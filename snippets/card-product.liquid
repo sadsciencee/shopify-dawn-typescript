@@ -20,8 +20,6 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
-
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1

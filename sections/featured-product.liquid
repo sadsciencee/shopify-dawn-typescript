@@ -1,10 +1,5 @@
-{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-{{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
-{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
-{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{% render 'ucoast', ucoast: 'css-dir-product-prio.scss' %}
+{% render 'ucoast', ucoast: 'css-dir-product-defer.scss' %}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -38,7 +33,7 @@
 
 {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
 {%- if first_3d_model -%}
-  {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+  {% render 'ucoast', ucoast: 'css-optional-component-product-model.scss' %}
   <link
     id="ModelViewerStyle"
     rel="stylesheet"
@@ -46,13 +41,7 @@
     media="print"
     onload="this.media='all'"
   >
-  <link
-    id="ModelViewerOverride"
-    rel="stylesheet"
-    href="{{ 'component-model-viewer-ui.css' | asset_url }}"
-    media="print"
-    onload="this.media='all'"
-  >
+  {% render 'ucoast', ucoast: 'css-optional-component-model-viewer-ui.scss' %}
 {%- endif -%}
 
 <section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
@@ -293,7 +282,7 @@
                     {%- endif -%}
                   </div>
                 </div>
-              {%- when 'share' -%} 
+              {%- when 'share' -%}
                 {% assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin %}
                 {% render 'share-button', block: block, share_link: share_url %}
               {%- when 'variant_picker' -%}
@@ -302,8 +291,8 @@
                   block: block,
                   product_form_id: product_form_id,
                   update_url: false
-                %} 
-              {%- when 'buy_buttons' -%} 
+                %}
+              {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
