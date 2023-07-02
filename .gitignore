@@ -1,9 +1,32 @@
-# OS generated files #
-######################
+# dependencies
+node_modules
+
+# production
+build
+
+# misc
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+
+npm-debug.log
+yarn-error.log
+yarn.lock
+.yarnclean
+.vscode
+.idea
+.idea/
+.idea/*
+node_modules/
+node_modules/*
+/assets/ucoast-*
+/assets/manifest.json
+/assets/font_JMDeco.woff2
+/assets/*
+/assets/font_JMUI-Italic.woff2
+
+/assets/font_JMUIBook.woff2
+
+/assets/font_JMUILight.woff2
+
+/assets/font_JMUILight-Italic.woff2
+
+/assets/font_JMUIMedium.woff2

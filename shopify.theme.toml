@@ -1,0 +1,8 @@
+[environments.dev]
+store = "duster-ucoast-burner"
+live-reload = 'off'
+
+[environments.prod]
+store = 'duster-los-angeles'
+live-reload = 'off'
+port = '9393'
