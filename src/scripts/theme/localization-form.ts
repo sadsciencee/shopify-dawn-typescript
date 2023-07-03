@@ -1,58 +1,66 @@
-if (!customElements.get('localization-form')) {
-  customElements.define(
-    'localization-form',
-    class LocalizationForm extends HTMLElement {
-      constructor() {
-        super();
-        this.elements = {
-          input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
-          button: this.querySelector('button'),
-          panel: this.querySelector('.disclosure__list-wrapper'),
-        };
-        this.elements.button.addEventListener('click', this.openSelector.bind(this));
-        this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
-        this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/functions';
+import { type EventWithRelatedTarget } from '@/scripts/functions'
 
-        this.querySelectorAll('a').forEach((item) => item.addEventListener('click', this.onItemClick.bind(this)));
-      }
+export class LocalizationForm extends HTMLElement {
+	elements: {
+		input: HTMLInputElement
+		button: HTMLButtonElement
+		panel: HTMLElement
+	}
+	constructor() {
+		super()
+		this.elements = {
+			input: qsRequired('input[name="locale_code"], input[name="country_code"]', this),
+			button: qsRequired('button', this),
+			panel: qsRequired('.disclosure__list-wrapper', this),
+		}
+		this.elements.button.addEventListener('click', this.openSelector.bind(this))
+		this.elements.button.addEventListener('focusout', this.closeSelector.bind(this))
+		this.addEventListener('keyup', this.onContainerKeyUp.bind(this))
 
-      hidePanel() {
-        this.elements.button.setAttribute('aria-expanded', 'false');
-        this.elements.panel.setAttribute('hidden', true);
-      }
+		this.querySelectorAll('a').forEach((item) =>
+			item.addEventListener('click', this.onItemClick.bind(this))
+		)
+	}
 
-      onContainerKeyUp(event) {
-        if (event.code.toUpperCase() !== 'ESCAPE') return;
+	hidePanel() {
+		this.elements.button.setAttribute('aria-expanded', 'false')
+		this.elements.panel.setAttribute('hidden', 'true')
+	}
 
-        if(this.elements.button.getAttribute('aria-expanded') == 'false') return;
-        this.hidePanel();
-        event.stopPropagation();
-        this.elements.button.focus();
-      }
+	onContainerKeyUp(event: KeyboardEvent) {
+		if (event.code.toUpperCase() !== 'ESCAPE') return
 
-      onItemClick(event) {
-        event.preventDefault();
-        const form = this.querySelector('form');
-        this.elements.input.value = event.currentTarget.dataset.value;
-        if (form) form.submit();
-      }
+		if (this.elements.button.getAttribute('aria-expanded') == 'false') return
+		this.hidePanel()
+		event.stopPropagation()
+		this.elements.button.focus()
+	}
 
-      openSelector() {
-        this.elements.button.focus();
-        this.elements.panel.toggleAttribute('hidden');
-        this.elements.button.setAttribute(
-          'aria-expanded',
-          (this.elements.button.getAttribute('aria-expanded') === 'false').toString()
-        );
-      }
+	onItemClick(event: MouseEvent) {
+		event.preventDefault()
+		const form = this.querySelector('form')
+		this.elements.input.value =
+			currentTargetRequired(event).dataset.value ?? this.elements.input.value
+		if (form) form.submit()
+	}
 
-      closeSelector(event) {
-        const isChild =
-          this.elements.panel.contains(event.relatedTarget) || this.elements.button.contains(event.relatedTarget);
-        if (!event.relatedTarget || !isChild) {
-          this.hidePanel();
-        }
-      }
-    }
-  );
+	openSelector() {
+		this.elements.button.focus()
+		this.elements.panel.toggleAttribute('hidden')
+		this.elements.button.setAttribute(
+			'aria-expanded',
+			(this.elements.button.getAttribute('aria-expanded') === 'false').toString()
+		)
+	}
+
+	closeSelector(event: EventWithRelatedTarget) {
+    const relatedTarget = relatedTargetOptional(event)
+		const isChild =
+			this.elements.panel.contains(relatedTarget) ||
+			this.elements.button.contains(relatedTarget)
+		if (!event.relatedTarget || !isChild) {
+			this.hidePanel()
+		}
+	}
 }

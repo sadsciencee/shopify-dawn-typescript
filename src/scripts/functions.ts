@@ -17,7 +17,7 @@ type HTMLElementProperty =
 	| 'parentElement'
 
 type CommonEventType = MouseEvent | KeyboardEvent | TouchEvent
-type EventWithRelatedTarget = MouseEvent | FocusEvent | DragEvent | PointerEvent
+export type EventWithRelatedTarget = MouseEvent | FocusEvent | DragEvent | PointerEvent
 
 // return a required HTML element or throw null. this is mainly for class component constructors where an error should be thrown if the element is not found.
 // allows passing in an additional property, for instances where an HTML element is accessed from a property of the query selector
@@ -136,6 +136,34 @@ export const targetOptional = <
 	event: E
 ) => {
 	return (event.target as EventTarget & T) ?? undefined
+}
+
+export const targetClosestRequired = <
+	E extends Event = CommonEventType,
+	T extends HTMLElement = HTMLElement
+	>(
+	event: E,
+	selector: string
+) => {
+	const element = event.target as T | null
+	if (!element) throw new Error(`required element not found: event.currentTarget`)
+	const closest = element.closest(selector) as T
+	if (!closest) throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
+	return closest
+}
+
+export const targetClosestOptional = <
+	E extends Event = CommonEventType,
+	T extends HTMLElement = HTMLElement
+	>(
+	event: E,
+	selector: string
+) => {
+	const element = event.target as T | null
+	if (!element) return undefined
+	const closest = element.closest(selector) as T
+	if (!closest) return undefined
+	return closest
 }
 
 // properties and methods of HTML elements that return an HTMLElement

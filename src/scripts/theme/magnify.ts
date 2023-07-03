@@ -1,63 +1,67 @@
-// create a container and set the full-size image as its background
-function createOverlay(image) {
-  const overlayImage = document.createElement('img');
-  overlayImage.setAttribute('src', `${image.src}`);
-  overlay = document.createElement('div');
-  prepareOverlay(overlay, overlayImage);
-
-  image.style.opacity = '50%';
-  toggleLoadingSpinner(image);
-
-  overlayImage.onload = () => {
-    toggleLoadingSpinner(image);
-    image.parentElement.insertBefore(overlay, image);
-    image.style.opacity = '100%';
-  };
-
-  return overlay;
+function toggleLoadingSpinner(image: HTMLImageElement) {
+  const loadingSpinner = image?.parentElement?.parentElement?.querySelector(`[data-uc-spinner]`)
+  if (!loadingSpinner) return
+  loadingSpinner.classList.toggle('hidden')
 }
 
-function prepareOverlay(container, image) {
-  container.setAttribute('class', 'image-magnify-full-size');
-  container.setAttribute('aria-hidden', 'true');
-  container.style.backgroundImage = `url('${image.src}')`;
-  container.style.backgroundColor = 'var(--gradient-background)';
-}
-
-function toggleLoadingSpinner(image) {
-  const loadingSpinner = image.parentElement.parentElement.querySelector(`.loading-overlay__spinner`);
-  loadingSpinner.classList.toggle('hidden');
-}
-
-function moveWithHover(image, event, zoomRatio) {
+function moveWithHover(
+  image: HTMLImageElement,
+  overlay: HTMLElement,
+  event: MouseEvent,
+  zoomRatio: number
+) {
   // calculate mouse position
-  const ratio = image.height / image.width;
-  const container = event.target.getBoundingClientRect();
-  const xPosition = event.clientX - container.left;
-  const yPosition = event.clientY - container.top;
-  const xPercent = `${xPosition / (image.clientWidth / 100)}%`;
-  const yPercent = `${yPosition / ((image.clientWidth * ratio) / 100)}%`;
+  const ratio = image.height / image.width
+  const target: EventTarget | null = event.target
+  if (!(target instanceof HTMLElement)) return
+  const container = target.getBoundingClientRect()
+  const xPosition = event.clientX - container.left
+  const yPosition = event.clientY - container.top
+  const xPercent = `${xPosition / (image.clientWidth / 100)}%`
+  const yPercent = `${yPosition / ((image.clientWidth * ratio) / 100)}%`
 
   // determine what to show in the frame
-  overlay.style.backgroundPosition = `${xPercent} ${yPercent}`;
-  overlay.style.backgroundSize = `${image.width * zoomRatio}px`;
+  overlay.style.backgroundPosition = `${xPercent} ${yPercent}`
+  overlay.style.backgroundSize = `${image.width * zoomRatio}px`
 }
 
-function magnify(image, zoomRatio) {
-  const overlay = createOverlay(image);
-  overlay.onclick = () => overlay.remove();
-  overlay.onmousemove = (event) => moveWithHover(image, event, zoomRatio);
-  overlay.onmouseleave = () => overlay.remove();
+function magnify(image: HTMLImageElement, zoomRatio: number) {
+  // create a container and set the full-size image as its background
+  const overlayImage = document.createElement('img')
+  overlayImage.setAttribute('src', `${image.src}`)
+  const overlay = document.createElement('div')
+  overlay.setAttribute('class', 'image-magnify-full-size')
+  overlay.setAttribute('aria-hidden', 'true')
+  overlay.style.backgroundImage = `url('${overlayImage.src}')`
+  overlay.style.backgroundColor = 'var(--gradient-background)'
+
+  image.style.opacity = '50%'
+  toggleLoadingSpinner(image)
+
+  overlayImage.onload = () => {
+    toggleLoadingSpinner(image)
+    const parent: HTMLElement | null = image.parentElement
+    if (!parent) return
+    parent.insertBefore(overlay, image)
+    image.style.opacity = '100%'
+  }
+
+  overlay.onclick = () => overlay.remove()
+  overlay.onmousemove = (event) => moveWithHover(image, overlay, event, zoomRatio)
+  overlay.onmouseleave = () => overlay.remove()
+  return overlay
 }
 
-function enableZoomOnHover(zoomRatio) {
-  const images = document.querySelectorAll('.image-magnify-hover');
-  images.forEach((image) => {
+export function enableZoomOnHover(zoomRatio: number): void {
+  const images = document.querySelectorAll('.image-magnify-hover')
+  if (!images) return
+  for (let i = 0; i < images.length; i++) {
+    const image = images[i] as HTMLImageElement
+    if (!image) return
     image.onclick = (event) => {
-      magnify(image, zoomRatio);
-      moveWithHover(image, event, zoomRatio);
-    };
-  });
+      const overlay: HTMLElement = magnify(image, zoomRatio)
+      if (!overlay) return
+      moveWithHover(image, overlay, event, zoomRatio)
+    }
+  }
 }
-
-enableZoomOnHover(2);
