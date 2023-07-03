@@ -1,10 +1,14 @@
+import { type uCoastWindow } from '@/scripts/setup';
+
 const SCROLL_ANIMATION_TRIGGER_CLASSNAME = 'scroll-trigger';
 const SCROLL_ANIMATION_OFFSCREEN_CLASSNAME = 'scroll-trigger--offscreen';
 const SCROLL_ZOOM_IN_TRIGGER_CLASSNAME = 'animate--zoom-in';
 const SCROLL_ANIMATION_CANCEL_CLASSNAME = 'scroll-trigger--cancel';
 
+declare let window:uCoastWindow
+
 // Scroll in animation logic
-function onIntersection(elements, observer) {
+function onIntersection(elements: IntersectionObserverEntry[], observer: IntersectionObserver) {
   elements.forEach((element, index) => {
     if (element.isIntersecting) {
       const elementTarget = element.target;
@@ -21,7 +25,7 @@ function onIntersection(elements, observer) {
   });
 }
 
-function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent = false) {
+function initializeScrollAnimationTrigger(rootEl:Document | HTMLElement = document, isDesignModeEvent = false) {
   const animationTriggerElements = Array.from(rootEl.getElementsByClassName(SCROLL_ANIMATION_TRIGGER_CLASSNAME));
   if (animationTriggerElements.length === 0) return;
 
@@ -48,30 +52,31 @@ function initializeScrollZoomAnimationTrigger() {
 
   const scaleAmount = 0.2 / 100;
 
-  animationTriggerElements.forEach((element) => {
+  animationTriggerElements.forEach((element:Element) => {
+    if (!(element instanceof HTMLElement)) return;
     let elementIsVisible = false;
-    const observer = new IntersectionObserver((elements) => {
+    const observer = new IntersectionObserver((elements:IntersectionObserverEntry[]) => {
       elements.forEach((entry) => {
         elementIsVisible = entry.isIntersecting;
       });
     });
     observer.observe(element);
 
-    element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
+    element.style.setProperty('--zoom-in-ratio', `${1 + scaleAmount * percentageSeen(element)}`);
 
     window.addEventListener(
       'scroll',
       throttle(() => {
         if (!elementIsVisible) return;
 
-        element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
+        element.style.setProperty('--zoom-in-ratio', `${1 + scaleAmount * percentageSeen(element)}`);
       }),
       { passive: true }
     );
   });
 }
 
-function percentageSeen(element) {
+function percentageSeen(element:HTMLElement) {
   const viewportHeight = window.innerHeight;
   const scrollY = window.scrollY;
   const elementPositionY = element.getBoundingClientRect().top + scrollY;
@@ -96,7 +101,12 @@ window.addEventListener('DOMContentLoaded', () => {
   initializeScrollZoomAnimationTrigger();
 });
 
-if (Shopify.designMode) {
-  document.addEventListener('shopify:section:load', (event) => initializeScrollAnimationTrigger(event.target, true));
+if (window.Shopify.designMode) {
+  document.addEventListener('shopify:section:load', (event:Event) => {
+    if (event.target instanceof HTMLElement || event.target instanceof Document) {
+      initializeScrollAnimationTrigger(event.target, true)
+    }
+
+  });
   document.addEventListener('shopify:section:reorder', () => initializeScrollAnimationTrigger(document, true));
 }

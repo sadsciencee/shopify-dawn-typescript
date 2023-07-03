@@ -151,9 +151,9 @@ function debounce(fn, wait) {
 	}
 }
 
-function throttle(fn, delay) {
+function throttle(fn: Function, delay:number = 0) {
 	let lastCall = 0
-	return function (...args) {
+	return function (...args:unknown[]) {
 		const now = new Date().getTime()
 		if (now - lastCall < delay) {
 			return
