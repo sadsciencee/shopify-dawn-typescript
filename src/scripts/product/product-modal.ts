@@ -1,42 +1,51 @@
-if (!customElements.get('product-modal')) {
-  customElements.define(
-    'product-modal',
-    class ProductModal extends ModalDialog {
-      constructor() {
-        super();
-      }
+import { ModalDialog } from '@/scripts/theme/modal-dialog'
+import { qsOptional, qsRequired } from '@/scripts/functions'
+import { DeferredMedia } from '@/scripts/theme/deferred-media'
 
-      hide() {
-        super.hide();
-      }
+export class ProductModal extends ModalDialog {
+	constructor() {
+		super()
+	}
 
-      show(opener) {
-        super.show(opener);
-        this.showActiveMedia();
-      }
+	override hide() {
+		super.hide()
+	}
 
-      showActiveMedia() {
-        this.querySelectorAll(
-          `[data-media-id]:not([data-media-id="${this.openedBy.getAttribute('data-media-id')}"])`
-        ).forEach((element) => {
-          element.classList.remove('active');
-        });
-        const activeMedia = this.querySelector(`[data-media-id="${this.openedBy.getAttribute('data-media-id')}"]`);
-        const activeMediaTemplate = activeMedia.querySelector('template');
-        const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null;
-        activeMedia.classList.add('active');
-        activeMedia.scrollIntoView();
+	override show(opener: HTMLElement) {
+		super.show(opener)
+		this.showActiveMedia()
+	}
 
-        const container = this.querySelector('[role="document"]');
-        container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
+	showActiveMedia() {
+		const openedById = this.openedBy ? this.openedBy.getAttribute('data-media-id') : 'NO_OPENER'
+		this.querySelectorAll(`[data-media-id]:not([data-media-id="${openedById}"])`).forEach(
+			(element) => {
+				element.classList.remove('active')
+			}
+		)
+		const activeMedia = qsOptional<
+			HTMLImageElement | HTMLVideoElement | HTMLIFrameElement | DeferredMedia
+		>(`[data-media-id="${openedById}"]`, this)
+		if (!activeMedia) {
+			console.error('no active media found')
+			return
+		}
+		const activeMediaTemplate = activeMedia.querySelector('template')
+		const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null
+		activeMedia.classList.add('active')
+		activeMedia.scrollIntoView()
 
-        if (
-          activeMedia.nodeName == 'DEFERRED-MEDIA' &&
-          activeMediaContent &&
-          activeMediaContent.querySelector('.js-youtube')
-        )
-          activeMedia.loadContent();
-      }
-    }
-  );
+		const container = qsRequired('[role="document"]', this)
+		const activeMediaWidth = activeMedia.width
+			? parseInt(`${activeMedia.width}`)
+			: activeMedia.clientWidth
+		container.scrollLeft = (activeMediaWidth - container.clientWidth) / 2
+
+		if (
+      activeMedia instanceof DeferredMedia &&
+			activeMediaContent &&
+			activeMediaContent.querySelector('.js-youtube')
+		)
+			activeMedia.loadContent()
+	}
 }

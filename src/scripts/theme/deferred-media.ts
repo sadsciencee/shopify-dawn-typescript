@@ -2,6 +2,7 @@ import { qsRequired } from '@/scripts/functions';
 import { pauseAllMedia } from '@/scripts/setup';
 
 export class DeferredMedia extends HTMLElement {
+  width?: number;
   constructor() {
     super();
     const poster = this.querySelector('[id^="Deferred-Poster-"]');

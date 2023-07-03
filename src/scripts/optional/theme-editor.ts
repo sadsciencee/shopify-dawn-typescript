@@ -1,38 +1,48 @@
+import { closestOptional, qsaOptional, qsOptional, targetRequired } from '@/scripts/functions';
+import { ProductModal } from '@/scripts/product/product-modal';
+import { SlideshowComponent } from '@/scripts/theme/slideshow-component';
+
 function hideProductModal() {
-  const productModal = document.querySelectorAll('product-modal[open]');
+  const productModal = qsaOptional<ProductModal>('product-modal[open]')
   productModal && productModal.forEach((modal) => modal.hide());
 }
 
-document.addEventListener('shopify:block:select', function (event) {
+document.addEventListener('shopify:block:select', function (event:Event) {
   hideProductModal();
-  const blockSelectedIsSlide = event.target.classList.contains('slideshow__slide');
+  const target = targetRequired(event);
+  const blockSelectedIsSlide = target.classList.contains('slideshow__slide');
   if (!blockSelectedIsSlide) return;
 
-  const parentSlideshowComponent = event.target.closest('slideshow-component');
+  const parentSlideshowComponent = closestOptional<SlideshowComponent>(target, 'slideshow-component')
+  if (!parentSlideshowComponent) return;
   parentSlideshowComponent.pause();
 
   setTimeout(function () {
     parentSlideshowComponent.slider.scrollTo({
-      left: event.target.offsetLeft,
+      left: target.offsetLeft,
     });
   }, 200);
 });
 
 document.addEventListener('shopify:block:deselect', function (event) {
-  const blockDeselectedIsSlide = event.target.classList.contains('slideshow__slide');
+  const target = targetRequired(event);
+  const blockDeselectedIsSlide = target.classList.contains('slideshow__slide');
   if (!blockDeselectedIsSlide) return;
-  const parentSlideshowComponent = event.target.closest('slideshow-component');
+  const parentSlideshowComponent = closestOptional<SlideshowComponent>(target, 'slideshow-component')
+  if (!parentSlideshowComponent) return;
   if (parentSlideshowComponent.autoplayButtonIsSetToPlay) parentSlideshowComponent.play();
 });
 
 document.addEventListener('shopify:section:load', () => {
   hideProductModal();
-  const zoomOnHoverScript = document.querySelector('[id^=EnableZoomOnHover]');
+  const zoomOnHoverScript = qsOptional<HTMLScriptElement>('[id^=EnableZoomOnHover]')
   if (!zoomOnHoverScript) return;
+  const zoomOnHoverScriptParent = zoomOnHoverScript.parentNode
+  if (!zoomOnHoverScriptParent) return;
   if (zoomOnHoverScript) {
     const newScriptTag = document.createElement('script');
     newScriptTag.src = zoomOnHoverScript.src;
-    zoomOnHoverScript.parentNode.replaceChild(newScriptTag, zoomOnHoverScript);
+    zoomOnHoverScriptParent.replaceChild(newScriptTag, zoomOnHoverScript);
   }
 });
 

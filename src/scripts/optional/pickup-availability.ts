@@ -1,117 +1,97 @@
-if (!customElements.get('pickup-availability')) {
-  customElements.define(
-    'pickup-availability',
-    class PickupAvailability extends HTMLElement {
-      constructor() {
-        super();
+import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/functions';
+import { PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer';
 
-        if (!this.hasAttribute('available')) return;
+export class PickupAvailability extends HTMLElement {
+  errorHtml?: Node | null;
+  constructor() {
+    super();
 
-        this.errorHtml = this.querySelector('template').content.firstElementChild.cloneNode(true);
-        this.onClickRefreshList = this.onClickRefreshList.bind(this);
-        this.fetchAvailability(this.dataset.variantId);
-      }
+    if (!this.hasAttribute('available')) return;
+    const template = qsRequired<HTMLTemplateElement>('template', this);
+    const content = template.content
+    const firstElementChild = content.firstElementChild
+    if (!content || !firstElementChild || firstElementChild === null) {
+      console.error('No template content found in PickupAvailability')
+    }
 
-      fetchAvailability(variantId) {
-        let rootUrl = this.dataset.rootUrl;
-        if (!rootUrl.endsWith('/')) {
-          rootUrl = rootUrl + '/';
-        }
-        const variantSectionUrl = `${rootUrl}variants/${variantId}/?section_id=pickup-availability`;
+    this.errorHtml = firstElementChild?.cloneNode(true);
+    this.onClickRefreshList = this.onClickRefreshList.bind(this);
+    const variantId = getAttributeOrThrow('variant-id', this);
+    this.fetchAvailability(variantId);
+  }
 
-        fetch(variantSectionUrl)
-          .then((response) => response.text())
-          .then((text) => {
-            const sectionInnerHTML = new DOMParser()
-              .parseFromString(text, 'text/html')
-              .querySelector('.shopify-section');
-            this.renderPreview(sectionInnerHTML);
-          })
-          .catch((e) => {
-            const button = this.querySelector('button');
-            if (button) button.removeEventListener('click', this.onClickRefreshList);
-            this.renderError();
-          });
-      }
+  fetchAvailability(variantId:string) {
+    let rootUrl = this.dataset.rootUrl;
+    if (!rootUrl) {
+      rootUrl = window.location.origin;
+    }
+    if (!rootUrl.endsWith('/')) {
+      rootUrl = rootUrl + '/';
+    }
+    const variantSectionUrl = `${rootUrl}variants/${variantId}/?section_id=pickup-availability`;
 
-      onClickRefreshList(evt) {
-        this.fetchAvailability(this.dataset.variantId);
-      }
-
-      renderError() {
-        this.innerHTML = '';
-        this.appendChild(this.errorHtml);
-
-        this.querySelector('button').addEventListener('click', this.onClickRefreshList);
-      }
-
-      renderPreview(sectionInnerHTML) {
-        const drawer = document.querySelector('pickup-availability-drawer');
-        if (drawer) drawer.remove();
-        if (!sectionInnerHTML.querySelector('pickup-availability-preview')) {
-          this.innerHTML = '';
-          this.removeAttribute('available');
-          return;
+    fetch(variantSectionUrl)
+      .then((response) => response.text())
+      .then((text) => {
+        const sectionInnerHTML = new DOMParser()
+          .parseFromString(text, 'text/html')
+          .querySelector('.shopify-section');
+        if (sectionInnerHTML instanceof Document) {
+          this.renderPreview(sectionInnerHTML);
+        } else {
+          throw new Error('No shopify-section found in sectionInnerHTML or was not instance of document')
         }
 
-        this.innerHTML = sectionInnerHTML.querySelector('pickup-availability-preview').outerHTML;
-        this.setAttribute('available', '');
-
-        document.body.appendChild(sectionInnerHTML.querySelector('pickup-availability-drawer'));
-
+      })
+      .catch((error) => {
+        console.error(error)
         const button = this.querySelector('button');
-        if (button)
-          button.addEventListener('click', (evt) => {
-            document.querySelector('pickup-availability-drawer').show(evt.target);
-          });
-      }
+        if (button) button.removeEventListener('click', this.onClickRefreshList);
+        this.renderError();
+      });
+  }
+
+  onClickRefreshList(_event:Event) {
+    const variantId = getAttributeOrThrow('variant-id', this);
+    this.fetchAvailability(variantId);
+  }
+
+  renderError() {
+    this.innerHTML = '';
+    if (!this.errorHtml) throw new Error('renderError thrown too early')
+    this.appendChild(this.errorHtml);
+
+    const button = qsRequired('button', this);
+    button.addEventListener('click', this.onClickRefreshList);
+  }
+
+  renderPreview(sectionInnerHTML:Document) {
+    const drawer = qsOptional<PickupAvailabilityDrawer>('pickup-availability-drawer')
+    if (drawer) drawer.remove();
+    const pickupAvailabilityPreview = qsOptional('pickup-availability-preview', sectionInnerHTML)
+    if (!pickupAvailabilityPreview) {
+      this.innerHTML = '';
+      this.removeAttribute('available');
+      return;
     }
-  );
-}
 
-if (!customElements.get('pickup-availability-drawer')) {
-  customElements.define(
-    'pickup-availability-drawer',
-    class PickupAvailabilityDrawer extends HTMLElement {
-      constructor() {
-        super();
+    this.innerHTML = pickupAvailabilityPreview.outerHTML;
+    this.setAttribute('available', '');
+    const drawerNode = sectionInnerHTML.querySelector('pickup-availability-drawer')
 
-        this.onBodyClick = this.handleBodyClick.bind(this);
-
-        this.querySelector('button').addEventListener('click', () => {
-          this.hide();
-        });
-
-        this.addEventListener('keyup', (event) => {
-          if (event.code.toUpperCase() === 'ESCAPE') this.hide();
-        });
-      }
-
-      handleBodyClick(evt) {
-        const target = evt.target;
-        if (
-          target != this &&
-          !target.closest('pickup-availability-drawer') &&
-          target.id != 'ShowPickupAvailabilityDrawer'
-        ) {
-          this.hide();
-        }
-      }
-
-      hide() {
-        this.removeAttribute('open');
-        document.body.removeEventListener('click', this.onBodyClick);
-        document.body.classList.remove('overflow-hidden');
-        removeTrapFocus(this.focusElement);
-      }
-
-      show(focusElement) {
-        this.focusElement = focusElement;
-        this.setAttribute('open', '');
-        document.body.addEventListener('click', this.onBodyClick);
-        document.body.classList.add('overflow-hidden');
-        trapFocus(this);
-      }
+    if (drawerNode instanceof Node) {
+      document.body.appendChild(drawerNode);
+    } else {
+      throw new Error('No pickup-availability-drawer found in sectionInnerHTML')
     }
-  );
+
+
+    const button = this.querySelector('button');
+    if (button)
+      button.addEventListener('click', (event:MouseEvent) => {
+        const drawer = qsRequired<PickupAvailabilityDrawer>('pickup-availability-drawer')
+        const target = targetRequired(event)
+        drawer.show(target);
+      });
+  }
 }
