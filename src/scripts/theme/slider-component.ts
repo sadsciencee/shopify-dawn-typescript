@@ -1,3 +1,5 @@
+import { qsaRequired, qsRequired } from '@/scripts/functions';
+
 export class SliderComponent extends HTMLElement {
   slider:HTMLElement
   sliderItems:NodeListOf<HTMLElement>
@@ -8,15 +10,13 @@ export class SliderComponent extends HTMLElement {
   nextButton:HTMLButtonElement
   constructor() {
     super();
-    this.slider = this.querySelector('[id^="Slider-"]');
-    this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
+    this.slider = qsRequired('[id^="Slider-"]', this)
+    this.sliderItems = qsaRequired('[id^="Slide-"]', this)
     this.enableSliderLooping = false;
-    this.currentPageElement = this.querySelector('.slider-counter--current');
-    this.pageTotalElement = this.querySelector('.slider-counter--total');
-    this.prevButton = this.querySelector('button[name="previous"]');
-    this.nextButton = this.querySelector('button[name="next"]');
-
-    if (!this.slider || !this.nextButton) return;
+    this.currentPageElement = qsRequired('.slider-counter--current', this)
+    this.pageTotalElement = qsRequired('.slider-counter--total', this)
+    this.prevButton = qsRequired('button[name="previous"]', this)
+    this.nextButton = qsRequired('button[name="next"]', this)
 
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
