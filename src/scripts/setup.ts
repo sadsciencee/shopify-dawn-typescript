@@ -6,8 +6,8 @@ import {
 	setDrawerHeight,
 	targetRequired
 } from '@/scripts/functions';
-import { initializeScrollAnimationTrigger } from '@/scripts/animations'
-import { enableZoomOnHover } from '@/scripts/media/magnify'
+import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
+import { enableZoomOnHover } from '@/scripts/theme/magnify'
 import { mediaLoader } from '@/scripts/mediaLoader'
 import { CountryProvinceSelector } from './shopify';
 
