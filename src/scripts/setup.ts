@@ -9,88 +9,13 @@ import {
 import { initializeScrollAnimationTrigger } from '@/scripts/animations'
 import { enableZoomOnHover } from '@/scripts/media/magnify'
 import { mediaLoader } from '@/scripts/mediaLoader'
+import { CountryProvinceSelector } from './shopify';
 
 export interface VariantChangeEvent extends Event {
 	data: {
 		sectionId: string
 		html: Document
 		currentVariant: JSON
-	}
-}
-
-export class CountryProvinceSelector {
-	countryEl: HTMLSelectElement
-	provinceEl: HTMLSelectElement
-	provinceContainer: HTMLSelectElement
-	constructor(country_domid: string, province_domid: string, options: { hideElement: string }) {
-		this.countryEl = qsRequired(`#${country_domid}`)
-		this.provinceEl = qsRequired(`#${province_domid}`)
-		this.provinceContainer = qsRequired(`#${options['hideElement'] || province_domid}`)
-
-		this.countryEl.addEventListener('change', this.countryHandler.bind(this))
-
-		this.initCountry()
-		this.initProvince()
-	}
-
-	public setSelectorByValue(selector: HTMLSelectElement, value: string) {
-		for (let i = 0, count = selector.options.length; i < count; i++) {
-			let option = selector.options[i]
-			if (value == option.value || value == option.innerHTML) {
-				selector.selectedIndex = i
-				return i
-			}
-		}
-	}
-
-	public initCountry() {
-		let value = this.countryEl.getAttribute('data-default')
-		this.setSelectorByValue(this.countryEl, value ?? '')
-		this.countryHandler()
-	}
-
-	public initProvince() {
-		let value = this.provinceEl.getAttribute('data-default')
-		if (value && this.provinceEl.options.length > 0) {
-			this.setSelectorByValue(this.provinceEl, value)
-		}
-	}
-
-	public countryHandler() {
-		let opt = this.countryEl.options[this.countryEl.selectedIndex]
-		let raw = opt.getAttribute('data-provinces')
-		if (!raw) return
-		let provinces = JSON.parse(raw)
-
-		this.clearOptions(this.provinceEl)
-
-		if (provinces && provinces.length == 0) {
-			this.provinceContainer.style.display = 'none'
-		} else {
-			for (let i = 0; i < provinces.length; i++) {
-				let opt = document.createElement('option')
-				opt.value = provinces[i][0]
-				opt.innerHTML = provinces[i][1]
-				this.provinceEl.appendChild(opt)
-			}
-
-			this.provinceContainer.style.display = ''
-		}
-	}
-
-	public clearOptions(selector: HTMLSelectElement) {
-		while (selector.firstChild) {
-			selector.removeChild(selector.firstChild)
-		}
-	}
-
-	public setOptions(selector: HTMLSelectElement, values: any) {
-		for (let i = 0; i < values.length; i++) {
-			let opt = document.createElement('option')
-			opt.value = values[i]
-			opt.innerHTML = values[i]
-			selector.appendChild(opt)
-		}
 	}
 }
 
@@ -309,15 +234,6 @@ export const accessibilityStrings: accessibilityStringsType = {
 	shareSuccess: '',
 	pauseSlideshow: '',
 	playSlideshow: '',
-}
-
-export const ON_CHANGE_DEBOUNCE_TIMER = 300
-
-export const PUB_SUB_EVENTS = {
-	cartUpdate: 'cart-update',
-	quantityUpdate: 'quantity-update',
-	variantChange: 'variant-change',
-	cartError: 'cart-error',
 }
 
 export function globalSetup() {

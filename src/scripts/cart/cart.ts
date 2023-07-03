@@ -1,3 +1,5 @@
+import { ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS } from '@/scripts/theme/constants';
+
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();

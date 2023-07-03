@@ -1,3 +1,5 @@
+import { PUB_SUB_EVENTS } from '@/scripts/theme/constants';
+
 if (!customElements.get('product-info')) {
   customElements.define(
     'product-info',

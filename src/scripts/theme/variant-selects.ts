@@ -1,3 +1,5 @@
+import { PUB_SUB_EVENTS } from '@/scripts/theme/constants';
+
 export class VariantSelects extends HTMLElement {
   constructor() {
     super();
