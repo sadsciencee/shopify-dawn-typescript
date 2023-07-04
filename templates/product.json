@@ -64,7 +64,7 @@
           "settings": {
             "heading": "Shipping & Returns",
             "icon": "truck",
-            "content": "",
+            "content": "<p>{{ product.metafields.test_data.binding_mount.value }}<\/p>",
             "page": ""
           }
         },
