@@ -287,6 +287,9 @@
     </main>
 
     {% render 'ucoast', ucoast: 'css-dir-base-defer.scss', preload_stylesheet: true %}
+    {% if settings.cart_type == 'drawer' %}
+      {% render 'ucoast', ucoast: 'css-optional-component-cart-drawer.scss' %}
+    {% endif %}
 
     {% case request.page_type %}
       {% when 'product' %}

@@ -3,13 +3,7 @@
         class="page-width section-{{ section.id }}-padding"
         data-section="{{ section.id }}"
 >
-    {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-    {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-    {{ 'component-price.css' | asset_url | stylesheet_tag }}
-    {{ 'component-slider.css' | asset_url | stylesheet_tag }}
-    {{ 'component-rating.css' | asset_url | stylesheet_tag }}
-    {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
-    {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
 
     {%- style -%}
         .section-{{ section.id }}-padding {
@@ -37,7 +31,7 @@
 
     {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
     {%- if first_3d_model -%}
-        {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+        {% render 'ucoast', ucoast: 'css-optional-component-product-model.scss' %}
         <link
                 id="ModelViewerStyle"
                 rel="stylesheet"
@@ -45,13 +39,7 @@
                 media="print"
                 onload="this.media='all'"
         >
-        <link
-                id="ModelViewerOverride"
-                rel="stylesheet"
-                href="{{ 'component-model-viewer-ui.css' | asset_url }}"
-                media="print"
-                onload="this.media='all'"
-        >
+        {% render 'ucoast', ucoast: 'css-optional-component-model-viewer-ui.scss' %}
     {%- endif -%}
 
     {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
@@ -507,6 +495,7 @@
       {{ product.media | where: 'media_type', 'model' | json }}
 
 
+
         </script>
         {% render 'ucoast', ucoast: 'js-optional-product-model.ts' %}
     {%- endif -%}
@@ -589,6 +578,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
     </script>
