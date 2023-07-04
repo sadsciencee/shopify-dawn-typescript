@@ -1,8 +1,9 @@
 // in general, these functions are for enforcing types when access HTML dom elements so I don't have to think about it so much
 // right now I've avoided any other helper functions but if we get another sub category of functions we should change this to a folder 'functions'
 
-import { type KlaviyoPopup, type Modal, type NotifyMe } from '@/scripts/content/modal'
-import { type QuickAddModal } from '@/scripts/optional/quick-add'
+// TODO: add KlaviyoPopup back in
+//import { type KlaviyoPopup, type Modal, type NotifyMe } from '@/scripts/content/modal'
+//import { type QuickAddModal } from '@/scripts/optional/quick-add'
 import {
 	DebounceCallback,
 	EventWithRelatedTarget,
@@ -319,7 +320,7 @@ export const getCurrentHeaderHeight = () => {
 	return height
 }
 
-export const closeAllModals = () => {
+/*export const closeAllModals = () => {
 	const modals = qsaOptional<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
 		'modal-dialog, klaviyo-popup, notify-me, quick-add-modal'
 	)
@@ -329,7 +330,7 @@ export const closeAllModals = () => {
 			modal.hide()
 		}
 	})
-}
+}*/
 
 // these three functions are somewhat similar - should be refactored for clarity
 export const isElementInViewport = (el: HTMLElement) => {

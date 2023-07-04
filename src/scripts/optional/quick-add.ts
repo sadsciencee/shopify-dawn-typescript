@@ -115,6 +115,6 @@ export class QuickAddModal extends ModalDialog {
       mediaImageSizes = mediaImageSizes.replace('715px', '495px');
     }
 
-    mediaImages.forEach((img) => img.setAttribute('sizes', mediaImageSizes));
+    mediaImages.forEach((img:HTMLImageElement) => img.setAttribute('sizes', mediaImageSizes));
   }
 }

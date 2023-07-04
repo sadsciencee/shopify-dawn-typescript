@@ -6,6 +6,7 @@ import {
 import { StickyHeader } from '@/scripts/theme/sticky-header';
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme';
+import { SectionApiResponse } from '@/scripts/types/responses';
 
 export class CartNotification extends HTMLElement {
   notification: HTMLElement;
@@ -49,11 +50,14 @@ export class CartNotification extends HTMLElement {
     removeTrapFocus(this.activeElement);
   }
 
-  renderContents(parsedState) {
+  renderContents(parsedState: SectionApiResponse) {
     this.cartItemKey = parsedState.key;
     this.getSectionsToRender().forEach((section) => {
-      document.getElementById(section.id).innerHTML = this.getSectionInnerHTML(
-        parsedState.sections[section.id],
+      const sectionId = section.id;
+      if (!sectionId) throw new Error('section.id is not set');
+      const sectionToUpdate = qsRequired(`#${sectionId}`);
+      sectionToUpdate.innerHTML = this.getSectionInnerHTML(
+        parsedState.sections[sectionId],
         section.selector
       );
     });
@@ -79,7 +83,9 @@ export class CartNotification extends HTMLElement {
   }
 
   getSectionInnerHTML(html:string, selector = '.shopify-section') {
-    return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
+    const newDocument = new DOMParser().parseFromString(html, 'text/html')
+    const newSection = qsRequired(selector, newDocument.documentElement)
+    return newSection.innerHTML;
   }
 
   handleBodyClick(event: MouseEvent) {
