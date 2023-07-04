@@ -2,8 +2,10 @@ import { qsOptional, qsRequired } from '@/scripts/functions';
 import { type PredictiveSearch } from '@/scripts/catalog/predictive-search';
 import { type DetailsModal } from '@/scripts/theme/details-modal';
 import { type HeaderMenu } from '@/scripts/theme/header-menu';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class StickyHeader extends HTMLElement {
+export class StickyHeader extends UcoastEl {
+	static htmlSelector = 'sticky-header'
 	preventHide: boolean = false
   preventReveal: boolean = false
 	header: HTMLElement
@@ -21,7 +23,7 @@ export class StickyHeader extends HTMLElement {
 		this.header = qsRequired('.section-header')
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		this.header = qsRequired('.section-header')
 		this.headerIsAlwaysSticky =
 			this.getAttribute('data-sticky-type') === 'always' ||
@@ -59,7 +61,7 @@ export class StickyHeader extends HTMLElement {
 		)
 	}
 
-	disconnectedCallback() {
+	override disconnectedCallback() {
 		this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp)
 		window.removeEventListener('scroll', this.onScrollHandler)
 	}

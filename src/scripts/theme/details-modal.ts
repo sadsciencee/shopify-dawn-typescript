@@ -1,7 +1,15 @@
-import { closestOptional, qsOptional, qsRequired, targetClosestOptional, targetRequired } from '@/scripts/functions';
+import {
+	closestOptional,
+	qsOptional,
+	qsRequired,
+	targetClosestOptional,
+	targetRequired,
+} from '@/scripts/functions'
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
-export class DetailsModal extends HTMLElement {
+export class DetailsModal extends UcoastEl {
+	static htmlSelector = 'details-modal'
 	detailsContainer: HTMLDetailsElement
 	summaryToggle: HTMLElement
 	button: HTMLButtonElement
@@ -29,9 +37,11 @@ export class DetailsModal extends HTMLElement {
 	onSummaryClick(event: MouseEvent) {
 		event.preventDefault()
 		const closestDetails = targetClosestOptional(event, 'details')
-		closestDetails?.hasAttribute('open') ? this.close() : this.open({
-			target: targetRequired(event)
-		})
+		closestDetails?.hasAttribute('open')
+			? this.close()
+			: this.open({
+					target: targetRequired(event),
+			  })
 	}
 
 	onBodyClick(event: MouseEvent) {
@@ -39,7 +49,7 @@ export class DetailsModal extends HTMLElement {
 		if (!this.contains(target) || target.classList.contains('modal-overlay')) this.close(false)
 	}
 
-	open(event: { target:HTMLElement }) {
+	open(event: { target: HTMLElement }) {
 		this.onBodyClickEvent = this.onBodyClickEvent || this.onBodyClick.bind(this)
 		if (!this.onBodyClickEvent) throw new Error('onBodyClickEvent is undefined')
 		const closestDetails = closestOptional(event.target, 'details')
@@ -57,7 +67,7 @@ export class DetailsModal extends HTMLElement {
 	}
 
 	close(focusToggle = true) {
-    if (!this.onBodyClickEvent) throw new Error('onBodyClickEvent is undefined')
+		if (!this.onBodyClickEvent) throw new Error('onBodyClickEvent is undefined')
 		removeTrapFocus(focusToggle ? this.summaryToggle : undefined)
 		this.detailsContainer.removeAttribute('open')
 		document.body.removeEventListener('click', this.onBodyClickEvent)

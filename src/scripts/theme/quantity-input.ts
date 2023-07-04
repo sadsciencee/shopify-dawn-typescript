@@ -1,8 +1,10 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import { subscribe, type SubscriberCallback } from '@/scripts/theme/pubsub'
 import { qsRequired, targetRequired } from '@/scripts/functions'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class QuantityInput extends HTMLElement {
+export class QuantityInput extends UcoastEl {
+	static htmlSelector = 'quantity-input'
 	input: HTMLInputElement
 	changeEvent: Event
 	quantityUpdateUnsubscriber: SubscriberCallback | undefined = undefined
@@ -17,7 +19,7 @@ export class QuantityInput extends HTMLElement {
 		)
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		this.validateQtyRules()
 		this.quantityUpdateUnsubscriber = subscribe(
 			PUB_SUB_EVENTS.quantityUpdate,
@@ -25,7 +27,7 @@ export class QuantityInput extends HTMLElement {
 		)
 	}
 
-	disconnectedCallback() {
+	override disconnectedCallback() {
 		if (this.quantityUpdateUnsubscriber) {
 			this.quantityUpdateUnsubscriber(undefined)
 		}

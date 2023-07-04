@@ -2,6 +2,7 @@ import { VariantSelects } from '@/scripts/theme/variant-selects';
 import { qsaOptional } from '@/scripts/functions';
 
 export class VariantRadios extends VariantSelects {
+  static override htmlSelector = 'variant-radios';
   constructor() {
     super();
   }

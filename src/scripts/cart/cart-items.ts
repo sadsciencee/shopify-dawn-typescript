@@ -13,10 +13,12 @@ import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/theme/global'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow
 
-export class CartItems extends HTMLElement {
+export class CartItems extends UcoastEl {
+	static htmlSelector = 'cart-items'
 	lineItemStatusElement: HTMLElement
 	cartUpdateUnsubscriber?: () => void = undefined
 	constructor() {
@@ -32,7 +34,7 @@ export class CartItems extends HTMLElement {
 		this.addEventListener('change', debouncedOnChange.bind(this))
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		this.cartUpdateUnsubscriber = subscribe(
 			PUB_SUB_EVENTS.cartUpdate,
 			(pubSubEvent: PubSubEvent) => {
@@ -44,7 +46,7 @@ export class CartItems extends HTMLElement {
 		)
 	}
 
-	disconnectedCallback() {
+	override disconnectedCallback() {
 		if (this.cartUpdateUnsubscriber) {
 			this.cartUpdateUnsubscriber()
 		}

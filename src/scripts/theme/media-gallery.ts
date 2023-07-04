@@ -10,10 +10,12 @@ import { type uCoastWindow } from '@/scripts/setup'
 import { type StickyHeader } from '@/scripts/theme/sticky-header'
 import { type DeferredMedia } from '@/scripts/theme/deferred-media'
 import { type SlideChangedEvent } from '@/scripts/types/events'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow
 
-export class MediaGallery extends HTMLElement {
+export class MediaGallery extends UcoastEl {
+	static htmlSelector = 'media-gallery'
 	elements: {
 		liveRegion: HTMLElement
 		viewer: HTMLElement | SliderComponent

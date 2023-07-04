@@ -2,8 +2,10 @@ import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import { isVariantChangeEvent, publish, subscribe } from '@/scripts/theme/pubsub';
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/functions';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class ProductInfo extends HTMLElement {
+export class ProductInfo extends UcoastEl {
+	static htmlSelector = 'product-info'
 	input: HTMLInputElement
 	currentVariant: HTMLInputElement
 	variantSelects: VariantRadios
@@ -20,7 +22,7 @@ export class ProductInfo extends HTMLElement {
 		this.submitButton = qsRequired('[type="submit"]', this)
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		if (!this.input) return
 		this.quantityForm = qsOptional('.product-form__quantity', this)
 		if (!this.quantityForm) return
@@ -42,7 +44,7 @@ export class ProductInfo extends HTMLElement {
 		})
 	}
 
-	disconnectedCallback() {
+	override disconnectedCallback() {
 		if (this.cartUpdateUnsubscriber) {
 			this.cartUpdateUnsubscriber()
 		}

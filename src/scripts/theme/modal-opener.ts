@@ -1,7 +1,9 @@
 import { qsOptional } from '@/scripts/functions';
 import { type ModalDialog } from '@/scripts/theme/modal-dialog';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class ModalOpener extends HTMLElement {
+export class ModalOpener extends UcoastEl {
+  static htmlSelector = 'modal-opener';
   constructor() {
     super();
 

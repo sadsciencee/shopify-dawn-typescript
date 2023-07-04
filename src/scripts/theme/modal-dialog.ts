@@ -1,10 +1,12 @@
-import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions';
-import { type DeferredMedia } from '@/scripts/theme/deferred-media';
-import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
+import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions'
+import { type DeferredMedia } from '@/scripts/theme/deferred-media'
+import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
-export class ModalDialog extends HTMLElement {
+export class ModalDialog extends UcoastEl {
+	static htmlSelector = 'modal-dialog'
 	moved: boolean = false
-  openedBy?: HTMLElement
+	openedBy?: HTMLElement
 	constructor() {
 		super()
 		this.querySelector('[id^="ModalClose-"]')?.addEventListener(
@@ -29,13 +31,13 @@ export class ModalDialog extends HTMLElement {
 		}
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		if (this.moved) return
 		this.moved = true
 		document.body.appendChild(this)
 	}
 
-	show(opener:HTMLElement) {
+	show(opener: HTMLElement) {
 		this.openedBy = opener
 		const popup = qsOptional<DeferredMedia>('.template-popup', this)
 		document.body.classList.add('overflow-hidden')

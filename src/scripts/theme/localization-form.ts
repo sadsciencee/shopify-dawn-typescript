@@ -1,7 +1,9 @@
 import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/functions';
 import { type EventWithRelatedTarget } from '@/scripts/types/theme';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class LocalizationForm extends HTMLElement {
+export class LocalizationForm extends UcoastEl {
+	static htmlSelector = 'localization-form'
 	elements: {
 		input: HTMLInputElement
 		button: HTMLButtonElement

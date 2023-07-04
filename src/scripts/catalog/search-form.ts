@@ -1,8 +1,10 @@
-import { debounce, qsRequired } from '@/scripts/functions';
+import { debounce, qsRequired } from '@/scripts/functions'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
-export class SearchForm extends HTMLElement {
+export class SearchForm extends UcoastEl {
+	static htmlSelector = 'search-form'
 	input: HTMLInputElement
-  resetButton: HTMLButtonElement
+	resetButton: HTMLButtonElement
 	form: HTMLFormElement
 	constructor() {
 		super()
@@ -38,7 +40,7 @@ export class SearchForm extends HTMLElement {
 		return !document.querySelector('[aria-selected="true"] a')
 	}
 
-	onFormReset(event:Event) {
+	onFormReset(event: Event) {
 		// Prevent default so the form reset doesn't set the value gotten from the url on page load
 		event.preventDefault()
 		// Don't reset if the user has selected an element on the predictive search dropdown

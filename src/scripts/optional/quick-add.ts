@@ -18,6 +18,7 @@ import { type ProductInfo } from '@/scripts/product/product-info'
 declare let window: uCoastWindow
 
 export class QuickAddModal extends ModalDialog {
+	static override htmlSelector = 'quick-add-modal'
 	productElement?: HTMLElement
 	modalContent: HTMLElement
 	constructor() {

@@ -7,8 +7,10 @@ import { type StickyHeader } from '@/scripts/theme/sticky-header';
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
 import { type SectionApiResponse } from '@/scripts/types/responses';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class CartNotification extends HTMLElement {
+export class CartNotification extends UcoastEl {
+  static htmlSelector = 'cart-notification';
   notification: HTMLElement;
   header: StickyHeader;
   onBodyClick: (event: MouseEvent) => void;

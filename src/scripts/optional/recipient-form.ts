@@ -7,10 +7,12 @@ import {
 } from '@/scripts/theme/pubsub'
 import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
 import { type uCoastWindow } from '@/scripts/setup'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow
 
-export class RecipientForm extends HTMLElement {
+export class RecipientForm extends UcoastEl {
+	static htmlSelector = 'recipient-form'
 	sectionId: string
 	recipientFieldsLiveRegion: HTMLElement
 	checkboxInput: HTMLInputElement
@@ -63,7 +65,7 @@ export class RecipientForm extends HTMLElement {
 		this.onChange()
 	}
 
-	connectedCallback() {
+	override connectedCallback() {
 		this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
 			if (!isCartUpdateEvent(event)) return
 			if (
@@ -93,7 +95,7 @@ export class RecipientForm extends HTMLElement {
 		})
 	}
 
-	disconnectedCallback() {
+	override disconnectedCallback() {
 		if (this.cartUpdateUnsubscriber) {
 			this.cartUpdateUnsubscriber()
 		}

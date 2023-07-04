@@ -5,10 +5,12 @@ import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { routes, type uCoastWindow } from '@/scripts/setup'
 import { publish } from '@/scripts/theme/pubsub'
 import { QuickAddModal } from '@/scripts/optional/quick-add';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow
 
-export class ProductForm extends HTMLElement {
+export class ProductForm extends UcoastEl {
+	static htmlSelector = 'product-form'
 	form: HTMLFormElement
 	formIdEl: HTMLInputElement
 	cart?: CartNotification | CartDrawer

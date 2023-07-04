@@ -1,11 +1,13 @@
 import { getAttributeOrThrow, qsOptional } from '@/scripts/functions';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class ProductRecommendations extends HTMLElement {
+export class ProductRecommendations extends UcoastEl {
+  static htmlSelector = 'product-recommendations';
   constructor() {
     super();
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     const handleIntersection = (entries:IntersectionObserverEntry[], observer:IntersectionObserver) => {
       if (!entries[0].isIntersecting) return;
       observer.unobserve(this);

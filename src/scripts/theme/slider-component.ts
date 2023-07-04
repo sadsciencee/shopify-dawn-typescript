@@ -1,5 +1,6 @@
 import { currentTargetRequired, qsaRequired, qsRequired } from '@/scripts/functions'
 import { type SlideChangedEvent } from '@/scripts/types/events'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export function isSliderComponent(obj: HTMLElement): obj is SliderComponent {
 	if (!obj) return false
@@ -8,7 +9,8 @@ export function isSliderComponent(obj: HTMLElement): obj is SliderComponent {
 }
 
 
-export class SliderComponent extends HTMLElement {
+export class SliderComponent extends UcoastEl {
+	static htmlSelector = 'slider-component'
 	slider: HTMLElement
 	sliderItems: NodeListOf<HTMLElement>
 	sliderItemsToShow?: HTMLElement[]

@@ -1,5 +1,4 @@
 import {
-	closestOptional,
 	closestRequired,
 	currentTargetRequired,
 	debounce,
@@ -15,10 +14,12 @@ import {
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 type FilterDataType = { html: string; url: string }
 
-class FacetFiltersForm extends HTMLElement {
+export class FacetFiltersForm extends UcoastEl {
+	static htmlSelector = 'facet-filters-form'
 	static filterData: FilterDataType[] = []
 	static searchParamsInitial: string = window.location.search.slice(1)
 	static searchParamsPrev: string = window.location.search.slice(1)
@@ -293,69 +294,10 @@ class FacetFiltersForm extends HTMLElement {
 	}
 }
 
-FacetFiltersForm.filterData = []
-FacetFiltersForm.searchParamsInitial = window.location.search.slice(1)
-FacetFiltersForm.searchParamsPrev = window.location.search.slice(1)
-customElements.define('facet-filters-form', FacetFiltersForm)
-FacetFiltersForm.setListeners()
-
-class PriceRange extends HTMLElement {
-	constructor() {
-		super()
-		this.querySelectorAll('input').forEach((element) =>
-			element.addEventListener('change', this.onRangeChange.bind(this))
-		)
-		this.setMinAndMaxValues()
-	}
-
-	onRangeChange(event: Event) {
-		const currentTarget = currentTargetRequired<Event, HTMLInputElement>(event)
-		this.adjustToValidValues(currentTarget)
-		this.setMinAndMaxValues()
-	}
-
-	setMinAndMaxValues() {
-		const inputs = this.querySelectorAll('input')
-		const minInput = inputs[0]
-		const maxInput = inputs[1]
-		if (maxInput.value) minInput.setAttribute('max', maxInput.value)
-		if (minInput.value) maxInput.setAttribute('min', minInput.value)
-		if (minInput.value === '') maxInput.setAttribute('min', '0')
-		if (maxInput.value === '')
-			minInput.setAttribute('max', getAttributeOrThrow('max', maxInput))
-	}
-
-	adjustToValidValues(input: HTMLInputElement) {
-		const value = Number(input.value)
-		const min = Number(getAttributeOrThrow('min', input))
-		const max = Number(getAttributeOrThrow('max', input))
-
-		if (value < min) input.value = `${min}`
-		if (value > max) input.value = `${max}`
-	}
+export function initializeFacetFiltersForm() {
+	FacetFiltersForm.filterData = []
+	FacetFiltersForm.searchParamsInitial = window.location.search.slice(1)
+	FacetFiltersForm.searchParamsPrev = window.location.search.slice(1)
+	customElements.define('facet-filters-form', FacetFiltersForm)
+	FacetFiltersForm.setListeners()
 }
-
-customElements.define('price-range', PriceRange)
-
-class FacetRemove extends HTMLElement {
-	constructor() {
-		super()
-		const facetLink = qsRequired('a', this)
-		facetLink.setAttribute('role', 'button')
-		facetLink.addEventListener('click', this.closeFilter.bind(this))
-		facetLink.addEventListener('keyup', (event) => {
-			event.preventDefault()
-			if (event.code.toUpperCase() === 'SPACE') this.closeFilter(event)
-		})
-	}
-
-	closeFilter(event: Event) {
-		event.preventDefault()
-		const form =
-			closestOptional<FacetFiltersForm>(this, 'facet-filters-form') ||
-			qsRequired<FacetFiltersForm>('facet-filters-form')
-		form.onActiveFilterClick(event)
-	}
-}
-
-customElements.define('facet-remove', FacetRemove)

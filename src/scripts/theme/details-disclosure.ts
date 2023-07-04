@@ -1,6 +1,8 @@
 import { qsRequired } from '@/scripts/functions'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class DetailsDisclosure extends HTMLElement {
+export class DetailsDisclosure extends UcoastEl {
+	static htmlSelector = 'details-disclosure'
 	mainDetailsToggle: HTMLDetailsElement
 	content: HTMLElement
 	animations?: Animation[]

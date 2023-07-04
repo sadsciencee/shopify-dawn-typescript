@@ -3,6 +3,7 @@ import { qsOptional, qsRequired } from '@/scripts/functions'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 
 export class ProductModal extends ModalDialog {
+	static override htmlSelector = 'product-modal'
 	constructor() {
 		super()
 	}

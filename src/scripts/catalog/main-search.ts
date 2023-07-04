@@ -1,7 +1,8 @@
 import { SearchForm } from '@/scripts/catalog/search-form';
 import { qsaRequired, targetRequired } from '@/scripts/functions';
 
-class MainSearch extends SearchForm {
+export class MainSearch extends SearchForm {
+  static override htmlSelector = 'main-search';
   allSearchInputs: NodeListOf<HTMLInputElement>;
   constructor() {
     super();
@@ -51,5 +52,3 @@ class MainSearch extends SearchForm {
     });
   }
 }
-
-customElements.define('main-search', MainSearch);

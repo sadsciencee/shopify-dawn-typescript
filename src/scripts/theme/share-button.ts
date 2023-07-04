@@ -5,6 +5,7 @@ import { type uCoastWindow } from '@/scripts/setup';
 declare let window: uCoastWindow
 
 export class ShareButton extends DetailsDisclosure {
+	static override htmlSelector = 'share-button'
 	elements: {
 		shareButton: HTMLButtonElement
 		shareSummary: HTMLElement

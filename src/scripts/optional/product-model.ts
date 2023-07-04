@@ -1,10 +1,11 @@
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 import { ModelViewerUIReference, uCoastWindow } from '@/scripts/setup'
-import { qsaOptional, qsRequired } from '@/scripts/functions';
+import { qsaOptional, qsRequired } from '@/scripts/functions'
 
 declare let window: uCoastWindow
 
 export class ProductModel extends DeferredMedia {
+	static override htmlSelector = 'product-model'
 	modelViewerUI?: ModelViewerUIReference
 	constructor() {
 		super()

@@ -8,8 +8,10 @@ import {
 	qsRequired,
 } from '@/scripts/functions'
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
-export class CartDrawer extends HTMLElement {
+export class CartDrawer extends UcoastEl {
+	static htmlSelector = 'cart-drawer'
 	activeElement?: HTMLElement
 	productId?: string
 	constructor() {

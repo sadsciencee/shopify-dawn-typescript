@@ -11,12 +11,14 @@ import { type ProductVariant } from '@/scripts/types/api'
 import { type uCoastWindow } from '@/scripts/setup'
 import { type ProductForm } from '@/scripts/product/product-form'
 import { type MediaGallery } from '@/scripts/theme/media-gallery'
-import { type ShareButton } from '@/scripts/theme/share'
+import { type ShareButton } from '@/scripts/theme/share-button'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow
 
-export class VariantSelects extends HTMLElement {
+export class VariantSelects extends UcoastEl {
+	static htmlSelector = 'variant-selects'
 	currentVariant?: ProductVariant
 	options?: string[]
 	variantData?: ProductVariant[]

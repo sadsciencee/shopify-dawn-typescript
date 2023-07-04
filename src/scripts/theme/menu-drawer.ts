@@ -8,8 +8,10 @@ import {
 	targetClosestRequired,
 } from '@/scripts/functions'
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class MenuDrawer extends HTMLElement {
+export class MenuDrawer extends UcoastEl {
+	static htmlSelector = 'menu-drawer'
 	mainDetailsToggle: HTMLDetailsElement
 	constructor() {
 		super()

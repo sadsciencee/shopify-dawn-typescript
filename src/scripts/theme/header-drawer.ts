@@ -3,6 +3,7 @@ import { closestOptional, qsRequired } from '@/scripts/functions';
 import { trapFocus } from '@/scripts/theme/global';
 
 export class HeaderDrawer extends MenuDrawer {
+  static override htmlSelector = 'header-drawer'
   header?: HTMLElement
   borderOffset?: number
   constructor() {

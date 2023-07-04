@@ -1,8 +1,9 @@
 import { SearchForm } from '@/scripts/catalog/search-form'
-import { getAttributeOrThrow, qsaOptional, qsaRequired, qsRequired } from '@/scripts/functions';
+import { getAttributeOrThrow, qsaOptional, qsaRequired, qsRequired } from '@/scripts/functions'
 import { routes } from '@/scripts/setup'
 
 export class PredictiveSearch extends SearchForm {
+	static override htmlSelector = 'predictive-search'
 	cachedResults: Record<string, string>
 	predictiveSearchResults: HTMLElement
 	allPredictiveSearchInstances: NodeListOf<PredictiveSearch>
@@ -10,8 +11,8 @@ export class PredictiveSearch extends SearchForm {
 	abortController: AbortController
 	searchTerm: string
 	statusElement?: HTMLElement
-  loadingText?: string
-  resultsMaxHeight?: number | boolean
+	loadingText?: string
+	resultsMaxHeight?: number | boolean
 	constructor() {
 		super()
 		this.cachedResults = {}
@@ -144,11 +145,12 @@ export class PredictiveSearch extends SearchForm {
 
 		// Filter out hidden elements (duplicated page and article resources) thanks
 		// to this https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
-    // TODO: not sure about this assignemnt so check here if buggy
-    const allVisibleElementsNodes = qsaOptional('li, button.predictive-search__item', this) ?? []
-		const allVisibleElements = Array.from(
-      allVisibleElementsNodes
-		).filter((element) => element.offsetParent !== null)
+		// TODO: not sure about this assignemnt so check here if buggy
+		const allVisibleElementsNodes =
+			qsaOptional('li, button.predictive-search__item', this) ?? []
+		const allVisibleElements = Array.from(allVisibleElementsNodes).filter(
+			(element) => element.offsetParent !== null
+		)
 		let activeElementIndex = 0
 
 		if (moveUp && !selectedElement) return
@@ -163,7 +165,8 @@ export class PredictiveSearch extends SearchForm {
 			i++
 		}
 
-    if (!this.statusElement) throw new Error('switchOption called too early - statusElement not set')
+		if (!this.statusElement)
+			throw new Error('switchOption called too early - statusElement not set')
 
 		this.statusElement.textContent = ''
 
@@ -254,13 +257,14 @@ export class PredictiveSearch extends SearchForm {
 		this.setAttribute('loading', 'true')
 	}
 
-	setLiveRegionText(statusText:string) {
-    if (!this.statusElement) throw new Error('setLiveRegionText called to early - this.statusElement is not defined')
+	setLiveRegionText(statusText: string) {
+		if (!this.statusElement)
+			throw new Error('setLiveRegionText called to early - this.statusElement is not defined')
 		this.statusElement.setAttribute('aria-hidden', 'false')
 		this.statusElement.textContent = statusText
 
 		setTimeout(() => {
-      if (!this.statusElement) throw new Error('this.statusElement removed before timeout')
+			if (!this.statusElement) throw new Error('this.statusElement removed before timeout')
 			this.statusElement.setAttribute('aria-hidden', 'true')
 		}, 1000)
 	}
@@ -275,17 +279,13 @@ export class PredictiveSearch extends SearchForm {
 
 	setLiveRegionResults() {
 		this.removeAttribute('loading')
-    const liveRegionCountEl = qsRequired('[data-predictive-search-live-region-count]', this)
-		this.setLiveRegionText(
-      liveRegionCountEl?.textContent ?? ''
-		)
+		const liveRegionCountEl = qsRequired('[data-predictive-search-live-region-count]', this)
+		this.setLiveRegionText(liveRegionCountEl?.textContent ?? '')
 	}
 
 	getResultsMaxHeight() {
-    const header = qsRequired('.section-header')
-		this.resultsMaxHeight =
-			window.innerHeight -
-			header.getBoundingClientRect().bottom
+		const header = qsRequired('.section-header')
+		this.resultsMaxHeight = window.innerHeight - header.getBoundingClientRect().bottom
 		return this.resultsMaxHeight
 	}
 

@@ -1,7 +1,8 @@
 import { DetailsModal } from '@/scripts/theme/details-modal'
-import { qsRequired } from '@/scripts/functions';
+import { qsRequired } from '@/scripts/functions'
 
-class PasswordModal extends DetailsModal {
+export class PasswordModal extends DetailsModal {
+	static override htmlSelector = 'password-modal'
 	constructor() {
 		super()
 
@@ -9,5 +10,3 @@ class PasswordModal extends DetailsModal {
 			this.open({ target: qsRequired('details', this) })
 	}
 }
-
-customElements.define('password-modal', PasswordModal)

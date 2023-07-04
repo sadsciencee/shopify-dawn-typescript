@@ -1,6 +1,8 @@
 import { qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions';
+import { UcoastEl } from '@/scripts/core/UcoastEl';
 
-export class ShowMoreButton extends HTMLElement {
+export class ShowMoreButton extends UcoastEl {
+  static htmlSelector = 'show-more-button';
   constructor() {
     super();
     const button = qsRequired('button', this);
@@ -27,5 +29,3 @@ export class ShowMoreButton extends HTMLElement {
     parentDisplay.querySelectorAll('.show-more-item').forEach((item) => item.classList.toggle('hidden'));
   }
 }
-
-customElements.define('show-more-button', ShowMoreButton);
