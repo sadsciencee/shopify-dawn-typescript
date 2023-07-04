@@ -13,8 +13,8 @@ import {
 	targetClosestRequired,
 } from '@/scripts/functions'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
-import { MenuDrawer } from '@/scripts/theme/menu-drawer'
-import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
+import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
+import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 
 type FilterDataType = { html: string; url: string }
 

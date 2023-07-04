@@ -97,7 +97,7 @@ export class CartItems extends HTMLElement {
 		]
 	}
 
-	updateQuantity(line: string, quantity: string, name: string) {
+	updateQuantity(line: string, quantity: string, name?: string) {
 		this.enableLoading(line)
 
 		const body = JSON.stringify({

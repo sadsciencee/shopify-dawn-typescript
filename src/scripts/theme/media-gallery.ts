@@ -5,11 +5,11 @@ import {
 	qsOptional,
 	qsRequired,
 } from '@/scripts/functions'
-import { SliderComponent } from '@/scripts/theme/slider-component'
+import { isSliderComponent, type SliderComponent } from '@/scripts/theme/slider-component';
 import { type uCoastWindow } from '@/scripts/setup'
-import { StickyHeader } from '@/scripts/theme/sticky-header'
-import { DeferredMedia } from '@/scripts/theme/deferred-media'
-import { SlideChangedEvent } from '@/scripts/types/events'
+import { type StickyHeader } from '@/scripts/theme/sticky-header'
+import { type DeferredMedia } from '@/scripts/theme/deferred-media'
+import { type SlideChangedEvent } from '@/scripts/types/events'
 
 declare let window: uCoastWindow
 
@@ -77,7 +77,7 @@ export class MediaGallery extends HTMLElement {
 				const activeThumbnail = this.getActiveThumbnail(mediaId)
 				activeMediaParent.prepend(activeThumbnail)
 			}
-			if (this.elements.viewer instanceof SliderComponent) this.elements.viewer.resetPages()
+			if (isSliderComponent(this.elements.viewer)) this.elements.viewer.resetPages()
 		}
 
 		this.preventStickyHeader()
@@ -141,7 +141,7 @@ export class MediaGallery extends HTMLElement {
 	}
 
 	removeListSemantic() {
-		if (!(this.elements.viewer instanceof SliderComponent)) return
+		if (!(isSliderComponent(this.elements.viewer))) return
 		this.elements.viewer.slider.setAttribute('role', 'presentation')
 		this.elements.viewer.sliderItems.forEach((slide) =>
 			slide.setAttribute('role', 'presentation')

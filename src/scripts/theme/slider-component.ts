@@ -1,6 +1,13 @@
 import { currentTargetRequired, qsaRequired, qsRequired } from '@/scripts/functions'
 import { type SlideChangedEvent } from '@/scripts/types/events'
 
+export function isSliderComponent(obj: HTMLElement): obj is SliderComponent {
+	if (!obj) return false
+	if (obj.localName !== 'slider-component') return false
+	return true
+}
+
+
 export class SliderComponent extends HTMLElement {
 	slider: HTMLElement
 	sliderItems: NodeListOf<HTMLElement>

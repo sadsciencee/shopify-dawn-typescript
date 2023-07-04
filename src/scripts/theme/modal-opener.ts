@@ -1,5 +1,5 @@
 import { qsOptional } from '@/scripts/functions';
-import { ModalDialog } from '@/scripts/theme/modal-dialog';
+import { type ModalDialog } from '@/scripts/theme/modal-dialog';
 
 export class ModalOpener extends HTMLElement {
   constructor() {

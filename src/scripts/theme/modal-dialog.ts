@@ -1,5 +1,5 @@
 import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions';
-import { DeferredMedia } from '@/scripts/theme/deferred-media';
+import { type DeferredMedia } from '@/scripts/theme/deferred-media';
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
 
 export class ModalDialog extends HTMLElement {

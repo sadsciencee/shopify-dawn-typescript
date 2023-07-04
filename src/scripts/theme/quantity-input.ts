@@ -1,5 +1,5 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { subscribe, SubscriberCallback } from '@/scripts/theme/pubsub'
+import { subscribe, type SubscriberCallback } from '@/scripts/theme/pubsub'
 import { qsRequired, targetRequired } from '@/scripts/functions'
 
 export class QuantityInput extends HTMLElement {

@@ -3,10 +3,10 @@ import {
   qsRequired, targetClosestOptional,
   targetRequired
 } from '@/scripts/functions';
-import { StickyHeader } from '@/scripts/theme/sticky-header';
+import { type StickyHeader } from '@/scripts/theme/sticky-header';
 import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
-import { ShopifySectionRenderingSchema } from '@/scripts/types/theme';
-import { SectionApiResponse } from '@/scripts/types/responses';
+import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
+import { type SectionApiResponse } from '@/scripts/types/responses';
 
 export class CartNotification extends HTMLElement {
   notification: HTMLElement;
