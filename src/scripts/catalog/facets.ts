@@ -1,5 +1,14 @@
-import { qsaOptional, qsRequired } from '@/scripts/functions'
+import {
+	closestRequired, currentTargetRequired,
+	qsaOptional,
+	qsaRequired,
+	qsOptional,
+	qsRequired,
+	targetClosestOptional,
+	targetClosestRequired
+} from '@/scripts/functions';
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
+import { MenuDrawer } from '@/scripts/theme/menu-drawer'
 
 type FilterDataType = { html: string; url: string }
 
@@ -44,7 +53,7 @@ class FacetFiltersForm extends HTMLElement {
 		})
 	}
 
-	static renderPage(searchParams: string, event: PopStateEvent | null, updateURLHash = true) {
+	static renderPage(searchParams: string, event: Event | null = null, updateURLHash = true) {
 		FacetFiltersForm.searchParamsPrev = searchParams
 		const sections = FacetFiltersForm.getSections()
 		const countContainer = document.getElementById('ProductCount')
@@ -75,22 +84,28 @@ class FacetFiltersForm extends HTMLElement {
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = responseText
+				const newDocument = new DOMParser().parseFromString(html, 'text/html')
 				FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }]
 				FacetFiltersForm.renderFilters(html, event)
 				FacetFiltersForm.renderProductGridContainer(html)
 				FacetFiltersForm.renderProductCount(html)
 				if (typeof initializeScrollAnimationTrigger === 'function')
-					initializeScrollAnimationTrigger(html.innerHTML)
+					initializeScrollAnimationTrigger(newDocument.documentElement)
 			})
 	}
 
-	static renderSectionFromCache(filterDataUrl: string, event: Event | null) {
+	static renderSectionFromCache(
+		filterDataUrl: (element: FilterDataType) => boolean,
+		event: Event | null
+	) {
 		const html = FacetFiltersForm.filterData.find(filterDataUrl)?.html
+		if (!html) throw new Error('search filter not found in cache')
+		const newDocument = new DOMParser().parseFromString(html, 'text/html')
 		FacetFiltersForm.renderFilters(html, event)
 		FacetFiltersForm.renderProductGridContainer(html)
 		FacetFiltersForm.renderProductCount(html)
 		if (typeof initializeScrollAnimationTrigger === 'function')
-			initializeScrollAnimationTrigger(html.innerHTML)
+			initializeScrollAnimationTrigger(newDocument.documentElement)
 	}
 
 	static renderProductGridContainer(html: string) {
@@ -110,12 +125,11 @@ class FacetFiltersForm extends HTMLElement {
 		})
 	}
 
-	static renderProductCount(html) {
-		const count = new DOMParser()
-			.parseFromString(html, 'text/html')
-			.getElementById('ProductCount').innerHTML
-		const container = document.getElementById('ProductCount')
-		const containerDesktop = document.getElementById('ProductCountDesktop')
+	static renderProductCount(html: string) {
+		const newDocument = new DOMParser().parseFromString(html, 'text/html')
+		const count = qsRequired('#ProductCount', newDocument.documentElement).innerHTML
+		const container = qsRequired('#ProductCount')
+		const containerDesktop = qsOptional('#ProductCountDesktop')
 		container.innerHTML = count
 		container.classList.remove('loading')
 		if (containerDesktop) {
@@ -124,75 +138,83 @@ class FacetFiltersForm extends HTMLElement {
 		}
 	}
 
-	static renderFilters(html, event) {
+	static renderFilters(html: string, event: Event | null) {
 		const parsedHTML = new DOMParser().parseFromString(html, 'text/html')
 
-		const facetDetailsElements = parsedHTML.querySelectorAll(
-			'#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter'
+		const facetDetailsElements = qsaRequired(
+			'#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter',
+			parsedHTML
 		)
-		const matchesIndex = (element) => {
-			const jsFilter = event ? event.target.closest('.js-filter') : undefined
-			return jsFilter ? element.dataset.index === jsFilter.dataset.index : false
+		const matchesIndex = (element: HTMLElement) => {
+			if (!event) return false
+			const jsFilter = targetClosestOptional(event, '.js-filter')
+			if (!jsFilter) return false
+			return element.dataset.index === jsFilter.dataset.index
 		}
 		const facetsToRender = Array.from(facetDetailsElements).filter(
 			(element) => !matchesIndex(element)
 		)
 		const countsToRender = Array.from(facetDetailsElements).find(matchesIndex)
 
-		facetsToRender.forEach((element) => {
-			document.querySelector(`.js-filter[data-index="${element.dataset.index}"]`).innerHTML =
-				element.innerHTML
+		facetsToRender.forEach((element: HTMLElement) => {
+			const elementToUpdate = qsRequired(`.js-filter[data-index="${element.dataset.index}"]`)
+			elementToUpdate.innerHTML = element.innerHTML
 		})
 
 		FacetFiltersForm.renderActiveFacets(parsedHTML)
 		FacetFiltersForm.renderAdditionalElements(parsedHTML)
 
-		if (countsToRender)
-			FacetFiltersForm.renderCounts(countsToRender, event.target.closest('.js-filter'))
+		if (countsToRender && event) {
+			const target = targetClosestRequired(event, '.js-filter')
+			FacetFiltersForm.renderCounts(countsToRender, target)
+		}
 	}
 
-	static renderActiveFacets(html) {
+	static renderActiveFacets(html: Document) {
 		const activeFacetElementSelectors = ['.active-facets-mobile', '.active-facets-desktop']
 
-		activeFacetElementSelectors.forEach((selector) => {
+		activeFacetElementSelectors.forEach((selector: string) => {
 			const activeFacetsElement = html.querySelector(selector)
 			if (!activeFacetsElement) return
-			document.querySelector(selector).innerHTML = activeFacetsElement.innerHTML
+			const facetsElementToUpdate = qsRequired(selector)
+			facetsElementToUpdate.innerHTML = activeFacetsElement.innerHTML
 		})
 
 		FacetFiltersForm.toggleActiveFacets(false)
 	}
 
-	static renderAdditionalElements(html) {
+	static renderAdditionalElements(html: Document) {
 		const mobileElementSelectors = ['.mobile-facets__open', '.mobile-facets__count', '.sorting']
 
 		mobileElementSelectors.forEach((selector) => {
-			if (!html.querySelector(selector)) return
-			document.querySelector(selector).innerHTML = html.querySelector(selector).innerHTML
+			const newElement = qsOptional(selector, html)
+			const elementToUpdate = qsOptional(selector)
+			if (!newElement || !elementToUpdate) return
+			elementToUpdate.innerHTML = newElement.innerHTML
 		})
 
-		document.getElementById('FacetFiltersFormMobile').closest('menu-drawer').bindEvents()
+		const mobileFacets = qsRequired('#FacetFiltersFormMobile')
+		const menuDrawer = closestRequired<MenuDrawer>(mobileFacets, 'menu-drawer')
+		if (!menuDrawer) throw new Error('menu-drawer not found, cant close mobile facets')
+		menuDrawer.bindEvents()
 	}
 
-	static renderCounts(source, target) {
-		const targetElement = target.querySelector('.facets__selected')
-		const sourceElement = source.querySelector('.facets__selected')
-
-		const targetElementAccessibility = target.querySelector('.facets__summary')
-		const sourceElementAccessibility = source.querySelector('.facets__summary')
+	static renderCounts(source: HTMLElement, target: HTMLElement) {
+		const targetElement = qsOptional('.facets__selected', target)
+		const sourceElement = qsOptional('.facets__selected', source)
+		const targetElementAccessibility = qsOptional('.facets__summary', target)
+		const sourceElementAccessibility = qsOptional('.facets__summary', source)
 
 		if (sourceElement && targetElement) {
-			target.querySelector('.facets__selected').outerHTML =
-				source.querySelector('.facets__selected').outerHTML
+			targetElement.outerHTML = sourceElement.outerHTML
 		}
 
 		if (targetElementAccessibility && sourceElementAccessibility) {
-			target.querySelector('.facets__summary').outerHTML =
-				source.querySelector('.facets__summary').outerHTML
+			targetElementAccessibility.outerHTML = sourceElementAccessibility.outerHTML
 		}
 	}
 
-	static updateURLHash(searchParams) {
+	static updateURLHash(searchParams: string) {
 		history.pushState(
 			{ searchParams },
 			'',
@@ -201,31 +223,36 @@ class FacetFiltersForm extends HTMLElement {
 	}
 
 	static getSections() {
+		const productGrid = qsRequired('#product-grid')
 		return [
 			{
-				section: document.getElementById('product-grid').dataset.id,
+				section: productGrid.dataset.id,
 			},
 		]
 	}
 
-	createSearchParams(form) {
+	createSearchParams(form: HTMLFormElement) {
 		const formData = new FormData(form)
-		return new URLSearchParams(formData).toString()
+		return new URLSearchParams(formData.toString()).toString()
 	}
 
-	onSubmitForm(searchParams, event) {
+	onSubmitForm(searchParams: string, event: Event) {
 		FacetFiltersForm.renderPage(searchParams, event)
 	}
 
-	onSubmitHandler(event) {
+	onSubmitHandler(event: Event) {
 		event.preventDefault()
-		const sortFilterForms = document.querySelectorAll('facet-filters-form form')
-		if (event.srcElement.className == 'mobile-facets__checkbox') {
-			const searchParams = this.createSearchParams(event.target.closest('form'))
+		const sortFilterForms = qsaRequired<HTMLFormElement>('facet-filters-form form')
+		const internetExplorerSrc = event.srcElement ? (event.srcElement as HTMLElement) : undefined
+		if (internetExplorerSrc && internetExplorerSrc.className == 'mobile-facets__checkbox') {
+			const form = targetClosestRequired<Event, HTMLFormElement>(event, 'form')
+			const searchParams = this.createSearchParams(form)
 			this.onSubmitForm(searchParams, event)
 		} else {
-			const forms = []
-			const isMobile = event.target.closest('form').id === 'FacetFiltersFormMobile'
+			const forms: string[] = []
+			const isMobile =
+				targetClosestOptional<Event, HTMLFormElement>(event, 'form')?.id ===
+				'FacetFiltersFormMobile'
 
 			sortFilterForms.forEach((form) => {
 				if (!isMobile) {
@@ -246,13 +273,15 @@ class FacetFiltersForm extends HTMLElement {
 		}
 	}
 
-	onActiveFilterClick(event) {
+	onActiveFilterClick(event: Event) {
 		event.preventDefault()
 		FacetFiltersForm.toggleActiveFacets()
+		const currentTarget = currentTargetRequired(event)
+		if (!(currentTarget instanceof HTMLAnchorElement)) throw new Error('currentTarget is not anchor element')
 		const url =
-			event.currentTarget.href.indexOf('?') == -1
+			currentTarget.href.indexOf('?') == -1
 				? ''
-				: event.currentTarget.href.slice(event.currentTarget.href.indexOf('?') + 1)
+				: currentTarget.href.slice(currentTarget.href.indexOf('?') + 1)
 		FacetFiltersForm.renderPage(url)
 	}
 }
