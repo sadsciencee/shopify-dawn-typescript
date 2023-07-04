@@ -1,4 +1,5 @@
 import { CountryProvinceSelector } from './shopify';
+import { type WindowProductModel } from '@/scripts/optional/product-model';
 
 // this file used to have a bunch of functions as well as the uCoastShopify class
 // we have a new file that's just Shopify that will be used for all theme-defined functions
@@ -176,7 +177,7 @@ export interface uCoastWindow extends Window {
 		setupXRElements: () => void
 		addModels: (json: any) => void
 	}
-	ProductModel?: unknown
+	ProductModel?: WindowProductModel
 	loadHls?: () => void
 }
 
@@ -221,6 +222,8 @@ export const accessibilityStrings: accessibilityStringsType = {
 	shareSuccess: '',
 	pauseSlideshow: '',
 	playSlideshow: '',
+	recipientFormExpanded: '',
+	recipientFormCollapsed: '',
 }
 
 export function initShopify() {
