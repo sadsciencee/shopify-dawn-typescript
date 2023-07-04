@@ -17,17 +17,3 @@ yarn.lock
 .idea/*
 node_modules/
 node_modules/*
-/assets/ucoast-*
-/assets/manifest.json
-/assets/font_JMDeco.woff2
-/assets/*
-/assets/font_JMUI-Italic.woff2
-
-/assets/font_JMUIBook.woff2
-
-/assets/font_JMUILight.woff2
-
-/assets/font_JMUILight-Italic.woff2
-
-/assets/font_JMUIMedium.woff2
-/assets/
