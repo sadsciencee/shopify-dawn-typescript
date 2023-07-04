@@ -1,58 +1,89 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { subscribe } from '@/scripts/theme/pubsub'
+import {
+	isCartErrorEvent,
+	isCartUpdateEvent,
+	isVariantChangeEvent,
+	subscribe,
+} from '@/scripts/theme/pubsub'
+import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
+import { type uCoastWindow } from '@/scripts/setup'
+
+declare let window: uCoastWindow
 
 export class RecipientForm extends HTMLElement {
+	sectionId: string
+	recipientFieldsLiveRegion: HTMLElement
+	checkboxInput: HTMLInputElement
+	hiddenControlField: HTMLInputElement
+	emailInput: HTMLInputElement
+	nameInput: HTMLInputElement
+	messageInput: HTMLInputElement
+	sendonInput: HTMLInputElement
+	offsetProperty?: HTMLInputElement
+	errorMessageWrapper?: HTMLElement
+	errorMessageList?: HTMLElement
+	errorMessage?: HTMLElement
+	currentProductVariantId: string
+	defaultErrorHeader?: string
+	// from native dawn constructor
+	cartUpdateUnsubscriber?: () => void = undefined
+	variantChangeUnsubscriber?: () => void = undefined
+	cartErrorUnsubscriber?: () => void = undefined
 	constructor() {
 		super()
-		this.recipientFieldsLiveRegion = this.querySelector(
-			`#Recipient-fields-live-region-${this.dataset.sectionId}`
+		const sectionId = this.dataset.sectionId
+		if (!sectionId) throw new Error('RecipientForm: missing data-section-id')
+		this.sectionId = sectionId
+		this.recipientFieldsLiveRegion = qsRequired(
+			`#Recipient-fields-live-region-${this.sectionId}`,
+			this
 		)
-		this.checkboxInput = this.querySelector(`#Recipient-checkbox-${this.dataset.sectionId}`)
+		this.checkboxInput = qsRequired(`#Recipient-checkbox-${this.sectionId}`, this)
 		this.checkboxInput.disabled = false
-		this.hiddenControlField = this.querySelector(`#Recipient-control-${this.dataset.sectionId}`)
+		this.hiddenControlField = qsRequired(`#Recipient-control-${this.sectionId}`, this)
 		this.hiddenControlField.disabled = true
-		this.emailInput = this.querySelector(`#Recipient-email-${this.dataset.sectionId}`)
-		this.nameInput = this.querySelector(`#Recipient-name-${this.dataset.sectionId}`)
-		this.messageInput = this.querySelector(`#Recipient-message-${this.dataset.sectionId}`)
-		this.sendonInput = this.querySelector(`#Recipient-send-on-${this.dataset.sectionId}`)
-		this.offsetProperty = this.querySelector(
-			`#Recipient-timezone-offset-${this.dataset.sectionId}`
-		)
+		this.emailInput = qsRequired(`#Recipient-email-${this.sectionId}`, this)
+		this.nameInput = qsRequired(`#Recipient-name-${this.sectionId}`, this)
+		this.messageInput = qsRequired(`#Recipient-message-${this.sectionId}`, this)
+		this.sendonInput = qsRequired(`#Recipient-send-on-${this.sectionId}`, this)
+		this.offsetProperty = qsOptional(`#Recipient-timezone-offset-${this.sectionId}`, this)
 		if (this.offsetProperty)
 			this.offsetProperty.value = new Date().getTimezoneOffset().toString()
 
-		this.errorMessageWrapper = this.querySelector(
-			'.product-form__recipient-error-message-wrapper'
-		)
-		this.errorMessageList = this.errorMessageWrapper?.querySelector('ul')
-		this.errorMessage = this.errorMessageWrapper?.querySelector('.error-message')
-		this.defaultErrorHeader = this.errorMessage?.innerText
-		this.currentProductVariantId = this.dataset.productVariantId
+		this.errorMessageWrapper = qsOptional('.product-form__recipient-error-message-wrapper')
+		if (this.errorMessageWrapper instanceof HTMLElement) {
+			this.errorMessageList = qsRequired('ul', this.errorMessageWrapper)
+			this.errorMessage = qsRequired('.error-message', this.errorMessageWrapper)
+			this.defaultErrorHeader = this.errorMessage.innerText
+		} else {
+			console.warn('RecipientForm: missing error message wrapper')
+		}
+		this.currentProductVariantId = getAttributeOrThrow('product-variant-id', this)
 		this.addEventListener('change', this.onChange.bind(this))
 		this.onChange()
 	}
 
-	cartUpdateUnsubscriber = undefined
-	variantChangeUnsubscriber = undefined
-	cartErrorUnsubscriber = undefined
-
 	connectedCallback() {
 		this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+			if (!isCartUpdateEvent(event)) return
 			if (
+				event &&
 				event.source === 'product-form' &&
-				event.productVariantId.toString() === this.currentProductVariantId
+				event.productVariantId?.toString() === this.currentProductVariantId
 			) {
 				this.resetRecipientForm()
 			}
 		})
 
 		this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-			if (event.data.sectionId === this.dataset.sectionId) {
+			if (!isVariantChangeEvent(event)) return
+			if (event && event.data && event.data.sectionId === this.sectionId) {
 				this.currentProductVariantId = event.data.variant.id.toString()
 			}
 		})
 
 		this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartError, (event) => {
+			if (!isCartErrorEvent(event)) return
 			if (
 				event.source === 'product-form' &&
 				event.productVariantId.toString() === this.currentProductVariantId
@@ -90,12 +121,14 @@ export class RecipientForm extends HTMLElement {
 		}
 	}
 
-	inputFields() {
+	inputFields(): HTMLInputElement[] {
 		return [this.emailInput, this.nameInput, this.messageInput, this.sendonInput]
 	}
 
-	disableableFields() {
-		return [...this.inputFields(), this.offsetProperty]
+	disableableFields(): HTMLInputElement[] {
+		return this.offsetProperty
+			? [...this.inputFields(), this.offsetProperty]
+			: this.inputFields()
 	}
 
 	clearInputFields() {
@@ -110,18 +143,25 @@ export class RecipientForm extends HTMLElement {
 		this.disableableFields().forEach((field) => (field.disabled = true))
 	}
 
-	displayErrorMessage(title, body) {
+	displayErrorMessage(_title: string, body: string | string[] | { [key: string]: string[] }) {
 		this.clearErrorMessage()
+		if (!this.errorMessageWrapper)
+			throw new Error(
+				'RecipientForm: displayErrorMessage called too early, missing error message wrapper'
+			)
 		this.errorMessageWrapper.hidden = false
 		if (typeof body === 'object') {
-			this.errorMessage.innerText = this.defaultErrorHeader
+			if (!(this.errorMessage instanceof HTMLElement))
+				throw new Error(
+					'RecipientForm: displayErrorMessage called too early, missing error message'
+				)
+			this.errorMessage.innerText = this.defaultErrorHeader ?? 'Error'
 			return Object.entries(body).forEach(([key, value]) => {
-				const errorMessageId = `RecipientForm-${key}-error-${this.dataset.sectionId}`
-				const fieldSelector = `#Recipient-${key}-${this.dataset.sectionId}`
+				const errorMessageId = `RecipientForm-${key}-error-${this.sectionId}`
+				const fieldSelector = `#Recipient-${key}-${this.sectionId}`
 				const message = `${value.join(', ')}`
-				const errorMessageElement = this.querySelector(`#${errorMessageId}`)
-				const errorTextElement = errorMessageElement?.querySelector('.error-message')
-				if (!errorTextElement) return
+				const errorMessageElement = qsRequired(`#${errorMessageId}`, this)
+				const errorTextElement = qsRequired('.error-message', errorMessageElement)
 
 				if (this.errorMessageList) {
 					this.errorMessageList.appendChild(
@@ -132,18 +172,36 @@ export class RecipientForm extends HTMLElement {
 				errorTextElement.innerText = `${message}.`
 				errorMessageElement.classList.remove('hidden')
 
-				const inputElement = this[`${key}Input`]
+				const inputElement = this.getInputElement(key)
 				if (!inputElement) return
 
-				inputElement.setAttribute('aria-invalid', true)
+				inputElement.setAttribute('aria-invalid', 'true')
 				inputElement.setAttribute('aria-describedby', errorMessageId)
 			})
 		}
 
+		if (!(this.errorMessage instanceof HTMLElement))
+			throw new Error('Missing this.errorMessage, cannot display error')
 		this.errorMessage.innerText = body
 	}
 
-	createErrorListItem(target, message) {
+	getInputElement(key: string): HTMLInputElement {
+		switch (key) {
+			case 'email':
+				return this.emailInput
+			case 'name':
+				return this.nameInput
+			case 'message':
+				return this.messageInput
+			case 'sendon':
+				return this.sendonInput
+			case 'checkbox':
+				return this.checkboxInput
+		}
+		throw new Error(`RecipientForm: unknown input element ${key}`)
+	}
+
+	createErrorListItem(target:string, message:string) {
 		const li = document.createElement('li')
 		const a = document.createElement('a')
 		a.setAttribute('href', target)
@@ -154,19 +212,24 @@ export class RecipientForm extends HTMLElement {
 	}
 
 	clearErrorMessage() {
+		if (!this.errorMessageWrapper) throw new Error('Missing this.errorMessageWrapper, cannot clearErrorMessage')
 		this.errorMessageWrapper.hidden = true
 
 		if (this.errorMessageList) this.errorMessageList.innerHTML = ''
 
-		this.querySelectorAll('.recipient-fields .form__message').forEach((field) => {
-			field.classList.add('hidden')
-			const textField = field.querySelector('.error-message')
-			if (textField) textField.innerText = ''
-		})
+		const errorMessages = qsaOptional('.recipient-fields .form__message', this)
+		if (errorMessages) {
+			errorMessages.forEach((field) => {
+				field.classList.add('hidden')
+				const textField = qsOptional('.error-message', field)
+				if (textField) textField.innerText = ''
+			})
+		}
+
 
 		;[this.emailInput, this.messageInput, this.nameInput, this.sendonInput].forEach(
 			(inputElement) => {
-				inputElement.setAttribute('aria-invalid', false)
+				inputElement.setAttribute('aria-invalid', 'false')
 				inputElement.removeAttribute('aria-describedby')
 			}
 		)

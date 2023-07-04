@@ -159,6 +159,8 @@ type accessibilityStringsType = {
 	shareSuccess: string
 	pauseSlideshow: string
 	playSlideshow: string
+	recipientFormExpanded: string
+	recipientFormCollapsed: string
 }
 
 export interface uCoastWindow extends Window {
