@@ -1,5 +1,7 @@
 import { ProductVariant } from '@/scripts/types/api'
 
+// some of these might actually be pubsub events - which aren't *real* javascript events
+
 interface VariantChange extends Event {
 	data: {
 		sectionId: string

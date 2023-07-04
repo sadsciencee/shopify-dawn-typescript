@@ -1,4 +1,5 @@
-import { currentTargetRequired, qsaRequired, qsRequired } from '@/scripts/functions';
+import { currentTargetRequired, qsaRequired, qsRequired } from '@/scripts/functions'
+import { type SlideChangedEvent } from '@/scripts/types/events'
 
 export class SliderComponent extends HTMLElement {
 	slider: HTMLElement
@@ -8,7 +9,7 @@ export class SliderComponent extends HTMLElement {
 	slidesPerPage?: number
 	totalPages?: number
 	currentPage?: number = 1
-  slideScrollPosition?: number
+	slideScrollPosition?: number
 	enableSliderLooping: boolean
 	currentPageElement: HTMLElement
 	pageTotalElement: HTMLElement
@@ -54,6 +55,20 @@ export class SliderComponent extends HTMLElement {
 		this.initPages()
 	}
 
+	createSlideChangedEvent(): SlideChangedEvent {
+		const currentPage = this.currentPage
+		if (!currentPage) throw new Error('cannot createSlideChangedEvent - currentPage is undefined')
+		if (!this.sliderItemsToShow) throw new Error('cannot createSlideChangedEvent - sliderItemsToShow is undefined')
+		const currentElement = this.sliderItemsToShow[currentPage - 1]
+		if (!currentElement) throw new Error('cannot createSlideChangedEvent - currentElement is undefined')
+		return new CustomEvent('slideChanged', {
+			detail: {
+				currentPage,
+				currentElement
+			},
+		})
+	}
+
 	update() {
 		// Temporarily prevents unneeded updates resulting from variant changes
 		// This should be refactored as part of https://github.com/Shopify/dawn/issues/2057
@@ -73,14 +88,7 @@ export class SliderComponent extends HTMLElement {
 
 		if (this.currentPage != previousPage) {
 			if (this.sliderItemsToShow) {
-				this.dispatchEvent(
-					new CustomEvent('slideChanged', {
-						detail: {
-							currentPage: this.currentPage,
-							currentElement: this.sliderItemsToShow[this.currentPage - 1],
-						},
-					})
-				)
+				this.dispatchEvent(this.createSlideChangedEvent())
 			} else {
 				throw new Error('sliderItemsToShow is undefined')
 			}
@@ -110,7 +118,7 @@ export class SliderComponent extends HTMLElement {
 		}
 	}
 
-	isSlideVisible(element:HTMLElement, offset = 0) {
+	isSlideVisible(element: HTMLElement, offset = 0) {
 		const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset
 		return (
 			element.offsetLeft + element.clientWidth <= lastVisibleSlide &&
@@ -120,9 +128,9 @@ export class SliderComponent extends HTMLElement {
 
 	onButtonClick(event: MouseEvent) {
 		event.preventDefault()
-    const currentTarget = currentTargetRequired(event)
-    if(!(currentTarget instanceof HTMLButtonElement)) return
-    if (!this.sliderItemOffset) return
+		const currentTarget = currentTargetRequired(event)
+		if (!(currentTarget instanceof HTMLButtonElement)) return
+		if (!this.sliderItemOffset) return
 		const step = currentTarget.dataset.step ? parseInt(currentTarget.dataset.step) : 1
 		this.slideScrollPosition =
 			currentTarget.name === 'next'

@@ -1,53 +1,52 @@
-function getFocusableElements(container) {
-	return Array.from(
-		container.querySelectorAll(
-			"summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
-		)
-	)
-}
+import {
+	focusVisiblePolyfill,
+	getFocusableElements,
+	initializeSummaryA11y,
+	targetRequired,
+} from '@/scripts/functions'
 
-document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
-	summary.setAttribute('role', 'button')
-	summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'))
+import { type FocusableHTMLElement } from '@/scripts/types/theme'
 
-	if (summary.nextElementSibling.getAttribute('id')) {
-		summary.setAttribute('aria-controls', summary.nextElementSibling.id)
-	}
+// this is a default shopify function that normally runs in global scope
+// I moved it to functions for clarity
+initializeSummaryA11y()
 
-	summary.addEventListener('click', (event) => {
-		event.currentTarget.setAttribute(
-			'aria-expanded',
-			!event.currentTarget.closest('details').hasAttribute('open')
-		)
-	})
+// trapFocusHandlers variable and associated functions are part of the global scope
+// this function should always run first
 
-	if (summary.closest('header-drawer, menu-drawer')) return
-	summary.parentElement.addEventListener('keyup', onKeyUpEscape)
-})
+const trapFocusHandlers: {
+	focusin?: (event: Event) => void
+	focusout?: (event: Event) => void
+	keydown?: (event: KeyboardEvent) => void
+} = {}
 
-const trapFocusHandlers = {}
-
-function trapFocus(container, elementToFocus = container) {
-	var elements = getFocusableElements(container)
-	var first = elements[0]
-	var last = elements[elements.length - 1]
+export function trapFocus(container: HTMLElement, elementToFocus: HTMLElement | undefined = container) {
+	const elements = getFocusableElements(container)
+	const first = elements[0]
+	const last = elements[elements.length - 1]
 
 	removeTrapFocus()
 
 	trapFocusHandlers.focusin = (event) => {
 		if (event.target !== container && event.target !== last && event.target !== first) return
 
+		if (!trapFocusHandlers.keydown)
+			throw new Error('trapFocusHandlers.focusin called before .keydown is defined')
+
 		document.addEventListener('keydown', trapFocusHandlers.keydown)
 	}
 
 	trapFocusHandlers.focusout = function () {
+		if (!trapFocusHandlers.keydown)
+			throw new Error('trapFocusHandlers.focusout called before .keydown is defined')
 		document.removeEventListener('keydown', trapFocusHandlers.keydown)
 	}
 
-	trapFocusHandlers.keydown = function (event) {
+	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
 		if (event.code.toUpperCase() !== 'TAB') return // If not TAB key
 		// On the last focusable element and tab forward, focus the first element.
-		if (event.target === last && !event.shiftKey) {
+		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
+		if (target === last && !event.shiftKey) {
 			event.preventDefault()
 			first.focus()
 		}
@@ -65,7 +64,7 @@ function trapFocus(container, elementToFocus = container) {
 	elementToFocus.focus()
 
 	if (
-		elementToFocus.tagName === 'INPUT' &&
+		elementToFocus instanceof HTMLInputElement &&
 		['search', 'text', 'email', 'url'].includes(elementToFocus.type) &&
 		elementToFocus.value
 	) {
@@ -80,98 +79,19 @@ try {
 	focusVisiblePolyfill()
 }
 
-function focusVisiblePolyfill() {
-	const navKeys = [
-		'ARROWUP',
-		'ARROWDOWN',
-		'ARROWLEFT',
-		'ARROWRIGHT',
-		'TAB',
-		'ENTER',
-		'SPACE',
-		'ESCAPE',
-		'HOME',
-		'END',
-		'PAGEUP',
-		'PAGEDOWN',
-	]
-	let currentFocusedElement = null
-	let mouseClick = null
+// don't know why shopify put this function below the above but I'm not about to go debug it
 
-	window.addEventListener('keydown', (event) => {
-		if (navKeys.includes(event.code.toUpperCase())) {
-			mouseClick = false
-		}
-	})
+export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefined) {
+	if (trapFocusHandlers.focusin) {
+		document.removeEventListener('focusin', trapFocusHandlers.focusin)
+	}
+	if (trapFocusHandlers.focusout) {
+		document.removeEventListener('focusout', trapFocusHandlers.focusout)
+	}
 
-	window.addEventListener('mousedown', (event) => {
-		mouseClick = true
-	})
-
-	window.addEventListener(
-		'focus',
-		() => {
-			if (currentFocusedElement) currentFocusedElement.classList.remove('focused')
-
-			if (mouseClick) return
-
-			currentFocusedElement = document.activeElement
-			currentFocusedElement.classList.add('focused')
-		},
-		true
-	)
-}
-
-
-function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefined) {
-	document.removeEventListener('focusin', trapFocusHandlers.focusin)
-	document.removeEventListener('focusout', trapFocusHandlers.focusout)
-	document.removeEventListener('keydown', trapFocusHandlers.keydown)
+	if (trapFocusHandlers.keydown) {
+		document.removeEventListener('keydown', trapFocusHandlers.keydown)
+	}
 
 	if (elementToFocus) elementToFocus.focus()
 }
-
-function onKeyUpEscape(event) {
-	if (event.code.toUpperCase() !== 'ESCAPE') return
-
-	const openDetailsElement = event.target.closest('details[open]')
-	if (!openDetailsElement) return
-
-	const summaryElement = openDetailsElement.querySelector('summary')
-	openDetailsElement.removeAttribute('open')
-	summaryElement.setAttribute('aria-expanded', false)
-	summaryElement.focus()
-}
-
-export function debounce(fn, wait) {
-	let t
-	return (...args) => {
-		clearTimeout(t)
-		t = setTimeout(() => fn.apply(this, args), wait)
-	}
-}
-
-export function throttle(fn: Function, delay:number = 0) {
-	let lastCall = 0
-	return function (...args:unknown[]) {
-		const now = new Date().getTime()
-		if (now - lastCall < delay) {
-			return
-		}
-		lastCall = now
-		return fn(...args)
-	}
-}
-
-export function fetchConfig(type = 'json') {
-	return {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json', Accept: `application/${type}` },
-	}
-}
-
-/*
- * Shopify Common JS
- *
- */
-

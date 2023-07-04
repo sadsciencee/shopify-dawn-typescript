@@ -1,4 +1,4 @@
-import { qsRequired } from '@/scripts/functions'
+import { debounce, qsRequired } from '@/scripts/functions';
 
 export class SearchForm extends HTMLElement {
 	input: HTMLInputElement

@@ -1,10 +1,13 @@
 import {
-  closestRequired,
-  currentTargetRequired,
-  qsOptional,
-  qsRequired,
-  targetClosestOptional, targetClosestRequired
-} from '@/scripts/functions';
+	closestOptional,
+	closestRequired,
+	currentTargetRequired,
+	qsOptional,
+	qsRequired,
+	targetClosestOptional,
+	targetClosestRequired,
+} from '@/scripts/functions'
+import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
 
 export class MenuDrawer extends HTMLElement {
 	mainDetailsToggle: HTMLDetailsElement
@@ -47,12 +50,14 @@ export class MenuDrawer extends HTMLElement {
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 		function addTrapFocus() {
+			const nextElementSibling = summaryElement.nextElementSibling
 			if (!(detailsElement instanceof HTMLElement))
 				throw new Error('cannot addTrapFocus, detailsElement is null')
-			trapFocus(summaryElement.nextElementSibling, qsRequired('button', detailsElement))
-			if (summaryElement.nextElementSibling) {
-				summaryElement.nextElementSibling.removeEventListener('transitionend', addTrapFocus)
-			}
+			if (!(nextElementSibling instanceof HTMLElement))
+				throw new Error('cannot addTrapFocus, nextElementSibling is null')
+
+			trapFocus(nextElementSibling, qsOptional('button', detailsElement))
+			nextElementSibling.removeEventListener('transitionend', addTrapFocus)
 		}
 
 		if (detailsElement === this.mainDetailsToggle) {
@@ -128,8 +133,8 @@ export class MenuDrawer extends HTMLElement {
 		const parentMenuElement = detailsElement.closest('.submenu-open')
 		parentMenuElement && parentMenuElement.classList.remove('submenu-open')
 		detailsElement.classList.remove('menu-opening')
-    const summaryElement = qsRequired('summary', detailsElement)
-      summaryElement.setAttribute('aria-expanded', 'false')
+		const summaryElement = qsRequired('summary', detailsElement)
+		summaryElement.setAttribute('aria-expanded', 'false')
 		removeTrapFocus(summaryElement)
 		this.closeAnimation(detailsElement)
 	}
@@ -148,11 +153,10 @@ export class MenuDrawer extends HTMLElement {
 				window.requestAnimationFrame(handleAnimation)
 			} else {
 				detailsElement.removeAttribute('open')
-				if (detailsElement.closest('details[open]')) {
-					trapFocus(
-						detailsElement.closest('details[open]'),
-						detailsElement.querySelector('summary')
-					)
+				const closestDetails = closestOptional(detailsElement, 'details[open]')
+				if (closestDetails) {
+					const summaryElement = qsRequired('summary', detailsElement)
+					trapFocus(closestDetails, summaryElement)
 				}
 			}
 		}

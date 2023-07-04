@@ -1,5 +1,5 @@
 import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/functions';
-import { type EventWithRelatedTarget } from '@/scripts/functions'
+import { type EventWithRelatedTarget } from '@/scripts/types/theme';
 
 export class LocalizationForm extends HTMLElement {
 	elements: {

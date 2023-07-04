@@ -1,6 +1,6 @@
-import { pauseAllMedia } from '@/scripts/setup'
-import { qsOptional, targetClosestOptional } from '@/scripts/functions';
+import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions';
 import { DeferredMedia } from '@/scripts/theme/deferred-media';
+import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
 
 export class ModalDialog extends HTMLElement {
 	moved: boolean = false
@@ -41,7 +41,7 @@ export class ModalDialog extends HTMLElement {
 		document.body.classList.add('overflow-hidden')
 		this.setAttribute('open', '')
 		if (popup) popup.loadContent()
-		trapFocus(this, this.querySelector('[role="dialog"]'))
+		trapFocus(this, qsRequired('[role="dialog"]', this))
 		pauseAllMedia()
 	}
 

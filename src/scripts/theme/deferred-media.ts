@@ -1,5 +1,4 @@
-import { qsRequired } from '@/scripts/functions';
-import { pauseAllMedia } from '@/scripts/setup';
+import { pauseAllMedia, qsRequired } from '@/scripts/functions';
 
 export class DeferredMedia extends HTMLElement {
   width?: number;

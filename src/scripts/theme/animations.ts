@@ -1,4 +1,5 @@
 import { type uCoastWindow } from '@/scripts/setup';
+import { throttle } from '@/scripts/functions';
 
 const SCROLL_ANIMATION_TRIGGER_CLASSNAME = 'scroll-trigger';
 const SCROLL_ANIMATION_OFFSCREEN_CLASSNAME = 'scroll-trigger--offscreen';

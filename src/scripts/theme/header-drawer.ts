@@ -1,5 +1,6 @@
 import { MenuDrawer } from '@/scripts/theme/menu-drawer';
 import { closestOptional, qsRequired } from '@/scripts/functions';
+import { trapFocus } from '@/scripts/theme/global';
 
 export class HeaderDrawer extends MenuDrawer {
   header?: HTMLElement

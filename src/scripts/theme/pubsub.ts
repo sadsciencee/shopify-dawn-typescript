@@ -1,9 +1,17 @@
-// todo: data type should be known
+// todo: add additional data types as needed
 export type CartUpdateEvent = {
-	source: 'cart-items'
+	source: 'cart-items' | 'product-form'
+	productVariantId?: string
 }
 
-export type PubSubEvent = CartUpdateEvent | {} | undefined
+export type CartErrorEvent = {
+	source: 'product-form',
+	productVariantId: string,
+	errors: string,
+	message: string,
+}
+
+export type PubSubEvent = CartUpdateEvent | CartErrorEvent | undefined
 
 export type SubscriberCallback = (pubSubEvent: PubSubEvent) => void
 

@@ -1,4 +1,7 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog';
+import { qsOptional } from '@/scripts/functions';
+import { Shopify } from '@/scripts/shopify';
+import { type CartNotification } from '@/scripts/cart/cart-notification';
 
 export class QuickAddModal extends ModalDialog {
   constructor() {
@@ -7,7 +10,7 @@ export class QuickAddModal extends ModalDialog {
   }
 
   override hide(preventFocus = false) {
-    const cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+    const cartNotification = qsOptional<CartNotification>('cart-notification') || document.querySelector('cart-drawer');
     if (cartNotification) cartNotification.setActiveElement(this.openedBy);
     this.modalContent.innerHTML = '';
 

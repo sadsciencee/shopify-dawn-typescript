@@ -2,7 +2,9 @@ import {
 	closestOptional,
 	closestRequired,
 	currentTargetRequired,
+	debounce,
 	getAttributeOrThrow,
+	onKeyUpEscape,
 	qsaOptional,
 	qsaRequired,
 	qsOptional,
@@ -12,6 +14,7 @@ import {
 } from '@/scripts/functions'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { MenuDrawer } from '@/scripts/theme/menu-drawer'
+import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 
 type FilterDataType = { html: string; url: string }
 
@@ -35,7 +38,7 @@ class FacetFiltersForm extends HTMLElement {
 		this.facetForm = qsRequired('form', this)
 		this.facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this))
 
-		const facetWrapper = this.querySelector('#FacetsWrapperDesktop')
+		const facetWrapper = qsOptional('#FacetsWrapperDesktop', this)
 		if (facetWrapper) facetWrapper.addEventListener('keyup', onKeyUpEscape)
 	}
 
@@ -225,11 +228,11 @@ class FacetFiltersForm extends HTMLElement {
 		)
 	}
 
-	static getSections() {
+	static getSections(): ShopifySectionRenderingSchema[] {
 		const productGrid = qsRequired('#product-grid')
 		return [
 			{
-				section: productGrid.dataset.id,
+				section: getAttributeOrThrow('data-id', productGrid),
 			},
 		]
 	}
@@ -348,7 +351,9 @@ class FacetRemove extends HTMLElement {
 
 	closeFilter(event: Event) {
 		event.preventDefault()
-		const form = closestOptional<FacetFiltersForm>(this, 'facet-filters-form') || qsRequired<FacetFiltersForm>('facet-filters-form')
+		const form =
+			closestOptional<FacetFiltersForm>(this, 'facet-filters-form') ||
+			qsRequired<FacetFiltersForm>('facet-filters-form')
 		form.onActiveFilterClick(event)
 	}
 }

@@ -1,4 +1,5 @@
 import { qsRequired, targetRequired } from '@/scripts/functions';
+import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
 
 export class PickupAvailabilityDrawer extends HTMLElement {
   onBodyClick: (event: MouseEvent) => void;

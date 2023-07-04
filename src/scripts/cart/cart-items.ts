@@ -1,8 +1,16 @@
 import { ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/functions';
-import { debounce } from '@/scripts/theme/global'
+import {
+	debounce,
+	fetchConfig,
+	getAttributeOrThrow,
+	qsOptional,
+	qsRequired,
+	targetRequired
+} from '@/scripts/functions';
 import { publish, PubSubEvent, subscribe } from '@/scripts/theme/pubsub'
-import { routes } from '@/scripts/setup';
+import { routes } from '@/scripts/setup'
+import { ShopifySectionRenderingSchema } from '@/scripts/types/theme';
+import { trapFocus } from '@/scripts/theme/global';
 
 export class CartItems extends HTMLElement {
 	lineItemStatusElement: HTMLElement
@@ -38,17 +46,13 @@ export class CartItems extends HTMLElement {
 		}
 	}
 
-	onChange(event:Event) {
+	onChange(event: Event) {
 		const target = targetRequired<Event, HTMLInputElement>(event)
 		const targetIndex = getAttributeOrThrow('data-index', target)
 		const activeElement = document.activeElement as HTMLElement
 		if (!activeElement) throw new Error('no document.activeElement')
 		const activeElementName = getAttributeOrThrow('name', activeElement)
-		this.updateQuantity(
-			targetIndex,
-			target.value,
-			activeElementName
-		)
+		this.updateQuantity(targetIndex, target.value, activeElementName)
 	}
 
 	onCartUpdate() {
@@ -56,7 +60,7 @@ export class CartItems extends HTMLElement {
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-				const sourceQty = html.querySelector('cart-items')
+				const sourceQty = qsRequired('cart-items', html.documentElement)
 				this.innerHTML = sourceQty.innerHTML
 			})
 			.catch((e) => {
@@ -64,11 +68,11 @@ export class CartItems extends HTMLElement {
 			})
 	}
 
-	getSectionsToRender() {
+	getSectionsToRender(): ShopifySectionRenderingSchema[] {
 		return [
 			{
 				id: 'main-cart-items',
-				section: document.getElementById('main-cart-items').dataset.id,
+				section: getAttributeOrThrow('data-id', qsRequired('#main-cart-items')),
 				selector: '.js-contents',
 			},
 			{
@@ -83,13 +87,13 @@ export class CartItems extends HTMLElement {
 			},
 			{
 				id: 'main-cart-footer',
-				section: document.getElementById('main-cart-footer').dataset.id,
+				section: getAttributeOrThrow('data-id', qsRequired('#main-cart-footer')),
 				selector: '.js-contents',
 			},
 		]
 	}
 
-	updateQuantity(line:string, quantity:string, name:string) {
+	updateQuantity(line: string, quantity: string, name: string) {
 		this.enableLoading(line)
 
 		const body = JSON.stringify({
@@ -106,12 +110,12 @@ export class CartItems extends HTMLElement {
 			.then((state) => {
 				const parsedState = JSON.parse(state)
 				const quantityElement =
-					document.getElementById(`Quantity-${line}`) ||
-					document.getElementById(`Drawer-quantity-${line}`)
+					qsOptional<HTMLInputElement>(`#Quantity-${line}`) ||
+					qsRequired<HTMLInputElement>(`#Drawer-quantity-${line}`)
 				const items = document.querySelectorAll('.cart-item')
 
 				if (parsedState.errors) {
-					quantityElement.value = quantityElement.getAttribute('value')
+					quantityElement.value = getAttributeOrThrow('value', quantityElement)
 					this.updateLiveRegions(line, parsedState.errors)
 					return
 				}
@@ -125,10 +129,10 @@ export class CartItems extends HTMLElement {
 				if (cartDrawerWrapper)
 					cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0)
 
-				this.getSectionsToRender().forEach((section) => {
+				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {
+					const sectionEl = qsRequired(`#${section.id}`)
 					const elementToReplace =
-						document.getElementById(section.id).querySelector(section.selector) ||
-						document.getElementById(section.id)
+						(section.selector && sectionEl.querySelector(section.selector)) || sectionEl
 					elementToReplace.innerHTML = this.getSectionInnerHTML(
 						parsedState.sections[section.section],
 						section.selector

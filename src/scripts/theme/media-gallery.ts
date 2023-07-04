@@ -1,15 +1,22 @@
-import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/functions';
+import {
+	debounce,
+	getAttributeOrThrow,
+	pauseAllMedia,
+	qsOptional,
+	qsRequired,
+} from '@/scripts/functions'
 import { SliderComponent } from '@/scripts/theme/slider-component'
-import { pauseAllMedia, type uCoastWindow } from '@/scripts/setup';
-import { StickyHeader } from '@/scripts/theme/sticky-header';
-import { DeferredMedia } from '@/scripts/theme/deferred-media';
+import { type uCoastWindow } from '@/scripts/setup'
+import { StickyHeader } from '@/scripts/theme/sticky-header'
+import { DeferredMedia } from '@/scripts/theme/deferred-media'
+import { SlideChangedEvent } from '@/scripts/types/events'
 
 declare let window: uCoastWindow
 
 export class MediaGallery extends HTMLElement {
 	elements: {
 		liveRegion: HTMLElement
-		viewer: HTMLElement|SliderComponent
+		viewer: HTMLElement | SliderComponent
 		thumbnails?: SliderComponent
 	}
 	mql: MediaQueryList
@@ -49,9 +56,10 @@ export class MediaGallery extends HTMLElement {
 		return qsRequired(`[data-target="${mediaId}"]`, this.elements.thumbnails)
 	}
 
-	onSlideChanged(event: Event) {
+	onSlideChanged(event: SlideChangedEvent) {
 		if (!this.elements.thumbnails) return
-		const thumbnail = this.getActiveThumbnail(event.detail.currentElement.dataset.mediaId)
+		const mediaId = getAttributeOrThrow('data-media-id', event.detail.currentElement)
+		const thumbnail = this.getActiveThumbnail(mediaId)
 		this.setActiveThumbnail(thumbnail)
 	}
 
@@ -98,12 +106,13 @@ export class MediaGallery extends HTMLElement {
 			.forEach((element) => element.removeAttribute('aria-current'))
 		const button = qsRequired('button', thumbnail)
 		button.setAttribute('aria-current', 'true')
-		if (this.elements.thumbnails && this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return
+		if (this.elements.thumbnails && this.elements.thumbnails.isSlideVisible(thumbnail, 10))
+			return
 
 		this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft })
 	}
 
-	announceLiveRegion(activeItem:HTMLElement, position:string) {
+	announceLiveRegion(activeItem: HTMLElement, position: string) {
 		const image = qsRequired<HTMLImageElement>('.product__modal-opener--image img', activeItem)
 		if (!image) return
 		image.onload = () => {
@@ -119,7 +128,7 @@ export class MediaGallery extends HTMLElement {
 		image.src = image.src
 	}
 
-	playActiveMedia(activeItem:HTMLElement) {
+	playActiveMedia(activeItem: HTMLElement) {
 		pauseAllMedia()
 		const deferredMedia = qsOptional<DeferredMedia>('.deferred-media', activeItem)
 		if (deferredMedia) deferredMedia.loadContent(false)

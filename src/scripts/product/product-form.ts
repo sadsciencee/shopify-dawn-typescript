@@ -1,115 +1,144 @@
-import { PUB_SUB_EVENTS } from '@/scripts/theme/constants';
+import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/functions'
+import { type CartNotification } from '@/scripts/cart/cart-notification'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
+import { routes, type uCoastWindow } from '@/scripts/setup'
+import { publish } from '@/scripts/theme/pubsub'
+import { QuickAddModal } from '@/scripts/optional/quick-add';
 
-if (!customElements.get('product-form')) {
-  customElements.define(
-    'product-form',
-    class ProductForm extends HTMLElement {
-      constructor() {
-        super();
+declare let window: uCoastWindow
 
-        this.form = this.querySelector('form');
-        this.form.querySelector('[name=id]').disabled = false;
-        this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
-        this.submitButton = this.querySelector('[type="submit"]');
-        if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
+export class ProductForm extends HTMLElement {
+	form: HTMLFormElement
+	formIdEl: HTMLInputElement
+	cart?: CartNotification | CartDrawer
+	submitButton: HTMLButtonElement
+	errorMessageWrapper?: HTMLElement
+	errorMessage?: HTMLElement
+	hideErrors: boolean
+	error?: boolean
+	constructor() {
+		super()
 
-        this.hideErrors = this.dataset.hideErrors === 'true';
-      }
+		this.form = qsRequired('form', this)
+		this.formIdEl = qsRequired('[name=id]', this.form)
+		this.formIdEl.disabled = false
+		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
+		this.cart =
+			qsOptional<CartNotification>('cart-notification') ||
+			qsOptional<CartDrawer>('cart-drawer')
+		this.submitButton = qsRequired('[type="submit"]', this)
+		if (this.cart && this.cart.localName === 'cart-drawer')
+			this.submitButton.setAttribute('aria-haspopup', 'dialog')
 
-      onSubmitHandler(evt) {
-        evt.preventDefault();
-        if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
+		this.hideErrors = this.dataset.hideErrors === 'true'
+	}
 
-        this.handleErrorMessage();
+	getSpinner() {
+		return qsRequired('.loading-overlay__spinner', this)
+	}
 
-        this.submitButton.setAttribute('aria-disabled', true);
-        this.submitButton.classList.add('loading');
-        this.querySelector('.loading-overlay__spinner').classList.remove('hidden');
+	onSubmitHandler(event: Event) {
+		event.preventDefault()
+		if (this.submitButton.getAttribute('aria-disabled') === 'true') return
 
-        const config = fetchConfig('javascript');
-        config.headers['X-Requested-With'] = 'XMLHttpRequest';
-        delete config.headers['Content-Type'];
+		this.handleErrorMessage()
 
-        const formData = new FormData(this.form);
-        if (this.cart) {
-          formData.append(
-            'sections',
-            this.cart.getSectionsToRender().map((section) => section.id)
-          );
-          formData.append('sections_url', window.location.pathname);
-          this.cart.setActiveElement(document.activeElement);
-        }
-        config.body = formData;
+		this.submitButton.setAttribute('aria-disabled', 'true')
+		this.submitButton.classList.add('loading')
+		this.getSpinner().classList.remove('hidden')
 
-        fetch(`${routes.cart_add_url}`, config)
-          .then((response) => response.json())
-          .then((response) => {
-            if (response.status) {
-              publish(PUB_SUB_EVENTS.cartError, {
-                source: 'product-form',
-                productVariantId: formData.get('id'),
-                errors: response.errors || response.description,
-                message: response.message,
-              });
-              this.handleErrorMessage(response.description);
+		const formData = new FormData(this.form)
+		if (this.cart) {
+			const sectionIdsToRender = this.cart
+				.getSectionsToRender()
+				.filter((section) => section.id)
+				.map((section) => section.id)
+			if (!sectionIdsToRender.length) throw Error('getSectionsToRender returned empty array')
+			formData.append('sections', sectionIdsToRender.join(','))
+			formData.append('sections_url', window.location.pathname)
+			if (!(document.activeElement instanceof HTMLElement)) throw Error('no activeElement')
+			this.cart.setActiveElement(document.activeElement)
+		}
+		const config = addToCartConfig(formData)
+		const addedVariantId = formData.get('id') as string
+		if (!addedVariantId) throw Error('No variant id found')
 
-              const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
-              if (!soldOutMessage) return;
-              this.submitButton.setAttribute('aria-disabled', true);
-              this.submitButton.querySelector('span').classList.add('hidden');
-              soldOutMessage.classList.remove('hidden');
-              this.error = true;
-              return;
-            } else if (!this.cart) {
-              window.location = window.routes.cart_url;
-              return;
-            }
+		fetch(`${routes.cart_add_url}`, config)
+			.then((response) => response.json())
+			.then((response) => {
+				if (response.status) {
+					publish(PUB_SUB_EVENTS.cartError, {
+						source: 'product-form',
+						productVariantId: addedVariantId,
+						errors: response.errors || response.description,
+						message: response.message,
+					})
+					this.handleErrorMessage(response.description)
 
-            if (!this.error)
-              publish(PUB_SUB_EVENTS.cartUpdate, { source: 'product-form', productVariantId: formData.get('id') });
-            this.error = false;
-            const quickAddModal = this.closest('quick-add-modal');
-            if (quickAddModal) {
-              document.body.addEventListener(
-                'modalClosed',
-                () => {
-                  setTimeout(() => {
-                    this.cart.renderContents(response);
-                  });
-                },
-                { once: true }
-              );
-              quickAddModal.hide(true);
-            } else {
-              this.cart.renderContents(response);
-            }
-          })
-          .catch((e) => {
-            console.error(e);
-          })
-          .finally(() => {
-            this.submitButton.classList.remove('loading');
-            if (this.cart && this.cart.classList.contains('is-empty')) this.cart.classList.remove('is-empty');
-            if (!this.error) this.submitButton.removeAttribute('aria-disabled');
-            this.querySelector('.loading-overlay__spinner').classList.add('hidden');
-          });
-      }
+					const soldOutMessage = this.submitButton.querySelector('.sold-out-message')
+					if (!soldOutMessage) return
+					this.submitButton.setAttribute('aria-disabled', 'true')
+					const submitButtonText = qsRequired('span', this.submitButton)
+					submitButtonText.classList.add('hidden')
+					soldOutMessage.classList.remove('hidden')
+					this.error = true
+					return
+				} else if (!this.cart) {
+					window.location = window.routes.cart_url
+					return
+				}
 
-      handleErrorMessage(errorMessage = false) {
-        if (this.hideErrors) return;
+				if (!this.error)
+					publish(PUB_SUB_EVENTS.cartUpdate, {
+						source: 'product-form',
+						productVariantId: addedVariantId,
+					})
+				this.error = false
+				const quickAddModal = closestOptional<QuickAddModal>(this, 'quick-add-modal')
+				if (quickAddModal) {
+					document.body.addEventListener(
+						'modalClosed',
+						() => {
+							setTimeout(() => {
+								if (this.cart) {
+									this.cart.renderContents(response)
+								}
+							})
+						},
+						{ once: true }
+					)
+					quickAddModal.hide(true)
+				} else {
+					this.cart.renderContents(response)
+				}
+			})
+			.catch((e) => {
+				console.error(e)
+			})
+			.finally(() => {
+				this.submitButton.classList.remove('loading')
+				if (this.cart && this.cart.classList.contains('is-empty'))
+					this.cart.classList.remove('is-empty')
+				if (!this.error) this.submitButton.removeAttribute('aria-disabled')
+				this.getSpinner().classList.add('hidden')
+			})
+	}
 
-        this.errorMessageWrapper =
-          this.errorMessageWrapper || this.querySelector('.product-form__error-message-wrapper');
-        if (!this.errorMessageWrapper) return;
-        this.errorMessage = this.errorMessage || this.errorMessageWrapper.querySelector('.product-form__error-message');
+	handleErrorMessage(errorMessage?: string) {
+		if (this.hideErrors) return
 
-        this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage);
+		this.errorMessageWrapper =
+			this.errorMessageWrapper || qsRequired('.product-form__error-message-wrapper', this)
+		if (!this.errorMessageWrapper) throw new Error('No error message wrapper found')
+		this.errorMessage =
+			this.errorMessage ||
+			qsRequired('.product-form__error-message', this.errorMessageWrapper)
 
-        if (errorMessage) {
-          this.errorMessage.textContent = errorMessage;
-        }
-      }
-    }
-  );
+		this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage)
+
+		if (errorMessage) {
+			this.errorMessage.textContent = errorMessage
+		}
+	}
 }

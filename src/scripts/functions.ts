@@ -2,7 +2,16 @@
 // right now I've avoided any other helper functions but if we get another sub category of functions we should change this to a folder 'functions'
 
 import { type KlaviyoPopup, type Modal, type NotifyMe } from '@/scripts/content/modal'
-import { type QuickAddModal } from '@/scripts/product/quick-add'
+import { type QuickAddModal } from '@/scripts/optional/quick-add'
+import {
+	DebounceCallback,
+	EventWithRelatedTarget,
+	FocusableHTMLElement,
+} from '@/scripts/types/theme'
+import { ProductModel } from '@/scripts/optional/product-model';
+import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations';
+
+// local types
 
 type HTMLElementProperty =
 	| 'parentNode'
@@ -17,10 +26,11 @@ type HTMLElementProperty =
 	| 'parentElement'
 
 type CommonEventType = MouseEvent | KeyboardEvent | TouchEvent
-export type EventWithRelatedTarget = MouseEvent | FocusEvent | DragEvent | PointerEvent
 
-// return a required HTML element or throw null. this is mainly for class component constructors where an error should be thrown if the element is not found.
-// allows passing in an additional property, for instances where an HTML element is accessed from a property of the query selector
+// begin typescript DOM functions
+// this is a set of functions I wrote while refactoring Dawn 9.0 to typescript
+// ended up being very flexible and useful for enforcing types when accessing dom elements so we are reusing for Dawn 10.0
+
 export const qsRequired = <T extends HTMLElement = HTMLElement, U extends HTMLElement = T>(
 	selector: string,
 	component?: HTMLElement,
@@ -141,21 +151,22 @@ export const targetOptional = <
 export const targetClosestRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E,
 	selector: string
 ) => {
 	const element = event.target as T | null
 	if (!element) throw new Error(`required element not found: event.currentTarget`)
 	const closest = element.closest(selector) as T
-	if (!closest) throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
+	if (!closest)
+		throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
 	return closest
 }
 
 export const targetClosestOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E,
 	selector: string
 ) => {
@@ -193,6 +204,10 @@ export const elementPropertyRequired = <T extends HTMLElement = HTMLElement>(
 	return parent
 }
 
+// this function is use to safely define a new custom element
+// it allows callbacks to be run before and after the element is defined -
+// callback functionality is mainly for shop filters but can apply to any class with heavy usage of static methods
+
 interface CustomElementConstructorWithStaticTagName extends CustomElementConstructor {
 	htmlSelector: string
 }
@@ -224,13 +239,12 @@ export const safeDefineElement = (
 	}
 }
 
-// throw error when unable to get required value
+// formData helpers
 export const getOrThrow = <T extends FormData | Map<any, any> = FormData>(data: T, key: string) => {
 	const value = data.get(key)
 	if (!value) throw new Error(`Value ${key} not found in ${data}`)
 	return value
 }
-// return undefined when unable to get required value
 export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
 	data: T,
 	key: string
@@ -240,16 +254,18 @@ export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
 	return value
 }
 
-// get attribute or throw
+// get attribute from element or throw error
 export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
 	const data = el.getAttribute(attribute)
 	if (!data) throw new Error(`Attribute ${attribute} no found on element ${el}`)
 	return data
 }
+// browser safe replace all
 export const replaceAll = (str: string, find: string, replace: string) => {
 	return str.split(find).join(replace)
 }
 
+// toggle attributes specific to ucoast builds, not used in default dawn repack
 export const toggleActive = (el: HTMLElement, active: boolean) => {
 	if (active) {
 		el.setAttribute('data-uc-active', '')
@@ -274,6 +290,7 @@ export const toggleLoading = (el: HTMLElement, loading: boolean) => {
 	}
 }
 
+// scroll to anchor link with some ucoast-specific features, not used in default dawn repack
 export const scrollToAnchor = (selector: string) => {
 	const header = qsRequired('[data-uc-header-wrapper]')
 	const anchor = qsRequired(selector)
@@ -287,24 +304,9 @@ export const scrollToAnchor = (selector: string) => {
 	window.scrollBy({ top: scrollToPosition, behavior: 'smooth' })
 }
 
+// TODO: refactor to use app proxy for security
 export const getBackendRoute = () => {
-	return 'https://duster-klaviyo-integration.herokuapp.com'
-	//return 'http://localhost:5000'
-}
-
-export function onKeyUpEscape(event: KeyboardEvent) {
-	if (!(event instanceof KeyboardEvent)) return
-	if (event.code.toUpperCase() !== 'ESCAPE') return
-	const target = event.target as HTMLElement | EventTarget | null
-	if (!(target instanceof HTMLElement)) return
-	const openDetailsElement = target?.closest('details[open]')
-	if (!openDetailsElement) return
-
-	const summaryElement = openDetailsElement.querySelector('summary')
-	openDetailsElement.removeAttribute('open')
-	if (!summaryElement) return
-	summaryElement.setAttribute('aria-expanded', '')
-	summaryElement.focus()
+	return 'http://localhost:5000'
 }
 
 export const getCurrentHeaderHeight = () => {
@@ -329,6 +331,7 @@ export const closeAllModals = () => {
 	})
 }
 
+// these three functions are somewhat similar - should be refactored for clarity
 export const isElementInViewport = (el: HTMLElement) => {
 	const rect = el.getBoundingClientRect()
 	const result =
@@ -366,6 +369,10 @@ export const isTenPercentInViewport = (element: HTMLElement) => {
 	return visibleArea >= 0.1 * elementArea
 }
 
+// this function applies the scaling from the --ax variables. it is project-dependent
+// 1440 and 375 are specific to the size I request from designers, however should be refactored as Constants
+// TODO: add const defs for hard coded scaling values
+
 export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
 	let ratio = viewport === 'desktop' ? 1440 / window.innerWidth : 375 / window.innerWidth
 	if (viewport === 'desktop' && ratio > 1.25) ratio = 1.25 // this is a reverse of the 1:.8 ratio from desktop min in css
@@ -374,6 +381,9 @@ export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
 	if (viewport === 'mobile' && ratio < 1) ratio = 1
 	return (val * ratio).toFixed(1)
 }
+
+// TODO: refactor for default dawn repack
+// this sets all relevant height variables for the app
 
 export const setHeightVars = (header: HTMLElement, announcement: HTMLElement | undefined) => {
 	const viewport = window.innerWidth >= 990 ? 'desktop' : 'mobile'
@@ -395,6 +405,274 @@ export const setHeightVars = (header: HTMLElement, announcement: HTMLElement | u
 	}
 }
 
+// set drawer height when opened - this prevents the drawer from being too short on mobile
+// tbh, shouldn't be necessary with proper height vars, but keeping it here since shopify uses it
 export const setDrawerHeight = () => {
 	document.documentElement.style.setProperty('--drawer-height', `${window.innerHeight}px`)
 }
+
+// accessibility functions
+
+export function initializeSummaryA11y() {
+	// this is from shopify
+	// it adds some accessibility features to summary elements
+	document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
+		summary.setAttribute('role', 'button')
+		const parentNode =
+			summary.parentNode instanceof HTMLElement ? summary.parentNode : undefined
+		const ariaExpandedVal = parentNode && parentNode.hasAttribute('open') ? 'true' : 'false'
+		summary.setAttribute('aria-expanded', ariaExpandedVal)
+
+		const nextElementSibling =
+			summary.nextElementSibling instanceof HTMLElement
+				? summary.nextElementSibling
+				: undefined
+
+		if (nextElementSibling && nextElementSibling.hasAttribute('id')) {
+			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
+		}
+
+		summary.addEventListener('click', (event) => {
+			const currentTarget = currentTargetRequired(event)
+			const closestTarget = targetClosestRequired(event, 'details')
+			currentTarget.setAttribute('aria-expanded', `${!closestTarget.hasAttribute('open')}`)
+		})
+
+		if (summary.closest('header-drawer, menu-drawer')) return
+		const parentElement =
+			summary.parentElement instanceof HTMLElement ? summary.parentElement : undefined
+		if (!parentElement) return
+		parentElement.addEventListener('keyup', onKeyUpEscape)
+	})
+}
+
+export function getFocusableElements(container: HTMLElement): FocusableHTMLElement[] {
+	return Array.from(
+		container.querySelectorAll(
+			"summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
+		)
+	)
+}
+
+export function focusVisiblePolyfill() {
+	const navKeys = [
+		'ARROWUP',
+		'ARROWDOWN',
+		'ARROWLEFT',
+		'ARROWRIGHT',
+		'TAB',
+		'ENTER',
+		'SPACE',
+		'ESCAPE',
+		'HOME',
+		'END',
+		'PAGEUP',
+		'PAGEDOWN',
+	]
+	let currentFocusedElement: HTMLElement | Element | null = null
+	let mouseClick: boolean | null = null
+
+	window.addEventListener('keydown', (event) => {
+		if (navKeys.includes(event.code.toUpperCase())) {
+			mouseClick = false
+		}
+	})
+
+	window.addEventListener('mousedown', (_event: MouseEvent) => {
+		mouseClick = true
+	})
+
+	window.addEventListener(
+		'focus',
+		() => {
+			if (currentFocusedElement) currentFocusedElement.classList.remove('focused')
+
+			if (mouseClick) return
+
+			currentFocusedElement = document.activeElement
+			if (currentFocusedElement instanceof HTMLElement) {
+				currentFocusedElement.classList.add('focused')
+			}
+		},
+		true
+	)
+}
+
+export function onKeyUpEscape(event: KeyboardEvent) {
+	if (event.code.toUpperCase() !== 'ESCAPE') return
+
+	const openDetailsElement = targetClosestOptional(event,'details[open]')
+	if (!openDetailsElement) return
+
+	const summaryElement = qsRequired('summary', openDetailsElement)
+	openDetailsElement.removeAttribute('open')
+	summaryElement.setAttribute('aria-expanded', 'false')
+	summaryElement.focus()
+}
+
+export function pauseAllMedia() {
+	const jsYoutubeEls = qsaOptional<HTMLIFrameElement>('.js-youtube')
+	if (jsYoutubeEls) {
+		jsYoutubeEls.forEach((video) => {
+			if (!video.contentWindow) return;
+			video.contentWindow.postMessage(
+				'{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
+				'*'
+			)
+		})
+	}
+
+	const jsVimeoEls = qsaOptional<HTMLIFrameElement>('.js-vimeo')
+	if (jsVimeoEls) {
+		jsVimeoEls.forEach((video) => {
+			if (!video.contentWindow) return;
+			video.contentWindow.postMessage('{"method":"pause"}', '*')
+		})
+	}
+
+	const html5Videos = qsaOptional<HTMLVideoElement>('video')
+	if (html5Videos) {
+		html5Videos.forEach((video) => video.pause())
+	}
+
+	const productModels = qsaOptional<ProductModel>('product-model')
+	if (productModels) {
+		productModels.forEach((model) => {
+			if (model.modelViewerUI) model.modelViewerUI.pause()
+		})
+	}
+}
+
+// event based functions
+
+export function debounce(fn: Function, wait: number): DebounceCallback {
+	let timeoutId: number
+	return (...args) => {
+		clearTimeout(timeoutId)
+		// @ts-ignore
+		// since this is a generic function that can literally be used for anything, I think 'any' is the best type here
+		// 'unknown' would be better but we can't assign a type without moving off of arrow functions
+		timeoutId = setTimeout(() => fn.apply(this, args), wait)
+	}
+}
+export function throttle(fn: Function, delay: number = 0) {
+	let lastCall = 0
+	return function (...args: unknown[]) {
+		const now = new Date().getTime()
+		if (now - lastCall < delay) {
+			return
+		}
+		lastCall = now
+		return fn(...args)
+	}
+}
+
+// fetch API configs
+
+export function fetchConfig(type = 'json') {
+	return {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', Accept: `application/${type}` },
+	}
+}
+
+type AddToCartFormValues = {
+	quantity: number
+	form_type: string
+	id: number
+	sections?: string
+	sections_url?: string
+}
+
+export function addToCartConfig(body: FormData) {
+	const data: AddToCartFormValues = {
+		quantity: getOrUndefined(body, 'quantity') ?? 1,
+		form_type: getOrThrow(body, 'form_type'),
+		id: getOrThrow(body, 'id'),
+		sections: getOrUndefined(body, 'sections'),
+		sections_url: getOrUndefined(body, 'sections_url'),
+	}
+	return {
+		method: 'POST',
+		headers: {
+			Accept: `application/javascript`,
+			'X-Requested-With': 'XMLHttpRequest',
+		},
+		body: JSON.stringify(data),
+	}
+}
+
+// klaviyo & notify me not part of initial dawn but will be in every project
+
+
+type AddToKlaviyoListFormValues = {
+	email: string
+	list_id: string
+	phone_number?: string
+}
+
+export function addToKlaviyoListConfig(body: FormData) {
+	const data: AddToKlaviyoListFormValues = {
+		email: getOrThrow(body, 'email'),
+		list_id: getOrThrow(body, 'list_id'),
+		phone_number: getOrUndefined(body, 'phone_number'),
+	}
+	return {
+		method: 'POST',
+		mode: 'cors' as RequestMode,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	}
+}
+
+type NotifyMeConfigValues = {
+	email: string
+	variant: string
+}
+
+export function notifyMeConfig(body: FormData) {
+	const data: NotifyMeConfigValues = {
+		email: getOrThrow(body, 'email'),
+		variant: getOrThrow(body, 'variant'),
+	}
+	return {
+		method: 'POST',
+		mode: 'cors' as RequestMode,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	}
+}
+
+// recentlyViewedProducts isn't part of dawn, but it's in my 9.0 build pack so leaving here for now
+
+export function getRecentlyViewedProducts(): string[] {
+	const pageList = localStorage.getItem('pageList')
+	if (!pageList) return []
+	return JSON.parse(pageList) || []
+}
+
+export function trackRecentlyViewedProducts() {
+	const pageList = getRecentlyViewedProducts()
+
+	let currentUrl = window.location.href.split('?')[0]
+
+	if (!pageList.includes(currentUrl) && currentUrl.includes('/products/')) {
+		pageList.push(currentUrl)
+
+		if (pageList.length > 4) {
+			pageList.shift()
+		}
+
+		localStorage.setItem('pageList', JSON.stringify(pageList))
+	}
+}
+
+window.addEventListener('DOMContentLoaded', () => initializeScrollAnimationTrigger())
+
+document.addEventListener('shopify:section:load', (event: Event) => {
+	initializeScrollAnimationTrigger(targetRequired<Event, Document>(event))
+})

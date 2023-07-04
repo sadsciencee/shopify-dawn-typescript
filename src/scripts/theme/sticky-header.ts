@@ -1,4 +1,5 @@
 import { qsOptional } from '@/scripts/functions';
+import { PredictiveSearch } from '@/scripts/catalog/predictive-search';
 
 export class StickyHeader extends HTMLElement {
 	preventHide: boolean = false
