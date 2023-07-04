@@ -1,19 +1,23 @@
+import { getAttributeOrThrow, qsOptional } from '@/scripts/functions';
+
 export class ProductRecommendations extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
-    const handleIntersection = (entries, observer) => {
+    const handleIntersection = (entries:IntersectionObserverEntry[], observer:IntersectionObserver) => {
       if (!entries[0].isIntersecting) return;
       observer.unobserve(this);
 
-      fetch(this.dataset.url)
+      const fetchUrl = getAttributeOrThrow('data-url', this);
+
+      fetch(fetchUrl)
         .then((response) => response.text())
         .then((text) => {
           const html = document.createElement('div');
           html.innerHTML = text;
-          const recommendations = html.querySelector('product-recommendations');
+          const recommendations = qsOptional<ProductRecommendations>('product-recommendations', html)
 
           if (recommendations && recommendations.innerHTML.trim().length) {
             this.innerHTML = recommendations.innerHTML;
