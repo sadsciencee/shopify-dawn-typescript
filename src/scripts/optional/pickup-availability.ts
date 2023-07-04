@@ -18,7 +18,7 @@ export class PickupAvailability extends UcoastEl {
 
 		this.errorHtml = firstElementChild?.cloneNode(true)
 		this.onClickRefreshList = this.onClickRefreshList.bind(this)
-		const variantId = getAttributeOrThrow('variant-id', this)
+		const variantId = getAttributeOrThrow('data-variant-id', this)
 		this.fetchAvailability(variantId)
 	}
 
@@ -35,16 +35,9 @@ export class PickupAvailability extends UcoastEl {
 		fetch(variantSectionUrl)
 			.then((response) => response.text())
 			.then((text) => {
-				const sectionInnerHTML = new DOMParser()
-					.parseFromString(text, 'text/html')
-					.querySelector('.shopify-section')
-				if (sectionInnerHTML instanceof Document) {
-					this.renderPreview(sectionInnerHTML)
-				} else {
-					throw new Error(
-						'No shopify-section found in sectionInnerHTML or was not instance of document'
-					)
-				}
+				const newDocument = new DOMParser().parseFromString(text, 'text/html')
+				const sectionInnerHTML = qsRequired('.shopify-section', newDocument.documentElement)
+				this.renderPreview(sectionInnerHTML)
 			})
 			.catch((error) => {
 				console.error(error)
@@ -68,7 +61,7 @@ export class PickupAvailability extends UcoastEl {
 		button.addEventListener('click', this.onClickRefreshList)
 	}
 
-	renderPreview(sectionInnerHTML: Document) {
+	renderPreview(sectionInnerHTML: Document|HTMLElement) {
 		const drawer = qsOptional<PickupAvailabilityDrawer>('pickup-availability-drawer')
 		if (drawer) drawer.remove()
 		const pickupAvailabilityPreview = qsOptional(

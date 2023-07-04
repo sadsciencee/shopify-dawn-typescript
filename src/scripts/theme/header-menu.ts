@@ -3,6 +3,7 @@ import { qsRequired } from '@/scripts/functions';
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
 
 export class HeaderMenu extends DetailsDisclosure {
+  static override htmlSelector = 'header-menu'
   header: StickyHeader | null
   constructor() {
     super()
