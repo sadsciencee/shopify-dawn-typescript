@@ -143,7 +143,7 @@ function onKeyUpEscape(event) {
 	summaryElement.focus()
 }
 
-function debounce(fn, wait) {
+export function debounce(fn, wait) {
 	let t
 	return (...args) => {
 		clearTimeout(t)
@@ -151,7 +151,7 @@ function debounce(fn, wait) {
 	}
 }
 
-function throttle(fn: Function, delay:number = 0) {
+export function throttle(fn: Function, delay:number = 0) {
 	let lastCall = 0
 	return function (...args:unknown[]) {
 		const now = new Date().getTime()
@@ -163,7 +163,7 @@ function throttle(fn: Function, delay:number = 0) {
 	}
 }
 
-function fetchConfig(type = 'json') {
+export function fetchConfig(type = 'json') {
 	return {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', Accept: `application/${type}` },

@@ -1,6 +1,15 @@
-let subscribers = {}
+// todo: data type should be known
+export type CartUpdateEvent = {
+	source: 'cart-items'
+}
 
-function subscribe(eventName, callback) {
+export type PubSubEvent = CartUpdateEvent | {} | undefined
+
+export type SubscriberCallback = (pubSubEvent: PubSubEvent) => void
+
+let subscribers: Record<string, SubscriberCallback[]> = {}
+
+export function subscribe(eventName: string, callback: SubscriberCallback) {
 	if (subscribers[eventName] === undefined) {
 		subscribers[eventName] = []
 	}
@@ -14,10 +23,10 @@ function subscribe(eventName, callback) {
 	}
 }
 
-function publish(eventName, data) {
+export function publish(eventName: string, pubSubEvent: PubSubEvent = undefined) {
 	if (subscribers[eventName]) {
 		subscribers[eventName].forEach((callback) => {
-			callback(data)
+			callback(pubSubEvent)
 		})
 	}
 }
