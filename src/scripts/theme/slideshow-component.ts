@@ -240,6 +240,7 @@ export class SlideshowComponent extends SliderComponent {
 		if (!this.sliderItemOffset)
 			throw new Error('autoRotateSlides called early - no sliderItemOffset found')
 		const slideScrollPosition =
+			this.sliderItems &&
 			this.currentPage === this.sliderItems.length
 				? 0
 				: this.slider.scrollLeft + this.sliderItemOffset
@@ -282,15 +283,17 @@ export class SlideshowComponent extends SliderComponent {
 		if (!this.currentPage)
 			throw new Error('applyAnimationToAnnouncementBar called early - no currentPage found')
 
-		const itemsCount = this.sliderItems.length
+		const itemsCount = this.sliderItems ? this.sliderItems.length : 0
 		const increment = button === 'next' ? 1 : -1
 
 		const currentIndex = this.currentPage - 1
 		let nextIndex = (currentIndex + increment) % itemsCount
 		nextIndex = nextIndex === -1 ? itemsCount - 1 : nextIndex
 
-		const nextSlide = this.sliderItems[nextIndex]
-		const currentSlide = this.sliderItems[currentIndex]
+		const nextSlide = this.sliderItems ? this.sliderItems[nextIndex] : undefined
+		const currentSlide = this.sliderItems ? this.sliderItems[currentIndex] : undefined
+
+		if (!nextSlide || !currentSlide) throw new Error('no slides - should not be triggering slides')
 
 		const animationClassIn = 'announcement-bar-slider--fade-in'
 		const animationClassOut = 'announcement-bar-slider--fade-out'
@@ -301,6 +304,7 @@ export class SlideshowComponent extends SliderComponent {
 		const shouldMoveNext =
 			(button === 'next' && !isLastSlide) || (button === 'previous' && isFirstSlide)
 		const direction = shouldMoveNext ? 'next' : 'previous'
+
 
 		currentSlide.classList.add(`${animationClassOut}-${direction}`)
 		nextSlide.classList.add(`${animationClassIn}-${direction}`)

@@ -1,6 +1,5 @@
 import {
 	closestOptional,
-	closestRequired,
 	currentTargetRequired,
 	qsOptional,
 	qsRequired,
@@ -47,7 +46,7 @@ export class MenuDrawer extends UcoastEl {
 		const summaryElement = currentTargetRequired(event)
 		const detailsElement = summaryElement.parentNode
 		if (!(detailsElement instanceof HTMLElement)) throw new Error('detailsElement is null')
-		const parentMenuElement = closestRequired(detailsElement, '.has-submenu')
+		const parentMenuElement = closestOptional(detailsElement, '.has-submenu')
 		const isOpen = detailsElement.hasAttribute('open')
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 

@@ -1,14 +1,16 @@
 import { ON_CHANGE_DEBOUNCE_TIMER } from '@/scripts/theme/constants'
 import { routes } from '@/scripts/setup'
-import { debounce, fetchConfig, targetRequired } from '@/scripts/functions';
+import { debounce, fetchConfig, qsRequired, targetRequired } from '@/scripts/functions';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class CartNote extends UcoastEl {
 	static htmlSelector = 'cart-note'
+	input: HTMLTextAreaElement
 	constructor() {
 		super()
+		this.input = qsRequired('textarea', this)
 
-		this.addEventListener(
+		this.input.addEventListener(
 			'change',
 			debounce((event: Event) => {
 				const target = targetRequired<Event, HTMLTextAreaElement>(event)

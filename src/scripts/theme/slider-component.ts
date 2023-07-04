@@ -1,4 +1,4 @@
-import { currentTargetRequired, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions'
+import { currentTargetRequired, qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
 import { type SlideChangedEvent } from '@/scripts/types/events'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
@@ -11,7 +11,7 @@ export function isSliderComponent(obj: HTMLElement): obj is SliderComponent {
 export class SliderComponent extends UcoastEl {
 	static htmlSelector = 'slider-component'
 	slider: HTMLElement
-	sliderItems: NodeListOf<HTMLElement>
+	sliderItems?: NodeListOf<HTMLElement>
 	sliderItemsToShow?: HTMLElement[]
 	sliderItemOffset?: number
 	slidesPerPage?: number
@@ -26,7 +26,7 @@ export class SliderComponent extends UcoastEl {
 	constructor() {
 		super()
 		this.slider = qsRequired('[id^="Slider-"]', this)
-		this.sliderItems = qsaRequired('[id^="Slide-"]', this)
+		this.sliderItems = qsaOptional('[id^="Slide-"]', this)
 		this.enableSliderLooping = false
 		this.currentPageElement = qsOptional('.slider-counter--current', this)
 		this.pageTotalElement = qsOptional('.slider-counter--total', this)
@@ -45,9 +45,9 @@ export class SliderComponent extends UcoastEl {
 	}
 
 	initPages() {
-		this.sliderItemsToShow = Array.from(this.sliderItems).filter(
+		this.sliderItemsToShow = this.sliderItems ? Array.from(this.sliderItems).filter(
 			(element) => element.clientWidth > 0
-		)
+		) : []
 		if (this.sliderItemsToShow.length < 2) return
 		this.sliderItemOffset =
 			this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft

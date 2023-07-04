@@ -1,4 +1,4 @@
-import { qsOptional, qsRequired } from '@/scripts/functions'
+import { qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
 import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
 import { type DetailsModal } from '@/scripts/theme/details-modal'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
@@ -67,7 +67,6 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	createObserver() {
-		console.log('createObserver')
 		let observer = new IntersectionObserver((entries, observer) => {
 			this.headerBounds = entries[0].intersectionRect
 			observer.disconnect()
@@ -143,8 +142,10 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	closeMenuDisclosure() {
-		this.disclosures = this.disclosures || this.header.querySelectorAll('header-menu')
-		this.disclosures.forEach((disclosure) => disclosure.close())
+		this.disclosures = this.disclosures || qsaOptional<HeaderMenu>('header-menu', this.header)
+		this.disclosures?.forEach((disclosure) => {
+			disclosure.close()
+		})
 	}
 
 	closeSearchModal() {
