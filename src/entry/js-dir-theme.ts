@@ -12,24 +12,27 @@ import { ShowMoreButton } from '@/scripts/theme/show-more-button'
 import { SliderComponent } from '@/scripts/theme/slider-component'
 import { SlideshowComponent } from '@/scripts/theme/slideshow-component'
 import { StickyHeader } from '@/scripts/theme/sticky-header'
-import { CartNotification } from '@/scripts/theme/cart-notification';
-import { SearchForm } from '@/scripts/theme/search-form';
+import { CartNotification } from '@/scripts/theme/cart-notification'
+import { SearchForm } from '@/scripts/theme/search-form'
+import { VariantRadios } from '@/scripts/theme/variant-radios'
+import { VariantSelects } from '@/scripts/theme/variant-selects'
+import { ProductRecommendations } from '@/scripts/theme/product-recommendations'
 
-// defined in header.liquid
+safeDefineElement(QuantityInput)
+safeDefineElement(MenuDrawer)
+safeDefineElement(HeaderDrawer)
+safeDefineElement(ModalDialog)
+safeDefineElement(ModalOpener)
+safeDefineElement(DeferredMedia)
+safeDefineElement(SliderComponent)
+safeDefineElement(SlideshowComponent)
+safeDefineElement(VariantSelects)
+safeDefineElement(VariantRadios)
+safeDefineElement(ProductRecommendations)
+safeDefineElement(ShowMoreButton)
+safeDefineElement(StickyHeader)
 safeDefineElement(DetailsDisclosure)
+safeDefineElement(HeaderMenu)
 safeDefineElement(DetailsModal)
 safeDefineElement(CartNotification)
 safeDefineElement(SearchForm)
-
-safeDefineElement(HeaderDrawer)
-safeDefineElement(HeaderMenu)
-safeDefineElement(MenuDrawer)
-safeDefineElement(ModalDialog)
-safeDefineElement(ModalOpener)
-
-safeDefineElement(QuantityInput)
-safeDefineElement(ShowMoreButton)
-safeDefineElement(SliderComponent)
-safeDefineElement(SlideshowComponent)
-safeDefineElement(StickyHeader)
-safeDefineElement(DeferredMedia)

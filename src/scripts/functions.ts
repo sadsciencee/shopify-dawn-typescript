@@ -10,7 +10,6 @@ import {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { ProductModel } from '@/scripts/optional/product-model';
-import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations';
 
 // local types
 
@@ -671,9 +670,3 @@ export function trackRecentlyViewedProducts() {
 		localStorage.setItem('pageList', JSON.stringify(pageList))
 	}
 }
-
-window.addEventListener('DOMContentLoaded', () => initializeScrollAnimationTrigger())
-
-document.addEventListener('shopify:section:load', (event: Event) => {
-	initializeScrollAnimationTrigger(targetRequired<Event, Document>(event))
-})

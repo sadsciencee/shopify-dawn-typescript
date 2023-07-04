@@ -1,6 +1,6 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import { isVariantChangeEvent, publish, subscribe } from '@/scripts/theme/pubsub';
-import { type VariantRadios } from '@/scripts/product/variant-radios'
+import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/functions';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

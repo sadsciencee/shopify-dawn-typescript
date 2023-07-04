@@ -28,11 +28,9 @@
 
     {% render 'meta-tags' %}
 
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
     {%- if settings.animations_reveal_on_scroll -%}
-      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+      {% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
     {%- endif -%}
 
     {{ content_for_header }}
@@ -345,7 +343,7 @@
     </script>
 
     {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+      {% render 'ucoast', ucoast: 'js-optional-predictive-search.ts' %}
     {%- endif -%}
   </body>
 </html>
