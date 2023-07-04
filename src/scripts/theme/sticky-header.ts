@@ -1,22 +1,28 @@
-import { qsOptional } from '@/scripts/functions';
-import { PredictiveSearch } from '@/scripts/catalog/predictive-search';
+import { qsOptional, qsRequired } from '@/scripts/functions';
+import { type PredictiveSearch } from '@/scripts/catalog/predictive-search';
+import { type DetailsModal } from '@/scripts/theme/details-modal';
+import { type HeaderMenu } from '@/scripts/theme/header-menu';
 
 export class StickyHeader extends HTMLElement {
 	preventHide: boolean = false
   preventReveal: boolean = false
-	header?: HTMLElement
+	header: HTMLElement
 	headerIsAlwaysSticky?: boolean
-	headerBounds?: DOMRect | {}
+	headerBounds: DOMRect | {} = {}
 	currentScrollTop: number = 0
 	predictiveSearch?: PredictiveSearch
-  onScrollHandler?: EventListener
-  hideHeaderOnScrollUp?: () => void
+  onScrollHandler!: (event: Event) => void
+	hideHeaderOnScrollUp!: () => void
+	searchModal?: DetailsModal
+	isScrolling?: number
+	disclosures?: [] | NodeListOf<HeaderMenu>
 	constructor() {
 		super()
+		this.header = qsRequired('.section-header')
 	}
 
 	connectedCallback() {
-		this.header = qsOptional('.section-header')
+		this.header = qsRequired('.section-header')
 		this.headerIsAlwaysSticky =
 			this.getAttribute('data-sticky-type') === 'always' ||
 			this.getAttribute('data-sticky-type') === 'reduce-logo-size'
@@ -72,11 +78,11 @@ export class StickyHeader extends HTMLElement {
 
 		if (this.predictiveSearch && this.predictiveSearch.isOpen) return
 
-		if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+		if (this.headerBounds instanceof DOMRect && scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
 			this.header.classList.add('scrolled-past-header')
 			if (this.preventHide) return
 			requestAnimationFrame(this.hide.bind(this))
-		} else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+		} else if (this.headerBounds instanceof DOMRect && scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
 			this.header.classList.add('scrolled-past-header')
 			if (!this.preventReveal) {
 				requestAnimationFrame(this.reveal.bind(this))
@@ -89,9 +95,11 @@ export class StickyHeader extends HTMLElement {
 
 				requestAnimationFrame(this.hide.bind(this))
 			}
-		} else if (scrollTop <= this.headerBounds.top) {
+		} else if (this.headerBounds instanceof DOMRect && scrollTop <= this.headerBounds.top) {
 			this.header.classList.remove('scrolled-past-header')
 			requestAnimationFrame(this.reset.bind(this))
+		} else {
+			console.warn('onScroll used in sticky-header but headerBounds is not initialized')
 		}
 
 		this.currentScrollTop = scrollTop
@@ -125,7 +133,7 @@ export class StickyHeader extends HTMLElement {
 	}
 
 	closeSearchModal() {
-		this.searchModal = this.searchModal || this.header.querySelector('details-modal')
+		this.searchModal = this.searchModal ?? qsRequired<DetailsModal>('details-modal', this.header)
 		this.searchModal.close(false)
 	}
 }
