@@ -253,7 +253,7 @@
     {% endcase %}
     {% if request.page_type contains 'customers' %}
       {% render 'ucoast', ucoast: 'css-dir-customer-prio.scss', preload_stylesheet: true %}
-    {% ebndif %}
+    {% endif %}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -307,9 +307,13 @@
         {% render 'ucoast', ucoast: 'css-dir-article-defer.scss', preload_stylesheet: true %}
     {% endcase %}
 
+    {% comment %}
+
     {% if request.page_type contains 'customers' %}
       {% render 'ucoast', ucoast: 'css-dir-customer-defer.scss', preload_stylesheet: true %}
     {% endif %}
+
+    {% endcomment %}
 
     {% sections 'footer-group' %}
 
