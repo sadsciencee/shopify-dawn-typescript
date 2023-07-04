@@ -53,6 +53,7 @@ export class CartNotification extends UcoastEl {
   }
 
   renderContents(parsedState: SectionApiResponse) {
+    console.log({ parsedState })
     this.cartItemKey = parsedState.key;
     this.getSectionsToRender().forEach((section) => {
       const sectionId = section.id;
@@ -69,11 +70,10 @@ export class CartNotification extends UcoastEl {
   }
 
   getSectionsToRender(): ShopifySectionRenderingSchema[] {
-    if (!this.cartItemKey) throw new Error('cartItemKey is not set');
     return [
       {
         id: 'cart-notification-product',
-        selector: `[id="cart-notification-product-${this.cartItemKey}"]`,
+        selector: this.cartItemKey ? `[id="cart-notification-product-${this.cartItemKey}"]` : undefined,
       },
       {
         id: 'cart-notification-button',

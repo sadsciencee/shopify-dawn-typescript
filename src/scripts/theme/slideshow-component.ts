@@ -1,12 +1,13 @@
 import { SliderComponent } from '@/scripts/theme/slider-component'
 import {
-	currentTargetOptional, currentTargetRequired,
+	currentTargetOptional,
+	currentTargetRequired,
 	qsaOptional,
 	qsOptional,
 	qsRequired,
-	targetRequired
-} from '@/scripts/functions';
-import { type uCoastWindow } from '@/scripts/setup';
+	targetRequired,
+} from '@/scripts/functions'
+import { type uCoastWindow } from '@/scripts/setup'
 
 declare let window: uCoastWindow
 
@@ -26,7 +27,7 @@ export class SlideshowComponent extends SliderComponent {
 	sliderControlButtons?: NodeListOf<HTMLButtonElement>
 	autoplayButtonIsSetToPlay: boolean = false
 	setPositionTimeout?: number
-  autoplay?: number
+	autoplay?: number
 	constructor() {
 		super()
 		this.sliderFirstItemNode = qsRequired('.slideshow__slide', this.slider)
@@ -54,21 +55,27 @@ export class SlideshowComponent extends SliderComponent {
 			this.announcementBarArrowButtonWasClicked = false
 
 			this.desktopLayout = window.matchMedia('(min-width: 750px)')
+			this.desktopLayout?.addEventListener('change', () => {
+				if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay()
+			})
 			this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-			;[this.reducedMotion, this.desktopLayout].forEach((mediaQuery) => {
-				mediaQuery.addEventListener('change', () => {
-					if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay()
-				})
+			this.reducedMotion?.addEventListener('change', () => {
+				if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay()
 			})
-			;[this.prevButton, this.nextButton].forEach((button) => {
-				button.addEventListener(
-					'click',
-					() => {
-						this.announcementBarArrowButtonWasClicked = true
-					},
-					{ once: true }
-				)
-			})
+			this.prevButton?.addEventListener(
+				'click',
+				() => {
+					this.announcementBarArrowButtonWasClicked = true
+				},
+				{ once: true }
+			)
+			this.nextButton?.addEventListener(
+				'click',
+				() => {
+					this.announcementBarArrowButtonWasClicked = true
+				},
+				{ once: true }
+			)
 		}
 
 		if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay()
@@ -144,7 +151,7 @@ export class SlideshowComponent extends SliderComponent {
 		if (!this.currentPage)
 			throw Error('this.currentPage is not set in SlideshowComponent class')
 		this.sliderControlButtons = qsaOptional('.slider-counter__link', this)
-		this.prevButton.removeAttribute('disabled')
+		this.prevButton?.removeAttribute('disabled')
 
 		if (!this.sliderControlButtons) return
 
@@ -212,7 +219,8 @@ export class SlideshowComponent extends SliderComponent {
 	}
 
 	togglePlayButtonState(pauseAutoplay: boolean) {
-    if (!this.sliderAutoplayButton) throw new Error('togglePlayButtonState called early - no autoplay button found')
+		if (!this.sliderAutoplayButton)
+			throw new Error('togglePlayButtonState called early - no autoplay button found')
 		if (pauseAutoplay) {
 			this.sliderAutoplayButton.classList.add('slideshow__autoplay--paused')
 			this.sliderAutoplayButton.setAttribute(
@@ -229,7 +237,8 @@ export class SlideshowComponent extends SliderComponent {
 	}
 
 	autoRotateSlides() {
-		if (!this.sliderItemOffset) throw new Error('autoRotateSlides called early - no sliderItemOffset found')
+		if (!this.sliderItemOffset)
+			throw new Error('autoRotateSlides called early - no sliderItemOffset found')
 		const slideScrollPosition =
 			this.currentPage === this.sliderItems.length
 				? 0
@@ -243,7 +252,8 @@ export class SlideshowComponent extends SliderComponent {
 		if (this.sliderItemsToShow) {
 			this.sliderItemsToShow.forEach((item, index) => {
 				const linkElements = item.querySelectorAll('a')
-				if (!this.currentPage) throw new Error('setSlideVisibility called early - no currentPage found')
+				if (!this.currentPage)
+					throw new Error('setSlideVisibility called early - no currentPage found')
 				if (index === this.currentPage - 1) {
 					if (linkElements.length)
 						linkElements.forEach((button) => {
@@ -269,7 +279,8 @@ export class SlideshowComponent extends SliderComponent {
 
 	applyAnimationToAnnouncementBar(button = 'next') {
 		if (!this.announcementBarSlider) return
-		if (!this.currentPage) throw new Error('applyAnimationToAnnouncementBar called early - no currentPage found')
+		if (!this.currentPage)
+			throw new Error('applyAnimationToAnnouncementBar called early - no currentPage found')
 
 		const itemsCount = this.sliderItems.length
 		const increment = button === 'next' ? 1 : -1
@@ -300,9 +311,12 @@ export class SlideshowComponent extends SliderComponent {
 		}, this.announcerBarAnimationDelay * 2)
 	}
 
-	linkToSlide(event:Event) {
+	linkToSlide(event: Event) {
 		event.preventDefault()
-		if (!this.sliderControlLinksArray || !this.currentPage) throw new Error('linkToSlide called early - no sliderControlLinksArray or currentPage found')
+		if (!this.sliderControlLinksArray || !this.currentPage)
+			throw new Error(
+				'linkToSlide called early - no sliderControlLinksArray or currentPage found'
+			)
 		const currentTarget = currentTargetRequired(event)
 		const slideScrollPosition =
 			this.slider.scrollLeft +

@@ -8,7 +8,7 @@ export class ProductInfo extends UcoastEl {
 	static htmlSelector = 'product-info'
 	input: HTMLInputElement
 	currentVariant: HTMLInputElement
-	variantSelects: VariantRadios
+	variantSelects?: VariantRadios
 	submitButton: HTMLButtonElement
 	quantityForm?: HTMLFormElement
 	cartUpdateUnsubscriber?: () => void = undefined
@@ -18,7 +18,7 @@ export class ProductInfo extends UcoastEl {
 		super()
 		this.input = qsRequired('.quantity__input', this)
 		this.currentVariant = qsRequired('.product-variant-id', this)
-		this.variantSelects = qsRequired('variant-radios', this)
+		this.variantSelects = qsOptional('variant-radios, variant-selects', this)
 		this.submitButton = qsRequired('[type="submit"]', this)
 	}
 

@@ -67,10 +67,12 @@ export class DetailsModal extends UcoastEl {
 	}
 
 	close(focusToggle = true) {
-		if (!this.onBodyClickEvent) throw new Error('onBodyClickEvent is undefined')
 		removeTrapFocus(focusToggle ? this.summaryToggle : undefined)
 		this.detailsContainer.removeAttribute('open')
-		document.body.removeEventListener('click', this.onBodyClickEvent)
+		if (this.onBodyClickEvent) {
+			document.body.removeEventListener('click', this.onBodyClickEvent)
+		}
+
 		document.body.classList.remove('overflow-hidden')
 	}
 }

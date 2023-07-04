@@ -28,6 +28,7 @@ export class FacetFiltersForm extends UcoastEl {
 	static getProductGridContainer: () => HTMLElement = () => qsRequired('#ProductGridContainer')
 	debouncedOnSubmit: (event: Event) => void
 	facetForm: HTMLFormElement
+
 	constructor() {
 		super()
 		this.onActiveFilterClick = this.onActiveFilterClick.bind(this)
@@ -134,11 +135,14 @@ export class FacetFiltersForm extends UcoastEl {
 
 	static renderProductCount(html: string) {
 		const newDocument = new DOMParser().parseFromString(html, 'text/html')
-		const count = qsRequired('#ProductCount', newDocument.documentElement).innerHTML
-		const container = qsRequired('#ProductCount')
+		const count = qsOptional('#ProductCount', newDocument.documentElement)?.innerHTML ?? 'No Results'
+		const container = qsOptional('#ProductCount')
+		if (container) {
+			container.innerHTML = count
+			container.classList.remove('loading')
+		}
 		const containerDesktop = qsOptional('#ProductCountDesktop')
-		container.innerHTML = count
-		container.classList.remove('loading')
+
 		if (containerDesktop) {
 			containerDesktop.innerHTML = count
 			containerDesktop.classList.remove('loading')
@@ -148,7 +152,7 @@ export class FacetFiltersForm extends UcoastEl {
 	static renderFilters(html: string, event: Event | null) {
 		const parsedHTML = new DOMParser().parseFromString(html, 'text/html')
 
-		const facetDetailsElements = qsaRequired(
+		const facetDetailsElements = qsaOptional(
 			'#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter',
 			parsedHTML
 		)
@@ -158,10 +162,12 @@ export class FacetFiltersForm extends UcoastEl {
 			if (!jsFilter) return false
 			return element.dataset.index === jsFilter.dataset.index
 		}
-		const facetsToRender = Array.from(facetDetailsElements).filter(
-			(element) => !matchesIndex(element)
-		)
-		const countsToRender = Array.from(facetDetailsElements).find(matchesIndex)
+		const facetsToRender = facetDetailsElements
+			? Array.from(facetDetailsElements).filter((element) => !matchesIndex(element))
+			: []
+		const countsToRender = facetDetailsElements
+			? Array.from(facetDetailsElements).find(matchesIndex)
+			: undefined
 
 		facetsToRender.forEach((element: HTMLElement) => {
 			const elementToUpdate = qsRequired(`.js-filter[data-index="${element.dataset.index}"]`)
@@ -294,10 +300,12 @@ export class FacetFiltersForm extends UcoastEl {
 	}
 }
 
-export function initializeFacetFiltersForm() {
+export function beforeFacetFiltersForm() {
 	FacetFiltersForm.filterData = []
 	FacetFiltersForm.searchParamsInitial = window.location.search.slice(1)
 	FacetFiltersForm.searchParamsPrev = window.location.search.slice(1)
-	customElements.define('facet-filters-form', FacetFiltersForm)
+}
+
+export function afterFacetFiltersForm() {
 	FacetFiltersForm.setListeners()
 }

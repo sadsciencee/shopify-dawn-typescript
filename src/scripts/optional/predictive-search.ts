@@ -1,5 +1,5 @@
 import { SearchForm } from '@/scripts/theme/search-form'
-import { getAttributeOrThrow, qsaOptional, qsaRequired, qsRequired } from '@/scripts/functions'
+import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions';
 import { routes } from '@/scripts/setup'
 
 export class PredictiveSearch extends SearchForm {
@@ -121,7 +121,8 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	updateSearchForTerm(previousTerm: string, newTerm: string) {
-		const searchForTextElement = qsRequired('[data-predictive-search-search-for-text]', this)
+		const searchForTextElement = qsOptional('[data-predictive-search-search-for-text]', this)
+		if (!searchForTextElement) return
 		const currentButtonText = searchForTextElement.innerText
 		if (!currentButtonText) return
 		const regex = new RegExp(previousTerm, 'g')
@@ -279,7 +280,7 @@ export class PredictiveSearch extends SearchForm {
 
 	setLiveRegionResults() {
 		this.removeAttribute('loading')
-		const liveRegionCountEl = qsRequired('[data-predictive-search-live-region-count]', this)
+		const liveRegionCountEl = qsOptional('[data-predictive-search-live-region-count]', this)
 		this.setLiveRegionText(liveRegionCountEl?.textContent ?? '')
 	}
 

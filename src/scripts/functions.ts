@@ -9,7 +9,7 @@ import {
 	EventWithRelatedTarget,
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
-import { ProductModel } from '@/scripts/optional/product-model';
+import { ProductModel } from '@/scripts/optional/product-model'
 
 // local types
 
@@ -219,6 +219,7 @@ export const safeDefineElement = (
 	callbackAfter?: Function
 ): void => {
 	try {
+		if (customElements.get(elementClass.htmlSelector)) return
 		if (callbackBefore instanceof Function) {
 			const elsInDocument = qsaOptional(elementClass.htmlSelector)
 			if (elsInDocument) {
@@ -501,7 +502,7 @@ export function focusVisiblePolyfill() {
 export function onKeyUpEscape(event: KeyboardEvent) {
 	if (event.code.toUpperCase() !== 'ESCAPE') return
 
-	const openDetailsElement = targetClosestOptional(event,'details[open]')
+	const openDetailsElement = targetClosestOptional(event, 'details[open]')
 	if (!openDetailsElement) return
 
 	const summaryElement = qsRequired('summary', openDetailsElement)
@@ -514,7 +515,7 @@ export function pauseAllMedia() {
 	const jsYoutubeEls = qsaOptional<HTMLIFrameElement>('.js-youtube')
 	if (jsYoutubeEls) {
 		jsYoutubeEls.forEach((video) => {
-			if (!video.contentWindow) return;
+			if (!video.contentWindow) return
 			video.contentWindow.postMessage(
 				'{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
 				'*'
@@ -525,7 +526,7 @@ export function pauseAllMedia() {
 	const jsVimeoEls = qsaOptional<HTMLIFrameElement>('.js-vimeo')
 	if (jsVimeoEls) {
 		jsVimeoEls.forEach((video) => {
-			if (!video.contentWindow) return;
+			if (!video.contentWindow) return
 			video.contentWindow.postMessage('{"method":"pause"}', '*')
 		})
 	}
@@ -577,25 +578,30 @@ export function fetchConfig(type = 'json') {
 }
 
 type AddToCartFormValues = {
-	quantity: number
+	items: { quantity: number; id: number }[]
 	form_type: string
-	id: number
 	sections?: string
 	sections_url?: string
 }
 
 export function addToCartConfig(body: FormData) {
+	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
-		quantity: getOrUndefined(body, 'quantity') ?? 1,
+		items: [
+			{
+				quantity,
+				id: parseInt(getOrThrow(body, 'id')),
+			},
+		],
 		form_type: getOrThrow(body, 'form_type'),
-		id: getOrThrow(body, 'id'),
 		sections: getOrUndefined(body, 'sections'),
 		sections_url: getOrUndefined(body, 'sections_url'),
 	}
 	return {
 		method: 'POST',
 		headers: {
-			Accept: `application/javascript`,
+			'Content-Type': 'application/json',
+			Accept: `application/json`,
 			'X-Requested-With': 'XMLHttpRequest',
 		},
 		body: JSON.stringify(data),
@@ -603,7 +609,6 @@ export function addToCartConfig(body: FormData) {
 }
 
 // klaviyo & notify me not part of initial dawn but will be in every project
-
 
 type AddToKlaviyoListFormValues = {
 	email: string

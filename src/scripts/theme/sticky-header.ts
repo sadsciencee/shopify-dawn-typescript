@@ -1,19 +1,19 @@
-import { qsOptional, qsRequired } from '@/scripts/functions';
-import { type PredictiveSearch } from '@/scripts/optional/predictive-search';
-import { type DetailsModal } from '@/scripts/theme/details-modal';
-import { type HeaderMenu } from '@/scripts/theme/header-menu';
-import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { qsOptional, qsRequired } from '@/scripts/functions'
+import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
+import { type DetailsModal } from '@/scripts/theme/details-modal'
+import { type HeaderMenu } from '@/scripts/theme/header-menu'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class StickyHeader extends UcoastEl {
 	static htmlSelector = 'sticky-header'
 	preventHide: boolean = false
-  preventReveal: boolean = false
+	preventReveal: boolean = false
 	header: HTMLElement
 	headerIsAlwaysSticky?: boolean
 	headerBounds: DOMRect | {} = {}
 	currentScrollTop: number = 0
 	predictiveSearch?: PredictiveSearch
-  onScrollHandler!: (event: Event) => void
+	onScrollHandler!: (event: Event) => void
 	hideHeaderOnScrollUp!: () => void
 	searchModal?: DetailsModal
 	isScrolling?: number
@@ -54,7 +54,7 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	setHeaderHeight() {
-    if (!this.header) throw new Error('no header element found')
+		if (!this.header) throw new Error('no header element found')
 		document.documentElement.style.setProperty(
 			'--header-height',
 			`${this.header.offsetHeight}px`
@@ -67,6 +67,7 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	createObserver() {
+		console.log('createObserver')
 		let observer = new IntersectionObserver((entries, observer) => {
 			this.headerBounds = entries[0].intersectionRect
 			observer.disconnect()
@@ -80,11 +81,19 @@ export class StickyHeader extends UcoastEl {
 
 		if (this.predictiveSearch && this.predictiveSearch.isOpen) return
 
-		if (this.headerBounds instanceof DOMRect && scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+		if (
+			this.headerBounds instanceof DOMRectReadOnly &&
+			scrollTop > this.currentScrollTop &&
+			scrollTop > this.headerBounds.bottom
+		) {
 			this.header.classList.add('scrolled-past-header')
 			if (this.preventHide) return
 			requestAnimationFrame(this.hide.bind(this))
-		} else if (this.headerBounds instanceof DOMRect && scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+		} else if (
+			this.headerBounds instanceof DOMRectReadOnly &&
+			scrollTop < this.currentScrollTop &&
+			scrollTop > this.headerBounds.bottom
+		) {
 			this.header.classList.add('scrolled-past-header')
 			if (!this.preventReveal) {
 				requestAnimationFrame(this.reveal.bind(this))
@@ -97,11 +106,15 @@ export class StickyHeader extends UcoastEl {
 
 				requestAnimationFrame(this.hide.bind(this))
 			}
-		} else if (this.headerBounds instanceof DOMRect && scrollTop <= this.headerBounds.top) {
+		} else if (
+			this.headerBounds instanceof DOMRectReadOnly &&
+			scrollTop <= this.headerBounds.top
+		) {
 			this.header.classList.remove('scrolled-past-header')
 			requestAnimationFrame(this.reset.bind(this))
-		} else {
+		} else if (!(this.headerBounds instanceof DOMRectReadOnly)) {
 			console.warn('onScroll used in sticky-header but headerBounds is not initialized')
+			console.log('headerBounds', this.headerBounds)
 		}
 
 		this.currentScrollTop = scrollTop
@@ -135,7 +148,8 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	closeSearchModal() {
-		this.searchModal = this.searchModal ?? qsRequired<DetailsModal>('details-modal', this.header)
+		this.searchModal =
+			this.searchModal ?? qsRequired<DetailsModal>('details-modal', this.header)
 		this.searchModal.close(false)
 	}
 }

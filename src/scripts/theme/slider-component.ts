@@ -1,13 +1,12 @@
-import { currentTargetRequired, qsaRequired, qsRequired } from '@/scripts/functions'
+import { currentTargetRequired, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions'
 import { type SlideChangedEvent } from '@/scripts/types/events'
-import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export function isSliderComponent(obj: HTMLElement): obj is SliderComponent {
 	if (!obj) return false
 	if (obj.localName !== 'slider-component') return false
 	return true
 }
-
 
 export class SliderComponent extends UcoastEl {
 	static htmlSelector = 'slider-component'
@@ -20,19 +19,19 @@ export class SliderComponent extends UcoastEl {
 	currentPage?: number = 1
 	slideScrollPosition?: number
 	enableSliderLooping: boolean
-	currentPageElement: HTMLElement
-	pageTotalElement: HTMLElement
-	prevButton: HTMLButtonElement
-	nextButton: HTMLButtonElement
+	currentPageElement?: HTMLElement
+	pageTotalElement?: HTMLElement
+	prevButton?: HTMLButtonElement
+	nextButton?: HTMLButtonElement
 	constructor() {
 		super()
 		this.slider = qsRequired('[id^="Slider-"]', this)
 		this.sliderItems = qsaRequired('[id^="Slide-"]', this)
 		this.enableSliderLooping = false
-		this.currentPageElement = qsRequired('.slider-counter--current', this)
-		this.pageTotalElement = qsRequired('.slider-counter--total', this)
-		this.prevButton = qsRequired('button[name="previous"]', this)
-		this.nextButton = qsRequired('button[name="next"]', this)
+		this.currentPageElement = qsOptional('.slider-counter--current', this)
+		this.pageTotalElement = qsOptional('.slider-counter--total', this)
+		this.prevButton = qsOptional('button[name="previous"]', this)
+		this.nextButton = qsOptional('button[name="next"]', this)
 
 		this.initPages()
 		const resizeObserver = new ResizeObserver((_entries: ResizeObserverEntry[]) =>
@@ -41,8 +40,8 @@ export class SliderComponent extends UcoastEl {
 		resizeObserver.observe(this.slider)
 
 		this.slider.addEventListener('scroll', this.update.bind(this))
-		this.prevButton.addEventListener('click', this.onButtonClick.bind(this))
-		this.nextButton.addEventListener('click', this.onButtonClick.bind(this))
+		this.prevButton?.addEventListener('click', this.onButtonClick.bind(this))
+		this.nextButton?.addEventListener('click', this.onButtonClick.bind(this))
 	}
 
 	initPages() {
@@ -66,14 +65,17 @@ export class SliderComponent extends UcoastEl {
 
 	createSlideChangedEvent(): SlideChangedEvent {
 		const currentPage = this.currentPage
-		if (!currentPage) throw new Error('cannot createSlideChangedEvent - currentPage is undefined')
-		if (!this.sliderItemsToShow) throw new Error('cannot createSlideChangedEvent - sliderItemsToShow is undefined')
+		if (!currentPage)
+			throw new Error('cannot createSlideChangedEvent - currentPage is undefined')
+		if (!this.sliderItemsToShow)
+			throw new Error('cannot createSlideChangedEvent - sliderItemsToShow is undefined')
 		const currentElement = this.sliderItemsToShow[currentPage - 1]
-		if (!currentElement) throw new Error('cannot createSlideChangedEvent - currentElement is undefined')
+		if (!currentElement)
+			throw new Error('cannot createSlideChangedEvent - currentElement is undefined')
 		return new CustomEvent('slideChanged', {
 			detail: {
 				currentPage,
-				currentElement
+				currentElement,
 			},
 		})
 	}
@@ -106,23 +108,25 @@ export class SliderComponent extends UcoastEl {
 		if (this.enableSliderLooping) return
 
 		if (
+			this.prevButton &&
 			this.sliderItemsToShow &&
 			this.sliderItemsToShow.length &&
 			this.isSlideVisible(this.sliderItemsToShow[0]) &&
 			this.slider.scrollLeft === 0
 		) {
 			this.prevButton.setAttribute('disabled', 'disabled')
-		} else {
+		} else if (this.prevButton) {
 			this.prevButton.removeAttribute('disabled')
 		}
 
 		if (
+			this.nextButton &&
 			this.sliderItemsToShow &&
 			this.sliderItemsToShow.length > 0 &&
 			this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])
 		) {
 			this.nextButton.setAttribute('disabled', 'disabled')
-		} else {
+		} else if (this.nextButton) {
 			this.nextButton.removeAttribute('disabled')
 		}
 	}
