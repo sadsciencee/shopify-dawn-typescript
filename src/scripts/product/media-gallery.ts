@@ -97,7 +97,7 @@ export class MediaGallery extends UcoastEl {
 		if (!this.elements.thumbnails) return
 		const activeThumbnail = this.getActiveThumbnail(mediaId)
 		this.setActiveThumbnail(activeThumbnail)
-		this.announceLiveRegion(activeMedia, getAttributeOrThrow('media-position', activeThumbnail))
+		this.announceLiveRegion(activeMedia, getAttributeOrThrow('data-media-position', activeThumbnail))
 	}
 
 	setActiveThumbnail(thumbnail: HTMLElement) {
@@ -145,7 +145,7 @@ export class MediaGallery extends UcoastEl {
 	removeListSemantic() {
 		if (!(isSliderComponent(this.elements.viewer))) return
 		this.elements.viewer.slider.setAttribute('role', 'presentation')
-		this.elements.viewer.sliderItems.forEach((slide) =>
+		this.elements.viewer.sliderItems?.forEach((slide) =>
 			slide.setAttribute('role', 'presentation')
 		)
 	}

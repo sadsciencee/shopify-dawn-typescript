@@ -48,7 +48,7 @@ export class PickupAvailability extends UcoastEl {
 	}
 
 	onClickRefreshList(_event: Event) {
-		const variantId = getAttributeOrThrow('variant-id', this)
+		const variantId = getAttributeOrThrow('data-variant-id', this)
 		this.fetchAvailability(variantId)
 	}
 
