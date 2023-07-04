@@ -21,7 +21,7 @@ const attributes = {
 	confirmMessage: 'data-confirm-message',
 }
 
-export class CustomerAddresses {
+class CustomerAddresses {
 	elements?: {
 		container: HTMLElement
 		addressContainer: HTMLElement
@@ -126,4 +126,10 @@ export class CustomerAddresses {
 			})
 		}
 	}
+}
+
+export function initializeCustomerAddresses() {
+	window.addEventListener('load', () => {
+		typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+	});
 }

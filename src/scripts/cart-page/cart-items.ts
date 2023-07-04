@@ -12,7 +12,7 @@ import { publish, PubSubEvent, subscribe } from '@/scripts/theme/pubsub'
 import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/theme/global'
-import { type CartDrawer } from '@/scripts/cart/cart-drawer'
+import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 declare let window: uCoastWindow

@@ -1,7 +1,7 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/functions'
-import { type CartNotification } from '@/scripts/cart/cart-notification'
-import { type CartDrawer } from '@/scripts/cart/cart-drawer'
+import { type CartNotification } from '@/scripts/theme/cart-notification'
+import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
 import { routes, type uCoastWindow } from '@/scripts/setup'
 import { publish } from '@/scripts/theme/pubsub'
 import { QuickAddModal } from '@/scripts/optional/quick-add';

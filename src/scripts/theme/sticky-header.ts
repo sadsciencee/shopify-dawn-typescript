@@ -1,5 +1,5 @@
 import { qsOptional, qsRequired } from '@/scripts/functions';
-import { type PredictiveSearch } from '@/scripts/catalog/predictive-search';
+import { type PredictiveSearch } from '@/scripts/optional/predictive-search';
 import { type DetailsModal } from '@/scripts/theme/details-modal';
 import { type HeaderMenu } from '@/scripts/theme/header-menu';
 import { UcoastEl } from '@/scripts/core/UcoastEl';

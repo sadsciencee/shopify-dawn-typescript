@@ -1,4 +1,4 @@
-import { CartItems } from '@/scripts/cart/cart-items'
+import { CartItems } from '@/scripts/cart-page/cart-items'
 
 export class CartDrawerItems extends CartItems {
 	static override htmlSelector = 'cart-drawer-items'

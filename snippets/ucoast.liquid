@@ -55,65 +55,107 @@
   {{ 'css-optional-section-password-a5c48994.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
   {{ 'css-optional-template-giftcard-aa643788.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/js-dir-cart.ts" or path == "js-dir-cart.ts" %}
-  <script src="{{ 'js-dir-cart-24485fb7.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-9d6db3e8.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
+  <script src="{{ 'js-dir-cart-drawer-0ac815ba.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'cart-remove-button-70123cd7.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-50e8c7cc.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'setup-90dd961b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-cart-page.ts" or path == "js-dir-cart-page.ts" %}
+  <script src="{{ 'js-dir-cart-page-b26671f9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'cart-remove-button-70123cd7.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'setup-90dd961b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-catalog.ts" or path == "js-dir-catalog.ts" %}
-  <script src="{{ 'js-dir-catalog-cf1b5466.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-50e8c7cc.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-catalog-16a5dc71.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-8511372a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-customer.ts" or path == "js-dir-customer.ts" %}
-  <script src="{{ 'js-dir-customer-4ed993c7.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <script src="{{ 'js-dir-customer-53904b77.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-product.ts" or path == "js-dir-product.ts" %}
-  <script src="{{ 'js-dir-product-c5e7db9a.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <script src="{{ 'js-dir-product-2f8a325b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-f2e1c5da.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-50e8c7cc.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-33d80bc6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-d5c58062.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-9d6db3e8.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-0fe52f9d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-ce0fed2e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-dde7917a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'setup-90dd961b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-theme.ts" or path == "js-dir-theme.ts" %}
-  <script src="{{ 'js-dir-theme-cf40b29a.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'deferred-media-d5c58062.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-modal-d0cdbb6d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-9d6db3e8.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-33d80bc6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-theme-f58754c1.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-ce0fed2e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-1fa7e0a4.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-modal-a49ff1e5.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-0fe52f9d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-dde7917a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-8511372a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-localization-form.ts" or path == "js-optional-localization-form.ts" %}
+  <script src="{{ 'js-optional-localization-form-e9854003.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-magnify.ts" or path == "js-optional-magnify.ts" %}
+  <script src="{{ 'js-optional-magnify-9863d9e4.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
 {% elsif path == "/src/entry/js-optional-password-modal.ts" or path == "js-optional-password-modal.ts" %}
-  <script src="{{ 'js-optional-password-modal-a3df792c.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'details-modal-d0cdbb6d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-9d6db3e8.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-password-modal-b632cce4.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'details-modal-a49ff1e5.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-pickup-availability.ts" or path == "js-optional-pickup-availability.ts" %}
-  <script src="{{ 'js-optional-pickup-availability-54e0b08e.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-pickup-availability-e87c2fc6.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-predictive-search.ts" or path == "js-optional-predictive-search.ts" %}
+  <script src="{{ 'js-optional-predictive-search-fc4b5f6b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-8511372a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'setup-90dd961b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-product-model.ts" or path == "js-optional-product-model.ts" %}
-  <script src="{{ 'js-optional-product-model-35e3b67e.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'deferred-media-d5c58062.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-product-model-c28021b9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'deferred-media-ce0fed2e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-quick-add.ts" or path == "js-optional-quick-add.ts" %}
-  <script src="{{ 'js-optional-quick-add-5b886624.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modal-dialog-33d80bc6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-9d6db3e8.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
-  <script src="{{ 'js-optional-recipient-form-f02291e0.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <script src="{{ 'js-optional-quick-add-36e7a971.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'modal-dialog-0fe52f9d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-f2e1c5da.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-1bdc573b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-0eb3d956.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'setup-90dd961b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-b27a4c10.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
+  <script src="{{ 'js-optional-recipient-form-9e20224d.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-share-button.ts" or path == "js-optional-share-button.ts" %}
+  <script src="{{ 'js-optional-share-button-d336bacb.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-1fa7e0a4.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-1e97a1db.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-theme-editor.ts" or path == "js-optional-theme-editor.ts" %}
-  <script src="{{ 'js-optional-theme-editor-aab3819a.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-1b3f960d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-theme-editor-3ca91de7.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8498227d.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% endif %}

@@ -10,7 +10,7 @@
     share_link: share_url
   %}
 {% endcomment %}
-<script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+{% render 'ucoast', ucoast: 'js-optional-share-button.ts' %}
 
 <share-button id="Share-{{ section.id }}" class="share-button quick-add-hidden" {{ block.shopify_attributes }}>
   <button class="share-button__button hidden">

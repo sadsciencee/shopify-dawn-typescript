@@ -371,7 +371,7 @@
 </footer>
 
 {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-  <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
 {%- endif -%}
 
 {% schema %}

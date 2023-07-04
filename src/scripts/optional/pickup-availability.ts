@@ -1,5 +1,5 @@
 import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/functions'
-import { PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer'
+import { type PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class PickupAvailability extends UcoastEl {

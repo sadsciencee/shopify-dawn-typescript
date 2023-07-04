@@ -10,8 +10,8 @@ import {
 import { type ProductVariant } from '@/scripts/types/api'
 import { type uCoastWindow } from '@/scripts/setup'
 import { type ProductForm } from '@/scripts/product/product-form'
-import { type MediaGallery } from '@/scripts/theme/media-gallery'
-import { type ShareButton } from '@/scripts/theme/share-button'
+import { type MediaGallery } from '@/scripts/product/media-gallery'
+import { type ShareButton } from '@/scripts/optional/share-button'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

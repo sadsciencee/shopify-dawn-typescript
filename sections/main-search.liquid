@@ -1,12 +1,8 @@
-{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-  <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
 {% if section.settings.image_shape == 'blob' %}
   {% render 'ucoast', ucoast: 'css-optional-mask-blobs.scss' %}
 {%- endif -%}
 
-<script src="{{ 'main-search.js' | asset_url }}" defer="defer"></script>
+{% render 'ucoast', ucoast: 'js-dir-catalog.ts' %}
 
 <style>
   .template-search__header {

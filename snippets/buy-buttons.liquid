@@ -146,7 +146,6 @@
         </pickup-availability-preview>
       </template>
     </pickup-availability>
-
-    <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+    {% render 'ucoast', ucoast: 'js-optional-pickup-availability.ts' %}
   {%- endif -%}
 </div>

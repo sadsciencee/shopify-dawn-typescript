@@ -13,7 +13,7 @@
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}
-  <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-dir-cart-page.ts' %}
 {%- endunless -%}
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">

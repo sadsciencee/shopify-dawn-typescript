@@ -1,4 +1,4 @@
-import { SearchForm } from '@/scripts/catalog/search-form';
+import { SearchForm } from '@/scripts/theme/search-form';
 import { qsaRequired, targetRequired } from '@/scripts/functions';
 
 export class MainSearch extends SearchForm {

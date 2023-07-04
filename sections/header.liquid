@@ -89,15 +89,12 @@
   }
 {%- endstyle -%}
 
-<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+
 {%- if settings.cart_type == "drawer" -%}
-  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}
 {%- endif -%}
 {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-  <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
 {%- endif -%}
 
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">

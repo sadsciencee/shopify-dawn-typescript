@@ -1,11 +1,11 @@
+{% render 'ucoast', ucoast: 'js-dir-catalog.ts' %}
 {% if section.settings.image_shape == 'blob' %}
   {% render 'ucoast', ucoast: 'css-optional-mask-blobs.scss' %}
 {%- endif -%}
 
 {%- if section.settings.enable_quick_add -%}
   {% render 'ucoast', ucoast: 'css-optional-quick-add.scss' %}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
 {%- endif -%}
 
 {%- style -%}
@@ -97,7 +97,6 @@
     {%- endif -%}
 
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
-      <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
           aria-labelledby="verticalTitle"

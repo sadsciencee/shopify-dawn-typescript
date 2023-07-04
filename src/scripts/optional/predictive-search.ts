@@ -1,4 +1,4 @@
-import { SearchForm } from '@/scripts/catalog/search-form'
+import { SearchForm } from '@/scripts/theme/search-form'
 import { getAttributeOrThrow, qsaOptional, qsaRequired, qsRequired } from '@/scripts/functions'
 import { routes } from '@/scripts/setup'
 

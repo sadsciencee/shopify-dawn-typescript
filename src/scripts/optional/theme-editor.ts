@@ -1,4 +1,4 @@
-import { closestOptional, qsaOptional, qsOptional, targetRequired } from '@/scripts/functions'
+import { closestOptional, qsaOptional, targetRequired } from '@/scripts/functions'
 import { type ProductModal } from '@/scripts/product/product-modal'
 import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
 export function initializeThemeEditor() {
@@ -41,15 +41,15 @@ export function initializeThemeEditor() {
 
 	document.addEventListener('shopify:section:load', () => {
 		hideProductModal()
-		const zoomOnHoverScript = qsOptional<HTMLScriptElement>('[id^=EnableZoomOnHover]')
-		if (!zoomOnHoverScript) return
-		const zoomOnHoverScriptParent = zoomOnHoverScript.parentNode
-		if (!zoomOnHoverScriptParent) return
-		if (zoomOnHoverScript) {
+		const zoomOnHoverScripts = qsaOptional<HTMLScriptElement>('[id^=EnableZoomOnHover] script')
+		zoomOnHoverScripts?.forEach((zoomOnHoverScript) => {
+			const zoomOnHoverScriptParent = zoomOnHoverScript.parentNode
+			if (!zoomOnHoverScriptParent) return
 			const newScriptTag = document.createElement('script')
 			newScriptTag.src = zoomOnHoverScript.src
 			zoomOnHoverScriptParent.replaceChild(newScriptTag, zoomOnHoverScript)
-		}
+		})
+
 	})
 
 	document.addEventListener('shopify:section:reorder', () => hideProductModal())

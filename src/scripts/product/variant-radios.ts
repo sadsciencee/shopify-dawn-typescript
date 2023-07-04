@@ -1,4 +1,4 @@
-import { VariantSelects } from '@/scripts/theme/variant-selects';
+import { VariantSelects } from '@/scripts/product/variant-selects';
 import { qsaOptional } from '@/scripts/functions';
 
 export class VariantRadios extends VariantSelects {

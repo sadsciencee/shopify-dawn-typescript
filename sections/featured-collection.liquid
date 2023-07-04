@@ -6,8 +6,7 @@
 
 {%- if section.settings.enable_quick_add -%}
   {% render 'ucoast', ucoast: 'css-optional-quick-add.scss' %}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  {% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
 {%- endif -%}
 
 {%- style -%}
