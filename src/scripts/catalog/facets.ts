@@ -1,12 +1,15 @@
 import {
-	closestRequired, currentTargetRequired,
+	closestOptional,
+	closestRequired,
+	currentTargetRequired,
+	getAttributeOrThrow,
 	qsaOptional,
 	qsaRequired,
 	qsOptional,
 	qsRequired,
 	targetClosestOptional,
-	targetClosestRequired
-} from '@/scripts/functions';
+	targetClosestRequired,
+} from '@/scripts/functions'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { MenuDrawer } from '@/scripts/theme/menu-drawer'
 
@@ -277,7 +280,8 @@ class FacetFiltersForm extends HTMLElement {
 		event.preventDefault()
 		FacetFiltersForm.toggleActiveFacets()
 		const currentTarget = currentTargetRequired(event)
-		if (!(currentTarget instanceof HTMLAnchorElement)) throw new Error('currentTarget is not anchor element')
+		if (!(currentTarget instanceof HTMLAnchorElement))
+			throw new Error('currentTarget is not anchor element')
 		const url =
 			currentTarget.href.indexOf('?') == -1
 				? ''
@@ -301,8 +305,9 @@ class PriceRange extends HTMLElement {
 		this.setMinAndMaxValues()
 	}
 
-	onRangeChange(event) {
-		this.adjustToValidValues(event.currentTarget)
+	onRangeChange(event: Event) {
+		const currentTarget = currentTargetRequired<Event, HTMLInputElement>(event)
+		this.adjustToValidValues(currentTarget)
 		this.setMinAndMaxValues()
 	}
 
@@ -312,17 +317,18 @@ class PriceRange extends HTMLElement {
 		const maxInput = inputs[1]
 		if (maxInput.value) minInput.setAttribute('max', maxInput.value)
 		if (minInput.value) maxInput.setAttribute('min', minInput.value)
-		if (minInput.value === '') maxInput.setAttribute('min', 0)
-		if (maxInput.value === '') minInput.setAttribute('max', maxInput.getAttribute('max'))
+		if (minInput.value === '') maxInput.setAttribute('min', '0')
+		if (maxInput.value === '')
+			minInput.setAttribute('max', getAttributeOrThrow('max', maxInput))
 	}
 
-	adjustToValidValues(input) {
+	adjustToValidValues(input: HTMLInputElement) {
 		const value = Number(input.value)
-		const min = Number(input.getAttribute('min'))
-		const max = Number(input.getAttribute('max'))
+		const min = Number(getAttributeOrThrow('min', input))
+		const max = Number(getAttributeOrThrow('max', input))
 
-		if (value < min) input.value = min
-		if (value > max) input.value = max
+		if (value < min) input.value = `${min}`
+		if (value > max) input.value = `${max}`
 	}
 }
 
@@ -331,7 +337,7 @@ customElements.define('price-range', PriceRange)
 class FacetRemove extends HTMLElement {
 	constructor() {
 		super()
-		const facetLink = this.querySelector('a')
+		const facetLink = qsRequired('a', this)
 		facetLink.setAttribute('role', 'button')
 		facetLink.addEventListener('click', this.closeFilter.bind(this))
 		facetLink.addEventListener('keyup', (event) => {
@@ -340,10 +346,9 @@ class FacetRemove extends HTMLElement {
 		})
 	}
 
-	closeFilter(event) {
+	closeFilter(event: Event) {
 		event.preventDefault()
-		const form =
-			this.closest('facet-filters-form') || document.querySelector('facet-filters-form')
+		const form = closestOptional<FacetFiltersForm>(this, 'facet-filters-form') || qsRequired<FacetFiltersForm>('facet-filters-form')
 		form.onActiveFilterClick(event)
 	}
 }

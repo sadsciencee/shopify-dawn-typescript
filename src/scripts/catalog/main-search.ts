@@ -1,28 +1,38 @@
+import { SearchForm } from '@/scripts/catalog/search-form';
+import { qsaRequired, targetRequired } from '@/scripts/functions';
+
 class MainSearch extends SearchForm {
+  allSearchInputs: NodeListOf<HTMLInputElement>;
   constructor() {
     super();
-    this.allSearchInputs = document.querySelectorAll('input[type="search"]');
+    this.allSearchInputs = qsaRequired('input[type="search"]')
     this.setupEventListeners();
   }
 
   setupEventListeners() {
-    let allSearchForms = [];
-    this.allSearchInputs.forEach((input) => allSearchForms.push(input.form));
+    let allSearchForms:HTMLFormElement[] = [];
+    this.allSearchInputs.forEach((input) => {
+      if (input.form) {
+        allSearchForms.push(input.form)
+      } else {
+        throw new Error('input in allSearchInputs is not in a form element')
+      }
+    });
     this.input.addEventListener('focus', this.onInputFocus.bind(this));
     if (allSearchForms.length < 2) return;
     allSearchForms.forEach((form) => form.addEventListener('reset', this.onFormReset.bind(this)));
     this.allSearchInputs.forEach((input) => input.addEventListener('input', this.onInput.bind(this)));
   }
 
-  onFormReset(event) {
+  override onFormReset(event:Event) {
     super.onFormReset(event);
     if (super.shouldResetForm()) {
       this.keepInSync('', this.input);
     }
   }
 
-  onInput(event) {
-    const target = event.target;
+  onInput(event:Event) {
+    const target = targetRequired<Event, HTMLInputElement>(event);
     this.keepInSync(target.value, target);
   }
 
@@ -33,7 +43,7 @@ class MainSearch extends SearchForm {
     }
   }
 
-  keepInSync(value, target) {
+  keepInSync(value:string, target:HTMLInputElement) {
     this.allSearchInputs.forEach((input) => {
       if (input !== target) {
         input.value = value;
