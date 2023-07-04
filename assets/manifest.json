@@ -1,101 +1,101 @@
 {
-  "_UcoastEl-7a35b61d.js": {
-    "file": "UcoastEl-7a35b61d.js",
+  "_UcoastEl-5d53ad84.js": {
+    "file": "UcoastEl-5d53ad84.js",
     "imports": [
-      "_functions-78fee3e2.js"
+      "_functions-de1108d3.js"
     ]
   },
-  "_animations-0332dad9.js": {
-    "file": "animations-0332dad9.js",
+  "_animations-02d2bf85.js": {
+    "file": "animations-02d2bf85.js",
     "imports": [
-      "_functions-78fee3e2.js"
+      "_functions-de1108d3.js"
     ]
   },
-  "_cart-remove-button-9c28cbbd.js": {
-    "file": "cart-remove-button-9c28cbbd.js",
+  "_cart-remove-button-3ab3c826.js": {
+    "file": "cart-remove-button-3ab3c826.js",
     "imports": [
       "_pubsub-54ee595b.js",
-      "_setup-7a83b76f.js",
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js",
-      "_global-47ed11f5.js"
+      "_setup-240a0a56.js",
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js",
+      "_global-86a0ee8d.js"
     ]
   },
-  "_deferred-media-b6922f6c.js": {
-    "file": "deferred-media-b6922f6c.js",
+  "_deferred-media-285ba866.js": {
+    "file": "deferred-media-285ba866.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
-  "_details-disclosure-661efff9.js": {
-    "file": "details-disclosure-661efff9.js",
+  "_details-disclosure-b5d1182b.js": {
+    "file": "details-disclosure-b5d1182b.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
-  "_details-modal-91c86ca3.js": {
-    "file": "details-modal-91c86ca3.js",
+  "_details-modal-698f2288.js": {
+    "file": "details-modal-698f2288.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
-  "_functions-78fee3e2.js": {
-    "file": "functions-78fee3e2.js"
+  "_functions-de1108d3.js": {
+    "file": "functions-de1108d3.js"
   },
-  "_global-47ed11f5.js": {
-    "file": "global-47ed11f5.js",
+  "_global-86a0ee8d.js": {
+    "file": "global-86a0ee8d.js",
     "imports": [
-      "_functions-78fee3e2.js"
+      "_functions-de1108d3.js"
     ]
   },
-  "_modal-dialog-0cc2022b.js": {
-    "file": "modal-dialog-0cc2022b.js",
+  "_modal-dialog-3dff0037.js": {
+    "file": "modal-dialog-3dff0037.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
-  "_product-form-ebee2bf3.js": {
-    "file": "product-form-ebee2bf3.js",
+  "_product-form-ea01210b.js": {
+    "file": "product-form-ea01210b.js",
     "imports": [
       "_pubsub-54ee595b.js",
-      "_functions-78fee3e2.js",
-      "_setup-7a83b76f.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_setup-240a0a56.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
   "_pubsub-54ee595b.js": {
     "file": "pubsub-54ee595b.js"
   },
-  "_search-form-68be087f.js": {
-    "file": "search-form-68be087f.js",
+  "_search-form-e0b17dd0.js": {
+    "file": "search-form-e0b17dd0.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
-  "_setup-7a83b76f.js": {
-    "file": "setup-7a83b76f.js",
+  "_setup-240a0a56.js": {
+    "file": "setup-240a0a56.js",
     "imports": [
-      "_shopify-d077eff8.js"
+      "_shopify-9954b672.js"
     ]
   },
-  "_shopify-d077eff8.js": {
-    "file": "shopify-d077eff8.js",
+  "_shopify-9954b672.js": {
+    "file": "shopify-9954b672.js",
     "imports": [
-      "_functions-78fee3e2.js"
+      "_functions-de1108d3.js"
     ]
   },
-  "_slider-component-942d8965.js": {
-    "file": "slider-component-942d8965.js",
+  "_slider-component-b7320bc3.js": {
+    "file": "slider-component-b7320bc3.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ]
   },
   "src/entry/css-dir-article-defer.scss": {
@@ -234,101 +234,101 @@
     "src": "src/entry/css-optional-template-giftcard.scss"
   },
   "src/entry/js-dir-cart-drawer.ts": {
-    "file": "js-dir-cart-drawer-8f7f8b38.js",
+    "file": "js-dir-cart-drawer-e2640aa0.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js",
-      "_cart-remove-button-9c28cbbd.js",
+      "_functions-de1108d3.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js",
+      "_cart-remove-button-3ab3c826.js",
       "_pubsub-54ee595b.js",
-      "_setup-7a83b76f.js",
-      "_shopify-d077eff8.js"
+      "_setup-240a0a56.js",
+      "_shopify-9954b672.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-cart-drawer.ts"
   },
   "src/entry/js-dir-cart-page.ts": {
-    "file": "js-dir-cart-page-1df46fb7.js",
+    "file": "js-dir-cart-page-bedf3846.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_cart-remove-button-9c28cbbd.js",
+      "_functions-de1108d3.js",
+      "_cart-remove-button-3ab3c826.js",
       "_pubsub-54ee595b.js",
-      "_setup-7a83b76f.js",
-      "_shopify-d077eff8.js",
-      "_UcoastEl-7a35b61d.js",
-      "_global-47ed11f5.js"
+      "_setup-240a0a56.js",
+      "_shopify-9954b672.js",
+      "_UcoastEl-5d53ad84.js",
+      "_global-86a0ee8d.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-cart-page.ts"
   },
   "src/entry/js-dir-catalog.ts": {
-    "file": "js-dir-catalog-bd36db77.js",
+    "file": "js-dir-catalog-3917d94d.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_animations-0332dad9.js",
-      "_UcoastEl-7a35b61d.js",
-      "_search-form-68be087f.js"
+      "_functions-de1108d3.js",
+      "_animations-02d2bf85.js",
+      "_UcoastEl-5d53ad84.js",
+      "_search-form-e0b17dd0.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-catalog.ts"
   },
   "src/entry/js-dir-customer.ts": {
-    "file": "js-dir-customer-1c4c43aa.js",
+    "file": "js-dir-customer-7723a8e6.js",
     "imports": [
-      "_shopify-d077eff8.js",
-      "_functions-78fee3e2.js"
+      "_shopify-9954b672.js",
+      "_functions-de1108d3.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-customer.ts"
   },
   "src/entry/js-dir-product.ts": {
-    "file": "js-dir-product-843eccd7.js",
+    "file": "js-dir-product-4c664447.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_product-form-ebee2bf3.js",
+      "_functions-de1108d3.js",
+      "_product-form-ea01210b.js",
       "_pubsub-54ee595b.js",
-      "_UcoastEl-7a35b61d.js",
-      "_modal-dialog-0cc2022b.js",
-      "_deferred-media-b6922f6c.js",
-      "_slider-component-942d8965.js",
-      "_setup-7a83b76f.js",
-      "_shopify-d077eff8.js",
-      "_global-47ed11f5.js"
+      "_UcoastEl-5d53ad84.js",
+      "_modal-dialog-3dff0037.js",
+      "_deferred-media-285ba866.js",
+      "_slider-component-b7320bc3.js",
+      "_setup-240a0a56.js",
+      "_shopify-9954b672.js",
+      "_global-86a0ee8d.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-product.ts"
   },
   "src/entry/js-dir-theme.ts": {
-    "file": "js-dir-theme-17cb68fb.js",
+    "file": "js-dir-theme-22470eb4.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_deferred-media-b6922f6c.js",
-      "_details-disclosure-661efff9.js",
-      "_details-modal-91c86ca3.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js",
-      "_modal-dialog-0cc2022b.js",
+      "_functions-de1108d3.js",
+      "_deferred-media-285ba866.js",
+      "_details-disclosure-b5d1182b.js",
+      "_details-modal-698f2288.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js",
+      "_modal-dialog-3dff0037.js",
       "_pubsub-54ee595b.js",
-      "_slider-component-942d8965.js",
-      "_search-form-68be087f.js"
+      "_slider-component-b7320bc3.js",
+      "_search-form-e0b17dd0.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-dir-theme.ts"
   },
   "src/entry/js-optional-animations.ts": {
-    "file": "js-optional-animations-bcd57908.js",
+    "file": "js-optional-animations-bd896be3.js",
     "imports": [
-      "_animations-0332dad9.js",
-      "_functions-78fee3e2.js"
+      "_animations-02d2bf85.js",
+      "_functions-de1108d3.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-animations.ts"
   },
   "src/entry/js-optional-localization-form.ts": {
-    "file": "js-optional-localization-form-1230cac8.js",
+    "file": "js-optional-localization-form-e4f4436b.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-localization-form.ts"
@@ -339,87 +339,87 @@
     "src": "src/entry/js-optional-magnify.ts"
   },
   "src/entry/js-optional-password-modal.ts": {
-    "file": "js-optional-password-modal-65f4b121.js",
+    "file": "js-optional-password-modal-2c4029a0.js",
     "imports": [
-      "_details-modal-91c86ca3.js",
-      "_functions-78fee3e2.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js"
+      "_details-modal-698f2288.js",
+      "_functions-de1108d3.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-password-modal.ts"
   },
   "src/entry/js-optional-pickup-availability.ts": {
-    "file": "js-optional-pickup-availability-04d56e2d.js",
+    "file": "js-optional-pickup-availability-df2355df.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js",
-      "_global-47ed11f5.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js",
+      "_global-86a0ee8d.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-pickup-availability.ts"
   },
   "src/entry/js-optional-predictive-search.ts": {
-    "file": "js-optional-predictive-search-002ed9ac.js",
+    "file": "js-optional-predictive-search-e910c7a3.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_search-form-68be087f.js",
-      "_setup-7a83b76f.js",
-      "_UcoastEl-7a35b61d.js",
-      "_shopify-d077eff8.js"
+      "_functions-de1108d3.js",
+      "_search-form-e0b17dd0.js",
+      "_setup-240a0a56.js",
+      "_UcoastEl-5d53ad84.js",
+      "_shopify-9954b672.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-predictive-search.ts"
   },
   "src/entry/js-optional-product-model.ts": {
-    "file": "js-optional-product-model-b9729c5a.js",
+    "file": "js-optional-product-model-0c944c88.js",
     "imports": [
-      "_deferred-media-b6922f6c.js",
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_deferred-media-285ba866.js",
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-product-model.ts"
   },
   "src/entry/js-optional-quick-add.ts": {
-    "file": "js-optional-quick-add-58fe198c.js",
+    "file": "js-optional-quick-add-83dafc2b.js",
     "imports": [
-      "_modal-dialog-0cc2022b.js",
-      "_functions-78fee3e2.js",
-      "_product-form-ebee2bf3.js",
-      "_global-47ed11f5.js",
-      "_UcoastEl-7a35b61d.js",
+      "_modal-dialog-3dff0037.js",
+      "_functions-de1108d3.js",
+      "_product-form-ea01210b.js",
+      "_global-86a0ee8d.js",
+      "_UcoastEl-5d53ad84.js",
       "_pubsub-54ee595b.js",
-      "_setup-7a83b76f.js",
-      "_shopify-d077eff8.js"
+      "_setup-240a0a56.js",
+      "_shopify-9954b672.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-quick-add.ts"
   },
   "src/entry/js-optional-recipient-form.ts": {
-    "file": "js-optional-recipient-form-029be3bd.js",
+    "file": "js-optional-recipient-form-edfac22f.js",
     "imports": [
       "_pubsub-54ee595b.js",
-      "_functions-78fee3e2.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_UcoastEl-5d53ad84.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-recipient-form.ts"
   },
   "src/entry/js-optional-share-button.ts": {
-    "file": "js-optional-share-button-5601b61e.js",
+    "file": "js-optional-share-button-648178c4.js",
     "imports": [
-      "_functions-78fee3e2.js",
-      "_details-disclosure-661efff9.js",
-      "_UcoastEl-7a35b61d.js"
+      "_functions-de1108d3.js",
+      "_details-disclosure-b5d1182b.js",
+      "_UcoastEl-5d53ad84.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-share-button.ts"
   },
   "src/entry/js-optional-theme-editor.ts": {
-    "file": "js-optional-theme-editor-b02aca3e.js",
+    "file": "js-optional-theme-editor-25223444.js",
     "imports": [
-      "_functions-78fee3e2.js"
+      "_functions-de1108d3.js"
     ],
     "isEntry": true,
     "src": "src/entry/js-optional-theme-editor.ts"

@@ -3,14 +3,14 @@ import {
 	currentTargetRequired,
 	debounce,
 	getAttributeOrThrow,
-	onKeyUpEscape,
+	onKeyUpEscape, parseFormData,
 	qsaOptional,
 	qsaRequired,
 	qsOptional,
 	qsRequired,
 	targetClosestOptional,
-	targetClosestRequired,
-} from '@/scripts/functions'
+	targetClosestRequired
+} from '@/scripts/functions';
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
@@ -246,7 +246,7 @@ export class FacetFiltersForm extends UcoastEl {
 
 	createSearchParams(form: HTMLFormElement) {
 		const formData = new FormData(form)
-		return new URLSearchParams(formData.toString()).toString()
+		return new URLSearchParams(parseFormData(formData)).toString()
 	}
 
 	onSubmitForm(searchParams: string, event: Event) {

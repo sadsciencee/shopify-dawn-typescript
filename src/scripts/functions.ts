@@ -675,3 +675,11 @@ export function trackRecentlyViewedProducts() {
 		localStorage.setItem('pageList', JSON.stringify(pageList))
 	}
 }
+
+export function parseFormData(formData: FormData) {
+	const formDataObj: Record<string, string> = {};
+	formData.forEach((value, key:string) => {
+		formDataObj[key] = value.toString();
+	});
+	return formDataObj;
+}
