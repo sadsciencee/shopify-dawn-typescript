@@ -109,7 +109,7 @@
     "src": "src/entry/css-dir-article-prio.scss"
   },
   "src/entry/css-dir-base-defer.scss": {
-    "file": "css-dir-base-defer-088a32b1.css",
+    "file": "css-dir-base-defer-19df2d03.css",
     "isEntry": true,
     "src": "src/entry/css-dir-base-defer.scss"
   },
