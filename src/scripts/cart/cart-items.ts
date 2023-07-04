@@ -3,14 +3,18 @@ import {
 	debounce,
 	fetchConfig,
 	getAttributeOrThrow,
+	qsaOptional,
 	qsOptional,
 	qsRequired,
-	targetRequired
-} from '@/scripts/functions';
+	targetRequired,
+} from '@/scripts/functions'
 import { publish, PubSubEvent, subscribe } from '@/scripts/theme/pubsub'
-import { routes } from '@/scripts/setup'
-import { ShopifySectionRenderingSchema } from '@/scripts/types/theme';
-import { trapFocus } from '@/scripts/theme/global';
+import { routes, type uCoastWindow } from '@/scripts/setup'
+import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
+import { trapFocus } from '@/scripts/theme/global'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
+
+declare let window: uCoastWindow
 
 export class CartItems extends HTMLElement {
 	lineItemStatusElement: HTMLElement
@@ -18,7 +22,7 @@ export class CartItems extends HTMLElement {
 	constructor() {
 		super()
 		this.lineItemStatusElement =
-			qsOptional('#shopping-cart-line-item-status') ||
+			qsOptional('#shopping-cart-line-item-status') ??
 			qsRequired('#CartDrawer-LineItemStatus')
 
 		const debouncedOnChange = debounce((event: Event) => {
@@ -121,8 +125,8 @@ export class CartItems extends HTMLElement {
 				}
 
 				this.classList.toggle('is-empty', parsedState.item_count === 0)
-				const cartDrawerWrapper = document.querySelector('cart-drawer')
-				const cartFooter = document.getElementById('main-cart-footer')
+				const cartDrawerWrapper = qsOptional<CartDrawer>('cart-drawer')
+				const cartFooter = qsOptional('#main-cart-footer')
 
 				if (cartFooter)
 					cartFooter.classList.toggle('is-empty', parsedState.item_count === 0)
@@ -133,13 +137,15 @@ export class CartItems extends HTMLElement {
 					const sectionEl = qsRequired(`#${section.id}`)
 					const elementToReplace =
 						(section.selector && sectionEl.querySelector(section.selector)) || sectionEl
+					if (!section.section) throw new Error('no section.section')
+					if (!section.selector) throw new Error('no section.selector')
 					elementToReplace.innerHTML = this.getSectionInnerHTML(
 						parsedState.sections[section.section],
 						section.selector
 					)
 				})
-				const updatedValue = parsedState.items[line - 1]
-					? parsedState.items[line - 1].quantity
+				const updatedValue = parsedState.items[parseInt(line) - 1]
+					? parsedState.items[parseInt(line) - 1].quantity
 					: undefined
 				let message = ''
 				if (
@@ -158,19 +164,18 @@ export class CartItems extends HTMLElement {
 				this.updateLiveRegions(line, message)
 
 				const lineItem =
-					document.getElementById(`CartItem-${line}`) ||
-					document.getElementById(`CartDrawer-Item-${line}`)
+					qsOptional(`#CartItem-${line}`) || qsOptional(`#CartDrawer-Item-${line}`)
 				if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
-						? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
-						: lineItem.querySelector(`[name="${name}"]`).focus()
+						? trapFocus(cartDrawerWrapper, qsRequired(`[name="${name}"]`, lineItem))
+						: qsRequired(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
 					trapFocus(
-						cartDrawerWrapper.querySelector('.drawer__inner-empty'),
-						cartDrawerWrapper.querySelector('a')
+						qsRequired('.drawer__inner-empty', cartDrawerWrapper),
+						qsRequired('a', cartDrawerWrapper)
 					)
 				} else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
-					trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'))
+					trapFocus(cartDrawerWrapper, qsRequired('.cart-item__name'))
 				}
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
@@ -178,9 +183,7 @@ export class CartItems extends HTMLElement {
 				this.querySelectorAll('.loading-overlay').forEach((overlay) =>
 					overlay.classList.add('hidden')
 				)
-				const errors =
-					document.getElementById('cart-errors') ||
-					document.getElementById('CartDrawer-CartErrors')
+				const errors = qsOptional('#cart-errors') ?? qsRequired('#CartDrawer-CartErrors')
 				errors.textContent = window.cartStrings.error
 			})
 			.finally(() => {
@@ -188,59 +191,65 @@ export class CartItems extends HTMLElement {
 			})
 	}
 
-	updateLiveRegions(line, message) {
+	updateLiveRegions(line: string, message: string) {
 		const lineItemError =
-			document.getElementById(`Line-item-error-${line}`) ||
-			document.getElementById(`CartDrawer-LineItemError-${line}`)
-		if (lineItemError) lineItemError.querySelector('.cart-item__error-text').innerHTML = message
+			qsOptional(`#Line-item-error-${line}`) ??
+			qsOptional(`#CartDrawer-LineItemError-${line}`)
+		if (lineItemError) {
+			const errorText = qsRequired('.cart-item__error-text', lineItemError)
+			errorText.innerHTML = message
+		}
 
-		this.lineItemStatusElement.setAttribute('aria-hidden', true)
+		this.lineItemStatusElement.setAttribute('aria-hidden', 'true')
 
 		const cartStatus =
-			document.getElementById('cart-live-region-text') ||
-			document.getElementById('CartDrawer-LiveRegionText')
-		cartStatus.setAttribute('aria-hidden', false)
+			qsOptional('#cart-live-region-text') ?? qsRequired('#CartDrawer-LiveRegionText')
+		cartStatus.setAttribute('aria-hidden', 'false')
 
 		setTimeout(() => {
-			cartStatus.setAttribute('aria-hidden', true)
+			cartStatus.setAttribute('aria-hidden', 'true')
 		}, 1000)
 	}
 
-	getSectionInnerHTML(html, selector) {
-		return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML
+	getSectionInnerHTML(html: string, selector: string) {
+		const newDocument = new DOMParser().parseFromString(html, 'text/html')
+		const newElement = qsRequired(selector, newDocument.documentElement)
+		return newElement.innerHTML
 	}
 
-	enableLoading(line) {
-		const mainCartItems =
-			document.getElementById('main-cart-items') ||
-			document.getElementById('CartDrawer-CartItems')
+	enableLoading(line: string) {
+		const mainCartItems = this.getMainCartItems()
 		mainCartItems.classList.add('cart__items--disabled')
 
-		const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading-overlay`)
-		const cartDrawerItemElements = this.querySelectorAll(
-			`#CartDrawer-Item-${line} .loading-overlay`
-		)
-
-		;[...cartItemElements, ...cartDrawerItemElements].forEach((overlay) =>
+		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.remove('hidden'))
+		this.getCartDrawerItemElements(line)?.forEach((overlay) =>
 			overlay.classList.remove('hidden')
 		)
 
-		document.activeElement.blur()
-		this.lineItemStatusElement.setAttribute('aria-hidden', false)
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur()
+		}
+
+		this.lineItemStatusElement.setAttribute('aria-hidden', 'false')
 	}
 
-	disableLoading(line) {
-		const mainCartItems =
-			document.getElementById('main-cart-items') ||
-			document.getElementById('CartDrawer-CartItems')
+	getMainCartItems() {
+		return qsOptional('#main-cart-items') ?? qsRequired('#CartDrawer-CartItems')
+	}
+
+	getCartItemElements(line: string) {
+		return qsaOptional(`#CartItem-${line} .loading-overlay`, this)
+	}
+
+	getCartDrawerItemElements(line: string) {
+		return qsaOptional(`#CartDrawer-Item-${line} .loading-overlay`, this)
+	}
+
+	disableLoading(line: string) {
+		const mainCartItems = this.getMainCartItems()
 		mainCartItems.classList.remove('cart__items--disabled')
 
-		const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading-overlay`)
-		const cartDrawerItemElements = this.querySelectorAll(
-			`#CartDrawer-Item-${line} .loading-overlay`
-		)
-
-		cartItemElements.forEach((overlay) => overlay.classList.add('hidden'))
-		cartDrawerItemElements.forEach((overlay) => overlay.classList.add('hidden'))
+		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.add('hidden'))
+		this.getCartDrawerItemElements(line)?.forEach((overlay) => overlay.classList.add('hidden'))
 	}
 }

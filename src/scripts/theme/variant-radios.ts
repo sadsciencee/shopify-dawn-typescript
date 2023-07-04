@@ -5,7 +5,7 @@ export class VariantRadios extends VariantSelects {
     super();
   }
 
-  setInputAvailability(listOfOptions, listOfAvailableOptions) {
+  override setInputAvailability(listOfOptions, listOfAvailableOptions) {
     listOfOptions.forEach((input) => {
       if (listOfAvailableOptions.includes(input.getAttribute('value'))) {
         input.classList.remove('disabled');
@@ -15,7 +15,7 @@ export class VariantRadios extends VariantSelects {
     });
   }
 
-  updateOptions() {
+  override updateOptions() {
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
