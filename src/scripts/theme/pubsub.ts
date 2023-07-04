@@ -42,6 +42,13 @@ export function isCartErrorEvent(obj: PubSubEvent): obj is CartErrorEvent {
 	return true
 }
 
+export function createVariantChangeEvent(event:VariantChangeEvent) {
+	if (!isVariantChangeEvent(event)) {
+		throw new Error('Event is not a VariantChangeEvent')
+	}
+	return event
+}
+
 export function isVariantChangeEvent(obj: PubSubEvent): obj is VariantChangeEvent {
 	if (!obj) return false
 	if (!('data' in obj)) return false
