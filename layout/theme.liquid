@@ -249,7 +249,11 @@
 					preload_stylesheet: true
 				%}
 			{% when 'page' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-page-prio',
+					preload_stylesheet: true,
+					ignore_m_up: true
+				%}
 			{% when 'collection' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-collection-prio',
@@ -334,18 +338,23 @@
 			{% when 'product' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-product-defer',
-					preload_stylesheet: true
+					preload_stylesheet: true,
+					ignore_m_up: true
 				%}
 			{% when 'page' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-page-defer',
-					preload_stylesheet: true
-				%}
+				{% comment %}
+					{% render 'ucoast-style-tag',
+						file: 'css-dir-page-defer',
+						preload_stylesheet: true
+					%}
+				{% endcomment %}
 			{% when 'collection' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-collection-defer',
-					preload_stylesheet: true
-				%}
+				{% comment %}
+					{% render 'ucoast-style-tag',
+						file: 'css-dir-collection-defer',
+						preload_stylesheet: true
+					%}
+				{% endcomment %}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-blog-defer',
