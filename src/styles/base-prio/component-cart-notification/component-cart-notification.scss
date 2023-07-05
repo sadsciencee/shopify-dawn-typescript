@@ -49,7 +49,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .cart-notification-wrapper:is(.page-width) > .cart-notification {
     right: 4rem;
   }

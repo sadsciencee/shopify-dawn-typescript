@@ -271,7 +271,7 @@ noscript .localization-selector.link {
 }
 
 /* Menu drawer */
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .menu-drawer__localization {
     display: none;
   }

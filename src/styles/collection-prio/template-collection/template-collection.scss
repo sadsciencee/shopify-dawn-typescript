@@ -58,7 +58,7 @@
   margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .collection__title--desktop-slider .title {
     margin-bottom: 2.5rem;
   }

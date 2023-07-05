@@ -140,7 +140,7 @@ slider-component.slider-component-full-width {
   scroll-snap-align: center;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .slider-component-desktop.page-width {
     max-width: none;
   }
@@ -334,7 +334,7 @@ slider-component.slider-component-full-width {
   justify-content: center;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .slider:not(.slider--everywhere):not(.slider--desktop) + .slider-buttons {
     display: none;
   }

@@ -65,7 +65,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .quick-add-modal__content {
     width: 70%;
   }

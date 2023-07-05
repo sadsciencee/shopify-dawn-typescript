@@ -137,7 +137,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .header:not(.drawer-menu).page-width {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -446,7 +446,7 @@ table:not([class]) th {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .large-up-hide {
     display: none !important;
   }
@@ -817,7 +817,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .title,
   .title-wrapper-with-link {
     margin: 5rem 0 3rem;
@@ -995,7 +995,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .grid--6-col-desktop .grid__item {
     width: calc(16.66% - var(--grid-desktop-horizontal-spacing) * 5 / 6);
     max-width: calc(16.66% - var(--grid-desktop-horizontal-spacing) * 5 / 6);
@@ -1032,7 +1032,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .grid--1-col-desktop {
     flex: 0 0 100%;
     max-width: 100%;
@@ -1168,7 +1168,7 @@ summary::-webkit-details-marker {
   opacity: 0;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .media--cropped {
     padding-bottom: 63%;
   }
@@ -2121,7 +2121,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .utility-bar--bottom-border-social-only {
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   }
@@ -2148,7 +2148,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   scale: 0.9;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .utility-bar__grid {
     grid-template-columns: 3fr 4fr 3fr;
     grid-template-areas: 'social-icons announcements language-currency';
@@ -2217,7 +2217,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -2360,7 +2360,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .header {
     grid-template-columns: 1fr auto 1fr;
   }
@@ -2475,7 +2475,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .header--middle-left .header__heading-link,
   .header--top-left .header__heading-link {
     margin-left: -0.75rem;
@@ -2601,7 +2601,7 @@ menu-drawer + .header__search {
   display: inline-flex;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .header:not(.header--top-center) * > .header__search,
   .header--top-center > .header__search {
     display: inline-flex;
@@ -2686,7 +2686,7 @@ details[open] .modal-overlay::after {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .search-modal__form {
     max-width: 74.2rem;
   }
@@ -2753,7 +2753,7 @@ details[open] > .header__submenu {
   margin-left: 0;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .header__inline-menu {
     display: block;
   }
@@ -2894,7 +2894,7 @@ details-disclosure > details {
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .overflow-hidden-tablet {
     overflow: auto;
   }

@@ -151,7 +151,7 @@
   font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .footer-block__heading {
     font-size: calc(var(--font-heading-scale) * 1.8rem);
   }

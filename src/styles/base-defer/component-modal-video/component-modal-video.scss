@@ -56,7 +56,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .modal-video__toggle {
     right: 4.3rem;
     top: 3rem;
@@ -84,7 +84,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .modal-video__content-info {
     height: calc(100% - 7rem);
     padding-top: 9rem;

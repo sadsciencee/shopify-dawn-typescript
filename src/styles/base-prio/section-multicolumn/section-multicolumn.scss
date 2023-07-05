@@ -213,7 +213,7 @@
   white-space: nowrap;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .multicolumn-list__item--empty {
     display: list-item;
   }

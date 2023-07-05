@@ -326,7 +326,7 @@
   word-break: break-word;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .image-with-text__content {
     padding: 6rem 7rem 7rem;
   }

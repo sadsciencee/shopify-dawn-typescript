@@ -62,7 +62,7 @@
 	--ax50: calc(var(--ax) * 50);
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
 	:root {
 		--ax: #{$desktopBaseScale};
 		--x-spacing: #{$xSpacingDesktop};

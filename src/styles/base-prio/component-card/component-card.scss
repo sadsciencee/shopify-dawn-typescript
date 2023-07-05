@@ -259,7 +259,7 @@
   outline: 0;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;

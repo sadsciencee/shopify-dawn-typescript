@@ -41,7 +41,7 @@
   padding-left: 2.5rem;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .facet-filters {
     padding-left: 3rem;
   }
@@ -422,7 +422,7 @@ span.active-facets__button-inner:after {
   font-size: 1rem;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .active-facets__button {
     margin-right: 1.5rem;
   }

@@ -270,7 +270,7 @@
   margin-bottom: 7rem;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   .customer .pagination {
     margin-top: 7rem;
     margin-bottom: 10rem;
@@ -416,14 +416,14 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   :is(.account, .order) > div:nth-of-type(2) {
     display: flex;
     margin-top: 5rem;
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   :is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
     flex-grow: 1;
     padding-right: 3.2rem;
@@ -454,7 +454,7 @@
   margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($m-up) {
   :is(.account, .order) h2 {
     margin-top: 0;
   }
