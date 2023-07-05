@@ -101,12 +101,7 @@
 			>
 		{%- endunless -%}
 
-		{%- if settings.predictive_search_enabled -%}
-			{% render 'ucoast-style-tag',
-				file: 'css-optional-component-predictive-search',
-				ignore_m_up: true
-			%}
-		{%- endif -%}
+
 
 		<script>
 			document.documentElement.className = document.documentElement.className.replace(
@@ -219,9 +214,13 @@
 				recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
 			}
 		</script>
-
 		{%- if settings.predictive_search_enabled -%}
+			{% render 'ucoast-style-tag',
+					file: 'css-optional-component-predictive-search',
+					ignore_m_up: true
+			%}
 			{% render 'ucoast', ucoast: 'js-optional-predictive-search.ts' %}
 		{%- endif -%}
+		{% render 'ucoast-style-tag', file: 'css-optional-component-localization-form' %}
 	</body>
 </html>

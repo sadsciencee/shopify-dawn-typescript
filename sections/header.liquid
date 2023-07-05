@@ -1,9 +1,7 @@
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   {% render 'ucoast-style-tag', file: 'css-optional-component-mega-menu' %}
 {%- endif -%}
-{%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-  {% render 'ucoast-style-tag', file: 'css-optional-component-localization-form' %}
-{%- endif -%}
+
 
 <style>
   header-drawer {
