@@ -39,7 +39,7 @@
   max-width: calc(10rem / var(--font-body-scale));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .cart-item__image {
     max-width: 100%;
   }
@@ -141,7 +141,7 @@ cart-remove-button .button:not([disabled]):hover {
   color: rgb(var(--color-foreground));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   cart-remove-button .button {
     min-width: 3.5rem;
     min-height: 3.5rem;
@@ -161,7 +161,7 @@ cart-remove-button .icon-remove {
   padding: 0;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .cart-item .loading-overlay {
     right: 0;
     padding-top: 4.5rem;
@@ -260,7 +260,7 @@ cart-remove-button .icon-remove {
   margin-top: 0.4rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .cart-items {
     border-spacing: 0;
     border-collapse: separate;

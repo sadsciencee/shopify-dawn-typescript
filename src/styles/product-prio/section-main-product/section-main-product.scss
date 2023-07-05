@@ -17,7 +17,7 @@
   padding-left: 0;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product__column-sticky {
     display: block;
     position: sticky;
@@ -383,7 +383,7 @@ a.product__text {
   display: none;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product__info-container {
     max-width: 60rem;
   }
@@ -521,7 +521,7 @@ a.product__text {
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product--thumbnail .product__media-list,
   .product--thumbnail_slider .product__media-list {
     padding-bottom: calc(var(--media-shadow-vertical-offset) * var(--media-shadow-visible));
@@ -602,7 +602,7 @@ a.product__text {
   border: 0.1rem solid rgba(var(--color-foreground), 0.1);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .grid__item.product__media-item--full {
     width: 100%;
   }
@@ -749,7 +749,7 @@ a.product__text {
   display: none;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product-media-modal__content {
     padding-bottom: 2rem;
   }
@@ -815,7 +815,7 @@ a.product__text {
   width: 100%;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product-media-modal__content {
     padding: 2rem 11rem;
   }
@@ -917,7 +917,7 @@ a.product__text {
       rgba(var(--color-shadow), var(--popup-shadow-opacity));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product-popup-modal__content {
     padding-right: 1.5rem;
     margin-top: 10rem;
@@ -1029,7 +1029,7 @@ a.product__text {
   content: none;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product--stacked .thumbnail-list {
     display: none;
   }
@@ -1085,7 +1085,7 @@ a.product__text {
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product--thumbnail_slider .thumbnail-slider {
     display: flex;
     align-items: center;
@@ -1245,7 +1245,7 @@ a.product__text {
   top: calc(0.4rem + var(--media-border-width));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product:not(.product--small) .thumbnail__badge {
     height: 3rem;
     width: 3rem;
@@ -1432,7 +1432,7 @@ a.product__text {
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product-media-container {
     max-width: 100%;
   }
@@ -1464,7 +1464,7 @@ a.product__text {
   position: relative;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .product-media-container .product__modal-opener:not(.product__modal-opener--image) {
     display: none;
   }

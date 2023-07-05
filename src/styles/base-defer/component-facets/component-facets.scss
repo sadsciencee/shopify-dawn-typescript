@@ -15,7 +15,7 @@
   overflow-y: auto;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .facets-container > * + * {
     margin-top: 0;
   }
@@ -947,7 +947,7 @@ input.mobile-facets__checkbox {
   display: block;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .facets-vertical {
     display: flex;
   }

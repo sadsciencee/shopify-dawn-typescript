@@ -18,7 +18,7 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .discounts__discount--position {
     justify-content: flex-end;
   }

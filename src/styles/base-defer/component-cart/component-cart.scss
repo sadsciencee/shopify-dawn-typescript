@@ -121,7 +121,7 @@ cart-items {
   border-bottom-right-radius: 0;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .cart__items {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -201,7 +201,7 @@ cart-items {
   text-align: center;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .cart-note {
     max-width: 35rem;
   }

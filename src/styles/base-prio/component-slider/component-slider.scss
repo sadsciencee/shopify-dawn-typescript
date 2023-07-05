@@ -74,7 +74,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .slider.slider--tablet-up {
     position: relative;
     flex-wrap: inherit;
@@ -264,7 +264,7 @@ slider-component.slider-component-full-width {
   min-width: 4.4rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .slider-counter--dots {
     margin: 0 1.2rem;
   }
@@ -346,7 +346,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .slider--mobile + .slider-buttons {
     display: none;
   }

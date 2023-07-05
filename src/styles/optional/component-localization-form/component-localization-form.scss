@@ -21,7 +21,7 @@
   flex-grow: 1;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .localization-form {
     padding: 1rem 2rem 1rem 0;
   }
@@ -81,7 +81,7 @@ noscript .localization-form__select {
   padding-left: 0rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   noscript .localization-form__select {
     min-width: 20rem;
   }

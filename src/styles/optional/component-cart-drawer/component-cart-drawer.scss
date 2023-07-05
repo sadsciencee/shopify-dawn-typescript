@@ -360,7 +360,7 @@ cart-drawer-items {
   margin-right: 0.5rem !important;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .drawer__footer #dynamic-checkout-cart ul > li {
     flex-basis: calc(100% / 3 - 0.5rem) !important;
     margin: 0 !important;

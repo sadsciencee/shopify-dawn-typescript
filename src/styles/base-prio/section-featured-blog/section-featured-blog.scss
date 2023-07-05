@@ -46,7 +46,7 @@
   margin-top: 3rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .blog__button {
     margin-top: 5rem;
   }
@@ -54,7 +54,7 @@
 
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
-  @media screen and (min-width: 750px) {
+  @include media-query($s-up) {
     .blog__posts .article + .article {
       margin-left: var(--grid-desktop-horizontal-spacing);
     }

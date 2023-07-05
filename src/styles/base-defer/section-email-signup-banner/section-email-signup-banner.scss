@@ -89,7 +89,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .banner--content-align-center .newsletter-form__message {
     justify-content: center;
   }

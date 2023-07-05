@@ -37,7 +37,7 @@
       rgba(var(--color-shadow), var(--popup-shadow-opacity));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
     border-top-width: var(--popup-border-width);
   }

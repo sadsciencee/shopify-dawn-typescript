@@ -69,7 +69,7 @@ pickup-availability-drawer[open] {
   opacity: 1;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   pickup-availability-drawer {
     transform: translateX(100%);
     width: 37.5rem;
@@ -163,7 +163,7 @@ pickup-availability-drawer[open] {
     }
   }
 
-  @media screen and (min-width: 750px) {
+  @include media-query($s-up) {
     0% {
       opacity: 0;
       transform: translateX(100%);

@@ -102,7 +102,7 @@
   padding-bottom: 33rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .article-card__image--small .ratio::before {
     padding-bottom: 14.3rem;
   }
@@ -136,7 +136,7 @@
     margin: 0 0 5rem 0;
   }
 
-  @media screen and (min-width: 750px) {
+  @include media-query($s-up) {
     .articles-wrapper.grid {
       margin-bottom: 7rem;
     }

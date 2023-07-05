@@ -35,7 +35,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer__content-top .grid {
     row-gap: 6rem;
     margin-bottom: 0;
@@ -96,7 +96,7 @@
   padding-right: 2rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer__column--info {
     padding-left: 0;
     padding-right: 0;
@@ -110,7 +110,7 @@
   margin: 0 auto;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block {
     display: block;
     margin-top: 0;
@@ -138,7 +138,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block--newsletter {
     flex-wrap: nowrap;
     justify-content: center;
@@ -180,7 +180,7 @@
   max-width: 36rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   /* Pushes other components to the right of the flexbox */
   .footer-block__newsletter:not(:only-child) {
     text-align: left;
@@ -241,7 +241,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block__newsletter + .footer__list-social {
     margin-top: 0;
   }
@@ -265,7 +265,7 @@
   color: rgba(var(--color-foreground), 0.75);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer__localization {
     padding: 0.4rem 0;
     justify-content: flex-start;
@@ -282,7 +282,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer__payment {
     margin-top: 1.5rem;
   }
@@ -297,7 +297,7 @@
   margin-top: 1.5rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer__content-bottom-wrapper:not(.footer__content-bottom-wrapper--center) .footer__copyright {
     text-align: right;
   }
@@ -318,7 +318,7 @@
   margin-bottom: 4rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block__details-content {
     margin-bottom: 0;
   }
@@ -347,7 +347,7 @@
   color: rgb(var(--color-foreground));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block__details-content .list-menu__item--link:hover,
   .copyright__content a:hover {
     color: rgb(var(--color-foreground));
@@ -367,7 +367,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .footer-block__details-content .list-menu__item--link {
     display: inline-block;
     font-size: 1.4rem;
@@ -475,7 +475,7 @@
   display: block;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .policies li a {
     padding: 0;
   }
@@ -500,7 +500,7 @@
     }
   }
 
-  @media screen and (min-width: 750px) {
+  @include media-query($s-up) {
     .footer__content-top .grid {
       margin-left: -3rem;
     }

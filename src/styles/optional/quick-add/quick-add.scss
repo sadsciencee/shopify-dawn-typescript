@@ -50,7 +50,7 @@
   width: calc(100% - 3rem);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .quick-add-modal__content {
     --modal-height-offset: 10rem;
     margin-top: var(--modal-height-offset);
@@ -165,7 +165,7 @@ quick-add-modal .product__column-sticky {
   position: relative;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   quick-add-modal .product:not(.product--no-media) .product__media-wrapper {
     max-width: 45%;
     width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
@@ -221,7 +221,7 @@ quick-add-modal .product-media-container.constrain-height {
   --viewport-offset: calc((var(--modal-height-offset) + var(--modal-padding) + var(--popup-border-width)) * 2);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   quick-add-modal .product-media-container.constrain-height {
     --constrained-min-height: 400px;
   }

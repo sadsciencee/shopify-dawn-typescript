@@ -36,7 +36,7 @@ product-recommendations:not(.is-accordion) .complementary-products__container {
   gap: calc(var(--grid-mobile-vertical-spacing) + 8px);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .complementary-slide > ul {
     gap: var(--grid-desktop-vertical-spacing);
   }
@@ -156,7 +156,7 @@ product-recommendations.is-accordion + .accordion {
   text-align: var(--text-alignment);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .complementary-products__container .price--on-sale .price-item--regular {
     font-size: 1.3rem;
   }

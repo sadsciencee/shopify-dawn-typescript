@@ -33,7 +33,7 @@
   margin: 0;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .price {
     margin-bottom: 0;
   }
@@ -45,7 +45,7 @@
   letter-spacing: 0.13rem;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .price--large {
     font-size: 1.8rem;
   }

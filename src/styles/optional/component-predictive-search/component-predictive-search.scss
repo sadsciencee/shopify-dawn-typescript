@@ -48,7 +48,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .predictive-search {
     border-top: none;
     width: calc(100% + 0.2rem);
@@ -75,7 +75,7 @@ predictive-search[loading] .predictive-search {
   display: none;
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .predictive-search__results-groups-wrapper--no-products .predictive-search__result-group:nth-child(2),
   .predictive-search__result-group:last-child .predictive-search__pages-wrapper {
     display: none;
@@ -205,7 +205,7 @@ predictive-search[loading] .predictive-search__results-groups-wrapper ~ .predict
   line-height: calc(1 + 0.4 / var(--font-body-scale));
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($s-up) {
   .predictive-search__item--term {
     padding-top: 1rem;
     padding-bottom: 1rem;
