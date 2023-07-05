@@ -31,7 +31,7 @@
 
     {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
     {%- if first_3d_model -%}
-        {% render 'ucoast', ucoast: 'css-optional-component-product-model.scss' %}
+        {% render 'ucoast-style-tag', file: 'css-optional-component-product-model' %}
         <link
                 id="ModelViewerStyle"
                 rel="stylesheet"
@@ -39,7 +39,7 @@
                 media="print"
                 onload="this.media='all'"
         >
-        {% render 'ucoast', ucoast: 'css-optional-component-model-viewer-ui.scss' %}
+        {% render 'ucoast-style-tag', file: 'css-optional-component-model-viewer-ui' %}
     {%- endif -%}
 
     {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
@@ -438,7 +438,7 @@
                                     </aside>
                                 {%- endif -%}
                                 {%- if block.settings.enable_quick_add -%}
-                                    {% render 'ucoast', ucoast: 'css-optional-quick-add.scss' %}
+                                    {% render 'ucoast-style-tag', file: 'css-optional-quick-add' %}
                                     {% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
                                 {%- endif -%}
                             </product-recommendations>

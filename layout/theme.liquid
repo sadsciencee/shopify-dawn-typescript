@@ -235,24 +235,24 @@
       }
     {% endstyle %}
 
-    {% render 'ucoast', ucoast: 'css-dir-base-prio.scss', preload_stylesheet: true %}
+    {% render 'ucoast-style-tag', file: 'css-dir-base-prio', preload_stylesheet: true %}
 
     {% case request.page_type %}
       {% when 'product' %}
-        {% render 'ucoast', ucoast: 'css-dir-product-prio.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-product-prio', preload_stylesheet: true %}
       {% when 'page' %}
-          {% render 'ucoast', ucoast: 'css-dir-page-prio.scss', preload_stylesheet: true %}
+          {% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
       {% when 'collection' %}
-        {% render 'ucoast', ucoast: 'css-dir-collection-prio.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-collection-prio', preload_stylesheet: true %}
       {% when 'blog' %}
-        {% render 'ucoast', ucoast: 'css-dir-blog-prio.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-blog-prio', preload_stylesheet: true %}
       {% when 'article' %}
-        {% render 'ucoast', ucoast: 'css-dir-article-prio.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-article-prio', preload_stylesheet: true %}
       {% when 'customer' %}
 
     {% endcase %}
     {% if request.page_type contains 'customers' %}
-      {% render 'ucoast', ucoast: 'css-dir-customer-prio.scss', preload_stylesheet: true %}
+      {% render 'ucoast-style-tag', file: 'css-dir-customer-prio', preload_stylesheet: true %}
     {% endif %}
 
     {%- unless settings.type_body_font.system? -%}
@@ -263,7 +263,7 @@
     {%- endunless -%}
 
     {%- if settings.predictive_search_enabled -%}
-      {% render 'ucoast', ucoast: 'css-optional-component-predictive-search.scss' %}
+      {% render 'ucoast-style-tag', file: 'css-optional-component-predictive-search' %}
     {%- endif -%}
 
     <script>
@@ -289,28 +289,28 @@
       {{ content_for_layout }}
     </main>
 
-    {% render 'ucoast', ucoast: 'css-dir-base-defer.scss', preload_stylesheet: true %}
+    {% render 'ucoast-style-tag', file: 'css-dir-base-defer', preload_stylesheet: true %}
     {% if settings.cart_type == 'drawer' %}
-      {% render 'ucoast', ucoast: 'css-optional-component-cart-drawer.scss' %}
+      {% render 'ucoast-style-tag', file: 'css-optional-component-cart-drawer' %}
     {% endif %}
 
     {% case request.page_type %}
       {% when 'product' %}
-        {% render 'ucoast', ucoast: 'css-dir-product-defer.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-product-defer', preload_stylesheet: true %}
       {% when 'page' %}
-        {% render 'ucoast', ucoast: 'css-dir-page-defer.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-page-defer', preload_stylesheet: true %}
       {% when 'collection' %}
-        {% render 'ucoast', ucoast: 'css-dir-collection-defer.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-collection-defer', preload_stylesheet: true %}
       {% when 'blog' %}
-        {% render 'ucoast', ucoast: 'css-dir-blog-defer.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-blog-defer', preload_stylesheet: true %}
       {% when 'article' %}
-        {% render 'ucoast', ucoast: 'css-dir-article-defer.scss', preload_stylesheet: true %}
+        {% render 'ucoast-style-tag', file: 'css-dir-article-defer', preload_stylesheet: true %}
     {% endcase %}
 
     {% comment %}
 
     {% if request.page_type contains 'customers' %}
-      {% render 'ucoast', ucoast: 'css-dir-customer-defer.scss', preload_stylesheet: true %}
+      {% render 'ucoast-style-tag', file: 'css-dir-customer-defer', preload_stylesheet: true %}
     {% endif %}
 
     {% endcomment %}
