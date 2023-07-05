@@ -1,0 +1,32 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($s-up) {
+  .localization-form {
+    padding: 1rem 2rem 1rem 0;
+  }
+
+  .localization-form:first-of-type {
+    padding-left: 0;
+  }
+
+  .localization-form:only-child {
+    justify-content: start;
+    width: auto;
+    margin: 0 1rem 0 0;
+  }
+
+  .localization-form:only-child .button,
+  .localization-form:only-child .localization-form__select {
+    margin: 1rem 0;
+  }
+}
+@include media-query($m-down) {
+  noscript .localization-form:only-child {
+    width: 100%;
+  }
+}
+@include media-query($s-up) {
+  noscript .localization-form__select {
+    min-width: 20rem;
+  }
+}

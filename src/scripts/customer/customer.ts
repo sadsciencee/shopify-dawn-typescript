@@ -68,7 +68,9 @@ class CustomerAddresses {
 				hideElement: 'AddressProvinceContainerNew',
 			})
 			this.elements.countrySelects.forEach((select: HTMLSelectElement) => {
+
 				const formId = select.dataset.formId
+				console.log({ select, formId })
 				// eslint-disable-next-line no-new
 				// shopify is ignoring this, so we have to ignore it too
 				// @ts-ignore

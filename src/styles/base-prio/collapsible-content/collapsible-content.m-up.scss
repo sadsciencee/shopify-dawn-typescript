@@ -1,0 +1,10 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@supports not (inset: 10px) {
+	@include media-query($m-up) {
+		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
+		.collapsible-content__grid--reverse .collapsible-content__grid-item {
+			padding-left: 7rem;
+		}
+	}
+}

@@ -1,0 +1,26 @@
+<script type='text/javascript'>
+
+  document.documentElement.className = document.documentElement.className.replace(
+    'no-js',
+    'js'
+  )
+  if (Shopify.designMode) {
+    document.documentElement.classList.add('shopify-design-mode')
+  }
+
+  function initialize() {
+    {
+      const n=(i,t)=>{let e=t==="desktop"?1440/window.innerWidth:375/window.innerWidth;return t==="desktop"&&e>1.25&&(e=1.25),t==="desktop"&&e<1&&(e=1),t==="mobile"&&e>1.1111111111&&(e=1.1111111111),t==="mobile"&&e<1&&(e=1),(i*e).toFixed(1)},d=(i,t)=>{const e=window.innerWidth>=990?"desktop":"mobile",o=e==="desktop"?"100vh":`calc(${n(window.innerHeight,e)} * var(--ax))`;document.documentElement.style.setProperty("--viewport-height",o),document.documentElement.style.setProperty("--header-height",`calc(${n(i.getBoundingClientRect().height,e)} * var(--ax))`),t&&document.documentElement.style.setProperty("--announcement-height",`calc(${n(t.getBoundingClientRect().height,e)} * var(--ax))`)}
+    }
+  }
+  try {
+    initialize()
+  } catch(e) {
+    console.log(e)
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize)
+  } else {
+    initialize()
+  }
+</script>

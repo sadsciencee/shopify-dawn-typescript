@@ -1,0 +1,8 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+/* Menu drawer */
+@include media-query($m-up) {
+  .menu-drawer__localization {
+    display: none;
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($s-up) {
+  slider-component + .button.product__xr-button {
+    display: none;
+  }
+
+  .product__xr-button[data-shopify-xr-hidden] {
+    display: none;
+  }
+}

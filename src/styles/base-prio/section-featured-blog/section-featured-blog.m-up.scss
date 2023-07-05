@@ -1,0 +1,12 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($m-up) {
+	.grid--1-col-desktop .article-card .card__content {
+		text-align: center;
+	}
+}
+@include media-query($m-up) {
+	.blog__posts.articles-wrapper {
+		margin-bottom: 0;
+	}
+}

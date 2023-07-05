@@ -1,0 +1,35 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+.blog-placeholder-svg {
+	height: 100%;
+}
+
+.blog__title {
+	margin: 0;
+}
+
+.blog__posts.articles-wrapper {
+	margin-bottom: 1rem;
+}
+
+.blog__posts.articles-wrapper .article {
+	scroll-snap-align: start;
+}
+
+@include media-query($s-down) {
+	.blog__post.article {
+		width: calc(100% - 3rem - var(--grid-mobile-horizontal-spacing));
+	}
+}
+
+.background-secondary .blog-placeholder__content {
+	background-color: rgb(var(--color-background));
+}
+
+.blog__posts .card-wrapper {
+	width: 100%;
+}
+
+.blog__button {
+	margin-top: 3rem;
+}

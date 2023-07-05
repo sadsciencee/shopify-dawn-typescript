@@ -1,0 +1,13 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($m-up) {
+  .modal-video__toggle {
+    right: 4.3rem;
+    top: 3rem;
+  }
+  .modal-video__content-info {
+    height: calc(100% - 7rem);
+    padding-top: 9rem;
+    width: calc(100% - 8.6rem);
+  }
+}

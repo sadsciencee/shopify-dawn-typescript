@@ -683,3 +683,29 @@ export function parseFormData(formData: FormData) {
 	});
 	return formDataObj;
 }
+
+// used in critical.js
+
+export function disableDesktopCSS() {
+	if (window.innerWidth >= 990) return
+	const mUp = qsaOptional('link[href*=".m-up"]')
+	mUp?.forEach((link) => {
+		const href = link.getAttribute('href')
+		if (!href) return
+		link.removeAttribute('href')
+		link.setAttribute('data-href', href)
+	})
+	if (window.innerWidth < 750) {
+		const sUp = qsaOptional('link[href*=".s-up"]');
+		sUp?.forEach((link) => {
+			const href = link.getAttribute('href')
+			if (!href) return
+			link.removeAttribute('href')
+			link.setAttribute('data-href', href)
+		})
+		return
+	}
+
+
+
+}

@@ -4,17 +4,21 @@ export interface ShopifyPostLinkOptions extends RequestInit {
 	parameters?: Record<string, string>
 }
 
-export class CountryProvinceSelector extends HTMLElement {
+export class CountryProvinceSelector {
 	countryEl: HTMLSelectElement
 	provinceEl: HTMLSelectElement
 	provinceContainer: HTMLElement
 	constructor(country_domid:string, province_domid:string, options: {
 		hideElement: string
 	}) {
-		super()
 		this.countryEl = qsRequired(`#${country_domid}`)
 		this.provinceEl = qsRequired(`#${province_domid}`)
 		this.provinceContainer = qsRequired(`#${options['hideElement'] || province_domid}`)
+		console.log({
+			countryEl: this.countryEl,
+			provinceEl: this.provinceEl,
+			provinceContainer: this.provinceContainer,
+		})
 
 		Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler, this))
 
@@ -23,13 +27,13 @@ export class CountryProvinceSelector extends HTMLElement {
 	}
 
 	initCountry() {
-		const value = getAttributeOrThrow('data-default', this.countryEl)
+		const value = this.countryEl.getAttribute('data-default') ?? ''
 		Shopify.setSelectorByValue(this.countryEl, value)
 		this.countryHandler()
 	}
 
 	initProvince() {
-		var value = this.provinceEl.getAttribute('data-default')
+		const value = this.provinceEl.getAttribute('data-default')
 		if (value && this.provinceEl.options.length > 0) {
 			Shopify.setSelectorByValue(this.provinceEl, value)
 		}

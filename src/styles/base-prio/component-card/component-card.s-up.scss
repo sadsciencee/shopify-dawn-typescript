@@ -1,0 +1,14 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.card__information {
+		padding-bottom: 1.7rem;
+		padding-top: 1.7rem;
+	}
+
+	.card--horizontal .card__heading,
+	.card--horizontal .price__container .price-item,
+	.card--horizontal__quick-add {
+		font-size: calc(var(--font-heading-scale) * 1.3rem);
+	}
+}

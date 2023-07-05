@@ -1,0 +1,95 @@
+@import './functions';
+
+$ax1: var(--ax1);
+$ax2: var(--ax2);
+$ax3: var(--ax3);
+$ax4: var(--ax4);
+$ax5: var(--ax5);
+$ax6: var(--ax6);
+$ax7: var(--ax7);
+$ax8: var(--ax8);
+$ax9: var(--ax9);
+$ax10: var(--ax10);
+$ax11: var(--ax11);
+$ax12: var(--ax12);
+$ax13: var(--ax13);
+$ax14: var(--ax14);
+$ax15: var(--ax15);
+$ax16: var(--ax16);
+$ax17: var(--ax17);
+$ax18: var(--ax18);
+$ax19: var(--ax19);
+$ax20: var(--ax20);
+$ax21: var(--ax21);
+$ax22: var(--ax22);
+$ax23: var(--ax23);
+$ax24: var(--ax24);
+$ax25: var(--ax25);
+$ax26: var(--ax26);
+$ax27: var(--ax27);
+$ax28: var(--ax28);
+$ax29: var(--ax29);
+$ax30: var(--ax30);
+$ax31: var(--ax31);
+$ax32: var(--ax32);
+$ax33: var(--ax33);
+$ax34: var(--ax34);
+$ax35: var(--ax35);
+$ax36: var(--ax36);
+$ax37: var(--ax37);
+$ax38: var(--ax38);
+$ax39: var(--ax39);
+$ax40: var(--ax40);
+$ax41: var(--ax41);
+$ax42: var(--ax42);
+$ax43: var(--ax43);
+$ax44: var(--ax44);
+$ax45: var(--ax45);
+$ax46: var(--ax46);
+$ax47: var(--ax47);
+$ax48: var(--ax48);
+$ax49: var(--ax49);
+$ax50: var(--ax50);
+
+// height vars
+$viewport: var(--viewport-height);
+$drawerHeight: var(--drawer-height);
+$viewportMinusHeader: calc(var(--viewport-height) - var(--header-height));
+$viewportMinusAnnouncement: calc(var(--viewport-height) - var(--announcement-height));
+$viewportMinusCombined: calc(var(--viewport-height) - var(--announcement-height) - var(--header-height));
+$announcementHeight: var(--announcement-height);
+$headerHeight: var(--header-height);
+$combinedHeaderHeight: calc(var(--announcement-height) + var(--header-height));
+
+// shopify vars (used in build pack architecture)
+$xSpacingMobile: var(--grid-mobile-horizontal-spacing);
+$xSpacingDesktop: var(--grid-desktop-horizontal-spacing);
+$ySpacingMobile: var(--grid-mobile-vertical-spacing);
+$ySpacingDesktop: var(--grid-desktop-vertical-spacing);
+$sectionSpacingMobile: var(--spacing-sections-mobile);
+$sectionSpacingDesktop: var(--spacing-sections-desktop);
+
+// shopify vars (only used for dawn settings)
+
+
+// section spacing
+
+$mobileSpace1: ax(48);
+$mobileSpace2: ax(58);
+$mobileSpace3: ax(63);
+$mobileSpace4: ax(72);
+$mobileSpace5: ax(86);
+$desktopSpace1: ax(110);
+$desktopSpace2: ax(127);
+$desktopSpace3: ax(136);
+$desktopSpace4: ax(171);
+$desktopSpace5: ax(199);
+
+
+@mixin box-shadow {
+  box-shadow: $ax2 $ax3 ax(55) $ax7 rgba(217,217,217, 0.61);
+}
+
+@mixin box-shadow-pre {
+  box-shadow: $ax2 $ax3 ax(55) $ax7 rgba(217,217,217, 0);
+}

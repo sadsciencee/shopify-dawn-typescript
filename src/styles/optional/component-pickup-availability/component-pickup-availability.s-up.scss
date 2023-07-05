@@ -1,0 +1,27 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	pickup-availability-drawer {
+		transform: translateX(100%);
+		width: 37.5rem;
+	}
+
+	pickup-availability-drawer[open] {
+		opacity: 1;
+		transform: translateX(0);
+		animation: animateDrawerOpen var(--duration-default) ease;
+	}
+}
+@keyframes animateDrawerOpen {
+	@include media-query($s-up) {
+		0% {
+			opacity: 0;
+			transform: translateX(100%);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+}

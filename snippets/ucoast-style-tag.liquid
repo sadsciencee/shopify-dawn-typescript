@@ -1,0 +1,29 @@
+{% comment %}
+  file: feeds into 'ucoast' param in the vite plugin
+  settings [bool]:
+    preload_stylesheet: if true, will preload the stylesheet
+    ignore_s_up: disable s_up breakpoint for this file
+    ignore_m_up: all css that isn't required for small screens
+{% endcomment %}
+{% liquid
+    assign base_file = file | append: '.scss'
+    assign s_up_file = file | append: '.s-up.scss'
+    assign m_up_file = file | append: '.m-up.scss'
+    if preload_stylesheet
+        render 'ucoast', ucoast: base_file, preload_stylesheet: true
+        unless ignore_s_up
+            render 'ucoast', ucoast: s_up_file, preload_stylesheet: true
+        endunless
+        unless ignore_m_up
+            render 'ucoast', ucoast: m_up_file, preload_stylesheet: true
+        endunless
+    else
+        render 'ucoast', ucoast: base_file
+        unless ignore_s_up
+            render 'ucoast', ucoast: s_up_file
+        endunless
+        unless ignore_m_up
+            render 'ucoast', ucoast: m_up_file
+        endunless
+    endif
+%}

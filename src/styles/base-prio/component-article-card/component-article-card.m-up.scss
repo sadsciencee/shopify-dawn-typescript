@@ -1,0 +1,19 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($m-up) {
+	.article-card__link:not(:only-child) {
+		margin-right: 4rem;
+	}
+
+	.article-card__image--small .ratio::before {
+		padding-bottom: 17.7rem;
+	}
+
+	.article-card__image--medium .ratio::before {
+		padding-bottom: 30.7rem;
+	}
+
+	.article-card__image--large .ratio::before {
+		padding-bottom: 40.7rem;
+	}
+}

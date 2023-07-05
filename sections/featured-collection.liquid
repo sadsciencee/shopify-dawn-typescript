@@ -1,11 +1,9 @@
-{% render 'ucoast', ucoast: 'css-dir-collection-prio.scss' %}
-
 {% if section.settings.image_shape == 'blob' %}
-  {% render 'ucoast', ucoast: 'css-optional-mask-blobs.scss' %}
+  {% render 'ucoast-style-tag', file: 'css-optional-mask-blobs' %}
 {%- endif -%}
 
 {%- if section.settings.enable_quick_add -%}
-  {% render 'ucoast', ucoast: 'css-optional-quick-add.scss' %}
+  {% render 'ucoast-style-tag', file: 'css-optional-quick-add' %}
   {% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
 {%- endif -%}
 
