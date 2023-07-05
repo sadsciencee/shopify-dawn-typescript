@@ -1,2 +1,22 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.article-card__image--small .ratio::before {
+		padding-bottom: 14.3rem;
+	}
+
+	.article-card__image--medium .ratio::before {
+		padding-bottom: 21.9rem;
+	}
+
+	.article-card__image--large .ratio::before {
+		padding-bottom: 27.5rem;
+	}
+}
+@supports not (inset: 10px) {
+	@include media-query($s-up) {
+		.articles-wrapper.grid {
+			margin-bottom: 7rem;
+		}
+	}
+}

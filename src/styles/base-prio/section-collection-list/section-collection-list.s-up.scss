@@ -1,2 +1,16 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+@include media-query($m-only) {
+  .slider.collection-list--1-items,
+  .slider.collection-list--2-items,
+  .slider.collection-list--3-items,
+  .slider.collection-list--4-items {
+    padding-bottom: 0;
+  }
+}
+
+@include media-query($s-up) {
+  .collection-list__item a:hover {
+    box-shadow: none;
+  }
+}

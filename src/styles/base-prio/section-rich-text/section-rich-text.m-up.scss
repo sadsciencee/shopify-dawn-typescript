@@ -1,2 +1,8 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+
+@include media-query($m-up) {
+  .rich-text__blocks {
+    max-width: 78rem;
+  }
+}

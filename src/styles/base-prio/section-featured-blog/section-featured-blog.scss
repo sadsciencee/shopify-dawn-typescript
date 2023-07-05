@@ -1,62 +1,35 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
 .blog-placeholder-svg {
-  height: 100%;
-}
-
-@include media-query($m-up) {
-  .grid--1-col-desktop .article-card .card__content {
-    text-align: center;
-  }
+	height: 100%;
 }
 
 .blog__title {
-  margin: 0;
+	margin: 0;
 }
 
 .blog__posts.articles-wrapper {
-  margin-bottom: 1rem;
-}
-
-@include media-query($m-up) {
-  .blog__posts.articles-wrapper {
-    margin-bottom: 0;
-  }
+	margin-bottom: 1rem;
 }
 
 .blog__posts.articles-wrapper .article {
-  scroll-snap-align: start;
+	scroll-snap-align: start;
 }
 
 @include media-query($s-down) {
-  .blog__post.article {
-    width: calc(100% - 3rem - var(--grid-mobile-horizontal-spacing));
-  }
+	.blog__post.article {
+		width: calc(100% - 3rem - var(--grid-mobile-horizontal-spacing));
+	}
 }
 
 .background-secondary .blog-placeholder__content {
-  background-color: rgb(var(--color-background));
+	background-color: rgb(var(--color-background));
 }
 
 .blog__posts .card-wrapper {
-  width: 100%;
+	width: 100%;
 }
 
 .blog__button {
-  margin-top: 3rem;
-}
-
-@include media-query($s-up) {
-  .blog__button {
-    margin-top: 5rem;
-  }
-}
-
-/* check for flexbox gap in older Safari versions */
-@supports not (inset: 10px) {
-  @include media-query($s-up) {
-    .blog__posts .article + .article {
-      margin-left: var(--grid-desktop-horizontal-spacing);
-    }
-  }
+	margin-top: 3rem;
 }

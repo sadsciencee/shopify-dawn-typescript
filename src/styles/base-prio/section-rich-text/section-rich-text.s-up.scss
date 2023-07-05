@@ -1,2 +1,19 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+@include media-query($s-up) {
+  .rich-text__wrapper {
+    width: 100%;
+  }
+
+  .rich-text__wrapper--left {
+    justify-content: flex-start;
+  }
+
+  .rich-text__wrapper--right {
+    justify-content: flex-end;
+  }
+
+  .rich-text__blocks {
+    max-width: 50rem;
+  }
+}

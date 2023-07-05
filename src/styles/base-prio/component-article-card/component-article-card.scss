@@ -84,12 +84,6 @@
   margin-right: 3rem;
 }
 
-@include media-query($m-up) {
-  .article-card__link:not(:only-child) {
-    margin-right: 4rem;
-  }
-}
-
 .article-card__image--small .ratio::before {
   padding-bottom: 11rem;
 }
@@ -102,43 +96,13 @@
   padding-bottom: 33rem;
 }
 
-@include media-query($s-up) {
-  .article-card__image--small .ratio::before {
-    padding-bottom: 14.3rem;
-  }
 
-  .article-card__image--medium .ratio::before {
-    padding-bottom: 21.9rem;
-  }
 
-  .article-card__image--large .ratio::before {
-    padding-bottom: 27.5rem;
-  }
-}
 
-@include media-query($m-up) {
-  .article-card__image--small .ratio::before {
-    padding-bottom: 17.7rem;
-  }
-
-  .article-card__image--medium .ratio::before {
-    padding-bottom: 30.7rem;
-  }
-
-  .article-card__image--large .ratio::before {
-    padding-bottom: 40.7rem;
-  }
-}
 
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
   .articles-wrapper.grid {
     margin: 0 0 5rem 0;
-  }
-
-  @include media-query($s-up) {
-    .articles-wrapper.grid {
-      margin-bottom: 7rem;
-    }
   }
 }

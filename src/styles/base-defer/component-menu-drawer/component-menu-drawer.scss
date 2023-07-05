@@ -65,19 +65,6 @@ details[open].menu-opening > .menu-drawer__submenu {
   visibility: hidden; /* hide menus from screen readers when hidden by submenu */
 }
 
-@include media-query($s-up) {
-  .menu-drawer {
-    width: 40rem;
-    border-width: 0 var(--drawer-border-width) 0 0;
-    border-style: solid;
-    border-color: rgba(var(--color-foreground), var(--drawer-border-opacity));
-  }
-
-  .no-js .menu-drawer {
-    height: auto;
-  }
-}
-
 .menu-drawer__inner-container {
   position: relative;
   height: 100%;

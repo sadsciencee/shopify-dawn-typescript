@@ -30,15 +30,6 @@
   }
 }
 
-@include media-query($s-up) {
-  slider-component + .button.product__xr-button {
-    display: none;
-  }
-
-  .product__xr-button[data-shopify-xr-hidden] {
-    display: none;
-  }
-}
 
 .product__xr-button .icon {
   width: 1.4rem;

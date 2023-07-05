@@ -1,2 +1,11 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.featured-product .product__media-item {
+		padding-bottom: 0;
+	}
+
+	.background-secondary .featured-product {
+		padding: 5rem;
+	}
+}

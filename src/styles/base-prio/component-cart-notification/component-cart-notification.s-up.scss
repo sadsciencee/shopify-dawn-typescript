@@ -1,2 +1,13 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
+		border-top-width: var(--popup-border-width);
+	}
+
+	.cart-notification {
+		border-width: 0 var(--popup-border-width) var(--popup-border-width);
+		max-width: 36.8rem;
+		right: 2.2rem;
+	}
+}

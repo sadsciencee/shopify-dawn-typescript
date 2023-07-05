@@ -1,2 +1,15 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.blog__button {
+		margin-top: 5rem;
+	}
+}
+/* check for flexbox gap in older Safari versions */
+@supports not (inset: 10px) {
+	@include media-query($s-up) {
+		.blog__posts .article + .article {
+			margin-left: var(--grid-desktop-horizontal-spacing);
+		}
+	}
+}

@@ -19,30 +19,6 @@
   width: 100%;
 }
 
-@include media-query($s-up) {
-  .rich-text__wrapper {
-    width: 100%;
-  }
-
-  .rich-text__wrapper--left {
-    justify-content: flex-start;
-  }
-
-  .rich-text__wrapper--right {
-    justify-content: flex-end;
-  }
-
-  .rich-text__blocks {
-    max-width: 50rem;
-  }
-}
-
-@include media-query($m-up) {
-  .rich-text__blocks {
-    max-width: 78rem;
-  }
-}
-
 .rich-text__blocks * {
   overflow-wrap: break-word;
 }

@@ -9,14 +9,6 @@
   position: relative;
 }
 
-@include media-query($s-up) {
-  .newsletter-form {
-    align-items: flex-start;
-    margin: 0 auto;
-    max-width: 36rem;
-  }
-}
-
 .newsletter-form__field-wrapper {
   width: 100%;
 }
@@ -36,12 +28,6 @@
 
 .newsletter-form__message--success {
   margin-top: 2rem;
-}
-
-@include media-query($s-up) {
-  .newsletter-form__message {
-    justify-content: flex-start;
-  }
 }
 
 .newsletter-form__button {

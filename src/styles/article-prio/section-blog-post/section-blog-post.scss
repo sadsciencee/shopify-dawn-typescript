@@ -4,12 +4,6 @@
   margin-top: 5rem;
 }
 
-@include media-query($s-up) {
-  .article-template > *:first-child:not(.article-template__hero-container) {
-    margin-top: calc(5rem + var(--page-width-margin));
-  }
-}
-
 .article-template__hero-container {
   max-width: 130rem;
   margin: 0 auto;
@@ -27,44 +21,10 @@
   height: 33rem;
 }
 
-@include media-query($m-only) {
-  .article-template__hero-small {
-    height: 22rem;
-  }
-
-  .article-template__hero-medium {
-    height: 44rem;
-  }
-
-  .article-template__hero-large {
-    height: 66rem;
-  }
-}
-
-@include media-query($m-up) {
-  .article-template__hero-small {
-    height: 27.5rem;
-  }
-
-  .article-template__hero-medium {
-    height: 55rem;
-  }
-
-  .article-template__hero-large {
-    height: 82.5rem;
-  }
-}
-
 .article-template header {
   margin-top: 4.4rem;
   margin-bottom: 2rem;
   line-height: calc(0.8 / var(--font-body-scale));
-}
-
-@include media-query($s-up) {
-  .article-template header {
-    margin-top: 5rem;
-  }
 }
 
 .article-template__title {
@@ -108,25 +68,12 @@
   padding: 2.7rem 0;
 }
 
-@include media-query($s-up) {
-  .article-template__comment-wrapper {
-    margin-top: 6rem;
-    padding: 3.6rem 0;
-  }
-}
-
 .article-template__comment-wrapper h2 {
   margin-top: 0;
 }
 
 .article-template__comments {
   margin-bottom: 5rem;
-}
-
-@include media-query($s-up) {
-  .article-template__comments {
-    margin-bottom: 7rem;
-  }
 }
 
 .article-template__comments-fields {
@@ -140,12 +87,6 @@
   padding: 2rem 2rem 1.5rem;
 }
 
-@include media-query($s-up) {
-  .article-template__comments-comment {
-    padding: 2rem 2.5rem;
-  }
-}
-
 .article-template__comments-comment p {
   margin: 0 0 1rem;
 }
@@ -154,22 +95,8 @@
   margin-bottom: 3rem;
 }
 
-@include media-query($s-up) {
-  .article-template__comment-fields {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 4rem;
-  }
-}
-
 .article-template__comment-warning {
   margin: 2rem 0 2.5rem;
-}
-
-@include media-query($m-up) {
-  .article-template__comments .pagination-wrapper {
-    margin: 5rem 0 8rem;
-  }
 }
 
 .article-template__back:last-child {

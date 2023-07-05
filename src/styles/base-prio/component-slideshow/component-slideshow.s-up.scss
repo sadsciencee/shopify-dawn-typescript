@@ -1,2 +1,33 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+
+@include media-query($s-up) {
+	.slideshow--placeholder.banner--adapt_image {
+		height: 56rem;
+	}
+
+	.slideshow__text.slideshow__text--left {
+		align-items: flex-start;
+		text-align: left;
+	}
+
+	.slideshow__text.slideshow__text--right {
+		align-items: flex-end;
+		text-align: right;
+	}
+
+	.slideshow__text-wrapper.banner__content {
+		height: 100%;
+		padding: 5rem;
+	}
+
+	.slideshow__controls {
+		position: relative;
+	}
+	.slideshow__autoplay.slider-button {
+		position: inherit;
+		margin-left: 0.6rem;
+		padding: 0 0 0 0.6rem;
+		border-left: 0.1rem solid rgba(var(--color-foreground), 0.08);
+	}
+}

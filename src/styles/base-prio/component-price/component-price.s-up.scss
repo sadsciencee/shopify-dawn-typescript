@@ -1,2 +1,10 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+@include media-query($s-up) {
+  .price {
+    margin-bottom: 0;
+  }
+  .price--large {
+    font-size: 1.8rem;
+  }
+}

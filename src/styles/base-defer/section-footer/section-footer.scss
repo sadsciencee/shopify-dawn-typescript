@@ -35,13 +35,6 @@
   }
 }
 
-@include media-query($s-up) {
-  .footer__content-top .grid {
-    row-gap: 6rem;
-    margin-bottom: 0;
-  }
-}
-
 .footer__content-bottom {
   border-top: solid 0.1rem rgba(var(--color-foreground), 0.08);
   padding-top: 3rem;
@@ -96,25 +89,10 @@
   padding-right: 2rem;
 }
 
-@include media-query($s-up) {
-  .footer__column--info {
-    padding-left: 0;
-    padding-right: 0;
-    align-items: flex-end;
-  }
-}
-
 .footer-block:only-child:last-child {
   text-align: center;
   max-width: 76rem;
   margin: 0 auto;
-}
-
-@include media-query($s-up) {
-  .footer-block {
-    display: block;
-    margin-top: 0;
-  }
 }
 
 .footer-block:empty {
@@ -138,23 +116,10 @@
   }
 }
 
-@include media-query($s-up) {
-  .footer-block--newsletter {
-    flex-wrap: nowrap;
-    justify-content: center;
-  }
-}
-
 .footer-block__heading {
   margin-bottom: 2rem;
   margin-top: 0;
   font-size: calc(var(--font-heading-scale) * 1.6rem);
-}
-
-@include media-query($m-up) {
-  .footer-block__heading {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
-  }
 }
 
 .footer__list-social:empty,
@@ -178,42 +143,6 @@
 
 .newsletter-form__field-wrapper {
   max-width: 36rem;
-}
-
-@include media-query($s-up) {
-  /* Pushes other components to the right of the flexbox */
-  .footer-block__newsletter:not(:only-child) {
-    text-align: left;
-    margin-right: auto;
-  }
-
-  .footer-block__newsletter:not(:only-child) .footer__newsletter {
-    justify-content: flex-start;
-    margin: 0;
-  }
-
-  .footer-block__newsletter:not(:only-child) .newsletter-form__message--success {
-    left: auto;
-  }
-
-  .footer__follow-on-shop {
-    margin-bottom: 0.4rem;
-  }
-  /* Follow on shop is the first button but it has siblings*/
-  .footer__follow-on-shop:first-child:not(:last-child) {
-    justify-content: flex-start;
-    margin-right: auto;
-    text-align: left;
-  }
-
-  /*
-    All three components are present, email, Follow on Shop, and social icons.
-    Moves the FoS button next to the social icons so they appear grouped together
-  */
-  .footer__follow-on-shop:not(:first-child):not(:last-child) {
-    justify-content: flex-end;
-    text-align: right;
-  }
 }
 
 @include media-query($s-down) {
@@ -241,12 +170,6 @@
   }
 }
 
-@include media-query($s-up) {
-  .footer-block__newsletter + .footer__list-social {
-    margin-top: 0;
-  }
-}
-
 .footer__localization {
   display: flex;
   flex-direction: row;
@@ -265,26 +188,9 @@
   color: rgba(var(--color-foreground), 0.75);
 }
 
-@include media-query($s-up) {
-  .footer__localization {
-    padding: 0.4rem 0;
-    justify-content: flex-start;
-  }
-
-  .footer__localization h2 {
-    margin: 1rem 0 0;
-  }
-}
-
 @include media-query($m-down) {
   .footer__localization noscript {
     width: 100%;
-  }
-}
-
-@include media-query($s-up) {
-  .footer__payment {
-    margin-top: 1.5rem;
   }
 }
 
@@ -295,12 +201,6 @@
 .footer__copyright {
   text-align: center;
   margin-top: 1.5rem;
-}
-
-@include media-query($s-up) {
-  .footer__content-bottom-wrapper:not(.footer__content-bottom-wrapper--center) .footer__copyright {
-    text-align: right;
-  }
 }
 
 @keyframes appear-down {
@@ -318,25 +218,6 @@
   margin-bottom: 4rem;
 }
 
-@include media-query($s-up) {
-  .footer-block__details-content {
-    margin-bottom: 0;
-  }
-
-  .footer-block__details-content > p,
-  .footer-block__details-content > li {
-    padding: 0;
-  }
-
-  .footer-block:only-child li {
-    display: inline;
-  }
-
-  .footer-block__details-content > li:not(:last-child) {
-    margin-right: 1.5rem;
-  }
-}
-
 .footer-block__details-content .list-menu__item--link,
 .copyright__content a {
   color: rgba(var(--color-foreground), 0.75);
@@ -347,34 +228,10 @@
   color: rgb(var(--color-foreground));
 }
 
-@include media-query($s-up) {
-  .footer-block__details-content .list-menu__item--link:hover,
-  .copyright__content a:hover {
-    color: rgb(var(--color-foreground));
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-  }
-
-  .footer-block__details-content .list-menu__item--active:hover {
-    text-decoration-thickness: 0.2rem;
-  }
-}
-
 @include media-query($m-down) {
   .footer-block__details-content .list-menu__item--link {
     padding-top: 1rem;
     padding-bottom: 1rem;
-  }
-}
-
-@include media-query($s-up) {
-  .footer-block__details-content .list-menu__item--link {
-    display: inline-block;
-    font-size: 1.4rem;
-  }
-
-  .footer-block__details-content > :first-child .list-menu__item--link {
-    padding-top: 0;
   }
 }
 
@@ -475,11 +332,6 @@
   display: block;
 }
 
-@include media-query($s-up) {
-  .policies li a {
-    padding: 0;
-  }
-}
 @keyframes animateLocalization {
   0% {
     opacity: 0;
@@ -497,16 +349,6 @@
   @include media-query($s-down) {
     .footer .grid {
       margin-left: 0;
-    }
-  }
-
-  @include media-query($s-up) {
-    .footer__content-top .grid {
-      margin-left: -3rem;
-    }
-
-    .footer__content-top .grid__item {
-      padding-left: 3rem;
     }
   }
 }

@@ -360,19 +360,7 @@ cart-drawer-items {
   margin-right: 0.5rem !important;
 }
 
-@include media-query($s-up) {
-  .drawer__footer #dynamic-checkout-cart ul > li {
-    flex-basis: calc(100% / 3 - 0.5rem) !important;
-    margin: 0 !important;
-  }
 
-  .drawer__footer #dynamic-checkout-cart ul > li:first-child:nth-last-child(2),
-  .drawer__footer #dynamic-checkout-cart ul > li:first-child:nth-last-child(2) ~ li,
-  .drawer__footer #dynamic-checkout-cart ul > li:first-child:nth-last-child(4),
-  .drawer__footer #dynamic-checkout-cart ul > li:first-child:nth-last-child(4) ~ li {
-    flex-basis: calc(50% - 0.5rem) !important;
-  }
-}
 
 cart-drawer-items::-webkit-scrollbar {
   width: 3px;

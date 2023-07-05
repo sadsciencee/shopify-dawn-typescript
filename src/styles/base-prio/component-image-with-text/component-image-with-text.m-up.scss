@@ -1,2 +1,7 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($m-up) {
+	.image-with-text__content {
+		padding: 6rem 7rem 7rem;
+	}
+}

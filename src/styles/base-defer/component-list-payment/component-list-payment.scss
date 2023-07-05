@@ -9,14 +9,6 @@
   padding-left: 0;
 }
 
-@include media-query($s-up) {
-  .list-payment {
-    justify-content: flex-end;
-    margin: -0.5rem;
-    padding-top: 0;
-  }
-}
-
 .list-payment__item {
   align-items: center;
   display: flex;

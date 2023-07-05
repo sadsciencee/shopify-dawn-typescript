@@ -1,2 +1,42 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.article-template > *:first-child:not(.article-template__hero-container) {
+		margin-top: calc(5rem + var(--page-width-margin));
+	}
+	.article-template header {
+		margin-top: 5rem;
+	}
+
+	.article-template__comment-wrapper {
+		margin-top: 6rem;
+		padding: 3.6rem 0;
+	}
+
+	.article-template__comments {
+		margin-bottom: 7rem;
+	}
+
+	.article-template__comments-comment {
+		padding: 2rem 2.5rem;
+	}
+
+	.article-template__comment-fields {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 4rem;
+	}
+}
+@include media-query($m-only) {
+	.article-template__hero-small {
+		height: 22rem;
+	}
+
+	.article-template__hero-medium {
+		height: 44rem;
+	}
+
+	.article-template__hero-large {
+		height: 66rem;
+	}
+}

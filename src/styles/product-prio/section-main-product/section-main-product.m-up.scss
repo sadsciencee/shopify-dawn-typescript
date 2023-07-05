@@ -1,2 +1,77 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($m-up) {
+	.product--large:not(.product--no-media) .product__media-wrapper {
+		max-width: 65%;
+		width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
+	}
+
+	.product--large:not(.product--no-media) .product__info-wrapper {
+		padding: 0 0 0 4rem;
+		max-width: 35%;
+		width: calc(35% - var(--grid-desktop-horizontal-spacing) / 2);
+	}
+
+	.product--large:not(.product--no-media).product--right .product__info-wrapper {
+		padding: 0 4rem 0 0;
+	}
+
+	.product--medium:not(.product--no-media) .product__media-wrapper,
+	.product--small:not(.product--no-media) .product__info-wrapper {
+		max-width: 55%;
+		width: calc(55% - var(--grid-desktop-horizontal-spacing) / 2);
+	}
+
+	.product--medium:not(.product--no-media) .product__info-wrapper,
+	.product--small:not(.product--no-media) .product__media-wrapper {
+		max-width: 45%;
+		width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+	}
+
+	.product--stacked .product__media-item {
+		max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+	}
+
+	.product:not(.product--columns) .product__media-list .product__media-item:first-child,
+	.product:not(.product--columns) .product__media-list .product__media-item--full {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.product__modal-opener .product__media-icon {
+		opacity: 0;
+	}
+
+	.product__modal-opener:hover .product__media-icon,
+	.product__modal-opener:focus .product__media-icon {
+		opacity: 1;
+	}
+
+	.product-media-modal__content {
+		padding: 2rem 11rem;
+	}
+
+	.product-media-modal__content > * + * {
+		margin-top: 1.5rem;
+	}
+
+	.product-media-modal__content {
+		padding-bottom: 1.5rem;
+	}
+
+	.product-media-modal__toggle {
+		right: 5rem;
+	}
+
+	.thumbnail-list {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.product--medium .thumbnail-list {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	.product--large .thumbnail-list {
+		grid-template-columns: repeat(6, 1fr);
+	}
+}

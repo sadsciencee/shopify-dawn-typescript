@@ -1,2 +1,12 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+@include media-query($s-up) {
+  .newsletter__wrapper {
+    padding-right: 9rem;
+    padding-left: 9rem;
+  }
+  .newsletter__button {
+    flex-shrink: 0;
+    margin: 0 0 0 1rem;
+  }
+}

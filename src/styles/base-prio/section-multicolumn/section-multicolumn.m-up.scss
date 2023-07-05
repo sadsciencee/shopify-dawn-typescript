@@ -1,2 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+@include media-query($m-up) {
+  .multicolumn-list__item--empty {
+    display: list-item;
+  }
+}

@@ -1,25 +1,19 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
 .page-title {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 .main-page-title {
-  margin-bottom: 3rem;
-}
-
-@include media-query($s-up) {
-  .main-page-title {
-    margin-bottom: 4rem;
-  }
+	margin-bottom: 3rem;
 }
 
 .page-placeholder-wrapper {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .page-placeholder {
-  width: 52.5rem;
-  height: 52.5rem;
+	width: 52.5rem;
+	height: 52.5rem;
 }

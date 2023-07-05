@@ -18,11 +18,7 @@
   justify-content: center;
 }
 
-@include media-query($s-up) {
-  .discounts__discount--position {
-    justify-content: flex-end;
-  }
-}
+
 
 .discounts__discount > .icon {
   color: rgb(var(--color-foreground));

@@ -1,41 +1,21 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
 .contact img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 .contact .form__message {
-  align-items: flex-start;
+	align-items: flex-start;
 }
 
 .contact .icon-success {
-  margin-top: 0.2rem;
+	margin-top: 0.2rem;
 }
 
 .contact .field {
-  margin-bottom: 1.5rem;
-}
-
-@include media-query($s-up) {
-  .contact .field {
-    margin-bottom: 2rem;
-  }
+	margin-bottom: 1.5rem;
 }
 
 .contact__button {
-  margin-top: 3rem;
-}
-
-@include media-query($s-up) {
-  .contact__button {
-    margin-top: 4rem;
-  }
-}
-
-@include media-query($s-up) {
-  .contact__fields {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 2rem;
-  }
+	margin-top: 3rem;
 }

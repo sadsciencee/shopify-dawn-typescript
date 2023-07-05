@@ -1,2 +1,18 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+
+@include media-query($s-up) {
+	.contact .field {
+		margin-bottom: 2rem;
+	}
+
+	.contact__button {
+		margin-top: 4rem;
+	}
+
+	.contact__fields {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 2rem;
+	}
+}

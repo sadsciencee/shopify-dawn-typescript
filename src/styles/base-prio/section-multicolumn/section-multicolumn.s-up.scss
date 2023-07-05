@@ -1,2 +1,32 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.multicolumn .button {
+		margin-top: 4rem;
+	}
+
+	.multicolumn-list.slider,
+	.multicolumn-list.grid--4-col-desktop {
+		padding: 0;
+	}
+
+	.multicolumn-list__item,
+	.grid--4-col-desktop .multicolumn-list__item {
+		padding-bottom: 0;
+	}
+
+	.background-none .grid--2-col-tablet .multicolumn-list__item {
+		margin-top: 4rem;
+	}
+
+	.background-none .multicolumn-card__image-wrapper {
+		margin-left: 1.5rem;
+		margin-right: 1.5rem;
+	}
+
+	.background-none .multicolumn-list .multicolumn-card__info,
+	.background-none .multicolumn-list:not(.slider) .center .multicolumn-card__info {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
