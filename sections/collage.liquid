@@ -17,7 +17,7 @@
     <h2 class="collage-wrapper-title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       {{ section.settings.heading }}
     </h2>
-    <div class="collage{% if section.settings.mobile_layout == 'collage' %} collage--mobile{% endif %}">
+    <div class="display-grid collage {% if section.settings.mobile_layout == 'collage' %} collage--mobile{% endif %}">
       {%- for block in section.blocks -%}
         <div
           class="collage__item collage__item--{{ block.type }} collage__item--{{ section.settings.desktop_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"

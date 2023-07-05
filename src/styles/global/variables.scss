@@ -62,28 +62,145 @@ $headerHeight: var(--header-height);
 $combinedHeaderHeight: calc(var(--announcement-height) + var(--header-height));
 
 // shopify vars (used in build pack architecture)
+$xSpacing: var(--x-spacing);
 $xSpacingMobile: var(--grid-mobile-horizontal-spacing);
 $xSpacingDesktop: var(--grid-desktop-horizontal-spacing);
+$ySpacing: var(--y-spacing);
 $ySpacingMobile: var(--grid-mobile-vertical-spacing);
 $ySpacingDesktop: var(--grid-desktop-vertical-spacing);
 $sectionSpacingMobile: var(--spacing-sections-mobile);
 $sectionSpacingDesktop: var(--spacing-sections-desktop);
 
+// color scheme vars (dependent on parent color scheme class)
+$schemaColorBackground: var(--color-background);
+$schemaGradientBackground: var(--gradient-background);
+$schemaColorForeground: var(--color-foreground);
+$schemaColorShadow: var(--color-shadow);
+$schemaColorButton: var(--color-button);
+$schemaColorButtonText: var(--color-button-text);
+$schemaColorSecondaryButton: var(--color-secondary-button);
+$schemaColorSecondaryButtonText: var(--color-secondary-button-text);
+$schemaColorLink: var(--color-link);
+$schemaColorBadgeForeground: var(--color-badge-foreground);
+$schemaColorBadgeBackground: var(--color-badge-background);
+$schemaColorBadgeBorder: var(--color-badge-border);
+$schemaPaymentTermsBackgroundColor: var(--payment-terms-background-color);
+
 // shopify vars (only used for dawn settings)
+// fonts
+$fontBodyFamily: var(--font-body-family);
+$fontBodyStyle: var(--font-body-style);
+$fontBodyWeight: var(--font-body-weight);
+$fontBodyWeightBold: var(--font-body-weight-bold);
+$fontHeadingFamily: var(--font-heading-family);
+$fontHeadingStyle: var(--font-heading-style);
+$fontHeadingWeight: var(--font-heading-weight);
+$fontBodyScale: var(--font-body-scale);
+$fontHeadingScale: var(--font-heading-scale);
+//media
+$mediaPadding: var(--media-padding);
+$mediaBorderOpacity: var(--media-border-opacity);
+$mediaBorderWidth: var(--media-border-width);
+$mediaRadius: var(--media-radius);
+$mediaShadowOpacity: var(--media-shadow-opacity);
+$mediaShadowHorizontalOffset: var(--media-shadow-horizontal-offset);
+$mediaShadowVerticalOffset: var(--media-shadow-vertical-offset);
+$mediaShadowBlurRadius: var(--media-shadow-blur-radius);
+$mediaShadowVisible: var(--media-shadow-visible);
+// layout
+$pageWidth: var(--page-width);
+$pageWidthMargin: var(--page-width-margin);
+// product card
+$productCardImagePadding: var(--product-card-image-padding);
+$productCardCornerRadius: var(--product-card-corner-radius);
+$productCardTextAlignment: var(--product-card-text-alignment);
+$productCardBorderWidth: var(--product-card-border-width);
+$productCardBorderOpacity: var(--product-card-border-opacity);
+$productCardShadowOpacity: var(--product-card-shadow-opacity);
+$productCardShadowVisible: var(--product-card-shadow-visible);
+$productCardShadowHorizontalOffset: var(--product-card-shadow-horizontal-offset);
+$productCardShadowVerticalOffset: var(--product-card-shadow-vertical-offset);
+$productCardShadowBlurRadius: var(--product-card-shadow-blur-radius);
+// collection card
+$collectionCardImagePadding: var(--collection-card-image-padding);
+$collectionCardCornerRadius: var(--collection-card-corner-radius);
+$collectionCardTextAlignment: var(--collection-card-text-alignment);
+$collectionCardBorderWidth: var(--collection-card-border-width);
+$collectionCardBorderOpacity: var(--collection-card-border-opacity);
+$collectionCardShadowOpacity: var(--collection-card-shadow-opacity);
+$collectionCardShadowVisible: var(--collection-card-shadow-visible);
+$collectionCardShadowHorizontalOffset: var(--collection-card-shadow-horizontal-offset);
+$collectionCardShadowVerticalOffset: var(--collection-card-shadow-vertical-offset);
+$collectionCardShadowBlurRadius: var(--collection-card-shadow-blur-radius);
+// blog card
+$blogCardImagePadding: var(--blog-card-image-padding);
+$blogCardCornerRadius: var(--blog-card-corner-radius);
+$blogCardTextAlignment: var(--blog-card-text-alignment);
+$blogCardBorderWidth: var(--blog-card-border-width);
+$blogCardBorderOpacity: var(--blog-card-border-opacity);
+$blogCardShadowOpacity: var(--blog-card-shadow-opacity);
+$blogCardShadowVisible: var(--blog-card-shadow-visible);
+$blogCardShadowHorizontalOffset: var(--blog-card-shadow-horizontal-offset);
+$blogCardShadowVerticalOffset: var(--blog-card-shadow-vertical-offset);
+$blogCardShadowBlurRadius: var(--blog-card-shadow-blur-radius);
+// badge
+$badgeCornerRadius: var(--badge-corner-radius);
+// popup
+$popupBorderWidth: var(--popup-border-width);
+$popupBorderOpacity: var(--popup-border-opacity);
+$popupCornerRadius: var(--popup-corner-radius);
+$popupShadowOpacity: var(--popup-shadow-opacity);
+$popupShadowHorizontalOffset: var(--popup-shadow-horizontal-offset);
+$popupShadowVerticalOffset: var(--popup-shadow-vertical-offset);
+$popupShadowBlurRadius: var(--popup-shadow-blur-radius);
+// drawer
+$drawerBorderWidth: var(--drawer-border-width);
+$drawerBorderOpacity: var(--drawer-border-opacity);
+$drawerShadowOpacity: var(--drawer-shadow-opacity);
+$drawerShadowHorizontalOffset: var(--drawer-shadow-horizontal-offset);
+$drawerShadowVerticalOffset: var(--drawer-shadow-vertical-offset);
+$drawerShadowBlurRadius: var(--drawer-shadow-blur-radius);
+// text boxes
+$textBoxesBorderOpacity: var(--text-boxes-border-opacity);
+$textBoxesBorderWidth: var(--text-boxes-border-width);
+$textBoxesRadius: var(--text-boxes-radius);
+$textBoxesShadowOpacity: var(--text-boxes-shadow-opacity);
+$textBoxesShadowVisible: var(--text-boxes-shadow-visible);
+$textBoxesShadowHorizontalOffset: var(--text-boxes-shadow-horizontal-offset);
+$textBoxesShadowVerticalOffset: var(--text-boxes-shadow-vertical-offset);
+$textBoxesShadowBlurRadius: var(--text-boxes-shadow-blur-radius);
+// buttons
+$buttonsRadius: var(--buttons-radius);
+$buttonsRadiusOutset: var(--buttons-radius-outset);
+$buttonsBorderWidth: var(--buttons-border-width);
+$buttonsBorderOpacity: var(--buttons-border-opacity);
+$buttonsShadowOpacity: var(--buttons-shadow-opacity);
+$buttonsShadowVisible: var(--buttons-shadow-visible);
+$buttonsShadowHorizontalOffset: var(--buttons-shadow-horizontal-offset);
+$buttonsShadowVerticalOffset: var(--buttons-shadow-vertical-offset);
+$buttonsShadowBlurRadius: var(--buttons-shadow-blur-radius);
+$buttonsBorderOffset: var(--buttons-border-offset);
+// inputs
+$inputsRadius: var(--inputs-radius);
+$inputsBorderWidth: var(--inputs-border-width);
+$inputsBorderOpacity: var(--inputs-border-opacity);
+$inputsShadowOpacity: var(--inputs-shadow-opacity);
+$inputsShadowHorizontalOffset: var(--inputs-shadow-horizontal-offset);
+$inputsMarginOffset: var(--inputs-margin-offset);
+$inputsShadowVerticalOffset: var(--inputs-shadow-vertical-offset);
+$inputsShadowBlurRadius: var(--inputs-shadow-blur-radius);
+$inputsRadiusOutset: var(--inputs-radius-outset);
+// variant pills
+$variantPillsRadius: var(--variant-pills-radius);
+$variantPillsBorderWidth: var(--variant-pills-border-width);
+$variantPillsBorderOpacity: var(--variant-pills-border-opacity);
+$variantPillsShadowOpacity: var(--variant-pills-shadow-opacity);
+$variantPillsShadowHorizontalOffset: var(--variant-pills-shadow-horizontal-offset);
+$variantPillsShadowVerticalOffset: var(--variant-pills-shadow-vertical-offset);
+$variantPillsShadowBlurRadius: var(--variant-pills-shadow-blur-radius);
 
 
-// section spacing
 
-$mobileSpace1: ax(48);
-$mobileSpace2: ax(58);
-$mobileSpace3: ax(63);
-$mobileSpace4: ax(72);
-$mobileSpace5: ax(86);
-$desktopSpace1: ax(110);
-$desktopSpace2: ax(127);
-$desktopSpace3: ax(136);
-$desktopSpace4: ax(171);
-$desktopSpace5: ax(199);
 
 
 @mixin box-shadow {

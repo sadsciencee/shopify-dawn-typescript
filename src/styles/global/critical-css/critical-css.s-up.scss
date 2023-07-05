@@ -1,2 +1,12 @@
 @import "../variables.scss";
 @import "../functions.scss";
+@include media-query($s-up) {
+  :root {
+    --ax: #{$desktopBaseScale};
+    --x-spacing: #{$xSpacingDesktop};
+    --y-spacing: #{$ySpacingDesktop};
+  }
+  body {
+    font-size: 1.6rem;
+  }
+}

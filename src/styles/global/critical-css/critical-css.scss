@@ -6,6 +6,7 @@
 	--ax: 0.1rem;
 	--ax: #{$mobileBaseScale};
 	--x-spacing: #{$xSpacingMobile};
+	--y-spacing: #{$ySpacingMobile};
 	--header-height: #{ax(45)};
 	--announcement-height: #{ax(26)};
 	--viewport-height: 100vh;
@@ -62,18 +63,31 @@
 	--ax50: calc(var(--ax) * 50);
 }
 
-@include media-query($m-up) {
-	:root {
-		--ax: #{$desktopBaseScale};
-		--x-spacing: #{$xSpacingDesktop};
-		--announcement-height: calc(var(--ax) * 27);
-		--header-height: calc(var(--ax) * 73);
-		--viewport-minus-header: calc(var(--viewport-height) - var(--header-height));
-	}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
 }
 
-// first load critical CSS from Shopify
+html {
+	box-sizing: border-box;
+	font-size: calc(var(--font-body-scale) * 62.5%);
+	height: 100%;
+}
 
+body {
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	grid-template-columns: 100%;
+	min-height: 100%;
+	margin: 0;
+	font-size: 1.5rem;
+	letter-spacing: 0.06rem;
+	line-height: calc(1 + 0.8 / var(--font-body-scale));
+	font-family: var(--font-body-family);
+	font-style: var(--font-body-style);
+	font-weight: var(--font-body-weight);
+}
 
 
 // minimalist utility class library [uses tailwind classes for a few extremely common css rules]
@@ -254,6 +268,9 @@
 .inline-block {
 	display: inline-block;
 }
+.display-grid {
+	display: grid;
+}
 .flex {
 	display: flex;
 }
@@ -376,87 +393,7 @@
 	margin-bottom: calc(#{$sectionSpacingMobile} * 5);
 }
 
-@include media-query($m-up) {
-	.sa-1 {
-		margin-top: calc(#{$sectionSpacingDesktop} / 2);
-	}
 
-	.sa-2 {
-		margin-top: $sectionSpacingDesktop;
-	}
-
-	.sa-3 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 1.5);
-	}
-
-	.sa-4 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 2);
-	}
-
-	.sa-5 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 2.5);
-	}
-
-	.sa-6 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 3);
-	}
-
-	.sa-7 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 3.5);
-	}
-
-	.sa-8 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 4);
-	}
-
-	.sa-9 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 4.5);
-	}
-
-	.sa-10 {
-		margin-top: calc(#{$sectionSpacingDesktop} * 5);
-	}
-
-	.sb-1 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} / 2);
-	}
-
-	.sb-2 {
-		margin-bottom: $sectionSpacingDesktop;
-	}
-
-	.sb-3 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 1.5);
-	}
-
-	.sb-4 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 2);
-	}
-
-	.sb-5 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 2.5);
-	}
-
-	.sb-6 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 3);
-	}
-
-	.sb-7 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 3.5);
-	}
-
-	.sb-8 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 4);
-	}
-
-	.sb-9 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 4.5);
-	}
-
-	.sb-10 {
-		margin-bottom: calc(#{$sectionSpacingDesktop} * 5);
-	}
-}
 
 
 @include media-query($m-down) {
@@ -532,35 +469,7 @@
 	height: $viewport;
 }
 
-@include media-query($m-up) {
-	.m-up-hide {
-		display: none !important;
-	}
-	.my-auto--m-up {
-		margin-top: auto;
-		margin-bottom: auto;
-	}
-	.flex--m-up {
-		display: flex;
-	}
-	.viewport--m-up {
-		height: $viewport;
-	}
-	.vp-header--m-up {
-		height: calc(#{$viewport} - #{$headerHeight});
-	}
-	.vp-header-x--m-up {
-		height: calc(#{$viewport} - #{$headerHeight} - #{$xSpacing});
-	}
-	.vp-announcement--m-up {
-		height: calc(#{$viewport} - #{$announcementHeight});
-	}
-	.vp-combined--m-up {
-		@include media-query($m-up) {
-			height: calc(#{$viewport} - #{$headerHeight} - #{$announcementHeight});
-		}
-	}
-}
+
 
 @include media-query($m-down) {
 	.m-down-hide {
@@ -598,16 +507,20 @@
 
 // ensure media doesnt hit CLS
 
+/* component-media */
 .media {
 	display: block;
-	background-color: rgba($clrBaseText, 0.1);
+	background-color: rgba(var(--color-foreground), 0.1);
 	position: relative;
 	overflow: hidden;
 }
 
+.media--transparent {
+	background-color: transparent;
+}
+
 .media > *:not(.zoom):not(.deferred-media__poster-button),
-.media model-viewer,
-.media video {
+.media model-viewer {
 	display: block;
 	max-width: 100%;
 	position: absolute;
@@ -620,6 +533,40 @@
 .media > img {
 	object-fit: cover;
 	object-position: center center;
+	transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.media--square {
+	padding-bottom: 100%;
+}
+
+.media--portrait {
+	padding-bottom: 125%;
+}
+
+.media--landscape {
+	padding-bottom: 66.6%;
+}
+
+.media--cropped {
+	padding-bottom: 56%;
+}
+
+.media--16-9 {
+	padding-bottom: 56.25%;
+}
+
+.media--circle {
+	padding-bottom: 100%;
+	border-radius: 50%;
+}
+
+.media.media--hover-effect > img + img {
+	opacity: 0;
+}
+
+deferred-media {
+	display: block;
 }
 
 // hide drawers on initial load
