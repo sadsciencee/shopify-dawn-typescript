@@ -9,7 +9,7 @@
   height: 100%;
   display: flex;
   justify-content: flex-end;
-  background-color: rgba(var(--color-foreground), 0.5);
+  background-color: rgba(#{$schemaColorForeground}, 0.5);
   transition: visibility var(--duration-default) ease;
 }
 
@@ -22,9 +22,9 @@
   width: 40rem;
   max-width: calc(100vw - 3rem);
   padding: 0 1.5rem;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
   border-right: 0;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@
 .drawer__inner-empty {
   height: 100%;
   padding: 0 1.5rem;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 
 .drawer__header {
   position: relative;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
   padding: 1.5rem 0;
   display: flex;
   justify-content: space-between;
@@ -90,11 +90,11 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   padding: 0;
   min-width: 4.4rem;
   min-height: 4.4rem;
-  box-shadow: 0 0 0 0.2rem rgba(var(--color-button), 0);
+  box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorButton}, 0);
   position: absolute;
   top: 10px;
   right: -10px;
-  color: rgb(var(--color-foreground));
+  color: rgb(#{$schemaColorForeground});
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -116,8 +116,8 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer__footer {
-  background-color: rgb(var(--color-background));
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  background-color: rgb(#{$schemaColorBackground});
+  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
   padding: 1.5rem 0;
 }
 
@@ -127,7 +127,7 @@ cart-drawer-items.is-empty + .drawer__footer {
 
 .drawer__footer > details {
   margin-top: -1.5rem;
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
 }
 
 .drawer__footer > details[open] {
@@ -191,7 +191,7 @@ cart-drawer {
   position: sticky;
   top: 0;
   z-index: 2;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
 }
 
 cart-drawer-items {
@@ -249,7 +249,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items th {
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .cart-drawer .cart-item:last-child {
@@ -367,7 +367,7 @@ cart-drawer-items::-webkit-scrollbar {
 }
 
 cart-drawer-items::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--color-foreground), 0.7);
+  background-color: rgba(#{$schemaColorForeground}, 0.7);
   border-radius: 100px;
 }
 

@@ -2,6 +2,6 @@
 @import "../../global/functions.scss";
 @include media-query($m-up) {
   .footer-block__heading {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: calc(#{$fontHeadingScale} * 1.8rem);
   }
 }

@@ -22,7 +22,7 @@
 }
 
 .customer ul {
-	line-height: calc(1 + 0.6 / var(--font-body-scale));
+	line-height: calc(1 + 0.6 / #{$fontBodyScale});
 	padding-left: 4.4rem;
 	text-align: left;
 	margin-bottom: 4rem;
@@ -34,11 +34,11 @@
 
 .customer strong {
 	font-weight: normal;
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .customer h2.form__message {
-	font-size: calc(var(--font-heading-scale) * 1.8rem);
+	font-size: calc(#{$fontHeadingScale} * 1.8rem);
 }
 
 .customer .field {
@@ -53,7 +53,7 @@
 .customer table {
 	table-layout: auto;
 	border-collapse: collapse;
-	border-bottom: 0.01rem solid rgba(var(--color-foreground), 0.08);
+	border-bottom: 0.01rem solid rgba(#{$schemaColorForeground}, 0.08);
 	box-shadow: none;
 	width: 100%;
 	font-size: 1.6rem;
@@ -68,7 +68,7 @@
 }
 
 .customer tbody {
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .customer th,
@@ -103,7 +103,7 @@
 }
 
 .customer tbody tr {
-	border-top: 0.01rem solid rgba(var(--color-foreground), 0.08);
+	border-top: 0.01rem solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 @media screen and (forced-colors: active) {
@@ -139,7 +139,7 @@
 	display: block;
 	position: absolute;
 	left: 0;
-	background: rgba(var(--color-foreground), 0.08);
+	background: rgba(#{$schemaColorForeground}, 0.08);
 }
 
 @media screen and (forced-colors: active) {
@@ -163,7 +163,7 @@
 	}
 
 	.customer td::before {
-		color: rgba(var(--color-foreground), 0.75);
+		color: rgba(#{$schemaColorForeground}, 0.75);
 		content: attr(data-label);
 		font-size: 1.4rem;
 		padding-right: 2rem;
@@ -267,7 +267,7 @@
 .login h3 {
 	margin-top: 1.5rem;
 	text-align: left;
-	font-size: calc(var(--font-heading-scale) * 1.6rem);
+	font-size: calc(#{$fontHeadingScale} * 1.6rem);
 }
 
 #customer_login_guest button {
@@ -304,14 +304,14 @@
 .activate button[name='decline'],
 .addresses li > button,
 .addresses form button[type] {
-	background-color: rgba(var(--color-background), var(--alpha-button-background));
-	color: rgb(var(--color-link));
+	background-color: rgba(#{$schemaColorBackground}, var(--alpha-button-background));
+	color: rgb(#{$schemaColorLink});
 }
 
 /* Account/Order */
 :is(.account, .order) {
 	margin: 0 auto;
-	max-width: var(--page-width);
+	max-width: #{$pageWidth};
 	padding-left: 2rem;
 	padding-right: 2rem;
 }
@@ -344,13 +344,13 @@
 .account table td:first-of-type a {
 	padding: 1.1rem 1.5rem;
 	text-decoration: none;
-	box-shadow: 0 0 0 0.1rem rgba(var(--color-link), 0.2);
+	box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorLink}, 0.2);
 	border: 0.1rem solid transparent;
 	font-size: 1.2rem;
 }
 
 .account table td:first-of-type a:hover {
-	box-shadow: 0 0 0 0.2rem rgba(var(--color-link), 0.2);
+	box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorLink}, 0.2);
 }
 
 .order td:first-of-type {
@@ -392,12 +392,12 @@
 
 .order .item-props > span {
 	word-break: break-all;
-	line-height: calc(1 + 0.2 / var(--font-body-scale));
+	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
 .order .fulfillment {
 	width: fit-content;
-	border: 0.01rem solid rgba(var(--color-foreground), 0.2);
+	border: 0.01rem solid rgba(#{$schemaColorForeground}, 0.2);
 	padding: 1rem;
 	margin-top: 1rem;
 	font-size: 1.4rem;
@@ -429,7 +429,7 @@
 }
 
 .order table a {
-	line-height: calc(1 + 0.3 / var(--font-body-scale));
+	line-height: calc(1 + 0.3 / #{$fontBodyScale});
 }
 
 .order tbody tr:first-of-type td:first-of-type > div {
@@ -445,12 +445,12 @@
 
 .order .properties span {
 	display: block;
-	line-height: calc(1 + 0.2 / var(--font-body-scale));
+	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
 .order svg {
 	width: 1.1rem;
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 	margin-right: 0.5rem;
 }
 
@@ -460,20 +460,20 @@
 
 .order dd {
 	margin-left: 0;
-	line-height: calc(1 + 0.3 / var(--font-body-scale));
+	line-height: calc(1 + 0.3 / #{$fontBodyScale});
 }
 
 .order dd s {
-	color: rgba(var(--color-foreground), 0.7);
+	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .order .unit-price {
 	font-size: 1.1rem;
 	letter-spacing: 0.07rem;
-	line-height: calc(1 + 0.2 / var(--font-body-scale));
+	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 	margin-top: 0.2rem;
 	text-transform: uppercase;
-	color: rgba(var(--color-foreground), 0.7);
+	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .order .regular-price {
@@ -536,7 +536,7 @@ li[data-address] {
 
 li[data-address] > h2 {
 	text-align: center;
-	font-size: calc(var(--font-heading-scale) * 1.8rem);
+	font-size: calc(#{$fontHeadingScale} * 1.8rem);
 	margin-bottom: 0;
 }
 

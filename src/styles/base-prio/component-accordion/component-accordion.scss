@@ -13,7 +13,7 @@
 }
 
 .accordion .summary__title + .icon-caret {
-  height: calc(var(--font-heading-scale) * 0.6rem);
+  height: calc(#{$fontHeadingScale} * 0.6rem);
 }
 
 .accordion + .accordion {
@@ -24,8 +24,8 @@
 .accordion {
   margin-top: 2.5rem;
   margin-bottom: 0;
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .accordion__title {
@@ -38,10 +38,10 @@
 
 .accordion .icon-accordion {
   align-self: center;
-  fill: rgb(var(--color-foreground));
-  height: calc(var(--font-heading-scale) * 2rem);
-  margin-right: calc(var(--font-heading-scale) * 1rem);
-  width: calc(var(--font-heading-scale) * 2rem);
+  fill: rgb(#{$schemaColorForeground});
+  height: calc(#{$fontHeadingScale} * 2rem);
+  margin-right: calc(#{$fontHeadingScale} * 1rem);
+  width: calc(#{$fontHeadingScale} * 2rem);
 }
 
 .accordion details[open] > summary .icon-caret {

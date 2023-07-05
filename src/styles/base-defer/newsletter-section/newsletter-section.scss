@@ -1,8 +1,8 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .newsletter__wrapper {
-  padding-right: calc(4rem / var(--font-body-scale));
-  padding-left: calc(4rem / var(--font-body-scale));
+  padding-right: calc(4rem / #{$fontBodyScale});
+  padding-left: calc(4rem / #{$fontBodyScale});
 }
 
 .newsletter__wrapper > * {

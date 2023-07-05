@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.collection-hero.collection-hero--with-image {
-		padding: calc(4rem + var(--page-width-margin)) 0 calc(4rem + var(--page-width-margin));
+		padding: calc(4rem + #{$pageWidthMargin}) 0 calc(4rem + #{$pageWidthMargin});
 		overflow: hidden;
 	}
 

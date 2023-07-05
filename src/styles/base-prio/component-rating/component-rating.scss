@@ -16,7 +16,7 @@
 }
 
 .rating-star {
-  --color-rating-star: rgb(var(--color-foreground));
+  --color-rating-star: rgb(#{$schemaColorForeground});
   --percent: calc(
     (
         var(--rating) / var(--rating-max) + var(--rating-decimal) * var(--font-size) /
@@ -36,7 +36,7 @@
   background: linear-gradient(
     90deg,
     var(--color-rating-star) var(--percent),
-    rgba(var(--color-foreground), 0.15) var(--percent)
+    rgba(#{$schemaColorForeground}, 0.15) var(--percent)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

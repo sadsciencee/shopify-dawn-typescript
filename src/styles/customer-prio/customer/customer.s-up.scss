@@ -6,12 +6,12 @@
 	}
 
 	.customer h2.form__message {
-		font-size: calc(var(--font-heading-scale) * 2.2rem);
+		font-size: calc(#{$fontHeadingScale} * 2.2rem);
 	}
 
 	.customer table {
 		border: none;
-		box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.08);
+		box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.08);
 	}
 
 	.customer td {
@@ -119,7 +119,7 @@
 	}
 
 	li[data-address] > h2 {
-		font-size: calc(var(--font-heading-scale) * 2.2rem);
+		font-size: calc(#{$fontHeadingScale} * 2.2rem);
 	}
 
 	.addresses form > div:nth-of-type(1) {

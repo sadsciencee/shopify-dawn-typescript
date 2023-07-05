@@ -7,7 +7,7 @@
 }
 
 .featured-product .product-media-container {
-	margin-bottom: var(--media-shadow-vertical-offset);
+	margin-bottom: #{$mediaShadowVerticalOffset};
 	max-width: 100%;
 }
 

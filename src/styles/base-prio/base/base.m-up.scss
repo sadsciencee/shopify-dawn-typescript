@@ -12,7 +12,7 @@
 	}
 
 	.page-width-desktop {
-		max-width: var(--page-width);
+		max-width: #{$pageWidth};
 		padding: 0 5rem;
 	}
 
@@ -39,28 +39,28 @@
 	}
 
 	.grid--6-col-desktop .grid__item {
-		width: calc(16.66% - var(--grid-desktop-horizontal-spacing) * 5 / 6);
-		max-width: calc(16.66% - var(--grid-desktop-horizontal-spacing) * 5 / 6);
+		width: calc(16.66% - #{$xSpacingDesktop} * 5 / 6);
+		max-width: calc(16.66% - #{$xSpacingDesktop} * 5 / 6);
 	}
 
 	.grid--5-col-desktop .grid__item {
-		width: calc(20% - var(--grid-desktop-horizontal-spacing) * 4 / 5);
-		max-width: calc(20% - var(--grid-desktop-horizontal-spacing) * 4 / 5);
+		width: calc(20% - #{$xSpacingDesktop} * 4 / 5);
+		max-width: calc(20% - #{$xSpacingDesktop} * 4 / 5);
 	}
 
 	.grid--4-col-desktop .grid__item {
-		width: calc(25% - var(--grid-desktop-horizontal-spacing) * 3 / 4);
-		max-width: calc(25% - var(--grid-desktop-horizontal-spacing) * 3 / 4);
+		width: calc(25% - #{$xSpacingDesktop} * 3 / 4);
+		max-width: calc(25% - #{$xSpacingDesktop} * 3 / 4);
 	}
 
 	.grid--3-col-desktop .grid__item {
-		width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
-		max-width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+		width: calc(33.33% - #{$xSpacingDesktop} * 2 / 3);
+		max-width: calc(33.33% - #{$xSpacingDesktop} * 2 / 3);
 	}
 
 	.grid--2-col-desktop .grid__item {
-		width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
-		max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(50% - #{$xSpacingDesktop} / 2);
+		max-width: calc(50% - #{$xSpacingDesktop} / 2);
 	}
 
 	.slider.slider--desktop .scroll-trigger.animate--slide-in {
@@ -88,7 +88,7 @@
 	}
 
 	.utility-bar--bottom-border-social-only {
-		border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+		border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
 	}
 
 	.utility-bar__grid {

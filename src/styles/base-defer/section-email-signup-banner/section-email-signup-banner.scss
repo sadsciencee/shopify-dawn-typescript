@@ -28,9 +28,9 @@
 @include media-query($s-down) {
   .email-signup-banner:not(.banner--mobile-bottom) .banner__box:not(.email-signup-banner__box--no-image) {
     background-color: transparent;
-    --color-foreground: 255, 255, 255;
-    --color-button: 255, 255, 255;
-    --color-button-text: 0, 0, 0;
+    --c-foreground: 255, 255, 255;
+    --c-button: 255, 255, 255;
+    --c-button-text: 0, 0, 0;
   }
 }
 

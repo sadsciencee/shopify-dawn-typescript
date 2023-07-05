@@ -107,7 +107,7 @@
 @include media-query($s-up) {
   .footer-block__details-content .list-menu__item--link:hover,
   .copyright__content a:hover {
-    color: rgb(var(--color-foreground));
+    color: rgb(#{$schemaColorForeground});
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }

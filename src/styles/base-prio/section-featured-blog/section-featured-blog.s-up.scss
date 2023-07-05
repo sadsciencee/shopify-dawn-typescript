@@ -9,7 +9,7 @@
 @supports not (inset: 10px) {
 	@include media-query($s-up) {
 		.blog__posts .article + .article {
-			margin-left: var(--grid-desktop-horizontal-spacing);
+			margin-left: #{$xSpacingDesktop};
 		}
 	}
 }

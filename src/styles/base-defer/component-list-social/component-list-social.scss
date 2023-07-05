@@ -21,7 +21,7 @@
   align-items: center;
   display: flex;
   padding: 1.3rem;
-  color: rgb(var(--color-foreground));
+  color: rgb(#{$schemaColorForeground});
 }
 
 .list-social__link:hover .icon {

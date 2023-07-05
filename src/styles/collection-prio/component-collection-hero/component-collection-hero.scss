@@ -22,7 +22,7 @@
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
 	font-size: 1.6rem;
-	line-height: calc(1 + 0.5 / var(--font-body-scale));
+	line-height: calc(1 + 0.5 / #{$fontBodyScale});
 }
 
 .collection-hero--with-image .collection-hero__title {
@@ -34,11 +34,11 @@
 }
 
 .collection-hero__image-container {
-	border: var(--media-border-width) solid
-		rgba(var(--color-foreground), var(--media-border-opacity));
-	border-radius: var(--media-radius);
-	box-shadow: var(--media-shadow-horizontal-offset) var(--media-shadow-vertical-offset)
-		var(--media-shadow-blur-radius) rgba(var(--color-shadow), var(--media-shadow-opacity));
+	border: #{$mediaBorderWidth} solid
+		rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity});
+	border-radius: #{$mediaRadius};
+	box-shadow: #{$mediaShadowHorizontalOffset} #{$mediaShadowVerticalOffset}
+		#{$mediaShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
 }
 
 @include media-query($s-down) {

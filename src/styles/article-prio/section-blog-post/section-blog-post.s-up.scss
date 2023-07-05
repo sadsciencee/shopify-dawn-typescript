@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-template > *:first-child:not(.article-template__hero-container) {
-		margin-top: calc(5rem + var(--page-width-margin));
+		margin-top: calc(5rem + #{$pageWidthMargin});
 	}
 	.article-template header {
 		margin-top: 5rem;

@@ -7,11 +7,11 @@
 .discounts__discount {
   display: flex;
   align-items: center;
-  line-height: calc(1 + 0.5 / var(--font-body-scale));
+  line-height: calc(1 + 0.5 / #{$fontBodyScale});
 }
 
 .discounts__discount svg {
-  color: rgba(var(--color-button), var(--alpha-button-background));
+  color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
 .discounts__discount--position {
@@ -21,7 +21,7 @@
 
 
 .discounts__discount > .icon {
-  color: rgb(var(--color-foreground));
+  color: rgb(#{$schemaColorForeground});
   width: 1.2rem;
   height: 1.2rem;
   margin-right: 0.7rem;

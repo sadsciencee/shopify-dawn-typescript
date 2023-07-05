@@ -171,6 +171,6 @@
     note: consider removing from this stylesheet if multirow-specific styles increase signficantly
   */
 	.multirow__inner {
-		row-gap: var(--grid-desktop-vertical-spacing);
+		row-gap: #{$ySpacingDesktop};
 	}
 }

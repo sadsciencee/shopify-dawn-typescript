@@ -3,13 +3,13 @@
 @include media-query($m-up) {
 	.product--large:not(.product--no-media) .product__media-wrapper {
 		max-width: 65%;
-		width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(65% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product--large:not(.product--no-media) .product__info-wrapper {
 		padding: 0 0 0 4rem;
 		max-width: 35%;
-		width: calc(35% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(35% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product--large:not(.product--no-media).product--right .product__info-wrapper {
@@ -19,17 +19,17 @@
 	.product--medium:not(.product--no-media) .product__media-wrapper,
 	.product--small:not(.product--no-media) .product__info-wrapper {
 		max-width: 55%;
-		width: calc(55% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(55% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product--medium:not(.product--no-media) .product__info-wrapper,
 	.product--small:not(.product--no-media) .product__media-wrapper {
 		max-width: 45%;
-		width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(45% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product--stacked .product__media-item {
-		max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+		max-width: calc(50% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product:not(.product--columns) .product__media-list .product__media-item:first-child,
