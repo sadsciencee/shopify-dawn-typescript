@@ -1,13 +1,13 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .collection .grid__item:only-child {
     flex: 0 0 100%;
     max-width: 100%;
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .collection .slider.slider--tablet {
     margin-bottom: 1.5rem;
   }
@@ -40,7 +40,7 @@
   margin-bottom: 15rem;
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .collection .slider--tablet.product-grid {
     scroll-padding-left: 1.5rem;
   }

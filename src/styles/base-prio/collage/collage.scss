@@ -17,7 +17,7 @@
   flex-grow: initial;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .collage {
     grid-column-gap: var(--grid-mobile-horizontal-spacing);
     grid-row-gap: var(--grid-mobile-vertical-spacing);

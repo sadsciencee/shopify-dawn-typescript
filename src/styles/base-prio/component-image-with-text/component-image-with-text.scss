@@ -133,7 +133,7 @@
   box-shadow: none;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .image-with-text.collapse-corners:not(.image-with-text--overlap) .image-with-text__media-item:after,
   .image-with-text.collapse-corners:not(.image-with-text--overlap) .grid__item .image-with-text__media,
   .image-with-text.collapse-corners:not(.image-with-text--overlap) .image-with-text__media img,
@@ -368,7 +368,7 @@
   margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .collapse-padding .image-with-text__grid .image-with-text__content {
     padding-left: 0;
     padding-right: 0;

@@ -13,7 +13,7 @@
   display: block;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .footer .grid {
     display: block;
   }
@@ -56,7 +56,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .footer__content-bottom {
     flex-wrap: wrap;
     padding-top: 0;
@@ -76,7 +76,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .footer__localization:empty + .footer__column {
     padding-top: 1.5rem;
   }
@@ -132,7 +132,7 @@
   margin-top: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .footer-block.footer-block--menu:only-child {
     text-align: left;
   }
@@ -216,7 +216,7 @@
   }
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   /*
     On a small screen we want all the items to be centered
     because they will be stacked.
@@ -276,7 +276,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .footer__localization noscript {
     width: 100%;
   }
@@ -360,7 +360,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .footer-block__details-content .list-menu__item--link {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -394,7 +394,7 @@
   justify-content: flex-end;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .footer-block-image,
   .footer-block-image.left,
   .footer-block-image.center,
@@ -494,7 +494,7 @@
 
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
-  @media screen and (max-width: 749px) {
+  @include media-query($s-down) {
     .footer .grid {
       margin-left: 0;
     }

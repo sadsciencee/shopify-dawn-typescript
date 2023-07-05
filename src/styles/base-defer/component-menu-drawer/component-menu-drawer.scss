@@ -217,13 +217,13 @@ details[open].menu-opening > .menu-drawer__submenu {
   padding: 2rem 3rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .header--has-account:where(:not(.header--has-social):not(.header--has-localizations)) .menu-drawer__utility-links {
     padding: 2rem 3rem;
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .header--has-localizations:where(:not(.header--has-social)) .menu-drawer__utility-links {
     padding: 2rem 3rem;
   }

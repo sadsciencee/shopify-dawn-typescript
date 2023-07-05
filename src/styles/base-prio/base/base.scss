@@ -284,7 +284,7 @@ h5,
   font-size: calc(var(--font-heading-scale) * 5rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   .hxl {
     font-size: calc(var(--font-heading-scale) * 6.2rem);
   }
@@ -294,7 +294,7 @@ h5,
   font-size: calc(var(--font-heading-scale) * 4rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   .h0 {
     font-size: calc(var(--font-heading-scale) * 5.2rem);
   }
@@ -305,7 +305,7 @@ h1,
   font-size: calc(var(--font-heading-scale) * 3rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h1,
   .h1 {
     font-size: calc(var(--font-heading-scale) * 4rem);
@@ -317,7 +317,7 @@ h2,
   font-size: calc(var(--font-heading-scale) * 2rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h2,
   .h2 {
     font-size: calc(var(--font-heading-scale) * 2.4rem);
@@ -329,7 +329,7 @@ h3,
   font-size: calc(var(--font-heading-scale) * 1.7rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h3,
   .h3 {
     font-size: calc(var(--font-heading-scale) * 1.8rem);
@@ -348,7 +348,7 @@ h5,
   font-size: calc(var(--font-heading-scale) * 1.2rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h5,
   .h5 {
     font-size: calc(var(--font-heading-scale) * 1.3rem);
@@ -434,13 +434,13 @@ table:not([class]) th {
   border: 0.1rem solid rgba(var(--color-foreground), 0.2);
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .small-hide {
     display: none !important;
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@include media-query($m-only) {
   .medium-hide {
     display: none !important;
   }
@@ -923,7 +923,7 @@ summary::-webkit-details-marker {
   row-gap: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .grid__item.slider__slide--full-width {
     width: 100%;
     max-width: none;
@@ -967,7 +967,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .grid--1-col-tablet-down .grid__item {
     width: 100%;
     max-width: 100%;
@@ -1044,7 +1044,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .grid--peek.slider--mobile {
     margin: 0;
     width: 100%;
@@ -1083,7 +1083,7 @@ summary::-webkit-details-marker {
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@include media-query($m-only) {
   .slider--tablet.grid--peek .grid__item {
     width: calc(25% - var(--grid-desktop-horizontal-spacing) - 3rem);
   }
@@ -2138,7 +2138,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   margin-left: -1.2rem;
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .utility-bar .utility-bar__grid .list-social {
     display: none;
   }
@@ -2354,7 +2354,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   align-items: center;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .header--has-app {
     grid-template-columns: auto 1fr auto;
   }
@@ -2458,7 +2458,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   transition: width 0.3s cubic-bezier(0.52, 0, 0.61, 0.99);
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .header__heading,
   .header__heading-link {
     text-align: center;
@@ -2970,7 +2970,7 @@ details-disclosure > details {
   border-radius: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .content-container--full-width-mobile {
     border-left: none;
     border-right: none;
@@ -3057,7 +3057,7 @@ details-disclosure > details {
     padding-bottom: 0;
   }
 
-  @media screen and (min-width: 749px) {
+  @include media-query($s-up) {
     .grid--peek .grid__item {
       padding-left: var(--grid-mobile-horizontal-spacing);
     }

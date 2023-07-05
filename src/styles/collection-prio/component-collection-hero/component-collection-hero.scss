@@ -79,7 +79,7 @@
     rgba(var(--color-shadow), var(--media-shadow-opacity));
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .collection-hero__image-container {
     height: 20rem;
   }

@@ -151,7 +151,7 @@ pickup-availability-drawer[open] {
 }
 
 @keyframes animateDrawerOpen {
-  @media screen and (max-width: 749px) {
+  @include media-query($s-down) {
     0% {
       opacity: 0;
       transform: translateX(100%);

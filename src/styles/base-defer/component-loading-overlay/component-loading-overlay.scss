@@ -6,7 +6,7 @@
   width: 1.8rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .loading-overlay {
     top: 0;
     right: 0;

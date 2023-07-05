@@ -9,7 +9,7 @@
   margin: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .collection-list:not(.slider) {
     padding-left: 0;
     padding-right: 0;
@@ -31,13 +31,13 @@
   width: 100%;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .slider.collection-list--1-items {
     padding-bottom: 0;
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@include media-query($m-only) {
   .slider.collection-list--1-items,
   .slider.collection-list--2-items,
   .slider.collection-list--3-items,
@@ -52,7 +52,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .collection-list.slider .collection-list__item {
     max-width: 100%;
   }

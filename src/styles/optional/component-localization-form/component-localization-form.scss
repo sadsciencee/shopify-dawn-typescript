@@ -42,7 +42,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   noscript .localization-form:only-child {
     width: 100%;
   }
@@ -56,7 +56,7 @@
   display: inline-block;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .localization-form .button {
     word-break: break-all;
   }

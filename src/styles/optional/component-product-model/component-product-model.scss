@@ -20,7 +20,7 @@
   display: none;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   slider-component .product__xr-button {
     display: none;
   }

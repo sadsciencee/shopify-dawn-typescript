@@ -300,7 +300,7 @@ cart-drawer-items {
   grid-column: 2 / 5;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .cart-drawer .cart-item cart-remove-button {
     margin-left: 0;
   }

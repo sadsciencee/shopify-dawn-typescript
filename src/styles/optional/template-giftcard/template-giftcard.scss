@@ -42,7 +42,7 @@ body {
   font-weight: var(--font-body-weight);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   body {
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
@@ -69,7 +69,7 @@ h1,
   font-size: calc(var(--font-heading-scale) * 3rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h1,
   .h1 {
     font-size: calc(var(--font-heading-scale) * 4rem);
@@ -81,7 +81,7 @@ h2,
   font-size: calc(var(--font-heading-scale) * 2rem);
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   h2,
   .h2 {
     font-size: calc(var(--font-heading-scale) * 2.4rem);
@@ -140,7 +140,7 @@ h2,
   padding: 3rem;
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   .gift-card {
     padding: 5rem 5rem 3rem;
   }
@@ -162,7 +162,7 @@ h2,
   max-height: 26rem;
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   .gift-card__image {
     padding: 0;
   }

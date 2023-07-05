@@ -29,7 +29,7 @@
   padding-bottom: 1rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .predictive-search--header {
     right: 0;
     left: 0;

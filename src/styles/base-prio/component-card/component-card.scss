@@ -205,7 +205,7 @@
   box-shadow: none;
 }
 
-@media only screen and (min-width: 750px) {
+@include media-query($s-up) {
   .card--horizontal .card__heading,
   .card--horizontal .price__container .price-item,
   .card--horizontal__quick-add {

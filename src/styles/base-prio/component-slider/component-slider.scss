@@ -13,19 +13,19 @@ slider-component.slider-component-full-width {
   --desktop-margin-left-first-item: 1.5rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   slider-component.page-width {
     padding: 0 1.5rem;
   }
 }
 
-@media screen and (min-width: 749px) and (max-width: 990px) {
+@include media-query($m-only) {
   slider-component.page-width {
     padding: 0 5rem;
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .no-js slider-component .slider {
     padding-bottom: 3rem;
   }
@@ -40,7 +40,7 @@ slider-component.slider-component-full-width {
   padding-bottom: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .slider.slider--mobile {
     position: relative;
     flex-wrap: inherit;
@@ -90,7 +90,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .slider.slider--tablet {
     position: relative;
     flex-wrap: inherit;
@@ -274,7 +274,7 @@ slider-component.slider-component-full-width {
   padding: 1rem;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .slider-counter__link {
     padding: 0.7rem;
   }
@@ -340,7 +340,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .slider--desktop:not(.slider--tablet) + .slider-buttons {
     display: none;
   }

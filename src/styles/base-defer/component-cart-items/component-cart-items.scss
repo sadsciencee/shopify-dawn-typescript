@@ -118,7 +118,7 @@
   margin-left: 1rem;
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@include media-query($m-only) {
   .cart-item cart-remove-button {
     width: 4.5rem;
     height: 4.5rem;
@@ -207,7 +207,7 @@ cart-remove-button .icon-remove {
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($s-down) {
   .cart-items,
   .cart-items thead,
   .cart-items tbody {

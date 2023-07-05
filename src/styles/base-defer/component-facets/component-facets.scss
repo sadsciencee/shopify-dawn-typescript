@@ -26,7 +26,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .facets-container {
     grid-template-columns: auto minmax(0, max-content);
     column-gap: 2rem;
@@ -433,7 +433,7 @@ span.active-facets__button-inner:after {
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($m-down) {
   .active-facets {
     margin: 0 -1.2rem -1.2rem;
   }
@@ -506,7 +506,7 @@ a.active-facets__button.focused .active-facets__button-inner,
   width: 1.2rem;
 }
 
-@media all and (min-width: 990px) {
+@include media-query($m-up) {
   .active-facets__button svg {
     margin-right: -0.4rem;
     margin-top: 0.1rem;
@@ -1092,7 +1092,7 @@ input.mobile-facets__checkbox {
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@include media-query($m-only) {
   .facets-vertical .active-facets__button {
     padding: 1rem;
     margin-bottom: 0;
