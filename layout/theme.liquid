@@ -32,7 +32,10 @@
 		{% endif %}
 
 		{% render 'meta-tags' %}
+		{% comment %}
 		{% render 'ucoast-style-tag', file: '_critical-css', preload_stylesheet: true %}
+		{% endcomment %}
+		{% render 'critical-css' %}
 
 		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
 		{%- if settings.animations_reveal_on_scroll -%}

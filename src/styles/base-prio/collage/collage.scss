@@ -57,8 +57,6 @@
 }
 
 .collage-card {
-  height: 100%;
-  position: relative;
   border-radius: var(--border-radius);
   border: var(--border-width) solid rgba(#{$schemaColorForeground}, var(--border-opacity));
   padding: var(--image-padding);
@@ -103,11 +101,6 @@
 .collage-card .deferred-media {
   height: 100%;
   overflow: visible;
-}
-
-.collage-card__link {
-  display: block;
-  height: 100%;
 }
 
 .collage-card .deferred-media__poster {
