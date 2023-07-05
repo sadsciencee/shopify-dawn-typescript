@@ -1,3 +1,5 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
 .article-template > *:first-child:not(.article-template__hero-container) {
   margin-top: 5rem;
 }

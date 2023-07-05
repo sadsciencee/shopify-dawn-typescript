@@ -1,3 +1,5 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
 .customer:not(.account):not(.order) {
   margin: 0 auto;
   max-width: 33.4rem;

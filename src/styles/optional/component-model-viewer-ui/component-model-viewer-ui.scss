@@ -1,3 +1,5 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
 .shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
   background: rgb(var(--color-background));
   border-color: rgba(var(--color-foreground), 0.04);
