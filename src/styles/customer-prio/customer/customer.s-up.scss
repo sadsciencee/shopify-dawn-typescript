@@ -136,3 +136,23 @@
 		flex-basis: calc(50% - 1rem);
 	}
 }
+@include media-query($m-up) {
+	.customer .pagination {
+		margin-top: 7rem;
+		margin-bottom: 10rem;
+	}
+
+	:is(.account, .order) > div:nth-of-type(2) {
+		display: flex;
+		margin-top: 5rem;
+	}
+
+	:is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
+		flex-grow: 1;
+		padding-right: 3.2rem;
+	}
+
+	:is(.account, .order) h2 {
+		margin-top: 0;
+	}
+}

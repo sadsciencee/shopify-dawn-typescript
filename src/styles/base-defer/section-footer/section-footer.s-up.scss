@@ -142,3 +142,8 @@
     }
   }
 }
+@include media-query($m-up) {
+  .footer-block__heading {
+    font-size: calc(#{$fontHeadingScale} * 1.8rem);
+  }
+}

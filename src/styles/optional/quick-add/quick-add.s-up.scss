@@ -40,3 +40,8 @@
 		--constrained-min-height: 400px;
 	}
 }
+@include media-query($m-up) {
+	.quick-add-modal__content {
+		width: 70%;
+	}
+}

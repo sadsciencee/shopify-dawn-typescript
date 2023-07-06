@@ -30,3 +30,8 @@
 		padding-right: 1.5rem;
 	}
 }
+@include media-query($m-up) {
+	.multicolumn-list__item--empty {
+		display: list-item;
+	}
+}
