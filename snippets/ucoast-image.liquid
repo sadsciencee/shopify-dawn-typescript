@@ -1,0 +1,27 @@
+{% comment %}
+	image: image_picker
+	image_class: text
+	lazy: bool
+{% endcomment %}
+
+{% liquid
+    unless id
+        assign id = image.id
+    endunless
+    unless loading
+        assign loading = lazy
+    endunless
+    unless starting_width
+        assign starting_width = 180
+    endunless
+    capture input
+        echo image | image_url: width: starting_width | image_tag: loading: loading, class: image_class, id: id, style: style
+    endcapture
+    assign starting_src = image | image_url: width: starting_width
+    assign replace_src = ' src="' | append: starting_src | append: '" data-src='
+    if defer
+        assign replace_src = ' data-uc-defer ' | append: replace_src
+    endif
+    assign output = input | replace: 'srcset="', 'data-srcset="' | replace: ' src=', replace_src
+    echo output
+%}
