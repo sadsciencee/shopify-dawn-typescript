@@ -14,7 +14,7 @@
     aria-describedby="{{ localPosition }}Label"
   >
     <span>{{ localization.language.endonym_name | capitalize }}</span>
-    {% render 'icon-caret' %}
+    {% render 'icon-default', icon: 'caret' %}
   </button>
   <div class="disclosure__list-wrapper" hidden>
     <ul id="{{ localPosition }}List" role="list" class="disclosure__list list-unstyled">

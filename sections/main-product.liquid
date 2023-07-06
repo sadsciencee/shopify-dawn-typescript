@@ -187,7 +187,7 @@
                                                 {{ block.settings.heading | default: block.settings.page.title }}
                                             </h2>
                                         </div>
-                                        {% render 'icon-caret' %}
+                                        {% render 'icon-default', icon: 'caret' %}
                                     </summary>
                                     <div class="accordion__content rte"
                                          id="ProductAccordion-{{ block.id }}-{{ section.id }}">
@@ -230,7 +230,7 @@
                     <span class="visually-hidden">
                       {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
                     </span>
-                                        {% render 'icon-minus' %}
+                                        {% render 'icon-default', icon: 'minus' %}
                                     </button>
                                     <input
                                             class="quantity__input"
@@ -252,7 +252,7 @@
                     <span class="visually-hidden">
                       {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
                     </span>
-                                        {% render 'icon-plus' %}
+                                        {% render 'icon-default', icon: 'plus' %}
                                     </button>
                                 </quantity-input>
                                 <div class="quantity__rules caption no-js-hidden">
@@ -367,7 +367,7 @@
                                                         {%- endif -%}
                                                     </div>
                                                     {%- if block.settings.make_collapsible_row -%}
-                                                    {% render 'icon-caret' %}
+                                                    {% render 'icon-default', icon: 'caret' %}
                                                 </summary>
                                                 {%- endif -%}
                                                 <slideshow-component class="slider-mobile-gutter">
@@ -404,7 +404,7 @@
                                                             <button type="button"
                                                                     class="slider-button slider-button--prev"
                                                                     name="previous"
-                                                                    aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+                                                                    aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-default', icon: 'caret' %}</button>
                                                             <div class="slider-counter slider-counter--{{ block.settings.pagination_style }}{% if block.settings.pagination_style == 'counter' or block.settings.pagination_style == 'numbers' %} caption{% endif %}">
                                                                 {%- if block.settings.pagination_style == 'counter' -%}
                                                                     <span class="slider-counter--current">1</span>
@@ -427,7 +427,7 @@
                                                             <button type="button"
                                                                     class="slider-button slider-button--next"
                                                                     name="next"
-                                                                    aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+                                                                    aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-default', icon: 'caret' %}</button>
                                                         </div>
                                                     {%- endif -%}
                                                 </slideshow-component>
@@ -450,7 +450,7 @@
                 {%- endfor -%}
                 <a href="{{ product.url }}" class="link product__view-details animate-arrow">
                     {{ 'products.product.view_full_details' | t }}
-                    {% render 'icon-arrow' %}
+                    {% render 'icon-default', icon: 'arrow' %}
                 </a>
             </product-info>
         </div>
@@ -480,7 +480,7 @@
                         class="product-popup-modal__toggle"
                         aria-label="{{ 'accessibility.close' | t }}"
                 >
-                    {% render 'icon-close' %}
+                    {% render 'icon-default', icon: 'close' %}
                 </button>
                 <div class="product-popup-modal__content-info">
                     <h1 class="h2">{{ block.settings.page.title }}</h1>

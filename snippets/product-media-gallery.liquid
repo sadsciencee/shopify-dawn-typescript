@@ -128,7 +128,7 @@
           name="previous"
           aria-label="{{ 'general.slider.previous_slide' | t }}"
         >
-          {% render 'icon-caret' %}
+          {% render 'icon-default', icon: 'caret' %}
         </button>
         <div class="slider-counter caption">
           <span class="slider-counter--current">1</span>
@@ -142,7 +142,7 @@
           name="next"
           aria-label="{{ 'general.slider.next_slide' | t }}"
         >
-          {% render 'icon-caret' %}
+          {% render 'icon-default', icon: 'caret' %}
         </button>
       </div>
     {%- endunless -%}
@@ -157,7 +157,7 @@
       data-shopify-title="{{ product.title | escape }}"
       data-shopify-xr-hidden
     >
-      {% render 'icon-3d-model' %}
+      {% render 'icon-default', icon: '3d-model' %}
       {{ 'products.product.xr_button' | t }}
     </button>
   {%- endif -%}
@@ -177,7 +177,7 @@
         aria-controls="GalleryThumbnails-{{ section.id }}"
         data-step="3"
       >
-        {% render 'icon-caret' %}
+        {% render 'icon-default', icon: 'caret' %}
       </button>
       <ul
         id="Slider-Thumbnails-{{ section.id }}{{ id_append }}"
@@ -255,11 +255,11 @@
             >
               {%- if media.media_type == 'model' -%}
                 <span class="thumbnail__badge" aria-hidden="true">
-                  {%- render 'icon-3d-model' -%}
+                  {%- render 'icon-default', icon: '3d-model' -%}
                 </span>
               {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
                 <span class="thumbnail__badge" aria-hidden="true">
-                  {%- render 'icon-play' -%}
+                  {%- render 'icon-default', icon: 'play' -%}
                 </span>
               {%- endif -%}
               {%- capture thumbnail_id -%}
@@ -301,7 +301,7 @@
         aria-controls="GalleryThumbnails-{{ section.id }}"
         data-step="3"
       >
-        {% render 'icon-caret' %}
+        {% render 'icon-default', icon: 'caret' %}
       </button>
     </slider-component>
   {%- endif -%}

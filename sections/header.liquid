@@ -227,7 +227,7 @@
                     </option>
                   {%- endfor -%}
                 </select>
-                {% render 'icon-caret' %}
+                {% render 'icon-default', icon: 'caret' %}
               </div>
               <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
             {%- endform -%}
@@ -255,7 +255,7 @@
                     </option>
                   {%- endfor -%}
                 </select>
-                {% render 'icon-caret' %}
+                {% render 'icon-default', icon: 'caret' %}
               </div>
               <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
             {%- endform -%}
@@ -275,7 +275,7 @@
 
       {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-          {% render 'icon-account' %}
+          {% render 'icon-default', icon: 'account' %}
           <span class="visually-hidden">
             {%- liquid
               if customer
@@ -298,9 +298,9 @@
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
           if cart == empty
-            render 'icon-cart-empty'
+            render 'icon-default', icon: 'cart-empty'
           else
-            render 'icon-cart'
+            render 'icon-default', icon: 'cart'
           endif
         -%}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>

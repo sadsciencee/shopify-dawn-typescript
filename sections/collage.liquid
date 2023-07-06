@@ -159,7 +159,7 @@
                         {% endif %}
                       >
                         <span class="deferred-media__poster-button motion-reduce">
-                          {%- render 'icon-play' -%}
+                          {%- render 'icon-default', icon: 'play' -%}
                         </span>
 
                         {%- if block.settings.cover_image != blank -%}
@@ -203,7 +203,7 @@
                       class="modal-video__toggle"
                       aria-label="{{ 'accessibility.close' | t }}"
                     >
-                      {% render 'icon-close' %}
+                      {% render 'icon-default', icon: 'close' %}
                     </button>
                     <div class="modal-video__content-info">
                       <deferred-media class="modal-video__video template-popup">

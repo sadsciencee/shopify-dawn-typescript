@@ -45,9 +45,9 @@
     <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button">
       <span class="deferred-media__poster-button motion-reduce">
         {%- if media.media_type == 'model' -%}
-          {%- render 'icon-3d-model' -%}
+          {%- render 'icon-default', icon: '3d-model' -%}
         {%- else -%}
-          {%- render 'icon-play' -%}
+          {%- render 'icon-default', icon: 'play' -%}
         {%- endif -%}
       </span>
       <img
@@ -91,7 +91,7 @@
         data-shopify-title="title"
         data-shopify-xr-hidden
         >
-        {% render 'icon-3d-model' %}
+        {% render 'icon-default', icon: '3d-model' %}
         {{ 'products.product.xr_button' | t }}
       </button>
     </div>

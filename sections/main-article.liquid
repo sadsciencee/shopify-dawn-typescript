@@ -85,7 +85,7 @@
 
   <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
-      <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+      <span class="icon-wrap">{% render 'icon-default', icon: 'arrow' %}</span>
       {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
     </a>
   </div>
@@ -138,7 +138,7 @@
           {%- if form.errors -%}
             <div class="form__message" role="alert">
               <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
-                {% render 'icon-error' %}
+                {% render 'icon-default', icon: 'error' %}
                 {{ 'templates.contact.form.error_heading' | t }}
               </h3>
             </div>
@@ -161,7 +161,7 @@
           {%- elsif form.posted_successfully? -%}
             <div class="form-status-list form__message" role="status">
               <h3 class="form-status" tabindex="-1" autofocus>
-                {% render 'icon-success' %}
+                {% render 'icon-default', icon: 'success' %}
                 {{ post_message | t }}
               </h3>
             </div>
@@ -196,7 +196,7 @@
                 {%- if form.errors contains 'author' -%}
                   <small id="CommentForm-author-error">
                     <span class="form__message">
-                      {%- render 'icon-error' -%}
+                      {%- render 'icon-default', icon: 'error' -%}
                       {{- 'blogs.article.name' | t }}
                       {{ form.errors.messages.author }}.</span
                     >
@@ -228,7 +228,7 @@
                 {%- if form.errors contains 'email' -%}
                   <small id="CommentForm-email-error">
                     <span class="form__message">
-                      {%- render 'icon-error' -%}
+                      {%- render 'icon-default', icon: 'error' -%}
                       {{- 'blogs.article.email' | t }}
                       {{ form.errors.messages.email }}.</span
                     >
@@ -258,7 +258,7 @@
             {%- if form.errors contains 'body' -%}
               <small id="CommentForm-body-error">
                 <span class="form__message">
-                  {%- render 'icon-error' -%}
+                  {%- render 'icon-default', icon: 'error' -%}
                   {{- 'blogs.article.message' | t }}
                   {{ form.errors.messages.body }}.</span
                 >

@@ -148,7 +148,7 @@
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                       {%- for discount in item.discount_allocations -%}
                         <li class="discounts__discount">
-                          {%- render 'icon-discount' -%}
+                          {%- render 'icon-default', icon: 'discount' -%}
                           {{ discount.title }}
                         </li>
                       {%- endfor -%}
@@ -220,7 +220,7 @@
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                           </span>
-                          {% render 'icon-minus' %}
+                          {% render 'icon-default', icon: 'minus' %}
                         </button>
                         <input
                           class="quantity__input"
@@ -244,7 +244,7 @@
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                           </span>
-                          {% render 'icon-plus' %}
+                          {% render 'icon-default', icon: 'plus' %}
                         </button>
                       </quantity-input>
 
@@ -257,7 +257,7 @@
                           class="button button--tertiary"
                           aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
                         >
-                          {% render 'icon-remove' %}
+                          {% render 'icon-default', icon: 'remove' %}
                         </a>
                       </cart-remove-button>
                     </div>

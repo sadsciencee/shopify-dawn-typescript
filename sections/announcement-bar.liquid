@@ -30,7 +30,7 @@
           <p class="announcement-bar__message h5">
             <span>{{ section.blocks.first.settings.text | escape }}</span>
             {%- if section.blocks.first.settings.link != blank -%}
-              {% render 'icon-arrow' %}
+              {% render 'icon-default', icon: 'arrow' %}
             {%- endif -%}
           </p>
           {%- if section.blocks.first.settings.link != blank -%}
@@ -53,7 +53,7 @@
             aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
             aria-controls="Slider-{{ section.id }}"
           >
-            {% render 'icon-caret' %}
+            {% render 'icon-default', icon: 'caret' %}
           </button>
           <div
             class="grid grid--1-col slider slider--everywhere"
@@ -89,7 +89,7 @@
                     <p class="announcement-bar__message h5">
                       <span>{{ block.settings.text | escape }}</span>
                       {%- if block.settings.link != blank -%}
-                        {% render 'icon-arrow' %}
+                        {% render 'icon-default', icon: 'arrow' %}
                       {%- endif -%}
                     </p>
                     {%- if block.settings.link != blank -%}
@@ -107,7 +107,7 @@
             aria-label="{{ 'sections.announcements.next_announcement' | t }}"
             aria-controls="Slider-{{ section.id }}"
           >
-            {% render 'icon-caret' %}
+            {% render 'icon-default', icon: 'caret' %}
           </button>
         </div>
       </slideshow-component>

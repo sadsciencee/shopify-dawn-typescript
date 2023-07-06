@@ -85,7 +85,7 @@
             name="previous"
             aria-label="{{ 'general.slider.previous_slide' | t }}"
           >
-            {% render 'icon-caret' %}
+            {% render 'icon-default', icon: 'caret' %}
           </button>
           <div class="slider-counter caption">
             <span class="slider-counter--current">1</span>
@@ -99,7 +99,7 @@
             name="next"
             aria-label="{{ 'general.slider.next_slide' | t }}"
           >
-            {% render 'icon-caret' %}
+            {% render 'icon-default', icon: 'caret' %}
           </button>
         </div>
       {%- endif -%}

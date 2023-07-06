@@ -55,7 +55,7 @@
 >
   <noscript>
     {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
-      <span class="product__media-icon motion-reduce quick-add-hidden">{% render 'icon-play' %}</span>
+      <span class="product__media-icon motion-reduce quick-add-hidden">{% render 'icon-default', icon: 'play' %}</span>
       <div class="product__media media">
         {{ media.preview_image | image_url: width: 1946 | image_tag:
           loading: lazy,
@@ -82,11 +82,11 @@
       {%- liquid
         case media.media_type
         when 'video' or 'external_video'
-          render 'icon-play'
+          render 'icon-default', icon: 'play'
         when 'model'
-          render 'icon-3d-model'
+          render 'icon-default', icon: '3d-model'
         else
-          render 'icon-zoom'
+          render 'icon-default', icon: 'zoom'
         endcase
       -%}
     </span>
@@ -126,10 +126,10 @@
       <span class="deferred-media__poster-button motion-reduce">
         {%- if media.media_type == 'model' -%}
           <span class="visually-hidden">{{ 'products.product.media.play_model' | t }}</span>
-          {%- render 'icon-3d-model' -%}
+          {%- render 'icon-default', icon: '3d-model' -%}
         {%- else -%}
           <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
-          {%- render 'icon-play' -%}
+          {%- render 'icon-default', icon: 'play' -%}
         {%- endif -%}
       </span>
       {{ media.preview_image | image_url: width: 1946 | image_tag:
@@ -168,7 +168,7 @@
           data-shopify-title="{{ product.title | escape }}"
           data-shopify-xr-hidden
           >
-          {% render 'icon-3d-model' %}
+          {% render 'icon-default', icon: '3d-model' %}
           {{ 'products.product.xr_button' | t }}
         </button>
       {%- endif -%}

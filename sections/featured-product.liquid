@@ -131,7 +131,7 @@
 							data-shopify-title="{{ product.title | escape }}"
 							data-shopify-xr-hidden
 						>
-							{% render 'icon-3d-model' %}
+							{% render 'icon-default', icon: '3d-model' %}
 							{{ 'products.product.xr_button' | t }}
 						</button>
 					{%- endif -%}
@@ -273,7 +273,7 @@
 													| escape
 												-}}
 											</span>
-											{% render 'icon-minus' %}
+											{% render 'icon-default', icon: 'minus' %}
 										</button>
 										<input
 											class="quantity__input"
@@ -305,7 +305,7 @@
 													| escape
 												-}}
 											</span>
-											{% render 'icon-plus' %}
+											{% render 'icon-default', icon: 'plus' %}
 										</button>
 									</quantity-input>
 									<div class="quantity__rules caption no-js-hidden">
@@ -417,7 +417,7 @@
 						class="link product__view-details animate-arrow"
 					>
 						{{ 'products.product.view_full_details' | t }}
-						{% render 'icon-arrow' %}
+						{% render 'icon-default', icon: 'arrow' %}
 					</a>
 				</product-info>
 			</div>
@@ -487,7 +487,7 @@
 									data-shopify-title="{{ product.title | escape }}"
 									data-shopify-xr-hidden
 								>
-									{% render 'icon-3d-model' %}
+									{% render 'icon-default', icon: '3d-model' %}
 									{{ 'products.product.xr_button' | t }}
 								</button>
 							{%- endif -%}

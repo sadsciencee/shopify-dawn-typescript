@@ -32,7 +32,7 @@
                 onclick="this.closest('cart-drawer').close()"
                 aria-label="{{ 'accessibility.close' | t }}"
               >
-                {% render 'icon-close' %}
+                {% render 'icon-default', icon: 'close' %}
               </button>
               <a href="{{ routes.all_products_collection_url }}" class="button">
                 {{ 'general.continue_shopping' | t }}
@@ -61,7 +61,7 @@
           onclick="this.closest('cart-drawer').close()"
           aria-label="{{ 'accessibility.close' | t }}"
         >
-          {% render 'icon-close' %}
+          {% render 'icon-default', icon: 'close' %}
         </button>
       </div>
       <cart-drawer-items
@@ -205,7 +205,7 @@
                           >
                             {%- for discount in item.discount_allocations -%}
                               <li class="discounts__discount">
-                                {%- render 'icon-discount' -%}
+                                {%- render 'icon-default', icon: 'discount' -%}
                                 {{ discount.title }}
                               </li>
                             {%- endfor -%}
@@ -273,7 +273,7 @@
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                                 </span>
-                                {% render 'icon-minus' %}
+                                {% render 'icon-default', icon: 'minus' %}
                               </button>
                               <input
                                 class="quantity__input"
@@ -297,7 +297,7 @@
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                                 </span>
-                                {% render 'icon-plus' %}
+                                {% render 'icon-default', icon: 'plus' %}
                               </button>
                             </quantity-input>
 
@@ -310,7 +310,7 @@
                                 class="button button--tertiary cart-remove-button"
                                 aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
                               >
-                                {% render 'icon-remove' %}
+                                {% render 'icon-default', icon: 'remove' %}
                               </button>
                             </cart-remove-button>
                           </div>
@@ -354,7 +354,7 @@
             <summary>
               <span class="summary__title">
                 {{ 'sections.cart.note' | t }}
-                {% render 'icon-caret' %}
+                {% render 'icon-default', icon: 'caret' %}
               </span>
             </summary>
             <cart-note class="cart__note field">
@@ -383,7 +383,7 @@
               <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                 {%- for discount in cart.cart_level_discount_applications -%}
                   <li class="discounts__discount discounts__discount--end">
-                    {%- render 'icon-discount' -%}
+                    {%- render 'icon-default', icon: 'discount' -%}
                     {{ discount.title }}
                     (-{{ discount.total_allocated_amount | money }})
                   </li>
