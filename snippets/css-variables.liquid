@@ -118,8 +118,8 @@
     --d-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
     --d-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
 
-    --spacing-desktop: {{ settings.spacing_sections }}px;
-    --spacing-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+    --spacing-desktop: {% render 'ax', value: settings.spacing_sections %};
+    --spacing-mobile: {% render 'ax', value: settings.spacing_sections_mobile %};
 
     --y-spacing-desk: {{ settings.spacing_grid_vertical }}px;
     --x-spacing-desk: {{ settings.spacing_grid_horizontal }}px;

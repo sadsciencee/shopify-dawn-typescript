@@ -4,9 +4,9 @@
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.s-up.scss" or path == "_critical-css.s-up.scss" %}
-  {{ '_critical-css.s-up-bac2ab27.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{ '_critical-css.s-up-d07f24f5.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-aa7fe5b3.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ '_critical-css-d0366f93.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
   <script src="{{ '_critical-js-d6449d17.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'functions-97382afd.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">

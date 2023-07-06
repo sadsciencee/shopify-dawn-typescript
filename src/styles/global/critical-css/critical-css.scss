@@ -1,5 +1,5 @@
-@import "../variables.scss";
-@import "../functions.scss";
+@import '../variables.scss';
+@import '../functions.scss';
 
 // root CSS vars
 :root {
@@ -11,6 +11,7 @@
 	--announcement-height: #{ax(26)};
 	--viewport-height: 100vh;
 	--drawer-height: var(--viewport-height);
+	--section-spacing: #{$sectionSpacingMobile};
 	--ax1: calc(var(--ax) * 1);
 	--ax2: calc(var(--ax) * 2);
 	--ax3: calc(var(--ax) * 3);
@@ -89,9 +90,7 @@ body {
 	font-weight: #{$fontBodyWeight};
 }
 
-
 // minimalist utility class library [uses tailwind classes for a few extremely common css rules]
-
 
 @include media-query($s-down) {
 	.s-down-hide {
@@ -314,162 +313,117 @@ body {
 // spacing classes
 
 .sa-1 {
-	margin-top: calc(#{$sectionSpacingMobile} / 2);
+	margin-top: calc(#{$sectionSpacing} / 2);
 }
 
 .sa-2 {
-	margin-top: $sectionSpacingMobile;
+	margin-top: $sectionSpacing;
 }
 
 .sa-3 {
-	margin-top: calc(#{$sectionSpacingMobile} * 1.5);
+	margin-top: calc(#{$sectionSpacing} * 1.5);
 }
 
 .sa-4 {
-	margin-top: calc(#{$sectionSpacingMobile} * 2);
+	margin-top: calc(#{$sectionSpacing} * 2);
 }
 
 .sa-5 {
-	margin-top: calc(#{$sectionSpacingMobile} * 2.5);
+	margin-top: calc(#{$sectionSpacing} * 2.5);
 }
 
 .sa-6 {
-	margin-top: calc(#{$sectionSpacingMobile} * 3);
+	margin-top: calc(#{$sectionSpacing} * 3);
 }
 
 .sa-7 {
-	margin-top: calc(#{$sectionSpacingMobile} * 3.5);
+	margin-top: calc(#{$sectionSpacing} * 3.5);
 }
 
 .sa-8 {
-	margin-top: calc(#{$sectionSpacingMobile} * 4);
+	margin-top: calc(#{$sectionSpacing} * 4);
 }
 
 .sa-9 {
-	margin-top: calc(#{$sectionSpacingMobile} * 4.5);
+	margin-top: calc(#{$sectionSpacing} * 4.5);
 }
 
 .sa-10 {
-	margin-top: calc(#{$sectionSpacingMobile} * 5);
+	margin-top: calc(#{$sectionSpacing} * 5);
 }
-
-.sb-1 {
-	margin-bottom: calc(#{$sectionSpacingMobile} / 2);
-}
-
-.sb-2 {
-	margin-bottom: $sectionSpacingMobile;
-}
-
-.sb-3 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 1.5);
-}
-
-.sb-4 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 2);
-}
-
-.sb-5 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 2.5);
-}
-
-.sb-6 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 3);
-}
-
-.sb-7 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 3.5);
-}
-
-.sb-8 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 4);
-}
-
-.sb-9 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 4.5);
-}
-
-.sb-10 {
-	margin-bottom: calc(#{$sectionSpacingMobile} * 5);
-}
-
-
-
 
 @include media-query($m-down) {
 	.sa-0--m-down {
 		margin-top: 0;
 	}
 	.sa-1--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} / 2);
+		margin-top: calc(#{$sectionSpacing} / 2);
 	}
 	.sa-2--m-down {
-		margin-top: $sectionSpacingMobile;
+		margin-top: $sectionSpacing;
 	}
 	.sa-3--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 1.5);
+		margin-top: calc(#{$sectionSpacing} * 1.5);
 	}
 	.sa-4--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 2);
+		margin-top: calc(#{$sectionSpacing} * 2);
 	}
 	.sa-5--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 2.5);
+		margin-top: calc(#{$sectionSpacing} * 2.5);
 	}
 	.sa-6--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 3);
+		margin-top: calc(#{$sectionSpacing} * 3);
 	}
 	.sa-7--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 3.5);
+		margin-top: calc(#{$sectionSpacing} * 3.5);
 	}
 	.sa-8--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 4);
+		margin-top: calc(#{$sectionSpacing} * 4);
 	}
 	.sa-9--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 4.5);
+		margin-top: calc(#{$sectionSpacing} * 4.5);
 	}
 	.sa-10--m-down {
-		margin-top: calc(#{$sectionSpacingMobile} * 5);
+		margin-top: calc(#{$sectionSpacing} * 5);
 	}
 	.sb-0--m-down {
 		margin-bottom: 0;
 	}
 	.sb-1--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} / 2);
+		margin-bottom: calc(#{$sectionSpacing} / 2);
 	}
 	.sb-2--m-down {
-		margin-bottom: $sectionSpacingMobile;
+		margin-bottom: $sectionSpacing;
 	}
 	.sb-3--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 1.5);
+		margin-bottom: calc(#{$sectionSpacing} * 1.5);
 	}
 	.sb-4--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 2);
+		margin-bottom: calc(#{$sectionSpacing} * 2);
 	}
 	.sb-5--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 2.5);
+		margin-bottom: calc(#{$sectionSpacing} * 2.5);
 	}
 	.sb-6--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 3);
+		margin-bottom: calc(#{$sectionSpacing} * 3);
 	}
 	.sb-7--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 3.5);
+		margin-bottom: calc(#{$sectionSpacing} * 3.5);
 	}
 	.sb-8--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 4);
+		margin-bottom: calc(#{$sectionSpacing} * 4);
 	}
 	.sb-9--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 4.5);
+		margin-bottom: calc(#{$sectionSpacing} * 4.5);
 	}
 	.sb-10--m-down {
-		margin-bottom: calc(#{$sectionSpacingMobile} * 5);
+		margin-bottom: calc(#{$sectionSpacing} * 5);
 	}
 }
 
 .viewport {
 	height: $viewport;
 }
-
-
 
 @include media-query($m-down) {
 	.m-down-hide {

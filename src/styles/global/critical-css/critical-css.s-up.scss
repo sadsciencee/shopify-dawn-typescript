@@ -5,6 +5,7 @@
     --ax: #{$desktopBaseScale};
     --x-spacing: #{$xSpacingDesktop};
     --y-spacing: #{$ySpacingDesktop};
+    --section-spacing: #{$sectionSpacingDesktop};
   }
   body {
     font-size: 1.6rem;
