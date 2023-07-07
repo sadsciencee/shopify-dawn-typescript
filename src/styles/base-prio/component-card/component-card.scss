@@ -20,7 +20,7 @@
 
 .card.card--horizontal {
 	--text-alignment: left;
-	--image-padding: 0rem;
+	--image-padding: 0;
 	flex-direction: row;
 	align-items: flex-start;
 	gap: #{$ax15};
@@ -199,7 +199,7 @@
 }
 
 .card--card.card--media > .card__content {
-	margin-top: calc(0rem - var(--image-padding));
+	margin-top: calc(0 - var(--image-padding));
 }
 
 .card--standard.card--text a::after,
@@ -333,7 +333,7 @@
 }
 
 .card-information .caption {
-	letter-spacing: 0.07rem;
+	letter-spacing: ax(.7);
 }
 
 .card-article-info {

@@ -5,7 +5,7 @@ pickup-availability {
 }
 
 pickup-availability[available] {
-  min-height: 8rem;
+  min-height: #{ax(80)};
 }
 
 .pickup-availability-preview {

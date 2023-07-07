@@ -126,7 +126,7 @@ blockquote {
 
 .caption {
 	font-size: #{$ax10};
-	letter-spacing: 0.07rem;
+	letter-spacing: 0.07em;
 	line-height: calc(1 + 0.7 / #{$fontBodyScale});
 }
 

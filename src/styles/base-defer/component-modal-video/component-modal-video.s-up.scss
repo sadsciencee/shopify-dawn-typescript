@@ -17,8 +17,8 @@
     top: #{$ax30};
   }
   .modal-video__content-info {
-    height: calc(100% - 7rem);
-    padding-top: 9rem;
+    height: calc(100% - #{ax(70)});
+    padding-top: #{ax(90)};
     width: calc(100% - #{ax(86)});
   }
 }

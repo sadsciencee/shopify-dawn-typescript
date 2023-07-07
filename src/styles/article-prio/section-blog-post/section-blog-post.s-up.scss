@@ -14,7 +14,7 @@
 	}
 
 	.article-template__comments {
-		margin-bottom: 7rem;
+		margin-bottom: ax(70);
 	}
 
 	.article-template__comments-comment {
@@ -37,7 +37,7 @@
 	}
 
 	.article-template__hero-large {
-		height: 66rem;
+		height: ax(660);
 	}
 }
 @include media-query($m-up) {
@@ -53,6 +53,6 @@
 		height: #{ax(825)};
 	}
 	.article-template__comments .pagination-wrapper {
-		margin: #{$ax50} 0 8rem;
+		margin: #{$ax50} 0 #{ax(80)};
 	}
 }

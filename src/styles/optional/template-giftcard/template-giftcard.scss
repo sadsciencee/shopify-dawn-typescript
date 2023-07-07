@@ -32,7 +32,7 @@ html {
 body {
   background-color: rgb(#{$schemaColorBackground});
   color: rgb(#{$schemaColorForeground});
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.04375em;
   line-height: calc(1 + 0.8 / #{$fontBodyScale});
   max-width: #{$pageWidth};
   margin: 0 auto;
@@ -132,7 +132,7 @@ h2,
 
 @media (forced-colors: active) {
   .button {
-    border: transparent solid 1px;
+    border: transparent solid #{$ax1};
   }
 }
 
@@ -152,14 +152,14 @@ h2,
   align-items: center;
   height: 100%;
   margin: #{$ax30} auto;
-  max-width: 40rem;
+  max-width: ax(400);
 }
 
 .gift-card__image {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
-  max-height: 26rem;
+  max-height: ax(260);
 }
 
 @include media-query($s-up) {
@@ -174,7 +174,7 @@ h2,
   gap: 0rem #{$ax10};
   align-items: center;
   justify-content: center;
-  letter-spacing: 1px;
+  letter-spacing: #{$ax1};
   opacity: 0.8;
 }
 
@@ -193,7 +193,7 @@ h2,
 }
 
 .gift-card__text-wrapper {
-  max-width: 30rem;
+  max-width: ax(300);
   margin: 0 auto;
 }
 
@@ -206,7 +206,7 @@ h2,
 }
 
 .badge {
-  border: 1px solid transparent;
+  border: #{$ax1} solid transparent;
   border-radius: #{$ax40};
   display: inline-block;
   font-size: #{$ax12};

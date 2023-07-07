@@ -33,7 +33,7 @@ product-recommendations:not(.is-accordion) .complementary-products__container {
 }
 
 .complementary-slide.complementary-slide--standard > ul {
-  gap: calc(#{$ySpacingMobile} + 8px);
+  gap: calc(#{$ySpacingMobile} + #{$ax8});
 }
 
 

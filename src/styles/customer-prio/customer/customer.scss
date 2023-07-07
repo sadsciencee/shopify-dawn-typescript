@@ -90,7 +90,7 @@
 
 .customer thead th {
 	font-size: #{$ax12};
-	letter-spacing: 0.07rem;
+	letter-spacing: 0.0583em;
 	text-transform: uppercase;
 }
 
@@ -188,7 +188,7 @@
 /* Pagination */
 .customer .pagination {
 	margin-top: #{$ax50};
-	margin-bottom: 7rem;
+	margin-bottom: #{ax(70)};
 }
 
 .customer .pagination ul {
@@ -238,7 +238,7 @@
 	width: #{$ax20};
 	height: ax(.1);
 	position: absolute;
-	bottom: 0.08rem;
+	bottom: ax(.8);
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: currentColor;
@@ -385,7 +385,7 @@
 
 .order .item-props {
 	font-size: #{$ax14};
-	margin-top: 0.05px;
+	margin-top: ax(0.05);
 	display: flex;
 	flex-direction: column;
 }
@@ -469,7 +469,7 @@
 
 .order .unit-price {
 	font-size: #{$ax11};
-	letter-spacing: 0.07rem;
+	letter-spacing: 0.0636em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 	margin-top: #{$ax2};
 	text-transform: uppercase;

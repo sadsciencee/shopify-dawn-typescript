@@ -29,7 +29,7 @@ slideshow-component .slideshow.banner {
 @include media-query($s-down) {
 	.slideshow--placeholder.banner--mobile-bottom.banner--adapt_image .slideshow__media,
 	.slideshow--placeholder.banner--adapt_image:not(.banner--mobile-bottom) {
-		height: 28rem;
+		height: ax(280);
 	}
 }
 

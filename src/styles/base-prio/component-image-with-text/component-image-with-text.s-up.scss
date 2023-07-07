@@ -18,7 +18,7 @@
 	}
 
 	.image-with-text__media--placeholder.image-with-text__media--adapt {
-		height: 30rem;
+		height: ax(300);
 	}
 
 	.image-with-text__grid--reverse .image-with-text__content {
@@ -176,6 +176,6 @@
 }
 @include media-query($m-up) {
 	.image-with-text__content {
-		padding: #{ax(60)} 7rem 7rem;
+		padding: #{ax(60)} #{ax(70)} #{ax(70)};
 	}
 }

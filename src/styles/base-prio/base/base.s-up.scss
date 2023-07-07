@@ -11,7 +11,7 @@
 	}
 
 	.page-width--narrow {
-		padding: 0 9rem;
+		padding: 0 #{ax(90)};
 	}
 
 	.page-width-desktop {

@@ -19,7 +19,7 @@
 
 .drawer__inner {
   height: 100%;
-  width: 40rem;
+  width: ax(400);
   max-width: calc(100vw - #{$ax30});
   padding: 0 $ax15;
   border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
@@ -92,8 +92,8 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   min-height: #{$ax44};
   box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorButton}, 0);
   position: absolute;
-  top: 10px;
-  right: -10px;
+  top: #{$ax10};
+  right: ax(-10);
   color: rgb(#{$schemaColorForeground});
   background-color: transparent;
   border: none;
@@ -101,7 +101,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .cart-drawer__warnings .drawer__close {
-  right: 5px;
+  right: #{$ax5};
 }
 
 .drawer__close svg {
@@ -257,7 +257,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-item .loading-overlay {
-  right: 5px;
+  right: #{$ax5};
   padding-top: #{$ax25};
 }
 
@@ -363,14 +363,14 @@ cart-drawer-items {
 
 
 cart-drawer-items::-webkit-scrollbar {
-  width: 3px;
+  width: #{$ax3};
 }
 
 cart-drawer-items::-webkit-scrollbar-thumb {
   background-color: rgba(#{$schemaColorForeground}, 0.7);
-  border-radius: 100px;
+  border-radius: ax(100);
 }
 
 cart-drawer-items::-webkit-scrollbar-track-piece {
-  margin-top: 31px;
+  margin-top: $ax31;
 }

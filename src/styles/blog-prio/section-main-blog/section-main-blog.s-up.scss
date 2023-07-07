@@ -30,7 +30,7 @@
 
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--large .ratio::before,
   .blog-articles--collage > *:nth-child(3n + 2):last-child .article-card__image--large .ratio::before {
-    padding-bottom: 66rem;
+    padding-bottom: ax(660);
   }
 }
 @include media-query($m-up) {

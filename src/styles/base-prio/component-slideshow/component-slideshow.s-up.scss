@@ -3,7 +3,7 @@
 
 @include media-query($s-up) {
 	.slideshow--placeholder.banner--adapt_image {
-		height: 56rem;
+		height: ax(560);
 	}
 
 	.slideshow__text.slideshow__text--left {

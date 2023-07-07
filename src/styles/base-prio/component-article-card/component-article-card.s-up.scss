@@ -16,7 +16,7 @@
 @supports not (inset: 10px) {
 	@include media-query($s-up) {
 		.articles-wrapper.grid {
-			margin-bottom: 7rem;
+			margin-bottom: #{ax(70)};
 		}
 	}
 }

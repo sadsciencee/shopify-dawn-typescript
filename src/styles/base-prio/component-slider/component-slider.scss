@@ -251,8 +251,8 @@ slider-component.slider-component-full-width {
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	width: 44px;
-	height: 44px;
+	width: #{$ax44};
+	height: #{$ax44};
 	display: flex;
 	align-items: center;
 	justify-content: center;

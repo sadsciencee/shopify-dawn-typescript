@@ -2,8 +2,8 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.collapsible-section-layout {
-		padding-bottom: 7rem;
-		padding-top: 7rem;
+		padding-bottom: ax(70);
+		padding-top: ax(70);
 	}
 
 	.collapsible-content__media--small {
@@ -37,7 +37,7 @@
 	@include media-query($m-up) {
 		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
 		.collapsible-content__grid--reverse .collapsible-content__grid-item {
-			padding-left: 7rem;
+			padding-left: ax(70);
 		}
 	}
 }

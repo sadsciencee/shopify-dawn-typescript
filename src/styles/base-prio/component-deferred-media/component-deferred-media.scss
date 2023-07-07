@@ -60,7 +60,7 @@
 /* outline styling for Windows High Contrast Mode */
 @media (forced-colors: active) {
   .deferred-media__poster:focus {
-    outline: transparent solid 1px;
+    outline: transparent solid #{$ax1};
   }
 }
 .deferred-media__poster:focus:not(:focus-visible) {

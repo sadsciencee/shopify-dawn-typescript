@@ -2,8 +2,8 @@
 @import "../../global/functions.scss";
 @include media-query($s-up) {
   .newsletter__wrapper {
-    padding-right: 9rem;
-    padding-left: 9rem;
+    padding-right: #{ax(90)};
+    padding-left: #{ax(90)};
   }
   .newsletter__button {
     flex-shrink: 0;

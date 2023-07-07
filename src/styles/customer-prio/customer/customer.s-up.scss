@@ -138,7 +138,7 @@
 }
 @include media-query($m-up) {
 	.customer .pagination {
-		margin-top: 7rem;
+		margin-top: #{ax(70)};
 		margin-bottom: #{ax(100)};
 	}
 

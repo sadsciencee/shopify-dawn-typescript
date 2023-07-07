@@ -243,7 +243,7 @@
 }
 
 .facets__header {
-  border-bottom: 1px solid rgba(#{$schemaColorForeground}, 0.2);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
   padding: #{$ax15} #{$ax20};
   display: flex;
   justify-content: space-between;
@@ -448,7 +448,7 @@ a.active-facets__button:focus-visible {
 /* outline styling for Windows High Contrast Mode */
 @media (forced-colors: active) {
   a.active-facets__button:focus-visible {
-    outline: transparent solid 1px;
+    outline: transparent solid #{$ax1};
   }
 }
 a.active-facets__button.focused,
@@ -707,7 +707,7 @@ details.menu-opening .mobile-facets__close svg {
 }
 
 .no-js .mobile-facets__details {
-  border-bottom: 1px solid rgba(#{$schemaColorForeground}, 0.04);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.04);
 }
 
 .mobile-facets__highlight {
@@ -719,10 +719,10 @@ details.menu-opening .mobile-facets__close svg {
   visibility: visible;
   opacity: 1;
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: block;
   background-color: rgba(#{$schemaColorForeground}, 0.04);
 }

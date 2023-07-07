@@ -58,7 +58,7 @@
 }
 @include media-query($m-up) {
 	.cart__warnings {
-		padding: 7rem 0 #{$ax10};
+		padding: ax(70) 0 #{$ax10};
 	}
 
 	.cart__empty-text {

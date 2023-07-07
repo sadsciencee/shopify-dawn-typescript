@@ -119,7 +119,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__submenu .menu-drawer__menu-item {
-  padding-left: 9rem;
+  padding-left: #{ax(90)};
 }
 
 .menu-drawer summary.menu-drawer__menu-item {

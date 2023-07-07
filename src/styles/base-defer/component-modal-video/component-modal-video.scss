@@ -58,7 +58,7 @@
 .modal-video__content-info {
   height: calc(100% - #{ax(60)});
   margin: 0 auto;
-  padding-top: 8rem;
+  padding-top: #{ax(80)};
   width: calc(100% - #{$ax10});
 }
 

@@ -12,7 +12,7 @@
 	.banner--content-align-left.banner--desktop-transparent .banner__box,
 	.banner--content-align-right.banner--desktop-transparent .banner__box,
 	.banner--medium.banner--desktop-transparent .banner__box {
-		max-width: 68rem;
+		max-width: ax(680);
 	}
 
 	.banner {
@@ -131,7 +131,7 @@
 
 	.banner--desktop-transparent .banner__box {
 		background: transparent;
-		max-width: 89rem;
+		max-width: ax(890);
 		border: none;
 		border-radius: 0;
 		box-shadow: none;
@@ -172,6 +172,6 @@
 }
 @media screen and (min-width: 1400px) {
 	.banner__box {
-		max-width: 90rem;
+		max-width: ax(900);
 	}
 }

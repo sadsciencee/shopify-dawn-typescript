@@ -21,11 +21,11 @@
 	}
 
 	.featured-product:not(.product--no-media) > .product__info-wrapper {
-		padding: 0 7rem;
+		padding: 0 #{ax(70)};
 	}
 
 	.background-secondary .featured-product {
-		padding: #{ax(60)} 7rem;
+		padding: #{ax(60)} #{ax(70)};
 		position: relative;
 		z-index: 1;
 	}

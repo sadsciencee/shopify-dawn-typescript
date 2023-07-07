@@ -138,7 +138,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 
 .page-margin,
 .shopify-challenge__container {
-	margin: 7rem auto;
+	margin: #{ax(70)} auto;
 }
 
 .rte-width {
@@ -256,7 +256,7 @@ hr {
 
 @include media-query($s-up) {
 	hr {
-		margin: 7rem 0;
+		margin: #{ax(70)} 0;
 	}
 }
 
@@ -550,7 +550,7 @@ summary::-webkit-details-marker {
 
 .subtitle--medium {
 	font-size: #{$ax16};
-	letter-spacing: 0.08rem;
+	letter-spacing: 0.05em;
 }
 
 /* component-grid */
@@ -776,10 +776,10 @@ button.shopify-payment-button__button--unbranded {
 .shopify-challenge__button:hover::after,
 .customer button:hover::after,
 .shopify-payment-button__button--unbranded:hover::after {
-	--border-offset: 1.3px;
+	--border-offset: ax(1.3);
 	box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
 			rgba(#{$schemaColorButtonText}, var(--border-opacity)),
-		0 0 0 calc(#{$buttonsBorderWidth} + 1px)
+		0 0 0 calc(#{$buttonsBorderWidth} + #{$ax1})
 			rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
@@ -824,7 +824,7 @@ button.shopify-payment-button__button--unbranded {
 .button--tertiary {
 	font-size: #{$ax12};
 	padding: #{$ax10} #{$ax15};
-	min-width: calc(9rem + #{$buttonsBorderWidth} * 2);
+	min-width: calc(#{ax(90)} + #{$buttonsBorderWidth} * 2);
 	min-height: calc(#{$ax35} + #{$buttonsBorderWidth} * 2);
 }
 
@@ -1082,7 +1082,7 @@ details[open] > .share-button__fallback {
 	border-radius: #{$inputsRadius};
 	height: #{$ax45};
 	min-height: calc(#{$inputsBorderWidth} * 2);
-	min-width: calc(7rem + (#{$inputsBorderWidth} * 2));
+	min-width: calc(#{ax(70)} + (#{$inputsBorderWidth} * 2));
 	position: relative;
 	border: 0;
 }
@@ -1555,7 +1555,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0rem;
+	padding: 0;
 	height: #{$ax44};
 	width: #{$ax44};
 	background-color: transparent;
@@ -1669,12 +1669,12 @@ product-info .loading-overlay:not(.hidden) ~ *,
 
 .announcement-bar .slider-button--next {
 	margin-right: #{ax(-15)};
-	min-width: 44px;
+	min-width: #{$ax44};
 }
 
 .announcement-bar .slider-button--prev {
 	margin-left: #{ax(-15)};
-	min-width: 44px;
+	min-width: #{$ax44};
 }
 
 .announcement-bar .slider-button--next:focus-visible,
@@ -2230,7 +2230,7 @@ details-disclosure > details {
 }
 
 .badge {
-	border: 1px solid transparent;
+	border: #{$ax1} solid transparent;
 	border-radius: #{$badgeCornerRadius};
 	display: inline-block;
 	font-size: #{$ax12};
@@ -2392,7 +2392,7 @@ details-disclosure > details {
 	.button,
 	.shopify-challenge__button,
 	.customer button {
-		border: transparent solid 1px;
+		border: transparent solid #{$ax1};
 	}
 
 	.button:focus-visible,
@@ -2402,7 +2402,7 @@ details-disclosure > details {
 	.shopify-payment-button [role='button']:focus-visible,
 	.shopify-payment-button__button--unbranded:focus,
 	.shopify-payment-button [role='button']:focus {
-		outline: solid transparent 1px;
+		outline: solid transparent #{$ax1};
 	}
 
 	.field__input:focus,
@@ -2410,11 +2410,11 @@ details-disclosure > details {
 	.customer .field input:focus,
 	.customer select:focus,
 	.localization-form__select:focus.localization-form__select:after {
-		outline: transparent solid 1px;
+		outline: transparent solid #{$ax1};
 	}
 
 	.localization-form__select:focus {
-		outline: transparent solid 1px;
+		outline: transparent solid #{$ax1};
 	}
 }
 
@@ -2683,8 +2683,8 @@ details-disclosure > details {
 		.card__inner {
 		transition: transform calc(2 * var(--duration-extended)) ease,
 			filter var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
-		filter: drop-shadow(0rem #{$ax20} #{$ax20} rgba(0, 0, 0, 0.15))
-			drop-shadow(0rem #{$ax10} #{$ax10} rgba(0, 0, 0, 0.15));
+		filter: drop-shadow(0 #{$ax20} #{$ax20} rgba(0, 0, 0, 0.15))
+			drop-shadow(0 #{$ax10} #{$ax10} rgba(0, 0, 0, 0.15));
 	}
 
 	.animate--hover-3d-lift .card-wrapper:hover .card--card:after,
@@ -2790,7 +2790,7 @@ details-disclosure > details {
 	.animate--hover-vertical-lift .button:not([disabled]):hover:after,
 	.animate--hover-vertical-lift .customer button:not([disabled]):hover:after,
 	.animate--hover-vertical-lift .shopify-payment-button__button:not([disabled]):hover:after {
-		--border-offset: 0.3px; /* Default is 1.3px as defined above in this file. This removes 1px to prevent the border from growing on buttons when this effect is on.  */
+		--border-offset: ax(.3); /* Default is 1.3px as defined above in this file. This removes 1px to prevent the border from growing on buttons when this effect is on.  */
 		box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
 				rgba(#{$schemaColorButtonText}, var(--border-opacity)),
 			0 0 0 #{$buttonsBorderWidth}

@@ -12,7 +12,7 @@
 
 .rich-text:not(.rich-text--full-width) .rich-text__wrapper {
   margin: auto;
-  width: calc(100% - 8rem / #{$fontBodyScale});
+  width: calc(100% - #{ax(80)} / #{$fontBodyScale});
 }
 
 .rich-text__blocks {

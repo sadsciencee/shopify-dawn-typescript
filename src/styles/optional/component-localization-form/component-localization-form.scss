@@ -48,7 +48,7 @@
   padding-left: #{$ax10};
   text-align: left;
   min-height: calc(#{$ax40} + #{$inputsBorderWidth} * 2);
-  min-width: calc(7rem + #{$inputsBorderWidth} * 2);
+  min-width: calc(#{ax(70)} + #{$inputsBorderWidth} * 2);
 }
 
 .disclosure__button.localization-form__select {
