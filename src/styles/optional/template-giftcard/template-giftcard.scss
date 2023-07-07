@@ -66,19 +66,19 @@ h2,
 
 h1,
 .h1 {
-  font-size: calc(#{$fontHeadingScale} * 3rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax30});
 }
 
 @include media-query($s-up) {
   h1,
   .h1 {
-    font-size: calc(#{$fontHeadingScale} * 4rem);
+    font-size: calc(#{$fontHeadingScale} * #{$ax40});
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(#{$fontHeadingScale} * 2rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax20});
 }
 
 @include media-query($s-up) {
@@ -96,7 +96,7 @@ h2,
   align-items: center;
   text-align: center;
   border: none;
-  padding: #{$ax15} 3rem;
+  padding: #{$ax15} #{$ax30};
   text-decoration: none;
   background-color: rgb(#{$schemaColorButton});
   box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton});
@@ -137,12 +137,12 @@ h2,
 }
 
 .gift-card {
-  padding: 3rem;
+  padding: #{$ax30};
 }
 
 @include media-query($s-up) {
   .gift-card {
-    padding: 5rem 5rem 3rem;
+    padding: 5rem 5rem #{$ax30};
   }
 }
 
@@ -151,7 +151,7 @@ h2,
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin: 3rem auto;
+  margin: #{$ax30} auto;
   max-width: 40rem;
 }
 
@@ -189,7 +189,7 @@ h2,
   text-align: center;
   letter-spacing: 0.25rem;
   opacity: 0.8;
-  margin: 3rem 0;
+  margin: #{$ax30} 0;
 }
 
 .gift-card__text-wrapper {
@@ -207,7 +207,7 @@ h2,
 
 .badge {
   border: 1px solid transparent;
-  border-radius: 4rem;
+  border-radius: #{$ax40};
   display: inline-block;
   font-size: #{$ax12};
   letter-spacing: 0.08334em;
@@ -226,7 +226,7 @@ h2,
 }
 
 .gift-card__qr-code {
-  margin: 3rem 0;
+  margin: #{$ax30} 0;
 }
 
 .gift-card__qr-code img {
@@ -236,7 +236,7 @@ h2,
 .gift_card__apple-wallet {
   line-height: 0;
   display: block;
-  margin-bottom: 3rem;
+  margin-bottom: #{$ax30};
   text-align: center;
 }
 

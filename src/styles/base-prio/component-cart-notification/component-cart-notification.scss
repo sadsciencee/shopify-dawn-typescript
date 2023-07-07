@@ -67,8 +67,8 @@
 }
 
 .cart-notification__close {
-	margin-top: -2rem;
-	margin-right: -3rem;
+	margin-top: ax(-20);
+	margin-right: ax(-30);
 }
 
 .cart-notification__links {
@@ -82,8 +82,8 @@
 .cart-notification-product {
 	align-items: flex-start;
 	display: flex;
-	padding-bottom: 3rem;
-	padding-top: 2rem;
+	padding-bottom: #{$ax30};
+	padding-top: #{$ax20};
 }
 
 .cart-notification-product dl {

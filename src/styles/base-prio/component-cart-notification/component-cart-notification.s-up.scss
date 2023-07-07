@@ -7,12 +7,12 @@
 
 	.cart-notification {
 		border-width: 0 #{$popupBorderWidth} #{$popupBorderWidth};
-		max-width: 36.8rem;
+		max-width: ax(368);
 		right: #{$ax22};
 	}
 }
 @include media-query($m-up) {
 	.cart-notification-wrapper:is(.page-width) > .cart-notification {
-		right: 4rem;
+		right: #{$ax40};
 	}
 }

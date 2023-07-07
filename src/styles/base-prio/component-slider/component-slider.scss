@@ -27,7 +27,7 @@ slider-component.slider-component-full-width {
 
 @include media-query($m-down) {
 	.no-js slider-component .slider {
-		padding-bottom: 3rem;
+		padding-bottom: #{$ax30};
 	}
 }
 

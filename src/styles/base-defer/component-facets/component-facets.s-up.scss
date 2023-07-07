@@ -41,7 +41,7 @@
   }
 
   .facets__header-vertical {
-    padding: #{$ax15} 2rem #{$ax15} 0;
+    padding: #{$ax15} #{$ax20} #{$ax15} 0;
     font-size: #{$ax14};
   }
 
@@ -50,7 +50,7 @@
   }
 
   .facets-vertical .facets-wrapper {
-    padding-right: 3rem;
+    padding-right: #{$ax30};
   }
 
   .facets-vertical .facets-wrapper--no-filters {
@@ -75,7 +75,7 @@
   }
 
   .facets-vertical .active-facets__button-wrapper {
-    margin-bottom: 2rem;
+    margin-bottom: #{$ax20};
   }
 
   .facets-vertical .no-js .facets__button-no-js {
@@ -86,7 +86,7 @@
   .facets-vertical .no-js .facet-filters__field {
     justify-content: flex-start;
     padding-bottom: 1rem;
-    padding-top: 2rem;
+    padding-top: #{$ax20};
   }
 
   .facets-vertical .facets__price {
@@ -136,7 +136,7 @@
   }
 
   .facets-container-drawer .mobile-facets__wrapper {
-    margin-right: 2rem;
+    margin-right: #{$ax20};
     flex-grow: 1;
   }
 
@@ -154,7 +154,7 @@
 }
 @include media-query($m-up) {
   .facet-filters {
-    padding-left: 3rem;
+    padding-left: #{$ax30};
   }
   .active-facets__button {
     margin-right: #{$ax15};

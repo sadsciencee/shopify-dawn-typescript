@@ -64,9 +64,9 @@ product-recommendations.is-accordion + .accordion {
 
 .complementary-products > .summary__title .icon-accordion {
   fill: rgb(#{$schemaColorForeground});
-  height: calc(#{$fontHeadingScale} * 2rem);
+  height: calc(#{$fontHeadingScale} * #{$ax20});
   margin-right: calc(#{$fontHeadingScale} * 1rem);
-  width: calc(#{$fontHeadingScale} * 2rem);
+  width: calc(#{$fontHeadingScale} * #{$ax20});
 }
 
 .complementary-products__container .card--card .card__content,

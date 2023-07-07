@@ -18,12 +18,12 @@
 }
 
 .article-template__hero-large {
-  height: 33rem;
+  height: ax(330);
 }
 
 .article-template header {
   margin-top: #{$ax44};
-  margin-bottom: 2rem;
+  margin-bottom: #{$ax20};
   line-height: calc(0.8 / #{$fontBodyScale});
 }
 
@@ -50,12 +50,12 @@
 }
 
 .article-template__content {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: #{$ax30};
+  margin-bottom: #{$ax30};
 }
 
 .article-template__social-sharing {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
 }
 
 .article-template__social-sharing + header,
@@ -77,14 +77,14 @@
 }
 
 .article-template__comments-fields {
-  margin-bottom: 4rem;
+  margin-bottom: #{$ax40};
 }
 
 .article-template__comments-comment {
   color: rgba(#{$schemaColorForeground}, 0.75);
   background-color: rgb(#{$schemaColorBackground});
   margin-bottom: #{$ax15};
-  padding: 2rem 2rem #{$ax15};
+  padding: #{$ax20} #{$ax20} #{$ax15};
 }
 
 .article-template__comments-comment p {
@@ -92,11 +92,11 @@
 }
 
 .article-template__comment-fields > * {
-  margin-bottom: 3rem;
+  margin-bottom: #{$ax30};
 }
 
 .article-template__comment-warning {
-  margin: 2rem 0 #{$ax25};
+  margin: #{$ax20} 0 #{$ax25};
 }
 
 .article-template__back:last-child {

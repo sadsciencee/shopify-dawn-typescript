@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.multicolumn .button {
-		margin-top: 4rem;
+		margin-top: #{$ax40};
 	}
 
 	.multicolumn-list.slider,
@@ -16,7 +16,7 @@
 	}
 
 	.background-none .grid--2-col-tablet .multicolumn-list__item {
-		margin-top: 4rem;
+		margin-top: #{$ax40};
 	}
 
 	.background-none .multicolumn-card__image-wrapper {

@@ -20,15 +20,15 @@
 	}
 
 	.banner--small:not(.banner--adapt) {
-		min-height: 42rem;
+		min-height: ax(420);
 	}
 
 	.banner--medium:not(.banner--adapt) {
-		min-height: 56rem;
+		min-height: ax(560);
 	}
 
 	.banner--large:not(.banner--adapt) {
-		min-height: 72rem;
+		min-height: ax(720);
 	}
 
 	.banner__content.banner__content--top-left {
@@ -146,7 +146,7 @@
 	}
 
 	.banner__box > * + .banner__text {
-		margin-top: 2rem;
+		margin-top: #{$ax20};
 	}
 
 	.banner__box {

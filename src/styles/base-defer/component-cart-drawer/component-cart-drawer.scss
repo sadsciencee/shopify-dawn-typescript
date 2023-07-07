@@ -20,7 +20,7 @@
 .drawer__inner {
   height: 100%;
   width: 40rem;
-  max-width: calc(100vw - 3rem);
+  max-width: calc(100vw - #{$ax30});
   padding: 0 $ax15;
   border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
   border-right: 0;
@@ -262,7 +262,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items td {
-  padding-top: 2rem;
+  padding-top: #{$ax20};
 }
 
 .cart-drawer .cart-item > td + td {

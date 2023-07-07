@@ -20,7 +20,7 @@
 }
 
 .totals > * + * {
-  margin-left: 2rem;
+  margin-left: #{$ax20};
 }
 
 .totals__subtotal-value {
@@ -28,5 +28,5 @@
 }
 
 .cart__ctas + .totals {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }

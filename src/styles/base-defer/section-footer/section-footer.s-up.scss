@@ -134,11 +134,11 @@
 @supports not (inset: 10px) {
   @include media-query($s-up) {
     .footer__content-top .grid {
-      margin-left: -3rem;
+      margin-left: ax(-30);
     }
 
     .footer__content-top .grid__item {
-      padding-left: 3rem;
+      padding-left: #{$ax30};
     }
   }
 }

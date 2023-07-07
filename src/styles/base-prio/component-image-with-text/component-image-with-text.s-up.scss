@@ -52,20 +52,20 @@
 
 	.image-with-text--overlap .image-with-text__text-item {
 		display: flex;
-		padding: 3rem 0;
+		padding: #{$ax30} 0;
 	}
 
 	.image-with-text--overlap .image-with-text__content {
 		height: auto;
-		width: calc(100% + 4rem);
-		min-width: calc(100% + 4rem);
+		width: calc(100% + #{$ax40});
+		min-width: calc(100% + #{$ax40});
 		margin-top: 0;
-		margin-left: -4rem;
+		margin-left: ax(-40);
 	}
 
 	.image-with-text--overlap .image-with-text__grid--reverse .image-with-text__content {
 		margin-left: 0;
-		margin-right: -4rem;
+		margin-right: ax(-40);
 	}
 
 	.image-with-text--overlap .image-with-text__grid--reverse .image-with-text__text-item {

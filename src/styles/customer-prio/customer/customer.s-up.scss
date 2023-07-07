@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.customer:not(.account):not(.order) {
-		max-width: 47.8rem;
+		max-width: ax(478);
 	}
 
 	.customer h2.form__message {
@@ -115,7 +115,7 @@
 	}
 
 	.addresses li > button:first-of-type {
-		margin-top: 3rem;
+		margin-top: #{$ax30};
 	}
 
 	li[data-address] > h2 {
@@ -123,7 +123,7 @@
 	}
 
 	.addresses form > div:nth-of-type(1) {
-		margin-right: 2rem;
+		margin-right: #{$ax20};
 	}
 
 	.addresses form > div:nth-of-type(2) {

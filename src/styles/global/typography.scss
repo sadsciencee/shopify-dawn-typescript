@@ -35,35 +35,35 @@ h5,
 
 @include media-query($s-up) {
 	.hxl {
-		font-size: calc(#{$fontHeadingScale} * 6.2rem);
+		font-size: calc(#{$fontHeadingScale} * #{ax(62)});
 	}
 }
 
 .h0 {
-	font-size: calc(#{$fontHeadingScale} * 4rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax40});
 }
 
 @include media-query($s-up) {
 	.h0 {
-		font-size: calc(#{$fontHeadingScale} * 5.2rem);
+		font-size: calc(#{$fontHeadingScale} * #{ax(52)});
 	}
 }
 
 h1,
 .h1 {
-	font-size: calc(#{$fontHeadingScale} * 3rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax30});
 }
 
 @include media-query($s-up) {
 	h1,
 	.h1 {
-		font-size: calc(#{$fontHeadingScale} * 4rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax40});
 	}
 }
 
 h2,
 .h2 {
-	font-size: calc(#{$fontHeadingScale} * 2rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax20});
 }
 
 @include media-query($s-up) {
@@ -161,7 +161,7 @@ blockquote {
 .select__select {
 	font-size: #{$ax13};
 	line-height: calc(1 + 0.5 / #{$fontBodyScale});
-	letter-spacing: 0.04rem;
+	letter-spacing: 0.0308em;
 }
 
 .color-foreground {

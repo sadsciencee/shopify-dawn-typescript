@@ -19,7 +19,7 @@
 @include media-query($m-down) {
   .facets-container {
     grid-template-columns: auto minmax(0, max-content);
-    column-gap: 2rem;
+    column-gap: #{$ax20};
   }
 }
 
@@ -35,7 +35,7 @@
   display: block;
   color: rgba(#{$schemaColorForeground}, 0.85);
   font-size: #{$ax14};
-  margin: 0 2rem 0 0;
+  margin: 0 #{$ax20} 0 0;
 }
 
 .facet-filters__summary {
@@ -171,7 +171,7 @@
   display: block;
   color: rgba(#{$schemaColorForeground}, 0.85);
   font-size: #{$ax14};
-  margin: #{ax(-15)} 2rem 0 0;
+  margin: #{ax(-15)} #{$ax20} 0 0;
 }
 
 .facets__reset {
@@ -238,13 +238,13 @@
   top: calc(100% + #{$ax5});
   left: ax(-12);
   width: 35rem;
-  max-height: 55rem;
+  max-height: #{ax(550)};
   overflow-y: auto;
 }
 
 .facets__header {
   border-bottom: 1px solid rgba(#{$schemaColorForeground}, 0.2);
-  padding: #{$ax15} 2rem;
+  padding: #{$ax15} #{$ax20};
   display: flex;
   justify-content: space-between;
   font-size: #{$ax14};
@@ -255,7 +255,7 @@
 }
 
 .facets__list {
-  padding: #{$ax5} 2rem;
+  padding: #{$ax5} #{$ax20};
 }
 
 .facets__item {
@@ -269,7 +269,7 @@
 }
 
 .facet-checkbox {
-  padding: 1rem 2rem 1rem 0;
+  padding: 1rem #{$ax20} 1rem 0;
   flex-grow: 1;
   position: relative;
   font-size: #{$ax14};
@@ -328,11 +328,11 @@
 
 .facets__price {
   display: flex;
-  padding: 2rem;
+  padding: #{$ax20};
 }
 
 .facets__price .field + .field-currency {
-  margin-left: 2rem;
+  margin-left: #{$ax20};
 }
 
 .facets__price .field {
@@ -635,7 +635,7 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__open svg {
-  width: 2rem;
+  width: #{$ax20};
 }
 
 .mobile-facets__open line,
@@ -680,7 +680,7 @@ details.menu-opening .mobile-facets__close svg {
   margin-top: #{$ax15};
   padding: #{$ax12} #{$ax26};
   text-decoration: none;
-  width: calc(100% - 5.2rem);
+  width: calc(100% - #{ax(52)});
 }
 
 .no-js .mobile-facets__close-button {
@@ -789,7 +789,7 @@ input.mobile-facets__checkbox {
 }
 
 .mobile-facets__label {
-  padding: #{$ax15} 2rem #{$ax15} #{$ax25};
+  padding: #{$ax15} #{$ax20} #{$ax15} #{$ax25};
   width: 100%;
   transition: background-color 0.2s ease;
   word-break: break-word;
@@ -827,7 +827,7 @@ input.mobile-facets__checkbox {
 
 .mobile-facets__footer {
   border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
-  padding: 2rem;
+  padding: #{$ax20};
   bottom: 0;
   position: sticky;
   display: flex;

@@ -4,7 +4,7 @@
 	.cart__items {
 		grid-column-start: 1;
 		grid-column-end: 3;
-		padding-bottom: 4rem;
+		padding-bottom: #{$ax40};
 	}
 
 	.cart__contents > * + * {
@@ -30,7 +30,7 @@
 	}
 
 	.cart__footer > * + * {
-		margin-left: 4rem;
+		margin-left: #{$ax40};
 		margin-top: 0;
 	}
 	.cart-note {
@@ -62,6 +62,6 @@
 	}
 
 	.cart__empty-text {
-		margin: 0 0 3rem;
+		margin: 0 0 #{$ax30};
 	}
 }

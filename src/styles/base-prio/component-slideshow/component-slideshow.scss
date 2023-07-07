@@ -8,7 +8,7 @@ slideshow-component {
 
 @include media-query($m-down) {
 	.no-js slideshow-component .slider {
-		padding-bottom: 3rem;
+		padding-bottom: #{$ax30};
 	}
 }
 

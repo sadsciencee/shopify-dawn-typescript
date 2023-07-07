@@ -3,16 +3,16 @@
 
 @include media-query($s-up) {
 	.contact .field {
-		margin-bottom: 2rem;
+		margin-bottom: #{$ax20};
 	}
 
 	.contact__button {
-		margin-top: 4rem;
+		margin-top: #{$ax40};
 	}
 
 	.contact__fields {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 2rem;
+		grid-column-gap: #{$ax20};
 	}
 }

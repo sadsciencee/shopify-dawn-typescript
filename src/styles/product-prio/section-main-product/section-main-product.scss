@@ -101,7 +101,7 @@
 	flex: 0 0 100%;
 	padding: 0;
 	margin: 0 0 #{$ax12} 0;
-	max-width: 44rem;
+	max-width: #{ax(440)};
 	min-width: fit-content;
 	border: none;
 }
@@ -140,7 +140,7 @@ fieldset.product-form__input .form__label {
 	color: rgb(#{$schemaColorForeground});
 	display: inline-block;
 	margin: #{$ax7} #{$ax5} #{$ax2} 0;
-	padding: 1rem 2rem;
+	padding: 1rem #{$ax20};
 	font-size: #{$ax14};
 	letter-spacing: 0.00714em;
 	line-height: 1;
@@ -396,7 +396,7 @@ a.product__text {
 }
 
 .product-form__buttons {
-	max-width: 44rem;
+	max-width: #{ax(440)};
 }
 
 .product--no-media .product__info-container > modal-opener {
@@ -420,8 +420,8 @@ a.product__text {
 @include media-query($s-down) {
 	.product__media-list {
 		margin-left: ax(-25);
-		margin-bottom: 3rem;
-		width: calc(100% + 4rem);
+		margin-bottom: #{$ax30};
+		width: calc(100% + #{$ax40});
 	}
 
 	.product__media-wrapper slider-component:not(.thumbnail-slider--no-slide) {
@@ -443,7 +443,7 @@ a.product__text {
 	}
 
 	.product__media-list .product__media-item {
-		width: calc(100% - 3rem - #{$xSpacingMobile});
+		width: calc(100% - #{$ax30} - #{$xSpacingMobile});
 	}
 
 	.product--mobile-columns .product__media-item {
@@ -473,8 +473,8 @@ a.product__text {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 3rem;
-	width: 3rem;
+	height: #{$ax30};
+	width: #{$ax30};
 	position: absolute;
 	left: #{$ax12};
 	top: #{$ax12};
@@ -625,12 +625,12 @@ a.product__text {
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	right: 2rem;
+	right: #{$ax20};
 	padding: #{$ax12};
 	position: fixed;
 	z-index: 2;
-	top: 2rem;
-	width: 4rem;
+	top: #{$ax20};
+	width: #{$ax40};
 }
 
 .product-media-modal__content .deferred-media {
@@ -682,7 +682,7 @@ a.product__text {
 	width: 92%;
 	position: absolute;
 	top: 0;
-	padding: 0 #{$ax15} 0 3rem;
+	padding: 0 #{$ax15} 0 #{$ax30};
 	border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});
 	border-style: solid;
 	border-width: #{$popupBorderWidth};
@@ -775,7 +775,7 @@ a.product__text {
 	padding: #{$ax12};
 	z-index: 2;
 	top: #{$ax15};
-	width: 4rem;
+	width: #{$ax40};
 	margin: 0 0 0 auto;
 }
 
@@ -963,8 +963,8 @@ a.product__text {
 
 .thumbnail__badge {
 	color: rgb(#{$schemaColorForeground}, 0.6);
-	height: 2rem;
-	width: 2rem;
+	height: #{$ax20};
+	width: #{$ax20};
 	left: auto;
 	right: calc(#{$ax4} + #{$mediaBorderWidth});
 	top: calc(#{$ax4} + #{$mediaBorderWidth});
@@ -1023,19 +1023,19 @@ a.product__text {
 
 /* Icon with text */
 .icon-with-text {
-	--icon-size: calc(#{$fontHeadingScale} * 3rem);
+	--icon-size: calc(#{$fontHeadingScale} * #{$ax30});
 	--icon-spacing: calc(#{$fontHeadingScale} * 1rem);
 }
 
 .icon-with-text--horizontal {
 	display: flex;
 	justify-content: center;
-	column-gap: 3rem;
+	column-gap: #{$ax30};
 	flex-direction: row;
 }
 
 .icon-with-text--vertical {
-	--icon-size: calc(#{$fontHeadingScale} * 2rem);
+	--icon-size: calc(#{$fontHeadingScale} * #{$ax20});
 }
 
 .icon-with-text .icon {
@@ -1148,11 +1148,11 @@ a.product__text {
 /* Recipient form */
 .recipient-form {
 	/* (2.88[line-height] - #{$ax16}) / 2 */
-	--recipient-checkbox-margin-top: 0.64rem;
+	--recipient-checkbox-margin-top: ax(6.4);
 
 	display: block;
 	position: relative;
-	max-width: 44rem;
+	max-width: #{ax(440)};
 	margin-bottom: #{$ax25};
 }
 
@@ -1193,7 +1193,7 @@ a.product__text {
 }
 
 .recipient-fields__field {
-	margin: 0 0 2rem 0;
+	margin: 0 0 #{$ax20} 0;
 }
 
 .recipient-fields .field__label {

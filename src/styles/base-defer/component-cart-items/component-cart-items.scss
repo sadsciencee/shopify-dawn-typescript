@@ -197,7 +197,7 @@ cart-remove-button .icon-remove {
     display: flex;
     justify-content: space-between;
     border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
-    margin-bottom: 4rem;
+    margin-bottom: #{$ax40};
   }
 
   .cart-item {

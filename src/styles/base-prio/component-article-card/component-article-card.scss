@@ -54,8 +54,8 @@
 
 .blog-articles .article-card .card__information,
 .blog__posts .article-card .card__information {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: #{$ax20};
+  padding-right: #{$ax20};
 }
 
 .article-card__info {
@@ -81,7 +81,7 @@
 }
 
 .article-card__link:not(:only-child) {
-  margin-right: 3rem;
+  margin-right: #{$ax30};
 }
 
 .article-card__image--small .ratio::before {
@@ -93,7 +93,7 @@
 }
 
 .article-card__image--large .ratio::before {
-  padding-bottom: 33rem;
+  padding-bottom: ax(330);
 }
 
 

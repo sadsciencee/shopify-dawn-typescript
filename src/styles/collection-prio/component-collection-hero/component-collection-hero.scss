@@ -7,7 +7,7 @@
 
 .collection-hero--with-image .collection-hero__inner {
 	margin-bottom: 0;
-	padding-bottom: 2rem;
+	padding-bottom: #{$ax20};
 }
 
 .collection-hero__text-wrapper {
@@ -30,7 +30,7 @@
 }
 
 .collection-hero--with-image .collection-hero__text-wrapper {
-	padding: 5rem 0 4rem;
+	padding: 5rem 0 #{$ax40};
 }
 
 .collection-hero__image-container {

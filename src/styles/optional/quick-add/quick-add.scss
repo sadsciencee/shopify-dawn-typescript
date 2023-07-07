@@ -47,7 +47,7 @@
 	background-color: rgb(#{$schemaColorBackground});
 	overflow: hidden;
 	max-width: #{$pageWidth};
-	width: calc(100% - 3rem);
+	width: calc(100% - #{$ax30});
 }
 
 .quick-add-modal__content img {
@@ -85,7 +85,7 @@
 	}
 
 	quick-add-modal .product--mobile-columns .product__media-item {
-		width: calc(100% - 3rem - #{$xSpacingMobile});
+		width: calc(100% - #{$ax30} - #{$xSpacingMobile});
 	}
 }
 
@@ -100,7 +100,7 @@
 	cursor: pointer;
 	padding: #{$ax12};
 	z-index: 5;
-	width: 4rem;
+	width: #{$ax40};
 	position: fixed;
 	top: #{$ax15};
 	right: #{$ax15};

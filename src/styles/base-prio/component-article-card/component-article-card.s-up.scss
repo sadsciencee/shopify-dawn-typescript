@@ -22,7 +22,7 @@
 }
 @include media-query($m-up) {
 	.article-card__link:not(:only-child) {
-		margin-right: 4rem;
+		margin-right: #{$ax40};
 	}
 
 	.article-card__image--small .ratio::before {

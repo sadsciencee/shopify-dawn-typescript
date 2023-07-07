@@ -33,12 +33,12 @@
   }
 
   .cart-items th + th {
-    padding-left: 4rem;
+    padding-left: #{$ax40};
   }
 
   .cart-items td {
     vertical-align: top;
-    padding-top: 4rem;
+    padding-top: #{$ax40};
   }
 
   .cart-item {
@@ -46,7 +46,7 @@
   }
 
   .cart-item > td + td {
-    padding-left: 4rem;
+    padding-left: #{$ax40};
   }
 
   .cart-item__details {

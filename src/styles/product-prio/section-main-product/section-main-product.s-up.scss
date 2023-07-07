@@ -4,7 +4,7 @@
 	.product__column-sticky {
 		display: block;
 		position: sticky;
-		top: 3rem;
+		top: #{$ax30};
 		z-index: 2;
 	}
 
@@ -29,7 +29,7 @@
 	}
 
 	.product--right .product__media-list {
-		margin-bottom: 2rem;
+		margin-bottom: #{$ax20};
 	}
 
 	.product__media-container .slider-buttons {
@@ -124,7 +124,7 @@
 	}
 
 	.product-media-modal__content {
-		padding-bottom: 2rem;
+		padding-bottom: #{$ax20};
 	}
 
 	.product-media-modal__content > *:not(.active) {
@@ -140,7 +140,7 @@
 	}
 
 	.product-media-modal__content {
-		padding: 2rem #{ax(110)};
+		padding: #{$ax20} #{ax(110)};
 	}
 
 	.product-media-modal__content > * {
@@ -148,7 +148,7 @@
 	}
 
 	.product-media-modal__content > * + * {
-		margin-top: 2rem;
+		margin-top: #{$ax20};
 	}
 
 	.product-media-modal__toggle {
@@ -160,7 +160,7 @@
 		padding-right: #{$ax15};
 		margin-top: #{ax(100)};
 		width: 70%;
-		padding: 0 3rem;
+		padding: 0 #{$ax30};
 	}
 
 	.product-media-modal__dialog .global-media-settings--no-shadow {
@@ -201,8 +201,8 @@
 	}
 
 	.product:not(.product--small) .thumbnail__badge {
-		height: 3rem;
-		width: 3rem;
+		height: #{$ax30};
+		width: #{$ax30};
 	}
 
 	.product:not(.product--small) .thumbnail__badge .icon {
@@ -251,13 +251,13 @@
 	}
 
 	.product--large:not(.product--no-media) .product__info-wrapper {
-		padding: 0 0 0 4rem;
+		padding: 0 0 0 #{$ax40};
 		max-width: 35%;
 		width: calc(35% - #{$xSpacingDesktop} / 2);
 	}
 
 	.product--large:not(.product--no-media).product--right .product__info-wrapper {
-		padding: 0 4rem 0 0;
+		padding: 0 #{$ax40} 0 0;
 	}
 
 	.product--medium:not(.product--no-media) .product__media-wrapper,
@@ -292,7 +292,7 @@
 	}
 
 	.product-media-modal__content {
-		padding: 2rem #{ax(110)};
+		padding: #{$ax20} #{ax(110)};
 	}
 
 	.product-media-modal__content > * + * {

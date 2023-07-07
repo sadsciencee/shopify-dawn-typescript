@@ -18,13 +18,13 @@
 	}
 
 	.article-template__comments-comment {
-		padding: 2rem #{$ax25};
+		padding: #{$ax20} #{$ax25};
 	}
 
 	.article-template__comment-fields {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 4rem;
+		grid-column-gap: #{$ax40};
 	}
 }
 @include media-query($m-only) {
@@ -33,7 +33,7 @@
 	}
 
 	.article-template__hero-medium {
-		height: 44rem;
+		height: #{ax(440)};
 	}
 
 	.article-template__hero-large {
@@ -46,7 +46,7 @@
 	}
 
 	.article-template__hero-medium {
-		height: 55rem;
+		height: #{ax(550)};
 	}
 
 	.article-template__hero-large {

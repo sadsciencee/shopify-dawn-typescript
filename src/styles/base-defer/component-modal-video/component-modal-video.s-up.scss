@@ -14,7 +14,7 @@
 @include media-query($m-up) {
   .modal-video__toggle {
     right: $ax43;
-    top: 3rem;
+    top: #{$ax30};
   }
   .modal-video__content-info {
     height: calc(100% - 7rem);

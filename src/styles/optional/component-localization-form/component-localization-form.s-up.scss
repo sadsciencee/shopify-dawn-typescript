@@ -2,7 +2,7 @@
 @import "../../global/functions.scss";
 @include media-query($s-up) {
   .localization-form {
-    padding: 1rem 2rem 1rem 0;
+    padding: 1rem #{$ax20} 1rem 0;
   }
 
   .localization-form:first-of-type {

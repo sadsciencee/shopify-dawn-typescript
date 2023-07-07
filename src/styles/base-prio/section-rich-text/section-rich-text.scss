@@ -7,7 +7,7 @@
 .rich-text__wrapper {
   display: flex;
   justify-content: center;
-  width: calc(100% - 4rem / #{$fontBodyScale});
+  width: calc(100% - #{$ax40} / #{$fontBodyScale});
 }
 
 .rich-text:not(.rich-text--full-width) .rich-text__wrapper {
@@ -29,11 +29,11 @@
 }
 
 .rich-text__blocks > * + * {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }
 
 .rich-text__blocks > * + a {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
 }
 
 .rich-text__buttons {
