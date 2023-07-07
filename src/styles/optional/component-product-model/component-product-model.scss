@@ -1,8 +1,8 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .product__xr-button {
-  background: rgba(var(--color-foreground), 0.08);
-  color: rgb(var(--color-foreground));
+  background: rgba(#{$schemaColorForeground}, 0.08);
+  color: rgb(#{$schemaColorForeground});
   margin: 1rem auto;
   box-shadow: none;
   display: flex;

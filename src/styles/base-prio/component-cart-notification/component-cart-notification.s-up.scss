@@ -2,12 +2,17 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
-		border-top-width: var(--popup-border-width);
+		border-top-width: #{$popupBorderWidth};
 	}
 
 	.cart-notification {
-		border-width: 0 var(--popup-border-width) var(--popup-border-width);
+		border-width: 0 #{$popupBorderWidth} #{$popupBorderWidth};
 		max-width: 36.8rem;
 		right: 2.2rem;
+	}
+}
+@include media-query($m-up) {
+	.cart-notification-wrapper:is(.page-width) > .cart-notification {
+		right: 4rem;
 	}
 }

@@ -9,68 +9,68 @@
 
 .product-card-wrapper .card,
 .contains-card--product {
-	--border-radius: var(--product-card-corner-radius);
-	--border-width: var(--product-card-border-width);
-	--border-opacity: var(--product-card-border-opacity);
-	--shadow-horizontal-offset: var(--product-card-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--product-card-shadow-vertical-offset);
-	--shadow-blur-radius: var(--product-card-shadow-blur-radius);
-	--shadow-opacity: var(--product-card-shadow-opacity);
-	--shadow-visible: var(--product-card-shadow-visible);
-	--image-padding: var(--product-card-image-padding);
-	--text-alignment: var(--product-card-text-alignment);
+	--border-radius: #{$productCardCornerRadius};
+	--border-width: #{$productCardBorderWidth};
+	--border-opacity: #{$productCardBorderOpacity};
+	--shadow-horizontal-offset: #{$productCardShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$productCardShadowVerticalOffset};
+	--shadow-blur-radius: #{$productCardShadowBlurRadius};
+	--shadow-opacity: #{$productCardShadowOpacity};
+	--shadow-visible: #{$productCardShadowVisible};
+	--image-padding: #{$productCardImagePadding};
+	--text-alignment: #{$productCardTextAlignment};
 }
 
 .collection-card-wrapper .card,
 .contains-card--collection {
-	--border-radius: var(--collection-card-corner-radius);
-	--border-width: var(--collection-card-border-width);
-	--border-opacity: var(--collection-card-border-opacity);
-	--shadow-horizontal-offset: var(--collection-card-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--collection-card-shadow-vertical-offset);
-	--shadow-blur-radius: var(--collection-card-shadow-blur-radius);
-	--shadow-opacity: var(--collection-card-shadow-opacity);
-	--shadow-visible: var(--collection-card-shadow-visible);
-	--image-padding: var(--collection-card-image-padding);
-	--text-alignment: var(--collection-card-text-alignment);
+	--border-radius: #{$collectionCardCornerRadius};
+	--border-width: #{$collectionCardBorderWidth};
+	--border-opacity: #{$collectionCardBorderOpacity};
+	--shadow-horizontal-offset: #{$collectionCardShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$collectionCardShadowVerticalOffset};
+	--shadow-blur-radius: #{$collectionCardShadowBlurRadius};
+	--shadow-opacity: #{$collectionCardShadowOpacity};
+	--shadow-visible: #{$collectionCardShadowVisible};
+	--image-padding: #{$collectionCardImagePadding};
+	--text-alignment: #{$collectionCardTextAlignment};
 }
 
 .article-card-wrapper .card,
 .contains-card--article {
-	--border-radius: var(--blog-card-corner-radius);
-	--border-width: var(--blog-card-border-width);
-	--border-opacity: var(--blog-card-border-opacity);
-	--shadow-horizontal-offset: var(--blog-card-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--blog-card-shadow-vertical-offset);
-	--shadow-blur-radius: var(--blog-card-shadow-blur-radius);
-	--shadow-opacity: var(--blog-card-shadow-opacity);
-	--shadow-visible: var(--blog-card-shadow-visible);
-	--image-padding: var(--blog-card-image-padding);
-	--text-alignment: var(--blog-card-text-alignment);
+	--border-radius: #{$blogCardCornerRadius};
+	--border-width: #{$blogCardBorderWidth};
+	--border-opacity: #{$blogCardBorderOpacity};
+	--shadow-horizontal-offset: #{$blogCardShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$blogCardShadowVerticalOffset};
+	--shadow-blur-radius: #{$blogCardShadowBlurRadius};
+	--shadow-opacity: #{$blogCardShadowOpacity};
+	--shadow-visible: #{$blogCardShadowVisible};
+	--image-padding: #{$blogCardImagePadding};
+	--text-alignment: #{$blogCardTextAlignment};
 }
 
 .contains-content-container,
 .content-container {
-	--border-radius: var(--text-boxes-radius);
-	--border-width: var(--text-boxes-border-width);
-	--border-opacity: var(--text-boxes-border-opacity);
-	--shadow-horizontal-offset: var(--text-boxes-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--text-boxes-shadow-vertical-offset);
-	--shadow-blur-radius: var(--text-boxes-shadow-blur-radius);
-	--shadow-opacity: var(--text-boxes-shadow-opacity);
-	--shadow-visible: var(--text-boxes-shadow-visible);
+	--border-radius: #{$textBoxesRadius};
+	--border-width: #{$textBoxesBorderWidth};
+	--border-opacity: #{$textBoxesBorderOpacity};
+	--shadow-horizontal-offset: #{$textBoxesShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$textBoxesShadowVerticalOffset};
+	--shadow-blur-radius: #{$textBoxesShadowBlurRadius};
+	--shadow-opacity: #{$textBoxesShadowOpacity};
+	--shadow-visible: #{$textBoxesShadowVisible};
 }
 
 .contains-media,
 .global-media-settings {
-	--border-radius: var(--media-radius);
-	--border-width: var(--media-border-width);
-	--border-opacity: var(--media-border-opacity);
-	--shadow-horizontal-offset: var(--media-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--media-shadow-vertical-offset);
-	--shadow-blur-radius: var(--media-shadow-blur-radius);
-	--shadow-opacity: var(--media-shadow-opacity);
-	--shadow-visible: var(--media-shadow-visible);
+	--border-radius: #{$mediaRadius};
+	--border-width: #{$mediaBorderWidth};
+	--border-opacity: #{$mediaBorderOpacity};
+	--shadow-horizontal-offset: #{$mediaShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$mediaShadowVerticalOffset};
+	--shadow-blur-radius: #{$mediaShadowBlurRadius};
+	--shadow-opacity: #{$mediaShadowOpacity};
+	--shadow-visible: #{$mediaShadowVisible};
 }
 
 /* base */
@@ -96,7 +96,7 @@ html.no-js .no-js-hidden {
 }
 
 .page-width {
-	max-width: var(--page-width);
+	max-width: #{$pageWidth};
 	margin: 0 auto;
 	padding: 0 1.5rem;
 }
@@ -120,7 +120,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 .section + .section {
-	margin-top: var(--spacing-sections-mobile);
+	margin-top: #{$sectionSpacingMobile};
 }
 
 .element-margin-top {
@@ -128,7 +128,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 .background-secondary {
-	background-color: rgba(var(--color-foreground), 0.04);
+	background-color: rgba(#{$schemaColorForeground}, 0.04);
 }
 
 .grid-auto-flow {
@@ -196,7 +196,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 ::selection {
-	background-color: rgba(var(--color-foreground), 0.2);
+	background-color: rgba(#{$schemaColorForeground}, 0.2);
 }
 
 @include media-query($s-down) {
@@ -249,7 +249,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 hr {
 	border: none;
 	height: 0.1rem;
-	background-color: rgba(var(--color-foreground), 0.2);
+	background-color: rgba(#{$schemaColorForeground}, 0.2);
 	display: block;
 	margin: 5rem 0;
 }
@@ -267,9 +267,9 @@ hr {
 }
 
 .placeholder {
-	background-color: rgba(var(--color-foreground), 0.04);
-	color: rgba(var(--color-foreground), 0.55);
-	fill: rgba(var(--color-foreground), 0.55);
+	background-color: rgba(#{$schemaColorForeground}, 0.04);
+	color: rgba(#{$schemaColorForeground}, 0.55);
+	fill: rgba(#{$schemaColorForeground}, 0.55);
 }
 
 details > * {
@@ -314,7 +314,7 @@ details > * {
 
 .underlined-link,
 .customer a {
-	color: rgba(var(--color-link), var(--alpha-link));
+	color: rgba(#{$schemaColorLink}, var(--alpha-link));
 }
 
 .inline-richtext a,
@@ -325,7 +325,7 @@ details > * {
 .underlined-link:hover,
 .customer a:hover,
 .inline-richtext a:hover {
-	color: rgb(var(--color-link));
+	color: rgb(#{$schemaColorLink});
 	text-decoration-thickness: 0.2rem;
 }
 
@@ -335,7 +335,7 @@ details > * {
 
 h3 .icon-arrow,
 .h3 .icon-arrow {
-	width: calc(var(--font-heading-scale) * 1.5rem);
+	width: calc(#{$fontHeadingScale} * 1.5rem);
 }
 
 /* arrow animation */
@@ -402,19 +402,19 @@ summary::-webkit-details-marker {
 }
 
 *:focus-visible {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: 0.3rem;
-	box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-		0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
+		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: 0.3rem;
-	box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-		0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
+		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Negate the fallback side-effect for browsers that support :focus-visible */
@@ -428,16 +428,16 @@ summary::-webkit-details-marker {
 */
 
 .focus-inset:focus-visible {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: -0.2rem;
-	box-shadow: 0 0 0.2rem 0 rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0.2rem 0 rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .focused.focus-inset,
 .no-js .focus-inset:focus {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: -0.2rem;
-	box-shadow: 0 0 0.2rem 0 rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0.2rem 0 rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .no-js .focus-inset:focus:not(:focus-visible) {
@@ -456,18 +456,18 @@ summary::-webkit-details-marker {
 }
 
 .focus-offset:focus-visible {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: 1rem;
-	box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-		0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}),
+		0 0 0.2rem 1.2rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .focus-offset.focused,
 .no-js .focus-offset:focus {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: 1rem;
-	box-shadow: 0 0 0 1rem rgb(var(--color-background)),
-		0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}),
+		0 0 0.2rem 1.2rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .no-js .focus-offset:focus:not(:focus-visible) {
@@ -538,9 +538,9 @@ summary::-webkit-details-marker {
 
 .subtitle {
 	font-size: 1.8rem;
-	line-height: calc(1 + 0.8 / var(--font-body-scale));
+	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	letter-spacing: 0.06rem;
-	color: rgba(var(--color-foreground), 0.7);
+	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .subtitle--small {
@@ -560,8 +560,8 @@ summary::-webkit-details-marker {
 	margin-bottom: 2rem;
 	padding: 0;
 	list-style: none;
-	column-gap: var(--grid-mobile-horizontal-spacing);
-	row-gap: var(--grid-mobile-vertical-spacing);
+	column-gap: #{$xSpacingMobile};
+	row-gap: #{$ySpacingMobile};
 }
 
 .grid:last-child {
@@ -569,8 +569,8 @@ summary::-webkit-details-marker {
 }
 
 .grid__item {
-	width: calc(25% - var(--grid-mobile-horizontal-spacing) * 3 / 4);
-	max-width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
+	width: calc(25% - #{$xSpacingMobile} * 3 / 4);
+	max-width: calc(50% - #{$xSpacingMobile} / 2);
 	flex-grow: 1;
 	flex-shrink: 0;
 }
@@ -593,11 +593,11 @@ summary::-webkit-details-marker {
 }
 
 .grid--3-col .grid__item {
-	width: calc(33.33% - var(--grid-mobile-horizontal-spacing) * 2 / 3);
+	width: calc(33.33% - #{$xSpacingMobile} * 2 / 3);
 }
 
 .grid--2-col .grid__item {
-	width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
+	width: calc(50% - #{$xSpacingMobile} / 2);
 }
 
 @include media-query($m-down) {
@@ -649,93 +649,32 @@ summary::-webkit-details-marker {
 
 	/* Fix to show some space at the end of our sliders in all browsers */
 	.grid--peek.slider:after {
-		margin-left: calc(-1 * var(--grid-mobile-horizontal-spacing));
+		margin-left: calc(-1 * #{$xSpacingMobile});
 	}
 
 	.grid--2-col-tablet-down .grid__item {
-		width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
+		width: calc(50% - #{$xSpacingMobile} / 2);
 	}
 
 	.slider--tablet.grid--peek.grid--2-col-tablet-down .grid__item,
 	.grid--peek .grid__item {
-		width: calc(50% - var(--grid-mobile-horizontal-spacing) - 3rem);
+		width: calc(50% - #{$xSpacingMobile} - 3rem);
 	}
 
 	.slider--tablet.grid--peek.grid--1-col-tablet-down .grid__item,
 	.slider--mobile.grid--peek.grid--1-col-tablet-down .grid__item {
-		width: calc(100% - var(--grid-mobile-horizontal-spacing) - 3rem);
+		width: calc(100% - #{$xSpacingMobile} - 3rem);
 	}
 }
 
-/* component-media */
-.media {
-	display: block;
-	background-color: rgba(var(--color-foreground), 0.1);
-	position: relative;
-	overflow: hidden;
-}
-
-.media--transparent {
-	background-color: transparent;
-}
-
-.media > *:not(.zoom):not(.deferred-media__poster-button),
-.media model-viewer {
-	display: block;
-	max-width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-}
-
-.media > img {
-	object-fit: cover;
-	object-position: center center;
-	transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.media--square {
-	padding-bottom: 100%;
-}
-
-.media--portrait {
-	padding-bottom: 125%;
-}
-
-.media--landscape {
-	padding-bottom: 66.6%;
-}
-
-.media--cropped {
-	padding-bottom: 56%;
-}
-
-.media--16-9 {
-	padding-bottom: 56.25%;
-}
-
-.media--circle {
-	padding-bottom: 100%;
-	border-radius: 50%;
-}
-
-.media.media--hover-effect > img + img {
-	opacity: 0;
-}
-
-deferred-media {
-	display: block;
-}
 
 /* component-button */
 /* Button - default */
 
 .button--secondary,
 .button--tertiary {
-	--color-button: var(--color-secondary-button);
-	--color-button-text: var(--color-secondary-button-text);
+	--c-button: #{$schemaColorSecondaryButton};
+	--c-button-text: #{$schemaColorSecondaryButtonText};
 }
 
 .button--tertiary {
@@ -750,14 +689,14 @@ button.shopify-payment-button__button--unbranded,
 .shopify-payment-button [role='button'],
 .cart__dynamic-checkout-buttons [role='button'],
 .cart__dynamic-checkout-buttons iframe {
-	--shadow-horizontal-offset: var(--buttons-shadow-horizontal-offset);
-	--shadow-vertical-offset: var(--buttons-shadow-vertical-offset);
-	--shadow-blur-radius: var(--buttons-shadow-blur-radius);
-	--shadow-opacity: var(--buttons-shadow-opacity);
-	--shadow-visible: var(--buttons-shadow-visible);
-	--border-offset: var(--buttons-border-offset); /* reduce radius edge artifacts */
-	--border-opacity: calc(1 - var(--buttons-border-opacity));
-	border-radius: var(--buttons-radius-outset);
+	--shadow-horizontal-offset: #{$buttonsShadowHorizontalOffset};
+	--shadow-vertical-offset: #{$buttonsShadowVerticalOffset};
+	--shadow-blur-radius: #{$buttonsShadowBlurRadius};
+	--shadow-opacity: #{$buttonsShadowOpacity};
+	--shadow-visible: #{$buttonsShadowVisible};
+	--border-offset: #{$buttonsBorderOffset}; /* reduce radius edge artifacts */
+	--border-opacity: calc(1 - #{$buttonsBorderOpacity});
+	border-radius: #{$buttonsRadiusOutset};
 	position: relative;
 }
 
@@ -765,8 +704,8 @@ button.shopify-payment-button__button--unbranded,
 .shopify-challenge__button,
 .customer button,
 button.shopify-payment-button__button--unbranded {
-	min-width: calc(12rem + var(--buttons-border-width) * 2);
-	min-height: calc(4.5rem + var(--buttons-border-width) * 2);
+	min-width: calc(12rem + #{$buttonsBorderWidth} * 2);
+	min-height: calc(4.5rem + #{$buttonsBorderWidth} * 2);
 }
 
 .shopify-payment-button__button--branded {
@@ -775,7 +714,7 @@ button.shopify-payment-button__button--unbranded {
 
 .cart__dynamic-checkout-buttons iframe {
 	box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-		var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
+		var(--shadow-blur-radius) rgba(#{$schemaColorShadow}, var(--shadow-opacity));
 }
 
 .button,
@@ -790,11 +729,11 @@ button.shopify-payment-button__button--unbranded {
 	font: inherit;
 	font-size: 1.5rem;
 	text-decoration: none;
-	color: rgb(var(--color-button-text));
+	color: rgb(#{$schemaColorButtonText});
 	transition: box-shadow var(--duration-short) ease;
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: rgba(var(--color-button), var(--alpha-button-background));
+	background-color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
 .button:before,
@@ -810,9 +749,9 @@ button.shopify-payment-button__button--unbranded {
 	bottom: 0;
 	left: 0;
 	z-index: -1;
-	border-radius: var(--buttons-radius-outset);
+	border-radius: #{$buttonsRadiusOutset};
 	box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-		var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
+		var(--shadow-blur-radius) rgba(#{$schemaColorShadow}, var(--shadow-opacity));
 }
 
 .button:after,
@@ -821,15 +760,15 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button__button--unbranded:after {
 	content: '';
 	position: absolute;
-	top: var(--buttons-border-width);
-	right: var(--buttons-border-width);
-	bottom: var(--buttons-border-width);
-	left: var(--buttons-border-width);
+	top: #{$buttonsBorderWidth};
+	right: #{$buttonsBorderWidth};
+	bottom: #{$buttonsBorderWidth};
+	left: #{$buttonsBorderWidth};
 	z-index: 1;
-	border-radius: var(--buttons-radius);
-	box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
-			rgba(var(--color-button-text), var(--border-opacity)),
-		0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
+	border-radius: #{$buttonsRadius};
+	box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
+			rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+		0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
 	transition: box-shadow var(--duration-short) ease;
 }
 
@@ -838,14 +777,14 @@ button.shopify-payment-button__button--unbranded {
 .customer button:hover::after,
 .shopify-payment-button__button--unbranded:hover::after {
 	--border-offset: 1.3px;
-	box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
-			rgba(var(--color-button-text), var(--border-opacity)),
-		0 0 0 calc(var(--buttons-border-width) + 1px)
-			rgba(var(--color-button), var(--alpha-button-background));
+	box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
+			rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+		0 0 0 calc(#{$buttonsBorderWidth} + 1px)
+			rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
 .button--secondary:after {
-	--border-opacity: var(--buttons-border-opacity);
+	--border-opacity: #{$buttonsBorderOpacity};
 }
 
 .button:focus-visible,
@@ -856,9 +795,9 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button__button--unbranded:focus,
 .shopify-payment-button [role='button']:focus {
 	outline: 0;
-	box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-		0 0 0 0.5rem rgba(var(--color-foreground), 0.5),
-		0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
+		0 0 0 0.5rem rgba(#{$schemaColorForeground}, 0.5),
+		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button:focus:not(:focus-visible):not(.focused),
@@ -870,7 +809,7 @@ button.shopify-payment-button__button--unbranded {
 .button::selection,
 .shopify-challenge__button::selection,
 .customer button::selection {
-	background-color: rgba(var(--color-button-text), 0.3);
+	background-color: rgba(#{$schemaColorButtonText}, 0.3);
 }
 
 .button,
@@ -879,14 +818,14 @@ button.shopify-payment-button__button--unbranded {
 .customer button {
 	font-size: 1.5rem;
 	letter-spacing: 0.1rem;
-	line-height: calc(1 + 0.2 / var(--font-body-scale));
+	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
 .button--tertiary {
 	font-size: 1.2rem;
 	padding: 1rem 1.5rem;
-	min-width: calc(9rem + var(--buttons-border-width) * 2);
-	min-height: calc(3.5rem + var(--buttons-border-width) * 2);
+	min-width: calc(9rem + #{$buttonsBorderWidth} * 2);
+	min-height: calc(3.5rem + #{$buttonsBorderWidth} * 2);
 }
 
 .button--small {
@@ -918,7 +857,7 @@ button.shopify-payment-button__button--unbranded {
 
 @media screen and (forced-colors: active) {
 	.button.loading {
-		color: rgb(var(--color-foreground));
+		color: rgb(#{$schemaColorForeground});
 	}
 }
 
@@ -937,7 +876,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .button.loading > .loading-overlay__spinner .path {
-	stroke: rgb(var(--color-button-text));
+	stroke: rgb(#{$schemaColorButtonText});
 }
 
 /* Button - social share */
@@ -955,7 +894,7 @@ button.shopify-payment-button__button--unbranded {
 	font-size: 1.4rem;
 	display: flex;
 	align-items: center;
-	color: rgb(var(--color-link));
+	color: rgb(#{$schemaColorLink});
 	margin-left: 0;
 	padding-left: 0;
 	min-height: 4.4rem;
@@ -992,7 +931,7 @@ details[open] > .share-button__fallback {
 	z-index: 3;
 	width: 100%;
 	min-width: max-content;
-	border-radius: var(--inputs-radius);
+	border-radius: #{$inputsRadius};
 	border: 0;
 }
 
@@ -1000,20 +939,20 @@ details[open] > .share-button__fallback {
 	pointer-events: none;
 	content: '';
 	position: absolute;
-	top: var(--inputs-border-width);
-	right: var(--inputs-border-width);
-	bottom: var(--inputs-border-width);
-	left: var(--inputs-border-width);
+	top: #{$inputsBorderWidth};
+	right: #{$inputsBorderWidth};
+	bottom: #{$inputsBorderWidth};
+	left: #{$inputsBorderWidth};
 	border: 0.1rem solid transparent;
-	border-radius: var(--inputs-radius);
-	box-shadow: 0 0 0 var(--inputs-border-width)
-		rgba(var(--color-foreground), var(--inputs-border-opacity));
+	border-radius: #{$inputsRadius};
+	box-shadow: 0 0 0 #{$inputsBorderWidth}
+		rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
 	transition: box-shadow var(--duration-short) ease;
 	z-index: 1;
 }
 
 .share-button__fallback:before {
-	background: rgb(var(--color-background));
+	background: rgb(#{$schemaColorBackground});
 	pointer-events: none;
 	content: '';
 	position: absolute;
@@ -1021,9 +960,9 @@ details[open] > .share-button__fallback {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	border-radius: var(--inputs-radius-outset);
-	box-shadow: var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset)
-		var(--inputs-shadow-blur-radius) rgba(var(--color-shadow), var(--inputs-shadow-opacity));
+	border-radius: #{$inputsRadiusOutset};
+	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset}
+		#{$inputsShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
 	z-index: -1;
 }
 
@@ -1036,11 +975,11 @@ details[open] > .share-button__fallback {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	right: var(--inputs-border-width);
+	right: #{$inputsBorderWidth};
 }
 
 .share-button__fallback button:hover {
-	color: rgba(var(--color-foreground), 0.75);
+	color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
 .share-button__fallback button:hover svg {
@@ -1054,18 +993,18 @@ details[open] > .share-button__fallback {
 .share-button__close,
 .share-button__copy {
 	background-color: transparent;
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .share-button__copy:focus-visible,
 .share-button__close:focus-visible {
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
 .share-button__copy:focus,
 .share-button__close:focus {
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
@@ -1088,10 +1027,10 @@ details[open] > .share-button__fallback {
 
 .share-button__fallback .field__input:focus,
 .share-button__fallback .field__input:-webkit-autofill {
-	outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
 	outline-offset: 0.1rem;
-	box-shadow: 0 0 0 0.1rem rgb(var(--color-background)),
-		0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+	box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorBackground}),
+		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .share-button__fallback .field__input {
@@ -1120,7 +1059,7 @@ details[open] > .share-button__fallback {
 	height: 100%;
 	margin-top: 0;
 	padding: 0.8rem 0 0.8rem 1.5rem;
-	margin: var(--inputs-border-width);
+	margin: #{$inputsBorderWidth};
 }
 
 .share-button__message:not(:empty):not(.hidden) ~ * {
@@ -1134,16 +1073,16 @@ details[open] > .share-button__fallback {
 .customer select {
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: rgb(var(--color-background));
-	color: rgb(var(--color-foreground));
+	background-color: rgb(#{$schemaColorBackground});
+	color: rgb(#{$schemaColorForeground});
 	font-size: 1.6rem;
 	width: 100%;
 	box-sizing: border-box;
 	transition: box-shadow var(--duration-short) ease;
-	border-radius: var(--inputs-radius);
+	border-radius: #{$inputsRadius};
 	height: 4.5rem;
-	min-height: calc(var(--inputs-border-width) * 2);
-	min-width: calc(7rem + (var(--inputs-border-width) * 2));
+	min-height: calc(#{$inputsBorderWidth} * 2);
+	min-width: calc(7rem + (#{$inputsBorderWidth} * 2));
 	position: relative;
 	border: 0;
 }
@@ -1160,9 +1099,9 @@ details[open] > .share-button__fallback {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	border-radius: var(--inputs-radius-outset);
-	box-shadow: var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset)
-		var(--inputs-shadow-blur-radius) rgba(var(--color-shadow), var(--inputs-shadow-opacity));
+	border-radius: #{$inputsRadiusOutset};
+	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset}
+		#{$inputsShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
 	z-index: -1;
 }
 
@@ -1174,24 +1113,24 @@ details[open] > .share-button__fallback {
 	pointer-events: none;
 	content: '';
 	position: absolute;
-	top: var(--inputs-border-width);
-	right: var(--inputs-border-width);
-	bottom: var(--inputs-border-width);
-	left: var(--inputs-border-width);
+	top: #{$inputsBorderWidth};
+	right: #{$inputsBorderWidth};
+	bottom: #{$inputsBorderWidth};
+	left: #{$inputsBorderWidth};
 	border: 0.1rem solid transparent;
-	border-radius: var(--inputs-radius);
-	box-shadow: 0 0 0 var(--inputs-border-width)
-		rgba(var(--color-foreground), var(--inputs-border-opacity));
+	border-radius: #{$inputsRadius};
+	box-shadow: 0 0 0 #{$inputsBorderWidth}
+		rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
 	transition: box-shadow var(--duration-short) ease;
 	z-index: 1;
 }
 
 .select__select {
-	font-family: var(--font-body-family);
-	font-style: var(--font-body-style);
-	font-weight: var(--font-body-weight);
+	font-family: #{$fontBodyFamily};
+	font-style: #{$fontBodyStyle};
+	font-weight: #{$fontBodyWeight};
 	font-size: 1.2rem;
-	color: rgba(var(--color-foreground), 0.75);
+	color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
 .field:hover.field:after,
@@ -1200,10 +1139,10 @@ details[open] > .share-button__fallback {
 .customer .field:hover.field:after,
 .customer select:hover.select:after,
 .localization-form__select:hover.localization-form__select:after {
-	box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width))
-		rgba(var(--color-foreground), var(--inputs-border-opacity));
+	box-shadow: 0 0 0 calc(0.1rem + #{$inputsBorderWidth})
+		rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
 	outline: 0;
-	border-radius: var(--inputs-radius);
+	border-radius: #{$inputsRadius};
 }
 
 .field__input:focus-visible,
@@ -1211,9 +1150,9 @@ details[open] > .share-button__fallback {
 .customer .field input:focus-visible,
 .customer select:focus-visible,
 .localization-form__select:focus-visible.localization-form__select:after {
-	box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
+	box-shadow: 0 0 0 calc(0.1rem + #{$inputsBorderWidth}) rgba(#{$schemaColorForeground});
 	outline: 0;
-	border-radius: var(--inputs-radius);
+	border-radius: #{$inputsRadius};
 }
 
 .field__input:focus,
@@ -1221,9 +1160,9 @@ details[open] > .share-button__fallback {
 .customer .field input:focus,
 .customer select:focus,
 .localization-form__select:focus.localization-form__select:after {
-	box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
+	box-shadow: 0 0 0 calc(0.1rem + #{$inputsBorderWidth}) rgba(#{$schemaColorForeground});
 	outline: 0;
-	border-radius: var(--inputs-radius);
+	border-radius: #{$inputsRadius};
 }
 
 .localization-form__select:focus {
@@ -1246,16 +1185,16 @@ details[open] > .share-button__fallback {
 	pointer-events: none;
 	position: absolute;
 	top: calc(50% - 0.2rem);
-	right: calc(var(--inputs-border-width) + 1.5rem);
+	right: calc(#{$inputsBorderWidth} + 1.5rem);
 }
 
 .select__select,
 .customer select {
 	cursor: pointer;
-	line-height: calc(1 + 0.6 / var(--font-body-scale));
-	padding: 0 calc(var(--inputs-border-width) + 3rem) 0 2rem;
-	margin: var(--inputs-border-width);
-	min-height: calc(var(--inputs-border-width) * 2);
+	line-height: calc(1 + 0.6 / #{$fontBodyScale});
+	padding: 0 calc(#{$inputsBorderWidth} + 3rem) 0 2rem;
+	margin: #{$inputsBorderWidth};
+	min-height: calc(#{$inputsBorderWidth} * 2);
 }
 
 /* Field */
@@ -1280,20 +1219,20 @@ details[open] > .share-button__fallback {
 	flex-grow: 1;
 	text-align: left;
 	padding: 1.5rem;
-	margin: var(--inputs-border-width);
+	margin: #{$inputsBorderWidth};
 	transition: box-shadow var(--duration-short) ease;
 }
 
 .field__label,
 .customer .field label {
 	font-size: 1.6rem;
-	left: calc(var(--inputs-border-width) + 2rem);
-	top: calc(1rem + var(--inputs-border-width));
+	left: calc(#{$inputsBorderWidth} + 2rem);
+	top: calc(1rem + #{$inputsBorderWidth});
 	margin-bottom: 0;
 	pointer-events: none;
 	position: absolute;
 	transition: top var(--duration-short) ease, font-size var(--duration-short) ease;
-	color: rgba(var(--color-foreground), 0.75);
+	color: rgba(#{$schemaColorForeground}, 0.75);
 	letter-spacing: 0.1rem;
 	line-height: 1.5;
 }
@@ -1305,8 +1244,8 @@ details[open] > .share-button__fallback {
 .customer .field input:not(:placeholder-shown) ~ label,
 .customer .field input:-webkit-autofill ~ label {
 	font-size: 1rem;
-	top: calc(var(--inputs-border-width) + 0.5rem);
-	left: calc(var(--inputs-border-width) + 2rem);
+	top: calc(#{$inputsBorderWidth} + 0.5rem);
+	left: calc(#{$inputsBorderWidth} + 2rem);
 	letter-spacing: 0.04rem;
 }
 
@@ -1317,7 +1256,7 @@ details[open] > .share-button__fallback {
 .customer .field input:not(:placeholder-shown),
 .customer .field input:-webkit-autofill {
 	padding: 2.2rem 1.5rem 0.8rem 2rem;
-	margin: var(--inputs-border-width);
+	margin: #{$inputsBorderWidth};
 }
 
 .field__input::-webkit-search-cancel-button,
@@ -1361,9 +1300,9 @@ details[open] > .share-button__fallback {
 /* Text area */
 
 .text-area {
-	font-family: var(--font-body-family);
-	font-style: var(--font-body-style);
-	font-weight: var(--font-body-weight);
+	font-family: #{$fontBodyFamily};
+	font-style: #{$fontBodyStyle};
+	font-weight: #{$fontBodyWeight};
 	min-height: 10rem;
 	resize: none;
 }
@@ -1437,32 +1376,32 @@ input[type='checkbox'] {
 
 /* component-quantity */
 .quantity {
-	color: rgba(var(--color-foreground));
+	color: rgba(#{$schemaColorForeground});
 	position: relative;
-	width: calc(14rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
+	width: calc(14rem / #{$fontBodyScale} + #{$inputsBorderWidth} * 2);
 	display: flex;
-	border-radius: var(--inputs-radius);
-	min-height: calc((var(--inputs-border-width) * 2) + 4.5rem);
+	border-radius: #{$inputsRadius};
+	min-height: calc((#{$inputsBorderWidth} * 2) + 4.5rem);
 }
 
 .quantity:after {
 	pointer-events: none;
 	content: '';
 	position: absolute;
-	top: var(--inputs-border-width);
-	right: var(--inputs-border-width);
-	bottom: var(--inputs-border-width);
-	left: var(--inputs-border-width);
+	top: #{$inputsBorderWidth};
+	right: #{$inputsBorderWidth};
+	bottom: #{$inputsBorderWidth};
+	left: #{$inputsBorderWidth};
 	border: 0.1rem solid transparent;
-	border-radius: var(--inputs-radius);
-	box-shadow: 0 0 0 var(--inputs-border-width)
-		rgba(var(--color-foreground), var(--inputs-border-opacity));
+	border-radius: #{$inputsRadius};
+	box-shadow: 0 0 0 #{$inputsBorderWidth}
+		rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
 	transition: box-shadow var(--duration-short) ease;
 	z-index: 1;
 }
 
 .quantity:before {
-	background: rgb(var(--color-background));
+	background: rgb(#{$schemaColorBackground});
 	pointer-events: none;
 	content: '';
 	position: absolute;
@@ -1470,9 +1409,9 @@ input[type='checkbox'] {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	border-radius: var(--inputs-radius-outset);
-	box-shadow: var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset)
-		var(--inputs-shadow-blur-radius) rgba(var(--color-shadow), var(--inputs-shadow-opacity));
+	border-radius: #{$inputsRadiusOutset};
+	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset}
+		#{$inputsShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
 	z-index: -1;
 }
 
@@ -1492,7 +1431,7 @@ input[type='checkbox'] {
 }
 
 .quantity__button {
-	width: calc(4.5rem / var(--font-body-scale));
+	width: calc(4.5rem / #{$fontBodyScale});
 	flex-shrink: 0;
 	font-size: 1.8rem;
 	border: 0;
@@ -1501,16 +1440,16 @@ input[type='checkbox'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 	padding: 0;
 }
 
 .quantity__button:first-child {
-	margin-left: calc(var(--inputs-border-width));
+	margin-left: calc(#{$inputsBorderWidth});
 }
 
 .quantity__button:last-child {
-	margin-right: calc(var(--inputs-border-width));
+	margin-right: calc(#{$inputsBorderWidth});
 }
 
 .quantity__button svg {
@@ -1520,13 +1459,13 @@ input[type='checkbox'] {
 
 .quantity__button:focus-visible,
 .quantity__input:focus-visible {
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
 .quantity__button:focus,
 .quantity__input:focus {
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
@@ -1539,8 +1478,8 @@ input[type='checkbox'] {
 .quantity__input:-webkit-autofill,
 .quantity__input:-webkit-autofill:hover,
 .quantity__input:-webkit-autofill:active {
-	box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset !important;
-	-webkit-box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset !important;
+	box-shadow: 0 0 0 10rem rgb(#{$schemaColorBackground}) inset !important;
+	-webkit-box-shadow: 0 0 0 10rem rgb(#{$schemaColorBackground}) inset !important;
 }
 
 .quantity__input::-webkit-outer-spin-button,
@@ -1633,7 +1572,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgb(var(--color-background));
+	background: rgb(#{$schemaColorBackground});
 	z-index: 4;
 	display: flex;
 	justify-content: center;
@@ -1655,8 +1594,8 @@ product-info .loading-overlay:not(.hidden) ~ *,
 
 .cart-count-bubble {
 	position: absolute;
-	background-color: rgb(var(--color-button));
-	color: rgb(var(--color-button-text));
+	background-color: rgb(#{$schemaColorButton});
+	color: rgb(#{$schemaColorButtonText});
 	height: 1.7rem;
 	width: 1.7rem;
 	border-radius: 100%;
@@ -1666,7 +1605,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 	font-size: 0.9rem;
 	bottom: 0.8rem;
 	left: 2.2rem;
-	line-height: calc(1 + 0.1 / var(--font-body-scale));
+	line-height: calc(1 + 0.1 / #{$fontBodyScale});
 }
 
 /* utility-bar */
@@ -1675,7 +1614,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 }
 
 .utility-bar--bottom-border {
-	border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+	border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .utility-bar__grid {
@@ -1701,7 +1640,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 
 .announcement-bar,
 .announcement-bar__announcement {
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -1742,7 +1681,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 .announcement-bar .slider-button--prev:focus-visible,
 .utility-bar .list-social__link:focus-visible {
 	outline-offset: -0.3rem;
-	box-shadow: 0 0 0 -0.2rem rgb(var(--color-foreground));
+	box-shadow: 0 0 0 -0.2rem rgb(#{$schemaColorForeground});
 }
 
 .announcement-bar__link {
@@ -1869,11 +1808,11 @@ product-info .loading-overlay:not(.hidden) ~ *,
 .header-wrapper {
 	display: block;
 	position: relative;
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 }
 
 .header-wrapper--border-bottom {
-	border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+	border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .header {
@@ -1916,12 +1855,12 @@ product-info .loading-overlay:not(.hidden) ~ *,
 }
 
 .header__heading-link:hover .h2 {
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .header__heading-link .h2 {
 	line-height: 1;
-	color: rgba(var(--color-foreground), 0.75);
+	color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
 .header__heading-logo {
@@ -1973,7 +1912,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 }
 
 .header__icon {
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .header__icon span {
@@ -2016,7 +1955,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 	width: 100%;
 	display: block;
 	position: absolute;
-	background: rgba(var(--color-foreground), 0.5);
+	background: rgba(#{$schemaColorForeground}, 0.5);
 }
 
 /* Search */
@@ -2070,7 +2009,7 @@ details[open] .modal-overlay {
 details[open] .modal-overlay::after {
 	position: absolute;
 	content: '';
-	background-color: rgb(var(--color-foreground), 0.5);
+	background-color: rgb(#{$schemaColorForeground}, 0.5);
 	top: 100%;
 	left: 0;
 	right: 0;
@@ -2084,8 +2023,8 @@ details[open] .modal-overlay::after {
 
 .search-modal {
 	opacity: 0;
-	border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-	min-height: calc(100% + var(--inputs-margin-offset) + (2 * var(--inputs-border-width)));
+	border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+	min-height: calc(100% + #{$inputsMarginOffset} + (2 * #{$inputsBorderWidth}));
 	height: 100%;
 }
 
@@ -2096,16 +2035,16 @@ details[open] .modal-overlay::after {
 	width: 100%;
 	height: 100%;
 	padding: 0 5rem 0 1rem;
-	line-height: calc(1 + 0.8 / var(--font-body-scale));
+	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	position: relative;
 }
 
 .search-modal__content-bottom {
-	bottom: calc((var(--inputs-margin-offset) / 2));
+	bottom: calc((#{$inputsMarginOffset} / 2));
 }
 
 .search-modal__content-top {
-	top: calc((var(--inputs-margin-offset) / 2));
+	top: calc((#{$inputsMarginOffset} / 2));
 }
 
 .search-modal__form {
@@ -2180,11 +2119,11 @@ details[open] > .header__submenu {
 .header__menu-item {
 	padding: 1.2rem;
 	text-decoration: none;
-	color: rgba(var(--color-foreground), 0.75);
+	color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
 .header__menu-item:hover {
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 }
 
 .header__menu-item span {
@@ -2210,7 +2149,7 @@ details[open] > .header__menu-item .icon-caret {
 
 .header__active-menu-item {
 	transition: text-decoration-thickness var(--duration-short) ease;
-	color: rgb(var(--color-foreground));
+	color: rgb(#{$schemaColorForeground});
 	text-decoration: underline;
 	text-underline-offset: 0.3rem;
 }
@@ -2225,12 +2164,12 @@ details[open] > .header__menu-item .icon-caret {
 
 .global-settings-popup,
 .header__submenu.global-settings-popup {
-	border-radius: var(--popup-corner-radius);
-	border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
+	border-radius: #{$popupCornerRadius};
+	border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});
 	border-style: solid;
-	border-width: var(--popup-border-width);
-	box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset)
-		var(--popup-shadow-blur-radius) rgba(var(--color-shadow), var(--popup-shadow-opacity));
+	border-width: #{$popupBorderWidth};
+	box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
+		#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
 	z-index: -1;
 }
 
@@ -2239,7 +2178,7 @@ details[open] > .header__menu-item .icon-caret {
 }
 
 .header__submenu .header__submenu {
-	background-color: rgba(var(--color-foreground), 0.03);
+	background-color: rgba(#{$schemaColorForeground}, 0.03);
 	padding: 1rem 0;
 	margin: 1rem 0;
 }
@@ -2292,22 +2231,22 @@ details-disclosure > details {
 
 .badge {
 	border: 1px solid transparent;
-	border-radius: var(--badge-corner-radius);
+	border-radius: #{$badgeCornerRadius};
 	display: inline-block;
 	font-size: 1.2rem;
 	letter-spacing: 0.1rem;
 	line-height: 1;
 	padding: 0.5rem 1.3rem 0.6rem 1.3rem;
 	text-align: center;
-	background-color: rgb(var(--color-badge-background));
-	border-color: rgba(var(--color-badge-border), var(--alpha-badge-border));
-	color: rgb(var(--color-badge-foreground));
+	background-color: rgb(#{$schemaColorBadgeBackground});
+	border-color: rgba(#{$schemaColorBadgeBorder}, var(--alpha-badge-border));
+	color: rgb(#{$schemaColorBadgeForeground});
 	word-break: break-word;
 }
 
 .gradient {
-	background: rgb(var(--color-background));
-	background: var(--gradient-background);
+	background: rgb(#{$schemaColorBackground});
+	background: #{$schemaGradientBackground};
 	background-attachment: fixed;
 }
 
@@ -2336,23 +2275,23 @@ details-disclosure > details {
 }
 
 .content-container {
-	border-radius: var(--text-boxes-radius);
-	border: var(--text-boxes-border-width) solid
-		rgba(var(--color-foreground), var(--text-boxes-border-opacity));
+	border-radius: #{$textBoxesRadius};
+	border: #{$textBoxesBorderWidth} solid
+		rgba(#{$schemaColorForeground}, #{$textBoxesBorderOpacity});
 	position: relative;
 }
 
 .content-container:after {
 	content: '';
 	position: absolute;
-	top: calc(var(--text-boxes-border-width) * -1);
-	right: calc(var(--text-boxes-border-width) * -1);
-	bottom: calc(var(--text-boxes-border-width) * -1);
-	left: calc(var(--text-boxes-border-width) * -1);
-	border-radius: var(--text-boxes-radius);
-	box-shadow: var(--text-boxes-shadow-horizontal-offset) var(--text-boxes-shadow-vertical-offset)
-		var(--text-boxes-shadow-blur-radius)
-		rgba(var(--color-shadow), var(--text-boxes-shadow-opacity));
+	top: calc(#{$textBoxesBorderWidth} * -1);
+	right: calc(#{$textBoxesBorderWidth} * -1);
+	bottom: calc(#{$textBoxesBorderWidth} * -1);
+	left: calc(#{$textBoxesBorderWidth} * -1);
+	border-radius: #{$textBoxesRadius};
+	box-shadow: #{$textBoxesShadowHorizontalOffset} #{$textBoxesShadowVerticalOffset}
+		#{$textBoxesShadowBlurRadius}
+		rgba(#{$schemaColorShadow}, #{$textBoxesShadowOpacity});
 	z-index: -1;
 }
 
@@ -2375,23 +2314,23 @@ details-disclosure > details {
 
 .global-media-settings {
 	position: relative;
-	border: var(--media-border-width) solid
-		rgba(var(--color-foreground), var(--media-border-opacity));
-	border-radius: var(--media-radius);
+	border: #{$mediaBorderWidth} solid
+		rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity});
+	border-radius: #{$mediaRadius};
 	overflow: visible !important;
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 }
 
 .global-media-settings:after {
 	content: '';
 	position: absolute;
-	top: calc(var(--media-border-width) * -1);
-	right: calc(var(--media-border-width) * -1);
-	bottom: calc(var(--media-border-width) * -1);
-	left: calc(var(--media-border-width) * -1);
-	border-radius: var(--media-radius);
-	box-shadow: var(--media-shadow-horizontal-offset) var(--media-shadow-vertical-offset)
-		var(--media-shadow-blur-radius) rgba(var(--color-shadow), var(--media-shadow-opacity));
+	top: calc(#{$mediaBorderWidth} * -1);
+	right: calc(#{$mediaBorderWidth} * -1);
+	bottom: calc(#{$mediaBorderWidth} * -1);
+	left: calc(#{$mediaBorderWidth} * -1);
+	border-radius: #{$mediaRadius};
+	box-shadow: #{$mediaShadowHorizontalOffset} #{$mediaShadowVerticalOffset}
+		#{$mediaShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
 	z-index: -1;
 	pointer-events: none;
 }
@@ -2409,7 +2348,7 @@ details-disclosure > details {
 .global-media-settings model-viewer,
 .global-media-settings video,
 .global-media-settings .placeholder-svg {
-	border-radius: calc(var(--media-radius) - var(--media-border-width));
+	border-radius: calc(#{$mediaRadius} - #{$mediaBorderWidth});
 }
 
 .content-container--full-width,
@@ -2426,12 +2365,12 @@ details-disclosure > details {
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
 	.grid {
-		margin-left: calc(-1 * var(--grid-mobile-horizontal-spacing));
+		margin-left: calc(-1 * #{$xSpacingMobile});
 	}
 
 	.grid__item {
-		padding-left: var(--grid-mobile-horizontal-spacing);
-		padding-bottom: var(--grid-mobile-vertical-spacing);
+		padding-left: #{$xSpacingMobile};
+		padding-bottom: #{$ySpacingMobile};
 	}
 
 	.grid--gapless .grid__item {
@@ -2440,12 +2379,12 @@ details-disclosure > details {
 	}
 
 	.product-grid .grid__item {
-		padding-bottom: var(--grid-mobile-vertical-spacing);
+		padding-bottom: #{$ySpacingMobile};
 	}
 }
 
 .font-body-bold {
-	font-weight: var(--font-body-weight-bold);
+	font-weight: #{$fontBodyWeightBold};
 }
 
 /* outline and border styling for Windows High Contrast Mode */
@@ -2507,12 +2446,12 @@ details-disclosure > details {
 .rte img {
 	height: auto;
 	max-width: 100%;
-	border: var(--media-border-width) solid
-		rgba(var(--color-foreground), var(--media-border-opacity));
-	border-radius: var(--media-radius);
-	box-shadow: var(--media-shadow-horizontal-offset) var(--media-shadow-vertical-offset)
-		var(--media-shadow-blur-radius) rgba(var(--color-shadow), var(--media-shadow-opacity));
-	margin-bottom: var(--media-shadow-vertical-offset);
+	border: #{$mediaBorderWidth} solid
+		rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity});
+	border-radius: #{$mediaRadius};
+	box-shadow: #{$mediaShadowHorizontalOffset} #{$mediaShadowVerticalOffset}
+		#{$mediaShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
+	margin-bottom: #{$mediaShadowVerticalOffset};
 }
 
 .rte ul,
@@ -2530,14 +2469,14 @@ details-disclosure > details {
 }
 
 .rte a {
-	color: rgba(var(--color-link), var(--alpha-link));
+	color: rgba(#{$schemaColorLink}, var(--alpha-link));
 	text-underline-offset: 0.3rem;
 	text-decoration-thickness: 0.1rem;
 	transition: text-decoration-thickness var(--duration-short) ease;
 }
 
 .rte a:hover {
-	color: rgb(var(--color-link));
+	color: rgb(#{$schemaColorLink});
 	text-decoration-thickness: 0.2rem;
 }
 
@@ -2852,10 +2791,10 @@ details-disclosure > details {
 	.animate--hover-vertical-lift .customer button:not([disabled]):hover:after,
 	.animate--hover-vertical-lift .shopify-payment-button__button:not([disabled]):hover:after {
 		--border-offset: 0.3px; /* Default is 1.3px as defined above in this file. This removes 1px to prevent the border from growing on buttons when this effect is on.  */
-		box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
-				rgba(var(--color-button-text), var(--border-opacity)),
-			0 0 0 var(--buttons-border-width)
-				rgba(var(--color-button), var(--alpha-button-background));
+		box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
+				rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+			0 0 0 #{$buttonsBorderWidth}
+				rgba(#{$schemaColorButton}, var(--alpha-button-background));
 	}
 
 	.animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {

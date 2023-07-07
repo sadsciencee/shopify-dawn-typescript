@@ -107,7 +107,7 @@
 @include media-query($s-up) {
   .footer-block__details-content .list-menu__item--link:hover,
   .copyright__content a:hover {
-    color: rgb(var(--color-foreground));
+    color: rgb(#{$schemaColorForeground});
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }
@@ -140,5 +140,10 @@
     .footer__content-top .grid__item {
       padding-left: 3rem;
     }
+  }
+}
+@include media-query($m-up) {
+  .footer-block__heading {
+    font-size: calc(#{$fontHeadingScale} * 1.8rem);
   }
 }

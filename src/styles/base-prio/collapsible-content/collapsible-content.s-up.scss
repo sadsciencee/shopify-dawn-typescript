@@ -34,4 +34,10 @@
 			padding-right: 0;
 		}
 	}
+	@include media-query($m-up) {
+		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
+		.collapsible-content__grid--reverse .collapsible-content__grid-item {
+			padding-left: 7rem;
+		}
+	}
 }

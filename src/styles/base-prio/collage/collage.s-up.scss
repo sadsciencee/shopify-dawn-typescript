@@ -3,8 +3,8 @@
 @include media-query($s-up) {
   .collage {
     grid-auto-flow: column;
-    grid-column-gap: var(--grid-desktop-horizontal-spacing);
-    grid-row-gap: var(--grid-desktop-vertical-spacing);
+    grid-column-gap: #{$xSpacingDesktop};
+    grid-row-gap: #{$ySpacingDesktop};
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

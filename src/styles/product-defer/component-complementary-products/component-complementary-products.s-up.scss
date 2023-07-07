@@ -2,11 +2,11 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.complementary-slide > ul {
-		gap: var(--grid-desktop-vertical-spacing);
+		gap: #{$ySpacingDesktop};
 	}
 
 	.complementary-slide.complementary-slide--standard > ul {
-		gap: calc(var(--grid-desktop-vertical-spacing) + 8px);
+		gap: calc(#{$ySpacingDesktop} + 8px);
 	}
 
 	.complementary-products__container .price--on-sale .price-item--regular {

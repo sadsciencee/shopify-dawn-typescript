@@ -56,7 +56,7 @@
             >
               {% render 'product-variant-options', product: product, option: option, block: block %}
             </select>
-            {% render 'icon-caret' %}
+            {% render 'icon-default', icon: 'caret' %}
           </div>
         </div>
       {%- endfor -%}
@@ -116,7 +116,7 @@
           </option>
         {%- endfor -%}
       </select>
-      {% render 'icon-caret' %}
+      {% render 'icon-default', icon: 'caret' %}
     </div>
   </div>
 </noscript>

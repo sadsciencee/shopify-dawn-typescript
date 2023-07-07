@@ -17,3 +17,9 @@
     max-width: 50rem;
   }
 }
+
+@include media-query($m-up) {
+  .rich-text__blocks {
+    max-width: 78rem;
+  }
+}

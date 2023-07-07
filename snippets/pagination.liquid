@@ -13,8 +13,7 @@
 
 {% render 'ucoast-style-tag',
 	file: 'css-optional-component-pagination',
-	ignore_s_up: true,
-	ignore_m_up: true
+	ignore_s_up: true
 %}
 
 {%- if paginate.parts.size > 0 -%}
@@ -28,7 +27,7 @@
 							class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
 							aria-label="{{ 'general.pagination.previous' | t }}"
 						>
-							{% render 'icon-caret' %}
+							{% render 'icon-default', icon: 'caret' %}
 						</a>
 					</li>
 				{%- endif -%}
@@ -68,7 +67,7 @@
 							class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
 							aria-label="{{ 'general.pagination.next' | t }}"
 						>
-							{%- render 'icon-caret' -%}
+							{%- render 'icon-default', icon: 'caret' -%}
 						</a>
 					</li>
 				{%- endif -%}

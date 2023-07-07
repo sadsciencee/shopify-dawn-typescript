@@ -171,6 +171,11 @@
     note: consider removing from this stylesheet if multirow-specific styles increase signficantly
   */
 	.multirow__inner {
-		row-gap: var(--grid-desktop-vertical-spacing);
+		row-gap: #{$ySpacingDesktop};
+	}
+}
+@include media-query($m-up) {
+	.image-with-text__content {
+		padding: 6rem 7rem 7rem;
 	}
 }

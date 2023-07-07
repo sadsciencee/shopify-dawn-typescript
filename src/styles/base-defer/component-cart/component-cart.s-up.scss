@@ -56,3 +56,12 @@
 		gap: 1rem;
 	}
 }
+@include media-query($m-up) {
+	.cart__warnings {
+		padding: 7rem 0 1rem;
+	}
+
+	.cart__empty-text {
+		margin: 0 0 3rem;
+	}
+}

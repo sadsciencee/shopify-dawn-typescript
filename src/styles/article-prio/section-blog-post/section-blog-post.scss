@@ -24,7 +24,7 @@
 .article-template header {
   margin-top: 4.4rem;
   margin-bottom: 2rem;
-  line-height: calc(0.8 / var(--font-body-scale));
+  line-height: calc(0.8 / #{$fontBodyScale});
 }
 
 .article-template__title {
@@ -81,8 +81,8 @@
 }
 
 .article-template__comments-comment {
-  color: rgba(var(--color-foreground), 0.75);
-  background-color: rgb(var(--color-background));
+  color: rgba(#{$schemaColorForeground}, 0.75);
+  background-color: rgb(#{$schemaColorBackground});
   margin-bottom: 1.5rem;
   padding: 2rem 2rem 1.5rem;
 }

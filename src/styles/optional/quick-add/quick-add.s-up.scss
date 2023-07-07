@@ -16,13 +16,13 @@
 
 	quick-add-modal .product:not(.product--no-media) .product__media-wrapper {
 		max-width: 45%;
-		width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(45% - #{$xSpacingDesktop} / 2);
 	}
 
 	quick-add-modal .product:not(.product--no-media) .product__info-wrapper {
 		padding-left: 4rem;
 		max-width: 54%;
-		width: calc(54% - var(--grid-desktop-horizontal-spacing) / 2);
+		width: calc(54% - #{$xSpacingDesktop} / 2);
 	}
 
 	quick-add-modal
@@ -38,5 +38,10 @@
 
 	quick-add-modal .product-media-container.constrain-height {
 		--constrained-min-height: 400px;
+	}
+}
+@include media-query($m-up) {
+	.quick-add-modal__content {
+		width: 70%;
 	}
 }

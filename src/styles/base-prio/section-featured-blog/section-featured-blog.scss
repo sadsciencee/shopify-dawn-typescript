@@ -18,12 +18,12 @@
 
 @include media-query($s-down) {
 	.blog__post.article {
-		width: calc(100% - 3rem - var(--grid-mobile-horizontal-spacing));
+		width: calc(100% - 3rem - #{$xSpacingMobile});
 	}
 }
 
 .background-secondary .blog-placeholder__content {
-	background-color: rgb(var(--color-background));
+	background-color: rgb(#{$schemaColorBackground});
 }
 
 .blog__posts .card-wrapper {

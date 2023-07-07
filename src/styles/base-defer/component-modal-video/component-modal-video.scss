@@ -1,7 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .modal-video {
-  background: rgba(var(--color-foreground), 0.2);
+  background: rgba(#{$schemaColorForeground}, 0.2);
   box-sizing: border-box;
   height: 100%;
   left: 0;
@@ -22,7 +22,7 @@
 }
 
 .modal-video__content {
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
   height: 100%;
   margin: 0;
   overflow: auto;
@@ -33,10 +33,10 @@
 
 .modal-video__toggle {
   align-items: center;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(#{$schemaColorBackground});
   border-radius: 50%;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
-  color: rgba(var(--color-foreground), 0.55);
+  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.1);
+  color: rgba(#{$schemaColorForeground}, 0.55);
   cursor: pointer;
   display: flex;
   justify-content: center;

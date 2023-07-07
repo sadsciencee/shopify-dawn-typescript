@@ -3,8 +3,8 @@
 .blog-articles {
   display: grid;
   grid-gap: 1rem;
-  column-gap: var(--grid-mobile-horizontal-spacing);
-  row-gap: var(--grid-mobile-vertical-spacing);
+  column-gap: #{$xSpacingMobile};
+  row-gap: #{$ySpacingMobile};
 }
 
 .blog-articles .card-wrapper {

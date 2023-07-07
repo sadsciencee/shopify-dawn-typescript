@@ -4,7 +4,7 @@ import {
   targetRequired
 } from '@/scripts/functions';
 import { type StickyHeader } from '@/scripts/theme/sticky-header';
-import { removeTrapFocus, trapFocus } from '@/scripts/theme/global';
+import { removeTrapFocus, trapFocus } from '@/scripts/global';
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
 import { type SectionApiResponse } from '@/scripts/types/responses';
 import { UcoastEl } from '@/scripts/core/UcoastEl';

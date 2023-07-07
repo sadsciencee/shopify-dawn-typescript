@@ -29,11 +29,11 @@ product-recommendations:not(.is-accordion) .complementary-products__container {
 .complementary-slide > ul {
   display: flex;
   flex-direction: column;
-  gap: var(--grid-mobile-vertical-spacing);
+  gap: #{$ySpacingMobile};
 }
 
 .complementary-slide.complementary-slide--standard > ul {
-  gap: calc(var(--grid-mobile-vertical-spacing) + 8px);
+  gap: calc(#{$ySpacingMobile} + 8px);
 }
 
 
@@ -63,10 +63,10 @@ product-recommendations.is-accordion + .accordion {
 }
 
 .complementary-products > .summary__title .icon-accordion {
-  fill: rgb(var(--color-foreground));
-  height: calc(var(--font-heading-scale) * 2rem);
-  margin-right: calc(var(--font-heading-scale) * 1rem);
-  width: calc(var(--font-heading-scale) * 2rem);
+  fill: rgb(#{$schemaColorForeground});
+  height: calc(#{$fontHeadingScale} * 2rem);
+  margin-right: calc(#{$fontHeadingScale} * 1rem);
+  width: calc(#{$fontHeadingScale} * 2rem);
 }
 
 .complementary-products__container .card--card .card__content,

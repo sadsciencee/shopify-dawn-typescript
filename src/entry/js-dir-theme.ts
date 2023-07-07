@@ -14,9 +14,6 @@ import { SlideshowComponent } from '@/scripts/theme/slideshow-component'
 import { StickyHeader } from '@/scripts/theme/sticky-header'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { SearchForm } from '@/scripts/theme/search-form'
-import { VariantRadios } from '@/scripts/theme/variant-radios'
-import { VariantSelects } from '@/scripts/theme/variant-selects'
-import { ProductRecommendations } from '@/scripts/theme/product-recommendations'
 
 safeDefineElement(QuantityInput)
 safeDefineElement(MenuDrawer)
@@ -26,9 +23,7 @@ safeDefineElement(ModalOpener)
 safeDefineElement(DeferredMedia)
 safeDefineElement(SliderComponent)
 safeDefineElement(SlideshowComponent)
-safeDefineElement(VariantSelects)
-safeDefineElement(VariantRadios)
-safeDefineElement(ProductRecommendations)
+
 safeDefineElement(ShowMoreButton)
 safeDefineElement(StickyHeader)
 safeDefineElement(DetailsDisclosure)

@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
+    "theme_name": "uCoast Dawn",
     "theme_version": "10.0.0",
-    "theme_author": "Shopify",
+    "theme_author": "uCoast Web",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_support_url": "https://ucoastweb.com/"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -166,10 +166,20 @@
         "id": "spacing_sections",
         "min": 0,
         "max": 100,
-        "step": 4,
-        "unit": "px",
+        "step": 2,
+        "unit": "ax",
         "label": "t:settings_schema.layout.settings.spacing_sections.label",
-        "default": 0
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "ax",
+        "label": "t:settings_schema.layout.settings.spacing_sections_mobile.label",
+        "default": 20
       },
       {
         "type": "header",

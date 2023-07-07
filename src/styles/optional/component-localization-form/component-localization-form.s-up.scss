@@ -30,3 +30,8 @@
     min-width: 20rem;
   }
 }
+@include media-query($m-up) {
+  .menu-drawer__localization {
+    display: none;
+  }
+}

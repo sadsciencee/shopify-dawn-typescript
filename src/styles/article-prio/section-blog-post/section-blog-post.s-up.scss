@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-template > *:first-child:not(.article-template__hero-container) {
-		margin-top: calc(5rem + var(--page-width-margin));
+		margin-top: calc(5rem + #{$pageWidthMargin});
 	}
 	.article-template header {
 		margin-top: 5rem;
@@ -38,5 +38,21 @@
 
 	.article-template__hero-large {
 		height: 66rem;
+	}
+}
+@include media-query($m-up) {
+	.article-template__hero-small {
+		height: 27.5rem;
+	}
+
+	.article-template__hero-medium {
+		height: 55rem;
+	}
+
+	.article-template__hero-large {
+		height: 82.5rem;
+	}
+	.article-template__comments .pagination-wrapper {
+		margin: 5rem 0 8rem;
 	}
 }
