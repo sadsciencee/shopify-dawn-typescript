@@ -379,6 +379,10 @@
 	},
 	"sections": {
 		"all": {
+			"enable_lazy_load": {
+				"label": "Enable lazy loading",
+				"info": "De-select if this section appears above the fold"
+			},
 			"animation": {
 				"content": "Animations",
 				"image_behavior": {
