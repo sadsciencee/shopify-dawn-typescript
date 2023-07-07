@@ -17,7 +17,7 @@
 			<div class="title-wrapper-with-link{% if posts_displayed > 2 %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %} title-wrapper--no-top-margin">
 				<h2
 					id="SectionHeading-{{ section.id }}"
-					class="blog__title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					class="blog__title m-0 inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
 					{% if settings.animations_reveal_on_scroll %}
 						data-cascade
 					{% endif %}
@@ -87,7 +87,7 @@
 								style="--animation-order: {{ forloop.index }};"
 							{% endif %}
 						>
-							<div class="article-card-wrapper card-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+							<div class="article-card-wrapper card-wrapper w-100{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
 								<div
 									class="
 										card article-card card--{{ settings.blog_card_style }}

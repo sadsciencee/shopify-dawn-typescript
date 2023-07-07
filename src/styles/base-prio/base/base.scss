@@ -566,7 +566,7 @@ summary::-webkit-details-marker {
 	row-gap: #{$ySpacingMobile};
 }
 
-.grid:last-child {
+.grid:last-child, .grid.mb-0 {
 	margin-bottom: 0;
 }
 

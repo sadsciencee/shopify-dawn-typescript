@@ -1,12 +1,9 @@
 @import '../../global/variables.scss';
 @import '../../global/functions.scss';
-.collection-list {
-	margin-top: 0;
-	margin-bottom: 0;
-}
 
-.collection-list-title {
-	margin: 0;
+.collection-list__item:only-child {
+	max-width: 100%;
+	width: 100%;
 }
 
 @include media-query($s-down) {
@@ -24,14 +21,6 @@
 		padding-left: #{$ax15};
 		padding-right: #{$ax15};
 	}
-}
-
-.collection-list__item:only-child {
-	max-width: 100%;
-	width: 100%;
-}
-
-@include media-query($s-down) {
 	.slider.collection-list--1-items {
 		padding-bottom: 0;
 	}

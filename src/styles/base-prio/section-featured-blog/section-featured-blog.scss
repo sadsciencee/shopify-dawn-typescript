@@ -4,10 +4,6 @@
 	height: 100%;
 }
 
-.blog__title {
-	margin: 0;
-}
-
 .blog__posts.articles-wrapper {
 	margin-bottom: #{$ax10};
 }
@@ -24,10 +20,6 @@
 
 .background-secondary .blog-placeholder__content {
 	background-color: rgb(#{$schemaColorBackground});
-}
-
-.blog__posts .card-wrapper {
-	width: 100%;
 }
 
 .blog__button {
