@@ -6,7 +6,7 @@ import {
 	targetClosestOptional,
 	targetClosestRequired,
 } from '@/scripts/functions'
-import { removeTrapFocus, trapFocus } from '@/scripts/theme/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class MenuDrawer extends UcoastEl {

@@ -1,6 +1,6 @@
 import { MenuDrawer } from '@/scripts/theme/menu-drawer';
 import { closestOptional, qsRequired } from '@/scripts/functions';
-import { trapFocus } from '@/scripts/theme/global';
+import { trapFocus } from '@/scripts/global';
 
 export class HeaderDrawer extends MenuDrawer {
   static override htmlSelector = 'header-drawer'

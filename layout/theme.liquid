@@ -100,18 +100,7 @@
 				document.documentElement.classList.add('shopify-design-mode')
 			}
 		</script>
-		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
-		{%- if settings.animations_reveal_on_scroll -%}
-			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
-		{%- endif -%}
-		<hls-loader>
-			{% liquid
-				capture input
-					render 'ucoast', ucoast: 'js-function-load-hls.ts'
-				endcapture
-				render 'strip-src', input: input
-			%}
-		</hls-loader>
+		{% render 'ucoast', ucoast: 'js-function-global-setup.ts' %}
 	</head>
 
 	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -128,6 +117,19 @@
 		<main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
 			{{ content_for_layout }}
 		</main>
+
+		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
+		{%- if settings.animations_reveal_on_scroll -%}
+			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
+		{%- endif -%}
+		<hls-loader>
+			{% liquid
+				capture input
+					render 'ucoast', ucoast: 'js-function-load-hls.ts'
+				endcapture
+				render 'ucoast-strip-src', input: input
+			%}
+		</hls-loader>
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-defer', preload_stylesheet: true %}
 

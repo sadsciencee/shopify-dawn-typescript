@@ -1,15 +1,14 @@
 import {
 	focusVisiblePolyfill,
-	getFocusableElements,
-	initializeSummaryA11y,
-	targetRequired,
-} from '@/scripts/functions'
+	getFocusableElements, initializeSummaryA11y,
+	targetRequired
+} from '@/scripts/functions';
 
 import { type FocusableHTMLElement } from '@/scripts/types/theme'
+import { mediaLoader } from '@/scripts/mediaLoader';
 
 // this is a default shopify function that normally runs in global scope
 // I moved it to functions for clarity
-initializeSummaryA11y()
 
 // trapFocusHandlers variable and associated functions are part of the global scope
 // this function should always run first
@@ -72,12 +71,7 @@ export function trapFocus(container: HTMLElement, elementToFocus: HTMLElement | 
 	}
 }
 
-// Here run the querySelector to figure out if the browser supports :focus-visible or not and run code based on it.
-try {
-	document.querySelector(':focus-visible')
-} catch (e) {
-	focusVisiblePolyfill()
-}
+
 
 // don't know why shopify put this function below the above but I'm not about to go debug it
 
@@ -94,4 +88,14 @@ export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefi
 	}
 
 	if (elementToFocus) elementToFocus.focus()
+}
+export function globalSetup() {
+	initializeSummaryA11y()
+	try {
+		document.querySelector(':focus-visible')
+	} catch (e) {
+		focusVisiblePolyfill()
+	}
+// mediaLoader
+	mediaLoader()
 }
