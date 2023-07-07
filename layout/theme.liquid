@@ -65,8 +65,8 @@
 					file: 'css-dir-article-prio',
 					preload_stylesheet: true
 				%}
-			{% when 'customer' %}
-
+			{% when 'cart' %}
+				{% render 'ucoast-style-tag', file: 'css-optional-component-cart' %}
 		{% endcase %}
 		{% if request.page_type contains 'customers' %}
 			{% render 'ucoast-style-tag', file: 'css-dir-customer-prio', preload_stylesheet: true %}
