@@ -1,5 +1,5 @@
-@import '../variables.scss';
-@import '../functions.scss';
+@import './variables.scss';
+@import './functions.scss';
 
 // root CSS vars
 :root {
@@ -534,4 +534,48 @@ deferred-media {
 
 .bg-transparent {
 	background: transparent;
+}
+@include media-query($s-up) {
+	:root {
+		--announcement-height: calc(var(--ax) * 27);
+		--header-height: calc(var(--ax) * 73);
+		--viewport-minus-header: calc(var(--viewport-height) - var(--header-height));
+
+		--ax: #{$desktopBaseScale};
+		--x-spacing: #{$xSpacingDesktop};
+		--y-spacing: #{$ySpacingDesktop};
+		--section-spacing: #{$sectionSpacingDesktop};
+	}
+	body {
+		font-size: 1.6rem;
+	}
+}
+@include media-query($m-up) {
+	.m-up-hide {
+		display: none !important;
+	}
+	.my-auto--m-up {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+	.flex--m-up {
+		display: flex;
+	}
+	.viewport--m-up {
+		height: $viewport;
+	}
+	.vp-header--m-up {
+		height: calc(#{$viewport} - #{$headerHeight});
+	}
+	.vp-header-x--m-up {
+		height: calc(#{$viewport} - #{$headerHeight} - #{$xSpacing});
+	}
+	.vp-announcement--m-up {
+		height: calc(#{$viewport} - #{$announcementHeight});
+	}
+	.vp-combined--m-up {
+		@include media-query($m-up) {
+			height: calc(#{$viewport} - #{$headerHeight} - #{$announcementHeight});
+		}
+	}
 }
