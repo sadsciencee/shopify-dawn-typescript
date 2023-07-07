@@ -1,120 +1,108 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
 .collage-wrapper-title {
-  margin-bottom: #{$ax30};
+	margin-bottom: #{$ax30};
 }
 
-
 .collage__item > * {
-  width: 100%;
+	width: 100%;
 }
 
 .collage__item .card__content {
-  flex-grow: initial;
+	flex-grow: initial;
 }
 
-
 .collage-card {
-  border-radius: var(--border-radius);
-  border: var(--border-width) solid rgba(#{$schemaColorForeground}, var(--border-opacity));
-  padding: var(--image-padding);
+	border-radius: var(--border-radius);
+	border: var(--border-width) solid rgba(#{$schemaColorForeground}, var(--border-opacity));
+	padding: var(--image-padding);
 }
 
 /* Needed for gradient continuity with or without animation, background-attachment: local scopes the gradient to its container which happens automatically when a transform is applied (animation on scroll) */
 .collage-card.gradient {
-  transform: perspective(0);
+	transform: perspective(0);
 }
 
 .collage-card:after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
-    rgba(#{$schemaColorShadow}, var(--shadow-opacity));
-  width: calc(var(--border-width) * 2 + 100%);
-  height: calc(var(--border-width) * 2 + 100%);
-  top: calc(var(--border-width) * -1);
-  left: calc(var(--border-width) * -1);
+	content: '';
+	position: absolute;
+	z-index: -1;
+	border-radius: var(--border-radius);
+	box-shadow: $comboBoxShadow1;
+	width: calc(var(--border-width) * 2 + 100%);
+	height: calc(var(--border-width) * 2 + 100%);
+	top: calc(var(--border-width) * -1);
+	left: calc(var(--border-width) * -1);
 }
 
-
 .collage-card .media {
-  height: 100%;
-  overflow: hidden;
-  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
+	border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
 }
 
 .collage-card .deferred-media {
-  height: 100%;
-  overflow: visible;
-}
-
-.collage-card .deferred-media__poster {
-  background-color: transparent;
-  border: 0;
+	overflow: visible;
 }
 
 .collage-card .deferred-media__poster:after {
-  z-index: 1;
-  outline-offset: #{$ax3};
+	z-index: 1;
+	outline-offset: #{$ax3};
 }
 
 .collage-card .deferred-media__poster:focus:after {
-  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow2;
+	outline: $comboOutline1;
 }
 
 .collage-card .deferred-media__poster:focus-visible:after {
-  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow2;
+	outline: $comboOutline1;
 }
 
 .collage-card .deferred-media__poster:focus:not(:focus-visible),
 .collage-card .deferred-media__poster:focus:not(:focus-visible):after {
-  outline: none;
-  box-shadow: none;
+	outline: none;
+	box-shadow: none;
 }
 
 .collage-card .deferred-media__poster:focus {
-  outline: none;
-  box-shadow: none;
+	outline: none;
+	box-shadow: none;
 }
 @include media-query($s-down) {
-  .collage {
-    grid-column-gap: #{$xSpacingMobile};
-    grid-row-gap: #{$ySpacingMobile};
-  }
+	.collage {
+		grid-column-gap: #{$xSpacingMobile};
+		grid-row-gap: #{$ySpacingMobile};
+	}
 
-  .collage--mobile {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+	.collage--mobile {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
 
-  .collage--mobile .collage__item--left:nth-child(3n - 2) {
-    grid-column: span 2;
-  }
+	.collage--mobile .collage__item--left:nth-child(3n - 2) {
+		grid-column: span 2;
+	}
 
-  .collage--mobile .collage__item--left:nth-child(3n - 2):nth-last-child(2) {
-    grid-column: span 1;
-  }
+	.collage--mobile .collage__item--left:nth-child(3n - 2):nth-last-child(2) {
+		grid-column: span 1;
+	}
 
-  .collage--mobile .collage__item--left:nth-child(3n) {
-    grid-column-start: 2;
-  }
+	.collage--mobile .collage__item--left:nth-child(3n) {
+		grid-column-start: 2;
+	}
 
-  .collage--mobile .collage__item--right:nth-child(3n - 2) {
-    grid-column-start: 1;
-  }
+	.collage--mobile .collage__item--right:nth-child(3n - 2) {
+		grid-column-start: 1;
+	}
 
-  .collage--mobile .collage__item--right:nth-child(3n - 2):last-child {
-    grid-column: span 2;
-  }
+	.collage--mobile .collage__item--right:nth-child(3n - 2):last-child {
+		grid-column: span 2;
+	}
 
-  .collage--mobile .collage__item--right:nth-child(3n - 1) {
-    grid-column-start: 2;
-  }
+	.collage--mobile .collage__item--right:nth-child(3n - 1) {
+		grid-column-start: 2;
+	}
 
-  .collage--mobile .collage__item--right:nth-child(3n) {
-    grid-column: 1 / span 2;
-  }
+	.collage--mobile .collage__item--right:nth-child(3n) {
+		grid-column: 1 / span 2;
+	}
 }

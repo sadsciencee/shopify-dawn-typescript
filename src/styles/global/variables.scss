@@ -201,7 +201,11 @@ $variantPillsShadowVerticalOffset: var(--pills-shadow-vertical-offset);
 $variantPillsShadowBlurRadius: var(--pills-shadow-blur-radius);
 
 
-
+// added to framework
+$headerBottomPositionDesktop: var(--header-bottom-position-desktop);
+$comboBoxShadow1: var(--combo-box-shadow-1);
+$comboBoxShadow2: var(--combo-box-shadow-2);
+$comboOutline1: var(--combo-outline-1);
 
 
 @mixin box-shadow {

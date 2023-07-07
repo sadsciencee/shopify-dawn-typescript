@@ -406,19 +406,17 @@ summary::-webkit-details-marker {
 }
 
 *:focus-visible {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{$ax3};
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	box-shadow: $comboBoxShadow2;
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{$ax3};
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	box-shadow: $comboBoxShadow2;
 }
 
 /* Negate the fallback side-effect for browsers that support :focus-visible */
@@ -432,14 +430,14 @@ summary::-webkit-details-marker {
 */
 
 .focus-inset:focus-visible {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{ax(-2)};
 	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .focused.focus-inset,
 .no-js .focus-inset:focus {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{ax(-2)};
 	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3);
 }
@@ -460,7 +458,7 @@ summary::-webkit-details-marker {
 }
 
 .focus-offset:focus-visible {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{$ax10};
 	box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}),
 		0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
@@ -468,7 +466,7 @@ summary::-webkit-details-marker {
 
 .focus-offset.focused,
 .no-js .focus-offset:focus {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{$ax10};
 	box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}),
 		0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
@@ -717,8 +715,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .cart__dynamic-checkout-buttons iframe {
-	box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-		var(--shadow-blur-radius) rgba(#{$schemaColorShadow}, var(--shadow-opacity));
+	box-shadow: $comboBoxShadow1;
 }
 
 .button,
@@ -754,8 +751,7 @@ button.shopify-payment-button__button--unbranded {
 	left: 0;
 	z-index: -1;
 	border-radius: #{$buttonsRadiusOutset};
-	box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-		var(--shadow-blur-radius) rgba(#{$schemaColorShadow}, var(--shadow-opacity));
+	box-shadow: $comboBoxShadow1;
 }
 
 .button:after,
@@ -1031,7 +1027,7 @@ details[open] > .share-button__fallback {
 
 .share-button__fallback .field__input:focus,
 .share-button__fallback .field__input:-webkit-autofill {
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	outline: $comboOutline1;
 	outline-offset: #{$ax1};
 	box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorBackground}),
 		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);

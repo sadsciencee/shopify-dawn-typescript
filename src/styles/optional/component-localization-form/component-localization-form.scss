@@ -189,7 +189,7 @@ noscript .localization-selector.link {
 }
 
 .header__localization .localization-form__select.link:focus-visible {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{ax(-2)};
   box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3);
 }

@@ -115,20 +115,20 @@
         "collection-0": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "dresses"
           }
         },
         "product": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "abrego-dress",
             "second_image": false
           }
         },
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "hydrogen"
           }
         }
       },
@@ -155,6 +155,7 @@
         "heading_size": "h1",
         "enable_video_looping": false,
         "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify:\/\/shop_images\/EssentialOil-Angelica-ANGj.pg.jpg",
         "description": "",
         "full_width": false,
         "color_scheme": "background-1",
@@ -222,6 +223,7 @@
         "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-0": {
           "type": "row",
           "settings": {
+            "image": "shopify:\/\/shop_images\/EssentialOil-CinnamonBark-CIB.jpg",
             "caption": "Caption",
             "heading": "Row",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
@@ -232,6 +234,7 @@
         "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-1": {
           "type": "row",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Hydrosol-BayLaurel-BAL.jpg",
             "caption": "Caption",
             "heading": "Row",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
@@ -242,6 +245,7 @@
         "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2": {
           "type": "row",
           "settings": {
+            "image": "shopify:\/\/shop_images\/EssentialOil-SiberianFir-PNE.jpg",
             "caption": "Caption",
             "heading": "Row",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
@@ -277,6 +281,7 @@
         "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-0": {
           "type": "slide",
           "settings": {
+            "image": "shopify:\/\/shop_images\/carrier-cocoabutter.jpg",
             "heading": "Image slide",
             "heading_size": "h1",
             "subheading": "Tell your brand's story through images",
@@ -294,6 +299,7 @@
         "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-1": {
           "type": "slide",
           "settings": {
+            "image": "shopify:\/\/shop_images\/EssentialOil-SiberianFir-PNE.jpg",
             "heading": "Image slide",
             "heading_size": "h1",
             "subheading": "Tell your brand's story through images",
@@ -325,23 +331,6 @@
         "space_above": 4,
         "mobile_space_above": -1
       }
-    },
-    "be643457-8f10-42ef-8351-b8c9edc300e9": {
-      "type": "featured-blog",
-      "settings": {
-        "heading": "Blog posts",
-        "heading_size": "h1",
-        "blog": "",
-        "post_limit": 3,
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "show_view_all": true,
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
     }
   },
   "order": [
@@ -352,7 +341,6 @@
     "video",
     "multicolumn",
     "13d0b711-48ba-483a-84fc-bcbb440aeb82",
-    "f0d6d105-6481-4c63-9ff2-e2d191a0f414",
-    "be643457-8f10-42ef-8351-b8c9edc300e9"
+    "f0d6d105-6481-4c63-9ff2-e2d191a0f414"
   ]
 }

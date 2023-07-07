@@ -108,16 +108,16 @@
 									class="no-js-hidden"
 									data-modal="#PopupModal-{{ block.id }}"
 								>
-									<div class="deferred-media">
+									<div class="deferred-media h-100">
 										<button
-											class="deferred-media__poster after-fill-outside full-unstyled-link"
+											class="deferred-media__poster b-0 bg-transparent after-fill-outside full-unstyled-link"
 											type="button"
 											aria-label="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
 											aria-haspopup="dialog"
 											data-media-id="{{ block.settings.video_url.id }}"
 										>
 											<div
-												class="media media--transparent ratio"
+												class="media media--transparent ratio h-100"
 												{% if block.settings.cover_image != blank %}
 													style="--ratio-percent: {{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%"
 												{% else %}
