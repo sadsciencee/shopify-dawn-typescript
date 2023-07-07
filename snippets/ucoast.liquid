@@ -4,7 +4,7 @@
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-37022a10.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ '_critical-css-f773db36.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
   <script src="{{ '_critical-js-ed5f8276.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
@@ -63,7 +63,7 @@
 {% elsif path == "/src/entry/css-dir-product-prio.s-up.scss" or path == "css-dir-product-prio.s-up.scss" %}
   {{ 'css-dir-product-prio.s-up-588d4790.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
-  {{ 'css-dir-product-prio-bae09bed.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-dir-product-prio-0da36b27.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-cart.s-up.scss" or path == "css-optional-component-cart.s-up.scss" %}
   {{ 'css-optional-component-cart.s-up-7df49572.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-cart.scss" or path == "css-optional-component-cart.scss" %}
@@ -92,6 +92,10 @@
   {{ 'css-optional-component-product-model.s-up-e399cb97.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
   {{ 'css-optional-component-product-model-5e7ce11d.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-recipient-form.s-up.scss" or path == "css-optional-component-recipient-form.s-up.scss" %}
+  {{ 'css-optional-component-recipient-form.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+{% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
+  {{ 'css-optional-component-recipient-form-b6e25a12.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-mask-blobs.s-up.scss" or path == "css-optional-mask-blobs.s-up.scss" %}
   {{ 'css-optional-mask-blobs.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}

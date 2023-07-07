@@ -40,8 +40,8 @@
     {%- unless settings.type_header_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
-
-    {{ 'template-giftcard.css' | asset_url | stylesheet_tag }}
+    {% render 'ucoast-style-tag', file: 'css-optional-template-giftcard', ignore_s_up: true  %}
+    {% render 'ucoast-style-tag', file: 'css-optional-component-recipient-form', ignore_s_up: true  %}
   </head>
 
   <body class="gradient gift-card">
