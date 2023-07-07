@@ -7,12 +7,12 @@
 }
 
 .totals > * {
-  font-size: 1.6rem;
+  font-size: #{$ax16};
   margin: 0;
 }
 
 .totals > h2 {
-  font-size: calc(#{$fontHeadingScale} * 1.6rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax16});
 }
 
 .totals * {
@@ -20,13 +20,13 @@
 }
 
 .totals > * + * {
-  margin-left: 2rem;
+  margin-left: #{$ax20};
 }
 
 .totals__subtotal-value {
-  font-size: 1.8rem;
+  font-size: #{$ax18};
 }
 
 .cart__ctas + .totals {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }

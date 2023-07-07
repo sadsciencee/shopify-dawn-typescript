@@ -2,38 +2,38 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-card__image--small .ratio::before {
-		padding-bottom: 14.3rem;
+		padding-bottom: ax(143);
 	}
 
 	.article-card__image--medium .ratio::before {
-		padding-bottom: 21.9rem;
+		padding-bottom: ax(219);
 	}
 
 	.article-card__image--large .ratio::before {
-		padding-bottom: 27.5rem;
+		padding-bottom: ax(275);
 	}
 }
 @supports not (inset: 10px) {
 	@include media-query($s-up) {
 		.articles-wrapper.grid {
-			margin-bottom: 7rem;
+			margin-bottom: #{ax(70)};
 		}
 	}
 }
 @include media-query($m-up) {
 	.article-card__link:not(:only-child) {
-		margin-right: 4rem;
+		margin-right: #{$ax40};
 	}
 
 	.article-card__image--small .ratio::before {
-		padding-bottom: 17.7rem;
+		padding-bottom: ax(177);
 	}
 
 	.article-card__image--medium .ratio::before {
-		padding-bottom: 30.7rem;
+		padding-bottom: ax(307);
 	}
 
 	.article-card__image--large .ratio::before {
-		padding-bottom: 40.7rem;
+		padding-bottom: ax(407);
 	}
 }

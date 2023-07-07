@@ -30,7 +30,7 @@
     <div class="product-media-modal__model" data-media-id="{{ media.id }}">
       <product-model class="deferred-media media media--transparent global-media-settings global-media-settings--no-shadow" style="padding-top: min(calc(100vh - 12rem), 100%)">
   {%- else -%}
-    <deferred-media class="deferred-media media global-media-settings global-media-settings--no-shadow" style="padding-top: min(calc(100vh - 12rem), {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%)" data-media-id="{{ media.id }}">
+    <deferred-media class="deferred-media media global-media-settings global-media-settings--no-shadow" style="padding-top: min(calc(100vh - {% render 'ucoast-ax', value: 120 %}), {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%)" data-media-id="{{ media.id }}">
   {%- endif -%}
 
     <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button">
@@ -41,19 +41,7 @@
           {%- render 'icon-default', icon: 'play' -%}
         {%- endif -%}
       </span>
-      <img
-        srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | image_url: width: 288 }} 288w,{% endif %}
-                {% if media.preview_image.width >= 576 %}{{ media.preview_image | image_url: width: 576 }} 576w,{% endif %}
-                {% if media.preview_image.width >= 550 %}{{ media.preview_image | image_url: width: 550 }} 550w,{% endif %}
-                {% if media.preview_image.width >= 1100 %}{{ media.preview_image | image_url: width: 1100 }} 1100w,{% endif %}
-                {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
-        src="{{ media | image_url: width: 550, height: 550 }}"
-        sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-        loading="lazy"
-        width="576"
-        height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
-        alt="{{ media.preview_image.alt | escape }}"
-      >
+      {% render 'ucoast-image', image: media.preview_image %}
     </button>
     <template>
       {%- case media.media_type -%}

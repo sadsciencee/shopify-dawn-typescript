@@ -2,38 +2,38 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.customer:not(.account):not(.order) {
-		max-width: 47.8rem;
+		max-width: ax(478);
 	}
 
 	.customer h2.form__message {
-		font-size: calc(#{$fontHeadingScale} * 2.2rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax22});
 	}
 
 	.customer table {
 		border: none;
-		box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.08);
+		box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.08);
 	}
 
 	.customer td {
-		padding-right: 2.2rem;
+		padding-right: #{$ax22};
 	}
 
 	.customer th,
 	.customer td:first-of-type {
 		text-align: left;
 		padding-left: 0;
-		padding-right: 2.2rem;
+		padding-right: #{$ax22};
 	}
 
 	.customer thead th,
 	.customer tbody td {
-		padding-top: 2.4rem;
-		padding-bottom: 2.4rem;
+		padding-top: #{$ax24};
+		padding-bottom: #{$ax24};
 	}
 
 	.customer th:first-of-type,
 	.customer td:first-of-type {
-		padding-left: 2.2rem;
+		padding-left: #{$ax22};
 	}
 
 	.customer tbody td {
@@ -41,7 +41,7 @@
 	}
 
 	.customer tbody td:first-of-type {
-		padding-top: 2.4rem;
+		padding-top: #{$ax24};
 	}
 
 	.customer tbody td:last-of-type {
@@ -54,22 +54,22 @@
 
 	.customer tfoot tr:first-of-type td,
 	.customer tfoot tr:first-of-type th {
-		padding-top: 2.4rem;
+		padding-top: #{$ax24};
 	}
 
 	.customer tfoot tr:last-of-type td,
 	.customer tfoot tr:last-of-type th {
-		padding-bottom: 2.4rem;
+		padding-bottom: #{$ax24};
 	}
 
 	.activate button[name='decline'] {
 		margin-top: inherit;
-		margin-left: 1rem;
+		margin-left: #{$ax10};
 	}
 
 	:is(.account, .order) {
-		padding-left: 5rem;
-		padding-right: 5rem;
+		padding-left: #{$ax50};
+		padding-right: #{$ax50};
 	}
 }
 @include media-query($m-only) {
@@ -78,7 +78,7 @@
 	}
 
 	.order > div:nth-of-type(2) > div:last-of-type div {
-		padding-right: 3.2rem;
+		padding-right: #{$ax32};
 	}
 }
 @include media-query($s-up) {
@@ -88,8 +88,8 @@
 	}
 
 	.account table td:first-of-type {
-		padding-top: 1.2rem;
-		padding-bottom: 1.2rem;
+		padding-top: #{$ax12};
+		padding-bottom: #{$ax12};
 	}
 
 	.order thead th:nth-last-child(-n + 3),
@@ -99,7 +99,7 @@
 
 	.order tfoot tr:last-of-type td,
 	.order tfoot tr:last-of-type th {
-		padding-bottom: 2.4rem;
+		padding-bottom: #{$ax24};
 	}
 
 	.order td .cart-discount {
@@ -115,15 +115,15 @@
 	}
 
 	.addresses li > button:first-of-type {
-		margin-top: 3rem;
+		margin-top: #{$ax30};
 	}
 
 	li[data-address] > h2 {
-		font-size: calc(#{$fontHeadingScale} * 2.2rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax22});
 	}
 
 	.addresses form > div:nth-of-type(1) {
-		margin-right: 2rem;
+		margin-right: #{$ax20};
 	}
 
 	.addresses form > div:nth-of-type(2) {
@@ -133,23 +133,23 @@
 	.addresses form > div:nth-of-type(1),
 	.addresses form > div:nth-of-type(2) {
 		box-sizing: border-box;
-		flex-basis: calc(50% - 1rem);
+		flex-basis: calc(50% - #{$ax10});
 	}
 }
 @include media-query($m-up) {
 	.customer .pagination {
-		margin-top: 7rem;
-		margin-bottom: 10rem;
+		margin-top: #{ax(70)};
+		margin-bottom: #{ax(100)};
 	}
 
 	:is(.account, .order) > div:nth-of-type(2) {
 		display: flex;
-		margin-top: 5rem;
+		margin-top: #{$ax50};
 	}
 
 	:is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
 		flex-grow: 1;
-		padding-right: 3.2rem;
+		padding-right: #{$ax32};
 	}
 
 	:is(.account, .order) h2 {

@@ -14,12 +14,12 @@
   }
 
   .rich-text__blocks {
-    max-width: 50rem;
+    max-width: ax(500);
   }
 }
 
 @include media-query($m-up) {
   .rich-text__blocks {
-    max-width: 78rem;
+    max-width: ax(780);
   }
 }

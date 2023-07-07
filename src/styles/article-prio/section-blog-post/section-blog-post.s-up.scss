@@ -2,57 +2,57 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-template > *:first-child:not(.article-template__hero-container) {
-		margin-top: calc(5rem + #{$pageWidthMargin});
+		margin-top: calc(#{$ax50} + #{$pageWidthMargin});
 	}
 	.article-template header {
-		margin-top: 5rem;
+		margin-top: #{$ax50};
 	}
 
 	.article-template__comment-wrapper {
-		margin-top: 6rem;
-		padding: 3.6rem 0;
+		margin-top: #{ax(60)};
+		padding: #{$ax36} 0;
 	}
 
 	.article-template__comments {
-		margin-bottom: 7rem;
+		margin-bottom: ax(70);
 	}
 
 	.article-template__comments-comment {
-		padding: 2rem 2.5rem;
+		padding: #{$ax20} #{$ax25};
 	}
 
 	.article-template__comment-fields {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 4rem;
+		grid-column-gap: #{$ax40};
 	}
 }
 @include media-query($m-only) {
 	.article-template__hero-small {
-		height: 22rem;
+		height: #{ax(220)};
 	}
 
 	.article-template__hero-medium {
-		height: 44rem;
+		height: #{ax(440)};
 	}
 
 	.article-template__hero-large {
-		height: 66rem;
+		height: ax(660);
 	}
 }
 @include media-query($m-up) {
 	.article-template__hero-small {
-		height: 27.5rem;
+		height: ax(275);
 	}
 
 	.article-template__hero-medium {
-		height: 55rem;
+		height: #{ax(550)};
 	}
 
 	.article-template__hero-large {
-		height: 82.5rem;
+		height: #{ax(825)};
 	}
 	.article-template__comments .pagination-wrapper {
-		margin: 5rem 0 8rem;
+		margin: #{$ax50} 0 #{ax(80)};
 	}
 }

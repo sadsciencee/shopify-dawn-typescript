@@ -20,23 +20,23 @@ cart-items.is-empty .title-wrapper-with-link,
 .cart__warnings {
   display: none;
   text-align: center;
-  padding: 3rem 0 1rem;
+  padding: #{$ax30} 0 #{$ax10};
 }
 
 .cart__empty-text {
-  margin: 4.5rem 0 2rem;
+  margin: #{$ax45} 0 #{$ax20};
 }
 
 .cart__contents > * + * {
-  margin-top: 2.5rem;
+  margin-top: #{$ax25};
 }
 
 .cart__login-title {
-  margin: 5.5rem 0 0.5rem;
+  margin: ax(55) 0 #{$ax5};
 }
 
 .cart__login-paragraph {
-  margin-top: 0.8rem;
+  margin-top: #{$ax8};
 }
 
 .cart__login-paragraph a {
@@ -49,8 +49,8 @@ cart-items {
 
 .cart__items {
   position: relative;
-  padding-bottom: 3rem;
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  padding-bottom: #{$ax30};
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .cart__items--disabled {
@@ -58,11 +58,11 @@ cart-items {
 }
 
 .cart__footer {
-  padding: 4rem 0 0;
+  padding: #{$ax40} 0 0;
 }
 
 .cart__footer-wrapper:last-child .cart__footer {
-  padding-bottom: 5rem;
+  padding-bottom: #{$ax50};
 }
 
 .cart__footer > div:only-child {
@@ -70,11 +70,11 @@ cart-items {
 }
 
 .cart__footer > * + * {
-  margin-top: 4rem;
+  margin-top: #{$ax40};
 }
 
 .cart__footer .discounts {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .cart__note {
@@ -86,8 +86,8 @@ cart-items {
   align-items: flex-end;
   position: absolute;
   line-height: 1;
-  height: 1.8rem;
-  top: -3rem;
+  height: #{$ax18};
+  top: ax(-30);
   color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
@@ -95,7 +95,7 @@ cart-items {
   height: 100%;
   position: relative;
   border-radius: #{$inputsRadius};
-  padding: 1rem 2rem;
+  padding: #{$ax10} #{$ax20};
 }
 
 .cart__note .text-area {
@@ -116,20 +116,20 @@ cart-items {
 }
 
 .cart__ctas > *:not(noscript:first-child) + * {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .cart__update-button {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .cart__dynamic-checkout-buttons {
-  max-width: 36rem;
+  max-width: ax(360);
   margin: 0 auto;
 }
 
 .cart__blocks > * + * {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .cart__dynamic-checkout-buttons div[role='button'] {
@@ -138,18 +138,18 @@ cart-items {
 
 .cart-note__label {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
   line-height: calc(1 + 1 / #{$fontBodyScale});
 }
 
 .tax-note {
-  margin: 2.2rem 0 1.6rem auto;
+  margin: #{$ax22} 0 #{$ax16} auto;
   text-align: center;
   display: block;
 }
 
 .cart__checkout-button {
-  max-width: 36rem;
+  max-width: ax(360);
 }
 
 .cart__ctas {

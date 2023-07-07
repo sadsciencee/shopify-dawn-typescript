@@ -2,7 +2,7 @@
 @import "../../global/functions.scss";
 .collage-wrapper-title {
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: #{$ax30};
 }
 
 .collage {
@@ -112,7 +112,7 @@
   content: '';
   position: absolute;
   z-index: 1;
-  outline-offset: 0.3rem;
+  outline-offset: #{$ax3};
   bottom: calc(var(--border-width) * -1);
   left: calc(var(--border-width) * -1);
   right: calc(var(--border-width) * -1);
@@ -120,13 +120,13 @@
 }
 
 .collage-card .deferred-media__poster:focus:after {
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 }
 
 .collage-card .deferred-media__poster:focus-visible:after {
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 }
 
 .collage-card .deferred-media__poster:focus:not(:focus-visible),

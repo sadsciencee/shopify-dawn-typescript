@@ -2,18 +2,18 @@
 @import "../../global/functions.scss";
 @include media-query($m-only) {
   .cart-item cart-remove-button {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: #{$ax45};
+    height: #{$ax45};
   }
 }
 @include media-query($s-up) {
   cart-remove-button .button {
-    min-width: 3.5rem;
-    min-height: 3.5rem;
+    min-width: #{$ax35};
+    min-height: #{$ax35};
   }
   .cart-item .loading-overlay {
     right: 0;
-    padding-top: 4.5rem;
+    padding-top: #{$ax45};
     bottom: auto;
   }
   .cart-items {
@@ -25,7 +25,7 @@
   }
 
   .cart-items th {
-    border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+    border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
   }
 
   .cart-items thead th:first-child {
@@ -33,12 +33,12 @@
   }
 
   .cart-items th + th {
-    padding-left: 4rem;
+    padding-left: #{$ax40};
   }
 
   .cart-items td {
     vertical-align: top;
-    padding-top: 4rem;
+    padding-top: #{$ax40};
   }
 
   .cart-item {
@@ -46,33 +46,33 @@
   }
 
   .cart-item > td + td {
-    padding-left: 4rem;
+    padding-left: #{$ax40};
   }
 
   .cart-item__details {
-    width: 35rem;
+    width: ax(350);
   }
 
   .cart-item__media {
-    width: 10rem;
+    width: #{ax(100)};
   }
 
   .cart-item cart-remove-button {
-    margin: 0.5rem 0 0 1.5rem;
+    margin: #{$ax5} 0 0 #{$ax15};
   }
 
   .cart-item__price-wrapper > *:only-child:not(.cart-item__discounted-prices) {
-    margin-top: 1rem;
+    margin-top: #{$ax10};
   }
 }
 @include media-query($m-up) {
   .cart-item .cart-item__quantity,
   .cart-items .cart-items__heading--wide {
-    padding-left: 6rem;
+    padding-left: #{ax(60)};
   }
 
   .cart-item__details {
-    width: 50rem;
+    width: ax(500);
   }
 
   .cart-items thead th:first-child {

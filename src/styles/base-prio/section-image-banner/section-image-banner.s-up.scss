@@ -12,7 +12,7 @@
 	.banner--content-align-left.banner--desktop-transparent .banner__box,
 	.banner--content-align-right.banner--desktop-transparent .banner__box,
 	.banner--medium.banner--desktop-transparent .banner__box {
-		max-width: 68rem;
+		max-width: ax(680);
 	}
 
 	.banner {
@@ -20,15 +20,15 @@
 	}
 
 	.banner--small:not(.banner--adapt) {
-		min-height: 42rem;
+		min-height: ax(420);
 	}
 
 	.banner--medium:not(.banner--adapt) {
-		min-height: 56rem;
+		min-height: ax(560);
 	}
 
 	.banner--large:not(.banner--adapt) {
-		min-height: 72rem;
+		min-height: ax(720);
 	}
 
 	.banner__content.banner__content--top-left {
@@ -81,7 +81,7 @@
 	}
 
 	.banner__content {
-		padding: 5rem;
+		padding: #{$ax50};
 	}
 
 	.banner__content--top-left {
@@ -131,7 +131,7 @@
 
 	.banner--desktop-transparent .banner__box {
 		background: transparent;
-		max-width: 89rem;
+		max-width: ax(890);
 		border: none;
 		border-radius: 0;
 		box-shadow: none;
@@ -146,18 +146,18 @@
 	}
 
 	.banner__box > * + .banner__text {
-		margin-top: 2rem;
+		margin-top: #{$ax20};
 	}
 
 	.banner__box {
 		width: auto;
-		max-width: 71rem;
-		min-width: 45rem;
+		max-width: ax(710);
+		min-width: ax(450);
 	}
 
 	.banner--content-align-center .banner__buttons--multiple > * {
 		flex-grow: 1;
-		min-width: 22rem;
+		min-width: #{ax(220)};
 	}
 
 	.banner--content-align-right .banner__buttons--multiple {
@@ -172,6 +172,6 @@
 }
 @media screen and (min-width: 1400px) {
 	.banner__box {
-		max-width: 90rem;
+		max-width: ax(900);
 	}
 }

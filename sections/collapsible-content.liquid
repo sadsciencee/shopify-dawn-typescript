@@ -36,14 +36,6 @@
 									style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"
 								{% endif %}
 							>
-								{%- liquid
-									assign padding_multiplier = 1
-									if section.settings.layout == 'section'
-										assign padding_multiplier = 2
-									endif
-									assign desktop_tablet_padding = 100 | times: padding_multiplier | append: 'px'
-									assign mobile_padding = 30 | times: padding_multiplier | append: 'px'
-								-%}
 								{% render 'ucoast-image', image: section.settings.image %}
 							</div>
 						</div>

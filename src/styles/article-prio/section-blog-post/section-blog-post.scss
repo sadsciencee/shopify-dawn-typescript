@@ -1,29 +1,29 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .article-template > *:first-child:not(.article-template__hero-container) {
-  margin-top: 5rem;
+  margin-top: #{$ax50};
 }
 
 .article-template__hero-container {
-  max-width: 130rem;
+  max-width: ax(1300);
   margin: 0 auto;
 }
 
 .article-template__hero-small {
-  height: 11rem;
+  height: #{ax(110)};
 }
 
 .article-template__hero-medium {
-  height: 22rem;
+  height: #{ax(220)};
 }
 
 .article-template__hero-large {
-  height: 33rem;
+  height: ax(330);
 }
 
 .article-template header {
-  margin-top: 4.4rem;
-  margin-bottom: 2rem;
+  margin-top: #{$ax44};
+  margin-bottom: #{$ax20};
   line-height: calc(0.8 / #{$fontBodyScale});
 }
 
@@ -32,11 +32,11 @@
 }
 
 .article-template__title:not(:only-child) {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .article-template__link {
-  font-size: 1.8rem;
+  font-size: #{$ax18};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,27 +45,27 @@
 
 .article-template__link .icon-wrap {
   display: flex;
-  margin-right: 1rem;
+  margin-right: #{$ax10};
   transform: rotate(180deg);
 }
 
 .article-template__content {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: #{$ax30};
+  margin-bottom: #{$ax30};
 }
 
 .article-template__social-sharing {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
 }
 
 .article-template__social-sharing + header,
 .article-template__social-sharing + .article-template__content {
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }
 
 .article-template__comment-wrapper {
-  margin-top: 5rem;
-  padding: 2.7rem 0;
+  margin-top: #{$ax50};
+  padding: #{$ax27} 0;
 }
 
 .article-template__comment-wrapper h2 {
@@ -73,32 +73,32 @@
 }
 
 .article-template__comments {
-  margin-bottom: 5rem;
+  margin-bottom: #{$ax50};
 }
 
 .article-template__comments-fields {
-  margin-bottom: 4rem;
+  margin-bottom: #{$ax40};
 }
 
 .article-template__comments-comment {
   color: rgba(#{$schemaColorForeground}, 0.75);
   background-color: rgb(#{$schemaColorBackground});
-  margin-bottom: 1.5rem;
-  padding: 2rem 2rem 1.5rem;
+  margin-bottom: #{$ax15};
+  padding: #{$ax20} #{$ax20} #{$ax15};
 }
 
 .article-template__comments-comment p {
-  margin: 0 0 1rem;
+  margin: 0 0 #{$ax10};
 }
 
 .article-template__comment-fields > * {
-  margin-bottom: 3rem;
+  margin-bottom: #{$ax30};
 }
 
 .article-template__comment-warning {
-  margin: 2rem 0 2.5rem;
+  margin: #{$ax20} 0 #{$ax25};
 }
 
 .article-template__back:last-child {
-  margin-bottom: 3.2rem;
+  margin-bottom: #{$ax32};
 }

@@ -5,7 +5,7 @@
 <style>
 	header-drawer {
 	    justify-self: start;
-	    margin-left: -1.2rem;
+	    margin-left: {% render 'ucoast-ax', value: -12 %};
 	}
 
 	{%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
@@ -40,7 +40,7 @@
 	}
 
 	summary.list-menu__item {
-	    padding-right: 2.7rem;
+	    padding-right: {% render 'ucoast-ax', value: 27 %};
 	}
 
 	.list-menu__item {
@@ -51,39 +51,44 @@
 
 	.list-menu__item--link {
 	    text-decoration: none;
-	    padding-bottom: 1rem;
-	    padding-top: 1rem;
+	    padding-bottom: {% render 'ucoast-ax', value: 10 %};
+	    padding-top: {% render 'ucoast-ax', value: 10 %};
 	    line-height: calc(1 + 0.8 / var(--f-body-scale));
 	}
 
 	@media screen and (min-width: 750px) {
 	    .list-menu__item--link {
-	        padding-bottom: 0.5rem;
-	        padding-top: 0.5rem;
+	        padding-bottom: {% render 'ucoast-ax', value: 5 %};
+	        padding-top: {% render 'ucoast-ax', value: 5 %};
 	    }
 	}
 </style>
+{% liquid
+	assign header_padding_top = section.settings.padding_top | times: 0.5
+	assign header_padding_bottom = section.settings.padding_bottom | times: 0.5
+	assign header_margin_bottom = section.settings.margin_bottom | times: 0.75
+%}
 
 {%- style -%}
 	.header {
-	padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+	padding: {% render 'ucoast-ax', value: header_padding_top %} {% render 'ucoast-ax', value: 30 %} {% render 'ucoast-ax', value: header_padding_bottom %} {% render 'ucoast-ax', value: 30 %};
 	}
 
 	.section-header {
 	position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
-	margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+	margin-bottom: {% render 'ucoast-ax', value: header_margin_bottom %};
 	}
 
 	@media screen and (min-width: 750px) {
 	.section-header {
-	margin-bottom: {{ section.settings.margin_bottom }}px;
+	margin-bottom: {% render 'ucoast-ax', value: section.settings.margin_bottom %};
 	}
 	}
 
 	@media screen and (min-width: 990px) {
 	.header {
-	padding-top: {{ section.settings.padding_top }}px;
-	padding-bottom: {{ section.settings.padding_bottom }}px;
+	padding-top: {% render 'ucoast-ax', value: section.settings.padding_top %};
+	padding-bottom: {% render 'ucoast-ax', value: section.settings.padding_bottom %};
 	}
 	}
 {%- endstyle -%}
@@ -155,13 +160,12 @@
                         <div class="header__heading-logo-wrapper">
                             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                             {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-                            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
                             {% render 'ucoast-image',
                                     image: settings.logo,
                                     image_class: 'header__heading-logo motion-reduce',
                                     alt: logo_alt,
-                                    preload: true
+                                    preload: true,
+									lazy_load: false
                             %}
                         </div>
                     {%- else -%}
@@ -504,7 +508,7 @@
 				"min": 0,
 				"max": 100,
 				"step": 4,
-				"unit": "px",
+				"unit": "ax",
 				"label": "t:sections.header.settings.margin_bottom.label",
 				"default": 0
 			},
@@ -518,7 +522,7 @@
 				"min": 0,
 				"max": 36,
 				"step": 4,
-				"unit": "px",
+				"unit": "ax",
 				"label": "t:sections.all.padding.padding_top",
 				"default": 20
 			},
@@ -528,7 +532,7 @@
 				"min": 0,
 				"max": 36,
 				"step": 4,
-				"unit": "px",
+				"unit": "ax",
 				"label": "t:sections.all.padding.padding_bottom",
 				"default": 20
 			}

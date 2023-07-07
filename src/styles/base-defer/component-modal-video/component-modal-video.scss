@@ -35,31 +35,31 @@
   align-items: center;
   background-color: rgb(#{$schemaColorBackground});
   border-radius: 50%;
-  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.1);
+  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.1);
   color: rgba(#{$schemaColorForeground}, 0.55);
   cursor: pointer;
   display: flex;
   justify-content: center;
   margin: 0 0 0 auto;
-  padding: 1.2rem;
+  padding: #{$ax12};
   position: fixed;
-  right: 0.5rem;
-  top: 2rem;
-  width: 4rem;
+  right: #{$ax5};
+  top: #{$ax20};
+  width: #{$ax40};
   z-index: 2;
 }
 
 .modal-video__toggle .icon {
   height: auto;
   margin: 0;
-  width: 2.2rem;
+  width: #{$ax22};
 }
 
 .modal-video__content-info {
-  height: calc(100% - 6rem);
+  height: calc(100% - #{ax(60)});
   margin: 0 auto;
-  padding-top: 8rem;
-  width: calc(100% - 1rem);
+  padding-top: #{ax(80)};
+  width: calc(100% - #{$ax10});
 }
 
 .modal-video__video,

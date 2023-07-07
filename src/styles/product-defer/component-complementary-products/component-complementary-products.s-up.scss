@@ -6,10 +6,10 @@
 	}
 
 	.complementary-slide.complementary-slide--standard > ul {
-		gap: calc(#{$ySpacingDesktop} + 8px);
+		gap: calc(#{$ySpacingDesktop} + #{$ax8});
 	}
 
 	.complementary-products__container .price--on-sale .price-item--regular {
-		font-size: 1.3rem;
+		font-size: #{$ax13};
 	}
 }

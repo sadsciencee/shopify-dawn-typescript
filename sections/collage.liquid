@@ -39,8 +39,6 @@
 												assign large_block = forloop.last
 											endif
 
-											assign grid_space_desktop = settings.spacing_grid_horizontal | divided_by: 2 | append: 'px'
-											assign grid_space_mobile = settings.spacing_grid_horizontal | divided_by: 4 | append: 'px'
 										-%}
 										{%- if large_block -%}
 											{% render 'ucoast-image', image: block.settings.image %}

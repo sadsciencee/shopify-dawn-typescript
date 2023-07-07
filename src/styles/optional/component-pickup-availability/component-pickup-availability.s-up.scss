@@ -3,7 +3,7 @@
 @include media-query($s-up) {
 	pickup-availability-drawer {
 		transform: translateX(100%);
-		width: 37.5rem;
+		width: ax(375);
 	}
 
 	pickup-availability-drawer[open] {

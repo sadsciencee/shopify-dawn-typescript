@@ -15,16 +15,16 @@
   }
 
   .banner--desktop-transparent .email-signup-banner__box--no-image .field__input {
-    box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.55);
+    box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.55);
   }
 
   .banner--desktop-transparent .email-signup-banner__box--no-image .field__input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorForeground}, 0.75);
+    box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorForeground}, 0.75);
   }
 
   .banner--desktop-transparent .email-signup-banner__box--no-image .field__button:focus-visible {
-    outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-    box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+    outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+    box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
   }
   .email-signup-banner-background-mobile {
     display: none;

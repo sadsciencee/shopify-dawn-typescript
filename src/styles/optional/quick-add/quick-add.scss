@@ -3,12 +3,12 @@
 .quick-add {
 	position: relative;
 	grid-row-start: 4;
-	margin: 0 0 1rem;
+	margin: 0 0 #{$ax10};
 	z-index: 1;
 }
 
 .card--card .quick-add {
-	margin: 0 1.3rem 1rem;
+	margin: 0 #{$ax13} #{$ax10};
 }
 
 .quick-add-modal {
@@ -37,7 +37,7 @@
 }
 
 .quick-add-modal__content {
-	--modal-height-offset: 3.2rem;
+	--modal-height-offset: #{$ax32};
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -47,7 +47,7 @@
 	background-color: rgb(#{$schemaColorBackground});
 	overflow: hidden;
 	max-width: #{$pageWidth};
-	width: calc(100% - 3rem);
+	width: calc(100% - #{$ax30});
 }
 
 .quick-add-modal__content img {
@@ -55,8 +55,8 @@
 }
 
 .quick-add-modal__content-info {
-	--modal-padding: 2.5rem;
-	padding-right: 4.4rem;
+	--modal-padding: #{$ax25};
+	padding-right: #{$ax44};
 	display: flex;
 	overflow-y: auto;
 	padding: var(--modal-padding);
@@ -72,8 +72,8 @@
 
 @include media-query($s-down) {
 	quick-add-modal .slider .product__media-item.grid__item {
-		margin-left: 1.5rem;
-		margin-right: 1.5rem;
+		margin-left: #{$ax15};
+		margin-right: #{$ax15};
 	}
 
 	.quick-add-modal__content {
@@ -85,25 +85,25 @@
 	}
 
 	quick-add-modal .product--mobile-columns .product__media-item {
-		width: calc(100% - 3rem - #{$xSpacingMobile});
+		width: calc(100% - #{$ax30} - #{$xSpacingMobile});
 	}
 }
 
 .quick-add-modal__toggle {
 	background-color: rgb(#{$schemaColorBackground});
-	border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.1);
+	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.1);
 	border-radius: 50%;
 	color: rgba(#{$schemaColorForeground}, 0.55);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	padding: 1.2rem;
+	padding: #{$ax12};
 	z-index: 5;
-	width: 4rem;
+	width: #{$ax40};
 	position: fixed;
-	top: 1.5rem;
-	right: 1.5rem;
+	top: #{$ax15};
+	right: #{$ax15};
 }
 
 .quick-add-modal__toggle:hover {
@@ -113,7 +113,7 @@
 .quick-add-modal__toggle .icon {
 	height: auto;
 	margin: 0;
-	width: 2.2rem;
+	width: #{$ax22};
 }
 
 quick-add-modal .product:not(.featured-product) .product__view-details {
@@ -160,8 +160,8 @@ quick-add-modal .product__title > a {
 quick-add-modal .product__title > a:hover {
 	color: rgb(#{$schemaColorForeground});
 	text-decoration: underline;
-	text-underline-offset: 0.2rem;
-	text-decoration-thickness: 0.3rem;
+	text-underline-offset: #{$ax2};
+	text-decoration-thickness: #{$ax3};
 }
 
 quick-add-modal .product-form__buttons {
@@ -169,7 +169,7 @@ quick-add-modal .product-form__buttons {
 }
 
 .quick-add__submit {
-	padding: 0.8rem;
+	padding: #{$ax8};
 	min-width: 100%;
 	box-sizing: border-box;
 }

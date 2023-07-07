@@ -6,30 +6,30 @@
 
 <style>
 	.template-search__header {
-		margin-bottom: 3rem;
+		margin-bottom: {% render 'ucoast-ax', value: 30 %};
 	}
 
 	.template-search__search {
-		margin: 0 auto 3.5rem;
-		max-width: 74.1rem;
+		margin: 0 auto {% render 'ucoast-ax', value: 35 %};
+		max-width: {% render 'ucoast-ax', value: 741 %};
 	}
 
 	.template-search__search .search {
-		margin-top: 3rem;
+		margin-top: {% render 'ucoast-ax', value: 30 %};
 	}
 
 	.template-search--empty {
-		padding-bottom: 18rem;
+		padding-bottom: {% render 'ucoast-ax', value: 180 %};
 	}
 
 	@media screen and (min-width: 750px) {
 		.template-search__header {
-			margin-bottom: 5rem;
+			margin-bottom: {% render 'ucoast-ax', value: 50 %};
 		}
 	}
 
 	.search__button .icon {
-		height: 1.8rem;
+		height: {% render 'ucoast-ax', value: 18 %};
 	}
 </style>
 

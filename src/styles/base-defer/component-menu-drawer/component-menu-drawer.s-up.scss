@@ -2,7 +2,7 @@
 @import "../../global/functions.scss";
 @include media-query($s-up) {
   .menu-drawer {
-    width: 40rem;
+    width: ax(400);
     border-width: 0 #{$drawerBorderWidth} 0 0;
     border-style: solid;
     border-color: rgba(#{$schemaColorForeground}, #{$drawerBorderOpacity});

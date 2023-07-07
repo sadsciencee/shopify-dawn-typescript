@@ -3,6 +3,6 @@
 
 @include media-query($s-up) {
 	.main-page-title {
-		margin-bottom: 4rem;
+		margin-bottom: #{$ax40};
 	}
 }

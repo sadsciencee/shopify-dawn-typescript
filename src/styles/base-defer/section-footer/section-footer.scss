@@ -1,7 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .footer {
-  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .footer:not(.color-background-1) {
@@ -9,7 +9,8 @@
 }
 
 .footer__content-top {
-  padding-bottom: 5rem;
+  padding-top: $ax50;
+  padding-bottom: $ax50;
   display: block;
 }
 
@@ -20,7 +21,7 @@
 
   .footer-block.grid__item {
     padding: 0;
-    margin: 4rem 0;
+    margin: #{$ax40} 0;
     width: 100%;
   }
 
@@ -29,15 +30,13 @@
   }
 
   .footer__content-top {
-    padding-bottom: 3rem;
-    padding-left: calc(4rem / #{$fontBodyScale});
-    padding-right: calc(4rem / #{$fontBodyScale});
+    padding: $ax30 calc(#{$ax40} / #{$fontBodyScale});
   }
 }
 
 .footer__content-bottom {
-  border-top: solid 0.1rem rgba(#{$schemaColorForeground}, 0.08);
-  padding-top: 3rem;
+  border-top: solid #{$ax1} rgba(#{$schemaColorForeground}, 0.08);
+  padding-top: #{$ax30};
 }
 
 .footer__content-bottom:only-child {
@@ -55,12 +54,12 @@
     padding-top: 0;
     padding-left: 0;
     padding-right: 0;
-    row-gap: 1.5rem;
+    row-gap: #{$ax15};
   }
 
   .footer__content-bottom-wrapper {
     flex-wrap: wrap;
-    row-gap: 1.5rem;
+    row-gap: #{$ax15};
     justify-content: center;
   }
 }
@@ -71,7 +70,7 @@
 
 @include media-query($s-down) {
   .footer__localization:empty + .footer__column {
-    padding-top: 1.5rem;
+    padding-top: #{$ax15};
   }
 }
 
@@ -85,13 +84,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: #{$ax20};
+  padding-right: #{$ax20};
 }
 
 .footer-block:only-child:last-child {
   text-align: center;
-  max-width: 76rem;
+  max-width: ax(760);
   margin: 0 auto;
 }
 
@@ -102,8 +101,8 @@
 .footer-block--newsletter {
   display: flex;
   align-items: flex-end;
-  margin-top: 3rem;
-  gap: 1rem;
+  margin-top: #{$ax30};
+  gap: #{$ax10};
 }
 
 .footer-block--newsletter:only-child {
@@ -117,9 +116,9 @@
 }
 
 .footer-block__heading {
-  margin-bottom: 2rem;
+  margin-bottom: #{$ax20};
   margin-top: 0;
-  font-size: calc(#{$fontHeadingScale} * 1.6rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax16});
 }
 
 .footer__list-social:empty,
@@ -142,7 +141,7 @@
 }
 
 .newsletter-form__field-wrapper {
-  max-width: 36rem;
+  max-width: ax(360);
 }
 
 @include media-query($s-down) {
@@ -155,7 +154,7 @@
     flex-direction: column;
     flex: 1 1 100%;
     align-items: center;
-    gap: 3rem;
+    gap: #{$ax30};
   }
 
   .footer__list-social.list-social,
@@ -176,7 +175,7 @@
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  padding: 1rem 1rem 0;
+  padding: #{$ax10} #{$ax10} 0;
 }
 
 .footer__localization:empty {
@@ -184,7 +183,7 @@
 }
 
 .footer__localization h2 {
-  margin: 1rem 1rem 0.5rem;
+  margin: #{$ax10} #{$ax10} #{$ax5};
   color: rgba(#{$schemaColorForeground}, 0.75);
 }
 
@@ -200,13 +199,13 @@
 
 .footer__copyright {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }
 
 @keyframes appear-down {
   0% {
     opacity: 0;
-    margin-top: -1rem;
+    margin-top: ax(-10);
   }
   100% {
     opacity: 1;
@@ -215,7 +214,7 @@
 }
 
 .footer-block__details-content {
-  margin-bottom: 4rem;
+  margin-bottom: #{$ax40};
 }
 
 .footer-block__details-content .list-menu__item--link,
@@ -230,8 +229,8 @@
 
 @include media-query($m-down) {
   .footer-block__details-content .list-menu__item--link {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: #{$ax10};
+    padding-bottom: #{$ax10};
   }
 }
 
@@ -261,7 +260,7 @@
 }
 
 .footer-block__image-wrapper {
-  margin-bottom: 2rem;
+  margin-bottom: #{$ax20};
   overflow: hidden !important;
 }
 
@@ -295,16 +294,16 @@
 
 .footer-block__brand-info .footer__list-social.list-social {
   justify-content: flex-start;
-  margin-left: -1.3rem;
-  margin-right: -1.3rem;
+  margin-left: ax(-13);
+  margin-right: ax(-13);
 }
 
 .footer-block__details-content .placeholder-svg {
-  max-width: 20rem;
+  max-width: #{ax(200)};
 }
 
 .copyright__content {
-  font-size: 1.1rem;
+  font-size: #{$ax11};
 }
 
 .copyright__content a {
@@ -324,11 +323,11 @@
 
 .policies li::before {
   content: '\00B7';
-  padding: 0 0.8rem;
+  padding: 0 #{$ax8};
 }
 
 .policies li a {
-  padding: 0.6rem 0;
+  padding: #{$ax6} 0;
   display: block;
 }
 
@@ -340,7 +339,7 @@
 
   100% {
     opacity: 1;
-    transform: translateY(-1rem);
+    transform: translateY(ax(-10));
   }
 }
 

@@ -32,7 +32,7 @@ html {
 body {
   background-color: rgb(#{$schemaColorBackground});
   color: rgb(#{$schemaColorForeground});
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.04375em;
   line-height: calc(1 + 0.8 / #{$fontBodyScale});
   max-width: #{$pageWidth};
   margin: 0 auto;
@@ -59,32 +59,32 @@ h2,
   font-family: #{$fontHeadingFamily};
   font-style: #{$fontHeadingStyle};
   font-weight: #{$fontHeadingWeight};
-  letter-spacing: calc(#{$fontHeadingScale} * 0.06rem);
+  letter-spacing: calc(#{$fontHeadingScale} * #{ax(.6)});
   line-height: calc(1 + 0.3 / max(1, #{$fontHeadingScale}));
   text-align: center;
 }
 
 h1,
 .h1 {
-  font-size: calc(#{$fontHeadingScale} * 3rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax30});
 }
 
 @include media-query($s-up) {
   h1,
   .h1 {
-    font-size: calc(#{$fontHeadingScale} * 4rem);
+    font-size: calc(#{$fontHeadingScale} * #{$ax40});
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(#{$fontHeadingScale} * 2rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax20});
 }
 
 @include media-query($s-up) {
   h2,
   .h2 {
-    font-size: calc(#{$fontHeadingScale} * 2.4rem);
+    font-size: calc(#{$fontHeadingScale} * #{$ax24});
   }
 }
 
@@ -96,15 +96,15 @@ h2,
   align-items: center;
   text-align: center;
   border: none;
-  padding: 1.5rem 3rem;
+  padding: #{$ax15} #{$ax30};
   text-decoration: none;
   background-color: rgb(#{$schemaColorButton});
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton});
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton});
   color: rgb(var(--c-button-label));
-  min-width: 12rem;
+  min-width: #{ax(120)};
   height: auto;
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
+  font-size: #{$ax15};
+  letter-spacing: 0.00667em;
   line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
@@ -113,12 +113,12 @@ h2,
 }
 
 .button:hover {
-  box-shadow: 0 0 0 0.2rem rgb(#{$schemaColorButton});
+  box-shadow: 0 0 0 #{$ax2} rgb(#{$schemaColorButton});
 }
 
 .button--secondary {
   color: rgb(var(--c-alt-button-label));
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label));
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label));
   background-color: transparent;
 }
 
@@ -127,22 +127,22 @@ h2,
 }
 
 .button--secondary:hover {
-  box-shadow: 0 0 0 0.2rem rgb(var(--c-alt-button-label));
+  box-shadow: 0 0 0 #{$ax2} rgb(var(--c-alt-button-label));
 }
 
 @media (forced-colors: active) {
   .button {
-    border: transparent solid 1px;
+    border: transparent solid #{$ax1};
   }
 }
 
 .gift-card {
-  padding: 3rem;
+  padding: #{$ax30};
 }
 
 @include media-query($s-up) {
   .gift-card {
-    padding: 5rem 5rem 3rem;
+    padding: #{$ax50} #{$ax50} #{$ax30};
   }
 }
 
@@ -151,15 +151,15 @@ h2,
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin: 3rem auto;
-  max-width: 40rem;
+  margin: #{$ax30} auto;
+  max-width: ax(400);
 }
 
 .gift-card__image {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
-  max-height: 26rem;
+  max-height: ax(260);
 }
 
 @include media-query($s-up) {
@@ -171,10 +171,10 @@ h2,
 .gift-card__price {
   display: flex;
   flex-wrap: wrap;
-  gap: 0rem 1rem;
+  gap: 0rem #{$ax10};
   align-items: center;
   justify-content: center;
-  letter-spacing: 1px;
+  letter-spacing: #{$ax1};
   opacity: 0.8;
 }
 
@@ -184,35 +184,35 @@ h2,
 
 .gift-card__number {
   color: rgb(#{$schemaColorForeground});
-  font-size: 1.8rem;
+  font-size: #{$ax18};
   line-height: calc(1 + 0.6 / #{$fontBodyScale});
   text-align: center;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.139em;
   opacity: 0.8;
-  margin: 3rem 0;
+  margin: #{$ax30} 0;
 }
 
 .gift-card__text-wrapper {
-  max-width: 30rem;
+  max-width: ax(300);
   margin: 0 auto;
 }
 
 .gift-card__text {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: #{$ax17};
   opacity: 0.6;
   margin: 0;
   line-height: calc(1 + 0.5 / #{$fontBodyScale});
 }
 
 .badge {
-  border: 1px solid transparent;
-  border-radius: 4rem;
+  border: #{$ax1} solid transparent;
+  border-radius: #{$ax40};
   display: inline-block;
-  font-size: 1.2rem;
-  letter-spacing: 0.1rem;
+  font-size: #{$ax12};
+  letter-spacing: 0.08334em;
   line-height: 1;
-  padding: 0.6rem 1.3rem;
+  padding: #{$ax6} #{$ax13};
   text-align: center;
   background-color: rgb(#{$schemaColorBackground});
   border-color: rgba(#{$schemaColorForeground}, 0.04);
@@ -226,7 +226,7 @@ h2,
 }
 
 .gift-card__qr-code {
-  margin: 3rem 0;
+  margin: #{$ax30} 0;
 }
 
 .gift-card__qr-code img {
@@ -236,21 +236,21 @@ h2,
 .gift_card__apple-wallet {
   line-height: 0;
   display: block;
-  margin-bottom: 3rem;
+  margin-bottom: #{$ax30};
   text-align: center;
 }
 
 .gift-card__buttons {
   display: flex;
   flex-direction: column;
-  max-width: 25rem;
+  max-width: ax(250);
   flex-wrap: wrap;
   margin: 0 auto;
 }
 
 .gift-card__buttons > .button {
   display: block;
-  margin: 1rem 0;
+  margin: #{$ax10} 0;
 }
 
 /*
@@ -264,22 +264,22 @@ h2,
 }
 
 *:focus-visible {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button:focus-visible {
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton}), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Negate the fallback side-effect for browsers that support :focus-visible */
@@ -289,35 +289,35 @@ h2,
 }
 
 .button:focus {
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton}), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button--secondary:focus-visible {
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label)), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button--secondary:focus {
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label)), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .form__message {
   align-items: center;
   display: flex;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
+  font-size: #{$ax12};
+  line-height: #{$ax15};
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: #{$ax5};
   opacity: 0.8;
 }
 
 .form__message .icon {
   flex-shrink: 0;
-  height: 1.3rem;
-  margin-right: 0.5rem;
-  width: 1.3rem;
+  height: #{$ax13};
+  margin-right: #{$ax5};
+  width: #{$ax13};
 }
 
 @media print {

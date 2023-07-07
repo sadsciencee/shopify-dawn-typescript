@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.quick-add-modal__content {
-		--modal-height-offset: 10rem;
+		--modal-height-offset: #{ax(100)};
 		margin-top: var(--modal-height-offset);
 		width: 80%;
 		max-height: calc(100% - var(--modal-height-offset) * 2);
@@ -10,8 +10,8 @@
 	}
 
 	quick-add-modal .quick-add-modal__toggle {
-		top: 2rem;
-		right: 2rem;
+		top: #{$ax20};
+		right: #{$ax20};
 	}
 
 	quick-add-modal .product:not(.product--no-media) .product__media-wrapper {
@@ -20,7 +20,7 @@
 	}
 
 	quick-add-modal .product:not(.product--no-media) .product__info-wrapper {
-		padding-left: 4rem;
+		padding-left: #{$ax40};
 		max-width: 54%;
 		width: calc(54% - #{$xSpacingDesktop} / 2);
 	}

@@ -1,8 +1,8 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .newsletter__wrapper {
-  padding-right: calc(4rem / #{$fontBodyScale});
-  padding-left: calc(4rem / #{$fontBodyScale});
+  padding-right: calc(#{$ax40} / #{$fontBodyScale});
+  padding-left: calc(#{$ax40} / #{$fontBodyScale});
 }
 
 .newsletter__wrapper > * {
@@ -11,28 +11,28 @@
 }
 
 .newsletter__wrapper > * + * {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }
 
 .newsletter__wrapper > * + .newsletter-form {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
 }
 
 .newsletter__subheading {
-  max-width: 70rem;
+  max-width: ax(700);
   margin-left: auto;
   margin-right: auto;
 }
 
 .newsletter__wrapper .newsletter-form__field-wrapper {
-  max-width: 36rem;
+  max-width: ax(360);
 }
 
 .newsletter-form__field-wrapper .newsletter-form__message {
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }
 
 .newsletter__button {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
   width: fit-content;
 }

@@ -45,30 +45,30 @@
 }
 
 .article-card__link {
-  text-underline-offset: 0.3rem;
+  text-underline-offset: #{$ax3};
 }
 
 .article-card .card__heading {
-  margin-bottom: 0.6rem;
+  margin-bottom: #{$ax6};
 }
 
 .blog-articles .article-card .card__information,
 .blog__posts .article-card .card__information {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: #{$ax20};
+  padding-right: #{$ax20};
 }
 
 .article-card__info {
-  padding-top: 0.4rem;
+  padding-top: #{$ax4};
 }
 
 .article-card__footer {
-  letter-spacing: 0.1rem;
-  font-size: 1.4rem;
+  letter-spacing: #{$ax1};
+  font-size: #{$ax14};
 }
 
 .article-card__footer:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .article-card__footer:last-child {
@@ -77,23 +77,23 @@
 
 .article-card__excerpt {
   width: 100%;
-  margin-top: 1.2rem;
+  margin-top: #{$ax12};
 }
 
 .article-card__link:not(:only-child) {
-  margin-right: 3rem;
+  margin-right: #{$ax30};
 }
 
 .article-card__image--small .ratio::before {
-  padding-bottom: 11rem;
+  padding-bottom: #{ax(110)};
 }
 
 .article-card__image--medium .ratio::before {
-  padding-bottom: 22rem;
+  padding-bottom: #{ax(220)};
 }
 
 .article-card__image--large .ratio::before {
-  padding-bottom: 33rem;
+  padding-bottom: ax(330);
 }
 
 
@@ -103,6 +103,6 @@
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
   .articles-wrapper.grid {
-    margin: 0 0 5rem 0;
+    margin: 0 0 #{$ax50} 0;
   }
 }

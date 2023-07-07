@@ -2,37 +2,37 @@
 @import '../../global/functions.scss';
 slider-component {
 	--desktop-margin-left-first-item: max(
-		5rem,
-		calc((100vw - #{$pageWidth} + 10rem - #{$xSpacingDesktop}) / 2)
+		#{$ax50},
+		calc((100vw - #{$pageWidth} + #{ax(100)} - #{$xSpacingDesktop}) / 2)
 	);
 	position: relative;
 	display: block;
 }
 
 slider-component.slider-component-full-width {
-	--desktop-margin-left-first-item: 1.5rem;
+	--desktop-margin-left-first-item: #{$ax15};
 }
 
 @include media-query($s-down) {
 	slider-component.page-width {
-		padding: 0 1.5rem;
+		padding: 0 #{$ax15};
 	}
 }
 
 @include media-query($m-only) {
 	slider-component.page-width {
-		padding: 0 5rem;
+		padding: 0 #{$ax50};
 	}
 }
 
 @include media-query($m-down) {
 	.no-js slider-component .slider {
-		padding-bottom: 3rem;
+		padding-bottom: #{$ax30};
 	}
 }
 
 .slider__slide {
-	--focus-outline-padding: 0.5rem;
+	--focus-outline-padding: #{$ax5};
 	--shadow-padding-top: calc(
 		(var(--shadow-vertical-offset) * -1 + var(--shadow-blur-radius)) * var(--shadow-visible)
 	);
@@ -51,16 +51,16 @@ slider-component.slider-component-full-width {
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
-		scroll-padding-left: 1.5rem;
+		scroll-padding-left: #{$ax15};
 		-webkit-overflow-scrolling: touch;
-		margin-bottom: 1rem;
+		margin-bottom: #{$ax10};
 	}
 
 	/* Fix to show some space at the end of our sliders in all browsers */
 	.slider--mobile:after {
 		content: '';
 		width: 0;
-		padding-left: 1.5rem;
+		padding-left: #{$ax15};
 	}
 
 	.slider.slider--mobile .slider__slide {
@@ -86,16 +86,16 @@ slider-component.slider-component-full-width {
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
-		scroll-padding-left: 1.5rem;
+		scroll-padding-left: #{$ax15};
 		-webkit-overflow-scrolling: touch;
-		margin-bottom: 1rem;
+		margin-bottom: #{$ax10};
 	}
 
 	/* Fix to show some space at the end of our sliders in all browsers */
 	.slider--tablet:after {
 		content: '';
 		width: 0;
-		padding-left: 1.5rem;
+		padding-left: #{$ax15};
 		margin-left: calc(-1 * #{$xSpacingDesktop});
 	}
 
@@ -122,7 +122,7 @@ slider-component.slider-component-full-width {
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
-	margin-bottom: 1rem;
+	margin-bottom: #{$ax10};
 }
 
 .slider.slider--everywhere .slider__slide {
@@ -145,8 +145,8 @@ slider-component.slider-component-full-width {
 }
 
 .slider::-webkit-scrollbar {
-	height: 0.4rem;
-	width: 0.4rem;
+	height: #{$ax4};
+	width: #{$ax4};
 	display: none;
 }
 
@@ -161,36 +161,36 @@ slider-component.slider-component-full-width {
 
 .slider::-webkit-scrollbar-thumb {
 	background-color: rgb(#{$schemaColorForeground});
-	border-radius: 0.4rem;
+	border-radius: #{$ax4};
 	border: 0;
 }
 
 .slider::-webkit-scrollbar-track {
 	background: rgba(#{$schemaColorForeground}, 0.04);
-	border-radius: 0.4rem;
+	border-radius: #{$ax4};
 }
 
 .slider-counter {
 	display: flex;
 	justify-content: center;
-	min-width: 4.4rem;
+	min-width: #{$ax44};
 }
 
 .slider-counter__link {
-	padding: 1rem;
+	padding: #{$ax10};
 }
 
 @include media-query($s-down) {
 	.slider-counter__link {
-		padding: 0.7rem;
+		padding: #{$ax7};
 	}
 }
 
 .slider-counter__link--dots .dot {
-	width: 1rem;
-	height: 1rem;
+	width: #{$ax10};
+	height: #{$ax10};
 	border-radius: 50%;
-	border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.5);
+	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.5);
 	padding: 0;
 	display: block;
 }
@@ -251,8 +251,8 @@ slider-component.slider-component-full-width {
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	width: 44px;
-	height: 44px;
+	width: #{$ax44};
+	height: #{$ax44};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -263,7 +263,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button .icon {
-	height: 0.6rem;
+	height: #{$ax6};
 }
 
 .slider-button[disabled] .icon {

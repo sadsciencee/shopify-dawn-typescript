@@ -7,7 +7,7 @@
 
 .collection-hero--with-image .collection-hero__inner {
 	margin-bottom: 0;
-	padding-bottom: 2rem;
+	padding-bottom: #{$ax20};
 }
 
 .collection-hero__text-wrapper {
@@ -15,13 +15,13 @@
 }
 
 .collection-hero__title {
-	margin: 2.5rem 0;
+	margin: #{$ax25} 0;
 }
 
 .collection-hero__title + .collection-hero__description {
-	margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
-	font-size: 1.6rem;
+	margin-top: #{$ax15};
+	margin-bottom: #{$ax15};
+	font-size: #{$ax16};
 	line-height: calc(1 + 0.5 / #{$fontBodyScale});
 }
 
@@ -30,7 +30,7 @@
 }
 
 .collection-hero--with-image .collection-hero__text-wrapper {
-	padding: 5rem 0 4rem;
+	padding: #{$ax50} 0 #{$ax40};
 }
 
 .collection-hero__image-container {
@@ -43,6 +43,6 @@
 
 @include media-query($s-down) {
 	.collection-hero__image-container {
-		height: 20rem;
+		height: #{ax(200)};
 	}
 }

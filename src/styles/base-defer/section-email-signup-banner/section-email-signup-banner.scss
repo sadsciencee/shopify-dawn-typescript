@@ -10,7 +10,7 @@
 }
 
 .email-signup-banner__box > * + .newsletter__subheading {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }
 
 .email-signup-banner__box .newsletter__subheading p {

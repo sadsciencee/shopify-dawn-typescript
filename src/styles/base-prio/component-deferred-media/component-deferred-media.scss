@@ -39,16 +39,16 @@
 .deferred-media__poster:focus-visible {
   outline: none;
   box-shadow: 0 0 0 #{$mediaBorderWidth} rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity}),
-    0 0 0 calc(#{$mediaBorderWidth} + 0.3rem) rgb(#{$schemaColorBackground}),
-    0 0 0 calc(#{$mediaBorderWidth} + 0.5rem) rgba(#{$schemaColorForeground}, 0.5);
+    0 0 0 calc(#{$mediaBorderWidth} + #{$ax3}) rgb(#{$schemaColorBackground}),
+    0 0 0 calc(#{$mediaBorderWidth} + #{$ax5}) rgba(#{$schemaColorForeground}, 0.5);
   border-radius: calc(#{$mediaRadius} - #{$mediaBorderWidth});
 }
 
 .deferred-media__poster:focus {
   outline: none;
   box-shadow: 0 0 0 #{$mediaBorderWidth} rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity}),
-    0 0 0 calc(#{$mediaBorderWidth} + 0.3rem) rgb(#{$schemaColorBackground}),
-    0 0 0 calc(#{$mediaBorderWidth} + 0.5rem) rgba(#{$schemaColorForeground}, 0.5);
+    0 0 0 calc(#{$mediaBorderWidth} + #{$ax3}) rgb(#{$schemaColorBackground}),
+    0 0 0 calc(#{$mediaBorderWidth} + #{$ax5}) rgba(#{$schemaColorForeground}, 0.5);
   border-radius: calc(#{$mediaRadius} - #{$mediaBorderWidth});
 }
 
@@ -60,7 +60,7 @@
 /* outline styling for Windows High Contrast Mode */
 @media (forced-colors: active) {
   .deferred-media__poster:focus {
-    outline: transparent solid 1px;
+    outline: transparent solid #{$ax1};
   }
 }
 .deferred-media__poster:focus:not(:focus-visible) {
@@ -70,14 +70,14 @@
 
 .deferred-media__poster-button {
   background-color: rgb(#{$schemaColorBackground});
-  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.1);
+  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.1);
   border-radius: 50%;
   color: rgb(#{$schemaColorForeground});
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 6.2rem;
-  width: 6.2rem;
+  height: #{ax(62)};
+  width: #{ax(62)};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -91,10 +91,10 @@
 }
 
 .deferred-media__poster-button .icon {
-  width: 2rem;
-  height: 2rem;
+  width: #{$ax20};
+  height: #{$ax20};
 }
 
 .deferred-media__poster-button .icon-play {
-  margin-left: 0.2rem;
+  margin-left: #{$ax2};
 }

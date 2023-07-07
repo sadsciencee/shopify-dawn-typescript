@@ -21,8 +21,8 @@
 	}
 
 	.section-collection-list .collection-list:not(.slider) {
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+		padding-left: #{$ax15};
+		padding-right: #{$ax15};
 	}
 }
 
@@ -44,5 +44,5 @@
 }
 
 .collection-list-view-all {
-	margin-top: 2rem;
+	margin-top: #{$ax20};
 }

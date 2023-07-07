@@ -4,7 +4,7 @@
 	.cart__items {
 		grid-column-start: 1;
 		grid-column-end: 3;
-		padding-bottom: 4rem;
+		padding-bottom: #{$ax40};
 	}
 
 	.cart__contents > * + * {
@@ -26,24 +26,24 @@
 	}
 
 	.cart__footer > * {
-		width: 35rem;
+		width: ax(350);
 	}
 
 	.cart__footer > * + * {
-		margin-left: 4rem;
+		margin-left: #{$ax40};
 		margin-top: 0;
 	}
 	.cart-note {
-		max-width: 35rem;
+		max-width: ax(350);
 	}
 
 	.cart__update-button {
 		margin-bottom: 0;
-		margin-right: 0.8rem;
+		margin-right: #{$ax8};
 	}
 
 	.tax-note {
-		margin-bottom: 2.2rem;
+		margin-bottom: #{$ax22};
 		text-align: right;
 	}
 
@@ -53,15 +53,15 @@
 
 	.cart__ctas {
 		display: flex;
-		gap: 1rem;
+		gap: #{$ax10};
 	}
 }
 @include media-query($m-up) {
 	.cart__warnings {
-		padding: 7rem 0 1rem;
+		padding: ax(70) 0 #{$ax10};
 	}
 
 	.cart__empty-text {
-		margin: 0 0 3rem;
+		margin: 0 0 #{$ax30};
 	}
 }

@@ -14,7 +14,7 @@
 
 @include media-query($s-down) {
 	.multicolumn .title-wrapper-with-link {
-		margin-bottom: 3rem;
+		margin-bottom: #{$ax30};
 	}
 
 	.multicolumn .page-width {
@@ -39,7 +39,7 @@
 }
 
 .multicolumn .button {
-	margin-top: 1.5rem;
+	margin-top: #{$ax15};
 }
 
 .multicolumn-list {
@@ -49,7 +49,7 @@
 }
 
 .multicolumn-list__item:only-child {
-	max-width: 72rem;
+	max-width: ax(720);
 }
 
 .multicolumn-list__item--empty {
@@ -76,13 +76,13 @@
 }
 
 .multicolumn-card-spacing {
-	padding-top: 2.5rem;
-	margin-left: 2.5rem;
-	margin-right: 2.5rem;
+	padding-top: #{$ax25};
+	margin-left: #{$ax25};
+	margin-right: #{$ax25};
 }
 
 .multicolumn-card__info > :nth-child(2) {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .multicolumn-list__item.center .media--adapt,
@@ -102,8 +102,8 @@
 	}
 
 	.multicolumn-list:not(.slider) {
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+		padding-left: #{$ax15};
+		padding-right: #{$ax15};
 	}
 }
 
@@ -113,7 +113,7 @@
 }
 
 .multicolumn-card__info {
-	padding: 2.5rem;
+	padding: #{$ax25};
 }
 
 .background-none .multicolumn-card__info {
@@ -127,25 +127,25 @@
 }
 
 .background-none .multicolumn-card__image-wrapper + .multicolumn-card__info {
-	padding-top: 2.5rem;
+	padding-top: #{$ax25};
 }
 
 .background-none .slider .multicolumn-card__info {
-	padding-left: 0.5rem;
+	padding-left: #{$ax5};
 }
 
 .background-none .slider .multicolumn-card__image-wrapper + .multicolumn-card__info {
-	padding-left: 1.5rem;
+	padding-left: #{$ax15};
 }
 
 .background-none .multicolumn-list:not(.slider) .center .multicolumn-card__info {
-	padding-left: 2.5rem;
-	padding-right: 2.5rem;
+	padding-left: #{$ax25};
+	padding-right: #{$ax25};
 }
 
 @include media-query($s-down) {
 	.background-none .slider .multicolumn-card__info {
-		padding-bottom: 1rem;
+		padding-bottom: #{$ax10};
 	}
 
 	.multicolumn.background-none .slider.slider--mobile {
@@ -171,10 +171,10 @@
 .multicolumn-card__info .link {
 	text-decoration: none;
 	font-size: inherit;
-	margin-top: 1.5rem;
+	margin-top: #{$ax15};
 }
 
 .multicolumn-card__info .icon-wrap {
-	margin-left: 0.8rem;
+	margin-left: #{$ax8};
 	white-space: nowrap;
 }

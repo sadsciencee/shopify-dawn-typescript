@@ -1,7 +1,7 @@
 @import '../../global/variables.scss';
 @import '../../global/functions.scss';
 .pagination-wrapper {
-	margin-top: 4rem;
+	margin-top: #{$ax40};
 }
 
 .pagination__list {
@@ -11,12 +11,12 @@
 }
 
 .pagination__list > li {
-	flex: 1 0 4.4rem;
-	max-width: 4.4rem;
+	flex: 1 0 #{$ax44};
+	max-width: #{$ax44};
 }
 
 .pagination__list > li:not(:last-child) {
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 }
 
 .pagination__item {
@@ -25,38 +25,38 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	height: 4.4rem;
+	height: #{$ax44};
 	width: 100%;
 	padding: 0;
 	text-decoration: none;
 }
 
 a.pagination__item:hover::after {
-	height: 0.1rem;
+	height: #{$ax1};
 }
 
 .pagination__item .icon-caret {
-	height: 0.6rem;
+	height: #{$ax6};
 }
 
 .pagination__item--current::after {
-	height: 0.1rem;
+	height: #{$ax1};
 }
 
 .pagination__item--current::after,
 .pagination__item:hover::after {
 	content: '';
 	display: block;
-	width: 2rem;
+	width: #{$ax20};
 	position: absolute;
-	bottom: 8px;
+	bottom: #{$ax8};
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: currentColor;
 }
 
 .pagination__item--next .icon {
-	margin-left: -0.2rem;
+	margin-left: #{ax(-2)};
 	transform: rotate(90deg);
 }
 
@@ -65,7 +65,7 @@ a.pagination__item:hover::after {
 }
 
 .pagination__item--prev .icon {
-	margin-right: -0.2rem;
+	margin-right: #{ax(-2)};
 	transform: rotate(-90deg);
 }
 

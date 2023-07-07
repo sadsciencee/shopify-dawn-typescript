@@ -3,7 +3,7 @@
 
 @include media-query($s-up) {
 	.slideshow--placeholder.banner--adapt_image {
-		height: 56rem;
+		height: ax(560);
 	}
 
 	.slideshow__text.slideshow__text--left {
@@ -18,7 +18,7 @@
 
 	.slideshow__text-wrapper.banner__content {
 		height: 100%;
-		padding: 5rem;
+		padding: #{$ax50};
 	}
 
 	.slideshow__controls {
@@ -26,8 +26,8 @@
 	}
 	.slideshow__autoplay.slider-button {
 		position: inherit;
-		margin-left: 0.6rem;
-		padding: 0 0 0 0.6rem;
-		border-left: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+		margin-left: #{$ax6};
+		padding: 0 0 0 #{$ax6};
+		border-left: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 	}
 }

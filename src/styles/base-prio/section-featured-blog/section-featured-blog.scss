@@ -9,7 +9,7 @@
 }
 
 .blog__posts.articles-wrapper {
-	margin-bottom: 1rem;
+	margin-bottom: #{$ax10};
 }
 
 .blog__posts.articles-wrapper .article {
@@ -18,7 +18,7 @@
 
 @include media-query($s-down) {
 	.blog__post.article {
-		width: calc(100% - 3rem - #{$xSpacingMobile});
+		width: calc(100% - #{$ax30} - #{$xSpacingMobile});
 	}
 }
 
@@ -31,5 +31,5 @@
 }
 
 .blog__button {
-	margin-top: 3rem;
+	margin-top: #{$ax30};
 }

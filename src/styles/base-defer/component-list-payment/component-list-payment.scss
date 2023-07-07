@@ -4,13 +4,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: -0.5rem 0;
-  padding-top: 1rem;
+  margin: ax(-5) 0;
+  padding-top: #{$ax10};
   padding-left: 0;
 }
 
 .list-payment__item {
   align-items: center;
   display: flex;
-  padding: 0.5rem;
+  padding: #{$ax5};
 }

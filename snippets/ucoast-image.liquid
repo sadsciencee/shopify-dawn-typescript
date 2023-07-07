@@ -17,8 +17,11 @@
     unless id
         assign id = image.id
     endunless
-    unless lazy_load == false
-        assign loading = lazy
+    if lazy_load == false
+        assign loading = 'eager'
+    endif
+    unless lazy_load == false or loading == 'eager'
+        assign loading = 'lazy'
     endunless
     unless starting_width
         assign starting_width = 180
@@ -36,6 +39,9 @@
     endif
     if custom_attributes
         assign replace_src = ' ' | append: custom_attributes | append: ' ' | append: replace_src
+    endif
+    if loading == 'eager'
+        assign replace_src = ' ' | append: 'fetchpriority="high"' | append: ' ' | append: replace_src
     endif
     assign output = input | replace: 'srcset="', 'data-srcset="' | replace: ' src=', replace_src
     echo output

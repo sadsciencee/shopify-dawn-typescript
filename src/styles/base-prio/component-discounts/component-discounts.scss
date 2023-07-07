@@ -1,7 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .discounts {
-  font-size: 1.2rem;
+  font-size: #{$ax12};
 }
 
 .discounts__discount {
@@ -22,7 +22,7 @@
 
 .discounts__discount > .icon {
   color: rgb(#{$schemaColorForeground});
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-right: 0.7rem;
+  width: #{$ax12};
+  height: #{$ax12};
+  margin-right: #{$ax7};
 }

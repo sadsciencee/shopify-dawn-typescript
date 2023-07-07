@@ -7,12 +7,12 @@
 .rich-text__wrapper {
   display: flex;
   justify-content: center;
-  width: calc(100% - 4rem / #{$fontBodyScale});
+  width: calc(100% - #{$ax40} / #{$fontBodyScale});
 }
 
 .rich-text:not(.rich-text--full-width) .rich-text__wrapper {
   margin: auto;
-  width: calc(100% - 8rem / #{$fontBodyScale});
+  width: calc(100% - #{ax(80)} / #{$fontBodyScale});
 }
 
 .rich-text__blocks {
@@ -29,30 +29,30 @@
 }
 
 .rich-text__blocks > * + * {
-  margin-top: 2rem;
+  margin-top: #{$ax20};
 }
 
 .rich-text__blocks > * + a {
-  margin-top: 3rem;
+  margin-top: #{$ax30};
 }
 
 .rich-text__buttons {
   display: inline-flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: #{$ax10};
   width: 100%;
-  max-width: 45rem;
+  max-width: ax(450);
   word-break: break-word;
 }
 
 .rich-text__buttons--multiple > * {
   flex-grow: 1;
-  min-width: 22rem;
+  min-width: #{ax(220)};
 }
 
 .rich-text__buttons + .rich-text__buttons {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .rich-text__blocks.left .rich-text__buttons {
