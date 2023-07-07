@@ -1,1 +1,1 @@
-calc({{ value }} * var(--ax))
+{% liquid echo 'calc(' | append: value | append: ' * var(--ax))' %}

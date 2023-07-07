@@ -11,6 +11,7 @@ export const loadHls = async () => {
 		safeDefineElement(UcoastVideo)
 	}
 	const videos = qsaOptional('ucoast-video')
+	console.log('loadHls Triggered');
 	if (!videos) return
 	for (let i = 0; i < videos.length; i++) {
 		const video = videos[i]
