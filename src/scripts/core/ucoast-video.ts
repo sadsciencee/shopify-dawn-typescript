@@ -1,7 +1,7 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { isTenPercentInViewport, qsRequired } from '@/scripts/functions'
 import { uCoastWindow } from '@/scripts/setup'
-import {HlsLoader} from '@/scripts/core/hls-loader';
+import { HlsLoader } from '@/scripts/core/hls-loader'
 
 declare let window: uCoastWindow
 export class UcoastVideo extends UcoastEl {

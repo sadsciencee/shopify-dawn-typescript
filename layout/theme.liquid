@@ -39,11 +39,6 @@
 			{% render 'critical-css' %}
 		{% endstyle %}
 
-		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
-		{%- if settings.animations_reveal_on_scroll -%}
-			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
-		{%- endif -%}
-
 		{{ content_for_header }}
 
 		{% render 'css-variables' %}
@@ -57,10 +52,7 @@
 					preload_stylesheet: true
 				%}
 			{% when 'page' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-page-prio',
-					preload_stylesheet: true
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
 			{% when 'collection' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-collection-prio',
@@ -99,8 +91,6 @@
 			>
 		{%- endunless -%}
 
-
-
 		<script>
 			document.documentElement.className = document.documentElement.className.replace(
 				'no-js',
@@ -110,6 +100,18 @@
 				document.documentElement.classList.add('shopify-design-mode')
 			}
 		</script>
+		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
+		{%- if settings.animations_reveal_on_scroll -%}
+			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
+		{%- endif -%}
+		<hls-loader>
+			{% liquid
+				capture input
+					render 'ucoast', ucoast: 'js-function-load-hls.ts'
+				endcapture
+				render 'strip-src', input: input
+			%}
+		</hls-loader>
 	</head>
 
 	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -128,7 +130,6 @@
 		</main>
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-defer', preload_stylesheet: true %}
-
 
 		{% case request.page_type %}
 			{% when 'product' %}
@@ -207,7 +208,6 @@
 			}
 		</script>
 		{%- if settings.predictive_search_enabled -%}
-
 			{% render 'ucoast', ucoast: 'js-optional-predictive-search.ts' %}
 		{%- endif -%}
 		{% comment %}

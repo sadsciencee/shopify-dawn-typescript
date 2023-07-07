@@ -44,19 +44,7 @@
 									assign desktop_tablet_padding = 100 | times: padding_multiplier | append: 'px'
 									assign mobile_padding = 30 | times: padding_multiplier | append: 'px'
 								-%}
-								{%- capture sizes -%}
-                  (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width }}px - {{ desktop_tablet_padding }}) / 2),
-                  (min-width: 750px) calc((100vw - {{ desktop_tablet_padding }}) / 2),
-                  calc(100vw - {{ mobile_padding }})
-                {%- endcapture -%}
-								{{
-									section.settings.image
-									| image_url: width: 3200
-									| image_tag:
-										loading: 'lazy',
-										sizes: sizes,
-										widths: '50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
-								}}
+								{% render 'ucoast-image', image: section.settings.image %}
 							</div>
 						</div>
 					{% endif %}

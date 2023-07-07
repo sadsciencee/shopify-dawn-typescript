@@ -1,7 +1,7 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { qsaOptional, qsaRequired } from '@/scripts/functions'
 import { uCoastWindow } from '@/scripts/setup'
-import { UcoastVideo } from '@/scripts/media/ucoast-video'
+import { UcoastVideo } from '@/scripts/core/ucoast-video'
 declare let window: uCoastWindow
 export class HlsLoader extends UcoastEl {
 	static htmlSelector = 'hls-loader'

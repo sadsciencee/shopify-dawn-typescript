@@ -3,10 +3,7 @@
 	class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
 	{{ block.shopify_attributes }}
 >
-	{% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
-	{% # theme-check-disable %}
 	{%- assign cart_qty = cart | item_count_for_variant: current_variant.id -%}
-	{% # theme-check-enable %}
 	<label class="quantity__label form__label" for="Quantity-{{ section.id }}">
 		{{ 'products.product.quantity.label' | t }}
 		<span class="quantity__rules-cart no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">

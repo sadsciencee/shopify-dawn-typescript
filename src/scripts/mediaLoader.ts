@@ -1,5 +1,6 @@
 import { isInViewport, qsaOptional } from '@/scripts/functions'
-import { UcoastVideo } from '@/scripts/media/ucoast-video'
+import { UcoastVideo } from '@/scripts/core/ucoast-video'
+
 export const mediaLoader = () => {
 	const images = qsaOptional('img')
 	const videos = qsaOptional<UcoastVideo>('ucoast-video')

@@ -1,8 +1,8 @@
 // @ts-ignore
 import Hls from 'hls.js/dist/hls.light.min.js'
 import { qsaOptional, qsRequired, safeDefineElement } from '@/scripts/functions'
-import { UcoastVideo } from '@/scripts/media/ucoast-video'
-import { type HlsLoader } from '@/scripts/media/hls-loader'
+import { UcoastVideo } from '@/scripts/core/ucoast-video'
+import { type HlsLoader } from '@/scripts/core/hls-loader'
 
 export const loadHls = async () => {
 	const hlsLoader = qsRequired<HlsLoader>('hls-loader')
