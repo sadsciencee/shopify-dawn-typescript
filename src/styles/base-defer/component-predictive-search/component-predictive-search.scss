@@ -4,7 +4,7 @@
 	display: none;
 	position: absolute;
 	top: calc(100% + #{$ax1});
-	left: -#{$ax1};
+	left: ax(-1);
 	border-width: #{$popupBorderWidth};
 	border-style: solid;
 	border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});

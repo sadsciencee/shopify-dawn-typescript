@@ -1108,8 +1108,8 @@ a.product__text {
 
 .product-media-container.constrain-height {
 	/* arbitrary offset value based on average theme spacing and header height */
-	--viewport-offset: ax(400);
-	--constrained-min-height: ax(300);
+	--viewport-offset: #{ax(400)};
+	--constrained-min-height: #{ax(300)};
 	--constrained-height: max(var(--constrained-min-height), calc(100vh - var(--viewport-offset)));
 	margin-right: auto;
 	margin-left: auto;

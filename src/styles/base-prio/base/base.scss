@@ -1681,7 +1681,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 .announcement-bar .slider-button--prev:focus-visible,
 .utility-bar .list-social__link:focus-visible {
 	outline-offset: #{ax(-3)};
-	box-shadow: 0 0 0 -#{$ax2} rgb(#{$schemaColorForeground});
+	box-shadow: 0 0 0 #{ax(-2)} rgb(#{$schemaColorForeground});
 }
 
 .announcement-bar__link {

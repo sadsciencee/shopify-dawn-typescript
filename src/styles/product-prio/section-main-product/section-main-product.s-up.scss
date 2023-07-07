@@ -225,8 +225,8 @@
 	}
 
 	.product-media-container.constrain-height {
-		--viewport-offset: 170px;
-		--constrained-min-height: 500px;
+		--viewport-offset: #{ax(170)};
+		--constrained-min-height: #{ax(500)};
 	}
 
 	.product-media-container.media-fit-cover,

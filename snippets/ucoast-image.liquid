@@ -17,8 +17,11 @@
     unless id
         assign id = image.id
     endunless
+    if lazy_load == false
+        assign loading = 'eager'
+    endif
     unless lazy_load == false or loading == 'eager'
-        assign loading = lazy
+        assign loading = 'lazy'
     endunless
     unless starting_width
         assign starting_width = 180

@@ -9,7 +9,8 @@
 }
 
 .footer__content-top {
-  padding-bottom: #{$ax50};
+  padding-top: $ax50;
+  padding-bottom: $ax50;
   display: block;
 }
 
@@ -29,9 +30,7 @@
   }
 
   .footer__content-top {
-    padding-bottom: #{$ax30};
-    padding-left: calc(#{$ax40} / #{$fontBodyScale});
-    padding-right: calc(#{$ax40} / #{$fontBodyScale});
+    padding: $ax30 calc(#{$ax40} / #{$fontBodyScale});
   }
 }
 
