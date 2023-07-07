@@ -18,6 +18,10 @@
 	--shadow-opacity: #{$productCardShadowOpacity};
 	--shadow-visible: #{$productCardShadowVisible};
 	--image-padding: #{$productCardImagePadding};
+}
+
+.product-card-wrapper .card,
+.contains-card--product:not(.collage-card) {
 	--text-alignment: #{$productCardTextAlignment};
 }
 
@@ -2800,4 +2804,15 @@ details-disclosure > details {
 	.animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {
 		--border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
 	}
+}
+
+// non essential utility classes
+
+.after-fill-outside {
+	content: '';
+	position: absolute;
+	bottom: calc(var(--border-width) * -1);
+	left: calc(var(--border-width) * -1);
+	right: calc(var(--border-width) * -1);
+	top: calc(var(--border-width) * -1);
 }

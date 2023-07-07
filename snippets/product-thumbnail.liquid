@@ -53,7 +53,7 @@
       <div class="product__media media">
         {% render 'ucoast-image', image: media.preview_image, lazy_load: lazy_load %}
       </div>
-      <a href="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | external_video_url }}{% endif %}" class="product__media-toggle">
+      <a href="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | external_video_url }}{% endif %}" class="product__media-toggle after-fill-outside">
         <span class="visually-hidden">{{ 'products.product.video_exit_message' | t: title: product.title | escape }}</span>
       </a>
     {%- else -%}
@@ -90,7 +90,7 @@
     <div class="product__media media media--transparent">
       {% render 'ucoast-image', image: media.preview_image, lazy_load: lazy_load, image_class: image_class %}
     </div>
-    <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
+    <button class="product__media-toggle after-fill-outside quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
       <span class="visually-hidden">
         {{ 'products.product.media.open_media' | t: index: position }}
       </span>
