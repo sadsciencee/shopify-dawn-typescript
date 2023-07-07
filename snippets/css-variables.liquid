@@ -30,6 +30,32 @@
     endif
     assign y_spacing_phone = settings.spacing_grid_vertical | divided_by: 2
     assign x_spacing_phone = settings.spacing_grid_horizontal | divided_by: 2
+
+    assign page_width = settings.page_width | divided_by: 10
+    if settings.page_width == '1600'
+        assign page_width_margin = 2
+    else
+        assign page_width_margin = 0
+    endif
+    assign product_card_image_padding = settings.card_image_padding | divided_by: 10.0
+    assign card_corner_radius = settings.card_corner_radius | divided_by: 10.0
+    assign card_border_thickness = settings.card_border_thickness | divided_by: 10.0
+    assign card_shadow_horizontal_offset = settings.card_shadow_horizontal_offset | divided_by: 10.0
+    assign card_shadow_vertical_offset = settings.card_shadow_vertical_offset | divided_by: 10.0
+    assign card_shadow_blur = settings.card_shadow_blur | divided_by: 10.0
+    assign collection_card_image_padding = settings.collection_card_image_padding | divided_by: 10.0
+    assign collection_card_corner_radius = settings.collection_card_corner_radius | divided_by: 10.0
+    assign collection_card_border_thickness = settings.collection_card_border_thickness | divided_by: 10.0
+    assign collection_card_shadow_horizontal_offset = settings.collection_card_shadow_horizontal_offset | divided_by: 10.0
+    assign collection_card_shadow_vertical_offset = settings.collection_card_shadow_vertical_offset | divided_by: 10.0
+    assign collection_card_shadow_blur = settings.collection_card_shadow_blur | divided_by: 10.0
+    assign blog_card_image_padding = settings.blog_card_image_padding | divided_by: 10.0
+    assign blog_card_corner_radius = settings.blog_card_corner_radius | divided_by: 10.0
+    assign blog_card_border_thickness = settings.blog_card_border_thickness | divided_by: 10.0
+    assign blog_card_shadow_horizontal_offset = settings.blog_card_shadow_horizontal_offset | divided_by: 10.0
+    assign blog_card_shadow_vertical_offset = settings.blog_card_shadow_vertical_offset | divided_by: 10.0
+    assign blog_card_shadow_blur = settings.blog_card_shadow_blur | divided_by: 10.0
+    assign badge_corner_radius = settings.badge_corner_radius | divided_by: 10.0
 %}
 
 {% style %}
@@ -93,43 +119,43 @@
     --me-shadow-blur-radius: {% render 'ucoast-ax', value: settings.media_shadow_blur %};
     --me-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
 
-    --page-width: {{ settings.page_width | divided_by: 10 }}rem;
-    --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
+    --page-width: {% render 'ucoast-ax', value: page_width %};
+    --page-width-margin: {% render 'ucoast-ax', value: page_width_margin %};
 
-    --p-crd-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
-    --p-crd-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+    --p-crd-image-padding: {% render 'ucoast-ax', value: product_card_image_padding %};
+    --p-crd-corner-radius: {% render 'ucoast-ax', value: card_corner_radius %};
     --p-crd-text-alignment: {{ settings.card_text_alignment }};
-    --p-crd-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+    --p-crd-border-width: {% render 'ucoast-ax', value: card_border_thickness %};
     --p-crd-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
     --p-crd-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
     --p-crd-shadow-visible: {% if settings.card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-    --p-crd-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-    --p-crd-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-    --p-crd-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+    --p-crd-shadow-horizontal-offset: {% render 'ucoast-ax', value: card_shadow_horizontal_offset %};
+    --p-crd-shadow-vertical-offset: {% render 'ucoast-ax', value: card_shadow_vertical_offset %};
+    --p-crd-shadow-blur-radius: {% render 'ucoast-ax', value: card_shadow_blur %};
 
-    --c-crd-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
-    --c-crd-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+    --c-crd-image-padding: {% render 'ucoast-ax', value: collection_card_image_padding %};
+    --c-crd-corner-radius: {% render 'ucoast-ax', value: collection_card_corner_radius %};
     --c-crd-text-alignment: {{ settings.collection_card_text_alignment }};
-    --c-crd-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
+    --c-crd-border-width: {% render 'ucoast-ax', value: collection_card_border_thickness %};
     --c-crd-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
     --c-crd-shadow-opacity: {{ settings.collection_card_shadow_opacity | divided_by: 100.0 }};
     --c-crd-shadow-visible: {% if settings.collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-    --c-crd-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-    --c-crd-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-    --c-crd-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
+    --c-crd-shadow-horizontal-offset: {% render 'ucoast-ax', value: collection_card_shadow_horizontal_offset %};
+    --c-crd-shadow-vertical-offset: {% render 'ucoast-ax', value: collection_card_shadow_vertical_offset %};
+    --c-crd-shadow-blur-radius: {% render 'ucoast-ax', value: collection_card_shadow_blur %};
 
-    --b-crd-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
-    --b-crd-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+    --b-crd-image-padding: {% render 'ucoast-ax', value: blog_card_image_padding %};
+    --b-crd-corner-radius: {% render 'ucoast-ax', value: blog_card_corner_radius %};
     --b-crd-text-alignment: {{ settings.blog_card_text_alignment }};
-    --b-crd-border-width: {{ settings.blog_card_border_thickness | divided_by: 10.0 }}rem;
+    --b-crd-border-width: {% render 'ucoast-ax', value: blog_card_border_thickness %};
     --b-crd-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
     --b-crd-shadow-opacity: {{ settings.blog_card_shadow_opacity | divided_by: 100.0 }};
     --b-crd-shadow-visible: {% if settings.blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
-    --b-crd-shadow-horizontal-offset: {{ settings.blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-    --b-crd-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-    --b-crd-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
+    --b-crd-shadow-horizontal-offset: {% render 'ucoast-ax', value: blog_card_shadow_horizontal_offset %};
+    --b-crd-shadow-vertical-offset: {% render 'ucoast-ax', value: blog_card_shadow_vertical_offset %};
+    --b-crd-shadow-blur-radius: {% render 'ucoast-ax', value: blog_card_shadow_blur %};
 
-    --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
+    --badge-corner-radius: {% render 'ucoast-ax', value: badge_corner_radius %};
 
     --pop-border-width: {% render 'ucoast-ax', value: settings.popup_border_thickness %};
     --pop-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
