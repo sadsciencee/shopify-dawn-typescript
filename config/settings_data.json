@@ -6,8 +6,8 @@
     "type_body_font": "lato_n4",
     "body_scale": 100,
     "page_width": 1200,
-    "spacing_sections": 20,
-    "spacing_sections_mobile": 16,
+    "spacing_sections": 40,
+    "spacing_sections_mobile": 24,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
     "animations_reveal_on_scroll": false,
@@ -173,8 +173,7 @@
           "button": "#ffffff",
           "button_label": "#121212",
           "secondary_button_label": "#ffffff",
-          "shadow": "#121212",
-          "padding": true
+          "shadow": "#121212"
         }
       },
       "accent-2": {
@@ -185,8 +184,7 @@
           "button": "#ffffff",
           "button_label": "#334fb4",
           "secondary_button_label": "#ffffff",
-          "shadow": "#121212",
-          "padding": true
+          "shadow": "#121212"
         }
       }
     }
