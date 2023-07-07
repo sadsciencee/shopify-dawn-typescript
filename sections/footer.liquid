@@ -89,7 +89,7 @@
 												-%}
 												<div
 													class="footer-block__image-wrapper"
-													style="max-width: min(100%, {{ settings.brand_image_width }}px);"
+													style="max-width: min(100%, {% render 'ucoast-ax', value: settings.brand_image_width %});"
 												>
 													{% render 'ucoast-image',
 														image: settings.brand_image
@@ -117,13 +117,9 @@
 									{%- when 'image' -%}
 										<div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
 											{%- if block.settings.image != blank -%}
-												{%- assign image_size_2x = block.settings.image_width
-													| times: 2
-													| at_most: 5760
-												-%}
 												<div
 													class="footer-block__image-wrapper"
-													style="max-width: min(100%, {{ block.settings.image_width }}px);"
+													style="max-width: min(100%, {% render 'ucoast-ax', value: block.settings.image_width %});"
 												>
 													{% render 'ucoast-image',
 														image: block.settings.image
@@ -487,7 +483,7 @@
 						"min": 50,
 						"max": 550,
 						"step": 5,
-						"unit": "px",
+						"unit": "ax",
 						"label": "Image width",
 						"default": 100
 					},

@@ -190,13 +190,6 @@
 				id="Slider-Thumbnails-{{ section.id }}{{ id_append }}"
 				class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}"
 			>
-				{%- capture sizes -%}
-          (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),
-          (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4),
-          (min-width: 750px) calc((100vw - 15rem) / 8),
-          calc((100vw - 8rem) / 3)
-        {%- endcapture -%}
-
 				{%- if featured_media != null -%}
 					{%- liquid
 						capture media_index
