@@ -4,9 +4,7 @@
 	endcapture
 -%}
 
-{%- unless settings.cart_type == 'drawer' -%}
-	{% render 'ucoast', ucoast: 'js-dir-cart-page.ts' %}
-{%- endunless -%}
+
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
 	<div class="title-wrapper-with-link">
