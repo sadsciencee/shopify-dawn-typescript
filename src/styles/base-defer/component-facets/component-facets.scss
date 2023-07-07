@@ -115,27 +115,27 @@
 }
 
 .mobile-facets__sort .select__select:focus-visible {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax3};
   box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .mobile-facets__sort .select__select.focused,
 .no-js .mobile-facets__sort .select__select:focus {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax3};
   box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .facet-filters__sort:focus-visible {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax10};
   box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}), 0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .facet-filters__sort.focused,
 .no-js .facet-filters__sort:focus {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax10};
   box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}), 0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }

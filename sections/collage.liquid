@@ -6,7 +6,7 @@
 
 <div class="color-{{ section.settings.color_scheme }} gradient isolate {{ spacing }}">
 	<div class="page-width{% if section.settings.heading == blank %} no-heading{% endif %} section-{{ section.id }}-padding">
-		<h2 class="collage-wrapper-title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+		<h2 class="collage-wrapper-title mt-0 inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
 			{{ section.settings.heading }}
 		</h2>
 		<div class="display-grid collage {% if section.settings.mobile_layout == 'collage' %} collage--mobile{% endif %}">
@@ -108,16 +108,16 @@
 									class="no-js-hidden"
 									data-modal="#PopupModal-{{ block.id }}"
 								>
-									<div class="deferred-media">
+									<div class="deferred-media h-100">
 										<button
-											class="deferred-media__poster full-unstyled-link"
+											class="deferred-media__poster b-0 bg-transparent after-fill-outside full-unstyled-link"
 											type="button"
 											aria-label="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
 											aria-haspopup="dialog"
 											data-media-id="{{ block.settings.video_url.id }}"
 										>
 											<div
-												class="media media--transparent ratio"
+												class="media media--transparent ratio h-100"
 												{% if block.settings.cover_image != blank %}
 													style="--ratio-percent: {{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%"
 												{% else %}
@@ -272,11 +272,11 @@
 						"label": "t:sections.collage.settings.card_styles.options__1.label"
 					},
 					{
-						"value": "product-card-wrapper",
+						"value": "product-card-wrapper contains-card--product",
 						"label": "t:sections.collage.settings.card_styles.options__2.label"
 					}
 				],
-				"default": "product-card-wrapper",
+				"default": "product-card-wrapper contains-card--product",
 				"info": "t:sections.collage.settings.card_styles.info",
 				"label": "t:sections.collage.settings.card_styles.label"
 			},

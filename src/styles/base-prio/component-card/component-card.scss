@@ -60,8 +60,7 @@
 	top: calc(var(--border-width) * -1);
 	left: calc(var(--border-width) * -1);
 	border-radius: var(--border-radius);
-	box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-		var(--shadow-blur-radius) rgba(#{$schemaColorShadow}, var(--shadow-opacity));
+	box-shadow: $comboBoxShadow1;
 }
 
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
@@ -225,15 +224,13 @@
 }
 
 .card__heading a:focus:after {
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow2;
+	outline: $comboOutline1;
 }
 
 .card__heading a:focus-visible:after {
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
-	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow2;
+	outline: $comboOutline1;
 }
 
 .card__heading a:focus:not(:focus-visible):after {

@@ -12,8 +12,7 @@
 	z-index: 3;
 	border-bottom-right-radius: #{$popupCornerRadius};
 	border-bottom-left-radius: #{$popupCornerRadius};
-	box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-		#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboPopupContentShadow;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }

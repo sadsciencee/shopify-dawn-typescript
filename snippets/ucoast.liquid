@@ -4,7 +4,7 @@
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-868e43a0.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ '_critical-css-f773db36.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
   <script src="{{ '_critical-js-ed5f8276.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
@@ -17,13 +17,13 @@
 {% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
   {{ 'css-dir-article-prio-1e2e9e80.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-dir-base-defer.s-up.scss" or path == "css-dir-base-defer.s-up.scss" %}
-  {{ 'css-dir-base-defer.s-up-0f734c9c.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{ 'css-dir-base-defer.s-up-02bbc718.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
-  {{ 'css-dir-base-defer-01afb9f1.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-dir-base-defer-626f17b6.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-dir-base-prio.s-up.scss" or path == "css-dir-base-prio.s-up.scss" %}
   {{ 'css-dir-base-prio.s-up-55e4af58.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
-  {{ 'css-dir-base-prio-4ad8c3a7.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-dir-base-prio-4e25d861.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-dir-blog-defer.s-up.scss" or path == "css-dir-blog-defer.s-up.scss" %}
   {{ 'css-dir-blog-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-blog-defer.scss" or path == "css-dir-blog-defer.scss" %}
@@ -63,15 +63,15 @@
 {% elsif path == "/src/entry/css-dir-product-prio.s-up.scss" or path == "css-dir-product-prio.s-up.scss" %}
   {{ 'css-dir-product-prio.s-up-588d4790.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
-  {{ 'css-dir-product-prio-8e6325dc.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-dir-product-prio-0da36b27.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-localization-form.s-up.scss" or path == "css-optional-component-localization-form.s-up.scss" %}
   {{ 'css-optional-component-localization-form.s-up-49bb358e.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
-  {{ 'css-optional-component-localization-form-2b301a99.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-optional-component-localization-form-1a39320e.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-mega-menu.s-up.scss" or path == "css-optional-component-mega-menu.s-up.scss" %}
   {{ 'css-optional-component-mega-menu.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-mega-menu.scss" or path == "css-optional-component-mega-menu.scss" %}
-  {{ 'css-optional-component-mega-menu-61e3bcf6.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-optional-component-mega-menu-d1b7c9ec.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-model-viewer-ui.s-up.scss" or path == "css-optional-component-model-viewer-ui.s-up.scss" %}
   {{ 'css-optional-component-model-viewer-ui.s-up-5acb32f4.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-model-viewer-ui.scss" or path == "css-optional-component-model-viewer-ui.scss" %}
@@ -79,15 +79,19 @@
 {% elsif path == "/src/entry/css-optional-component-pagination.s-up.scss" or path == "css-optional-component-pagination.s-up.scss" %}
   {{ 'css-optional-component-pagination.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-pagination.scss" or path == "css-optional-component-pagination.scss" %}
-  {{ 'css-optional-component-pagination-1ff2f2f7.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-optional-component-pagination-f10ce71e.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-pickup-availability.s-up.scss" or path == "css-optional-component-pickup-availability.s-up.scss" %}
-  {{ 'css-optional-component-pickup-availability.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{ 'css-optional-component-pickup-availability.s-up-e0a4fab3.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
   {{ 'css-optional-component-pickup-availability-75cbe3a7.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-product-model.s-up.scss" or path == "css-optional-component-product-model.s-up.scss" %}
   {{ 'css-optional-component-product-model.s-up-e399cb97.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
   {{ 'css-optional-component-product-model-5e7ce11d.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-recipient-form.s-up.scss" or path == "css-optional-component-recipient-form.s-up.scss" %}
+  {{ 'css-optional-component-recipient-form.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+{% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
+  {{ 'css-optional-component-recipient-form-b6e25a12.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-mask-blobs.s-up.scss" or path == "css-optional-mask-blobs.s-up.scss" %}
   {{ 'css-optional-mask-blobs.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}
@@ -107,7 +111,7 @@
 {% elsif path == "/src/entry/css-optional-template-giftcard.s-up.scss" or path == "css-optional-template-giftcard.s-up.scss" %}
   {{ 'css-optional-template-giftcard.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
-  {{ 'css-optional-template-giftcard-785c5d78.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-optional-template-giftcard-440c677a.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
   <script src="{{ 'js-dir-cart-drawer-2ae831ab.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">

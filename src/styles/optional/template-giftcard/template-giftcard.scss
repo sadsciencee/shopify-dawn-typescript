@@ -264,7 +264,7 @@ h2,
 }
 
 *:focus-visible {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax3};
   box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
@@ -272,7 +272,7 @@ h2,
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: $comboOutline1;
   outline-offset: #{$ax3};
   box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }

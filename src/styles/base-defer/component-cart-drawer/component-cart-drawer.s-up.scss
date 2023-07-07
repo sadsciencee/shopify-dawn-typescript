@@ -1,5 +1,9 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
+
+
+
+// drawer specific
 @include media-query($s-up) {
   .drawer__footer #dynamic-checkout-cart ul > li {
     flex-basis: calc(100% / 3 - #{$ax5}) !important;

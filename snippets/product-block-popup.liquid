@@ -20,20 +20,20 @@
 	{% when 'dialog' %}
     <modal-dialog
             id="PopupModal-{{ block.id }}"
-            class="product-popup-modal"
+            class="product-popup-modal fixed top-0 left-0 w-100 h-100 my-0 mx-auto"
             {{ block.shopify_attributes }}
     >
         <div
                 role="dialog"
                 aria-label="{{ block.settings.text }}"
                 aria-modal="true"
-                class="product-popup-modal__content"
+                class="product-popup-modal__content absolute top-0 mx-auto"
                 tabindex="-1"
         >
             <button
                     id="ModalClose-{{ block.id }}"
                     type="button"
-                    class="product-popup-modal__toggle"
+                    class="product-popup-modal__toggle flex align-center justify-center z-2 sticky"
                     aria-label="{{ 'accessibility.close' | t }}"
             >
                 {% render 'icon-default', icon: 'close' %}

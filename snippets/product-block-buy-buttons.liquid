@@ -131,8 +131,7 @@
 
 	{%- if show_pickup_availability -%}
 		{% render 'ucoast-style-tag',
-			file: 'css-optional-component-pickup-availability',
-			ignore_s_up: true
+			file: 'css-optional-component-pickup-availability'
 		%}
 
 		{%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities

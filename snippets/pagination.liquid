@@ -19,7 +19,7 @@
 {%- if paginate.parts.size > 0 -%}
 	<div class="pagination-wrapper">
 		<nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-			<ul class="pagination__list list-unstyled" role="list">
+			<ul class="pagination__list flex flex-wrap justify-center list-unstyled" role="list">
 				{%- if paginate.previous -%}
 					<li>
 						<a
@@ -37,7 +37,7 @@
 						{%- if part.is_link -%}
 							<a
 								href="{{ part.url }}{{ anchor }}"
-								class="pagination__item link"
+								class="pagination__item inline-flex justify-center align-center relative w-100 p-0 link"
 								aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
 							>
 								{{- part.title -}}

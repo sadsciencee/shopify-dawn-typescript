@@ -161,6 +161,14 @@ body {
 	margin: 0;
 }
 
+.mt-0 {
+	margin-top: 0;
+}
+
+.mb-0 {
+	margin-bottom: 0;
+}
+
 .p-0 {
 	padding: 0;
 }
@@ -246,6 +254,10 @@ body {
 	position: absolute;
 }
 
+.sticky {
+	position: sticky;
+}
+
 .fixed {
 	position: fixed;
 }
@@ -266,6 +278,9 @@ body {
 }
 .inline-block {
 	display: inline-block;
+}
+.inline-flex {
+	display: inline-flex;
 }
 .display-grid {
 	display: grid;

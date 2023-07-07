@@ -20,21 +20,16 @@
 	transform: translateY(-100%);
 	visibility: hidden;
 	width: 100%;
-	box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-		#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboPopupContentShadow;
 	z-index: -1;
 }
 
 .cart-notification.focused {
-	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3),
-		#{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-			#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboPopupFocusShadow, $comboPopupShadow;
 }
 
 .cart-notification:focus-visible {
-	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3),
-		#{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-			#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboPopupFocusShadow, $comboPopupShadow;
 }
 
 .cart-notification.animate {
