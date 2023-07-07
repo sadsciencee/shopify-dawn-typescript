@@ -5,9 +5,9 @@
 -%}
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %} {{ spacing }}">
-	<div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %}">
-		<div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
-			<div class="rich-text__blocks {{ section.settings.content_alignment }}">
+	<div class="rich-text z-1 content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %}">
+		<div class="flex justify-center rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
+			<div class="rich-text__blocks w-100 {{ section.settings.content_alignment }}">
 				{%- for block in section.blocks -%}
 					{%- case block.type -%}
 						{%- when 'heading' -%}
@@ -45,7 +45,7 @@
 							</div>
 						{%- when 'button' -%}
 							<div
-								class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="rich-text__buttons inline-flex flex-wrap w-100 {% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade

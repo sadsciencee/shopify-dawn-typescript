@@ -533,14 +533,12 @@ a.product__text {
 }
 
 .product__media-toggle:focus-visible:after {
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 0rem #{$ax5} rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow3;
 	border-radius: #{$mediaRadius};
 }
 
 .product__media-toggle.focused:after {
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 0rem #{$ax5} rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow3;
 	border-radius: #{$mediaRadius};
 }
 
@@ -911,15 +909,13 @@ a.product__text {
 }
 
 .thumbnail[aria-current]:focus-visible {
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 0rem #{$ax5} rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow3;
 }
 
 .thumbnail[aria-current]:focus,
 .thumbnail.focused {
 	outline: 0;
-	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 0rem #{$ax5} rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: $comboBoxShadow3;
 }
 
 /* outline styling for Windows High Contrast Mode */

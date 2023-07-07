@@ -4,11 +4,6 @@
 	margin-top: #{$ax40};
 }
 
-.pagination__list {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
 
 .pagination__list > li {
 	flex: 1 0 #{$ax44};
@@ -21,13 +16,7 @@
 
 .pagination__item {
 	color: rgb(#{$schemaColorForeground});
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
 	height: #{$ax44};
-	width: 100%;
-	padding: 0;
 	text-decoration: none;
 }
 
