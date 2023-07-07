@@ -2,6 +2,34 @@
     assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
     assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
     assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+
+    if settings.buttons_radius > 0
+        assign button_radius_outset = settings.buttons_radius | plus: settings.buttons_border_thickness
+    else
+        assign buttons_radius_outset = 0
+    endif
+    if settings.buttons_border_opacity > 0
+        assign buttons_border_width = settings.buttons_border_thickness
+    else
+        assign buttons_border_width = 0
+    endif
+    if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0
+        assign buttons_border_offset = 0.3
+    else
+        assign buttons_border_offset = 0
+    endif
+    if settings.inputs_radius > 0
+        assign input_radius_outset = settings.inputs_radius | plus: settings.inputs_border_thickness
+    else
+        assign input_radius_outset = 0
+    endif
+    if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0
+        assign input_margin_offset = settings.inputs_shadow_vertical_offset | abs
+    else
+        assign input_margin_offset = 0
+    endif
+    assign y_spacing_phone = settings.spacing_grid_vertical | divided_by: 2
+    assign x_spacing_phone = settings.spacing_grid_horizontal | divided_by: 2
 %}
 
 {% style %}
@@ -55,14 +83,14 @@
     --f-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
     --f-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
-    --me-padding: {{ settings.media_padding }}px;
+    --me-padding: {% render 'ucoast-ax', value: settings.media_padding %};
     --me-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
-    --me-border-width: {{ settings.media_border_thickness }}px;
-    --me-radius: {{ settings.media_radius }}px;
+    --me-border-width: {% render 'ucoast-ax', value: settings.media_border_thickness %};
+    --me-radius: {% render 'ucoast-ax', value: settings.media_radius %};
     --me-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
-    --me-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
-    --me-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
-    --me-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
+    --me-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.media_shadow_horizontal_offset %};
+    --me-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.media_shadow_vertical_offset %};
+    --me-shadow-blur-radius: {% render 'ucoast-ax', value: settings.media_shadow_blur %};
     --me-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
 
     --page-width: {{ settings.page_width | divided_by: 10 }}rem;
@@ -103,65 +131,65 @@
 
     --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
 
-    --pop-border-width: {{ settings.popup_border_thickness }}px;
+    --pop-border-width: {% render 'ucoast-ax', value: settings.popup_border_thickness %};
     --pop-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
-    --pop-corner-radius: {{ settings.popup_corner_radius }}px;
+    --pop-corner-radius: {% render 'ucoast-ax', value: settings.popup_corner_radius %};
     --pop-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
-    --pop-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
-    --pop-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
-    --pop-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+    --pop-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.popup_shadow_horizontal_offset %};
+    --pop-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.popup_shadow_vertical_offset %};
+    --pop-shadow-blur-radius: {% render 'ucoast-ax', value: settings.popup_shadow_blur %};
 
-    --d-border-width: {{ settings.drawer_border_thickness }}px;
+    --d-border-width: {% render 'ucoast-ax', value: settings.drawer_border_thickness %};
     --d-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
     --d-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
-    --d-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
-    --d-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
-    --d-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+    --d-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.drawer_shadow_horizontal_offset %};
+    --d-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.drawer_shadow_vertical_offset %};
+    --d-shadow-blur-radius: {% render 'ucoast-ax', value: settings.drawer_shadow_blur %};
 
     --spacing-desktop: {% render 'ucoast-ax', value: settings.spacing_sections %};
     --spacing-mobile: {% render 'ucoast-ax', value: settings.spacing_sections_mobile %};
 
-    --y-spacing-desk: {{ settings.spacing_grid_vertical }}px;
-    --x-spacing-desk: {{ settings.spacing_grid_horizontal }}px;
-    --y-spacing-phone: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
-    --x-spacing-phone: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+    --y-spacing-desk: {% render 'ucoast-ax', value: settings.spacing_grid_vertical %};
+    --x-spacing-desk: {% render 'ucoast-ax', value: settings.spacing_grid_horizontal %};
+    --y-spacing-phone: {% render 'ucoast-ax', value: y_spacing_phone %};
+    --x-spacing-phone: {% render 'ucoast-ax', value: x_spacing_phone %};
 
     --tb-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
-    --tb-border-width: {{ settings.text_boxes_border_thickness }}px;
-    --tb-radius: {{ settings.text_boxes_radius }}px;
+    --tb-border-width: {% render 'ucoast-ax', value: settings.text_boxes_border_thickness %};
+    --tb-radius: {% render 'ucoast-ax', value: settings.text_boxes_radius %};
     --tb-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
     --tb-shadow-visible: {% if settings.text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
-    --tb-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
-    --tb-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
-    --tb-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
+    --tb-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.text_boxes_shadow_horizontal_offset %};
+    --tb-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.text_boxes_shadow_vertical_offset %};
+    --tb-shadow-blur-radius: {% render 'ucoast-ax', value: settings.text_boxes_shadow_blur %};
 
-    --btn-radius: {{ settings.buttons_radius }}px;
-    --btn-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-    --btn-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+    --btn-radius: {% render 'ucoast-ax', value: settings.buttons_radius %};
+    --btn-radius-outset: {% render 'ucoast-ax', value: buttons_radius_outset %};
+    --btn-border-width: {% render 'ucoast-ax', value: buttons_border_width %};
     --btn-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
     --btn-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
     --btn-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
-    --btn-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
-    --btn-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
-    --btn-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
-    --btn-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
+    --btn-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.buttons_shadow_horizontal_offset %};
+    --btn-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.buttons_shadow_vertical_offset %};
+    --btn-shadow-blur-radius: {% render 'ucoast-ax', value: settings.buttons_shadow_blur %};
+    --btn-border-offset: {% render 'ucoast-ax', value: buttons_border_offset %};
 
-    --i-radius: {{ settings.inputs_radius }}px;
-    --i-border-width: {{ settings.inputs_border_thickness }}px;
+    --i-radius: {% render 'ucoast-ax', value: settings.inputs_radius %};
+    --i-border-width: {% render 'ucoast-ax', value: settings.inputs_border_thickness %};
     --i-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
     --i-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
-    --i-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
-    --i-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
-    --i-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
-    --i-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
-    --i-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+    --i-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.inputs_shadow_horizontal_offset %};
+    --i-margin-offset: {% render 'ucoast-ax', value: input_margin_offset %};
+    --i-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.inputs_shadow_vertical_offset %};
+    --i-shadow-blur-radius: {% render 'ucoast-ax', value: settings.inputs_shadow_blur %};
+    --i-radius-outset: {% render 'ucoast-ax', value: input_radius_outset %};
 
-    --pills-radius: {{ settings.variant_pills_radius }}px;
-    --pills-border-width: {{ settings.variant_pills_border_thickness }}px;
+    --pills-radius: {% render 'ucoast-ax', value: settings.variant_pills_radius %};
+    --pills-border-width: {% render 'ucoast-ax', value: settings.variant_pills_border_thickness %};
     --pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
     --pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
-    --pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
-    --pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
-    --pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+    --pills-shadow-horizontal-offset: {% render 'ucoast-ax', value: settings.variant_pills_shadow_horizontal_offset %};
+    --pills-shadow-vertical-offset: {% render 'ucoast-ax', value: settings.variant_pills_shadow_vertical_offset %};
+    --pills-shadow-blur-radius: {% render 'ucoast-ax', value: settings.variant_pills_shadow_blur %};
     }
 {% endstyle %}
