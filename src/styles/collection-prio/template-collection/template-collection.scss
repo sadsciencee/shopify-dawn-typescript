@@ -26,8 +26,8 @@
 
 @include media-query($s-up) {
   .collection .loading-overlay {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: #{$ax50};
+    padding-right: #{$ax50};
   }
 }
 
@@ -55,7 +55,7 @@
 }
 
 .collection__title .title:not(:only-child) {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 @include media-query($m-up) {
@@ -64,7 +64,7 @@
   }
 
   .collection__title.title-wrapper--self-padded-tablet-down {
-    padding: 0 5rem;
+    padding: 0 #{$ax50};
   }
 
   .collection slider-component:not(.page-width-desktop) {
@@ -78,5 +78,5 @@
 }
 
 .collection__view-all a:not(.link) {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }

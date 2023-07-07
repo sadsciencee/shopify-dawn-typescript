@@ -82,7 +82,7 @@
 }
 
 .multicolumn-card__info > :nth-child(2) {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .multicolumn-list__item.center .media--adapt,
@@ -145,7 +145,7 @@
 
 @include media-query($s-down) {
 	.background-none .slider .multicolumn-card__info {
-		padding-bottom: 1rem;
+		padding-bottom: #{$ax10};
 	}
 
 	.multicolumn.background-none .slider.slider--mobile {

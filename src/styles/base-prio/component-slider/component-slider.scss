@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 slider-component {
 	--desktop-margin-left-first-item: max(
-		5rem,
+		#{$ax50},
 		calc((100vw - #{$pageWidth} + #{ax(100)} - #{$xSpacingDesktop}) / 2)
 	);
 	position: relative;
@@ -21,7 +21,7 @@ slider-component.slider-component-full-width {
 
 @include media-query($m-only) {
 	slider-component.page-width {
-		padding: 0 5rem;
+		padding: 0 #{$ax50};
 	}
 }
 
@@ -53,7 +53,7 @@ slider-component.slider-component-full-width {
 		scroll-behavior: smooth;
 		scroll-padding-left: #{$ax15};
 		-webkit-overflow-scrolling: touch;
-		margin-bottom: 1rem;
+		margin-bottom: #{$ax10};
 	}
 
 	/* Fix to show some space at the end of our sliders in all browsers */
@@ -88,7 +88,7 @@ slider-component.slider-component-full-width {
 		scroll-behavior: smooth;
 		scroll-padding-left: #{$ax15};
 		-webkit-overflow-scrolling: touch;
-		margin-bottom: 1rem;
+		margin-bottom: #{$ax10};
 	}
 
 	/* Fix to show some space at the end of our sliders in all browsers */
@@ -122,7 +122,7 @@ slider-component.slider-component-full-width {
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
-	margin-bottom: 1rem;
+	margin-bottom: #{$ax10};
 }
 
 .slider.slider--everywhere .slider__slide {
@@ -177,7 +177,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-counter__link {
-	padding: 1rem;
+	padding: #{$ax10};
 }
 
 @include media-query($s-down) {
@@ -187,8 +187,8 @@ slider-component.slider-component-full-width {
 }
 
 .slider-counter__link--dots .dot {
-	width: 1rem;
-	height: 1rem;
+	width: #{$ax10};
+	height: #{$ax10};
 	border-radius: 50%;
 	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.5);
 	padding: 0;

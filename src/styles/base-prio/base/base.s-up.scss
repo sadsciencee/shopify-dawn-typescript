@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.page-width {
-		padding: 0 5rem;
+		padding: 0 #{$ax50};
 	}
 
 	.header.page-width {
@@ -19,7 +19,7 @@
 	}
 
 	.page-width-tablet {
-		padding: 0 5rem;
+		padding: 0 #{$ax50};
 	}
 
 	.section + .section {
@@ -27,7 +27,7 @@
 	}
 
 	.element-margin {
-		margin-top: calc(5rem + #{$pageWidthMargin});
+		margin-top: calc(#{$ax50} + #{$pageWidthMargin});
 	}
 
 	.disclosure-has-popup[open] > summary + * {
@@ -109,11 +109,11 @@
 	}
 
 	.search-modal__close-button {
-		right: 1rem;
+		right: #{$ax10};
 	}
 
 	.search-modal__content {
-		padding: 0 6rem;
+		padding: 0 #{ax(60)};
 	}
 
 	.overflow-hidden-mobile {
@@ -142,8 +142,8 @@
 }
 @include media-query($m-up) {
 	.header:not(.drawer-menu).page-width {
-		padding-left: 5rem;
-		padding-right: 5rem;
+		padding-left: #{$ax50};
+		padding-right: #{$ax50};
 	}
 
 	.page-width--narrow {
@@ -153,12 +153,12 @@
 
 	.page-width-desktop {
 		max-width: #{$pageWidth};
-		padding: 0 5rem;
+		padding: 0 #{$ax50};
 	}
 
 	.title,
 	.title-wrapper-with-link {
-		margin: 5rem 0 #{$ax30};
+		margin: #{$ax50} 0 #{$ax30};
 	}
 
 	.title--primary {
@@ -243,8 +243,8 @@
 	}
 
 	body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
-		padding-left: 5rem;
-		padding-right: 5rem;
+		padding-left: #{$ax50};
+		padding-right: #{$ax50};
 	}
 
 	.announcement-bar-slider {
@@ -267,7 +267,7 @@
 	.header--middle-left.drawer-menu {
 		grid-template-areas: 'navigation heading icons';
 		grid-template-columns: auto 1fr auto;
-		column-gap: 1rem;
+		column-gap: #{$ax10};
 	}
 
 	.header--middle-left {
@@ -298,12 +298,12 @@
 	}
 
 	.header:not(.header--middle-left, .header--middle-center) .header__inline-menu {
-		margin-top: 1.05rem;
+		margin-top: ax(10.5);
 	}
 
 	.header--middle-left .header__heading-link,
 	.header--top-left .header__heading-link {
-		margin-left: -0.75rem;
+		margin-left: ax(-7.5);
 	}
 
 	.header__heading,

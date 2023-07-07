@@ -1,7 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 .article-template > *:first-child:not(.article-template__hero-container) {
-  margin-top: 5rem;
+  margin-top: #{$ax50};
 }
 
 .article-template__hero-container {
@@ -32,7 +32,7 @@
 }
 
 .article-template__title:not(:only-child) {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .article-template__link {
@@ -45,7 +45,7 @@
 
 .article-template__link .icon-wrap {
   display: flex;
-  margin-right: 1rem;
+  margin-right: #{$ax10};
   transform: rotate(180deg);
 }
 
@@ -64,7 +64,7 @@
 }
 
 .article-template__comment-wrapper {
-  margin-top: 5rem;
+  margin-top: #{$ax50};
   padding: #{$ax27} 0;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .article-template__comments {
-  margin-bottom: 5rem;
+  margin-bottom: #{$ax50};
 }
 
 .article-template__comments-fields {
@@ -88,7 +88,7 @@
 }
 
 .article-template__comments-comment p {
-  margin: 0 0 1rem;
+  margin: 0 0 #{$ax10};
 }
 
 .article-template__comment-fields > * {

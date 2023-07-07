@@ -65,7 +65,7 @@ product-recommendations.is-accordion + .accordion {
 .complementary-products > .summary__title .icon-accordion {
   fill: rgb(#{$schemaColorForeground});
   height: calc(#{$fontHeadingScale} * #{$ax20});
-  margin-right: calc(#{$fontHeadingScale} * 1rem);
+  margin-right: calc(#{$fontHeadingScale} * #{$ax10});
   width: calc(#{$fontHeadingScale} * #{$ax20});
 }
 

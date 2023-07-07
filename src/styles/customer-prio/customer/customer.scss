@@ -53,7 +53,7 @@
 .customer table {
 	table-layout: auto;
 	border-collapse: collapse;
-	border-bottom: 0.01rem solid rgba(#{$schemaColorForeground}, 0.08);
+	border-bottom: ax(0.1) solid rgba(#{$schemaColorForeground}, 0.08);
 	box-shadow: none;
 	width: 100%;
 	font-size: #{$ax16};
@@ -80,8 +80,8 @@
 }
 
 .customer tbody td {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	padding-top: #{$ax10};
+	padding-bottom: #{$ax10};
 }
 
 .customer td:empty {
@@ -103,7 +103,7 @@
 }
 
 .customer tbody tr {
-	border-top: 0.01rem solid rgba(#{$schemaColorForeground}, 0.08);
+	border-top: ax(.1) solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 @media screen and (forced-colors: active) {
@@ -187,7 +187,7 @@
 
 /* Pagination */
 .customer .pagination {
-	margin-top: 5rem;
+	margin-top: #{$ax50};
 	margin-bottom: 7rem;
 }
 
@@ -204,7 +204,7 @@
 }
 
 .customer .pagination li:not(:last-child) {
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 }
 
 .customer .pagination li :first-child {
@@ -236,7 +236,7 @@
 	content: '';
 	display: block;
 	width: #{$ax20};
-	height: 0.01rem;
+	height: ax(.1);
 	position: absolute;
 	bottom: 0.08rem;
 	left: 50%;
@@ -257,7 +257,7 @@
 }
 
 .login .field + a {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .login p {
@@ -322,12 +322,12 @@
 }
 
 :is(.account, .order) h1 {
-	margin-bottom: 1rem;
+	margin-bottom: #{$ax10};
 }
 
 :is(.account, .order) h2 {
 	margin-top: #{$ax40};
-	margin-bottom: 1rem;
+	margin-bottom: #{$ax10};
 }
 
 .account h1 + a {
@@ -338,7 +338,7 @@
 .account a svg {
 	width: #{$ax15};
 	margin-bottom: ax(-0.3);
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 }
 
 .account table td:first-of-type a {
@@ -397,9 +397,9 @@
 
 .order .fulfillment {
 	width: fit-content;
-	border: 0.01rem solid rgba(#{$schemaColorForeground}, 0.2);
-	padding: 1rem;
-	margin-top: 1rem;
+	border: ax(.1) solid rgba(#{$schemaColorForeground}, 0.2);
+	padding: #{$ax10};
+	margin-top: #{$ax10};
 	font-size: #{$ax14};
 	text-align: left;
 }
@@ -414,7 +414,7 @@
 
 .order .cart-discount {
 	display: block;
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 	margin-bottom: #{$ax5};
 	font-size: #{$ax12};
 }
@@ -424,7 +424,7 @@
 	font-size: #{$ax12};
 	text-align: right;
 	padding-left: 0;
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 	margin-bottom: 0;
 }
 
@@ -440,7 +440,7 @@
 
 .order .properties {
 	font-size: #{$ax14};
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .order .properties span {
@@ -492,7 +492,7 @@
 }
 
 .addresses form button:first-of-type {
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 }
 
 label[for='AddressCountryNew'],
@@ -519,7 +519,7 @@ label[for='AddressProvinceNew'] {
 }
 
 li[data-address] {
-	margin-top: 5rem;
+	margin-top: #{$ax50};
 }
 
 .addresses [aria-expanded='false'] ~ div[id] {

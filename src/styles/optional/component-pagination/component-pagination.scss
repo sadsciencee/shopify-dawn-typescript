@@ -16,7 +16,7 @@
 }
 
 .pagination__list > li:not(:last-child) {
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 }
 
 .pagination__item {

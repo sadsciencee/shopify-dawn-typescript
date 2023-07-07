@@ -23,8 +23,8 @@
           (var(--rating-max) * (var(--letter-spacing) + var(--font-size)))
       ) * 100%
   );
-  letter-spacing: calc(var(--letter-spacing) * 1rem);
-  font-size: calc(var(--font-size) * 1rem);
+  letter-spacing: calc(var(--letter-spacing) * #{$ax10});
+  font-size: calc(var(--font-size) * #{$ax10});
   line-height: 1;
   display: inline-block;
   font-family: Times;

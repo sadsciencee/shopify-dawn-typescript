@@ -26,7 +26,7 @@
 	}
 
 	.cart__footer > * {
-		width: 35rem;
+		width: ax(350);
 	}
 
 	.cart__footer > * + * {
@@ -34,7 +34,7 @@
 		margin-top: 0;
 	}
 	.cart-note {
-		max-width: 35rem;
+		max-width: ax(350);
 	}
 
 	.cart__update-button {
@@ -53,12 +53,12 @@
 
 	.cart__ctas {
 		display: flex;
-		gap: 1rem;
+		gap: #{$ax10};
 	}
 }
 @include media-query($m-up) {
 	.cart__warnings {
-		padding: 7rem 0 1rem;
+		padding: 7rem 0 #{$ax10};
 	}
 
 	.cart__empty-text {

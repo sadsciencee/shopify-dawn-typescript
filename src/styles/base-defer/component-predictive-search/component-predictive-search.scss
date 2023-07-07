@@ -26,7 +26,7 @@
 .predictive-search__results-groups-wrapper {
 	display: flex;
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
-	padding-bottom: 1rem;
+	padding-bottom: #{$ax10};
 }
 
 @include media-query($s-down) {
@@ -69,7 +69,7 @@ predictive-search[loading] .predictive-search {
 .predictive-search__heading {
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 	margin: 0 #{$ax20};
-	padding: #{$ax15} 0 0.75rem;
+	padding: #{$ax15} 0 ax(7.5);
 	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
@@ -87,7 +87,7 @@ predictive-search:not([loading]) .predictive-search-status__loading {
 predictive-search[loading] .predictive-search__loading-state {
 	display: flex;
 	justify-content: center;
-	padding: 1rem;
+	padding: #{$ax10};
 }
 
 predictive-search[loading] .predictive-search__search-for-button {
@@ -122,7 +122,7 @@ predictive-search[loading]
 
 .predictive-search__item {
 	display: flex;
-	padding: 1rem #{$ax20};
+	padding: #{$ax10} #{$ax20};
 	text-align: left;
 	text-decoration: none;
 	width: 100%;
@@ -130,7 +130,7 @@ predictive-search[loading]
 
 .predictive-search__item--link-with-thumbnail {
 	display: grid;
-	grid-template-columns: 5rem 1fr;
+	grid-template-columns: #{$ax50} 1fr;
 	grid-column-gap: #{$ax20};
 	grid-template-areas: 'product-image product-content';
 }

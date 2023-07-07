@@ -64,12 +64,12 @@
 
 	.activate button[name='decline'] {
 		margin-top: inherit;
-		margin-left: 1rem;
+		margin-left: #{$ax10};
 	}
 
 	:is(.account, .order) {
-		padding-left: 5rem;
-		padding-right: 5rem;
+		padding-left: #{$ax50};
+		padding-right: #{$ax50};
 	}
 }
 @include media-query($m-only) {
@@ -133,7 +133,7 @@
 	.addresses form > div:nth-of-type(1),
 	.addresses form > div:nth-of-type(2) {
 		box-sizing: border-box;
-		flex-basis: calc(50% - 1rem);
+		flex-basis: calc(50% - #{$ax10});
 	}
 }
 @include media-query($m-up) {
@@ -144,7 +144,7 @@
 
 	:is(.account, .order) > div:nth-of-type(2) {
 		display: flex;
-		margin-top: 5rem;
+		margin-top: #{$ax50};
 	}
 
 	:is(.account, .order) > div:nth-of-type(2) > div:first-of-type {

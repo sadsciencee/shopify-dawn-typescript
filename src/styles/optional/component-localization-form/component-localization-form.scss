@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   flex: auto 1 0;
-  padding: 1rem;
+  padding: #{$ax10};
   margin: 0 auto;
 }
 
@@ -12,12 +12,12 @@
   display: inline-flex;
   flex-wrap: wrap;
   flex: initial;
-  padding: 1rem 0;
+  padding: #{$ax10} 0;
 }
 
 .localization-form:only-child .button,
 .localization-form:only-child .localization-form__select {
-  margin: 1rem 1rem #{$ax5};
+  margin: #{$ax10} #{$ax10} #{$ax5};
   flex-grow: 1;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .localization-form .button {
-  padding: 1rem;
+  padding: #{$ax10};
 }
 
 .localization-form__currency {
@@ -45,7 +45,7 @@
   border-radius: #{$inputsRadiusOutset};
   position: relative;
   margin-bottom: #{$ax15};
-  padding-left: 1rem;
+  padding-left: #{$ax10};
   text-align: left;
   min-height: calc(#{$ax40} + #{$inputsBorderWidth} * 2);
   min-width: calc(7rem + #{$inputsBorderWidth} * 2);
@@ -120,7 +120,7 @@ noscript .localization-selector.link {
   overflow: hidden;
   position: absolute;
   bottom: 100%;
-  transform: translateY(-1rem);
+  transform: translateY(ax(-10));
   z-index: 2;
   background-color: rgb(#{$schemaColorBackground});
   border-radius: #{$popupCornerRadius};
@@ -174,7 +174,7 @@ noscript .localization-selector.link {
 
 .header__localization .disclosure .localization-form__select {
   font-size: #{$ax14};
-  letter-spacing: 0.06rem;
+  letter-spacing: 0.043em;
   height: auto;
   background: transparent;
 }
@@ -255,7 +255,7 @@ noscript .localization-selector.link {
 .menu-drawer__localization .localization-form__select {
   background-color: initial;
   margin-top: 0;
-  padding: 1rem #{$ax36} 1rem 0rem;
+  padding: #{$ax10} #{$ax36} #{$ax10} 0rem;
 }
 
 .menu-drawer__localization .localization-form {
@@ -267,7 +267,7 @@ noscript .localization-selector.link {
 }
 
 .menu-drawer__localization + .list-social {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .menu-drawer__localization noscript .localization-form__select {

@@ -30,7 +30,7 @@
 	@include media-query($s-up) {
 		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
 		.collapsible-content__grid--reverse .collapsible-content__grid-item {
-			padding-left: 5rem;
+			padding-left: #{$ax50};
 			padding-right: 0;
 		}
 	}

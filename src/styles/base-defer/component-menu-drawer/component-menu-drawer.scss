@@ -115,7 +115,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__menu-item {
-  padding: #{$ax12} #{ax(52)} #{$ax12} 6rem;
+  padding: #{$ax12} #{ax(52)} #{$ax12} #{ax(60)};
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__submenu .menu-drawer__menu-item {
@@ -191,7 +191,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 
 .menu-drawer__close-button .icon-arrow {
   transform: rotate(180deg);
-  margin-right: 1rem;
+  margin-right: #{$ax10};
 }
 
 .menu-drawer__utility-links {
@@ -220,7 +220,7 @@ details[open].menu-opening > .menu-drawer__submenu {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  padding: 1rem 0;
+  padding: #{$ax10} 0;
   font-size: #{$ax14};
   color: rgb(#{$schemaColorForeground});
   margin-bottom: 0;
@@ -233,7 +233,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer__account .icon-account {
   height: #{$ax20};
   width: #{$ax20};
-  margin-right: 1rem;
+  margin-right: #{$ax10};
 }
 
 .menu-drawer__account:hover .icon-account {
@@ -242,7 +242,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 
 .menu-drawer .list-social {
   justify-content: flex-start;
-  margin-left: -1.25rem
+  margin-left: ax(-12.5);
 }
 
 .menu-drawer .list-social:empty {

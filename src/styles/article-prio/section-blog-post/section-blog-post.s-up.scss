@@ -2,14 +2,14 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-template > *:first-child:not(.article-template__hero-container) {
-		margin-top: calc(5rem + #{$pageWidthMargin});
+		margin-top: calc(#{$ax50} + #{$pageWidthMargin});
 	}
 	.article-template header {
-		margin-top: 5rem;
+		margin-top: #{$ax50};
 	}
 
 	.article-template__comment-wrapper {
-		margin-top: 6rem;
+		margin-top: #{ax(60)};
 		padding: #{$ax36} 0;
 	}
 
@@ -53,6 +53,6 @@
 		height: #{ax(825)};
 	}
 	.article-template__comments .pagination-wrapper {
-		margin: 5rem 0 8rem;
+		margin: #{$ax50} 0 8rem;
 	}
 }

@@ -240,7 +240,7 @@
 }
 
 .banner__box > * + * {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .banner__box > *:first-child {
@@ -258,14 +258,14 @@
 }
 
 .banner__box .banner__heading + * {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .banner__buttons {
 	display: inline-flex;
 	flex-wrap: wrap;
-	gap: 1rem;
-	max-width: 45rem;
+	gap: #{$ax10};
+	max-width: ax(450);
 	word-break: break-word;
 }
 

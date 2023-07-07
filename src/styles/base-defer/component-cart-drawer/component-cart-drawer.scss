@@ -82,7 +82,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer__heading {
-  margin: 0 0 1rem;
+  margin: 0 0 #{$ax10};
 }
 
 .drawer__close {
@@ -217,7 +217,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-item:last-child {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .cart-drawer .cart-item__media {
@@ -266,7 +266,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-item > td + td {
-  padding-left: 1rem;
+  padding-left: #{$ax10};
 }
 
 .cart-drawer .cart-item__details {
@@ -307,7 +307,7 @@ cart-drawer-items {
 }
 
 .cart-drawer__footer > * + * {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .cart-drawer .totals {
@@ -319,7 +319,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .tax-note {
-  margin: #{$ax12} 0 1rem auto;
+  margin: #{$ax12} 0 #{$ax10} auto;
   text-align: left;
 }
 

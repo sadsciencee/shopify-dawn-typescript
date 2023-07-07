@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.blog__button {
-		margin-top: 5rem;
+		margin-top: #{$ax50};
 	}
 }
 /* check for flexbox gap in older Safari versions */

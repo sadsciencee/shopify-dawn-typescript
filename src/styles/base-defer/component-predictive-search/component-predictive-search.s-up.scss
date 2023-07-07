@@ -28,7 +28,7 @@
 	}
 
 	.predictive-search__item--term {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
+		padding-top: #{$ax10};
+		padding-bottom: #{$ax10};
 	}
 }

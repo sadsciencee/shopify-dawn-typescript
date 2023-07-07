@@ -40,9 +40,9 @@
   display: inline-flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: #{$ax10};
   width: 100%;
-  max-width: 45rem;
+  max-width: ax(450);
   word-break: break-word;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .rich-text__buttons + .rich-text__buttons {
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .rich-text__blocks.left .rich-text__buttons {

@@ -68,7 +68,7 @@
 }
 
 .article-card__footer:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: #{$ax10};
 }
 
 .article-card__footer:last-child {
@@ -103,6 +103,6 @@
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
   .articles-wrapper.grid {
-    margin: 0 0 5rem 0;
+    margin: 0 0 #{$ax50} 0;
   }
 }

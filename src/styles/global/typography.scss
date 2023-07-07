@@ -2,7 +2,7 @@
 @import './functions.scss';
 .text-body {
 	font-size: #{$ax15};
-	letter-spacing: 0.06rem;
+	letter-spacing: 0.04em;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
 	font-style: #{$fontBodyStyle};
@@ -23,14 +23,14 @@ h5,
 	font-family: #{$fontHeadingFamily};
 	font-style: #{$fontHeadingStyle};
 	font-weight: #{$fontHeadingWeight};
-	letter-spacing: calc(#{$fontHeadingScale} * 0.06rem);
+	letter-spacing: calc(#{$fontHeadingScale} * #{ax(.6)});
 	color: rgb(#{$schemaColorForeground});
 	line-height: calc(1 + 0.3 / max(1, #{$fontHeadingScale}));
 	word-break: break-word;
 }
 
 .hxl {
-	font-size: calc(#{$fontHeadingScale} * 5rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax50});
 }
 
 @include media-query($s-up) {
@@ -115,7 +115,7 @@ blockquote {
 	font-style: italic;
 	color: rgba(#{$schemaColorForeground}, 0.75);
 	border-left: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.2);
-	padding-left: 1rem;
+	padding-left: #{$ax10};
 }
 
 @include media-query($s-up) {
@@ -125,7 +125,7 @@ blockquote {
 }
 
 .caption {
-	font-size: 1rem;
+	font-size: #{$ax10};
 	letter-spacing: 0.07rem;
 	line-height: calc(1 + 0.7 / #{$fontBodyScale});
 }
@@ -137,7 +137,7 @@ blockquote {
 }
 
 .caption-with-letter-spacing {
-	font-size: 1rem;
+	font-size: #{$ax10};
 	letter-spacing: 0.13em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 	text-transform: uppercase;
@@ -232,7 +232,7 @@ h6:empty {
 
 .link-with-icon .icon {
 	width: #{$ax15};
-	margin-left: 1rem;
+	margin-left: #{$ax10};
 }
 
 a:not([href]) {

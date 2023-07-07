@@ -30,7 +30,7 @@
 
 .accordion__title {
   display: inline-block;
-  max-width: calc(100% - 6rem);
+  max-width: calc(100% - #{ax(60)});
   min-height: #{$ax16};
   margin: 0;
   word-break: break-word;
@@ -40,7 +40,7 @@
   align-self: center;
   fill: rgb(#{$schemaColorForeground});
   height: calc(#{$fontHeadingScale} * #{$ax20});
-  margin-right: calc(#{$fontHeadingScale} * 1rem);
+  margin-right: calc(#{$fontHeadingScale} * #{$ax10});
   width: calc(#{$fontHeadingScale} * #{$ax20});
 }
 

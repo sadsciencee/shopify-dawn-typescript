@@ -139,7 +139,7 @@ slideshow-component:not(.page-width) .slider-buttons {
 }
 
 .slideshow__autoplay .icon.icon-play {
-	height: 1rem;
+	height: #{$ax10};
 }
 
 .slideshow__autoplay path {

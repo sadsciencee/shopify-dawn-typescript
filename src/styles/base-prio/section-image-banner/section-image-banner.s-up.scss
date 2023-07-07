@@ -81,7 +81,7 @@
 	}
 
 	.banner__content {
-		padding: 5rem;
+		padding: #{$ax50};
 	}
 
 	.banner__content--top-left {
@@ -151,8 +151,8 @@
 
 	.banner__box {
 		width: auto;
-		max-width: 71rem;
-		min-width: 45rem;
+		max-width: ax(710);
+		min-width: ax(450);
 	}
 
 	.banner--content-align-center .banner__buttons--multiple > * {

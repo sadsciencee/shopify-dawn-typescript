@@ -7,7 +7,7 @@
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
-		scroll-padding-left: 1rem;
+		scroll-padding-left: #{$ax10};
 		-webkit-overflow-scrolling: touch;
 	}
 
@@ -35,7 +35,7 @@
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
-		margin-bottom: 1rem;
+		margin-bottom: #{$ax10};
 		scroll-padding-left: var(--desktop-margin-left-first-item);
 	}
 
@@ -43,7 +43,7 @@
 	.slider--desktop:after {
 		content: '';
 		width: 0;
-		padding-left: 5rem;
+		padding-left: #{$ax50};
 		margin-left: calc(-1 * #{$xSpacingDesktop});
 	}
 

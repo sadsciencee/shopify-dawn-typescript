@@ -121,13 +121,13 @@
 
 .card--media .card__inner .card__content {
 	position: relative;
-	padding: calc(var(--image-padding) + 1rem);
+	padding: calc(var(--image-padding) + #{$ax10});
 }
 
 .card__content {
 	display: grid;
 	grid-template-rows: minmax(0, 1fr) max-content minmax(0, 1fr);
-	padding: 1rem;
+	padding: #{$ax10};
 	width: 100%;
 	flex-grow: 1;
 }
@@ -138,7 +138,7 @@
 
 .card__information {
 	grid-row-start: 2;
-	padding: #{$ax13} 1rem;
+	padding: #{$ax13} #{$ax10};
 }
 
 .card:not(.ratio) > .card__content {
@@ -337,7 +337,7 @@
 }
 
 .card-article-info {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 /* Card Shapes */

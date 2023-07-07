@@ -2,7 +2,7 @@
 @import "../../global/functions.scss";
 @include media-query($s-up) {
   .footer__content-top .grid {
-    row-gap: 6rem;
+    row-gap: #{ax(60)};
     margin-bottom: 0;
   }
 }
@@ -72,7 +72,7 @@
   }
 
   .footer__localization h2 {
-    margin: 1rem 0 0;
+    margin: #{$ax10} 0 0;
   }
 }
 @include media-query($s-up) {

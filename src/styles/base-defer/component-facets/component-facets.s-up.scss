@@ -85,7 +85,7 @@
 
   .facets-vertical .no-js .facet-filters__field {
     justify-content: flex-start;
-    padding-bottom: 1rem;
+    padding-bottom: #{$ax10};
     padding-top: #{$ax20};
   }
 
@@ -94,7 +94,7 @@
   }
 
   .facets-vertical .facets__price .field:last-of-type {
-    margin-left: 1rem;
+    margin-left: #{$ax10};
   }
 
   .facets-vertical .active-facets__button {
@@ -116,7 +116,7 @@
   }
 
   .facets-vertical .active-facets facet-remove:last-of-type {
-    margin-bottom: 1rem;
+    margin-bottom: #{$ax10};
   }
 
   .facets-vertical .active-facets {
@@ -170,12 +170,12 @@
     width: #{$ax14};
   }
   .facets-vertical .active-facets__button {
-    padding: 1rem;
+    padding: #{$ax10};
     margin-bottom: 0;
     margin-left: ax(-5);
   }
 
   .facets-vertical .active-facets__button-remove {
-    padding: 0 1rem 1rem;
+    padding: 0 #{$ax10} #{$ax10};
   }
 }

@@ -115,7 +115,7 @@
 
 .cart-item cart-remove-button {
   display: flex;
-  margin-left: 1rem;
+  margin-left: #{$ax10};
 }
 
 cart-remove-button .button {
@@ -154,7 +154,7 @@ cart-remove-button .icon-remove {
 .cart-item__error {
   display: flex;
   align-items: flex-start;
-  margin-top: 1rem;
+  margin-top: #{$ax10};
 }
 
 .cart-item__error-text {

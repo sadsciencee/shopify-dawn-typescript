@@ -62,7 +62,7 @@
 
 .cart-notification__heading .icon-checkmark {
 	color: rgb(#{$schemaColorForeground});
-	margin-right: 1rem;
+	margin-right: #{$ax10};
 	width: #{$ax13};
 }
 
@@ -76,7 +76,7 @@
 }
 
 .cart-notification__links > * {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .cart-notification-product {

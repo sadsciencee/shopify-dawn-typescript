@@ -5,8 +5,8 @@
 }
 
 .collapsible-section-layout {
-	padding-bottom: 5rem;
-	padding-top: 5rem;
+	padding-bottom: #{$ax50};
+	padding-top: #{$ax50};
 }
 
 
@@ -38,11 +38,11 @@
 }
 
 .collapsible-row-layout .accordion:not(:first-child):not(.color-background-1) {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .caption-with-letter-spacing + h2 {
-	margin-top: 1rem;
+	margin-top: #{$ax10};
 }
 
 .collapsible-row-layout .accordion {
