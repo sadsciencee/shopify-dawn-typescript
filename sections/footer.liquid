@@ -27,7 +27,7 @@
 		or section.settings.enable_follow_on_shop
 	-%}
 		{%- unless only_empty_brand -%}
-			<div class="footer__content-top page-width">
+			<div class="footer__content-top page-width block">
 				{%- if section.blocks.size > 0 -%}
 					{%- liquid
 						if section.blocks.size == 9
@@ -115,14 +115,14 @@
 											{%- endif -%}
 										</div>
 									{%- when 'image' -%}
-										<div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
+										<div class="footer-block__details-content flex footer-block-image {{ block.settings.alignment }}">
 											{%- if block.settings.image != blank -%}
 												<div
 													class="footer-block__image-wrapper"
 													style="max-width: min(100%, {% render 'ucoast-ax', value: block.settings.image_width %});"
 												>
 													{% render 'ucoast-image',
-														image: block.settings.image
+														image: block.settings.image, image_class: 'block h-auto'
 													%}
 												</div>
 											{%- else -%}
@@ -139,7 +139,7 @@
 				{%- endif -%}
 
 				<div
-					class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} flex"
 					{% if settings.animations_reveal_on_scroll %}
 						data-cascade
 					{% endif %}
@@ -223,7 +223,7 @@
 					{%- if shop.features.follow_on_shop?
 						and section.settings.enable_follow_on_shop
 					-%}
-						<div class="footer__follow-on-shop">
+						<div class="footer__follow-on-shop flex">
 							{% comment %} TODO: enable theme-check once `login_button` is accepted as valid filter {% endcomment %}
 							{% # theme-check-disable %}
 							{{ shop | login_button: action: 'follow' }}
@@ -245,8 +245,8 @@
 			data-cascade
 		{% endif %}
 	>
-		<div class="footer__content-bottom-wrapper page-width">
-			<div class="footer__column footer__localization isolate">
+		<div class="footer__content-bottom-wrapper page-width flex w-100">
+			<div class="footer__column footer__localization isolate w-100 flex flex-wrap">
 				{%- if section.settings.enable_country_selector
 					and localization.available_countries.size > 1
 				-%}
@@ -357,7 +357,7 @@
 					</localization-form>
 				{%- endif -%}
 			</div>
-			<div class="footer__column footer__column--info">
+			<div class="footer__column footer__column--info flex w-100">
 				{%- if section.settings.payment_enable -%}
 					<div class="footer__payment">
 						<span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
@@ -375,7 +375,7 @@
 				{%- endif -%}
 			</div>
 		</div>
-		<div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
+		<div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center justify-center{% endif %}">
 			<div class="footer__copyright caption">
 				<small class="copyright__content"
 					>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
