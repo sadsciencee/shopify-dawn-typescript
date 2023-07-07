@@ -1,4 +1,4 @@
-import { ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import {
 	debounce,
 	fetchConfig,
@@ -13,12 +13,15 @@ import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/global'
 import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
-import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 declare let window: uCoastWindow
 
 export class CartItems extends UcoastEl {
 	static htmlSelector = 'cart-items'
+	static attributes = {
+		cartEmpty: 'data-uc-cart-empty',
+	}
 	lineItemStatusElement: HTMLElement
 	cartUpdateUnsubscriber?: () => void = undefined
 	constructor() {
@@ -126,14 +129,18 @@ export class CartItems extends UcoastEl {
 					return
 				}
 
-				this.classList.toggle('is-empty', parsedState.item_count === 0)
 				const cartDrawerWrapper = qsOptional<CartDrawer>('cart-drawer')
 				const cartFooter = qsOptional('#main-cart-footer')
 
-				if (cartFooter)
-					cartFooter.classList.toggle('is-empty', parsedState.item_count === 0)
-				if (cartDrawerWrapper)
-					cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0)
+				if (parsedState.item_count === 0) {
+					this.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartFooter && cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartDrawerWrapper && cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
+				} else {
+					this.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartFooter && cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartDrawerWrapper && cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
+				}
 
 				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {
 					const sectionEl = qsRequired(`#${section.id}`)

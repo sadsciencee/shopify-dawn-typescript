@@ -6,3 +6,9 @@ export const PUB_SUB_EVENTS = {
   variantChange: 'variant-change',
   cartError: 'cart-error',
 };
+
+
+export const ATTRIBUTES = {
+  cartEmpty: '[data-uc-cart-empty]',
+  loading: '[data-uc-loading]'
+}

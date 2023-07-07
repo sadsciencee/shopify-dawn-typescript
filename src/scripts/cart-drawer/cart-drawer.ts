@@ -1,17 +1,22 @@
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { SectionApiResponse } from '@/scripts/types/responses'
-import {
-	closestOptional,
-	currentTargetRequired,
-	onKeyUpEscape,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/functions'
+import { currentTargetRequired, onKeyUpEscape, qsOptional, qsRequired } from '@/scripts/functions'
 import { removeTrapFocus, trapFocus } from '@/scripts/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
+import { ATTRIBUTES } from '@/scripts/theme/constants'
 
 export class CartDrawer extends UcoastEl {
 	static htmlSelector = 'cart-drawer'
+	static selectors = {
+		overlay: '[data-uc-cart-drawer-overlay]',
+		innerEmpty: '[data-uc-cart-drawer-inner-empty]',
+		inner: '[data-uc-cart-drawer-inner]',
+		container: '#CartDrawer',
+		cartLink: '#cart-icon-bubble',
+		closeButton: '[data-uc-cart-drawer-close-button]',
+		noteSummary: '[data-uc-cart-note-summary]',
+		noteDetails: '[data-uc-cart-note-details]',
+	}
 	activeElement?: HTMLElement
 	productId?: string
 	constructor() {
@@ -23,11 +28,11 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	getOverlay() {
-		return qsRequired('#CartDrawer-Overlay', this)
+		return qsRequired(CartDrawer.selectors.overlay, this)
 	}
 
 	setHeaderCartIconAccessibility() {
-		const cartLink = qsRequired('#cart-icon-bubble')
+		const cartLink = qsRequired(CartDrawer.selectors.cartLink)
 		cartLink.setAttribute('role', 'button')
 		cartLink.setAttribute('aria-haspopup', 'dialog')
 		cartLink.addEventListener('click', (event) => {
@@ -44,7 +49,7 @@ export class CartDrawer extends UcoastEl {
 
 	open(triggeredBy?: HTMLElement) {
 		if (triggeredBy) this.setActiveElement(triggeredBy)
-		const cartDrawerNote = qsOptional('[id^="Details-"] summary', this)
+		const cartDrawerNote = qsOptional(CartDrawer.selectors.noteSummary, this)
 		if (cartDrawerNote && !cartDrawerNote.hasAttribute('role'))
 			this.setSummaryAccessibility(cartDrawerNote)
 		// here the animation doesn't seem to always get triggered. A timeout seem to help
@@ -55,11 +60,12 @@ export class CartDrawer extends UcoastEl {
 		this.addEventListener(
 			'transitionend',
 			() => {
-				const containerToTrapFocusOn = this.classList.contains('is-empty')
-					? qsRequired('.drawer__inner-empty', this)
-					: qsRequired('#CartDrawer')
+				const containerToTrapFocusOn = this.hasAttribute(ATTRIBUTES.cartEmpty)
+					? qsRequired(CartDrawer.selectors.innerEmpty, this)
+					: qsRequired(CartDrawer.selectors.container)
 				const focusElement =
-					qsOptional('.drawer__inner', this) || qsRequired('.drawer__close', this)
+					qsOptional(CartDrawer.selectors.inner, this) ||
+					qsRequired(CartDrawer.selectors.closeButton, this)
 				trapFocus(containerToTrapFocusOn, focusElement)
 			},
 			{ once: true }
@@ -88,16 +94,18 @@ export class CartDrawer extends UcoastEl {
 
 		cartDrawerNote.addEventListener('click', (event: MouseEvent) => {
 			const currentTarget = currentTargetRequired(event)
-			const closestDetails = closestOptional(currentTarget, 'details')
-			currentTarget.setAttribute('aria-expanded', `${!closestDetails?.hasAttribute('open')}`)
+			const isExpanded = qsRequired(CartDrawer.selectors.noteDetails, this).hasAttribute(
+				'open'
+			)
+			currentTarget.setAttribute('aria-expanded', `${isExpanded}`)
 		})
 
 		parentElement.addEventListener('keyup', onKeyUpEscape)
 	}
 
 	renderContents(parsedState: SectionApiResponse) {
-		qsRequired('.drawer__inner', this).classList.contains('is-empty') &&
-			qsRequired('.drawer__inner', this).classList.remove('is-empty')
+		qsRequired(CartDrawer.selectors.inner, this).hasAttribute(ATTRIBUTES.cartEmpty) &&
+			qsRequired(CartDrawer.selectors.inner, this).removeAttribute(ATTRIBUTES.cartEmpty)
 		this.productId = parsedState.id
 		this.getSectionsToRender().forEach((section) => {
 			const sectionId = section.id
@@ -126,7 +134,7 @@ export class CartDrawer extends UcoastEl {
 		return [
 			{
 				id: 'cart-drawer',
-				selector: '#CartDrawer',
+				selector: CartDrawer.selectors.container,
 			},
 			{
 				id: 'cart-icon-bubble',

@@ -11,10 +11,14 @@
 	}
 </style>
 
-<cart-drawer class="drawer fixed left-0 top-0 h-100 flex justify-end {% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="drawer fixed left-0 top-0 h-100 flex justify-end" {% if cart == empty %} data-uc-cart-empty {% endif %}>
 	<div id="CartDrawer" class="cart-drawer">
-		<div id="CartDrawer-Overlay" class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"></div>
 		<div
+			data-uc-cart-drawer-overlay
+			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"
+		></div>
+		<div
+			data-uc-cart-drawer-inner
 			class="drawer__inner h-100 flex flex-column overflow-hidden"
 			role="dialog"
 			aria-modal="true"
@@ -22,7 +26,10 @@
 			tabindex="-1"
 		>
 			{%- if cart == empty -%}
-				<div class="drawer__inner-empty flex flex-column overflow-hidden h-100">
+				<div
+					data-uc-cart-drawer-inner-empty
+					class="drawer__inner-empty flex flex-column overflow-hidden h-100"
+				>
 					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
 						<div class="cart-drawer__empty-content">
 							<h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
@@ -31,6 +38,7 @@
 								type="button"
 								onclick="this.closest('cart-drawer').close()"
 								aria-label="{{ 'accessibility.close' | t }}"
+								data-uc-cart-drawer-close-button
 							>
 								{% render 'icon-default', icon: 'close' %}
 							</button>
@@ -74,7 +82,7 @@
 			</div>
 			<cart-drawer-items
 				{% if cart == empty %}
-					class=" is-empty"
+					data-uc-cart-empty
 				{% endif %}
 			>
 				<form
@@ -83,7 +91,10 @@
 					class="cart__contents cart-drawer__form flex flex-wrap"
 					method="post"
 				>
-					<div id="CartDrawer-CartItems" class="drawer__contents flex flex-column js-contents">
+					<div
+						id="CartDrawer-CartItems"
+						class="drawer__contents flex flex-column js-contents"
+					>
 						{%- if cart != empty -%}
 							<div class="drawer__cart-items-wrapper">
 								<table class="cart-items" role="table">
@@ -139,7 +150,7 @@
 															class="cart-item__link"
 															tabindex="-1"
 															aria-hidden="true"
-														><span></span>
+															><span></span>
 														</a>
 														{% render 'ucoast-image',
 															image: item.image,
@@ -486,8 +497,8 @@
 			</cart-drawer-items>
 			<div class="drawer__footer">
 				{%- if settings.show_cart_note -%}
-					<details id="Details-CartDrawer">
-						<summary class='flex relative lh-1'>
+					<details id="Details-CartDrawer" data-uc-cart-note-details>
+						<summary class="flex relative lh-1" data-uc-cart-note-summary>
 							<span class="summary__title">
 								{{ 'sections.cart.note' | t }}
 								{% render 'icon-default', icon: 'caret' %}

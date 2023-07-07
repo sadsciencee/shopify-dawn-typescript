@@ -1,4 +1,4 @@
-import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { ATTRIBUTES, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
 import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/functions'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
 import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
@@ -52,8 +52,8 @@ export class ProductForm extends UcoastEl {
 		this.getSpinner().classList.remove('hidden')
 
 		const formData = new FormData(this.form)
-    console.log('this.form', this.form)
-    console.log({formData: JSON.stringify(formData)})
+		console.log('this.form', this.form)
+		console.log({ formData: JSON.stringify(formData) })
 		if (this.cart) {
 			const sectionIdsToRender = this.cart
 				.getSectionsToRender()
@@ -67,7 +67,7 @@ export class ProductForm extends UcoastEl {
 		}
 		const config = addToCartConfig(formData)
 		const addedVariantId = formData.get('id') as string
-    console.log({config, url: `${routes.cart_add_url}`})
+		console.log({ config, url: `${routes.cart_add_url}` })
 		if (!addedVariantId) throw Error('No variant id found')
 
 		fetch(`${routes.cart_add_url}`, config)
@@ -124,8 +124,9 @@ export class ProductForm extends UcoastEl {
 			})
 			.finally(() => {
 				this.submitButton.classList.remove('loading')
-				if (this.cart && this.cart.classList.contains('is-empty'))
-					this.cart.classList.remove('is-empty')
+				this.cart?.hasAttribute(ATTRIBUTES.cartEmpty) &&
+					this.cart.removeAttribute(ATTRIBUTES.cartEmpty)
+
 				if (!this.error) this.submitButton.removeAttribute('aria-disabled')
 				this.getSpinner().classList.add('hidden')
 			})

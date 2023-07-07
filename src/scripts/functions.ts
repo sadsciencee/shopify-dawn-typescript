@@ -277,9 +277,9 @@ export const toggleActive = (el: HTMLElement, active: boolean) => {
 
 export const toggleIsEmpty = (el: HTMLElement, isEmpty: boolean) => {
 	if (isEmpty) {
-		el.setAttribute('data-uc-is-empty', '')
+		el.setAttribute('data-uc-cart-empty', '')
 	} else {
-		el.removeAttribute('data-uc-is-empty')
+		el.removeAttribute('data-uc-cart-empty')
 	}
 }
 

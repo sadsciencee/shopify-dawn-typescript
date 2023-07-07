@@ -35,19 +35,19 @@
   flex: 1;
 }
 
-cart-drawer.is-empty .drawer__inner {
+cart-drawer[data-uc-cart-empty] .drawer__inner {
   display: grid;
   grid-template-rows: 1fr;
   align-items: center;
   padding: 0;
 }
 
-cart-drawer.is-empty .drawer__header {
+cart-drawer[data-uc-cart-empty] .drawer__header {
   display: none;
 }
 
-cart-drawer:not(.is-empty) .cart-drawer__warnings,
-cart-drawer:not(.is-empty) .cart-drawer__collection {
+cart-drawer:not([data-uc-cart-empty]) .cart-drawer__warnings,
+cart-drawer:not([data-uc-cart-empty]) .cart-drawer__collection {
   display: none;
 }
 
@@ -97,7 +97,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   padding: $ax15 0;
 }
 
-cart-drawer-items.is-empty + .drawer__footer {
+cart-drawer-items[data-uc-cart-empty] + .drawer__footer {
   display: none;
 }
 

@@ -6,14 +6,14 @@
 }
 
 .cart__empty-text,
-.is-empty .cart__contents,
-cart-items.is-empty .title-wrapper-with-link,
-.is-empty .cart__footer {
+[data-uc-cart-empty] .cart__contents,
+cart-items[data-uc-cart-empty] .title-wrapper-with-link,
+[data-uc-cart-empty] .cart__footer {
   display: none;
 }
 
-.is-empty .cart__empty-text,
-.is-empty .cart__warnings {
+[data-uc-cart-empty] .cart__empty-text,
+[data-uc-cart-empty] .cart__warnings {
   display: block;
 }
 

@@ -4,9 +4,12 @@
 	endcapture
 -%}
 
-
-
-<cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+<cart-items
+	class="page-width{% unless cart == empty %} {{ spacing }}{% endunless %}"
+	{% if cart == empty %}
+		data-uc-cart-empty
+	{% endif %}
+>
 	<div class="title-wrapper-with-link">
 		<h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
 		<a href="{{ routes.all_products_collection_url }}" class="underlined-link">
