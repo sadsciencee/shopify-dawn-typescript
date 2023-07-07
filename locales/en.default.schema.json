@@ -135,6 +135,10 @@
 				},
 				"shadow": {
 					"label": "Shadow"
+				},
+				"padding": {
+					"label": "Apply padding when in use",
+					"info": "Use this to apply padding to section when this color scheme is selected. This is intended for use with sections that have a background color."
 				}
 			}
 		},
