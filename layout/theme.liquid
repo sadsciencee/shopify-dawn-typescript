@@ -32,16 +32,13 @@
 		{% endif %}
 
 		{% render 'meta-tags' %}
-		{% comment %}
-			{% render 'ucoast-style-tag', file: '_critical-css', preload_stylesheet: true %}
-		{% endcomment %}
-		{% style %}
-			{% render 'critical-css' %}
-		{% endstyle %}
 
 		{{ content_for_header }}
 
 		{% render 'css-variables' %}
+		{% style %}
+			{% render 'critical-css' %}
+		{% endstyle %}
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-prio', preload_stylesheet: true %}
 
@@ -65,7 +62,6 @@
 					file: 'css-dir-article-prio',
 					preload_stylesheet: true
 				%}
-
 		{% endcase %}
 		{% if request.page_type contains 'customers' %}
 			{% render 'ucoast-style-tag', file: 'css-dir-customer-prio', preload_stylesheet: true %}
@@ -130,13 +126,12 @@
 			%}
 		</hls-loader>
 
-		{% render 'ucoast-style-tag', file: 'css-dir-base-defer', preload_stylesheet: true %}
+		{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
 
 		{% case request.page_type %}
 			{% when 'product' %}
 				{% render 'ucoast-style-tag',
-					file: 'css-dir-product-defer',
-					preload_stylesheet: true
+					file: 'css-dir-product-defer'
 				%}
 			{% when 'page' %}
 				{% comment %}
@@ -154,13 +149,11 @@
 				{% endcomment %}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag',
-					file: 'css-dir-blog-defer',
-					preload_stylesheet: true
+					file: 'css-dir-blog-defer'
 				%}
 			{% when 'article' %}
 				{% render 'ucoast-style-tag',
-					file: 'css-dir-article-defer',
-					preload_stylesheet: true
+					file: 'css-dir-article-defer'
 				%}
 		{% endcase %}
 
@@ -171,6 +164,13 @@
 		{% endcomment %}
 
 		{% sections 'footer-group' %}
+
+		{%- if settings.cart_type == 'drawer' -%}
+			{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}
+		{%- endif -%}
+		{% comment %}
+			{% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
+		{% endcomment %}
 
 		<ul hidden>
 			<li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

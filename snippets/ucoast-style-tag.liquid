@@ -5,18 +5,32 @@
     ignore_s_up: disable s_up breakpoint for this file
     ignore_m_up: all css that isn't required for small screens
 {% endcomment %}
+
 {% liquid
     assign base_file = file | append: '.scss'
     assign s_up_file = file | append: '.s-up.scss'
-    if preload_stylesheet
-        render 'ucoast', ucoast: base_file, preload_stylesheet: true
+    capture base_url
+        render 'ucoast', ucoast: base_file
+    endcapture
+    assign base_url = base_url | strip
+
+    if preload_stylesheet == true
+        echo base_url | stylesheet_tag: preload: true
         unless ignore_s_up
-            render 'ucoast', ucoast: s_up_file, preload_stylesheet: true
+            capture s_up_url
+                render 'ucoast', ucoast: s_up_file
+            endcapture
+            assign s_up_url = s_up_url | strip
+            echo s_up_url | stylesheet_tag: preload: true, media: '(min-width: 750px)'
         endunless
     else
-        render 'ucoast', ucoast: base_file
+        render 'ucoast-defer-style', url: base_url
         unless ignore_s_up
-            render 'ucoast', ucoast: s_up_file
+            capture s_up_url
+                render 'ucoast', ucoast: s_up_file
+            endcapture
+            assign s_up_url = s_up_url | strip
+            render 'ucoast-defer-style', url: base_url, media: '(min-width: 750px)'
         endunless
     endif
 %}

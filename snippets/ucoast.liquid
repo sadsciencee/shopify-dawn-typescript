@@ -4,227 +4,215 @@
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-f773db36.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- '_critical-css-f773db36.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
-  <script src="{{ '_critical-js-ed5f8276.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ '_critical-js-2e6c0b3e.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/css-dir-article-defer.s-up.scss" or path == "css-dir-article-defer.s-up.scss" %}
-  {{ 'css-dir-article-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-article-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-article-defer.scss" or path == "css-dir-article-defer.scss" %}
-  {{ 'css-dir-article-defer-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-article-defer-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-article-prio.s-up.scss" or path == "css-dir-article-prio.s-up.scss" %}
-  {{ 'css-dir-article-prio.s-up-afaa3d61.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-article-prio.s-up-afaa3d61.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
-  {{ 'css-dir-article-prio-1e2e9e80.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-article-prio-1e2e9e80.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-base-defer.s-up.scss" or path == "css-dir-base-defer.s-up.scss" %}
-  {{ 'css-dir-base-defer.s-up-02bbc718.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-base-defer.s-up-d2fe88f8.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
-  {{ 'css-dir-base-defer-626f17b6.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-base-defer-e750b12d.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-base-prio.s-up.scss" or path == "css-dir-base-prio.s-up.scss" %}
-  {{ 'css-dir-base-prio.s-up-55e4af58.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-base-prio.s-up-a67d8edf.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
-  {{ 'css-dir-base-prio-4e25d861.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-base-prio-8afe5be4.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-blog-defer.s-up.scss" or path == "css-dir-blog-defer.s-up.scss" %}
-  {{ 'css-dir-blog-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-blog-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-blog-defer.scss" or path == "css-dir-blog-defer.scss" %}
-  {{ 'css-dir-blog-defer-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-blog-defer-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-blog-prio.s-up.scss" or path == "css-dir-blog-prio.s-up.scss" %}
-  {{ 'css-dir-blog-prio.s-up-083543ff.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-blog-prio.s-up-083543ff.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-blog-prio.scss" or path == "css-dir-blog-prio.scss" %}
-  {{ 'css-dir-blog-prio-45ecda7b.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-blog-prio-45ecda7b.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-collection-defer.s-up.scss" or path == "css-dir-collection-defer.s-up.scss" %}
-  {{ 'css-dir-blog-prio.s-up-083543ff.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-blog-prio.s-up-083543ff.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-collection-defer.scss" or path == "css-dir-collection-defer.scss" %}
-  {{ 'css-dir-collection-defer-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-collection-defer-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-collection-prio.s-up.scss" or path == "css-dir-collection-prio.s-up.scss" %}
-  {{ 'css-dir-collection-prio.s-up-4391ec39.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-collection-prio.s-up-4391ec39.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-collection-prio.scss" or path == "css-dir-collection-prio.scss" %}
-  {{ 'css-dir-collection-prio-c9def460.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-collection-prio-c9def460.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-customer-defer.s-up.scss" or path == "css-dir-customer-defer.s-up.scss" %}
-  {{ 'css-dir-customer-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-customer-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-customer-defer.scss" or path == "css-dir-customer-defer.scss" %}
-  {{ 'css-dir-customer-defer-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-customer-defer-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-customer-prio.s-up.scss" or path == "css-dir-customer-prio.s-up.scss" %}
-  {{ 'css-dir-customer-prio.s-up-ef135e8d.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-customer-prio.s-up-ef135e8d.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-customer-prio.scss" or path == "css-dir-customer-prio.scss" %}
-  {{ 'css-dir-customer-prio-6401da03.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-customer-prio-6401da03.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-page-defer.s-up.scss" or path == "css-dir-page-defer.s-up.scss" %}
-  {{ 'css-dir-page-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-page-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-page-defer.scss" or path == "css-dir-page-defer.scss" %}
-  {{ 'css-dir-page-defer-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-page-defer-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-page-prio.s-up.scss" or path == "css-dir-page-prio.s-up.scss" %}
-  {{ 'css-dir-page-prio.s-up-f14b1f57.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-page-prio.s-up-f14b1f57.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-page-prio.scss" or path == "css-dir-page-prio.scss" %}
-  {{ 'css-dir-page-prio-11763147.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-page-prio-11763147.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-product-defer.s-up.scss" or path == "css-dir-product-defer.s-up.scss" %}
-  {{ 'css-dir-product-defer.s-up-307777d0.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-product-defer.s-up-307777d0.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-product-defer.scss" or path == "css-dir-product-defer.scss" %}
-  {{ 'css-dir-product-defer-4d8d52bc.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-product-defer-4d8d52bc.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-product-prio.s-up.scss" or path == "css-dir-product-prio.s-up.scss" %}
-  {{ 'css-dir-product-prio.s-up-588d4790.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-dir-product-prio.s-up-588d4790.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
-  {{ 'css-dir-product-prio-0da36b27.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-dir-product-prio-0da36b27.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-localization-form.s-up.scss" or path == "css-optional-component-localization-form.s-up.scss" %}
-  {{ 'css-optional-component-localization-form.s-up-49bb358e.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-localization-form.s-up-49bb358e.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
-  {{ 'css-optional-component-localization-form-1a39320e.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-localization-form-1a39320e.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-mega-menu.s-up.scss" or path == "css-optional-component-mega-menu.s-up.scss" %}
-  {{ 'css-optional-component-mega-menu.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-mega-menu.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-mega-menu.scss" or path == "css-optional-component-mega-menu.scss" %}
-  {{ 'css-optional-component-mega-menu-d1b7c9ec.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-mega-menu-d1b7c9ec.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-model-viewer-ui.s-up.scss" or path == "css-optional-component-model-viewer-ui.s-up.scss" %}
-  {{ 'css-optional-component-model-viewer-ui.s-up-5acb32f4.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-model-viewer-ui.s-up-5acb32f4.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-model-viewer-ui.scss" or path == "css-optional-component-model-viewer-ui.scss" %}
-  {{ 'css-optional-component-model-viewer-ui-1d43a5f3.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-model-viewer-ui-1d43a5f3.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-pagination.s-up.scss" or path == "css-optional-component-pagination.s-up.scss" %}
-  {{ 'css-optional-component-pagination.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-pagination.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-pagination.scss" or path == "css-optional-component-pagination.scss" %}
-  {{ 'css-optional-component-pagination-f10ce71e.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-pagination-f10ce71e.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-pickup-availability.s-up.scss" or path == "css-optional-component-pickup-availability.s-up.scss" %}
-  {{ 'css-optional-component-pickup-availability.s-up-e0a4fab3.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-pickup-availability.s-up-e0a4fab3.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
-  {{ 'css-optional-component-pickup-availability-75cbe3a7.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-pickup-availability-75cbe3a7.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-product-model.s-up.scss" or path == "css-optional-component-product-model.s-up.scss" %}
-  {{ 'css-optional-component-product-model.s-up-e399cb97.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-product-model.s-up-e399cb97.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
-  {{ 'css-optional-component-product-model-5e7ce11d.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-product-model-5e7ce11d.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-recipient-form.s-up.scss" or path == "css-optional-component-recipient-form.s-up.scss" %}
-  {{ 'css-optional-component-recipient-form.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-component-recipient-form.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
-  {{ 'css-optional-component-recipient-form-b6e25a12.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-component-recipient-form-b6e25a12.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-mask-blobs.s-up.scss" or path == "css-optional-mask-blobs.s-up.scss" %}
-  {{ 'css-optional-mask-blobs.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-mask-blobs.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}
-  {{ 'css-optional-mask-blobs-5821cb0c.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-mask-blobs-5821cb0c.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-quick-add.s-up.scss" or path == "css-optional-quick-add.s-up.scss" %}
-  {{ 'css-optional-quick-add.s-up-b5adc47a.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-quick-add.s-up-b5adc47a.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-quick-add.scss" or path == "css-optional-quick-add.scss" %}
-  {{ 'css-optional-quick-add-a17fd672.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-quick-add-a17fd672.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-section-contact-form.s-up.scss" or path == "css-optional-section-contact-form.s-up.scss" %}
-  {{ 'css-optional-section-contact-form.s-up-ab226829.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-section-contact-form.s-up-ab226829.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-section-contact-form.scss" or path == "css-optional-section-contact-form.scss" %}
-  {{ 'css-optional-section-contact-form-c146f9b0.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-section-contact-form-c146f9b0.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-section-password.s-up.scss" or path == "css-optional-section-password.s-up.scss" %}
-  {{ 'css-optional-section-password.s-up-2ca188b3.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-section-password.s-up-2ca188b3.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-section-password.scss" or path == "css-optional-section-password.scss" %}
-  {{ 'css-optional-section-password-e79537ea.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-section-password-e79537ea.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-template-giftcard.s-up.scss" or path == "css-optional-template-giftcard.s-up.scss" %}
-  {{ 'css-optional-template-giftcard.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{- 'css-optional-template-giftcard.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
-  {{ 'css-optional-template-giftcard-440c677a.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{- 'css-optional-template-giftcard-440c677a.css' | asset_url | split: '?' | first -}}
 {% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
-  <script src="{{ 'js-dir-cart-drawer-2ae831ab.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-cart-drawer-55647c95.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-881cefcf.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-0d2b67ba.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-93179e5a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-94f2bfa6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-536508e6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-modal-16596b18.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-2bbf50a0.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-catalog.ts" or path == "js-dir-catalog.ts" %}
-  <script src="{{ 'js-dir-catalog-6ed26f7b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-f2a434ae.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-4edb6c48.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-catalog-0b197fa9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'animations-49dbaf13.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-94f2bfa6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-customer.ts" or path == "js-dir-customer.ts" %}
-  <script src="{{ 'js-dir-customer-6c7f20f7.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'shopify-0d2b67ba.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-customer-59390167.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'shopify-2bbf50a0.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-product.ts" or path == "js-dir-product.ts" %}
-  <script src="{{ 'js-dir-product-1e0553ac.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-680c8b0b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-product-1b34870c.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-dce7dc4c.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-5f0d20d7.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-24e0ee6e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-8aa4fab4.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-881cefcf.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-0d2b67ba.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-93179e5a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-da36892b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-2c8dde6a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-2bbf50a0.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-dir-theme.ts" or path == "js-dir-theme.ts" %}
-  <script src="{{ 'js-dir-theme-41ac5032.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-24e0ee6e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-f6135526.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-modal-6233a670.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-5f0d20d7.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-8aa4fab4.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-4edb6c48.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-dir-theme-aad8e52b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-da36892b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-536508e6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-2c8dde6a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-function-global-setup.ts" or path == "js-function-global-setup.ts" %}
-  <script src="{{ 'js-function-global-setup-7f1ab099.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-function-global-setup-df215a18.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-function-load-hls.ts" or path == "js-function-load-hls.ts" %}
-  <script src="{{ 'js-function-load-hls-c4f1c75f.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-function-load-hls-2c765930.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-animations.ts" or path == "js-optional-animations.ts" %}
-  <script src="{{ 'js-optional-animations-c9545153.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'animations-f2a434ae.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-animations-d3153a41.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'animations-49dbaf13.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-localization-form.ts" or path == "js-optional-localization-form.ts" %}
-  <script src="{{ 'js-optional-localization-form-06c51c0e.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-localization-form-33c8da8b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-magnify.ts" or path == "js-optional-magnify.ts" %}
   <script src="{{ 'js-optional-magnify-9863d9e4.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
 {% elsif path == "/src/entry/js-optional-password-modal.ts" or path == "js-optional-password-modal.ts" %}
-  <script src="{{ 'js-optional-password-modal-a31b210d.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'details-modal-6233a670.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-password-modal-3b7aaacc.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'details-modal-16596b18.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-pickup-availability.ts" or path == "js-optional-pickup-availability.ts" %}
-  <script src="{{ 'js-optional-pickup-availability-2d554157.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-predictive-search.ts" or path == "js-optional-predictive-search.ts" %}
-  <script src="{{ 'js-optional-predictive-search-afa38a73.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-4edb6c48.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-881cefcf.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-0d2b67ba.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-pickup-availability-8c8df6a2.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-product-model.ts" or path == "js-optional-product-model.ts" %}
-  <script src="{{ 'js-optional-product-model-e56b95c6.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'deferred-media-24e0ee6e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-product-model-a97fb91b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'deferred-media-da36892b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-quick-add.ts" or path == "js-optional-quick-add.ts" %}
-  <script src="{{ 'js-optional-quick-add-8a3a14a9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modal-dialog-5f0d20d7.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-680c8b0b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-50c7620e.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'ucoast-video-e5af95ed.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-quick-add-b2ea85f3.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'modal-dialog-93179e5a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-dce7dc4c.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'shopify-2bbf50a0.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-8c1cee51.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'ucoast-video-c6a47796.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'setup-881cefcf.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-0d2b67ba.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
-  <script src="{{ 'js-optional-recipient-form-6ba0c521.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <script src="{{ 'js-optional-recipient-form-ae6738a9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'pubsub-54ee595b.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-share-button.ts" or path == "js-optional-share-button.ts" %}
-  <script src="{{ 'js-optional-share-button-d6b4ef12.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-f6135526.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-05ebf663.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-share-button-b2ace4cb.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-536508e6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'UcoastEl-660e44ca.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/js-optional-theme-editor.ts" or path == "js-optional-theme-editor.ts" %}
-  <script src="{{ 'js-optional-theme-editor-ee2058af.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'functions-3f13b89f.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+  <script src="{{ 'js-optional-theme-editor-f9d2a886.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'functions-8c76e795.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% endif %}
