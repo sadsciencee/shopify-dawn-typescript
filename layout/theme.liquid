@@ -128,11 +128,7 @@
 		</main>
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-defer', preload_stylesheet: true %}
-		{% if settings.cart_type == 'drawer' %}
-			{% render 'ucoast-style-tag',
-				file: 'css-optional-component-cart-drawer'
-			%}
-		{% endif %}
+
 
 		{% case request.page_type %}
 			{% when 'product' %}
@@ -211,9 +207,7 @@
 			}
 		</script>
 		{%- if settings.predictive_search_enabled -%}
-			{% render 'ucoast-style-tag',
-					file: 'css-optional-component-predictive-search'
-			%}
+
 			{% render 'ucoast', ucoast: 'js-optional-predictive-search.ts' %}
 		{%- endif -%}
 		{% comment %}

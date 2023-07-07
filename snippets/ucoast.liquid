@@ -6,7 +6,7 @@
 {% if path == "/src/entry/_critical-css.s-up.scss" or path == "_critical-css.s-up.scss" %}
   {{ '_critical-css.s-up-d07f24f5.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-d0366f93.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ '_critical-css-79e0b9c2.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
   <script src="{{ '_critical-js-d6449d17.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'functions-97382afd.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
@@ -19,9 +19,9 @@
 {% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
   {{ 'css-dir-article-prio-9bf944be.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-dir-base-defer.s-up.scss" or path == "css-dir-base-defer.s-up.scss" %}
-  {{ 'css-dir-base-defer.s-up-b0696771.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{ 'css-dir-base-defer.s-up-3f886538.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
-  {{ 'css-dir-base-defer-cb2630c5.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ 'css-dir-base-defer-b10a3d2d.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-dir-base-prio.s-up.scss" or path == "css-dir-base-prio.s-up.scss" %}
   {{ 'css-dir-base-prio.s-up-44a3242d.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
@@ -66,10 +66,6 @@
   {{ 'css-dir-product-prio.s-up-130e9094.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
   {{ 'css-dir-product-prio-2496d9b6.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-cart-drawer.s-up.scss" or path == "css-optional-component-cart-drawer.s-up.scss" %}
-  {{ 'css-optional-component-cart-drawer.s-up-38ccf76b.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
-{% elsif path == "/src/entry/css-optional-component-cart-drawer.scss" or path == "css-optional-component-cart-drawer.scss" %}
-  {{ 'css-optional-component-cart-drawer-c2b1f6a4.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-localization-form.s-up.scss" or path == "css-optional-component-localization-form.s-up.scss" %}
   {{ 'css-optional-component-localization-form.s-up-8521e4f3.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
@@ -90,12 +86,8 @@
   {{ 'css-optional-component-pickup-availability.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
   {{ 'css-optional-component-pickup-availability-ad987600.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-predictive-search.s-up.scss" or path == "css-optional-component-predictive-search.s-up.scss" %}
-  {{ 'css-optional-component-predictive-search.s-up-0476cdb2.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
-{% elsif path == "/src/entry/css-optional-component-predictive-search.scss" or path == "css-optional-component-predictive-search.scss" %}
-  {{ 'css-optional-component-predictive-search-d8eb832f.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-component-product-model.s-up.scss" or path == "css-optional-component-product-model.s-up.scss" %}
-  {{ 'css-optional-component-predictive-search.s-up-0476cdb2.css' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
+  {{ 'css-optional-component-product-model.s-up-4ed993c7.js' | asset_url | split: '?' | first | stylesheet_tag: media: '(min-width: 750px)' }}
 {% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
   {{ 'css-optional-component-product-model-b1c734db.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/css-optional-mask-blobs.s-up.scss" or path == "css-optional-mask-blobs.s-up.scss" %}
