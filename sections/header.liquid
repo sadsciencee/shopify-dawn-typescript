@@ -93,12 +93,7 @@
 	}
 {%- endstyle -%}
 
-{%- if settings.cart_type == 'drawer' -%}
-	{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}
-{%- endif -%}
-{%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-	{% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
-{%- endif -%}
+
 
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
 	<symbol id="icon-search" viewbox="0 0 18 19" fill="none">
