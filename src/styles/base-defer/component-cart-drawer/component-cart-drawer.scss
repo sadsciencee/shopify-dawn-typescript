@@ -8,6 +8,7 @@
   width: 100vw;
   background-color: rgba(#{$schemaColorForeground}, 0.5);
   transition: visibility var(--duration-default) ease;
+  z-index: 1000;
 }
 
 .drawer.active {
