@@ -21,7 +21,7 @@
 	}
 
 	.collection-hero__title + .collection-hero__description {
-		font-size: 1.8rem;
+		font-size: #{$ax18};
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
@@ -43,6 +43,6 @@
 		align-self: stretch;
 		flex: 1 0 50%;
 		margin-left: 3rem;
-		min-height: 20rem;
+		min-height: #{ax(200)};
 	}
 }

@@ -8,7 +8,7 @@
 }
 
 .active-facets-mobile {
-  margin-bottom: 0.5rem;
+  margin-bottom: #{$ax5};
 }
 
 .mobile-facets__list {
@@ -28,13 +28,13 @@
   display: flex;
   grid-column: 2;
   grid-row: 1;
-  padding-left: 2.5rem;
+  padding-left: #{$ax25};
 }
 
 .facet-filters__label {
   display: block;
   color: rgba(#{$schemaColorForeground}, 0.85);
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   margin: 0 2rem 0 0;
 }
 
@@ -42,13 +42,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   cursor: pointer;
-  height: 4.5rem;
-  padding: 0 1.5rem;
+  height: #{$ax45};
+  padding: 0 #{$ax15};
   min-width: 25rem;
-  margin-top: 2.4rem;
-  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.55);
+  margin-top: #{$ax24};
+  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.55);
 }
 
 .facet-filters__summary::after {
@@ -82,14 +82,14 @@
 }
 
 .facet-filters button {
-  margin-left: 2.5rem;
+  margin-left: #{$ax25};
 }
 
 .facet-filters__sort {
   background-color: transparent;
   border: 0;
   border-radius: 0;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   height: auto;
   line-height: calc(1 + 0.5 / #{$fontBodyScale});
   margin: 0;
@@ -115,29 +115,29 @@
 }
 
 .mobile-facets__sort .select__select:focus-visible {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .mobile-facets__sort .select__select.focused,
 .no-js .mobile-facets__sort .select__select:focus {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .facet-filters__sort:focus-visible {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
   outline-offset: 1rem;
-  box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}), 0 0 0.2rem 1.2rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}), 0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .facet-filters__sort.focused,
 .no-js .facet-filters__sort:focus {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
   outline-offset: 1rem;
-  box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}), 0 0 0.2rem 1.2rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 1rem rgb(#{$schemaColorBackground}), 0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .no-js .facet-filters__sort:focus:not(:focus-visible),
@@ -153,9 +153,9 @@
 
 .facets__form {
   display: grid;
-  gap: 0 3.5rem;
+  gap: 0 #{$ax35};
   grid-template-columns: 1fr max-content max-content;
-  margin-bottom: 0.5rem;
+  margin-bottom: #{$ax5};
 }
 
 .facets__wrapper {
@@ -170,8 +170,8 @@
 .facets__heading {
   display: block;
   color: rgba(#{$schemaColorForeground}, 0.85);
-  font-size: 1.4rem;
-  margin: -1.5rem 2rem 0 0;
+  font-size: #{$ax14};
+  margin: #{ax(-15)} 2rem 0 0;
 }
 
 .facets__reset {
@@ -179,14 +179,14 @@
 }
 
 .facets__disclosure {
-  margin-right: 3.5rem;
+  margin-right: #{$ax35};
 }
 
 .facets__summary {
   color: rgba(#{$schemaColorForeground}, 0.75);
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   padding: 0 1.75rem 0 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: #{$ax15};
 }
 
 .facets__disclosure fieldset {
@@ -211,7 +211,7 @@
 
 .facets__summary:hover span {
   text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  text-underline-offset: #{$ax3};
 }
 
 .disclosure-has-popup[open] > .facets__summary::before {
@@ -235,8 +235,8 @@
     rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
   background-color: rgb(#{$schemaColorBackground});
   position: absolute;
-  top: calc(100% + 0.5rem);
-  left: -1.2rem;
+  top: calc(100% + #{$ax5});
+  left: ax(-12);
   width: 35rem;
   max-height: 55rem;
   overflow-y: auto;
@@ -244,10 +244,10 @@
 
 .facets__header {
   border-bottom: 1px solid rgba(#{$schemaColorForeground}, 0.2);
-  padding: 1.5rem 2rem;
+  padding: #{$ax15} 2rem;
   display: flex;
   justify-content: space-between;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   position: sticky;
   top: 0;
   background-color: rgb(#{$schemaColorBackground});
@@ -255,7 +255,7 @@
 }
 
 .facets__list {
-  padding: 0.5rem 2rem;
+  padding: #{$ax5} 2rem;
 }
 
 .facets__item {
@@ -272,7 +272,7 @@
   padding: 1rem 2rem 1rem 0;
   flex-grow: 1;
   position: relative;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   display: flex;
   word-break: break-word;
 }
@@ -280,10 +280,10 @@
 .facet-checkbox input[type='checkbox'] {
   position: absolute;
   opacity: 1;
-  width: 1.6rem;
-  height: 1.6rem;
-  top: 0.7rem;
-  left: -0.4rem;
+  width: #{$ax16};
+  height: #{$ax16};
+  top: #{$ax7};
+  left: ax(-4);
   z-index: -1;
   appearance: none;
   -webkit-appearance: none;
@@ -295,16 +295,16 @@
 
 .facet-checkbox > svg {
   background-color: rgb(#{$schemaColorBackground});
-  margin-right: 1.2rem;
+  margin-right: #{$ax12};
   flex-shrink: 0;
 }
 
 .facet-checkbox .icon-checkmark {
   visibility: hidden;
   position: absolute;
-  left: 0.3rem;
+  left: #{$ax3};
   z-index: 5;
-  top: 1.4rem;
+  top: #{$ax14};
 }
 
 .facet-checkbox > input[type='checkbox']:checked ~ .icon-checkmark {
@@ -314,7 +314,7 @@
 @media screen and (forced-colors: active) {
   .facet-checkbox > svg {
     background-color: inherit;
-    border: 0.1rem solid rgb(#{$schemaColorBackground});
+    border: #{$ax1} solid rgb(#{$schemaColorBackground});
   }
 
   .facet-checkbox > input[type='checkbox']:checked ~ .icon-checkmark {
@@ -341,23 +341,23 @@
 
 .facets__price .field-currency {
   align-self: center;
-  margin-right: 0.6rem;
+  margin-right: #{$ax6};
 }
 
 .facets__price .field__label {
-  left: 1.5rem;
+  left: #{$ax15};
 }
 
 button.facets__button {
   min-height: 0;
-  margin: 0 0 0 0.5rem;
+  margin: 0 0 0 #{$ax5};
   box-shadow: none;
-  padding-top: 1.4rem;
-  padding-bottom: 1.4rem;
+  padding-top: #{$ax14};
+  padding-bottom: #{$ax14};
 }
 
 .facets__button-no-js {
-  transform: translateY(-0.6rem);
+  transform: translateY(#{ax(-6)});
 }
 
 .active-facets {
@@ -366,26 +366,26 @@ button.facets__button {
   width: 100%;
   grid-column: 1 / -1;
   grid-row: 2;
-  margin-top: -0.5rem;
+  margin-top: ax(-5);
 }
 
 .active-facets__button {
   display: block;
-  margin-right: 1.5rem;
-  margin-top: 1.5rem;
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
+  margin-right: #{$ax15};
+  margin-top: #{$ax15};
+  padding-left: #{$ax2};
+  padding-right: #{$ax2};
   text-decoration: none;
 }
 
 span.active-facets__button-inner {
   color: rgb(#{$schemaColorForeground});
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorForeground});
-  border-radius: 2.6rem;
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorForeground});
+  border-radius: #{$ax26};
   font-size: 1rem;
   min-height: 0;
   min-width: 0;
-  padding: 0.5rem 1rem;
+  padding: #{$ax5} 1rem;
   display: flex;
   align-items: stretch;
 }
@@ -399,7 +399,7 @@ span.active-facets__button-inner:after {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding-top: 1.5rem;
+  padding-top: #{$ax15};
 }
 
 .active-facets__button-wrapper * {
@@ -408,36 +408,36 @@ span.active-facets__button-inner:after {
 
 @include media-query($m-down) {
   .active-facets {
-    margin: 0 -1.2rem -1.2rem;
+    margin: 0 ax(-12) ax(-12);
   }
 
   .active-facets__button,
   .active-facets__button-remove {
     margin: 0;
-    padding: 1.2rem;
+    padding: #{$ax12};
   }
 
   span.active-facets__button-inner {
-    padding-bottom: 0.3rem;
-    padding-top: 0.3rem;
+    padding-bottom: #{$ax3};
+    padding-top: #{$ax3};
   }
 
   .active-facets__button-wrapper {
     padding-top: 0;
-    margin-left: 1.2rem;
+    margin-left: #{$ax12};
   }
 }
 
 .active-facets__button:hover .active-facets__button-inner {
-  box-shadow: 0 0 0 0.2rem rgb(#{$schemaColorForeground});
+  box-shadow: 0 0 0 #{$ax2} rgb(#{$schemaColorForeground});
 }
 
 .active-facets__button--light .active-facets__button-inner {
-  box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.2);
+  box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.2);
 }
 
 .active-facets__button--light:hover .active-facets__button-inner {
-  box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorForeground}, 0.4);
+  box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorForeground}, 0.4);
 }
 
 a.active-facets__button:focus-visible {
@@ -458,25 +458,25 @@ a.active-facets__button.focused,
 }
 
 a.active-facets__button:focus-visible .active-facets__button-inner {
-  box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.2), 0 0 0 0.2rem rgb(#{$schemaColorBackground}),
-    0 0 0 0.4rem rgb(#{$schemaColorForeground});
+  box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.2), 0 0 0 #{$ax2} rgb(#{$schemaColorBackground}),
+    0 0 0 #{$ax4} rgb(#{$schemaColorForeground});
   outline: none;
 }
 
 a.active-facets__button.focused .active-facets__button-inner,
 .no-js a.active-facets__button:focus .active-facets__button-inner {
-  box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.2), 0 0 0 0.2rem rgb(#{$schemaColorBackground}),
-    0 0 0 0.4rem rgb(#{$schemaColorForeground});
+  box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.2), 0 0 0 #{$ax2} rgb(#{$schemaColorBackground}),
+    0 0 0 #{$ax4} rgb(#{$schemaColorForeground});
   outline: none;
 }
 
 .active-facets__button svg {
   align-self: center;
   flex-shrink: 0;
-  margin-left: 0.6rem;
-  margin-right: -0.2rem;
+  margin-left: #{$ax6};
+  margin-right: #{ax(-2)};
   pointer-events: none;
-  width: 1.2rem;
+  width: #{$ax12};
 }
 
 .active-facets facet-remove:only-child {
@@ -547,7 +547,7 @@ a.active-facets__button.focused .active-facets__button-inner,
   overflow-y: auto;
   pointer-events: all;
   transition: transform var(--duration-default) ease;
-  max-width: 37.5rem;
+  max-width: ax(375);
   display: flex;
   flex-direction: column;
   border-color: rgba(#{$schemaColorForeground}, #{$drawerBorderOpacity});
@@ -568,8 +568,8 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__header {
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
-  padding: 1rem 2.5rem;
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
+  padding: 1rem #{$ax25};
   text-align: center;
   display: flex;
   position: sticky;
@@ -583,17 +583,17 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__info {
-  padding: 0 2.6rem;
+  padding: 0 #{$ax26};
 }
 
 .mobile-facets__heading {
-  font-size: calc(#{$fontHeadingScale} * 1.4rem);
+  font-size: calc(#{$fontHeadingScale} * #{$ax14});
   margin: 0;
 }
 
 .mobile-facets__count {
   color: rgba(#{$schemaColorForeground}, 0.7);
-  font-size: 1.3rem;
+  font-size: #{$ax13};
   margin: 0;
   flex-grow: 1;
 }
@@ -605,8 +605,8 @@ a.active-facets__button.focused .active-facets__button-inner,
 .mobile-facets__open {
   text-align: left;
   width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: #{$ax5};
+  padding-bottom: #{$ax5};
   display: flex;
   align-items: center;
   color: rgba(#{$schemaColorLink}, var(--alpha-link));
@@ -627,7 +627,7 @@ a.active-facets__button.focused .active-facets__button-inner,
 
 .mobile-facets__open:hover .mobile-facets__open-label {
   text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  text-underline-offset: #{$ax3};
 }
 
 .mobile-facets__open > * + * {
@@ -648,17 +648,17 @@ a.active-facets__button.focused .active-facets__button-inner,
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0.7rem;
+  top: #{$ax7};
   right: 1rem;
-  width: 4.4rem;
-  height: 4.4rem;
+  width: #{$ax44};
+  height: #{$ax44};
   z-index: 101;
   opacity: 0;
   transition: opacity var(--duration-short) ease;
 }
 
 .mobile-facets__close svg {
-  width: 2.2rem;
+  width: #{$ax22};
 }
 
 details.menu-opening .mobile-facets__close {
@@ -674,11 +674,11 @@ details.menu-opening .mobile-facets__close svg {
   align-items: center;
   background-color: transparent;
   display: flex;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   font: inherit;
   letter-spacing: inherit;
-  margin-top: 1.5rem;
-  padding: 1.2rem 2.6rem;
+  margin-top: #{$ax15};
+  padding: #{$ax12} #{$ax26};
   text-decoration: none;
   width: calc(100% - 5.2rem);
 }
@@ -693,7 +693,7 @@ details.menu-opening .mobile-facets__close svg {
 }
 
 .mobile-facets__main {
-  padding: 2.7rem 0 0;
+  padding: #{$ax27} 0 0;
   position: relative;
   z-index: 1;
   flex-grow: 1;
@@ -728,7 +728,7 @@ details.menu-opening .mobile-facets__close svg {
 }
 
 .mobile-facets__summary {
-  padding: 1.3rem 2.5rem;
+  padding: #{$ax13} #{$ax25};
 }
 
 .mobile-facets__summary svg {
@@ -778,18 +778,18 @@ details.menu-opening .mobile-facets__close svg {
 input.mobile-facets__checkbox {
   border: 0;
   position: absolute;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: #{$ax16};
+  height: #{$ax16};
   position: absolute;
-  left: 2.1rem;
-  top: 1.2rem;
+  left: $ax21;
+  top: #{$ax12};
   z-index: 0;
   appearance: none;
   -webkit-appearance: none;
 }
 
 .mobile-facets__label {
-  padding: 1.5rem 2rem 1.5rem 2.5rem;
+  padding: #{$ax15} 2rem #{$ax15} #{$ax25};
   width: 100%;
   transition: background-color 0.2s ease;
   word-break: break-word;
@@ -800,14 +800,14 @@ input.mobile-facets__checkbox {
   background-color: rgb(#{$schemaColorBackground});
   position: relative;
   z-index: 2;
-  margin-right: 1.2rem;
+  margin-right: #{$ax12};
   flex-shrink: 0;
 }
 
 .mobile-facets__label .icon-checkmark {
   position: absolute;
-  top: 1.9rem;
-  left: 2.8rem;
+  top: #{$ax19};
+  left: #{$ax28};
   visibility: hidden;
 }
 
@@ -826,7 +826,7 @@ input.mobile-facets__checkbox {
 }
 
 .mobile-facets__footer {
-  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
   padding: 2rem;
   bottom: 0;
   position: sticky;
@@ -876,10 +876,10 @@ input.mobile-facets__checkbox {
   border-radius: 0;
   box-shadow: none;
   filter: none;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 1.5rem;
+  margin-left: #{$ax5};
+  margin-right: #{$ax5};
+  padding-left: #{$ax5};
+  padding-right: #{$ax15};
 }
 
 .product-count {
@@ -889,7 +889,7 @@ input.mobile-facets__checkbox {
 }
 
 .product-count__text {
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   line-height: calc(1 + 0.5 / #{$fontBodyScale});
   margin: 0;
 }
@@ -905,7 +905,7 @@ input.mobile-facets__checkbox {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.8rem;
+  width: #{$ax18};
 }
 
 .product-count__text.loading + .loading-overlay__spinner {

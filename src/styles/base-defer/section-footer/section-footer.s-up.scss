@@ -42,7 +42,7 @@
   }
 
   .footer__follow-on-shop {
-    margin-bottom: 0.4rem;
+    margin-bottom: #{$ax4};
   }
   /* Follow on shop is the first button but it has siblings*/
   .footer__follow-on-shop:first-child:not(:last-child) {
@@ -67,7 +67,7 @@
 }
 @include media-query($s-up) {
   .footer__localization {
-    padding: 0.4rem 0;
+    padding: #{$ax4} 0;
     justify-content: flex-start;
   }
 
@@ -77,7 +77,7 @@
 }
 @include media-query($s-up) {
   .footer__payment {
-    margin-top: 1.5rem;
+    margin-top: #{$ax15};
   }
 }
 @include media-query($s-up) {
@@ -101,7 +101,7 @@
   }
 
   .footer-block__details-content > li:not(:last-child) {
-    margin-right: 1.5rem;
+    margin-right: #{$ax15};
   }
 }
 @include media-query($s-up) {
@@ -109,17 +109,17 @@
   .copyright__content a:hover {
     color: rgb(#{$schemaColorForeground});
     text-decoration: underline;
-    text-underline-offset: 0.3rem;
+    text-underline-offset: #{$ax3};
   }
 
   .footer-block__details-content .list-menu__item--active:hover {
-    text-decoration-thickness: 0.2rem;
+    text-decoration-thickness: #{$ax2};
   }
 }
 @include media-query($s-up) {
   .footer-block__details-content .list-menu__item--link {
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: #{$ax14};
   }
 
   .footer-block__details-content > :first-child .list-menu__item--link {
@@ -144,6 +144,6 @@
 }
 @include media-query($m-up) {
   .footer-block__heading {
-    font-size: calc(#{$fontHeadingScale} * 1.8rem);
+    font-size: calc(#{$fontHeadingScale} * #{$ax18});
   }
 }

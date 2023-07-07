@@ -2,9 +2,9 @@
 @import '../../global/functions.scss';
 .customer:not(.account):not(.order) {
 	margin: 0 auto;
-	max-width: 33.4rem;
-	padding-left: 1.5rem;
-	padding-right: 1.5rem;
+	max-width: ax(334);
+	padding-left: #{$ax15};
+	padding-right: #{$ax15};
 	text-align: center;
 }
 
@@ -18,12 +18,12 @@
 }
 
 .customer button {
-	margin: 4rem 0 1.5rem;
+	margin: 4rem 0 #{$ax15};
 }
 
 .customer ul {
 	line-height: calc(1 + 0.6 / #{$fontBodyScale});
-	padding-left: 4.4rem;
+	padding-left: #{$ax44};
 	text-align: left;
 	margin-bottom: 4rem;
 }
@@ -38,7 +38,7 @@
 }
 
 .customer h2.form__message {
-	font-size: calc(#{$fontHeadingScale} * 1.8rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax18});
 }
 
 .customer .field {
@@ -56,14 +56,14 @@
 	border-bottom: 0.01rem solid rgba(#{$schemaColorForeground}, 0.08);
 	box-shadow: none;
 	width: 100%;
-	font-size: 1.6rem;
+	font-size: #{$ax16};
 	position: relative;
 }
 
 @media screen and (forced-colors: active) {
 	.customer table {
-		border-top: 0.1rem solid transparent;
-		border-bottom: 0.1rem solid transparent;
+		border-top: #{$ax1} solid transparent;
+		border-bottom: #{$ax1} solid transparent;
 	}
 }
 
@@ -89,7 +89,7 @@
 }
 
 .customer thead th {
-	font-size: 1.2rem;
+	font-size: #{$ax12};
 	letter-spacing: 0.07rem;
 	text-transform: uppercase;
 }
@@ -108,14 +108,14 @@
 
 @media screen and (forced-colors: active) {
 	.customer tbody tr {
-		border-top: 0.1rem solid transparent;
+		border-top: #{$ax1} solid transparent;
 	}
 }
 
 .customer tfoot td:first-of-type,
 .customer tfoot td {
-	padding-top: 0.6rem;
-	padding-bottom: 0.6rem;
+	padding-top: #{$ax6};
+	padding-bottom: #{$ax6};
 }
 
 .customer tfoot td:first-of-type {
@@ -134,7 +134,7 @@
 .customer thead::after,
 .customer tfoot::before {
 	content: ' ';
-	height: 0.1rem;
+	height: #{$ax1};
 	width: 100%;
 	display: block;
 	position: absolute;
@@ -165,7 +165,7 @@
 	.customer td::before {
 		color: rgba(#{$schemaColorForeground}, 0.75);
 		content: attr(data-label);
-		font-size: 1.4rem;
+		font-size: #{$ax14};
 		padding-right: 2rem;
 		text-transform: uppercase;
 		flex-grow: 1;
@@ -219,16 +219,16 @@
 }
 
 .customer .pagination li :first-child svg {
-	height: 0.6rem;
+	height: #{$ax6};
 }
 
 .customer .pagination li:first-of-type svg {
-	margin-left: -0.2rem;
+	margin-left: #{ax(-2)};
 	transform: rotate(90deg);
 }
 
 .customer .pagination li:last-of-type svg {
-	margin-right: -0.2rem;
+	margin-right: #{ax(-2)};
 	transform: rotate(-90deg);
 }
 
@@ -261,13 +261,13 @@
 }
 
 .login p {
-	margin: 1.5rem 0;
+	margin: #{$ax15} 0;
 }
 
 .login h3 {
-	margin-top: 1.5rem;
+	margin-top: #{$ax15};
 	text-align: left;
-	font-size: calc(#{$fontHeadingScale} * 1.6rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax16});
 }
 
 #customer_login_guest button {
@@ -294,7 +294,7 @@
 
 #recover,
 #login {
-	scroll-margin-top: 20rem;
+	scroll-margin-top: #{ax(200)};
 }
 
 #recover {
@@ -318,7 +318,7 @@
 
 :is(.account, .order) p {
 	margin: 0 0 2rem;
-	font-size: 1.6rem;
+	font-size: #{$ax16};
 }
 
 :is(.account, .order) h1 {
@@ -336,21 +336,21 @@
 }
 
 .account a svg {
-	width: 1.5rem;
+	width: #{$ax15};
 	margin-bottom: -0.03rem;
 	margin-right: 1rem;
 }
 
 .account table td:first-of-type a {
-	padding: 1.1rem 1.5rem;
+	padding: #{$ax11} #{$ax15};
 	text-decoration: none;
-	box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorLink}, 0.2);
-	border: 0.1rem solid transparent;
-	font-size: 1.2rem;
+	box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorLink}, 0.2);
+	border: #{$ax1} solid transparent;
+	font-size: #{$ax12};
 }
 
 .account table td:first-of-type a:hover {
-	box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorLink}, 0.2);
+	box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorLink}, 0.2);
 }
 
 .order td:first-of-type {
@@ -359,13 +359,13 @@
 
 .order tfoot tr:last-of-type td,
 .order tfoot tr:last-of-type th {
-	font-size: 2.2rem;
-	padding-top: 1.5rem;
+	font-size: #{$ax22};
+	padding-top: #{$ax15};
 	padding-bottom: 4rem;
 }
 
 .order tfoot tr:last-of-type td:before {
-	font-size: 2.2rem;
+	font-size: #{$ax22};
 }
 
 .order table p,
@@ -376,7 +376,7 @@
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p {
 	margin-bottom: 0;
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 }
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p:last-of-type {
@@ -384,7 +384,7 @@
 }
 
 .order .item-props {
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	margin-top: 0.05px;
 	display: flex;
 	flex-direction: column;
@@ -400,12 +400,12 @@
 	border: 0.01rem solid rgba(#{$schemaColorForeground}, 0.2);
 	padding: 1rem;
 	margin-top: 1rem;
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	text-align: left;
 }
 
 .order .fulfillment a {
-	margin: 0.7rem 0;
+	margin: #{$ax7} 0;
 }
 
 .order .fulfillment span {
@@ -415,13 +415,13 @@
 .order .cart-discount {
 	display: block;
 	margin-top: 1rem;
-	margin-bottom: 0.5rem;
-	font-size: 1.2rem;
+	margin-bottom: #{$ax5};
+	font-size: #{$ax12};
 }
 
 .order tbody ul {
 	list-style: none;
-	font-size: 1.2rem;
+	font-size: #{$ax12};
 	text-align: right;
 	padding-left: 0;
 	margin-top: 1rem;
@@ -439,7 +439,7 @@
 }
 
 .order .properties {
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	margin-top: 1rem;
 }
 
@@ -449,9 +449,9 @@
 }
 
 .order svg {
-	width: 1.1rem;
+	width: #{$ax11};
 	color: rgb(#{$schemaColorForeground});
-	margin-right: 0.5rem;
+	margin-right: #{$ax5};
 }
 
 .order dl {
@@ -468,22 +468,22 @@
 }
 
 .order .unit-price {
-	font-size: 1.1rem;
+	font-size: #{$ax11};
 	letter-spacing: 0.07rem;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
-	margin-top: 0.2rem;
+	margin-top: #{$ax2};
 	text-transform: uppercase;
 	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .order .regular-price {
-	font-size: 1.3rem;
+	font-size: #{$ax13};
 }
 
 /* Addresses */
 .addresses li > button {
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: #{$ax5};
+	margin-right: #{$ax5};
 }
 
 .addresses li > button + button,
@@ -498,8 +498,8 @@
 label[for='AddressCountryNew'],
 label[for='AddressProvinceNew'] {
 	display: block;
-	font-size: 1.4rem;
-	margin-bottom: 0.6rem;
+	font-size: #{$ax14};
+	margin-bottom: #{$ax6};
 }
 
 .addresses form {
@@ -536,7 +536,7 @@ li[data-address] {
 
 li[data-address] > h2 {
 	text-align: center;
-	font-size: calc(#{$fontHeadingScale} * 1.8rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax18});
 	margin-bottom: 0;
 }
 
@@ -551,5 +551,5 @@ li[data-address] > h2 {
 
 .addresses form > div:nth-of-type(7),
 .addresses form > div:nth-of-type(7) + div[id] {
-	margin-top: 1.5rem;
+	margin-top: #{$ax15};
 }

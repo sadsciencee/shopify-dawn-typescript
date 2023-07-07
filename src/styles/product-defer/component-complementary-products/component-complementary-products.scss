@@ -3,15 +3,15 @@
 .complementary-products__container {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: #{$ax13};
 }
 
 product-recommendations:not(.is-accordion) .complementary-products__container {
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }
 
 .complementary-products__container > details[open] {
-  padding-bottom: 1.5rem;
+  padding-bottom: #{$ax15};
 }
 
 .complementary-slider {
@@ -53,7 +53,7 @@ product-recommendations:not(.is-accordion) .complementary-products__container {
 .complementary-products > .summary__title {
   display: flex;
   line-height: 1;
-  padding: 1.5rem 0;
+  padding: #{$ax15} 0;
 }
 
 .accordion + product-recommendations .accordion,
@@ -106,16 +106,16 @@ product-recommendations.is-accordion + .accordion {
 
 .complementary-products__container .card--horizontal .quick-add {
   margin: 0;
-  max-width: 20rem;
+  max-width: #{ax(200)};
 }
 
 .complementary-products__container .quick-add__submit {
-  padding: 1.5rem 0;
+  padding: #{$ax15} 0;
   min-height: inherit;
 }
 
 .complementary-products__container .quick-add__submit .icon-plus {
-  width: 1.2rem;
+  width: #{$ax12};
 }
 
 .complementary-products__container .icon-wrap {

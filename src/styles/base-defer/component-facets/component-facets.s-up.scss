@@ -25,28 +25,28 @@
   }
 
   .facets__disclosure-vertical {
-    border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.1);
+    border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.1);
     margin-right: 0;
   }
 
   .facets-vertical .facets__summary {
-    padding-top: 1.5rem;
+    padding-top: #{$ax15};
     margin-bottom: 0;
-    padding-bottom: 1.5rem;
+    padding-bottom: #{$ax15};
   }
 
   .facets__heading--vertical {
-    margin: 0 0 1.5rem 0;
-    font-size: 1.5rem;
+    margin: 0 0 #{$ax15} 0;
+    font-size: #{$ax15};
   }
 
   .facets__header-vertical {
-    padding: 1.5rem 2rem 1.5rem 0;
-    font-size: 1.4rem;
+    padding: #{$ax15} 2rem #{$ax15} 0;
+    font-size: #{$ax14};
   }
 
   .facets__display-vertical {
-    padding-bottom: 1.5rem;
+    padding-bottom: #{$ax15};
   }
 
   .facets-vertical .facets-wrapper {
@@ -71,7 +71,7 @@
   }
 
   .product-count-vertical {
-    margin-left: 3.5rem;
+    margin-left: #{$ax35};
   }
 
   .facets-vertical .active-facets__button-wrapper {
@@ -90,7 +90,7 @@
   }
 
   .facets-vertical .facets__price {
-    padding: 0.5rem 0.5rem 0.5rem 0;
+    padding: #{$ax5} #{$ax5} #{$ax5} 0;
   }
 
   .facets-vertical .facets__price .field:last-of-type {
@@ -98,7 +98,7 @@
   }
 
   .facets-vertical .active-facets__button {
-    margin-bottom: 1.5rem;
+    margin-bottom: #{$ax15};
   }
 
   .no-js .facets-vertical .facet-filters.sorting {
@@ -141,7 +141,7 @@
   }
 
   .facets-container-drawer .product-count {
-    margin: 0 0 0.5rem 3.5rem;
+    margin: 0 0 #{$ax5} #{$ax35};
   }
 
   .facets-container-drawer .facets-pill {
@@ -157,22 +157,22 @@
     padding-left: 3rem;
   }
   .active-facets__button {
-    margin-right: 1.5rem;
+    margin-right: #{$ax15};
   }
 
   .active-facets__button-wrapper *,
   span.active-facets__button-inner {
-    font-size: 1.4rem;
+    font-size: #{$ax14};
   }
   .active-facets__button svg {
-    margin-right: -0.4rem;
-    margin-top: 0.1rem;
-    width: 1.4rem;
+    margin-right: ax(-4);
+    margin-top: #{$ax1};
+    width: #{$ax14};
   }
   .facets-vertical .active-facets__button {
     padding: 1rem;
     margin-bottom: 0;
-    margin-left: -0.5rem;
+    margin-left: ax(-5);
   }
 
   .facets-vertical .active-facets__button-remove {

@@ -39,11 +39,11 @@
 
 	.cart__update-button {
 		margin-bottom: 0;
-		margin-right: 0.8rem;
+		margin-right: #{$ax8};
 	}
 
 	.tax-note {
-		margin-bottom: 2.2rem;
+		margin-bottom: #{$ax22};
 		text-align: right;
 	}
 

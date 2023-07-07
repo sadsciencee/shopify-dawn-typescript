@@ -16,7 +16,7 @@
 	}
 
 	.slider-counter--dots {
-		margin: 0 1.2rem;
+		margin: 0 #{$ax12};
 	}
 
 	.slider--mobile + .slider-buttons {
@@ -59,17 +59,17 @@
 	}
 
 	.slider-component-full-width .slider--desktop {
-		scroll-padding-left: 1.5rem;
+		scroll-padding-left: #{$ax15};
 	}
 
 	.slider-component-full-width .slider--desktop .slider__slide:first-child {
-		margin-left: 1.5rem;
-		scroll-margin-left: 1.5rem;
+		margin-left: #{$ax15};
+		scroll-margin-left: #{$ax15};
 	}
 
 	/* Fix to show some space at the end of our sliders in all browsers */
 	.slider-component-full-width .slider--desktop:after {
-		padding-left: 1.5rem;
+		padding-left: #{$ax15};
 	}
 
 	.slider--desktop.grid--5-col-desktop .grid__item {

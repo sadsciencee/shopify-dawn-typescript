@@ -21,8 +21,8 @@
   height: 100%;
   width: 40rem;
   max-width: calc(100vw - 3rem);
-  padding: 0 1.5rem;
-  border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
+  padding: 0 $ax15;
+  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
   border-right: 0;
   background-color: rgb(#{$schemaColorBackground});
   overflow: hidden;
@@ -34,7 +34,7 @@
 
 .drawer__inner-empty {
   height: 100%;
-  padding: 0 1.5rem;
+  padding: 0 $ax15;
   background-color: rgb(#{$schemaColorBackground});
   overflow: hidden;
   display: flex;
@@ -65,7 +65,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .cart-drawer__warnings--has-collection .cart__login-title {
-  margin-top: 2.5rem;
+  margin-top: #{$ax25};
 }
 
 .drawer.active .drawer__inner {
@@ -75,7 +75,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 .drawer__header {
   position: relative;
   background-color: rgb(#{$schemaColorBackground});
-  padding: 1.5rem 0;
+  padding: $ax15 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,9 +88,9 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 .drawer__close {
   display: inline-block;
   padding: 0;
-  min-width: 4.4rem;
-  min-height: 4.4rem;
-  box-shadow: 0 0 0 0.2rem rgba(#{$schemaColorButton}, 0);
+  min-width: #{$ax44};
+  min-height: #{$ax44};
+  box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorButton}, 0);
   position: absolute;
   top: 10px;
   right: -10px;
@@ -105,8 +105,8 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer__close svg {
-  height: 2.4rem;
-  width: 2.4rem;
+  height: #{$ax24};
+  width: #{$ax24};
 }
 
 .drawer__contents {
@@ -117,8 +117,8 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 
 .drawer__footer {
   background-color: rgb(#{$schemaColorBackground});
-  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
-  padding: 1.5rem 0;
+  border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
+  padding: $ax15 0;
 }
 
 cart-drawer-items.is-empty + .drawer__footer {
@@ -126,23 +126,23 @@ cart-drawer-items.is-empty + .drawer__footer {
 }
 
 .drawer__footer > details {
-  margin-top: -1.5rem;
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
+  margin-top: #{ax(-15)};
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
 }
 
 .drawer__footer > details[open] {
-  padding-bottom: 1.5rem;
+  padding-bottom: $ax15;
 }
 
 .drawer__footer summary {
   display: flex;
   position: relative;
   line-height: 1;
-  padding: 1.5rem 0;
+  padding: $ax15 0;
 }
 
 .drawer__footer > details + .cart-drawer__footer {
-  padding-top: 1.5rem;
+  padding-top: $ax15;
 }
 
 cart-drawer {
@@ -172,7 +172,7 @@ cart-drawer {
 }
 
 .cart-drawer__collection {
-  margin: 0 2.5rem 1.5rem;
+  margin: 0 #{$ax25} $ax15;
 }
 
 .cart-drawer .drawer__cart-items-wrapper {
@@ -212,7 +212,7 @@ cart-drawer-items {
 .cart-drawer .cart-item {
   display: grid;
   grid-template: repeat(2, auto) / repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: $ax15;
   margin-bottom: 0;
 }
 
@@ -229,7 +229,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items thead {
-  margin-bottom: 0.5rem;
+  margin-bottom: #{$ax5};
 }
 
 .cart-drawer .cart-items thead th:first-child,
@@ -249,16 +249,16 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items th {
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .cart-drawer .cart-item:last-child {
-  margin-bottom: 1.5rem;
+  margin-bottom: $ax15;
 }
 
 .cart-drawer .cart-item .loading-overlay {
   right: 5px;
-  padding-top: 2.5rem;
+  padding-top: #{$ax25};
 }
 
 .cart-drawer .cart-items td {
@@ -288,11 +288,11 @@ cart-drawer-items {
 .cart-drawer .cart-item__price-wrapper .cart-item__discounted-prices {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: #{$ax6};
 }
 
 .cart-drawer .unit-price {
-  margin-top: 0.6rem;
+  margin-top: #{$ax6};
 }
 
 .cart-drawer .cart-items .cart-item__quantity {
@@ -319,7 +319,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .tax-note {
-  margin: 1.2rem 0 1rem auto;
+  margin: #{$ax12} 0 1rem auto;
   text-align: left;
 }
 
@@ -342,8 +342,8 @@ cart-drawer-items {
 .drawer__footer #dynamic-checkout-cart ul {
   flex-wrap: wrap !important;
   flex-direction: row !important;
-  margin: 0.5rem -0.5rem 0 0 !important;
-  gap: 0.5rem;
+  margin: $ax5 ax(-5) 0 0 !important;
+  gap: $ax5;
 }
 
 .drawer__footer [data-shopify-buttoncontainer] {
@@ -351,13 +351,13 @@ cart-drawer-items {
 }
 
 .drawer__footer #dynamic-checkout-cart ul > li {
-  flex-basis: calc(50% - 0.5rem) !important;
+  flex-basis: calc(50% - #{$ax5}) !important;
   margin: 0 !important;
 }
 
 .drawer__footer #dynamic-checkout-cart ul > li:only-child {
   flex-basis: 100% !important;
-  margin-right: 0.5rem !important;
+  margin-right: #{$ax5} !important;
 }
 
 

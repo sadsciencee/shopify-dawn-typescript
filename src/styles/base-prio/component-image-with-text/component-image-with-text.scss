@@ -14,15 +14,15 @@
 }
 
 .image-with-text__media--small {
-	height: 19.4rem;
+	height: ax(194);
 }
 
 .image-with-text__media--medium {
-	height: 29.6rem;
+	height: ax(296);
 }
 
 .image-with-text__media--large {
-	height: 43.5rem;
+	height: #{ax(435)};
 }
 
 .image-with-text__media--placeholder {
@@ -37,7 +37,7 @@
 }
 
 .image-with-text__media--placeholder.image-with-text__media--adapt {
-	height: 20rem;
+	height: #{ax(200)};
 }
 
 .image-with-text__media--placeholder > svg {

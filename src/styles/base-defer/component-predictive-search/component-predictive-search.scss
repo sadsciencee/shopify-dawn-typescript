@@ -3,8 +3,8 @@
 .predictive-search {
 	display: none;
 	position: absolute;
-	top: calc(100% + 0.1rem);
-	left: -0.1rem;
+	top: calc(100% + #{$ax1});
+	left: -#{$ax1};
 	border-width: #{$popupBorderWidth};
 	border-style: solid;
 	border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});
@@ -20,12 +20,12 @@
 
 .predictive-search--search-template {
 	z-index: 2;
-	width: calc(100% + 0.2rem);
+	width: calc(100% + #{$ax2});
 }
 
 .predictive-search__results-groups-wrapper {
 	display: flex;
-	border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 	padding-bottom: 1rem;
 }
 
@@ -67,15 +67,15 @@ predictive-search[loading] .predictive-search {
 }
 
 .predictive-search__heading {
-	border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 	margin: 0 2rem;
-	padding: 1.5rem 0 0.75rem;
+	padding: #{$ax15} 0 0.75rem;
 	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 predictive-search .spinner {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: #{$ax15};
+	height: #{$ax15};
 	line-height: 0;
 }
 
@@ -117,7 +117,7 @@ predictive-search[loading]
 .predictive-search__list-item[aria-selected='true'] .predictive-search__item-heading,
 .predictive-search__list-item:hover .predictive-search__item-heading {
 	text-decoration: underline;
-	text-underline-offset: 0.3rem;
+	text-underline-offset: #{$ax3};
 }
 
 .predictive-search__item {
@@ -146,7 +146,7 @@ predictive-search[loading]
 }
 
 .predictive-search__item-vendor {
-	font-size: 0.9rem;
+	font-size: #{$ax9};
 }
 
 .predictive-search__item-heading {
@@ -167,25 +167,25 @@ predictive-search[loading]
 
 .predictive-search__item .price {
 	color: rgba(#{$schemaColorForeground}, 0.7);
-	font-size: 1.2rem;
+	font-size: #{$ax12};
 }
 
 .predictive-search__item-vendor + .predictive-search__item-heading,
 .predictive-search .price {
-	margin-top: 0.5rem;
+	margin-top: #{$ax5};
 }
 
 .predictive-search__item--term {
 	justify-content: space-between;
 	align-items: center;
-	padding: 1.3rem 2rem;
+	padding: #{$ax13} 2rem;
 	word-break: break-all;
 	line-height: calc(1 + 0.4 / #{$fontBodyScale});
 }
 
 .predictive-search__item--term .icon-arrow {
-	width: calc(#{$fontHeadingScale} * 1.4rem);
-	height: calc(#{$fontHeadingScale} * 1.4rem);
+	width: calc(#{$fontHeadingScale} * #{$ax14});
+	height: calc(#{$fontHeadingScale} * #{$ax14});
 	flex-shrink: 0;
 	margin-left: calc(#{$fontHeadingScale} * 2rem);
 	color: rgb(#{$schemaColorLink});

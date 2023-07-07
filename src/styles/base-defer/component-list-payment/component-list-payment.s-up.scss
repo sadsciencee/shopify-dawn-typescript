@@ -3,7 +3,7 @@
 @include media-query($s-up) {
   .list-payment {
     justify-content: flex-end;
-    margin: -0.5rem;
+    margin: ax(-5);
     padding-top: 0;
   }
 }

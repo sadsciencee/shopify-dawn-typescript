@@ -8,7 +8,7 @@
 	.cart-notification {
 		border-width: 0 #{$popupBorderWidth} #{$popupBorderWidth};
 		max-width: 36.8rem;
-		right: 2.2rem;
+		right: #{$ax22};
 	}
 }
 @include media-query($m-up) {

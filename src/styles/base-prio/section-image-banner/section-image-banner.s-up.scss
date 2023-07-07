@@ -157,7 +157,7 @@
 
 	.banner--content-align-center .banner__buttons--multiple > * {
 		flex-grow: 1;
-		min-width: 22rem;
+		min-width: #{ax(220)};
 	}
 
 	.banner--content-align-right .banner__buttons--multiple {

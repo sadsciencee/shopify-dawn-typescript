@@ -82,7 +82,7 @@ body {
 	grid-template-columns: 100%;
 	min-height: 100%;
 	margin: 0;
-	font-size: 1.5rem;
+	font-size: #{$ax15};
 	letter-spacing: 0.06rem;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
@@ -547,7 +547,7 @@ deferred-media {
 		--section-spacing: #{$sectionSpacingDesktop};
 	}
 	body {
-		font-size: 1.6rem;
+		font-size: #{$ax16};
 	}
 }
 @include media-query($m-up) {

@@ -3,7 +3,7 @@
 .loading-overlay {
   position: absolute;
   z-index: 1;
-  width: 1.8rem;
+  width: #{$ax18};
 }
 
 @include media-query($s-down) {
@@ -14,7 +14,7 @@
 }
 
 .loading-overlay__spinner {
-  width: 1.8rem;
+  width: #{$ax18};
   display: inline-block;
 }
 

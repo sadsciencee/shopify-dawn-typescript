@@ -7,7 +7,7 @@
 .list-menu--disclosure {
   position: absolute;
   min-width: 100%;
-  width: 20rem;
+  width: #{ax(200)};
   border: 1px solid rgba(#{$schemaColorForeground}, 0.2);
 }
 
@@ -17,16 +17,16 @@
 
 .list-menu__item--active {
   text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  text-underline-offset: #{$ax3};
 }
 
 .list-menu__item--active:hover {
-  text-decoration-thickness: 0.2rem;
+  text-decoration-thickness: #{$ax2};
 }
 
 .list-menu--disclosure.localization-selector {
-  max-height: 18rem;
+  max-height: #{ax(180)};
   overflow: auto;
-  width: 10rem;
-  padding: 0.5rem;
+  width: #{ax(100)};
+  padding: #{$ax5};
 }

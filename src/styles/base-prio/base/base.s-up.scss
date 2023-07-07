@@ -6,8 +6,8 @@
 	}
 
 	.header.page-width {
-		padding-left: 3.2rem;
-		padding-right: 3.2rem;
+		padding-left: #{$ax32};
+		padding-right: #{$ax32};
 	}
 
 	.page-width--narrow {
@@ -88,7 +88,7 @@
 	}
 
 	.slider--tablet.grid--peek .grid__item:first-of-type {
-		margin-left: 1.5rem;
+		margin-left: #{$ax15};
 	}
 
 	.grid--2-col-tablet-down .grid__item {
@@ -101,11 +101,11 @@
 }
 @include media-query($s-up) {
 	.announcement-bar .slider-button--next {
-		margin-right: -3.2rem;
+		margin-right: ax(-32);
 	}
 
 	.announcement-bar .slider-button--prev {
-		margin-left: -3.2rem;
+		margin-left: ax(-32);
 	}
 
 	.search-modal__close-button {
@@ -147,7 +147,7 @@
 	}
 
 	.page-width--narrow {
-		max-width: 72.6rem;
+		max-width: ax(726);
 		padding: 0;
 	}
 
@@ -228,7 +228,7 @@
 	}
 
 	.utility-bar--bottom-border-social-only {
-		border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+		border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 	}
 
 	.utility-bar__grid {
@@ -334,12 +334,12 @@
 	}
 
 	.search-modal__form {
-		max-width: 74.2rem;
+		max-width: ax(742);
 	}
 
 	.search-modal__close-button {
 		position: initial;
-		margin-left: 0.5rem;
+		margin-left: #{$ax5};
 	}
 
 	.header__inline-menu {

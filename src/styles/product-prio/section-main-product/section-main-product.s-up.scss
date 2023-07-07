@@ -41,7 +41,7 @@
 	}
 
 	.product__info-container .price--on-sale .price-item--regular {
-		font-size: 1.6rem;
+		font-size: #{$ax16};
 	}
 
 	.product__info-container > *:first-child {
@@ -98,29 +98,29 @@
 	}
 
 	.product--medium.product--columns .product__media-item--full .deferred-media__poster-button {
-		height: 4.2rem;
-		width: 4.2rem;
+		height: $ax42;
+		width: $ax42;
 	}
 
 	.product--medium.product--columns
 		.product__media-item--full
 		.deferred-media__poster-button
 		.icon {
-		width: 1.8rem;
-		height: 1.8rem;
+		width: #{$ax18};
+		height: #{$ax18};
 	}
 
 	.product--small.product--columns .product__media-item--full .deferred-media__poster-button {
-		height: 3.6rem;
-		width: 3.6rem;
+		height: #{$ax36};
+		width: #{$ax36};
 	}
 
 	.product--small.product--columns
 		.product__media-item--full
 		.deferred-media__poster-button
 		.icon {
-		width: 1.6rem;
-		height: 1.6rem;
+		width: #{$ax16};
+		height: #{$ax16};
 	}
 
 	.product-media-modal__content {
@@ -140,7 +140,7 @@
 	}
 
 	.product-media-modal__content {
-		padding: 2rem 11rem;
+		padding: 2rem #{ax(110)};
 	}
 
 	.product-media-modal__content > * {
@@ -153,12 +153,12 @@
 
 	.product-media-modal__toggle {
 		right: 5rem;
-		top: 2.2rem;
+		top: #{$ax22};
 	}
 
 	.product-popup-modal__content {
-		padding-right: 1.5rem;
-		margin-top: 10rem;
+		padding-right: #{$ax15};
+		margin-top: #{ax(100)};
 		width: 70%;
 		padding: 0 3rem;
 	}
@@ -183,9 +183,9 @@
 
 	.thumbnail-slider .thumbnail-list.slider--tablet-up {
 		display: flex;
-		padding: 0.5rem;
+		padding: #{$ax5};
 		flex: 1;
-		scroll-padding-left: 0.5rem;
+		scroll-padding-left: #{$ax5};
 	}
 
 	.product__media-wrapper .slider-mobile-gutter .slider-button {
@@ -193,7 +193,7 @@
 	}
 
 	.thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
-		width: calc(25% - 0.8rem);
+		width: calc(25% - #{$ax8});
 	}
 
 	.product--thumbnail_slider .slider-mobile-gutter .slider-button {
@@ -206,13 +206,13 @@
 	}
 
 	.product:not(.product--small) .thumbnail__badge .icon {
-		width: 1.2rem;
-		height: 1.2rem;
+		width: #{$ax12};
+		height: #{$ax12};
 	}
 
 	.product:not(.product--small) .thumbnail__badge .icon-3d-model {
-		width: 1.4rem;
-		height: 1.4rem;
+		width: #{$ax14};
+		height: #{$ax14};
 	}
 
 	.product-media-container {
@@ -292,15 +292,15 @@
 	}
 
 	.product-media-modal__content {
-		padding: 2rem 11rem;
+		padding: 2rem #{ax(110)};
 	}
 
 	.product-media-modal__content > * + * {
-		margin-top: 1.5rem;
+		margin-top: #{$ax15};
 	}
 
 	.product-media-modal__content {
-		padding-bottom: 1.5rem;
+		padding-bottom: #{$ax15};
 	}
 
 	.product-media-modal__toggle {

@@ -25,7 +25,7 @@
 }
 
 .video-section__poster.deferred-media__poster:focus {
-  outline-offset: 0.3rem;
+  outline-offset: #{$ax3};
 }
 
 .video-section__media iframe {

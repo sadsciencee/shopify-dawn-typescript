@@ -10,7 +10,7 @@
 
 	.article-template__comment-wrapper {
 		margin-top: 6rem;
-		padding: 3.6rem 0;
+		padding: #{$ax36} 0;
 	}
 
 	.article-template__comments {
@@ -18,7 +18,7 @@
 	}
 
 	.article-template__comments-comment {
-		padding: 2rem 2.5rem;
+		padding: 2rem #{$ax25};
 	}
 
 	.article-template__comment-fields {
@@ -29,7 +29,7 @@
 }
 @include media-query($m-only) {
 	.article-template__hero-small {
-		height: 22rem;
+		height: #{ax(220)};
 	}
 
 	.article-template__hero-medium {
@@ -42,7 +42,7 @@
 }
 @include media-query($m-up) {
 	.article-template__hero-small {
-		height: 27.5rem;
+		height: ax(275);
 	}
 
 	.article-template__hero-medium {
@@ -50,7 +50,7 @@
 	}
 
 	.article-template__hero-large {
-		height: 82.5rem;
+		height: #{ax(825)};
 	}
 	.article-template__comments .pagination-wrapper {
 		margin: 5rem 0 8rem;

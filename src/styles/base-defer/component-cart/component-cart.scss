@@ -24,19 +24,19 @@ cart-items.is-empty .title-wrapper-with-link,
 }
 
 .cart__empty-text {
-  margin: 4.5rem 0 2rem;
+  margin: #{$ax45} 0 2rem;
 }
 
 .cart__contents > * + * {
-  margin-top: 2.5rem;
+  margin-top: #{$ax25};
 }
 
 .cart__login-title {
-  margin: 5.5rem 0 0.5rem;
+  margin: ax(55) 0 #{$ax5};
 }
 
 .cart__login-paragraph {
-  margin-top: 0.8rem;
+  margin-top: #{$ax8};
 }
 
 .cart__login-paragraph a {
@@ -50,7 +50,7 @@ cart-items {
 .cart__items {
   position: relative;
   padding-bottom: 3rem;
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.08);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
 .cart__items--disabled {
@@ -86,7 +86,7 @@ cart-items {
   align-items: flex-end;
   position: absolute;
   line-height: 1;
-  height: 1.8rem;
+  height: #{$ax18};
   top: -3rem;
   color: rgba(#{$schemaColorForeground}, 0.75);
 }
@@ -143,7 +143,7 @@ cart-items {
 }
 
 .tax-note {
-  margin: 2.2rem 0 1.6rem auto;
+  margin: #{$ax22} 0 #{$ax16} auto;
   text-align: center;
   display: block;
 }

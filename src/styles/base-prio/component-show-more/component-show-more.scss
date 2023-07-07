@@ -3,10 +3,10 @@
 .button-show-more {
   padding-left: 0;
   justify-content: flex-start;
-  padding-bottom: 1.1rem;
+  padding-bottom: #{$ax11};
 }
 
 .button-show-more,
 .button-show-less {
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }

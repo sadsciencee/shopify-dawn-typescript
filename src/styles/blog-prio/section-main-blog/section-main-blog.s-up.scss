@@ -20,7 +20,7 @@
 
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--small .ratio::before,
   .blog-articles--collage > *:nth-child(3n + 2):last-child .article-card__image--small .ratio::before {
-    padding-bottom: 22rem;
+    padding-bottom: #{ax(220)};
   }
 
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--medium .ratio::before,
@@ -36,7 +36,7 @@
 @include media-query($m-up) {
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--small .ratio .ratio::before,
   .blog-articles--collage > *:nth-child(3n + 2):last-child .article-card__image--small .ratio .ratio::before {
-    padding-bottom: 27.5rem;
+    padding-bottom: #{ax(275)};
   }
 
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--medium .ratio::before,
@@ -46,6 +46,6 @@
 
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--large .ratio::before,
   .blog-articles--collage > *:nth-child(3n + 2):last-child .article-card__image--large .ratio::before {
-    padding-bottom: 82.5rem;
+    padding-bottom: #{ax(825)};
   }
 }

@@ -2,15 +2,15 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.article-card__image--small .ratio::before {
-		padding-bottom: 14.3rem;
+		padding-bottom: ax(143);
 	}
 
 	.article-card__image--medium .ratio::before {
-		padding-bottom: 21.9rem;
+		padding-bottom: ax(219);
 	}
 
 	.article-card__image--large .ratio::before {
-		padding-bottom: 27.5rem;
+		padding-bottom: ax(275);
 	}
 }
 @supports not (inset: 10px) {
@@ -26,14 +26,14 @@
 	}
 
 	.article-card__image--small .ratio::before {
-		padding-bottom: 17.7rem;
+		padding-bottom: ax(177);
 	}
 
 	.article-card__image--medium .ratio::before {
-		padding-bottom: 30.7rem;
+		padding-bottom: ax(307);
 	}
 
 	.article-card__image--large .ratio::before {
-		padding-bottom: 40.7rem;
+		padding-bottom: ax(407);
 	}
 }

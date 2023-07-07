@@ -6,15 +6,15 @@
 	}
 
 	.image-with-text__media--small {
-		height: 31.4rem;
+		height: ax(314);
 	}
 
 	.image-with-text__media--medium {
-		height: 46rem;
+		height: ax(460);
 	}
 
 	.image-with-text__media--large {
-		height: 69.5rem;
+		height: #{ax(695)};
 	}
 
 	.image-with-text__media--placeholder.image-with-text__media--adapt {

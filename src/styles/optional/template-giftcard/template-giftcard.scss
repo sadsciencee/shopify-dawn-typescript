@@ -84,7 +84,7 @@ h2,
 @include media-query($s-up) {
   h2,
   .h2 {
-    font-size: calc(#{$fontHeadingScale} * 2.4rem);
+    font-size: calc(#{$fontHeadingScale} * #{$ax24});
   }
 }
 
@@ -96,15 +96,15 @@ h2,
   align-items: center;
   text-align: center;
   border: none;
-  padding: 1.5rem 3rem;
+  padding: #{$ax15} 3rem;
   text-decoration: none;
   background-color: rgb(#{$schemaColorButton});
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton});
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton});
   color: rgb(var(--c-button-label));
-  min-width: 12rem;
+  min-width: #{ax(120)};
   height: auto;
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
+  font-size: #{$ax15};
+  letter-spacing: 0.00667em;
   line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
@@ -113,12 +113,12 @@ h2,
 }
 
 .button:hover {
-  box-shadow: 0 0 0 0.2rem rgb(#{$schemaColorButton});
+  box-shadow: 0 0 0 #{$ax2} rgb(#{$schemaColorButton});
 }
 
 .button--secondary {
   color: rgb(var(--c-alt-button-label));
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label));
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label));
   background-color: transparent;
 }
 
@@ -127,7 +127,7 @@ h2,
 }
 
 .button--secondary:hover {
-  box-shadow: 0 0 0 0.2rem rgb(var(--c-alt-button-label));
+  box-shadow: 0 0 0 #{$ax2} rgb(var(--c-alt-button-label));
 }
 
 @media (forced-colors: active) {
@@ -184,7 +184,7 @@ h2,
 
 .gift-card__number {
   color: rgb(#{$schemaColorForeground});
-  font-size: 1.8rem;
+  font-size: #{$ax18};
   line-height: calc(1 + 0.6 / #{$fontBodyScale});
   text-align: center;
   letter-spacing: 0.25rem;
@@ -199,7 +199,7 @@ h2,
 
 .gift-card__text {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: #{$ax17};
   opacity: 0.6;
   margin: 0;
   line-height: calc(1 + 0.5 / #{$fontBodyScale});
@@ -209,10 +209,10 @@ h2,
   border: 1px solid transparent;
   border-radius: 4rem;
   display: inline-block;
-  font-size: 1.2rem;
-  letter-spacing: 0.1rem;
+  font-size: #{$ax12};
+  letter-spacing: 0.08334em;
   line-height: 1;
-  padding: 0.6rem 1.3rem;
+  padding: #{$ax6} #{$ax13};
   text-align: center;
   background-color: rgb(#{$schemaColorBackground});
   border-color: rgba(#{$schemaColorForeground}, 0.04);
@@ -264,22 +264,22 @@ h2,
 }
 
 *:focus-visible {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-  outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button:focus-visible {
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton}), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 /* Negate the fallback side-effect for browsers that support :focus-visible */
@@ -289,35 +289,35 @@ h2,
 }
 
 .button:focus {
-  box-shadow: 0 0 0 0.1rem rgb(#{$schemaColorButton}), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button--secondary:focus-visible {
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label)), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button--secondary:focus {
-  box-shadow: 0 0 0 0.1rem rgb(var(--c-alt-button-label)), 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-    0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .form__message {
   align-items: center;
   display: flex;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
+  font-size: #{$ax12};
+  line-height: #{$ax15};
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: #{$ax5};
   opacity: 0.8;
 }
 
 .form__message .icon {
   flex-shrink: 0;
-  height: 1.3rem;
-  margin-right: 0.5rem;
-  width: 1.3rem;
+  height: #{$ax13};
+  margin-right: #{$ax5};
+  width: #{$ax13};
 }
 
 @media print {

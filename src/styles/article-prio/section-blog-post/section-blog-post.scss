@@ -10,11 +10,11 @@
 }
 
 .article-template__hero-small {
-  height: 11rem;
+  height: #{ax(110)};
 }
 
 .article-template__hero-medium {
-  height: 22rem;
+  height: #{ax(220)};
 }
 
 .article-template__hero-large {
@@ -22,7 +22,7 @@
 }
 
 .article-template header {
-  margin-top: 4.4rem;
+  margin-top: #{$ax44};
   margin-bottom: 2rem;
   line-height: calc(0.8 / #{$fontBodyScale});
 }
@@ -36,7 +36,7 @@
 }
 
 .article-template__link {
-  font-size: 1.8rem;
+  font-size: #{$ax18};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,12 +60,12 @@
 
 .article-template__social-sharing + header,
 .article-template__social-sharing + .article-template__content {
-  margin-top: 1.5rem;
+  margin-top: #{$ax15};
 }
 
 .article-template__comment-wrapper {
   margin-top: 5rem;
-  padding: 2.7rem 0;
+  padding: #{$ax27} 0;
 }
 
 .article-template__comment-wrapper h2 {
@@ -83,8 +83,8 @@
 .article-template__comments-comment {
   color: rgba(#{$schemaColorForeground}, 0.75);
   background-color: rgb(#{$schemaColorBackground});
-  margin-bottom: 1.5rem;
-  padding: 2rem 2rem 1.5rem;
+  margin-bottom: #{$ax15};
+  padding: 2rem 2rem #{$ax15};
 }
 
 .article-template__comments-comment p {
@@ -96,9 +96,9 @@
 }
 
 .article-template__comment-warning {
-  margin: 2rem 0 2.5rem;
+  margin: 2rem 0 #{$ax25};
 }
 
 .article-template__back:last-child {
-  margin-bottom: 3.2rem;
+  margin-bottom: #{$ax32};
 }

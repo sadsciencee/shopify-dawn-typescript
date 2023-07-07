@@ -11,17 +11,17 @@
 
 
 .collapsible-content__media--small {
-	height: 19.4rem;
+	height: ax(194);
 }
 
 .collapsible-content__media--large {
-	height: 43.5rem;
+	height: #{ax(435)};
 }
 
 .collapsible-content-wrapper-narrow {
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
-	max-width: 73.4rem;
+	padding-right: #{$ax15};
+	padding-left: #{$ax15};
+	max-width: ax(734);
 }
 
 .collapsible-content__header {
@@ -48,14 +48,14 @@
 .collapsible-row-layout .accordion {
 	border: #{$textBoxesBorderWidth} solid
 		rgba(#{$schemaColorForeground}, #{$textBoxesBorderOpacity});
-	margin-bottom: 1.5rem;
+	margin-bottom: #{$ax15};
 	/* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
 	transform: perspective(0);
 }
 
 .collapsible-row-layout .accordion summary,
 .collapsible-row-layout .accordion .accordion__content {
-	padding: 1.5rem;
+	padding: #{$ax15};
 }
 
 .collapsible-row-layout .accordion .accordion__content {
@@ -68,5 +68,5 @@
 
 .collapsible-content summary:hover .accordion__title {
 	text-decoration: underline;
-	text-underline-offset: 0.3rem;
+	text-underline-offset: #{$ax3};
 }

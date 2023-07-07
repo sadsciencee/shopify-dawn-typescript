@@ -27,7 +27,7 @@
 }
 @include media-query($s-up) {
   noscript .localization-form__select {
-    min-width: 20rem;
+    min-width: #{ax(200)};
   }
 }
 @include media-query($m-up) {

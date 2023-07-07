@@ -206,7 +206,7 @@
 }
 
 .banner__box {
-	padding: 4rem 3.5rem;
+	padding: 4rem #{$ax35};
 	position: relative;
 	height: fit-content;
 	align-items: center;
@@ -236,7 +236,7 @@
 }
 
 .banner__box > * + .banner__text {
-	margin-top: 1.5rem;
+	margin-top: #{$ax15};
 }
 
 .banner__box > * + * {
@@ -276,7 +276,7 @@
 
 	.banner--content-align-mobile-center .banner__buttons--multiple > * {
 		flex-grow: 1;
-		min-width: 22rem;
+		min-width: #{ax(220)};
 	}
 }
 

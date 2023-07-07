@@ -1,7 +1,7 @@
 @import './variables.scss';
 @import './functions.scss';
 .text-body {
-	font-size: 1.5rem;
+	font-size: #{$ax15};
 	letter-spacing: 0.06rem;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
@@ -69,19 +69,19 @@ h2,
 @include media-query($s-up) {
 	h2,
 	.h2 {
-		font-size: calc(#{$fontHeadingScale} * 2.4rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax24});
 	}
 }
 
 h3,
 .h3 {
-	font-size: calc(#{$fontHeadingScale} * 1.7rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax17});
 }
 
 @include media-query($s-up) {
 	h3,
 	.h3 {
-		font-size: calc(#{$fontHeadingScale} * 1.8rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax18});
 	}
 }
 
@@ -89,18 +89,18 @@ h4,
 .h4 {
 	font-family: #{$fontHeadingFamily};
 	font-style: #{$fontHeadingStyle};
-	font-size: calc(#{$fontHeadingScale} * 1.5rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax15});
 }
 
 h5,
 .h5 {
-	font-size: calc(#{$fontHeadingScale} * 1.2rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax12});
 }
 
 @include media-query($s-up) {
 	h5,
 	.h5 {
-		font-size: calc(#{$fontHeadingScale} * 1.3rem);
+		font-size: calc(#{$fontHeadingScale} * #{$ax13});
 	}
 }
 
@@ -114,13 +114,13 @@ h6,
 blockquote {
 	font-style: italic;
 	color: rgba(#{$schemaColorForeground}, 0.75);
-	border-left: 0.2rem solid rgba(#{$schemaColorForeground}, 0.2);
+	border-left: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.2);
 	padding-left: 1rem;
 }
 
 @include media-query($s-up) {
 	blockquote {
-		padding-left: 1.5rem;
+		padding-left: #{$ax15};
 	}
 }
 
@@ -132,25 +132,25 @@ blockquote {
 
 @include media-query($s-up) {
 	.caption {
-		font-size: 1.2rem;
+		font-size: #{$ax12};
 	}
 }
 
 .caption-with-letter-spacing {
 	font-size: 1rem;
-	letter-spacing: 0.13rem;
+	letter-spacing: 0.13em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 	text-transform: uppercase;
 }
 
 .caption-with-letter-spacing--medium {
-	font-size: 1.2rem;
-	letter-spacing: 0.16rem;
+	font-size: #{$ax12};
+	letter-spacing: 0.1334em;
 }
 
 .caption-with-letter-spacing--large {
-	font-size: 1.4rem;
-	letter-spacing: 0.18rem;
+	font-size: #{$ax14};
+	letter-spacing: 0.01286em;
 }
 
 .caption-large,
@@ -159,7 +159,7 @@ blockquote {
 .field__input,
 .form__label,
 .select__select {
-	font-size: 1.3rem;
+	font-size: #{$ax13};
 	line-height: calc(1 + 0.5 / #{$fontBodyScale});
 	letter-spacing: 0.04rem;
 }
@@ -171,16 +171,16 @@ blockquote {
 table:not([class]) {
 	table-layout: fixed;
 	border-collapse: collapse;
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	border-style: hidden;
-	box-shadow: 0 0 0 0.1rem rgba(#{$schemaColorForeground}, 0.2);
+	box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.2);
 	/* draws the table border  */
 }
 
 table:not([class]) td,
 table:not([class]) th {
 	padding: 1em;
-	border: 0.1rem solid rgba(#{$schemaColorForeground}, 0.2);
+	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
 }
 a:empty,
 ul:empty,
@@ -205,10 +205,10 @@ h6:empty {
 	border: none;
 	box-shadow: none;
 	text-decoration: underline;
-	text-underline-offset: 0.3rem;
+	text-underline-offset: #{$ax3};
 	color: rgb(#{$schemaColorLink});
 	background-color: transparent;
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	font-family: inherit;
 }
 
@@ -222,16 +222,16 @@ h6:empty {
 
 .link-with-icon {
 	display: inline-flex;
-	font-size: 1.4rem;
+	font-size: #{$ax14};
 	font-weight: 600;
-	letter-spacing: 0.1rem;
+	letter-spacing: 0.00714em;
 	text-decoration: none;
-	margin-bottom: 4.5rem;
+	margin-bottom: #{$ax45};
 	white-space: nowrap;
 }
 
 .link-with-icon .icon {
-	width: 1.5rem;
+	width: #{$ax15};
 	margin-left: 1rem;
 }
 

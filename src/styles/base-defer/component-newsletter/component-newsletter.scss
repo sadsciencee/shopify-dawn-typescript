@@ -31,7 +31,7 @@
 }
 
 .newsletter-form__button {
-  width: 4.4rem;
+  width: #{$ax44};
   margin: 0;
   right: #{$inputsBorderWidth};
   top: 0;
@@ -40,12 +40,12 @@
 }
 
 .newsletter-form__button:focus-visible {
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0 0.4rem rgba(#{$schemaColorForeground});
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 0 #{$ax4} rgba(#{$schemaColorForeground});
   background-color: rgb(#{$schemaColorBackground});
 }
 
 .newsletter-form__button:focus {
-  box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}), 0 0 0 0.4rem rgba(#{$schemaColorForeground});
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 0 #{$ax4} rgba(#{$schemaColorForeground});
   background-color: rgb(#{$schemaColorBackground});
 }
 
@@ -55,5 +55,5 @@
 }
 
 .newsletter-form__button .icon {
-  width: 1.5rem;
+  width: #{$ax15};
 }

@@ -9,7 +9,7 @@
 
 @include media-query($m-down) {
   .collection .slider.slider--tablet {
-    margin-bottom: 1.5rem;
+    margin-bottom: #{$ax15};
   }
 }
 
@@ -20,7 +20,7 @@
   left: 0;
   display: none;
   width: 100%;
-  padding: 0 1.5rem;
+  padding: 0 #{$ax15};
   opacity: 0.7;
 }
 
@@ -36,13 +36,13 @@
 }
 
 .collection--empty .title-wrapper {
-  margin-top: 10rem;
-  margin-bottom: 15rem;
+  margin-top: #{ax(100)};
+  margin-bottom: #{ax(150)};
 }
 
 @include media-query($m-down) {
   .collection .slider--tablet.product-grid {
-    scroll-padding-left: 1.5rem;
+    scroll-padding-left: #{$ax15};
   }
 }
 
@@ -51,7 +51,7 @@
 }
 
 .collection__title.title-wrapper {
-  margin-bottom: 2.5rem;
+  margin-bottom: #{$ax25};
 }
 
 .collection__title .title:not(:only-child) {
@@ -60,7 +60,7 @@
 
 @include media-query($m-up) {
   .collection__title--desktop-slider .title {
-    margin-bottom: 2.5rem;
+    margin-bottom: #{$ax25};
   }
 
   .collection__title.title-wrapper--self-padded-tablet-down {
@@ -72,7 +72,7 @@
   }
 
   .collection--full-width slider-component:not(.slider-component-desktop) {
-    padding: 0 1.5rem;
+    padding: 0 #{$ax15};
     max-width: none;
   }
 }

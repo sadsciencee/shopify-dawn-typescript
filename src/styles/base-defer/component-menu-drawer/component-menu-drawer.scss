@@ -93,29 +93,29 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .no-js .menu-drawer__navigation > ul > li {
-  border-bottom: 0.1rem solid rgba(#{$schemaColorForeground}, 0.04);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.04);
 }
 
 .no-js .menu-drawer__submenu ul > li {
-  border-top: 0.1rem solid rgba(#{$schemaColorForeground}, 0.04);
+  border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.04);
 }
 
 .js .menu-drawer__menu li {
-  margin-bottom: 0.2rem;
+  margin-bottom: #{$ax2};
 }
 
 .menu-drawer__menu-item {
-  padding: 1.1rem 3rem;
+  padding: #{$ax11} 3rem;
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: #{$ax18};
 }
 
 .no-js .menu-drawer__menu-item {
-  font-size: 1.6rem;
+  font-size: #{$ax16};
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__menu-item {
-  padding: 1.2rem 5.2rem 1.2rem 6rem;
+  padding: #{$ax12} 5.2rem #{$ax12} 6rem;
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__submenu .menu-drawer__menu-item {
@@ -172,12 +172,12 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .menu-drawer__close-button {
-  margin-top: 1.5rem;
-  padding: 1.2rem 2.6rem 1.2rem 3rem;
+  margin-top: #{$ax15};
+  padding: #{$ax12} #{$ax26} #{$ax12} 3rem;
   text-decoration: none;
   display: flex;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   width: 100%;
   background-color: transparent;
   font-family: #{$fontBodyFamily};
@@ -221,7 +221,7 @@ details[open].menu-opening > .menu-drawer__submenu {
   align-items: center;
   text-decoration: none;
   padding: 1rem 0;
-  font-size: 1.4rem;
+  font-size: #{$ax14};
   color: rgb(#{$schemaColorForeground});
   margin-bottom: 0;
 }
@@ -250,5 +250,5 @@ details[open].menu-opening > .menu-drawer__submenu {
 }
 
 .menu-drawer .list-social__link {
-  padding: 1.3rem 1.3rem;
+  padding: #{$ax13} #{$ax13};
 }

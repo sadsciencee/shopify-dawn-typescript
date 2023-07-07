@@ -27,7 +27,7 @@
 }
 
 .background-secondary .featured-product {
-	padding: 2.5rem;
+	padding: #{$ax25};
 }
 
 .featured-product .share-button:nth-last-child(2) {
@@ -38,7 +38,7 @@
 	display: inline-flex;
 	float: right;
 	align-items: center;
-	min-height: 4.4rem;
+	min-height: #{$ax44};
 }
 
 .share-button + .product__view-details::after {

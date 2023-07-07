@@ -2,7 +2,7 @@
 @import '../../global/functions.scss';
 @include media-query($s-up) {
 	.quick-add-modal__content {
-		--modal-height-offset: 10rem;
+		--modal-height-offset: #{ax(100)};
 		margin-top: var(--modal-height-offset);
 		width: 80%;
 		max-height: calc(100% - var(--modal-height-offset) * 2);

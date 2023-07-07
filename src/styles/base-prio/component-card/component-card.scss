@@ -23,7 +23,7 @@
 	--image-padding: 0rem;
 	flex-direction: row;
 	align-items: flex-start;
-	gap: 1.5rem;
+	gap: #{$ax15};
 }
 
 .card--horizontal.ratio:before {
@@ -31,7 +31,7 @@
 }
 
 .card--card.card--horizontal {
-	padding: 1.2rem;
+	padding: #{$ax12};
 }
 
 .card--card.card--horizontal.card--text {
@@ -138,7 +138,7 @@
 
 .card__information {
 	grid-row-start: 2;
-	padding: 1.3rem 1rem;
+	padding: #{$ax13} 1rem;
 }
 
 .card:not(.ratio) > .card__content {
@@ -161,7 +161,7 @@
 }
 
 .card:not(.card--horizontal) > .card__content > .card__badge {
-	margin: 1.3rem;
+	margin: #{$ax13};
 }
 
 .card__media .media img {
@@ -187,7 +187,7 @@
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {
-	font-size: calc(#{$fontHeadingScale} * 1.2rem);
+	font-size: calc(#{$fontHeadingScale} * #{$ax12});
 }
 
 .card--horizontal .card-information > *:not(.visually-hidden:first-child) + *:not(.rating) {
@@ -221,19 +221,19 @@
 }
 
 .card__heading a:after {
-	outline-offset: 0.3rem;
+	outline-offset: #{$ax3};
 }
 
 .card__heading a:focus:after {
-	box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
-	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 }
 
 .card__heading a:focus-visible:after {
-	box-shadow: 0 0 0 0.3rem rgb(#{$schemaColorBackground}),
-		0 0 0.5rem 0.4rem rgba(#{$schemaColorForeground}, 0.3);
-	outline: 0.2rem solid rgba(#{$schemaColorForeground}, 0.5);
+	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	outline: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 }
 
 .card__heading a:focus:not(:focus-visible):after {
@@ -297,14 +297,14 @@
 }
 
 .card .icon-wrap {
-	margin-left: 0.8rem;
+	margin-left: #{$ax8};
 	white-space: nowrap;
 	transition: transform var(--duration-short) ease;
 	overflow: hidden;
 }
 
 .card-information > * + * {
-	margin-top: 0.5rem;
+	margin-top: #{$ax5};
 }
 
 .card-information {
@@ -325,11 +325,11 @@
 }
 
 .card-information > .rating {
-	margin-top: 0.4rem;
+	margin-top: #{$ax4};
 }
 
 .card-information > *:not(.visually-hidden:first-child) + *:not(.rating) {
-	margin-top: 0.7rem;
+	margin-top: #{$ax7};
 }
 
 .card-information .caption {

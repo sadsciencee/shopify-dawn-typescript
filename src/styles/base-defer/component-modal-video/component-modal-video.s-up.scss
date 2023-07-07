@@ -2,23 +2,23 @@
 @import "../../global/functions.scss";
 @include media-query($s-up) {
   .modal-video__toggle {
-    right: 4.8rem;
-    top: 3.5rem;
+    right: #{$ax48};
+    top: #{$ax35};
   }
   .modal-video__content-info {
-    height: calc(100% - 7.5rem);
-    padding-top: 9.5rem;
-    width: calc(100% - 9.6rem);
+    height: calc(100% - #{ax(75)});
+    padding-top: #{ax(95)};
+    width: calc(100% - #{ax(96)});
   }
 }
 @include media-query($m-up) {
   .modal-video__toggle {
-    right: 4.3rem;
+    right: $ax43;
     top: 3rem;
   }
   .modal-video__content-info {
     height: calc(100% - 7rem);
     padding-top: 9rem;
-    width: calc(100% - 8.6rem);
+    width: calc(100% - #{ax(86)});
   }
 }
