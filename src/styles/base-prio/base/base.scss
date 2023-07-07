@@ -101,7 +101,8 @@ html.no-js .no-js-hidden {
 
 .page-width {
 	max-width: #{$pageWidth};
-	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 0 #{$ax15};
 }
 
@@ -432,14 +433,14 @@ summary::-webkit-details-marker {
 .focus-inset:focus-visible {
 	outline: $comboOutline1;
 	outline-offset: #{ax(-2)};
-	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3);
+	box-shadow: $comboPopupFocusShadow;
 }
 
 .focused.focus-inset,
 .no-js .focus-inset:focus {
 	outline: $comboOutline1;
 	outline-offset: #{ax(-2)};
-	box-shadow: 0 0 #{$ax2} 0 rgba(#{$schemaColorForeground}, 0.3);
+	box-shadow: $comboPopupFocusShadow;
 }
 
 .no-js .focus-inset:focus:not(:focus-visible) {

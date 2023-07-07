@@ -207,6 +207,9 @@ $comboBoxShadow1: var(--combo-box-shadow-1);
 $comboBoxShadow2: var(--combo-box-shadow-2);
 $comboBoxShadow3: var(--combo-box-shadow-3);
 $comboOutline1: var(--combo-outline-1);
+$comboPopupShadow: var(--combo-popup-shadow);
+$comboPopupFocusShadow: var(--combo-popup-focus-shadow);
+$comboPopupContentShadow: var(--combo-popup-content-shadow);
 
 
 @mixin box-shadow {

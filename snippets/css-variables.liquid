@@ -92,7 +92,7 @@
 	{% endfor %}
 
 	{{ scheme_classes | prepend: 'body' }} {
-	    color: rgba(var(--c-foreground), 0.75);
+	    color: rgba(var(--c-foreground), 0.75));
 	    background-color: rgb(var(--c-background));
 	}
 
@@ -226,6 +226,13 @@
 	0 0 var(--ax5) var(--ax4) rgba(var(--c-foreground), 0.3);
 	--combo-box-shadow-3: 0 0 0 var(--ax3) rgb(var(--c-background)),
 	0 0 0rem (--ax5) rgba(var(--c-foreground), 0.5);
+
+
+	--combo-popup-shadow: var(--pop-shadow-horizontal-offset) var(--pop-shadow-vertical-offset)
+	var(--pop-shadow-blur-radius) rgba(var(--c-shadow), var(--pop-shadow-opacity));
+	--combo-popup-focus-shadow: 0 0 var(--ax2) 0 rgba(var(--c-foreground), 0.3);
+	--combo-popup-content-shadow: var(--pop-shadow-horizontal-offset) var(--pop-shadow-vertical-offset)
+	var(--pop-shadow-blur-radius) rgba(var(--c-shadow), var(--pop-shadow-opacity));
 
     --combo-outline-1: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 

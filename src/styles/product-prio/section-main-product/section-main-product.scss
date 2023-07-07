@@ -64,7 +64,7 @@
 	margin: #{$ax16} 0 #{$ax10};
 	font-size: #{$ax12};
 	line-height: calc(1 + 0.5 / #{$fontBodyScale});
-	letter-spacing: ax(.5);
+	letter-spacing: ax(0.5);
 	text-decoration: underline;
 	text-underline-offset: #{$ax3};
 }
@@ -130,8 +130,7 @@ fieldset.product-form__input .form__label {
 }
 
 .product-form__input input[type='radio'] + label {
-	border: #{$variantPillsBorderWidth} solid
-		rgba(#{$schemaColorForeground}, #{$variantPillsBorderOpacity});
+	border: #{$variantPillsBorderWidth} solid rgba(#{$schemaColorForeground}, #{$variantPillsBorderOpacity});
 	background-color: rgb(#{$schemaColorBackground});
 	color: rgba(#{$schemaColorForeground});
 	border-radius: #{$variantPillsRadius};
@@ -157,8 +156,7 @@ fieldset.product-form__input .form__label {
 	left: calc(#{$variantPillsBorderWidth} * -1);
 	z-index: -1;
 	border-radius: #{$variantPillsRadius};
-	box-shadow: #{$variantPillsShadowHorizontalOffset}
-		#{$variantPillsShadowVerticalOffset} #{$variantPillsShadowBlurRadius}
+	box-shadow: #{$variantPillsShadowHorizontalOffset} #{$variantPillsShadowVerticalOffset} #{$variantPillsShadowBlurRadius}
 		rgba(#{$schemaColorShadow}, #{$variantPillsShadowOpacity});
 }
 
@@ -544,11 +542,6 @@ a.product__text {
 
 .product-media-modal {
 	background-color: rgb(#{$schemaColorBackground});
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
 	visibility: hidden;
 	opacity: 0;
 	z-index: -1;
@@ -561,14 +554,11 @@ a.product__text {
 }
 
 .product-media-modal__dialog {
-	display: flex;
-	align-items: center;
 	height: 100vh;
 }
 
 .product-media-modal__content {
 	max-height: 100vh;
-	width: 100%;
 	overflow: auto;
 }
 
@@ -602,23 +592,14 @@ a.product__text {
 	background: none;
 }
 
-.product-media-modal__model {
-	width: 100%;
-}
-
 .product-media-modal__toggle {
 	background-color: rgb(#{$schemaColorBackground});
 	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.1);
 	border-radius: 50%;
 	color: rgba(#{$schemaColorForeground}, 0.55);
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	cursor: pointer;
 	right: #{$ax20};
 	padding: #{$ax12};
-	position: fixed;
-	z-index: 2;
 	top: #{$ax20};
 	width: #{$ax40};
 }
@@ -642,16 +623,10 @@ a.product__text {
 .product-popup-modal {
 	box-sizing: border-box;
 	opacity: 0;
-	position: fixed;
 	visibility: hidden;
 	z-index: -1;
-	margin: 0 auto;
-	top: 0;
-	left: 0;
 	overflow: auto;
-	width: 100%;
 	background: rgba(#{$schemaColorForeground}, 0.2);
-	height: 100%;
 }
 
 .product-popup-modal[open] {
@@ -676,20 +651,15 @@ a.product__text {
 	border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});
 	border-style: solid;
 	border-width: #{$popupBorderWidth};
-	box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-		#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboPopupContentShadow;
 }
 
 .product-popup-modal__content.focused {
-	box-shadow: $comboBoxShadow2,
-		#{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-			#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboBoxShadow2, $comboPopupShadow;
 }
 
 .product-popup-modal__content:focus-visible {
-	box-shadow: $comboBoxShadow2,
-		#{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset}
-			#{$popupShadowBlurRadius} rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	box-shadow: $comboBoxShadow2, $comboPopupShadow;
 }
 
 .product-popup-modal__content img {
