@@ -31,31 +31,32 @@
     assign y_spacing_phone = settings.spacing_grid_vertical | divided_by: 2
     assign x_spacing_phone = settings.spacing_grid_horizontal | divided_by: 2
 
-    assign page_width = settings.page_width | divided_by: 10
+    assign page_width = settings.page_width
     if settings.page_width == '1600'
         assign page_width_margin = 2
     else
         assign page_width_margin = 0
     endif
-    assign product_card_image_padding = settings.card_image_padding | divided_by: 10.0
-    assign card_corner_radius = settings.card_corner_radius | divided_by: 10.0
-    assign card_border_thickness = settings.card_border_thickness | divided_by: 10.0
-    assign card_shadow_horizontal_offset = settings.card_shadow_horizontal_offset | divided_by: 10.0
-    assign card_shadow_vertical_offset = settings.card_shadow_vertical_offset | divided_by: 10.0
-    assign card_shadow_blur = settings.card_shadow_blur | divided_by: 10.0
-    assign collection_card_image_padding = settings.collection_card_image_padding | divided_by: 10.0
-    assign collection_card_corner_radius = settings.collection_card_corner_radius | divided_by: 10.0
-    assign collection_card_border_thickness = settings.collection_card_border_thickness | divided_by: 10.0
-    assign collection_card_shadow_horizontal_offset = settings.collection_card_shadow_horizontal_offset | divided_by: 10.0
-    assign collection_card_shadow_vertical_offset = settings.collection_card_shadow_vertical_offset | divided_by: 10.0
-    assign collection_card_shadow_blur = settings.collection_card_shadow_blur | divided_by: 10.0
-    assign blog_card_image_padding = settings.blog_card_image_padding | divided_by: 10.0
-    assign blog_card_corner_radius = settings.blog_card_corner_radius | divided_by: 10.0
-    assign blog_card_border_thickness = settings.blog_card_border_thickness | divided_by: 10.0
-    assign blog_card_shadow_horizontal_offset = settings.blog_card_shadow_horizontal_offset | divided_by: 10.0
-    assign blog_card_shadow_vertical_offset = settings.blog_card_shadow_vertical_offset | divided_by: 10.0
-    assign blog_card_shadow_blur = settings.blog_card_shadow_blur | divided_by: 10.0
-    assign badge_corner_radius = settings.badge_corner_radius | divided_by: 10.0
+    assign product_card_image_padding = settings.card_image_padding
+    assign card_corner_radius = settings.card_corner_radius
+    assign card_border_thickness = settings.card_border_thickness
+    assign card_shadow_horizontal_offset = settings.card_shadow_horizontal_offset
+    assign card_shadow_vertical_offset = settings.card_shadow_vertical_offset
+    assign card_shadow_blur = settings.card_shadow_blur
+    assign collection_card_image_padding = settings.collection_card_image_padding
+    assign collection_card_corner_radius = settings.collection_card_corner_radius
+    assign collection_card_border_thickness = settings.collection_card_border_thickness
+    assign collection_card_shadow_horizontal_offset = settings.collection_card_shadow_horizontal_offset
+    assign collection_card_shadow_vertical_offset = settings.collection_card_shadow_vertical_offset
+    assign collection_card_shadow_blur = settings.collection_card_shadow_blur
+    assign blog_card_image_padding = settings.blog_card_image_padding
+    assign blog_card_corner_radius = settings.blog_card_corner_radius
+    assign blog_card_border_thickness = settings.blog_card_border_thickness
+    assign blog_card_shadow_horizontal_offset = settings.blog_card_shadow_horizontal_offset
+    assign blog_card_shadow_vertical_offset = settings.blog_card_shadow_vertical_offset
+    assign blog_card_shadow_blur = settings.blog_card_shadow_blur
+    assign badge_corner_radius = settings.badge_corner_radius
+
 %}
 
 {% style %}
