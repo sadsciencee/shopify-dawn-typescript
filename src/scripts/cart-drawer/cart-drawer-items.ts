@@ -14,12 +14,16 @@ export class CartDrawerItems extends CartItems {
 		lineQuantity: '#Drawer-quantity',
 		lineError: '#CartDrawer-LineItemError', // `${CartItems.selectors.cartDrawerLineError}-${line}`
 	}
+	constructor() {
+		super();
+		this.instanceSelectors = CartDrawerItems.selectors
+	}
 	override getSectionsToRender() {
 		return [
 			{
 				id: 'CartDrawer',
 				section: 'cart-drawer',
-				selector: CartDrawerItems.selectors.cartDrawerInner,
+				selector: this.instanceSelectors.cartDrawerInner,
 			},
 			{
 				id: 'cart-icon-bubble',
