@@ -11,7 +11,12 @@
 	}
 </style>
 
-<cart-drawer class="drawer fixed left-0 top-0 h-100 flex justify-end" {% if cart == empty %} data-uc-cart-empty {% endif %}>
+<cart-drawer
+	class="drawer fixed left-0 top-0 h-100 flex justify-end"
+	{% if cart == empty %}
+		data-uc-cart-empty
+	{% endif %}
+>
 	<div id="CartDrawer" class="cart-drawer">
 		<div
 			data-uc-cart-drawer-overlay

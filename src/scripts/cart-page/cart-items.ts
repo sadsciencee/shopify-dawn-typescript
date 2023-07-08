@@ -19,16 +19,39 @@ declare let window: uCoastWindow
 
 export class CartItems extends UcoastEl {
 	static htmlSelector = 'cart-items'
+	static selectors = {
+		itemLink: '.cart-item__name',
+		cartPageLineItemStatus: '#shopping-cart-line-item-status',
+		cartDrawerLineItemStatus: '#shopping-cart-line-item-status',
+		cartPageErrors: '#cart-errors',
+		cartDrawerErrors: '#CartDrawer-CartErrors',
+		cartPageLiveRegionText: '#cart-live-region-text',
+		cartDrawerLiveRegionText: '#CartDrawer-LiveRegionText',
+		cartPageMain: '#main-cart-items',
+		cartDrawerMain: '#CartDrawer-CartItems',
+		cartDrawerEmpty: '.drawer__inner-empty',
+		item: '.cart-item',
+		itemErrorText: '.cart-item__error-text',
+		footer: '#main-cart-footer',
+		loadingOverlay: '.loading-overlay',
+		// the following selectors are partial - they will be concatenated with the line ID
+		cartPageLine: '#CartItem',
+		cartDrawerLine: '#CartDrawer-Item',
+		cartPageLineQuantity: '#Quantity',
+		cartDrawerLineQuantity: '#Drawer-quantity',
+		cartPageLineError: '#Line-item-error', // `${CartItems.selectors.cartPageLineError}-${line}`
+		cartDrawerLineError: '#CartDrawer-LineItemError', // `${CartItems.selectors.cartDrawerLineError}-${line}`
+	}
 	static attributes = {
-		cartEmpty: 'data-uc-cart-empty',
+		disabled: 'data-uc-disabled',
 	}
 	lineItemStatusElement: HTMLElement
 	cartUpdateUnsubscriber?: () => void = undefined
 	constructor() {
 		super()
 		this.lineItemStatusElement =
-			qsOptional('#shopping-cart-line-item-status') ??
-			qsRequired('#CartDrawer-LineItemStatus')
+			qsOptional(CartItems.selectors.cartPageLineItemStatus) ??
+			qsRequired(CartItems.selectors.cartDrawerLineItemStatus)
 
 		const debouncedOnChange = debounce((event: Event) => {
 			this.onChange(event)
@@ -69,8 +92,8 @@ export class CartItems extends UcoastEl {
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-				const sourceQty = qsRequired('cart-items', html.documentElement)
-				this.innerHTML = sourceQty.innerHTML
+				const source = qsRequired(CartItems.htmlSelector, html.documentElement)
+				this.innerHTML = source.innerHTML
 			})
 			.catch((e) => {
 				console.error(e)
@@ -81,7 +104,10 @@ export class CartItems extends UcoastEl {
 		return [
 			{
 				id: 'main-cart-items',
-				section: getAttributeOrThrow('data-id', qsRequired('#main-cart-items')),
+				section: getAttributeOrThrow(
+					'data-id',
+					qsRequired(CartItems.selectors.cartPageMain)
+				),
 				selector: '.js-contents',
 			},
 			{
@@ -96,7 +122,7 @@ export class CartItems extends UcoastEl {
 			},
 			{
 				id: 'main-cart-footer',
-				section: getAttributeOrThrow('data-id', qsRequired('#main-cart-footer')),
+				section: getAttributeOrThrow('data-id', qsRequired(CartItems.selectors.footer)),
 				selector: '.js-contents',
 			},
 		]
@@ -119,9 +145,13 @@ export class CartItems extends UcoastEl {
 			.then((state) => {
 				const parsedState = JSON.parse(state)
 				const quantityElement =
-					qsOptional<HTMLInputElement>(`#Quantity-${line}`) ||
-					qsRequired<HTMLInputElement>(`#Drawer-quantity-${line}`)
-				const items = document.querySelectorAll('.cart-item')
+					qsOptional<HTMLInputElement>(
+						`${CartItems.selectors.cartPageLineQuantity}-${line}`
+					) ||
+					qsRequired<HTMLInputElement>(
+						`${CartItems.selectors.cartDrawerLineQuantity}-${line}`
+					)
+				const items = document.querySelectorAll(CartItems.selectors.item)
 
 				if (parsedState.errors) {
 					quantityElement.value = getAttributeOrThrow('value', quantityElement)
@@ -130,7 +160,7 @@ export class CartItems extends UcoastEl {
 				}
 
 				const cartDrawerWrapper = qsOptional<CartDrawer>('cart-drawer')
-				const cartFooter = qsOptional('#main-cart-footer')
+				const cartFooter = qsOptional(CartItems.selectors.footer)
 
 				if (parsedState.item_count === 0) {
 					this.removeAttribute(ATTRIBUTES.cartEmpty)
@@ -173,26 +203,29 @@ export class CartItems extends UcoastEl {
 				this.updateLiveRegions(line, message)
 
 				const lineItem =
-					qsOptional(`#CartItem-${line}`) || qsOptional(`#CartDrawer-Item-${line}`)
-				if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
+					qsOptional(`${CartItems.selectors.cartPageLine}-${line}`) ||
+					qsOptional(`${CartItems.selectors.cartDrawerLine}-${line}`)
+				if (lineItem?.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
 						? trapFocus(cartDrawerWrapper, qsRequired(`[name="${name}"]`, lineItem))
 						: qsRequired(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
 					trapFocus(
-						qsRequired('.drawer__inner-empty', cartDrawerWrapper),
+						qsRequired(CartItems.selectors.cartDrawerEmpty, cartDrawerWrapper),
 						qsRequired('a', cartDrawerWrapper)
 					)
-				} else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
-					trapFocus(cartDrawerWrapper, qsRequired('.cart-item__name'))
+				} else if (document.querySelector(CartItems.selectors.item) && cartDrawerWrapper) {
+					trapFocus(cartDrawerWrapper, qsRequired(CartItems.selectors.itemLink))
 				}
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
 			.catch(() => {
-				this.querySelectorAll('.loading-overlay').forEach((overlay) =>
+				this.querySelectorAll(CartItems.selectors.loadingOverlay).forEach((overlay) =>
 					overlay.classList.add('hidden')
 				)
-				const errors = qsOptional('#cart-errors') ?? qsRequired('#CartDrawer-CartErrors')
+				const errors =
+					qsOptional(CartItems.selectors.cartPageErrors) ??
+					qsRequired(CartItems.selectors.cartDrawerErrors)
 				errors.textContent = window.cartStrings.error
 			})
 			.finally(() => {
@@ -202,17 +235,18 @@ export class CartItems extends UcoastEl {
 
 	updateLiveRegions(line: string, message: string) {
 		const lineItemError =
-			qsOptional(`#Line-item-error-${line}`) ??
-			qsOptional(`#CartDrawer-LineItemError-${line}`)
+			qsOptional(`${CartItems.selectors.cartPageLineError}-${line}`) ??
+			qsOptional(`${CartItems.selectors.cartDrawerLineError}-${line}`)
 		if (lineItemError) {
-			const errorText = qsRequired('.cart-item__error-text', lineItemError)
+			const errorText = qsRequired(CartItems.selectors.itemErrorText, lineItemError)
 			errorText.innerHTML = message
 		}
 
 		this.lineItemStatusElement.setAttribute('aria-hidden', 'true')
 
 		const cartStatus =
-			qsOptional('#cart-live-region-text') ?? qsRequired('#CartDrawer-LiveRegionText')
+			qsOptional(CartItems.selectors.cartPageLiveRegionText) ??
+			qsRequired(CartItems.selectors.cartDrawerLiveRegionText)
 		cartStatus.setAttribute('aria-hidden', 'false')
 
 		setTimeout(() => {
@@ -228,7 +262,7 @@ export class CartItems extends UcoastEl {
 
 	enableLoading(line: string) {
 		const mainCartItems = this.getMainCartItems()
-		mainCartItems.classList.add('cart__items--disabled')
+		mainCartItems.setAttribute(CartItems.attributes.disabled, '')
 
 		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.remove('hidden'))
 		this.getCartDrawerItemElements(line)?.forEach((overlay) =>
@@ -243,21 +277,22 @@ export class CartItems extends UcoastEl {
 	}
 
 	getMainCartItems() {
-		return qsOptional('#main-cart-items') ?? qsRequired('#CartDrawer-CartItems')
+		return (
+			qsOptional(CartItems.selectors.cartPageMain) ??
+			qsRequired(CartItems.selectors.cartDrawerMain)
+		)
 	}
 
 	getCartItemElements(line: string) {
-		return qsaOptional(`#CartItem-${line} .loading-overlay`, this)
+		return qsaOptional(`${CartItems.selectors.cartPageLine}-${line} ${CartItems.selectors.loadingOverlay}`, this)
 	}
 
 	getCartDrawerItemElements(line: string) {
-		return qsaOptional(`#CartDrawer-Item-${line} .loading-overlay`, this)
+		return qsaOptional(`${CartItems.selectors.cartDrawerLine}-${line} ${CartItems.selectors.loadingOverlay}`, this)
 	}
 
 	disableLoading(line: string) {
-		const mainCartItems = this.getMainCartItems()
-		mainCartItems.classList.remove('cart__items--disabled')
-
+		this.getMainCartItems().removeAttribute(CartItems.attributes.disabled)
 		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.add('hidden'))
 		this.getCartDrawerItemElements(line)?.forEach((overlay) => overlay.classList.add('hidden'))
 	}

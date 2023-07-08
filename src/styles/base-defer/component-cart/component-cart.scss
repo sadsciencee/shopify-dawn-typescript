@@ -53,7 +53,7 @@ cart-items {
   border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
-.cart__items--disabled {
+.cart__items[data-uc-disabled] {
   pointer-events: none;
 }
 
