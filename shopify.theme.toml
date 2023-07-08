@@ -1,5 +1,3 @@
 [environments.dev]
 store = "ucoast-bundles-dev"
 live-reload = 'off'
-
-

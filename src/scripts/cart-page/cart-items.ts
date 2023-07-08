@@ -21,6 +21,7 @@ export class CartItems extends UcoastEl {
 	// static
 	static htmlSelector = 'cart-items'
 	static selectors = {
+		element: 'cart-items',
 		itemLink: '.cart-item__name',
 		lineItemStatus: '#shopping-cart-line-item-status',
 		errors: '#cart-errors',
@@ -47,6 +48,8 @@ export class CartItems extends UcoastEl {
 	// init
 	constructor() {
 		super()
+		this.setInstanceSelectors()
+		console.log('CartItems instance selectors', this.instanceSelectors)
 		this.lineItemStatusElement = qsRequired(this.instanceSelectors.lineItemStatus)
 
 		const debouncedOnChange = debounce((event: Event) => {
@@ -54,6 +57,10 @@ export class CartItems extends UcoastEl {
 		}, ON_CHANGE_DEBOUNCE_TIMER)
 
 		this.addEventListener('change', debouncedOnChange.bind(this))
+	}
+
+	setInstanceSelectors() {
+		this.instanceSelectors = CartItems.selectors
 	}
 
 	override connectedCallback() {
@@ -84,11 +91,14 @@ export class CartItems extends UcoastEl {
 	}
 
 	onCartUpdate() {
+		console.log('onCartUpdate')
 		fetch(`${routes.cart_url}?section_id=main-cart-items`)
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-				const source = qsRequired(CartItems.htmlSelector, html.documentElement)
+				console.log('onCartUpdate html', html)
+				// reference CartItems selectors here since this returns then inner HTML I guess
+				const source = qsRequired(CartItems.selectors.element, html.documentElement)
 				this.innerHTML = source.innerHTML
 			})
 			.catch((e) => {
@@ -122,6 +132,7 @@ export class CartItems extends UcoastEl {
 	}
 
 	updateQuantity(line: string, quantity: string, name?: string) {
+		console.log('updateQuantity', line, quantity, name)
 		this.enableLoading(line)
 
 		const body = JSON.stringify({
@@ -137,6 +148,7 @@ export class CartItems extends UcoastEl {
 			})
 			.then((state) => {
 				const parsedState = JSON.parse(state)
+				console.log({ parsedState })
 				const quantityElement = qsRequired<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)
@@ -150,15 +162,14 @@ export class CartItems extends UcoastEl {
 
 				const cartDrawerWrapper = qsOptional<CartDrawer>('cart-drawer')
 				const cartFooter = qsOptional(this.instanceSelectors.footer)
-
 				if (parsedState.item_count === 0) {
-					this.removeAttribute(ATTRIBUTES.cartEmpty)
-					cartFooter && cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
-					cartDrawerWrapper && cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
-				} else {
 					this.setAttribute(ATTRIBUTES.cartEmpty, '')
 					cartFooter && cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
 					cartDrawerWrapper && cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
+				} else {
+					this.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartFooter && cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartDrawerWrapper && cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
 				}
 
 				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {

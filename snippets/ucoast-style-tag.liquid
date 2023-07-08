@@ -13,8 +13,9 @@
         render 'ucoast', ucoast: base_file
     endcapture
     assign base_url = base_url | strip
-
-    if preload_stylesheet == true
+    if base_url contains '::'
+        render 'ucoast', ucoast: base_file
+    elsif preload_stylesheet == true
         echo base_url | stylesheet_tag: preload: true
         unless ignore_s_up
             capture s_up_url

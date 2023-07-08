@@ -4,6 +4,7 @@ export class CartDrawerItems extends CartItems {
 	static override htmlSelector = 'cart-drawer-items'
 	static override selectors = {
 		...CartItems.selectors,
+		element: 'cart-drawer-items',
 		itemLink: '.cart-item__name',
 		lineItemStatus: '#CartDrawer-LineItemStatus',
 		errors: '#CartDrawer-CartErrors',
@@ -16,6 +17,9 @@ export class CartDrawerItems extends CartItems {
 	}
 	constructor() {
 		super();
+
+	}
+	override setInstanceSelectors() {
 		this.instanceSelectors = CartDrawerItems.selectors
 	}
 	override getSectionsToRender() {

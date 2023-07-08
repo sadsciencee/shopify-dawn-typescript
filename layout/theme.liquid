@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 	<head>
-		{% render 'remove-unused-css' %}
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,6 +14,7 @@
 				href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
 			>
 		{%- endif -%}
+		{% render 'remove-unused-css' %}
 
 		{%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
 			<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -208,9 +208,7 @@
 				recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
 			}
 		</script>
-		{%- if settings.predictive_search_enabled -%}
-			{% render 'ucoast', ucoast: 'js-optional-predictive-search.ts' %}
-		{%- endif -%}
+
 		{% comment %}
 			{% render 'ucoast-style-tag', file: 'css-optional-component-localization-form' %}
 		{% endcomment %}
