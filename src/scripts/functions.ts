@@ -10,6 +10,7 @@ import {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { ProductModel } from '@/scripts/optional/product-model'
+import { ATTRIBUTES } from '@/scripts/theme/constants';
 
 // local types
 
@@ -285,9 +286,9 @@ export const toggleIsEmpty = (el: HTMLElement, isEmpty: boolean) => {
 
 export const toggleLoading = (el: HTMLElement, loading: boolean) => {
 	if (loading) {
-		el.setAttribute('data-uc-loading', '')
+		el.setAttribute(ATTRIBUTES.loading, '')
 	} else {
-		el.removeAttribute('data-uc-loading')
+		el.removeAttribute(ATTRIBUTES.loading)
 	}
 }
 

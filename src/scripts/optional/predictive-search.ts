@@ -1,6 +1,7 @@
 import { SearchForm } from '@/scripts/theme/search-form'
 import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions';
 import { routes } from '@/scripts/setup'
+import { ATTRIBUTES } from '@/scripts/theme/constants';
 
 export class PredictiveSearch extends SearchForm {
 	static override htmlSelector = 'predictive-search'
@@ -255,7 +256,7 @@ export class PredictiveSearch extends SearchForm {
 		this.loadingText = this.loadingText || getAttributeOrThrow('data-loading-text', this)
 
 		this.setLiveRegionText(this.loadingText)
-		this.setAttribute('loading', 'true')
+		this.setAttribute(ATTRIBUTES.loading, '')
 	}
 
 	setLiveRegionText(statusText: string) {
@@ -279,7 +280,7 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	setLiveRegionResults() {
-		this.removeAttribute('loading')
+		this.removeAttribute(ATTRIBUTES.loading)
 		const liveRegionCountEl = qsOptional('[data-predictive-search-live-region-count]', this)
 		this.setLiveRegionText(liveRegionCountEl?.textContent ?? '')
 	}
@@ -313,7 +314,7 @@ export class PredictiveSearch extends SearchForm {
 		if (selected) selected.setAttribute('aria-selected', 'false')
 
 		this.input.setAttribute('aria-activedescendant', '')
-		this.removeAttribute('loading')
+		this.removeAttribute(ATTRIBUTES.loading)
 		this.removeAttribute('open')
 		this.input.setAttribute('aria-expanded', 'false')
 		this.resultsMaxHeight = false

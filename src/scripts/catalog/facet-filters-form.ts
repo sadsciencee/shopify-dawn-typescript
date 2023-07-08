@@ -15,6 +15,7 @@ import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
+import { ATTRIBUTES } from '@/scripts/theme/constants';
 
 type FilterDataType = { html: string; url: string }
 
@@ -67,13 +68,9 @@ export class FacetFiltersForm extends UcoastEl {
 		const countContainer = document.getElementById('ProductCount')
 		const countContainerDesktop = document.getElementById('ProductCountDesktop')
 		const collection = qsRequired('.collection', FacetFiltersForm.getProductGridContainer())
-		collection.classList.add('loading')
-		if (countContainer) {
-			countContainer.classList.add('loading')
-		}
-		if (countContainerDesktop) {
-			countContainerDesktop.classList.add('loading')
-		}
+		collection.setAttribute(ATTRIBUTES.loading,'')
+		countContainer?.setAttribute(ATTRIBUTES.loading,'')
+		countContainerDesktop?.setAttribute(ATTRIBUTES.loading,'')
 
 		sections.forEach((section) => {
 			const url = `${window.location.pathname}?section_id=${section.section}&${searchParams}`
@@ -139,13 +136,13 @@ export class FacetFiltersForm extends UcoastEl {
 		const container = qsOptional('#ProductCount')
 		if (container) {
 			container.innerHTML = count
-			container.classList.remove('loading')
+			container.removeAttribute(ATTRIBUTES.loading)
 		}
 		const containerDesktop = qsOptional('#ProductCountDesktop')
 
 		if (containerDesktop) {
 			containerDesktop.innerHTML = count
-			containerDesktop.classList.remove('loading')
+			containerDesktop.removeAttribute(ATTRIBUTES.loading)
 		}
 	}
 

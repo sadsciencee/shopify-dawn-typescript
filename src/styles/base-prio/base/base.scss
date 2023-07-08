@@ -851,18 +851,18 @@ button.shopify-payment-button__button--unbranded {
 	width: 100%;
 }
 
-.button.loading {
+.button[data-uc-loading] {
 	color: transparent;
 	position: relative;
 }
 
 @media screen and (forced-colors: active) {
-	.button.loading {
+	.button[data-uc-loading] {
 		color: rgb(#{$schemaColorForeground});
 	}
 }
 
-.button.loading > .loading-overlay__spinner {
+.button[data-uc-loading] > .loading-overlay__spinner {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -872,11 +872,11 @@ button.shopify-payment-button__button--unbranded {
 	align-items: center;
 }
 
-.button.loading > .loading-overlay__spinner .spinner {
+.button[data-uc-loading] > .loading-overlay__spinner .spinner {
 	width: fit-content;
 }
 
-.button.loading > .loading-overlay__spinner .path {
+.button[data-uc-loading] > .loading-overlay__spinner .path {
 	stroke: rgb(#{$schemaColorButtonText});
 }
 

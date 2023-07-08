@@ -9,6 +9,6 @@ export const PUB_SUB_EVENTS = {
 
 
 export const ATTRIBUTES = {
-  cartEmpty: '[data-uc-cart-empty]',
-  loading: '[data-uc-loading]'
+  cartEmpty: 'data-uc-cart-empty',
+  loading: 'data-uc-loading'
 }

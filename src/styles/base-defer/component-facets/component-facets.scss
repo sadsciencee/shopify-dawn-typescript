@@ -894,7 +894,7 @@ input.mobile-facets__checkbox {
   margin: 0;
 }
 
-.product-count__text.loading {
+.product-count__text[data-uc-loading] {
   visibility: hidden;
 }
 
@@ -908,6 +908,6 @@ input.mobile-facets__checkbox {
   width: #{$ax18};
 }
 
-.product-count__text.loading + .loading-overlay__spinner {
+.product-count__text[data-uc-loading] + .loading-overlay__spinner {
   display: block;
 }

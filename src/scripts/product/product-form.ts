@@ -48,12 +48,10 @@ export class ProductForm extends UcoastEl {
 		this.handleErrorMessage()
 
 		this.submitButton.setAttribute('aria-disabled', 'true')
-		this.submitButton.classList.add('loading')
+		this.submitButton.setAttribute(ATTRIBUTES.loading, '')
 		this.getSpinner().classList.remove('hidden')
 
 		const formData = new FormData(this.form)
-		console.log('this.form', this.form)
-		console.log({ formData: JSON.stringify(formData) })
 		if (this.cart) {
 			const sectionIdsToRender = this.cart
 				.getSectionsToRender()
@@ -123,7 +121,7 @@ export class ProductForm extends UcoastEl {
 				console.error(e)
 			})
 			.finally(() => {
-				this.submitButton.classList.remove('loading')
+				this.submitButton.removeAttribute(ATTRIBUTES.loading)
 				this.cart?.hasAttribute(ATTRIBUTES.cartEmpty) &&
 					this.cart.removeAttribute(ATTRIBUTES.cartEmpty)
 
