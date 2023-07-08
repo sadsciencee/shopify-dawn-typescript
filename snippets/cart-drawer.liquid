@@ -33,7 +33,7 @@
 			{%- if cart == empty -%}
 				<div
 					data-uc-cart-drawer-inner-empty
-					class="drawer__inner-empty flex flex-column overflow-hidden h-100"
+					class="flex flex-column overflow-hidden h-100"
 				>
 					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
 						<div class="cart-drawer__empty-content">
@@ -97,7 +97,7 @@
 					method="post"
 				>
 					<div
-						id="CartDrawer-CartItems"
+						data-uc-cart-drawer-main
 						class="drawer__contents flex flex-column js-contents"
 					>
 						{%- if cart != empty -%}
@@ -177,7 +177,8 @@
 
 													<a
 														href="{{ item.url }}"
-														class="cart-item__name h4 break"
+														class="h4 break"
+														data-uc-cart-item-name
 													>
 														{{- item.product.title | escape -}}
 													</a>
@@ -422,7 +423,7 @@
 																step="{{ item.variant.quantity_rule.increment }}"
 																{% # theme-check-enable %}
 																aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-																id="Drawer-quantity-{{ item.index | plus: 1 }}"
+																id="CartDrawer-Quantity-{{ item.index | plus: 1 }}"
 																data-index="{{ item.index | plus: 1 }}"
 															>
 															<button
@@ -466,7 +467,7 @@
 														role="alert"
 													>
 														<small
-															class="cart-item__error-text"
+															data-uc-cart-item-error-text
 														></small>
 														<svg
 															aria-hidden="true"
@@ -487,17 +488,21 @@
 								</table>
 							</div>
 						{%- endif -%}
-						<p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
 						<p
-							id="CartDrawer-LineItemStatus"
+							data-uc-cart-drawer-live-region-text
+							class="visually-hidden"
+							role="status"
+						></p>
+						<p
 							class="visually-hidden"
 							aria-hidden="true"
 							role="status"
+							data-uc-cart-drawer-status
 						>
 							{{ 'accessibility.loading' | t }}
 						</p>
 					</div>
-					<div id="CartDrawer-CartErrors" role="alert"></div>
+					<div role="alert" data-uc-cart-drawer-errors></div>
 				</form>
 			</cart-drawer-items>
 			<div class="drawer__footer">

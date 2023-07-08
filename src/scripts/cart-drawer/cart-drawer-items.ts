@@ -5,14 +5,13 @@ export class CartDrawerItems extends CartItems {
 	static override selectors = {
 		...CartItems.selectors,
 		element: 'cart-drawer-items',
-		itemLink: '.cart-item__name',
-		lineItemStatus: '#CartDrawer-LineItemStatus',
-		errors: '#CartDrawer-CartErrors',
-		liveRegionText: '#CartDrawer-LiveRegionText',
-		main: '#CartDrawer-CartItems',
+		lineItemStatus: '[data-uc-cart-drawer-status]',
+		errors: '[data-uc-cart-drawer-errors]',
+		liveRegionText: '[data-uc-cart-drawer-live-region-text]',
+		main: '[data-uc-cart-drawer-main]',
 		// the following selectors are partial - they will be concatenated with the line ID
 		line: '#CartDrawer-Item',
-		lineQuantity: '#Drawer-quantity',
+		lineQuantity: '#CartDrawer-Quantity',
 		lineError: '#CartDrawer-LineItemError', // `${CartItems.selectors.cartDrawerLineError}-${line}`
 	}
 	constructor() {

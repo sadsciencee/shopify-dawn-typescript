@@ -26,7 +26,7 @@
   transition: transform var(--duration-default) ease;
 }
 
-.drawer__inner-empty {
+[data-uc-cart-drawer-inner-empty] {
   padding: 0 $ax15;
   background-color: rgb(#{$schemaColorBackground});
 }
@@ -168,14 +168,14 @@ cart-drawer-items {
   }
 }
 
-.cart-drawer .cart-item {
+.cart-drawer [data-uc-cart-item] {
   display: grid;
   grid-template: repeat(2, auto) / repeat(4, 1fr);
   gap: $ax15;
   margin-bottom: 0;
 }
 
-.cart-drawer .cart-item:last-child {
+.cart-drawer [data-uc-cart-item]:last-child {
   margin-bottom: #{$ax10};
 }
 
@@ -211,11 +211,11 @@ cart-drawer-items {
   border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
-.cart-drawer .cart-item:last-child {
+.cart-drawer [data-uc-cart-item]:last-child {
   margin-bottom: $ax15;
 }
 
-.cart-drawer .cart-item .loading-overlay {
+.cart-drawer [data-uc-cart-item] .loading-overlay {
   right: #{$ax5};
   padding-top: #{$ax25};
 }
@@ -224,7 +224,7 @@ cart-drawer-items {
   padding-top: #{$ax20};
 }
 
-.cart-drawer .cart-item > td + td {
+.cart-drawer [data-uc-cart-item] > td + td {
   padding-left: #{$ax10};
 }
 
@@ -260,7 +260,7 @@ cart-drawer-items {
 }
 
 @include media-query($s-down) {
-  .cart-drawer .cart-item cart-remove-button {
+  .cart-drawer [data-uc-cart-item] cart-remove-button {
     margin-left: 0;
   }
 }

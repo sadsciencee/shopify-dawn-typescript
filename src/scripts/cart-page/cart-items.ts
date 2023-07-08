@@ -22,34 +22,36 @@ export class CartItems extends UcoastEl {
 	static htmlSelector = 'cart-items'
 	static selectors = {
 		element: 'cart-items',
-		itemLink: '.cart-item__name',
-		lineItemStatus: '#shopping-cart-line-item-status',
-		errors: '#cart-errors',
-		liveRegionText: '#cart-live-region-text',
-		main: '#main-cart-items',
-		cartDrawerInner: '.drawer__inner',
-		cartDrawerInnerEmpty: '.drawer__inner-empty',
-		item: '.cart-item',
-		itemErrorText: '.cart-item__error-text',
-		footer: '#main-cart-footer',
+		itemLink: '[data-uc-cart-item-name]',
+		lineItemStatus: '[data-uc-cart-page-status]',
+		errors: '[data-uc-cart-page-errors]',
+		liveRegionText: '[data-uc-cart-page-live-region-text]',
+		main: '[data-uc-cart-page-main]',
+		cartDrawerInner: '[data-uc-cart-drawer-inner]',
+		cartDrawerInnerEmpty: '[data-uc-cart-drawer-inner-empty]',
+		item: '[data-uc-cart-item]',
+		itemErrorText: '[data-uc-cart-item-error-text]',
+		footer: '#CartPage-Footer',
 		loadingOverlay: '.loading-overlay',
 		// the following selectors are partial - they will be concatenated with the line ID
-		line: '#CartItem', // `${this.instanceSelectors.line}-${line}`
-		lineQuantity: '#Quantity', // `${this.instanceSelectors.lineQuantity}-${line}`
-		lineError: '#Line-item-error', // `${this.instanceSelectors.lineError}-${line}`
+		line: '#CartPage-Item', // ex: `${this.instanceSelectors.line}-${line}`
+		lineQuantity: '#CartPage-LineItemQuantity', // ex: `${this.instanceSelectors.lineQuantity}-${line}`
+		lineError: '#CartPage-LineItemError', // ex: `${this.instanceSelectors.lineError}-${line}`
 	}
+	// TODO: refactor to global attributes selector
 	static attributes = {
 		disabled: 'data-uc-disabled',
 	}
-	// instance types
+
+	// instance specific property types
 	instanceSelectors = CartItems.selectors
 	lineItemStatusElement: HTMLElement
 	cartUpdateUnsubscriber?: () => void = undefined
+
 	// init
 	constructor() {
 		super()
 		this.setInstanceSelectors()
-		console.log('CartItems instance selectors', this.instanceSelectors)
 		this.lineItemStatusElement = qsRequired(this.instanceSelectors.lineItemStatus)
 
 		const debouncedOnChange = debounce((event: Event) => {
@@ -59,10 +61,12 @@ export class CartItems extends UcoastEl {
 		this.addEventListener('change', debouncedOnChange.bind(this))
 	}
 
+	// have to instantiate selectors here so they can be different for CartDrawerItems
 	setInstanceSelectors() {
 		this.instanceSelectors = CartItems.selectors
 	}
 
+	// from here on is default Dawn CartItems -> typescript
 	override connectedCallback() {
 		this.cartUpdateUnsubscriber = subscribe(
 			PUB_SUB_EVENTS.cartUpdate,
@@ -91,12 +95,10 @@ export class CartItems extends UcoastEl {
 	}
 
 	onCartUpdate() {
-		console.log('onCartUpdate')
 		fetch(`${routes.cart_url}?section_id=main-cart-items`)
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-				console.log('onCartUpdate html', html)
 				// reference CartItems selectors here since this returns then inner HTML I guess
 				const source = qsRequired(CartItems.selectors.element, html.documentElement)
 				this.innerHTML = source.innerHTML
@@ -132,7 +134,6 @@ export class CartItems extends UcoastEl {
 	}
 
 	updateQuantity(line: string, quantity: string, name?: string) {
-		console.log('updateQuantity', line, quantity, name)
 		this.enableLoading(line)
 
 		const body = JSON.stringify({
@@ -148,7 +149,6 @@ export class CartItems extends UcoastEl {
 			})
 			.then((state) => {
 				const parsedState = JSON.parse(state)
-				console.log({ parsedState })
 				const quantityElement = qsRequired<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)

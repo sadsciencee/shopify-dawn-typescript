@@ -1,6 +1,6 @@
 <div
 	class="page-width"
-	id="main-cart-footer"
+	id="CartPage-Footer"
 	{% if cart == empty %}
 		data-uc-cart-empty
 	{% endif %}
@@ -112,7 +112,7 @@
 					{%- endcase -%}
 				{% endfor %}
 
-				<div id="cart-errors"></div>
+				<div data-uc-cart-page-errors></div>
 			</div>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 @import "../../global/variables.scss";
 @import "../../global/functions.scss";
 @include media-query($m-only) {
-  .cart-item cart-remove-button {
+  [data-uc-cart-item] cart-remove-button {
     width: #{$ax45};
     height: #{$ax45};
   }
@@ -11,7 +11,7 @@
     min-width: #{$ax35};
     min-height: #{$ax35};
   }
-  .cart-item .loading-overlay {
+  [data-uc-cart-item] .loading-overlay {
     right: 0;
     padding-top: #{$ax45};
     bottom: auto;
@@ -41,11 +41,11 @@
     padding-top: #{$ax40};
   }
 
-  .cart-item {
+  [data-uc-cart-item] {
     display: table-row;
   }
 
-  .cart-item > td + td {
+  [data-uc-cart-item] > td + td {
     padding-left: #{$ax40};
   }
 
@@ -57,7 +57,7 @@
     width: #{ax(100)};
   }
 
-  .cart-item cart-remove-button {
+  [data-uc-cart-item] cart-remove-button {
     margin: #{$ax5} 0 0 #{$ax15};
   }
 
@@ -66,7 +66,7 @@
   }
 }
 @include media-query($m-up) {
-  .cart-item .cart-item__quantity,
+  [data-uc-cart-item] .cart-item__quantity,
   .cart-items .cart-items__heading--wide {
     padding-left: #{ax(60)};
   }
