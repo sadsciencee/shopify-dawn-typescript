@@ -1,5 +1,5 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
-import { qsRequired } from '@/scripts/functions'
+import { qsRequired } from '@/scripts/core/global'
 import { type uCoastWindow } from '@/scripts/setup';
 
 declare let window: uCoastWindow

@@ -6,7 +6,7 @@ import {
 	qsOptional,
 	qsRequired,
 	targetRequired,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 import { type uCoastWindow } from '@/scripts/setup'
 
 declare let window: uCoastWindow

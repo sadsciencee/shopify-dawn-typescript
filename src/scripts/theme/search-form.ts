@@ -1,4 +1,4 @@
-import { debounce, qsRequired } from '@/scripts/functions'
+import { debounce, qsRequired } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class SearchForm extends UcoastEl {
@@ -51,5 +51,3 @@ export class SearchForm extends UcoastEl {
 		}
 	}
 }
-
-customElements.define('search-form', SearchForm)

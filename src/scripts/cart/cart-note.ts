@@ -1,6 +1,6 @@
-import { ON_CHANGE_DEBOUNCE_TIMER } from '@/scripts/theme/constants'
+import { ON_CHANGE_DEBOUNCE_TIMER } from '@/scripts/core/global'
 import { routes } from '@/scripts/setup'
-import { debounce, fetchConfig, qsRequired, targetRequired } from '@/scripts/functions';
+import { debounce, fetchConfig, qsRequired, targetRequired } from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class CartNote extends UcoastEl {

@@ -5,16 +5,16 @@ import {
 	qsOptional,
 	qsRequired,
 	replaceAll,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
 import { type uCoastWindow } from '@/scripts/setup'
-import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
 import { type ProductModal } from '@/scripts/product/product-modal'
-import { type VariantSelects } from '@/scripts/theme/variant-selects'
-import { type VariantRadios } from '@/scripts/theme/variant-radios'
+import { type VariantSelects } from '@/scripts/product/variant-selects'
+import { type VariantRadios } from '@/scripts/product/variant-radios'
 import { type ProductInfo } from '@/scripts/product/product-info'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 declare let window: uCoastWindow
 

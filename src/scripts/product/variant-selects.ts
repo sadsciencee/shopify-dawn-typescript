@@ -1,12 +1,12 @@
-import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { createVariantChangeEvent, publish } from '@/scripts/theme/pubsub'
+import { PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { createVariantChangeEvent, publish } from '@/scripts/core/global'
 import {
 	getAttributeOrThrow,
 	qsaOptional,
 	qsaRequired,
 	qsOptional,
 	qsRequired,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 import { type ProductVariant } from '@/scripts/types/api'
 import { type uCoastWindow } from '@/scripts/setup'
 import { type ProductForm } from '@/scripts/product/product-form'

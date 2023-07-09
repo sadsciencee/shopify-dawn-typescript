@@ -39,6 +39,7 @@
 		{% style %}
 			{% render 'critical-css' %}
 		{% endstyle %}
+		{% render 'ucoast', ucoast: '_critical.ts' %}
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-prio', preload_stylesheet: true %}
 
@@ -100,7 +101,6 @@
 				document.documentElement.classList.add('shopify-design-mode')
 			}
 		</script>
-		{% render 'ucoast', ucoast: 'js-function-global-setup.ts' %}
 	</head>
 
 	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

@@ -4,8 +4,8 @@ import {
 	qsRequired,
 	targetClosestOptional,
 	targetRequired,
-} from '@/scripts/functions'
-import { removeTrapFocus, trapFocus } from '@/scripts/global'
+} from '@/scripts/core/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class DetailsModal extends UcoastEl {
@@ -76,5 +76,3 @@ export class DetailsModal extends UcoastEl {
 		document.body.classList.remove('overflow-hidden')
 	}
 }
-
-customElements.define('details-modal', DetailsModal)

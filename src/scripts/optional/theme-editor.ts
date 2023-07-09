@@ -1,7 +1,7 @@
-import { closestOptional, qsaOptional, targetRequired } from '@/scripts/functions'
+import { closestOptional, qsaOptional, targetRequired } from '@/scripts/core/global'
 import { type ProductModal } from '@/scripts/product/product-modal'
 import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
-import { mediaLoader } from '@/scripts/mediaLoader';
+import { mediaLoader } from '@/scripts/core/global';
 export function initializeThemeEditor() {
 	function hideProductModal() {
 		const productModal = qsaOptional<ProductModal>('product-modal[open]')

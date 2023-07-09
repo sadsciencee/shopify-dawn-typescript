@@ -1,6 +1,6 @@
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 import { ModelViewerUIReference, uCoastWindow } from '@/scripts/setup'
-import { qsaOptional, qsRequired } from '@/scripts/functions'
+import { qsaOptional, qsRequired } from '@/scripts/core/global'
 
 declare let window: uCoastWindow
 

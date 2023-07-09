@@ -1,6 +1,6 @@
-import { closestOptional, closestRequired, getAttributeOrThrow } from '@/scripts/functions'
-import { type CartItems } from '@/scripts/cart-page/cart-items'
-import { type CartDrawerItems } from '@/scripts/cart-drawer/cart-drawer-items'
+import { closestOptional, closestRequired, getAttributeOrThrow } from '@/scripts/core/global'
+import { type CartItems } from '@/scripts/cart/cart-items'
+import { type CartDrawerItems } from '@/scripts/cart/cart-drawer-items'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class CartRemoveButton extends UcoastEl {

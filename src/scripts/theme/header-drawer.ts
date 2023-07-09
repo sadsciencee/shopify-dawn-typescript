@@ -1,7 +1,7 @@
 import { MenuDrawer } from '@/scripts/theme/menu-drawer'
-import { qsRequired } from '@/scripts/functions'
-import { trapFocus } from '@/scripts/global'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants'
+import { qsRequired } from '@/scripts/core/global'
+import { trapFocus } from '@/scripts/core/global'
+import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global'
 
 export class HeaderDrawer extends MenuDrawer {
 	static override htmlSelector = 'header-drawer'

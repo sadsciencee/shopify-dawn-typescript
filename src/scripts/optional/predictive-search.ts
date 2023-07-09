@@ -1,7 +1,7 @@
 import { SearchForm } from '@/scripts/theme/search-form'
-import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions';
+import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/core/global';
 import { routes } from '@/scripts/setup'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 export class PredictiveSearch extends SearchForm {
 	static override htmlSelector = 'predictive-search'

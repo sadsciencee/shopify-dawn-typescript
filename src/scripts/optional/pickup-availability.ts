@@ -1,4 +1,4 @@
-import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/functions'
+import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/core/global'
 import { type PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 

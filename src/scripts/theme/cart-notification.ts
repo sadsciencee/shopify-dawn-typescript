@@ -2,13 +2,13 @@ import {
   closestOptional,
   qsRequired, targetClosestOptional,
   targetRequired
-} from '@/scripts/functions';
+} from '@/scripts/core/global';
 import { type StickyHeader } from '@/scripts/theme/sticky-header';
-import { removeTrapFocus, trapFocus } from '@/scripts/global';
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global';
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
 import { type SectionApiResponse } from '@/scripts/types/responses';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-import { SELECTORS } from '@/scripts/theme/constants';
+import { SELECTORS } from '@/scripts/core/global';
 
 export class CartNotification extends UcoastEl {
   static htmlSelector = 'cart-notification';
@@ -110,5 +110,3 @@ export class CartNotification extends UcoastEl {
     this.activeElement = element;
   }
 }
-
-customElements.define('cart-notification', CartNotification);

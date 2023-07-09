@@ -1,7 +1,6 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { qsaOptional, qsaRequired } from '@/scripts/functions'
-import { uCoastWindow } from '@/scripts/setup'
-import { UcoastVideo } from '@/scripts/core/ucoast-video'
+import { isVideoComponent, qsaOptional, qsaRequired } from '@/scripts/core/global'
+import { type uCoastWindow } from '@/scripts/setup'
 declare let window: uCoastWindow
 export class HlsLoader extends UcoastEl {
 	static htmlSelector = 'hls-loader'
@@ -20,15 +19,15 @@ export class HlsLoader extends UcoastEl {
 		super.connectedCallback()
 		if (!this.videos) return
 		const video = this.videos[0]
-		if (!(video instanceof UcoastVideo)) return
-
-		if (
-			!video.videoEl.canPlayType('application/vnd.apple.mpegurl') &&
-			video.hasHls &&
-			!video.hlsReady &&
-			video.hlsSource
-		) {
-			void this.loadHlsScript()
+		if (isVideoComponent(video)) {
+			if (
+				!video.videoEl.canPlayType('application/vnd.apple.mpegurl') &&
+				video.hasHls &&
+				!video.hlsReady &&
+				video.hlsSource
+			) {
+				void this.loadHlsScript()
+			}
 		}
 	}
 	async loadHlsScript() {

@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/functions';
+import { safeDefineElement } from '@/scripts/core/global';
 import { LocalizationForm } from '@/scripts/optional/localization-form';
 
 safeDefineElement(LocalizationForm)

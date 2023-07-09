@@ -1,5 +1,5 @@
-import { qsRequired, targetRequired } from '@/scripts/functions'
-import { removeTrapFocus, trapFocus } from '@/scripts/global'
+import { qsRequired, targetRequired } from '@/scripts/core/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class PickupAvailabilityDrawer extends UcoastEl {

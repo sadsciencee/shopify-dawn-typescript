@@ -1,7 +1,7 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
-import { qsRequired, scaleValue } from '@/scripts/functions';
+import { qsRequired, scaleValue } from '@/scripts/core/global';
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
-import { SELECTORS } from '@/scripts/theme/constants';
+import { SELECTORS } from '@/scripts/core/global';
 
 export class HeaderMenu extends DetailsDisclosure {
   static override htmlSelector = 'header-menu'
