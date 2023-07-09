@@ -11,15 +11,23 @@ import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class MenuDrawer extends UcoastEl {
 	static htmlSelector = 'menu-drawer'
+	static selectors = {
+
+	}
+	instanceSelectors = MenuDrawer.selectors
 	mainDetailsToggle: HTMLDetailsElement
 	constructor() {
 		super()
-
+		this.getInstanceSelectors();
 		this.mainDetailsToggle = qsRequired('details', this)
 
 		this.addEventListener('keyup', this.onKeyUp.bind(this))
 		this.addEventListener('focusout', this.onFocusOut.bind(this))
 		this.bindEvents()
+	}
+
+	getInstanceSelectors() {
+		this.instanceSelectors = MenuDrawer.selectors
 	}
 
 	bindEvents() {

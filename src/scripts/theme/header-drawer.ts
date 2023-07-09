@@ -4,10 +4,18 @@ import { trapFocus } from '@/scripts/global';
 
 export class HeaderDrawer extends MenuDrawer {
   static override htmlSelector = 'header-drawer'
+  static override selectors = {
+    ...MenuDrawer.selectors,
+
+  }
   header?: HTMLElement
   borderOffset?: number
   constructor() {
     super();
+  }
+
+  override getInstanceSelectors() {
+    this.instanceSelectors = HeaderDrawer.selectors
   }
 
   setHeader() {

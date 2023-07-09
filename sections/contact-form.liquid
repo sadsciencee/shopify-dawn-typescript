@@ -9,7 +9,7 @@
 <div class="color-{{ section.settings.color_scheme }} gradient {{ spacing }}">
 	<div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
 		{%- if section.settings.heading != blank -%}
-			<h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			<h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}">
 				{{ section.settings.heading }}
 			</h2>
 		{%- else -%}
@@ -18,8 +18,12 @@
 		{%- liquid
 			assign contact_form_class = 'isolate'
 			if settings.animations_reveal_on_scroll
-				assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+
 			endif
+			capture contact_form_class
+				echo 'isolate'
+				render 'ucoast-animate', animation: 'slide-in'
+			endcapture
 		-%}
 		{%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
 			{%- if form.posted_successfully? -%}

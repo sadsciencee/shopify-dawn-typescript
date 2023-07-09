@@ -5,10 +5,10 @@
 -%}
 
 <div class="page-width page-width--narrow {{ spacing }}">
-	<h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+	<h1 class="main-page-title page-title h0{% render 'ucoast-animate', animation: 'fade-in' %}">
 		{{ page.title | escape }}
 	</h1>
-	<div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+	<div class="rte{% render 'ucoast-animate', animation: 'slide-in' %}">
 		{{ page.content }}
 	</div>
 </div>

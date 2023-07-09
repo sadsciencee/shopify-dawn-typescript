@@ -46,7 +46,7 @@
 				>
 					<div
 						id="GalleryViewer-{{ section.id }}"
-						class="product__media-list{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+						class="product__media-list{% render 'ucoast-animate', animation: 'fade-in' %}"
 					>
 						{%- if section.settings.product != blank -%}
 							{%- if current_variant.featured_media != null -%}
@@ -124,7 +124,7 @@
 					{%- endif -%}
 				</media-gallery>
 			</div>
-			<div class="product__info-wrapper grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			<div class="product__info-wrapper grid__item{% render 'ucoast-animate', animation: 'slide-in' %}">
 				<product-info
 					id="ProductInfo-{{ section.id }}"
 					class="product__info-container"
@@ -302,7 +302,7 @@
 						>
 							<div
 								id="GalleryViewer-{{ section.id }}-right"
-								class="product__media-list{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+								class="product__media-list{% render 'ucoast-animate', animation: 'fade-in' %}"
 							>
 								{%- if current_variant.featured_media != null -%}
 									{%- assign media = current_variant.featured_media -%}

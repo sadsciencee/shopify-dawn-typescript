@@ -47,7 +47,7 @@
 
 {% paginate search.results by 24 %}
 	<div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} {{ spacing }}">
-		<div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+		<div class="template-search__header page-width{% render 'ucoast-animate', animation: 'fade-in' %}">
 			<h1 class="h2 center">
 				{%- if search.performed -%}
 					{{- 'templates.search.title' | t -}}
@@ -281,7 +281,7 @@
 									{%- endif -%}
 
 									<li
-										class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+										class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %}"
 										{% if settings.animations_reveal_on_scroll %}
 											data-cascade
 										{% endif %}

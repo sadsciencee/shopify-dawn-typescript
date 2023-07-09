@@ -12,7 +12,7 @@
 					{% render block %}
 				{%- when 'heading' -%}
 					<h2
-						class="inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+						class="inline-richtext {{ block.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}"
 						{{ block.shopify_attributes }}
 						{% if settings.animations_reveal_on_scroll %}
 							data-cascade
@@ -23,7 +23,7 @@
 					</h2>
 				{%- when 'paragraph' -%}
 					<div
-						class="newsletter__subheading mx-auto rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+						class="newsletter__subheading mx-auto rte{% render 'ucoast-animate', animation: 'slide-in' %}"
 						{{ block.shopify_attributes }}
 						{% if settings.animations_reveal_on_scroll %}
 							data-cascade
@@ -37,7 +37,7 @@
 						{% form 'customer', class: 'newsletter-form' %}
 							<input type="hidden" name="contact[tags]" value="newsletter">
 							<div
-								class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="newsletter-form__field-wrapper{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade
 									style="--animation-order: {{ forloop.index }};"
