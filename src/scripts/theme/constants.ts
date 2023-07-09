@@ -20,5 +20,6 @@ export const SELECTORS = {
 	cartLink: '[data-uc-cart-icon-bubble]',
 	loadingOverlay: '[data-uc-loading-overlay]',
 	loadingOverlaySpinner: '[data-uc-loading-overlay-spinner]',
-	sectionHeader: '.section-header'
+	sectionHeader: '.section-header',
+	headerWrapper: '[data-uc-header-wrapper]',
 }

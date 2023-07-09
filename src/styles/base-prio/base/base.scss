@@ -1803,13 +1803,13 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 }
 
 /* Main Header Layout */
-.header-wrapper {
+[data-uc-header-wrapper] {
 	display: block;
 	position: relative;
 	background-color: rgb(#{$schemaColorBackground});
 }
 
-.header-wrapper--border-bottom {
+[data-uc-header-wrapper="border-bottom"] {
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 

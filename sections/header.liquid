@@ -93,8 +93,6 @@
 	}
 {%- endstyle -%}
 
-
-
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
 	<symbol id="icon-search" viewbox="0 0 18 19" fill="none">
 	    <path fill-rule="evenodd" clip-rule="evenodd"
@@ -310,14 +308,24 @@
 {% if section.settings.sticky_header_type != 'none' %}
 	<sticky-header
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+		class="color-{{ section.settings.color_scheme }} gradient"
+		{% if section.settings.show_line_separator %}
+			data-uc-header-wrapper="border-bottom"
+		{% else %}
+			data-uc-header-wrapper="border-none"
+		{% endif %}
 	>
 		{{ header_contents }}
 	</sticky-header>
 {% else %}
 	<div
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+		class="color-{{ section.settings.color_scheme }} gradient"
+		{% if section.settings.show_line_separator %}
+			data-uc-header-wrapper="border-bottom"
+		{% else %}
+			data-uc-header-wrapper="border-none"
+		{% endif %}
 	>
 		{{ header_contents }}
 	</div>

@@ -1,7 +1,7 @@
 @import '../../global/variables.scss';
 @import '../../global/functions.scss';
 @include media-query($s-up) {
-	.header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
+	[data-uc-header-wrapper="border-none"] + cart-notification .cart-notification {
 		border-top-width: #{$popupBorderWidth};
 	}
 

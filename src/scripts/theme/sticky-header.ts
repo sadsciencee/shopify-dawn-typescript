@@ -1,4 +1,4 @@
-import { qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
+import { qsaOptional, qsOptional, qsRequired, scaleValue } from '@/scripts/functions';
 import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
 import { type DetailsModal } from '@/scripts/theme/details-modal'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
@@ -56,9 +56,10 @@ export class StickyHeader extends UcoastEl {
 
 	setHeaderHeight() {
 		if (!this.header) throw new Error('no header element found')
+		const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
 		document.documentElement.style.setProperty(
 			'--header-height',
-			`${this.header.offsetHeight}px`
+			`calc(${scaleValue(this.header.offsetHeight, viewport)} * var(--ax))`
 		)
 	}
 

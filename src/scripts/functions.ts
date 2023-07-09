@@ -388,7 +388,7 @@ export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
 // this sets all relevant height variables for the app
 
 export const setHeightVars = (header: HTMLElement, announcement: HTMLElement | undefined) => {
-	const viewport = window.innerWidth >= 990 ? 'desktop' : 'mobile'
+	const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
 	const viewportHeight =
 		viewport === 'desktop'
 			? '100vh'

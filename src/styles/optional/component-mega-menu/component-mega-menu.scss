@@ -19,7 +19,7 @@
   max-height: calc(100vh - var(--header-bottom-position-desktop) - #{$ax40});
 }
 
-.header-wrapper--border-bottom .mega-menu__content {
+[data-uc-header-wrapper="border-bottom"] .mega-menu__content {
   border-top: 0;
 }
 

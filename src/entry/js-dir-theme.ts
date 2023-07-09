@@ -1,10 +1,6 @@
 import { safeDefineElement } from '@/scripts/functions'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
-
-
-
-
 import { ShowMoreButton } from '@/scripts/theme/show-more-button'
 import { SliderComponent } from '@/scripts/theme/slider-component'
 import { SlideshowComponent } from '@/scripts/theme/slideshow-component'
