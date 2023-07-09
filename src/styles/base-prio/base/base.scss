@@ -986,30 +986,30 @@ details[open] > .share-button__fallback {
 	transform: scale(1.07);
 }
 
-.share-button__close:not(.hidden) + .share-button__copy {
+[data-uc-share-button-close]:not(.hidden) + [data-uc-share-button-copy] {
 	display: none;
 }
 
-.share-button__close,
-.share-button__copy {
+[data-uc-share-button-close],
+[data-uc-share-button-copy] {
 	background-color: transparent;
 	color: rgb(#{$schemaColorForeground});
 }
 
-.share-button__copy:focus-visible,
-.share-button__close:focus-visible {
+[data-uc-share-button-copy]:focus-visible,
+[data-uc-share-button-close]:focus-visible {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
-.share-button__copy:focus,
-.share-button__close:focus {
+[data-uc-share-button-copy]:focus,
+[data-uc-share-button-close]:focus {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
-.field:not(:focus-visible):not(.focused) + .share-button__copy:not(:focus-visible):not(.focused),
-.field:not(:focus-visible):not(.focused) + .share-button__close:not(:focus-visible):not(.focused) {
+.field:not(:focus-visible):not(.focused) + [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
+.field:not(:focus-visible):not(.focused) + [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
 	background-color: inherit;
 }
 
@@ -1052,7 +1052,7 @@ details[open] > .share-button__fallback {
 	height: #{$ax15};
 }
 
-.share-button__message:not(:empty) {
+[data-uc-share-message]:not(:empty) {
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -1062,7 +1062,7 @@ details[open] > .share-button__fallback {
 	margin: #{$inputsBorderWidth};
 }
 
-.share-button__message:not(:empty):not(.hidden) ~ * {
+[data-uc-share-message]:not(:empty):not(.hidden) ~ * {
 	display: none;
 }
 
