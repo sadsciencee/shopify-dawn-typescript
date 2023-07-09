@@ -1,9 +1,9 @@
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { SectionApiResponse } from '@/scripts/types/responses'
-import { currentTargetRequired, onKeyUpEscape, qsOptional, qsRequired } from '@/scripts/functions'
-import { removeTrapFocus, trapFocus } from '@/scripts/global'
+import { currentTargetRequired, onKeyUpEscape, qsOptional, qsRequired } from '@/scripts/core/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 export class CartDrawer extends UcoastEl {
 	static htmlSelector = 'cart-drawer'

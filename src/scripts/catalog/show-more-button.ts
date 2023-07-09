@@ -2,7 +2,7 @@ import {
 	getAttributeOrThrow, qsaOptional,
 	qsOptional,
 	qsRequired,
-} from '@/scripts/functions';
+} from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class ShowMoreButton extends UcoastEl {

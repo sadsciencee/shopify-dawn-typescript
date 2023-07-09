@@ -4,7 +4,7 @@ import {
 	getAttributeOrThrow,
 	qsaRequired,
 	qsRequired,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 
 export class PriceRange extends UcoastEl {
 	static htmlSelector = 'price-range'

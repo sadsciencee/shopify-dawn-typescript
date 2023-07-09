@@ -1,4 +1,4 @@
-import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/functions';
+import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/core/global';
 import { type EventWithRelatedTarget } from '@/scripts/types/theme';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

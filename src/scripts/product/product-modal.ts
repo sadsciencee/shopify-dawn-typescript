@@ -1,5 +1,5 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import { qsOptional, qsRequired } from '@/scripts/functions'
+import { qsOptional, qsRequired } from '@/scripts/core/global'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 
 export class ProductModal extends ModalDialog {

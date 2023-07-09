@@ -1,6 +1,6 @@
-import { getAttributeOrThrow, qsOptional } from '@/scripts/functions';
+import { getAttributeOrThrow, qsOptional } from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-import { mediaLoader } from '@/scripts/mediaLoader';
+import { mediaLoader } from '@/scripts/core/global';
 
 export class ProductRecommendations extends UcoastEl {
   static htmlSelector = 'product-recommendations';

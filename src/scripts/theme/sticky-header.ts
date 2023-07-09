@@ -1,9 +1,9 @@
-import { qsaOptional, qsOptional, qsRequired, scaleValue } from '@/scripts/functions';
+import { qsaOptional, qsOptional, qsRequired, scaleValue } from '@/scripts/core/global';
 import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
 import { type DetailsModal } from '@/scripts/theme/details-modal'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { SELECTORS } from '@/scripts/theme/constants';
+import { SELECTORS } from '@/scripts/core/global';
 
 export class StickyHeader extends UcoastEl {
 	static htmlSelector = 'sticky-header'

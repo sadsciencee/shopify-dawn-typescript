@@ -1,4 +1,4 @@
-import { getAttributeOrThrow, qsRequired } from '@/scripts/functions';
+import { getAttributeOrThrow, qsRequired } from '@/scripts/core/global';
 
 export interface ShopifyPostLinkOptions extends RequestInit {
 	parameters?: Record<string, string>

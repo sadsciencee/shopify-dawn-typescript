@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/functions'
+import { safeDefineElement } from '@/scripts/core/global'
 
 import { FacetFiltersForm, beforeFacetFiltersForm, afterFacetFiltersForm } from '@/scripts/catalog/facet-filters-form'
 import { PriceRange } from '@/scripts/catalog/price-range'

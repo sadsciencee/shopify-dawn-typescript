@@ -1,11 +1,11 @@
-import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { PUB_SUB_EVENTS } from '@/scripts/core/global'
 import {
 	isCartErrorEvent,
 	isCartUpdateEvent,
 	isVariantChangeEvent,
 	subscribe,
-} from '@/scripts/theme/pubsub'
-import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
+} from '@/scripts/core/global'
+import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/core/global';
 import { type uCoastWindow } from '@/scripts/setup'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

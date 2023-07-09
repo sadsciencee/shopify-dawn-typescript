@@ -1,9 +1,9 @@
-import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/theme/constants';
-import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/functions'
+import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global';
+import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/core/global'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
-import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { routes, type uCoastWindow } from '@/scripts/setup'
-import { publish } from '@/scripts/theme/pubsub'
+import { publish } from '@/scripts/core/global'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
