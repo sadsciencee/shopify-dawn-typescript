@@ -19,12 +19,21 @@ declare let window: uCoastWindow
 
 export class VariantSelects extends UcoastEl {
 	static htmlSelector = 'variant-selects'
+	static selectors = {
+
+	}
+	instanceSelectors = VariantSelects.selectors
 	currentVariant?: ProductVariant
 	options?: string[]
 	variantData?: ProductVariant[]
 	constructor() {
 		super()
+		this.setInstanceSelectors()
 		this.addEventListener('change', this.onVariantChange)
+	}
+
+	setInstanceSelectors() {
+		this.instanceSelectors = VariantSelects.selectors
 	}
 
 	onVariantChange() {
