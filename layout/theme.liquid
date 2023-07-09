@@ -113,6 +113,8 @@
 			{{ content_for_layout }}
 		</main>
 
+		{% sections 'footer-group' %}
+
 		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
 		{%- if settings.animations_reveal_on_scroll -%}
 			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
@@ -155,7 +157,7 @@
 			{% endif %}
 		{% endcomment %}
 
-		{% sections 'footer-group' %}
+
 
 		{%- if settings.cart_type == 'drawer' -%}
 			{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}
