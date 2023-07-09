@@ -12,53 +12,30 @@
 	{% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, filter_type: 'vertical', paginate: paginate %}
 {% endcomment %}
 
-{%- liquid
-	assign sort_by = results.sort_by | default: results.default_sort_by
-	assign total_active_values = 0
-	if results.url
-		assign results_url = results.url
-	else
-		assign terms = results.terms | escape
-		assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
-	endif
-
-	assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
-	assign uses_comma_decimals = false
-	if currencies_using_comma_decimals contains cart.currency.iso_code
-		assign uses_comma_decimals = true
-	endif
--%}
-{% liquid
-
-%}
-
 <div class="facets-container{% if filter_type == 'drawer' %} facets-container-drawer{% endif %}{% render 'ucoast-animate', animation: 'fade-in' %}">
-	{%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
-		{% render 'facets-desktop',
-			filter_type: filter_type,
-			results: results,
-			enable_filtering: enable_filtering,
-			results_url: results_url,
-			uses_comma_decimals: uses_comma_decimals,
-			sort_by: sort_by
-		%}
-	{%- endif -%}
-	{% render 'facets-drawer',
-		filter_type: filter_type,
-		results: results,
-		enable_filtering: enable_filtering,
-		results_url: results_url,
-		uses_comma_decimals: uses_comma_decimals,
-		sort_by: sort_by
+	{% liquid
+        assign sort_by = results.sort_by | default: results.default_sort_by
+        assign total_active_values = 0
+        if results.url
+            assign results_url = results.url
+        else
+            assign terms = results.terms | escape
+            assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+        endif
+
+        assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+        assign uses_comma_decimals = false
+        if currencies_using_comma_decimals contains cart.currency.iso_code
+            assign uses_comma_decimals = true
+        endif
+
+		if filter_type == 'vertical' or filter_type == 'horizontal'
+			render 'facets-desktop', filter_type: filter_type, results: results, enable_filtering: enable_filtering,results_url: results_url, uses_comma_decimals: uses_comma_decimals, sort_by: sort_by
+		endif
+		render 'facets-drawer', filter_type: filter_type, results: results, enable_filtering: enable_filtering,results_url: results_url, uses_comma_decimals: uses_comma_decimals, sort_by: sort_by
+
+		if filter_type == 'drawer'
+			render 'facets-drawer-only', filter_type: filter_type, results: results, enable_filtering: enable_filtering,results_url: results_url, uses_comma_decimals: uses_comma_decimals, sort_by: sort_by
+		endif
 	%}
-	{%- if filter_type == 'drawer' -%}
-		{% render 'facets-drawer-only',
-			filter_type: filter_type,
-			results: results,
-			enable_filtering: enable_filtering,
-			results_url: results_url,
-			uses_comma_decimals: uses_comma_decimals,
-			sort_by: sort_by
-		%}
-	{%- endif -%}
 </div>

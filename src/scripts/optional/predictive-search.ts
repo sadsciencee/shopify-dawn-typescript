@@ -1,7 +1,7 @@
 import { SearchForm } from '@/scripts/theme/search-form'
 import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/functions';
 import { routes } from '@/scripts/setup'
-import { ATTRIBUTES } from '@/scripts/theme/constants';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
 
 export class PredictiveSearch extends SearchForm {
 	static override htmlSelector = 'predictive-search'
@@ -286,7 +286,7 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	getResultsMaxHeight() {
-		const header = qsRequired('.section-header')
+		const header = qsRequired(SELECTORS.sectionHeader)
 		this.resultsMaxHeight = window.innerHeight - header.getBoundingClientRect().bottom
 		return this.resultsMaxHeight
 	}

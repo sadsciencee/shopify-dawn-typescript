@@ -1786,7 +1786,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	top: calc(-1 * var(--header-height));
 }
 
-.shopify-section-header-hidden.menu-open {
+.shopify-section-header-hidden[data-uc-header-menu-open] {
 	top: 0;
 }
 
@@ -2070,11 +2070,11 @@ details[open] > .header__icon--menu .icon-hamburger {
 	transform: scale(0.8);
 }
 
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-close {
+.js details[open]:not([data-uc-menu-opening]) > .header__icon--menu .icon-close {
 	visibility: hidden;
 }
 
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-hamburger {
+.js details[open]:not([data-uc-menu-opening]) > .header__icon--menu .icon-hamburger {
 	visibility: visible;
 	opacity: 1;
 	transform: scale(1.07);

@@ -1,6 +1,7 @@
 import { MenuDrawer } from '@/scripts/theme/menu-drawer';
 import { closestOptional, qsRequired } from '@/scripts/functions';
 import { trapFocus } from '@/scripts/global';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
 
 export class HeaderDrawer extends MenuDrawer {
   static override htmlSelector = 'header-drawer'
@@ -19,7 +20,7 @@ export class HeaderDrawer extends MenuDrawer {
   }
 
   setHeader() {
-    return this.header || qsRequired('.section-header')
+    return this.header || qsRequired(SELECTORS.sectionHeader)
   }
 
   setBorderOffset() {
@@ -33,15 +34,15 @@ export class HeaderDrawer extends MenuDrawer {
       '--header-bottom-position',
       `${Math.round(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
     );
-    this.header.classList.add('menu-open');
+    this.header.setAttribute('data-uc-header-menu-open', '')
 
     setTimeout(() => {
-      this.mainDetailsToggle.classList.add('menu-opening');
+      this.mainDetails.setAttribute(ATTRIBUTES.menuOpening,'');
     });
 
     summaryElement.setAttribute('aria-expanded', 'true');
     window.addEventListener('resize', this.onResize);
-    trapFocus(this.mainDetailsToggle, summaryElement);
+    trapFocus(this.mainDetails, summaryElement);
     document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 
@@ -49,7 +50,7 @@ export class HeaderDrawer extends MenuDrawer {
     if (!elementToFocus) return;
     this.header = this.setHeader()
     super.closeMenuDrawer(event, elementToFocus);
-    this.header.classList.remove('menu-open');
+    this.header.removeAttribute('data-uc-header-menu-open')
     window.removeEventListener('resize', this.onResize);
   }
 

@@ -10,7 +10,7 @@ import {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { ProductModel } from '@/scripts/optional/product-model'
-import { ATTRIBUTES } from '@/scripts/theme/constants';
+import { ATTRIBUTES } from '@/scripts/theme/constants'
 
 // local types
 
@@ -433,14 +433,13 @@ export function initializeSummaryA11y() {
 		if (nextElementSibling && nextElementSibling.hasAttribute('id')) {
 			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
 		}
-
 		summary.addEventListener('click', (event) => {
 			const currentTarget = currentTargetRequired(event)
 			const closestTarget = targetClosestRequired(event, 'details')
 			currentTarget.setAttribute('aria-expanded', `${!closestTarget.hasAttribute('open')}`)
 		})
-
 		if (summary.closest('header-drawer, menu-drawer')) return
+
 		const parentElement =
 			summary.parentElement instanceof HTMLElement ? summary.parentElement : undefined
 		if (!parentElement) return
@@ -587,7 +586,7 @@ type AddToCartFormValues = {
 
 export function addToCartConfig(body: FormData) {
 	const definedQuantity = getOrUndefined(body, 'quantity')
-	console.log({definedQuantity})
+	console.log({ definedQuantity })
 	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
@@ -680,11 +679,11 @@ export function trackRecentlyViewedProducts() {
 }
 
 export function parseFormData(formData: FormData) {
-	const formDataObj: Record<string, string> = {};
-	formData.forEach((value, key:string) => {
-		formDataObj[key] = value.toString();
-	});
-	return formDataObj;
+	const formDataObj: Record<string, string> = {}
+	formData.forEach((value, key: string) => {
+		formDataObj[key] = value.toString()
+	})
+	return formDataObj
 }
 
 // used in critical.js
@@ -699,7 +698,7 @@ export function disableDesktopCSS() {
 		link.setAttribute('data-href', href)
 	})
 	if (window.innerWidth < 750) {
-		const sUp = qsaOptional('link[href*=".s-up"]');
+		const sUp = qsaOptional('link[href*=".s-up"]')
 		sUp?.forEach((link) => {
 			const href = link.getAttribute('href')
 			if (!href || href.includes('::')) return
@@ -708,7 +707,4 @@ export function disableDesktopCSS() {
 		})
 		return
 	}
-
-
-
 }

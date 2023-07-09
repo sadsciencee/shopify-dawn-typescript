@@ -18,7 +18,7 @@
 		{% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
 		{%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
 			<facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
-				<form class="facets-vertical-form" id="FacetSortForm">
+				<form class="facets-vertical-form" data-uc-facet-form="sort">
 					<div class="facet-filters sorting caption">
 						<div class="facet-filters__field">
 							<h2 class="facet-filters__label caption-large text-body">
@@ -132,6 +132,7 @@
 						class="collection collection--empty page-width"
 						id="product-grid"
 						data-id="{{ section.id }}"
+						data-uc-product-grid-collection
 					>
 						<div class="gradient" data-uc-loading-overlay></div>
 						<div class="title-wrapper center">
@@ -146,7 +147,10 @@
 						</div>
 					</div>
 				{%- else -%}
-					<div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
+					<div
+						class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+						data-uc-product-grid-collection
+					>
 						<div class="gradient" data-uc-loading-overlay></div>
 
 						<ul

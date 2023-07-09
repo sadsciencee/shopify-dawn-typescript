@@ -1,6 +1,6 @@
 <facet-filters-form class="facets small-hide">
 	<form
-		id="FacetFiltersForm"
+		data-uc-facet-form="desktop"
 		class="{% if filter_type == 'horizontal' %}facets__form{% else %}facets__form-vertical{% endif %}"
 	>
 		{%- if results.terms -%}
@@ -11,7 +11,7 @@
 		{% if enable_filtering %}
 			{% comment %} Heading is the first tabbable element on filter type horizontal {% endcomment %}
 			<div
-				id="FacetsWrapperDesktop"
+				data-uc-facet-wrapper-desktop
 				{% if filter_type == 'horizontal' %}
 					class="facets__wrapper"
 				{% endif %}
@@ -27,7 +27,7 @@
 				{%- endif -%}
 				{% comment %} Pills are right below the title for filter type vertical {% endcomment %}
 				{%- if filter_type == 'vertical' -%}
-					<div class="active-facets active-facets-desktop">
+					<div class="active-facets" data-uc-facets-active="desktop">
 						<div class="active-facets-vertical-filter">
 							{%- unless results.filters == empty -%}
 								<h2
@@ -107,7 +107,8 @@
 						{% when 'boolean', 'list' %}
 							<details
 								id="Details-{{ forloop.index }}-{{ section.id }}"
-								class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
+								class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %}"
+								data-uc-js-filter
 								data-index="{{ forloop.index }}"
 								{% if filter_type == 'vertical' and forloop.index == 1 %}
 									open
@@ -115,13 +116,17 @@
 							>
 								<summary
 									class="facets__summary caption-large focus-offset"
+									data-uc-facet-summary
 									aria-label="{{ filter.label }} ({{ 'products.facets.filters_selected.one' | t: count: filter.active_values.size }})"
 								>
 									<div>
 										<span>
 											{{- filter.label | escape }}
 											{%- if filter_type == 'vertical' -%}
-												<span class="facets__selected no-js-hidden{% if filter.active_values.size == 0 %} hidden{% endif %}">
+												<span
+													class="no-js-hidden{% if filter.active_values.size == 0 %} hidden{% endif %}"
+													data-uc-facet-selected
+												>
 													({{ filter.active_values.size }})</span
 												>
 											{%- endif -%}
@@ -135,7 +140,7 @@
 								>
 									{%- if filter_type != 'vertical' -%}
 										<div class="facets__header">
-											<span class="facets__selected no-js-hidden">
+											<span class="no-js-hidden" data-uc-facet-selected>
 												{{-
 													'products.facets.filters_selected'
 													| t: count: filter.active_values.size
@@ -331,13 +336,17 @@
 						{% when 'price_range' %}
 							<details
 								id="Details-{{ forloop.index }}-{{ section.id }}"
-								class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
+								class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %}"
+								data-uc-js-filter
 								data-index="{{ forloop.index }}"
 								{% if filter_type == 'vertical' and forloop.index == 1 %}
 									open
 								{% endif %}
 							>
-								<summary class="facets__summary caption-large focus-offset">
+								<summary
+									class="facets__summary caption-large focus-offset"
+									data-uc-facet-summary
+								>
 									<div>
 										<span>{{ filter.label | escape }}</span>
 										{% render 'icon-default', icon: 'caret' %}
@@ -353,7 +362,7 @@
 											| strip_html
 											| escape
 										-%}
-										<span class="facets__selected">
+										<span data-uc-facet-selected>
 											{{-
 												'products.facets.max_price'
 												| t: price: max_price_amount
@@ -452,7 +461,7 @@
 			</div>
 			{% comment %} Pills after filtes on filter type horizontal {% endcomment %}
 			{%- if filter_type == 'horizontal' -%}
-				<div class="active-facets active-facets-desktop">
+				<div class="active-facets" data-uc-facets-active="desktop">
 					{%- for filter in results.filters -%}
 						{%- for value in filter.active_values -%}
 							<facet-remove>
@@ -524,7 +533,7 @@
 		{%- if filter_type == 'horizontal' -%}
 			{% comment %} Sorting and product count are the last elements when filter type is horizontal {% endcomment %}
 			{%- if enable_sorting -%}
-				<div class="facet-filters sorting caption">
+				<div class="facet-filters sorting caption" data-uc-facet-mobile="sorting">
 					<div class="facet-filters__field">
 						<h2 class="facet-filters__label caption-large text-body">
 							<label for="SortBy">
@@ -532,7 +541,6 @@
 							</label>
 						</h2>
 						<div class="select">
-
 							<select
 								name="sort_by"
 								class="facet-filters__sort select__select caption-large"
@@ -605,8 +613,8 @@
 {% comment %} Sorting for vertical filter are grouped with filter when no JS{% endcomment %}
 {%- if enable_sorting and filter_type == 'vertical' -%}
 	<facet-filters-form class="small-hide">
-		<form class="no-js">
-			<div class="facet-filters sorting caption">
+		<form class="no-js" data-uc-facet-form>
+			<div class="facet-filters sorting caption" data-uc-facet-mobile="sorting">
 				<div class="facet-filters__field">
 					<h2 class="facet-filters__label caption-large text-body">
 						<label for="SortBy">

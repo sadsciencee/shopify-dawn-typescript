@@ -7,7 +7,7 @@
   padding-top: #{$ax10};
 }
 
-.active-facets-mobile {
+.active-facets[data-uc-active-facets="mobile"] {
   margin-bottom: #{$ax5};
 }
 
@@ -559,11 +559,11 @@ a.active-facets__button.focused .active-facets__button-inner,
   );
 }
 
-.menu-opening .mobile-facets__inner {
+[data-uc-menu-opening] .mobile-facets__inner {
   transform: translateX(0);
 }
 
-.js .disclosure-has-popup:not(.menu-opening) .mobile-facets__inner {
+.js .disclosure-has-popup:not([data-uc-menu-opening]) .mobile-facets__inner {
   transform: translateX(105vw);
 }
 
@@ -594,7 +594,6 @@ a.active-facets__button.focused .active-facets__button-inner,
 .mobile-facets__count {
   color: rgba(#{$schemaColorForeground}, 0.7);
   font-size: #{$ax13};
-  margin: 0;
   flex-grow: 1;
 }
 
@@ -603,12 +602,8 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__open {
-  text-align: left;
-  width: 100%;
   padding-top: #{$ax5};
   padding-bottom: #{$ax5};
-  display: flex;
-  align-items: center;
   color: rgba(#{$schemaColorLink}, var(--alpha-link));
 }
 
@@ -661,12 +656,12 @@ a.active-facets__button.focused .active-facets__button-inner,
   width: #{$ax22};
 }
 
-details.menu-opening .mobile-facets__close {
+details[data-uc-menu-opening] .mobile-facets__close {
   display: flex;
   opacity: 1;
 }
 
-details.menu-opening .mobile-facets__close svg {
+details[data-uc-menu-opening] .mobile-facets__close svg {
   margin: 0;
 }
 
@@ -758,7 +753,7 @@ details.menu-opening .mobile-facets__close svg {
   transition: transform 0.4s cubic-bezier(0.29, 0.63, 0.44, 1), visibility 0.4s cubic-bezier(0.29, 0.63, 0.44, 1);
 }
 
-.js details[open].menu-opening > .mobile-facets__submenu {
+.js details[open][data-uc-menu-opening] > .mobile-facets__submenu {
   transform: translateX(0);
   visibility: visible;
 }
@@ -767,7 +762,7 @@ details.menu-opening .mobile-facets__close svg {
   overflow-y: auto;
 }
 
-.js .mobile-facets .submenu-open {
+.js .mobile-facets [data-uc-submenu="open"] {
   visibility: hidden; /* hide menus from screen readers when hidden by submenu */
 }
 
