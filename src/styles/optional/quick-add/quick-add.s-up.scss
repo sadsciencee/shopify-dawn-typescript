@@ -1,0 +1,47 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.quick-add-modal__content {
+		--modal-height-offset: #{ax(100)};
+		margin-top: var(--modal-height-offset);
+		width: 80%;
+		max-height: calc(100% - var(--modal-height-offset) * 2);
+		overflow-y: auto;
+	}
+
+	quick-add-modal .quick-add-modal__toggle {
+		top: #{$ax20};
+		right: #{$ax20};
+	}
+
+	quick-add-modal .product:not(.product--no-media) .product__media-wrapper {
+		max-width: 45%;
+		width: calc(45% - #{$xSpacingDesktop} / 2);
+	}
+
+	quick-add-modal .product:not(.product--no-media) .product__info-wrapper {
+		padding-left: #{$ax40};
+		max-width: 54%;
+		width: calc(54% - #{$xSpacingDesktop} / 2);
+	}
+
+	quick-add-modal
+		.product--columns
+		.product__media-item:not(.product__media-item--single):not(:only-child) {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	quick-add-modal .thumbnail-slider .thumbnail-list.slider--tablet-up {
+		display: none;
+	}
+
+	quick-add-modal .product-media-container.constrain-height {
+		--constrained-min-height: 400px;
+	}
+}
+@include media-query($m-up) {
+	.quick-add-modal__content {
+		width: 70%;
+	}
+}

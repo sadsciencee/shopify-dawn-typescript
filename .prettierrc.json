@@ -1,0 +1,17 @@
+{
+	"trailingComma": "es5",
+	"printWidth": 100,
+	"tabWidth": 4,
+	"useTabs": true,
+	"singleQuote": true,
+	"semi": false,
+	"indentSchema": true,
+	"overrides": [
+		{
+			"files": "*.liquid",
+			"options": {
+				"singleQuote": false
+			}
+		}
+	]
+}

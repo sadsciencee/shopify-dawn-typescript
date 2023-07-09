@@ -1,0 +1,89 @@
+@import "../../global/variables";
+@import "../../global/functions";
+@include media-query($s-down) {
+  .articles-wrapper .article {
+    width: 100%;
+  }
+}
+
+.article {
+  display: flex;
+  align-items: center;
+}
+
+.article.grid__item {
+  padding: 0;
+}
+
+.grid--peek .article-card {
+  box-sizing: border-box;
+}
+
+.article-card__image-wrapper > a {
+  display: block;
+}
+
+.article-card__link.link {
+  padding: 0;
+}
+
+.article-card__link {
+  text-underline-offset: #{$ax3};
+}
+
+.article-card .card__heading {
+  margin-bottom: #{$ax6};
+}
+
+.blog-articles .article-card .card__information,
+.blog__posts .article-card .card__information {
+  padding-left: #{$ax20};
+  padding-right: #{$ax20};
+}
+
+.article-card__info {
+  padding-top: #{$ax4};
+}
+
+.article-card__footer {
+  letter-spacing: #{$ax1};
+  font-size: #{$ax14};
+}
+
+.article-card__footer:not(:last-child) {
+  margin-bottom: #{$ax10};
+}
+
+.article-card__footer:last-child {
+  margin-top: auto;
+}
+
+.article-card__excerpt {
+  width: 100%;
+  margin-top: #{$ax12};
+}
+
+.article-card__link:not(:only-child) {
+  margin-right: #{$ax30};
+}
+
+.article-card__image--small .ratio::before {
+  padding-bottom: #{ax(110)};
+}
+
+.article-card__image--medium .ratio::before {
+  padding-bottom: #{ax(220)};
+}
+
+.article-card__image--large .ratio::before {
+  padding-bottom: ax(330);
+}
+
+
+
+/* check for flexbox gap in older Safari versions */
+@supports not (inset: 10px) {
+  .articles-wrapper.grid {
+    margin: 0 0 #{$ax50} 0;
+  }
+}

@@ -1,0 +1,7 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($s-up) {
+  .discounts__discount--position {
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,32 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($s-up) {
+  .email-signup-banner:not(.banner--desktop-transparent) .email-signup-banner__box {
+    width: 100%;
+  }
+}
+@include media-query($s-up) {
+  .banner--desktop-transparent .email-signup-banner__box--no-image * {
+    color: rgb(#{$schemaColorForeground});
+  }
+
+  .banner--desktop-transparent .email-signup-banner__box .field__input {
+    background-color: transparent;
+  }
+
+  .banner--desktop-transparent .email-signup-banner__box--no-image .field__input {
+    box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.55);
+  }
+
+  .banner--desktop-transparent .email-signup-banner__box--no-image .field__input:focus {
+    box-shadow: 0 0 0 #{$ax2} rgba(#{$schemaColorForeground}, 0.75);
+  }
+
+  .banner--desktop-transparent .email-signup-banner__box--no-image .field__button:focus-visible {
+    outline: $comboOutline1;
+    box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+  }
+  .email-signup-banner-background-mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,402 @@
+{%- liquid
+	capture spacing
+		render 'ucoast-spacing', settings: section.settings
+	endcapture
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient isolate {{ spacing }}">
+	<div class="page-width{% if section.settings.heading == blank %} no-heading{% endif %} section-{{ section.id }}-padding">
+		<h2 class="collage-wrapper-title mt-0 inline-richtext {{ section.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}">
+			{{ section.settings.heading }}
+		</h2>
+		<div class="display-grid collage {% if section.settings.mobile_layout == 'collage' %} collage--mobile{% endif %}">
+			{%- for block in section.blocks -%}
+				<div
+					class="collage__item collage__item--{{ block.type }} collage__item--{{ section.settings.desktop_layout }}{% render 'ucoast-animate', animation: 'slide-in' %}"
+					{{ block.shopify_attributes }}
+					{% if settings.animations_reveal_on_scroll %}
+						data-cascade
+						style="--animation-order: {{ forloop.index }};"
+					{% endif %}
+				>
+					{%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+					{%- case block.type -%}
+						{%- when 'image' -%}
+							<div class="collage-card h-100 relative {% if section.settings.card_styles == 'none' %}global-media-settings{% else %}card-wrapper {{ section.settings.card_styles }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+								<div
+									class="media media--transparent ratio"
+									{% if block.settings.image != blank %}
+										style="--ratio-percent: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%"
+									{% else %}
+										style="--ratio-percent: 100%"
+									{% endif %}
+								>
+									{%- if block.settings.image != blank -%}
+										{%- liquid
+											if section.settings.desktop_layout == 'left'
+												assign large_block = forloop.first
+											else
+												assign large_block = forloop.last
+											endif
+
+										-%}
+										{%- if large_block -%}
+											{% render 'ucoast-image', image: block.settings.image %}
+										{%- else -%}
+											{% render 'ucoast-image', image: block.settings.image %}
+										{%- endif -%}
+									{%- else -%}
+										{{
+											'detailed-apparel-1'
+											| placeholder_svg_tag: 'placeholder-svg'
+										}}
+									{%- endif -%}
+								</div>
+							</div>
+						{%- when 'product' -%}
+							{%- assign placeholder_image = 'product-apparel-'
+								| append: placeholder_image_index
+							-%}
+							{% render 'card-product',
+								card_product: block.settings.product,
+								media_aspect_ratio: 'adapt',
+								show_secondary_image: block.settings.second_image,
+								extend_height: true,
+								placeholder_image: placeholder_image
+							%}
+						{%- when 'collection' -%}
+							{%- assign placeholder_image = 'collection-apparel-'
+								| append: placeholder_image_index
+							-%}
+							{% render 'card-collection',
+								card_collection: block.settings.collection,
+								media_aspect_ratio: 'adapt',
+								columns: 2,
+								extend_height: true,
+								wrapper_class: section.settings.card_styles,
+								placeholder_image: placeholder_image
+							%}
+						{%- when 'video' -%}
+							<div class="collage-card h-100 relative {% if section.settings.card_styles == 'none' %}global-media-settings{% else %}{{ section.settings.card_styles }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+								<noscript>
+									<a
+										href="{{ block.settings.video_url }}"
+										class="collage-card__link block h-100"
+									>
+										<div
+											class="media media--transparent ratio"
+											{% if block.settings.cover_image != blank %}
+												style="--ratio-percent: {{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%"
+											{% else %}
+												style="--ratio-percent: 100%"
+											{% endif %}
+										>
+											{%- if block.settings.cover_image != blank -%}
+												{% render 'image-shopify',
+													image: block.settings.cover_image
+												%}
+											{%- else -%}
+												{{
+													'hero-apparel-3'
+													| placeholder_svg_tag: 'placeholder-svg placeholder'
+												}}
+											{%- endif -%}
+										</div>
+									</a>
+								</noscript>
+								<modal-opener
+									class="no-js-hidden"
+									data-modal="#PopupModal-{{ block.id }}"
+								>
+									<div class="deferred-media h-100">
+										<button
+											class="deferred-media__poster b-0 bg-transparent after-fill-outside full-unstyled-link"
+											type="button"
+											aria-label="{{ 'sections.video.load_video' | t: description: block.settings.description | escape }}"
+											aria-haspopup="dialog"
+											data-media-id="{{ block.settings.video_url.id }}"
+										>
+											<div
+												class="media media--transparent ratio h-100"
+												{% if block.settings.cover_image != blank %}
+													style="--ratio-percent: {{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%"
+												{% else %}
+													style="--ratio-percent: 100%"
+												{% endif %}
+											>
+												<span class="deferred-media__poster-button motion-reduce">
+													{%- render 'icon-default', icon: 'play' -%}
+												</span>
+
+												{%- if block.settings.cover_image != blank -%}
+													{% render 'ucoast-image',
+														image: block.settings.cover_image
+													%}
+												{%- else -%}
+													{{
+														'hero-apparel-3'
+														| placeholder_svg_tag: 'placeholder-svg placeholder'
+													}}
+												{%- endif -%}
+											</div>
+										</button>
+									</div>
+								</modal-opener>
+								<modal-dialog
+									id="PopupModal-{{ block.id }}"
+									class="modal-video media-modal color-{{ settings.color_schemes | first }}"
+								>
+									<div
+										class="modal-video__content"
+										role="dialog"
+										aria-label="{{ block.settings.description | escape }}"
+										aria-modal="true"
+										tabindex="-1"
+									>
+										<button
+											id="ModalClose-{{ block.id }}"
+											type="button"
+											class="modal-video__toggle"
+											aria-label="{{ 'accessibility.close' | t }}"
+										>
+											{% render 'icon-default', icon: 'close' %}
+										</button>
+										<div class="modal-video__content-info">
+											<deferred-media class="modal-video__video template-popup">
+												<template>
+													{%- if block.settings.video_url.type
+															== 'youtube'
+													-%}
+														<iframe
+															src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?enablejsapi=1"
+															class="js-youtube"
+															allow="autoplay; encrypted-media"
+															allowfullscreen
+															title="{{ block.settings.description | escape }}"
+														></iframe>
+													{%- else -%}
+														<iframe
+															src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}"
+															class="js-vimeo"
+															allow="autoplay; encrypted-media"
+															allowfullscreen
+															title="{{ block.settings.description | escape }}"
+														></iframe>
+													{%- endif -%}
+												</template>
+											</deferred-media>
+										</div>
+									</div>
+								</modal-dialog>
+							</div>
+					{%- endcase -%}
+				</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "t:sections.collage.name",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "inline_richtext",
+				"id": "heading",
+				"default": "Multimedia collage",
+				"label": "t:sections.collage.settings.heading.label"
+			},
+			{
+				"type": "select",
+				"id": "heading_size",
+				"options": [
+					{
+						"value": "h2",
+						"label": "t:sections.all.heading_size.options__1.label"
+					},
+					{
+						"value": "h1",
+						"label": "t:sections.all.heading_size.options__2.label"
+					},
+					{
+						"value": "h0",
+						"label": "t:sections.all.heading_size.options__3.label"
+					}
+				],
+				"default": "h1",
+				"label": "t:sections.all.heading_size.label"
+			},
+			{
+				"type": "select",
+				"id": "desktop_layout",
+				"options": [
+					{
+						"value": "left",
+						"label": "t:sections.collage.settings.desktop_layout.options__1.label"
+					},
+					{
+						"value": "right",
+						"label": "t:sections.collage.settings.desktop_layout.options__2.label"
+					}
+				],
+				"default": "left",
+				"label": "t:sections.collage.settings.desktop_layout.label"
+			},
+			{
+				"type": "select",
+				"id": "mobile_layout",
+				"options": [
+					{
+						"value": "collage",
+						"label": "t:sections.collage.settings.mobile_layout.options__1.label"
+					},
+					{
+						"value": "column",
+						"label": "t:sections.collage.settings.mobile_layout.options__2.label"
+					}
+				],
+				"default": "column",
+				"label": "t:sections.collage.settings.mobile_layout.label"
+			},
+			{
+				"type": "select",
+				"id": "card_styles",
+				"options": [
+					{
+						"value": "none",
+						"label": "t:sections.collage.settings.card_styles.options__1.label"
+					},
+					{
+						"value": "product-card-wrapper contains-card--product",
+						"label": "t:sections.collage.settings.card_styles.options__2.label"
+					}
+				],
+				"default": "product-card-wrapper contains-card--product",
+				"info": "t:sections.collage.settings.card_styles.info",
+				"label": "t:sections.collage.settings.card_styles.label"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"info": "t:sections.all.colors.has_cards_info",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.spacing"
+			},
+			{
+				"type": "range",
+				"id": "space_above",
+				"label": "Space Above",
+				"info": "Set to -1 to disable space above",
+				"min": 0,
+				"max": 10,
+				"default": 4,
+				"unit": "spc",
+				"step": 1
+			},
+			{
+				"type": "range",
+				"id": "mobile_space_above",
+				"label": "Mobile Space Above",
+				"min": -1,
+				"max": 10,
+				"step": 1,
+				"default": -1,
+				"info": "Leave as '-1' to use the same value as the desktop setting."
+			}
+		],
+		"blocks": [
+			{
+				"type": "image",
+				"name": "t:sections.collage.blocks.image.name",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "t:sections.collage.blocks.image.settings.image.label"
+					}
+				]
+			},
+			{
+				"type": "product",
+				"name": "t:sections.collage.blocks.product.name",
+				"settings": [
+					{
+						"type": "product",
+						"id": "product",
+						"label": "t:sections.collage.blocks.product.settings.product.label"
+					},
+					{
+						"type": "checkbox",
+						"id": "second_image",
+						"default": false,
+						"label": "t:sections.collage.blocks.product.settings.second_image.label"
+					}
+				]
+			},
+			{
+				"type": "collection",
+				"name": "t:sections.collage.blocks.collection.name",
+				"settings": [
+					{
+						"type": "collection",
+						"id": "collection",
+						"label": "t:sections.collage.blocks.collection.settings.collection.label"
+					}
+				]
+			},
+			{
+				"type": "video",
+				"name": "t:sections.collage.blocks.video.name",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "cover_image",
+						"label": "t:sections.collage.blocks.video.settings.cover_image.label"
+					},
+					{
+						"type": "video_url",
+						"id": "video_url",
+						"accept": ["youtube", "vimeo"],
+						"default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+						"label": "t:sections.collage.blocks.video.settings.video_url.label",
+						"placeholder": "t:sections.collage.blocks.video.settings.video_url.placeholder",
+						"info": "t:sections.collage.blocks.video.settings.video_url.info"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"default": "Describe the video",
+						"label": "t:sections.collage.blocks.video.settings.description.label",
+						"info": "t:sections.collage.blocks.video.settings.description.info"
+					}
+				]
+			}
+		],
+		"max_blocks": 3,
+		"presets": [
+			{
+				"name": "t:sections.collage.presets.name",
+				"blocks": [
+					{
+						"type": "image"
+					},
+					{
+						"type": "product"
+					},
+					{
+						"type": "collection"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

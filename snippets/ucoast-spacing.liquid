@@ -1,0 +1,8 @@
+{% liquid
+    if settings.mobile_space_above == -1
+        echo ' sa-' | append: settings.space_above | append: ' '
+    else
+        echo ' sa-' | append: settings.space_above | append: ' '
+        echo ' sa-' | append: settings.mobile_space_above | append: '--m-down '
+    endif
+%}

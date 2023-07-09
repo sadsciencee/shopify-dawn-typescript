@@ -1,0 +1,273 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+.localization-form {
+  display: flex;
+  flex-direction: column;
+  flex: auto 1 0;
+  padding: #{$ax10};
+  margin: 0 auto;
+}
+
+.localization-form:only-child {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex: initial;
+  padding: #{$ax10} 0;
+}
+
+.localization-form:only-child .button,
+.localization-form:only-child .localization-form__select {
+  margin: #{$ax10} #{$ax10} #{$ax5};
+  flex-grow: 1;
+}
+
+@include media-query($m-down) {
+  noscript .localization-form:only-child {
+    width: 100%;
+  }
+}
+
+.localization-form .button {
+  padding: #{$ax10};
+}
+
+.localization-form__currency {
+  display: inline-block;
+}
+
+@include media-query($s-down) {
+  .localization-form .button {
+    word-break: break-all;
+  }
+}
+
+.localization-form__select {
+  border-radius: #{$inputsRadiusOutset};
+  position: relative;
+  margin-bottom: #{$ax15};
+  padding-left: #{$ax10};
+  text-align: left;
+  min-height: calc(#{$ax40} + #{$inputsBorderWidth} * 2);
+  min-width: calc(#{ax(70)} + #{$inputsBorderWidth} * 2);
+}
+
+.disclosure__button.localization-form__select {
+  padding: calc(#{$ax20} + #{$inputsBorderWidth});
+  background: rgb(#{$schemaColorBackground});
+}
+
+noscript .localization-form__select {
+  padding-left: 0rem;
+}
+
+
+
+.localization-form__select .icon-caret {
+  position: absolute;
+  content: '';
+  height: #{$ax6};
+  right: calc(#{$inputsBorderWidth} + #{$ax15});
+  top: calc(50% - #{$ax2});
+}
+
+.localization-selector.link {
+  text-decoration: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: rgb(#{$schemaColorForeground});
+  width: 100%;
+  padding-right: #{$ax40};
+  padding-bottom: #{$ax15};
+}
+
+noscript .localization-selector.link {
+  padding-top: #{$ax15};
+  padding-left: #{$ax15};
+}
+
+.disclosure .localization-form__select {
+  padding-top: #{$ax15};
+}
+
+.localization-selector option {
+  color: #000000;
+}
+
+.localization-selector + .disclosure__list-wrapper {
+  opacity: 1;
+  animation: animateLocalization var(--duration-default) ease;
+}
+
+.disclosure {
+  position: relative;
+}
+
+.disclosure__button {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: #{$ax40};
+  padding: 0 #{$ax15} 0 #{$ax15};
+  font-size: #{$ax13};
+  background-color: transparent;
+}
+
+.disclosure__list-wrapper {
+  border-width: #{$popupBorderWidth};
+  border-style: solid;
+  border-color: rgba(#{$schemaColorForeground}, #{$popupBorderOpacity});
+  overflow: hidden;
+  position: absolute;
+  bottom: 100%;
+  transform: translateY(ax(-10));
+  z-index: 2;
+  background-color: rgb(#{$schemaColorBackground});
+  border-radius: #{$popupCornerRadius};
+  box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset} #{$popupShadowBlurRadius}
+    rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+}
+
+.disclosure__list {
+  overflow-y: auto;
+  font-size: #{$ax14};
+  padding-bottom: #{$ax5};
+  padding-top: #{$ax5};
+  scroll-padding: #{$ax5} 0;
+  min-height: ax(82);
+  max-height: ax(206.5);
+  max-width: #{ax(220)};
+  min-width: #{ax(120)};
+}
+
+.disclosure__item {
+  position: relative;
+}
+
+.disclosure__link {
+  display: block;
+  padding: ax(9.5) #{$ax35} ax(9.5) #{$ax20};
+  text-decoration: none;
+  line-height: calc(1 + 0.8 / #{$fontBodyScale});
+  color: rgba(#{$schemaColorForeground}, 0.75);
+  word-break: break-word;
+}
+
+.disclosure__link:hover {
+  color: rgb(#{$schemaColorForeground});
+}
+
+.disclosure__link--active {
+  text-decoration: underline;
+}
+
+.disclosure__button[aria-expanded='true'] .icon-caret {
+  transform: rotate(180deg);
+}
+
+/* Header localization */
+.header__localization .localization-form:only-child {
+  margin: 0;
+}
+
+.header__localization .disclosure .localization-form__select {
+  font-size: #{$ax14};
+  letter-spacing: 0.043em;
+  height: auto;
+  background: transparent;
+}
+
+.header__localization .disclosure .localization-form__select:hover {
+  text-decoration: underline;
+}
+
+.header__localization .localization-form__select.link:after,
+.header__localization .localization-form__select.link:before {
+  box-shadow: none;
+}
+
+.header__localization .localization-form__select.link:focus-visible {
+  outline: $comboOutline1;
+  outline-offset: #{ax(-2)};
+  box-shadow: $comboPopupFocusShadow;
+}
+
+/* Header icons (desktop) */
+.desktop-localization-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.desktop-localization-wrapper .localization-selector + .disclosure__list-wrapper {
+  animation: animateMenuOpen var(--duration-default) ease;
+}
+
+.desktop-localization-wrapper .localization-form:only-child {
+  padding: 0;
+}
+
+.header__icons--localization {
+  align-items: center;
+  min-height: #{$ax44};
+}
+
+.js .header__icons--localization .localization-form__select {
+  padding: 0 #{$ax27} 0 #{$ax12};
+  width: max-content;
+}
+
+.header__icons--localization .localization-form:only-child .localization-form__select {
+  margin: 0;
+}
+
+.header__icons--localization .localization-form__select > span {
+  max-width: 20ch;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.header__icons--localization localization-form:only-child .localization-form__select > span {
+  max-width: 26ch;
+}
+
+.header__icons--localization .localization-form__select .icon-caret {
+  right: #{$ax8};
+}
+
+.header__icons--localization .disclosure__list-wrapper {
+  bottom: initial;
+  top: 100%;
+  right: 0;
+  transform: translateY(0);
+}
+
+/* Menu drawer */
+
+
+.menu-drawer__localization localization-form {
+  display: block;
+}
+
+.menu-drawer__localization .localization-form__select {
+  background-color: initial;
+  margin-top: 0;
+  padding: #{$ax10} #{$ax36} #{$ax10} 0rem;
+}
+
+.menu-drawer__localization .localization-form {
+  padding: 0;
+}
+
+.menu-drawer__localization .localization-form:only-child .localization-form__select {
+  margin: 0;
+}
+
+.menu-drawer__localization + .list-social {
+  margin-top: #{$ax10};
+}
+
+.menu-drawer__localization noscript .localization-form__select {
+  padding: initial;
+}

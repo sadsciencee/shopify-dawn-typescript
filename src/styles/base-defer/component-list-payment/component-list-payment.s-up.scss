@@ -1,0 +1,9 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($s-up) {
+  .list-payment {
+    justify-content: flex-end;
+    margin: ax(-5);
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,52 @@
+@import "../../global/variables";
+@import "../../global/functions";
+
+.rich-text__wrapper {
+  width: calc(100% - #{$ax40} / #{$fontBodyScale});
+}
+
+.rich-text:not(.rich-text--full-width) .rich-text__wrapper {
+  margin: auto;
+  width: calc(100% - #{ax(80)} / #{$fontBodyScale});
+}
+
+.rich-text__blocks * {
+  overflow-wrap: break-word;
+}
+
+.rich-text__blocks > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.rich-text__blocks > * + * {
+  margin-top: #{$ax20};
+}
+
+.rich-text__blocks > * + a {
+  margin-top: #{$ax30};
+}
+
+.rich-text__buttons {
+  justify-content: center;
+  gap: #{$ax10};
+  max-width: ax(450);
+  word-break: break-word;
+}
+
+.rich-text__buttons--multiple > * {
+  flex-grow: 1;
+  min-width: #{ax(220)};
+}
+
+.rich-text__buttons + .rich-text__buttons {
+  margin-top: #{$ax10};
+}
+
+.rich-text__blocks.left .rich-text__buttons {
+  justify-content: flex-start;
+}
+
+.rich-text__blocks.right .rich-text__buttons {
+  justify-content: flex-end;
+}

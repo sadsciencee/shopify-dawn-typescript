@@ -1,0 +1,158 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.customer:not(.account):not(.order) {
+		max-width: ax(478);
+	}
+
+	.customer h2.form__message {
+		font-size: calc(#{$fontHeadingScale} * #{$ax22});
+	}
+
+	.customer table {
+		border: none;
+		box-shadow: 0 0 0 #{$ax1} rgba(#{$schemaColorForeground}, 0.08);
+	}
+
+	.customer td {
+		padding-right: #{$ax22};
+	}
+
+	.customer th,
+	.customer td:first-of-type {
+		text-align: left;
+		padding-left: 0;
+		padding-right: #{$ax22};
+	}
+
+	.customer thead th,
+	.customer tbody td {
+		padding-top: #{$ax24};
+		padding-bottom: #{$ax24};
+	}
+
+	.customer th:first-of-type,
+	.customer td:first-of-type {
+		padding-left: #{$ax22};
+	}
+
+	.customer tbody td {
+		vertical-align: top;
+	}
+
+	.customer tbody td:first-of-type {
+		padding-top: #{$ax24};
+	}
+
+	.customer tbody td:last-of-type {
+		padding-bottom: 0;
+	}
+
+	.customer tbody tr:first-of-type {
+		border-top: none;
+	}
+
+	.customer tfoot tr:first-of-type td,
+	.customer tfoot tr:first-of-type th {
+		padding-top: #{$ax24};
+	}
+
+	.customer tfoot tr:last-of-type td,
+	.customer tfoot tr:last-of-type th {
+		padding-bottom: #{$ax24};
+	}
+
+	.activate button[name='decline'] {
+		margin-top: inherit;
+		margin-left: #{$ax10};
+	}
+
+	:is(.account, .order) {
+		padding-left: #{$ax50};
+		padding-right: #{$ax50};
+	}
+}
+@include media-query($m-only) {
+	.order > div:nth-of-type(2) > div:last-of-type {
+		display: flex;
+	}
+
+	.order > div:nth-of-type(2) > div:last-of-type div {
+		padding-right: #{$ax32};
+	}
+}
+@include media-query($s-up) {
+	.account thead th:last-child,
+	.account td:last-child {
+		text-align: right;
+	}
+
+	.account table td:first-of-type {
+		padding-top: #{$ax12};
+		padding-bottom: #{$ax12};
+	}
+
+	.order thead th:nth-last-child(-n + 3),
+	.order td:nth-last-child(-n + 3) {
+		text-align: right;
+	}
+
+	.order tfoot tr:last-of-type td,
+	.order tfoot tr:last-of-type th {
+		padding-bottom: #{$ax24};
+	}
+
+	.order td .cart-discount {
+		display: none;
+	}
+
+	.order tbody ul {
+		text-align: left;
+	}
+
+	.order tbody tr:first-of-type td:first-of-type > div {
+		align-items: flex-start;
+	}
+
+	.addresses li > button:first-of-type {
+		margin-top: #{$ax30};
+	}
+
+	li[data-address] > h2 {
+		font-size: calc(#{$fontHeadingScale} * #{$ax22});
+	}
+
+	.addresses form > div:nth-of-type(1) {
+		margin-right: #{$ax20};
+	}
+
+	.addresses form > div:nth-of-type(2) {
+		margin-top: 0;
+	}
+
+	.addresses form > div:nth-of-type(1),
+	.addresses form > div:nth-of-type(2) {
+		box-sizing: border-box;
+		flex-basis: calc(50% - #{$ax10});
+	}
+}
+@include media-query($m-up) {
+	.customer .pagination {
+		margin-top: #{ax(70)};
+		margin-bottom: #{ax(100)};
+	}
+
+	:is(.account, .order) > div:nth-of-type(2) {
+		display: flex;
+		margin-top: #{$ax50};
+	}
+
+	:is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
+		flex-grow: 1;
+		padding-right: #{$ax32};
+	}
+
+	:is(.account, .order) h2 {
+		margin-top: 0;
+	}
+}

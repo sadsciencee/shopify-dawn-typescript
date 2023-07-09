@@ -1,0 +1,67 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.cart__items {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		padding-bottom: #{$ax40};
+	}
+
+	.cart__contents > * + * {
+		margin-top: 0;
+	}
+
+	.cart__items + .cart__footer {
+		grid-column: 2;
+	}
+
+	.cart__footer {
+		display: flex;
+		justify-content: space-between;
+		border: 0;
+	}
+
+	.cart__footer-wrapper:last-child {
+		padding-top: 0;
+	}
+
+	.cart__footer > * {
+		width: ax(350);
+	}
+
+	.cart__footer > * + * {
+		margin-left: #{$ax40};
+		margin-top: 0;
+	}
+	.cart-note {
+		max-width: ax(350);
+	}
+
+	.cart__update-button {
+		margin-bottom: 0;
+		margin-right: #{$ax8};
+	}
+
+	.tax-note {
+		margin-bottom: #{$ax22};
+		text-align: right;
+	}
+
+	[data-shopify-buttoncontainer] {
+		justify-content: flex-end;
+	}
+
+	.cart__ctas {
+		display: flex;
+		gap: #{$ax10};
+	}
+}
+@include media-query($m-up) {
+	.cart__warnings {
+		padding: ax(70) 0 #{$ax10};
+	}
+
+	.cart__empty-text {
+		margin: 0 0 #{$ax30};
+	}
+}

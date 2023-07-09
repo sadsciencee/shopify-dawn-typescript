@@ -1,0 +1,19 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+.page-title {
+	margin-top: 0;
+}
+
+.main-page-title {
+	margin-bottom: #{$ax30};
+}
+
+.page-placeholder-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.page-placeholder {
+	width: ax(525);
+	height: ax(525);
+}

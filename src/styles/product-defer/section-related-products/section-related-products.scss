@@ -1,0 +1,9 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+.related-products {
+  display: block;
+}
+
+.related-products__heading {
+  margin: 0 0 #{$ax30};
+}

@@ -1,0 +1,59 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.newsletter-form__field-wrapper {
+  width: 100%;
+}
+
+.newsletter-form__field-wrapper .field__input {
+  padding-right: #{$ax50};
+}
+
+.newsletter-form__field-wrapper .field {
+  z-index: 0;
+}
+
+.newsletter-form__message {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.newsletter-form__message--success {
+  margin-top: #{$ax20};
+}
+
+.newsletter-form__button {
+  width: #{$ax44};
+  margin: 0;
+  right: #{$inputsBorderWidth};
+  top: 0;
+  height: 100%;
+  z-index: 2;
+}
+
+.newsletter-form__button:focus-visible {
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 0 #{$ax4} rgba(#{$schemaColorForeground});
+  background-color: rgb(#{$schemaColorBackground});
+}
+
+.newsletter-form__button:focus {
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 0 #{$ax4} rgba(#{$schemaColorForeground});
+  background-color: rgb(#{$schemaColorBackground});
+}
+
+.newsletter-form__button:not(:focus-visible):not(.focused) {
+  box-shadow: inherit;
+  background-color: inherit;
+}
+
+.newsletter-form__button .icon {
+  width: #{$ax15};
+}

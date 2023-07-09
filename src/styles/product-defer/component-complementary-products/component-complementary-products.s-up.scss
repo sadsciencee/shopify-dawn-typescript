@@ -1,0 +1,15 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+@include media-query($s-up) {
+	.complementary-slide > ul {
+		gap: #{$ySpacingDesktop};
+	}
+
+	.complementary-slide.complementary-slide--standard > ul {
+		gap: calc(#{$ySpacingDesktop} + #{$ax8});
+	}
+
+	.complementary-products__container .price--on-sale .price-item--regular {
+		font-size: #{$ax13};
+	}
+}

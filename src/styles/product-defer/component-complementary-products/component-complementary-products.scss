@@ -1,0 +1,151 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+.complementary-products__container {
+  display: flex;
+  flex-direction: column;
+  gap: #{$ax13};
+}
+
+product-recommendations:not(.is-accordion) .complementary-products__container {
+  margin-top: #{$ax15};
+}
+
+.complementary-products__container > details[open] {
+  padding-bottom: #{$ax15};
+}
+
+.complementary-slider {
+  margin-top: 0;
+  gap: 0;
+}
+
+.complementary-slide {
+  --shadow-padding-sides: calc((var(--shadow-horizontal-offset) + var(--shadow-blur-radius)) * var(--shadow-visible));
+  --shadow-padding-sides-negative: calc(
+    (var(--shadow-horizontal-offset) * -1 + var(--shadow-blur-radius)) * var(--shadow-visible)
+  );
+}
+
+.complementary-slide > ul {
+  display: flex;
+  flex-direction: column;
+  gap: #{$ySpacingMobile};
+}
+
+.complementary-slide.complementary-slide--standard > ul {
+  gap: calc(#{$ySpacingMobile} + #{$ax8});
+}
+
+
+
+.complementary-slide.grid__item {
+  width: 100%;
+  padding-top: max(var(--focus-outline-padding), var(--shadow-padding-top));
+  padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
+  padding-right: max(var(--focus-outline-padding), var(--shadow-padding-sides));
+  padding-left: max(var(--focus-outline-padding), var(--shadow-padding-sides-negative));
+}
+
+.complementary-slide .card-wrapper {
+  height: auto;
+}
+
+.complementary-products > .summary__title {
+  display: flex;
+  line-height: 1;
+  padding: #{$ax15} 0;
+}
+
+.accordion + product-recommendations .accordion,
+product-recommendations.is-accordion + .accordion {
+  margin-top: 0;
+  border-top: none;
+}
+
+.complementary-products > .summary__title .icon-accordion {
+  fill: rgb(#{$schemaColorForeground});
+  height: calc(#{$fontHeadingScale} * #{$ax20});
+  margin-right: calc(#{$fontHeadingScale} * #{$ax10});
+  width: calc(#{$fontHeadingScale} * #{$ax20});
+}
+
+.complementary-products__container .card--card .card__content,
+.complementary-products__container .card--horizontal .card__information {
+  padding: 0;
+}
+
+.complementary-products__container .card--horizontal .card__inner {
+  max-width: 20%;
+}
+
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .complementary-products__container .card--horizontal .card__inner {
+    max-width: 25%;
+  }
+}
+
+.complementary-slide .card--text .card__content {
+  grid-template-rows: minmax(0, 1fr) max-content auto;
+}
+
+.complementary-products__container .card--card.card--media > .card__content {
+  margin-top: 0;
+}
+
+.complementary-products-contains-quick-add .underline-links-hover:hover a {
+  text-decoration: initial;
+}
+
+.complementary-products-contains-quick-add .card__heading:hover a {
+  text-decoration: underline;
+}
+
+.complementary-products__container .card--card .card__inner .card__media {
+  border-radius: calc(var(--corner-radius) - var(--border-width) - var(--image-padding));
+}
+
+.complementary-products__container .card--horizontal .quick-add {
+  margin: 0;
+  max-width: #{ax(200)};
+}
+
+.complementary-products__container .quick-add__submit {
+  padding: #{$ax15} 0;
+  min-height: inherit;
+}
+
+.complementary-products__container .quick-add__submit .icon-plus {
+  width: #{$ax12};
+}
+
+.complementary-products__container .icon-wrap {
+  display: flex;
+}
+
+.complementary-products [data-uc-sold-out-message]:not(.hidden) + .icon-wrap {
+  display: none;
+}
+
+.complementary-products__container .quick-add__submit:not(.animate-arrow) .icon-wrap {
+  transition: transform var(--duration-short) ease;
+}
+
+.complementary-products__container .quick-add__submit:not(.animate-arrow):hover .icon-wrap {
+  transform: rotate(90deg);
+}
+
+.complementary-products__container .quick-add__submit:after,
+.complementary-products__container .quick-add__submit:hover:after {
+  box-shadow: none;
+}
+
+.complementary-products__container .card--horizontal .quick-add,
+.complementary-products__container .card__badge {
+  justify-self: var(--text-alignment);
+}
+
+.product--no-media .complementary-products__container .price {
+  text-align: var(--text-alignment);
+}
+
+

@@ -1,0 +1,293 @@
+@import '../../global/variables.scss';
+@import '../../global/functions.scss';
+.banner {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+}
+
+.banner__box {
+	text-align: center;
+}
+
+/* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
+.banner__box.gradient {
+	transform: perspective(0);
+}
+
+@include media-query($s-down) {
+	.banner--content-align-mobile-right .banner__box {
+		text-align: right;
+	}
+
+	.banner--content-align-mobile-left .banner__box {
+		text-align: left;
+	}
+}
+
+.banner__media.animate--zoom-in {
+	clip-path: inset(0px);
+}
+
+.banner__media.animate--zoom-in > img:not(.zoom):not(.deferred-media__poster-button),
+.banner__media.animate--zoom-in > svg:not(.zoom):not(.deferred-media__poster-button) {
+	position: fixed;
+	height: 100vh;
+}
+
+@include media-query($s-down) {
+	.banner--small.banner--mobile-bottom:not(.banner--adapt) .banner__media,
+	.banner--small.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt)
+		> .banner__media {
+		height: ax(280);
+	}
+
+	.banner--medium.banner--mobile-bottom:not(.banner--adapt) .banner__media,
+	.banner--medium.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt)
+		> .banner__media {
+		height: ax(340);
+	}
+
+	.banner--large.banner--mobile-bottom:not(.banner--adapt) .banner__media,
+	.banner--large.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt)
+		> .banner__media {
+		height: ax(390);
+	}
+
+	.banner--small:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+		min-height: ax(280);
+	}
+
+	.banner--medium:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+		min-height: ax(340);
+	}
+
+	.banner--large:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+		min-height: ax(390);
+	}
+}
+
+@include media-query($s-down) {
+	.banner:not(.banner--stacked) {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.banner--stacked {
+		height: auto;
+	}
+
+	.banner--stacked .banner__media {
+		flex-direction: column;
+	}
+}
+
+.banner__media {
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+.banner__media-half {
+	width: 50%;
+}
+
+.banner__media-half + .banner__media-half {
+	right: 0;
+	left: auto;
+}
+
+.banner__media-half.animate--fixed:first-child > img,
+.banner__media-half.animate--zoom-in:first-child > img {
+	width: 50%;
+}
+
+.banner__media-half.animate--fixed:nth-child(2) > img,
+.banner__media-half.animate--zoom-in:nth-child(2) > img {
+	left: 50%;
+	width: 50%;
+}
+
+@include media-query($s-down) {
+	.banner--stacked .animate--fixed:first-child > img,
+	.banner--stacked .animate--zoom-in:first-child > img {
+		width: 100%;
+	}
+
+	.banner--stacked .banner__media-half.animate--fixed:nth-child(2) > img,
+	.banner--stacked .banner__media-half.animate--zoom-in:nth-child(2) > img {
+		left: 0;
+		width: 100%;
+	}
+
+	.banner--stacked .banner__media-half {
+		width: 100%;
+	}
+
+	.banner--stacked .banner__media-half + .banner__media-half {
+		order: 1;
+	}
+}
+
+.banner--adapt,
+.banner--adapt_image.banner--mobile-bottom .banner__media:not(.placeholder) {
+	height: auto;
+}
+
+@include media-query($s-down) {
+	.banner--mobile-bottom .banner__media,
+	.banner--stacked:not(.banner--mobile-bottom) .banner__media {
+		position: relative;
+	}
+
+	.banner--stacked.banner--adapt .banner__content {
+		height: auto;
+	}
+
+	.banner:not(.banner--mobile-bottom):not(.email-signup-banner) .banner__box {
+		background: transparent;
+	}
+
+	.banner:not(.banner--mobile-bottom) .banner__box {
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.banner:not(.banner--mobile-bottom) .button--secondary {
+		--alpha-button-background: 0;
+	}
+
+	.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+		position: absolute;
+		height: auto;
+	}
+
+	.banner--stacked.banner--adapt:not(.banner--mobile-bottom) .banner__content {
+		max-height: 100%;
+		overflow: hidden;
+		position: absolute;
+	}
+
+	.banner--stacked:not(.banner--adapt) .banner__media {
+		position: relative;
+	}
+
+	.banner::before {
+		display: none !important;
+	}
+
+	.banner--stacked .banner__media-image-half {
+		width: 100%;
+	}
+}
+
+.banner__content {
+	padding: 0;
+	display: flex;
+	position: relative;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
+}
+
+@include media-query($s-down) {
+	.banner--mobile-bottom:not(.banner--stacked) .banner__content {
+		order: 2;
+	}
+
+	.banner:not(.banner--mobile-bottom) .field__input,
+	.banner--mobile-bottom:not(.banner--stacked) .banner__box.color-background-1 {
+		background: transparent;
+	}
+}
+
+.banner__box {
+	padding: #{$ax40} #{$ax35};
+	position: relative;
+	height: fit-content;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	word-wrap: break-word;
+	z-index: 1;
+}
+
+@include media-query($s-down) {
+	.banner--mobile-bottom::after,
+	.banner--mobile-bottom .banner__media::after {
+		display: none;
+	}
+}
+
+.banner::after,
+.banner__media::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	background: #000000;
+	opacity: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.banner__box > * + .banner__text {
+	margin-top: #{$ax15};
+}
+
+.banner__box > * + * {
+	margin-top: #{$ax10};
+}
+
+.banner__box > *:first-child {
+	margin-top: 0;
+}
+
+@include media-query($s-down) {
+	.banner--stacked .banner__box {
+		width: 100%;
+	}
+}
+
+.banner__heading {
+	margin-bottom: 0;
+}
+
+.banner__box .banner__heading + * {
+	margin-top: #{$ax10};
+}
+
+.banner__buttons {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: #{$ax10};
+	max-width: ax(450);
+	word-break: break-word;
+}
+
+@include media-query($s-down) {
+	.banner--content-align-mobile-right .banner__buttons--multiple {
+		justify-content: flex-end;
+	}
+
+	.banner--content-align-mobile-center .banner__buttons--multiple > * {
+		flex-grow: 1;
+		min-width: #{ax(220)};
+	}
+}
+
+.banner__box > * + .banner__buttons {
+	margin-top: #{$ax20};
+}
+
+@include media-query($s-down) {
+	.banner:not(.slideshow) .rte a,
+	.banner:not(.slideshow) .inline-richtext a:hover,
+	.banner:not(.slideshow) .rte a:hover {
+		color: currentColor;
+	}
+}

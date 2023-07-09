@@ -1,0 +1,32 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+.totals {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.totals > * {
+  font-size: #{$ax16};
+  margin: 0;
+}
+
+.totals > h2 {
+  font-size: calc(#{$fontHeadingScale} * #{$ax16});
+}
+
+.totals * {
+  line-height: 1;
+}
+
+.totals > * + * {
+  margin-left: #{$ax20};
+}
+
+.totals__subtotal-value {
+  font-size: #{$ax18};
+}
+
+.cart__ctas + .totals {
+  margin-top: #{$ax20};
+}

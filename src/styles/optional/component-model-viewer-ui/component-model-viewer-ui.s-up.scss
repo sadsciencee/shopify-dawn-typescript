@@ -1,0 +1,7 @@
+@import "../../global/variables.scss";
+@import "../../global/functions.scss";
+@include media-query($m-up) {
+  .pagination-wrapper {
+    margin-top: #{$ax50};
+  }
+}

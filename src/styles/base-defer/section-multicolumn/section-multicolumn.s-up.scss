@@ -1,0 +1,37 @@
+@import '../../global/variables';
+@import '../../global/functions';
+@include media-query($s-up) {
+	.multicolumn .button {
+		margin-top: #{$ax40};
+	}
+
+	.multicolumn-list.slider,
+	.multicolumn-list.grid--4-col-desktop {
+		padding: 0;
+	}
+
+	.multicolumn-list__item,
+	.grid--4-col-desktop .multicolumn-list__item {
+		padding-bottom: 0;
+	}
+
+	.background-none .grid--2-col-tablet .multicolumn-list__item {
+		margin-top: #{$ax40};
+	}
+
+	.background-none .multicolumn-card__image-wrapper {
+		margin-left: #{$ax15};
+		margin-right: #{$ax15};
+	}
+
+	.background-none .multicolumn-list .multicolumn-card__info,
+	.background-none .multicolumn-list:not(.slider) .center .multicolumn-card__info {
+		padding-left: #{$ax15};
+		padding-right: #{$ax15};
+	}
+}
+@include media-query($m-up) {
+	.multicolumn-list__item--empty {
+		display: list-item;
+	}
+}

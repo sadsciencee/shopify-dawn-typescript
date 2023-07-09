@@ -1,0 +1,161 @@
+
+// media query mixin
+$xs-up: 'xs-up';
+$xs-down: 'xs-down';
+$s-down: 's-down';
+$s-up: 's-up';
+$m-only: 'm-only';
+$m-down: 'm-down';
+$m-up: 'm-up';
+$m-and-l: 'm-and-l';
+$l-down: 'l-down';
+$l-up: 'l-up';
+$v-s-up: 'v-s-up';
+
+$breakpoints: (
+        $s-down '(max-width:749px)',
+        $s-up '(min-width: 750px)',
+        $m-only '(min-width: 750px) and (max-width: 989px)',
+        $m-down '(max-width:989px)',
+        $m-up '(min-width: 990px)',
+        $m-and-l '(min-width: 750px) and (max-width: 1200px)',
+        $l-down '(max-width:1200px)',
+        $l-up '(min-width: 1201px)',
+        $v-s-up '(min-height: 700px)',
+);
+
+@mixin media-query($mda-query) {
+  $breakpoint-found: false;
+
+  @each $breakpoint in $breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
+
+    @if $mda-query == $name and $declaration {
+      $breakpoint-found: true;
+
+      @media only screen and #{$declaration} {
+        @content;
+      }
+    }
+  }
+}
+
+// only used within this file now
+@function scaleValue($value, $mobile) {
+  @if $mobile {
+    $mobileMax: ($value * 0.1 * 1rem);
+    $mobileMin: ($value * 0.09 * 1rem);
+    $mobileVw: ($value * 0.2667 * 1vw);
+    @return clamp(#{$mobileMin}, #{$mobileVw}, #{$mobileMax});
+  } @else {
+    $desktopMax: ($value * 0.1 * 1rem);
+    $desktopMin: ($value * 0.08 * 1rem);
+    $desktopVw: ($value * 0.06944 * 1vw);
+    @return clamp(#{$desktopMin}, #{$desktopVw}, #{$desktopMax});
+  }
+}
+
+@mixin clampValue($property, $value, $mobile: false, $fallback: false) {
+  @if ($fallback != false) {
+    #{$property}: $fallback;
+  } @else {
+    #{$property}: ($value * 0.1rem);
+  }
+  #{$property}: scaleValue($value, $mobile);
+}
+
+/* default scaling vars for galaxy brain scaling */
+
+$mobileBaseScale: calc(#{scaleValue(100, true)} * 0.01);
+$desktopBaseScale: calc(#{scaleValue(100, false)} * 0.01);
+
+@function mx($value) {
+  @return calc(#{$value} * var(--mx));
+}
+
+@function dx($value) {
+  @return calc(#{$value} * var(--dx));
+}
+
+@function ax($value) {
+  @return calc(#{$value} * var(--ax));
+}
+
+// clampSize mixin
+// takes px input for mobile & desktop & converts to clamp size for mobile & desktop
+// based on design breakpoints of 390px and 1512px
+// scaleValues desktop between 1200px and 1800px with a swivel point of 1512px
+// scaleValues mobile between 320px and 450px with a swivel point of 390px
+// 451-989px uses mobileMax, 990-1200px uses desktopMin
+// hardcoded to prevent scaling below 10px for accessibility.
+// using sass vars to reduce rendered calculations
+// modified this to use ax value unless the font will scale below 10px
+
+@mixin clampSize($mobile, $desktop, $override: false) {
+  $mobileFallback: ($mobile * 0.1 * 1rem);
+  $mobileMaxVal: ($mobile * 0.1);
+  $mobileMax: ($mobileMaxVal * 1rem);
+  $mobileVw: ($mobile * 0.2667 * 1vw);
+  $desktopFallback: ($desktop * 0.1 * 1rem);
+  $desktopMax: ($desktop * 0.1 * 1rem);
+  $desktopVw: ($desktop * 0.06944 * 1vw);
+
+  // prevent min values from falling below 10px
+  $mobileMinVal: ($mobile * 0.09);
+  $desktopMinVal: ($desktop * 0.08);
+  $mobileMin: 1rem;
+  $desktopMin: 1rem;
+
+  // if formula is going to scaleValue desktop smaller than mobile equivalent, make mobile max == desktop min
+  @if ($mobileMaxVal > $desktopMinVal) {
+    $mobileMax: $mobileFallback;
+    $desktopMin: $mobileFallback;
+  }
+
+  // pretty convoluted at this point but we are going to cut file size some more here
+  // if calculated values are below one we will add new clamps. otherwise default to ax calcs
+
+  @if ($mobileMinVal > 1) {
+    font-size: ax($mobile);
+  } @else {
+    font-size: $mobileFallback;
+    font-size: clamp(#{$mobileMin}, #{$mobileVw}, #{$mobileMax});
+  }
+
+  @if ($desktopMinVal > 1) {
+    @include media-query($m-up) {
+      font-size: ax($desktop);
+    }
+  } @else {
+    @include media-query($m-up) {
+      font-size: $desktopFallback;
+      font-size: clamp(#{$desktopMin}, #{$desktopVw}, #{$desktopMax});
+    }
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+@mixin semanticButton {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  background: transparent;
+  color: currentColor;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+$bezier: cubic-bezier(0.32, 0.24, 0.15, 1);
