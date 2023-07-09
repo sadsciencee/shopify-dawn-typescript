@@ -1,4 +1,5 @@
 import { CartItems } from '@/scripts/cart-page/cart-items'
+import { SELECTORS } from '@/scripts/theme/constants';
 
 export class CartDrawerItems extends CartItems {
 	static override htmlSelector = 'cart-drawer-items'
@@ -10,9 +11,9 @@ export class CartDrawerItems extends CartItems {
 		liveRegionText: '[data-uc-cart-drawer-live-region-text]',
 		main: '[data-uc-cart-drawer-main]',
 		// the following selectors are partial - they will be concatenated with the line ID
-		line: '#CartDrawer-Item',
-		lineQuantity: '#CartDrawer-Quantity',
-		lineError: '#CartDrawer-LineItemError', // `${CartItems.selectors.cartDrawerLineError}-${line}`
+		line: '#CartDrawer-Item', // ex: `${this.instanceSelectors.line}-${line}`
+		lineQuantity: '#CartDrawer-Quantity', // ex: `${this.instanceSelectors.lineQuantity}-${line}`
+		lineError: '#CartDrawer-LineItemError', // ex: `${this.instanceSelectors.lineError}-${line}`
 	}
 	constructor() {
 		super();
@@ -29,9 +30,9 @@ export class CartDrawerItems extends CartItems {
 				selector: this.instanceSelectors.cartDrawerInner,
 			},
 			{
-				id: 'cart-icon-bubble',
+				id: 'CartIconBubble',
 				section: 'cart-icon-bubble',
-				selector: '.shopify-section',
+				selector: SELECTORS.cartLink,
 			},
 		]
 	}

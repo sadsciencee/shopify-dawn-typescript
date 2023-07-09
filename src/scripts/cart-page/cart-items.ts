@@ -1,4 +1,4 @@
-import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/theme/constants';
 import {
 	debounce,
 	fetchConfig,
@@ -25,14 +25,14 @@ export class CartItems extends UcoastEl {
 		itemLink: '[data-uc-cart-item-name]',
 		lineItemStatus: '[data-uc-cart-page-status]',
 		errors: '[data-uc-cart-page-errors]',
-		liveRegionText: '[data-uc-cart-page-live-region-text]',
-		main: '[data-uc-cart-page-main]',
+		liveRegionText: '#CartPage-LiveRegionText',
+		main: '#main-cart-items',
 		cartDrawerInner: '[data-uc-cart-drawer-inner]',
 		cartDrawerInnerEmpty: '[data-uc-cart-drawer-inner-empty]',
 		item: '[data-uc-cart-item]',
 		itemErrorText: '[data-uc-cart-item-error-text]',
 		footer: '#CartPage-Footer',
-		loadingOverlay: '.loading-overlay',
+		loadingOverlay: '[data-uc-loading-overlay]',
 		// the following selectors are partial - they will be concatenated with the line ID
 		line: '#CartPage-Item', // ex: `${this.instanceSelectors.line}-${line}`
 		lineQuantity: '#CartPage-LineItemQuantity', // ex: `${this.instanceSelectors.lineQuantity}-${line}`
@@ -116,17 +116,17 @@ export class CartItems extends UcoastEl {
 				selector: '.js-contents',
 			},
 			{
-				id: 'cart-icon-bubble',
+				id: 'CartIconBubble',
 				section: 'cart-icon-bubble',
-				selector: '.shopify-section',
+				selector: SELECTORS.cartLink,
 			},
 			{
-				id: 'cart-live-region-text',
+				id: 'CartPage-LiveRegionText',
 				section: 'cart-live-region-text',
 				selector: '.shopify-section',
 			},
 			{
-				id: 'main-cart-footer',
+				id: 'CartPage-Footer',
 				section: getAttributeOrThrow('data-id', qsRequired(this.instanceSelectors.footer)),
 				selector: '.js-contents',
 			},
@@ -217,7 +217,8 @@ export class CartItems extends UcoastEl {
 				}
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error(error)
 				this.querySelectorAll(this.instanceSelectors.loadingOverlay).forEach((overlay) =>
 					overlay.classList.add('hidden')
 				)

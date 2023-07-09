@@ -143,6 +143,7 @@
 												id="CartDrawer-Item-{{ item.index | plus: 1 }}"
 												class="cart-item"
 												role="row"
+												data-uc-cart-item
 											>
 												<td
 													class="cart-item__media"
@@ -295,8 +296,8 @@
 													role="cell"
 													headers="CartDrawer-ColumnTotal"
 												>
-													<div class="loading-overlay hidden">
-														<div class="loading-overlay__spinner">
+													<div class="hidden" data-uc-loading-overlay>
+														<div data-uc-loading-overlay-spinner>
 															<svg
 																aria-hidden="true"
 																focusable="false"
@@ -407,7 +408,7 @@
 																%}
 															</button>
 															<input
-																class="quantity__input"
+																data-uc-quantity-input
 																type="number"
 																data-quantity-variant-id="{{ item.variant.id }}"
 																name="updates[]"

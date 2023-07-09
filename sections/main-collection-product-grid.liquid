@@ -86,7 +86,7 @@
 								{%- endif -%}
 							</span>
 						</h2>
-						<div class="loading-overlay__spinner">
+						<div data-uc-loading-overlay-spinner>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -133,7 +133,7 @@
 						id="product-grid"
 						data-id="{{ section.id }}"
 					>
-						<div class="loading-overlay gradient"></div>
+						<div class="gradient" data-uc-loading-overlay></div>
 						<div class="title-wrapper center">
 							<h2 class="title title--primary">
 								{{ 'sections.collection_template.empty' | t -}}
@@ -147,7 +147,7 @@
 					</div>
 				{%- else -%}
 					<div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
-						<div class="loading-overlay gradient"></div>
+						<div class="gradient" data-uc-loading-overlay></div>
 
 						<ul
 							id="product-grid"

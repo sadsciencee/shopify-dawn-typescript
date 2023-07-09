@@ -79,14 +79,14 @@
 	display: block;
 }
 
-.product-form__error-message-wrapper:not([hidden]) {
+[data-uc-product-form-error-message-wrapper]:not([hidden]) {
 	display: flex;
 	align-items: flex-start;
 	font-size: #{$ax12};
 	margin-bottom: #{$ax15};
 }
 
-.product-form__error-message-wrapper svg {
+[data-uc-product-form-error-message-wrapper] svg {
 	flex-shrink: 0;
 	width: #{$ax12};
 	height: #{$ax12};
@@ -351,7 +351,7 @@ a.product__text {
 }
 
 .product--no-media fieldset.product-form__input,
-.product--no-media .product-form__quantity,
+.product--no-media [data-uc-product-form-quantity],
 .product--no-media .product-form__input--dropdown,
 .product--no-media .share-button,
 .product--no-media .product__view-details,
@@ -372,17 +372,17 @@ a.product__text {
 	width: 100%;
 }
 
-.product--no-media .product-form__quantity,
+.product--no-media [data-uc-product-form-quantity],
 .product--no-media .product-form__input--dropdown {
 	flex-direction: column;
 	max-width: 100%;
 }
 
-.product-form__quantity .form__label {
+[data-uc-product-form-quantity] .form__label {
 	margin-bottom: #{$ax6};
 }
 
-.product-form__quantity-top .form__label {
+[data-uc-product-form-quantity="top"] .form__label {
 	margin-bottom: #{$ax12};
 }
 
@@ -779,7 +779,7 @@ a.product__text {
 	display: none;
 }
 
-.product__modal-opener > .loading-overlay__spinner {
+.product__modal-opener > [data-uc-loading-overlay-spinner] {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

@@ -139,7 +139,7 @@ cart-remove-button .icon-remove {
   width: #{$ax15};
 }
 
-[data-uc-cart-item] .loading-overlay {
+[data-uc-cart-item] [data-uc-loading-overlay] {
   top: 0;
   left: auto;
   right: auto;
@@ -147,7 +147,7 @@ cart-remove-button .icon-remove {
   padding: 0;
 }
 
-[data-uc-cart-item] .loading-overlay:not(.hidden) ~ * {
+[data-uc-cart-item] [data-uc-loading-overlay]:not(.hidden) ~ * {
   visibility: hidden;
 }
 

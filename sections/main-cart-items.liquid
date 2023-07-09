@@ -37,7 +37,7 @@
 		method="post"
 		id="cart"
 	>
-		<div class="cart__items" [data-uc-cart-page-main] data-id="{{ section.id }}">
+		<div class="cart__items" id='main-cart-items' data-id="{{ section.id }}">
 			<div class="js-contents">
 				{%- if cart != empty -%}
 					<table class="cart-items">
@@ -75,7 +75,7 @@
 
 						<tbody>
 							{%- for item in cart.items -%}
-								<tr class="cart-item" id="CartPage-Item-{{ item.index | plus: 1 }}">
+								<tr class="cart-item" data-uc-cart-item id="CartPage-Item-{{ item.index | plus: 1 }}">
 									<td class="cart-item__media">
 										{% if item.image %}
 											{% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -200,8 +200,8 @@
 									</td>
 
 									<td class="cart-item__totals right medium-hide large-up-hide">
-										<div class="loading-overlay hidden">
-											<div class="loading-overlay__spinner">
+										<div class="hidden" data-uc-loading-overlay>
+											<div data-uc-loading-overlay-spinner>
 												<svg
 													aria-hidden="true"
 													focusable="false"
@@ -299,7 +299,7 @@
 													{% render 'icon-default', icon: 'minus' %}
 												</button>
 												<input
-													class="quantity__input"
+													data-uc-quantity-input
 													data-quantity-variant-id="{{ item.variant.id }}"
 													type="number"
 													name="updates[]"
@@ -366,8 +366,8 @@
 									</td>
 
 									<td class="cart-item__totals right small-hide">
-										<div class="loading-overlay hidden">
-											<div class="loading-overlay__spinner">
+										<div class="hidden" data-uc-loading-overlay>
+											<div data-uc-loading-overlay-spinner>
 												<svg
 													aria-hidden="true"
 													focusable="false"
@@ -449,7 +449,7 @@
 			</div>
 		</div>
 
-		<p class="visually-hidden" id="CartPage-LiveRegionText" data-uc-cart-page-live-region-text aria-live="polite" role="status"></p>
+		<p class="visually-hidden" id="CartPage-LiveRegionText" aria-live="polite" role="status"></p>
 		<p
 			class="visually-hidden"
 			aria-live="polite"

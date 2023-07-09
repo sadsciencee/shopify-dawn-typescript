@@ -898,8 +898,8 @@ input.mobile-facets__checkbox {
   visibility: hidden;
 }
 
-.product-count .loading-overlay__spinner,
-.product-count-vertical .loading-overlay__spinner {
+.product-count [data-uc-loading-overlay-spinner],
+.product-count-vertical [data-uc-loading-overlay-spinner] {
   display: none;
   position: absolute;
   right: 0;
@@ -908,6 +908,6 @@ input.mobile-facets__checkbox {
   width: #{$ax18};
 }
 
-.product-count__text[data-uc-loading] + .loading-overlay__spinner {
+.product-count__text[data-uc-loading] + [data-uc-loading-overlay-spinner] {
   display: block;
 }

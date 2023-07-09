@@ -215,7 +215,7 @@ cart-drawer-items {
   margin-bottom: $ax15;
 }
 
-.cart-drawer [data-uc-cart-item] .loading-overlay {
+.cart-drawer [data-uc-cart-item] [data-uc-loading-overlay] {
   right: #{$ax5};
   padding-top: #{$ax25};
 }

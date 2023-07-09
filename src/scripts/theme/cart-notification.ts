@@ -8,6 +8,7 @@ import { removeTrapFocus, trapFocus } from '@/scripts/global';
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
 import { type SectionApiResponse } from '@/scripts/types/responses';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { SELECTORS } from '@/scripts/theme/constants';
 
 export class CartNotification extends UcoastEl {
   static htmlSelector = 'cart-notification';
@@ -80,6 +81,7 @@ export class CartNotification extends UcoastEl {
       },
       {
         id: 'cart-icon-bubble',
+        selector: SELECTORS.cartLink
       },
     ];
   }

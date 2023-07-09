@@ -1,4 +1,4 @@
-import { ATTRIBUTES, PUB_SUB_EVENTS } from '@/scripts/theme/constants'
+import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/theme/constants';
 import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/functions'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
 import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
@@ -11,6 +11,17 @@ declare let window: uCoastWindow
 
 export class ProductForm extends UcoastEl {
 	static htmlSelector = 'product-form'
+	static selectors = {
+		form: 'form',
+		formIdEl: '[name=id]',
+		submitButton: '[type="submit"]',
+		submitButtonMessage: '[type="submit"] span',
+		soldOutMessage: '[data-uc-sold-out-message]',
+		errorMessageWrapper: '[data-uc-product-form-error-message-wrapper]',
+		errorMessage: '[data-uc-product-form-error-message]',
+	}
+
+
 	form: HTMLFormElement
 	formIdEl: HTMLInputElement
 	cart?: CartNotification | CartDrawer
@@ -23,22 +34,22 @@ export class ProductForm extends UcoastEl {
 	constructor() {
 		super()
 
-		this.form = qsRequired('form', this)
-		this.formIdEl = qsRequired('[name=id]', this.form)
+		this.form = qsRequired(ProductForm.selectors.form, this)
+		this.formIdEl = qsRequired(ProductForm.selectors.formIdEl, this.form)
 		this.formIdEl.disabled = false
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
 		this.cart =
 			qsOptional<CartNotification>('cart-notification') ||
 			qsOptional<CartDrawer>('cart-drawer')
-		this.submitButton = qsRequired('[type="submit"]', this)
-		if (this.cart && this.cart.localName === 'cart-drawer')
+		this.submitButton = qsRequired(ProductForm.selectors.submitButton, this)
+		if (this.cart?.localName === 'cart-drawer')
 			this.submitButton.setAttribute('aria-haspopup', 'dialog')
 
 		this.hideErrors = this.dataset.hideErrors === 'true'
 	}
 
 	getSpinner() {
-		return qsRequired('.loading-overlay__spinner', this)
+		return qsRequired(SELECTORS.loadingOverlaySpinner, this)
 	}
 
 	onSubmitHandler(event: Event) {
@@ -65,7 +76,6 @@ export class ProductForm extends UcoastEl {
 		}
 		const config = addToCartConfig(formData)
 		const addedVariantId = formData.get('id') as string
-		console.log({ config, url: `${routes.cart_add_url}` })
 		if (!addedVariantId) throw Error('No variant id found')
 
 		fetch(`${routes.cart_add_url}`, config)
@@ -80,10 +90,10 @@ export class ProductForm extends UcoastEl {
 					})
 					this.handleErrorMessage(response.description)
 
-					const soldOutMessage = this.submitButton.querySelector('.sold-out-message')
+					const soldOutMessage = this.submitButton.querySelector(ProductForm.selectors.soldOutMessage)
 					if (!soldOutMessage) return
 					this.submitButton.setAttribute('aria-disabled', 'true')
-					const submitButtonText = qsRequired('span', this.submitButton)
+					const submitButtonText = qsRequired(ProductForm.selectors.submitButtonMessage, this.submitButton)
 					submitButtonText.classList.add('hidden')
 					soldOutMessage.classList.remove('hidden')
 					this.error = true
@@ -134,11 +144,11 @@ export class ProductForm extends UcoastEl {
 		if (this.hideErrors) return
 
 		this.errorMessageWrapper =
-			this.errorMessageWrapper || qsRequired('.product-form__error-message-wrapper', this)
+			this.errorMessageWrapper || qsRequired(ProductForm.selectors.errorMessageWrapper, this)
 		if (!this.errorMessageWrapper) throw new Error('No error message wrapper found')
 		this.errorMessage =
 			this.errorMessage ||
-			qsRequired('.product-form__error-message', this.errorMessageWrapper)
+			qsRequired(ProductForm.selectors.errorMessage, this.errorMessageWrapper)
 
 		this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage)
 

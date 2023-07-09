@@ -14,7 +14,7 @@ import { type ProductModal } from '@/scripts/product/product-modal'
 import { type VariantSelects } from '@/scripts/theme/variant-selects'
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { type ProductInfo } from '@/scripts/product/product-info'
-import { ATTRIBUTES } from '@/scripts/theme/constants';
+import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
 
 declare let window: uCoastWindow
 
@@ -41,7 +41,7 @@ export class QuickAddModal extends ModalDialog {
 	override show(opener: HTMLElement) {
 		opener.setAttribute('aria-disabled', 'true')
 		opener.setAttribute(ATTRIBUTES.loading, '')
-		qsRequired('.loading-overlay__spinner', opener).classList.remove('hidden')
+		qsRequired(SELECTORS.loadingOverlaySpinner, opener).classList.remove('hidden')
 
 		fetch(getAttributeOrThrow('data-product-url', opener))
 			.then((response) => response.text())
@@ -69,7 +69,7 @@ export class QuickAddModal extends ModalDialog {
 			.finally(() => {
 				opener.removeAttribute('aria-disabled')
 				opener.removeAttribute(ATTRIBUTES.loading)
-				qsRequired('.loading-overlay__spinner', opener).classList.add('hidden')
+				qsRequired(SELECTORS.loadingOverlaySpinner, opener).classList.add('hidden')
 			})
 	}
 

@@ -11,7 +11,7 @@
     min-width: #{$ax35};
     min-height: #{$ax35};
   }
-  [data-uc-cart-item] .loading-overlay {
+  [data-uc-cart-item] [data-uc-loading-overlay] {
     right: 0;
     padding-top: #{$ax45};
     bottom: auto;

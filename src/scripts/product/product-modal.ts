@@ -7,6 +7,9 @@ export class ProductModal extends ModalDialog {
 	constructor() {
 		super()
 	}
+	static selectors = {
+		container: '[data-uc-product-modal-container]',
+	}
 
 	override hide() {
 		super.hide()
@@ -36,14 +39,14 @@ export class ProductModal extends ModalDialog {
 		activeMedia.classList.add('active')
 		activeMedia.scrollIntoView()
 
-		const container = qsRequired('[role="document"]', this)
+		const container = qsRequired(ProductModal.selectors.container, this)
 		const activeMediaWidth = activeMedia.width
 			? parseInt(`${activeMedia.width}`)
 			: activeMedia.clientWidth
 		container.scrollLeft = (activeMediaWidth - container.clientWidth) / 2
 
 		if (
-      activeMedia instanceof DeferredMedia &&
+			activeMedia instanceof DeferredMedia &&
 			activeMediaContent &&
 			activeMediaContent.querySelector('.js-youtube')
 		)

@@ -3,7 +3,7 @@ import { SectionApiResponse } from '@/scripts/types/responses'
 import { currentTargetRequired, onKeyUpEscape, qsOptional, qsRequired } from '@/scripts/functions'
 import { removeTrapFocus, trapFocus } from '@/scripts/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES } from '@/scripts/theme/constants'
+import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
 
 export class CartDrawer extends UcoastEl {
 	static htmlSelector = 'cart-drawer'
@@ -12,7 +12,7 @@ export class CartDrawer extends UcoastEl {
 		innerEmpty: '[data-uc-cart-drawer-inner-empty]',
 		inner: '[data-uc-cart-drawer-inner]',
 		container: '#CartDrawer',
-		cartLink: '#cart-icon-bubble',
+		cartLink: '#CartIconBubble',
 		closeButton: '[data-uc-cart-drawer-close-button]',
 		noteSummary: '[data-uc-cart-note-summary]',
 		noteDetails: '[data-uc-cart-note-details]',
@@ -104,12 +104,13 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	renderContents(parsedState: SectionApiResponse) {
-		qsRequired(CartDrawer.selectors.inner, this).hasAttribute(ATTRIBUTES.cartEmpty) &&
+		qsOptional(CartDrawer.selectors.inner, this)?.hasAttribute(ATTRIBUTES.cartEmpty) &&
 			qsRequired(CartDrawer.selectors.inner, this).removeAttribute(ATTRIBUTES.cartEmpty)
 		this.productId = parsedState.id
 		this.getSectionsToRender().forEach((section) => {
 			const sectionId = section.id
 			if (!sectionId) throw new Error('Section id is required')
+			console.log('rendering section', {section}, parsedState.sections)
 			const sectionElement = section.selector
 				? qsRequired(section.selector)
 				: qsRequired(`#${sectionId}`)
@@ -138,6 +139,7 @@ export class CartDrawer extends UcoastEl {
 			},
 			{
 				id: 'cart-icon-bubble',
+				selector: SELECTORS.cartLink
 			},
 		]
 	}

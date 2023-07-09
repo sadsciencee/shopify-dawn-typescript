@@ -15,6 +15,9 @@
     assign base_url = base_url | strip
     if base_url contains '::'
         render 'ucoast', ucoast: base_file
+        unless ignore_s_up
+            render 'ucoast', ucoast: s_up_file
+        endunless
     elsif preload_stylesheet == true
         echo base_url | stylesheet_tag: preload: true
         unless ignore_s_up

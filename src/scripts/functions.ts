@@ -586,6 +586,8 @@ type AddToCartFormValues = {
 }
 
 export function addToCartConfig(body: FormData) {
+	const definedQuantity = getOrUndefined(body, 'quantity')
+	console.log({definedQuantity})
 	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
@@ -692,7 +694,7 @@ export function disableDesktopCSS() {
 	const mUp = qsaOptional('link[href*=".m-up"]')
 	mUp?.forEach((link) => {
 		const href = link.getAttribute('href')
-		if (!href) return
+		if (!href || href.includes('::')) return // vite urls contain ::
 		link.removeAttribute('href')
 		link.setAttribute('data-href', href)
 	})
@@ -700,7 +702,7 @@ export function disableDesktopCSS() {
 		const sUp = qsaOptional('link[href*=".s-up"]');
 		sUp?.forEach((link) => {
 			const href = link.getAttribute('href')
-			if (!href) return
+			if (!href || href.includes('::')) return
 			link.removeAttribute('href')
 			link.setAttribute('data-href', href)
 		})

@@ -11,7 +11,7 @@
 
 {%- liquid
 	assign product = section.settings.product
-
+	assign current_variant = product.selected_or_first_available_variant
 	if section.settings.media_size == 'large'
 		assign media_width = 0.65
 	elsif section.settings.media_size == 'medium'
@@ -20,8 +20,6 @@
 		assign media_width = 0.45
 	endif
 -%}
-
-{% comment %} TODO: assign `product.selected_or_first_available_variant` to variable and replace usage to reduce verbosity {% endcomment %}
 
 {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
 {%- if first_3d_model -%}
@@ -51,10 +49,8 @@
 						class="product__media-list{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 					>
 						{%- if section.settings.product != blank -%}
-							{%- if product.selected_or_first_available_variant.featured_media
-									!= null
-							-%}
-								{%- assign media = product.selected_or_first_available_variant.featured_media -%}
+							{%- if current_variant.featured_media != null -%}
+								{%- assign media = current_variant.featured_media -%}
 								<div
 									class="product__media-item"
 									data-media-id="{{ section.id }}-{{ media.id }}"
@@ -79,8 +75,7 @@
 							-%}
 							{%- for media in product.media -%}
 								{%- if media_to_render contains media.id
-									and media.id
-										!= product.selected_or_first_available_variant.featured_media.id
+									and media.id != current_variant.featured_media.id
 								-%}
 									<div
 										class="product__media-item"
@@ -193,7 +188,7 @@
 											<input
 												type="hidden"
 												name="id"
-												value="{{ product.selected_or_first_available_variant.id }}"
+												value="{{ current_variant.id }}"
 											>
 											{{ form | payment_terms }}
 										{%- endform -%}
@@ -201,7 +196,7 @@
 								{%- endif -%}
 							{%- when 'sku' -%}
 								<p
-									class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+									class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if current_variant.sku.size == 0 %} visibility-hidden{% endif %}"
 									id="Sku-{{ section.id }}"
 									role="status"
 									{{ block.shopify_attributes }}
@@ -209,133 +204,16 @@
 									<span class="visually-hidden">
 										{{- 'products.product.sku' | t }}:</span
 									>
-									{{- product.selected_or_first_available_variant.sku -}}
+									{{- current_variant.sku -}}
 								</p>
 							{%- when 'quantity_selector' -%}
-								<div
-									id="Quantity-Form-{{ section.id }}"
-									class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
-									{{ block.shopify_attributes }}
-								>
-									{% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
-									{% # theme-check-disable %}
-									{%- assign cart_qty = cart
-										| item_count_for_variant: product.selected_or_first_available_variant.id
-									-%}
-									{% # theme-check-enable %}
-									<label
-										class="quantity__label form__label"
-										for="Quantity-{{ section.id }}"
-									>
-										{{ 'products.product.quantity.label' | t }}
-										<span class="quantity__rules-cart no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">
-											<span class="loading-overlay hidden">
-												<span class="loading-overlay__spinner">
-													<svg
-														aria-hidden="true"
-														focusable="false"
-														class="spinner"
-														viewBox="0 0 66 66"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-													</svg>
-												</span>
-											</span>
-											<span
-												>(
-												{{-
-													'products.product.quantity.in_cart_html'
-													| t: quantity: cart_qty
-												-}}
-												)</span
-											>
-										</span>
-									</label>
-									<quantity-input class="quantity">
-										<button
-											class="quantity__button no-js-hidden"
-											name="minus"
-											type="button"
-										>
-											<span class="visually-hidden">
-												{{-
-													'products.product.quantity.decrease'
-													| t: product: product.title
-													| escape
-												-}}
-											</span>
-											{% render 'icon-default', icon: 'minus' %}
-										</button>
-										<input
-											class="quantity__input"
-											type="number"
-											name="quantity"
-											id="Quantity-{{ section.id }}"
-											data-cart-quantity="{{ cart_qty }}"
-											data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-											min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-											{% if product.selected_or_first_available_variant.quantity_rule.max
-													!= null
-											%}
-												data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-												max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-											{% endif %}
-											step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-											value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-											form="{{ product_form_id }}"
-										>
-										<button
-											class="quantity__button no-js-hidden"
-											name="plus"
-											type="button"
-										>
-											<span class="visually-hidden">
-												{{-
-													'products.product.quantity.increase'
-													| t: product: product.title
-													| escape
-												-}}
-											</span>
-											{% render 'icon-default', icon: 'plus' %}
-										</button>
-									</quantity-input>
-									<div class="quantity__rules caption no-js-hidden">
-										{%- if product.selected_or_first_available_variant.quantity_rule.increment
-												> 1
-										-%}
-											<span class="divider">
-												{{-
-													'products.product.quantity.multiples_of'
-													| t:
-														quantity: product.selected_or_first_available_variant.quantity_rule.increment
-												-}}
-											</span>
-										{%- endif -%}
-										{%- if product.selected_or_first_available_variant.quantity_rule.min
-												> 1
-										-%}
-											<span class="divider">
-												{{-
-													'products.product.quantity.minimum_of'
-													| t:
-														quantity: product.selected_or_first_available_variant.quantity_rule.min
-												-}}
-											</span>
-										{%- endif -%}
-										{%- if product.selected_or_first_available_variant.quantity_rule.max
-												!= null
-										-%}
-											<span class="divider">
-												{{-
-													'products.product.quantity.maximum_of'
-													| t:
-														quantity: product.selected_or_first_available_variant.quantity_rule.max
-												-}}
-											</span>
-										{%- endif -%}
-									</div>
-								</div>
+								{% render 'product-block-quantity-selector',
+									block: block,
+									current_variant: current_variant,
+									product_form_id: product_form_id,
+									product: product,
+									section: section
+								%}
 							{%- when 'share' -%}
 								{% assign share_url = product.selected_variant.url
 									| default: product.url
@@ -426,10 +304,8 @@
 								id="GalleryViewer-{{ section.id }}-right"
 								class="product__media-list{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 							>
-								{%- if product.selected_or_first_available_variant.featured_media
-										!= null
-								-%}
-									{%- assign media = product.selected_or_first_available_variant.featured_media -%}
+								{%- if current_variant.featured_media != null -%}
+									{%- assign media = current_variant.featured_media -%}
 									<div
 										class="product__media-item"
 										data-media-id="{{ section.id }}-{{ media.id }}"
@@ -448,8 +324,7 @@
 								{%- endif -%}
 								{%- for media in product.media -%}
 									{%- if media_to_render contains media.id
-										and media.id
-											!= product.selected_or_first_available_variant.featured_media.id
+										and media.id != current_variant.featured_media.id
 									-%}
 										<div
 											class="product__media-item"
@@ -518,8 +393,8 @@
 {%- endif -%}
 
 {%- liquid
-	if product.selected_or_first_available_variant.featured_media
-		assign seo_media = product.selected_or_first_available_variant.featured_media
+	if current_variant.featured_media
+		assign seo_media = current_variant.featured_media
 	else
 		assign seo_media = product.featured_media
 	endif

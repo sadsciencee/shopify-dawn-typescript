@@ -10,5 +10,11 @@ export const PUB_SUB_EVENTS = {
 
 export const ATTRIBUTES = {
   cartEmpty: 'data-uc-cart-empty',
-  loading: 'data-uc-loading'
+  loading: 'data-uc-loading',
+}
+
+export const SELECTORS = {
+  cartLink: '[data-uc-cart-icon-bubble]',
+  loadingOverlay: '[data-uc-loading-overlay]',
+  loadingOverlaySpinner :'[data-uc-loading-overlay-spinner]',
 }

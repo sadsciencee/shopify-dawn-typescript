@@ -1,14 +1,24 @@
 <div
 	id="Quantity-Form-{{ section.id }}"
-	class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+	class="product-form__input"
+	{% if settings.inputs_shadow_vertical_offset != 0
+		and settings.inputs_shadow_vertical_offset < 0
+	%}
+		data-uc-product-form-quantity="top"
+	{% else %}
+		data-uc-product-form-quantity
+	{% endif %}
 	{{ block.shopify_attributes }}
 >
 	{%- assign cart_qty = cart | item_count_for_variant: current_variant.id -%}
-	<label class="quantity__label form__label" for="Quantity-{{ section.id }}">
+	<label class="form__label" for="Quantity-{{ section.id }}" data-uc-quantity-label>
 		{{ 'products.product.quantity.label' | t }}
-		<span class="quantity__rules-cart no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">
-			<span class="loading-overlay hidden">
-				<span class="loading-overlay__spinner">
+		<span
+			class="no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}"
+			data-uc-quantity-rules-cart
+		>
+			<span class="hidden" data-uc-loading-overlay>
+				<span data-uc-loading-overlay-spinner>
 					<svg
 						aria-hidden="true"
 						focusable="false"
@@ -35,7 +45,7 @@
 			{% render 'icon-default', icon: 'minus' %}
 		</button>
 		<input
-			class="quantity__input"
+			data-uc-quantity-input
 			type="number"
 			name="quantity"
 			id="Quantity-{{ section.id }}"
@@ -57,7 +67,7 @@
 			{% render 'icon-default', icon: 'plus' %}
 		</button>
 	</quantity-input>
-	<div class="quantity__rules caption no-js-hidden">
+	<div class="caption no-js-hidden" data-uc-quantity-rules>
 		{%- if current_variant.quantity_rule.increment > 1 -%}
 			<span class="divider">
 				{{-

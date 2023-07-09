@@ -206,7 +206,7 @@
 											{%- render 'icon-default', icon: 'arrow' -%}
 										</span>
 									{%- endif -%}
-									<div class="loading-overlay__spinner hidden">
+									<div class="hidden" data-uc-loading-overlay-spinner>
 										<svg
 											aria-hidden="true"
 											focusable="false"
@@ -281,7 +281,7 @@
 												{{ 'products.product.sold_out' | t }}
 											{%- endif -%}
 										</span>
-										<span class="sold-out-message hidden">
+										<span class="hidden" data-uc-sold-out-message>
 											{{ 'products.product.sold_out' | t }}
 										</span>
 										{%- if horizontal_quick_add -%}
@@ -289,7 +289,7 @@
 												{%- render 'icon-default', icon: 'plus' -%}
 											</span>
 										{%- endif -%}
-										<div class="loading-overlay__spinner hidden">
+										<div class="hidden" data-uc-loading-overlay-spinner>
 											<svg
 												aria-hidden="true"
 												focusable="false"
