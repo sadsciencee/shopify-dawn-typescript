@@ -100,17 +100,18 @@
 
 				{% comment %} Filters for both horizontal and vertical filter {% endcomment %}
 				{%- for filter in results.filters -%}
+					{% assign filter_index = forloop.index %}
 					{%- assign total_active_values = total_active_values
 						| plus: filter.active_values.size
 					-%}
 					{% case filter.type %}
 						{% when 'boolean', 'list' %}
 							<details
-								id="Details-{{ forloop.index }}-{{ section.id }}"
+								id="Details-{{ filter_index }}-{{ section.id }}"
 								class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %}"
 								data-uc-js-filter
-								data-index="{{ forloop.index }}"
-								{% if filter_type == 'vertical' and forloop.index == 1 %}
+								data-index="{{ filter_index }}"
+								{% if filter_type == 'vertical' and filter_index == 1 %}
 									open
 								{% endif %}
 							>
@@ -135,8 +136,9 @@
 									</div>
 								</summary>
 								<div
-									id="Facet-{{ forloop.index }}-{{ section.id }}"
-									class="parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}"
+									id="Facet-{{ filter_index }}-{{ section.id }}"
+									class="{% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}"
+									data-uc-show-more-display
 								>
 									{%- if filter_type != 'vertical' -%}
 										<div class="facets__header">
@@ -157,7 +159,8 @@
 										</div>
 									{%- endif -%}
 									<fieldset
-										class="facets-wrap parent-wrap {% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}"
+										class="facets-wrap {% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}"
+										data-uc-show-more-wrap
 									>
 										<legend class="visually-hidden">
 											{{ filter.label | escape }}
@@ -167,7 +170,10 @@
 											role="list"
 										>
 											{%- for value in filter.values -%}
-												<li class="list-menu__item facets__item{% if forloop.index > 10 and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
+												<li
+													class="list-menu__item facets__item{% if forloop.index > 10 and filter_type == 'vertical' %} show-more-item hidden{% endif %}"
+													data-uc-show-more-item="{{ filter_index }}-{{ section.id }}"
+												>
 													<label
 														for="Filter-{{ filter.param_name | escape }}-{{ forloop.index }}"
 														class="facet-checkbox{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}"
@@ -317,14 +323,15 @@
 										<show-more-button>
 											<button
 												class="button-show-more link underlined-link no-js-hidden"
+												data-uc-show-more="{{ forloop.index }}-{{ section.id }}"
 												id="Show-More-{{ forloop.index }}-{{ section.id }}"
 												type="button"
 											>
-												<span class="label-show-more label-text"
+												<span class="label-show-more" data-uc-show-more-label
 													><span aria-hidden="true">+ </span>
 													{{- 'products.facets.show_more' | t -}}
 												</span>
-												<span class="label-show-less label-text hidden"
+												<span class="label-show-less hidden" data-uc-show-more-label
 													><span aria-hidden="true">- </span>
 													{{- 'products.facets.show_less' | t -}}
 												</span>

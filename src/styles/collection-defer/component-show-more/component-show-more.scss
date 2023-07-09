@@ -1,12 +1,12 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
-.button-show-more {
+@import "../../global/variables";
+@import "../../global/functions";
+[data-uc-show-more] {
   padding-left: 0;
   justify-content: flex-start;
   padding-bottom: #{$ax11};
 }
 
-.button-show-more,
+[data-uc-show-more],
 .button-show-less {
   margin-top: #{$ax15};
 }

@@ -130,9 +130,7 @@
 
 		{% case request.page_type %}
 			{% when 'product' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-product-defer'
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-product-defer' %}
 			{% when 'page' %}
 				{% comment %}
 					{% render 'ucoast-style-tag',
@@ -141,20 +139,14 @@
 					%}
 				{% endcomment %}
 			{% when 'collection' %}
-				{% comment %}
-					{% render 'ucoast-style-tag',
-						file: 'css-dir-collection-defer',
-						preload_stylesheet: true
-					%}
-				{% endcomment %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-collection-defer',
+					preload_stylesheet: true
+				%}
 			{% when 'blog' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-blog-defer'
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-blog-defer' %}
 			{% when 'article' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-article-defer'
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-article-defer' %}
 		{% endcase %}
 
 		{% comment %}

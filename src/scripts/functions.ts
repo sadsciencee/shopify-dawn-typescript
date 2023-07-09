@@ -678,14 +678,6 @@ export function trackRecentlyViewedProducts() {
 	}
 }
 
-export function parseFormData(formData: FormData) {
-	const formDataObj: Record<string, string> = {}
-	formData.forEach((value, key: string) => {
-		formDataObj[key] = value.toString()
-	})
-	return formDataObj
-}
-
 // used in critical.js
 
 export function disableDesktopCSS() {

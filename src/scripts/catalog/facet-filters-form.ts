@@ -4,7 +4,6 @@ import {
 	debounce,
 	getAttributeOrThrow,
 	onKeyUpEscape,
-	parseFormData,
 	qsaOptional,
 	qsaRequired,
 	qsOptional,
@@ -279,7 +278,17 @@ export class FacetFiltersForm extends UcoastEl {
 
 	createSearchParams(form: HTMLFormElement) {
 		const formData = new FormData(form)
-		return new URLSearchParams(parseFormData(formData)).toString()
+		// this is only really necessary bc typescript -> parse form data into string array in shopify filter param format
+		const paramsArr: Record<string, string>[] = []
+		formData.forEach((value, key: string) => {
+			paramsArr.push({
+				key,
+				value: value.toString(),
+			})
+		})
+		const paramsString = paramsArr.map((param) => `${param.key}=${param.value}`).join('&')
+		// back to normal dawn here
+		return new URLSearchParams(paramsString).toString()
 	}
 
 	onSubmitForm(searchParams: string, event: Event) {

@@ -1,7 +1,9 @@
 @import '../../global/variables.scss';
 @import '../../global/functions.scss';
 .customer:not(.account):not(.order) {
-	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0;
 	max-width: ax(334);
 	padding-left: #{$ax15};
 	padding-right: #{$ax15};
