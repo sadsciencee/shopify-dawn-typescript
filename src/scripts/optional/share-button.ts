@@ -6,6 +6,14 @@ declare let window: uCoastWindow
 
 export class ShareButton extends DetailsDisclosure {
 	static override htmlSelector = 'share-button'
+	static selectors = {
+		shareButton: '[data-uc-share-button]',
+		shareSummary: '[data-uc-share-summary]',
+		closeButton: '[data-uc-share-button-close]',
+		copyButton: '[data-uc-share-button-copy]',
+		successMessage: '[data-uc-share-message]',
+		urlInput: 'input',
+	}
 	elements: {
 		shareButton: HTMLButtonElement
 		shareSummary: HTMLElement
@@ -18,11 +26,11 @@ export class ShareButton extends DetailsDisclosure {
 		super()
 
 		this.elements = {
-			shareButton: qsRequired('button', this),
-			shareSummary: qsRequired('summary', this),
-			closeButton: qsRequired('.share-button__close', this),
-			successMessage: qsRequired('[id^="ShareMessage"]', this),
-			urlInput: qsRequired('input', this),
+			shareButton: qsRequired(ShareButton.selectors.shareButton, this),
+			shareSummary: qsRequired(ShareButton.selectors.shareSummary, this),
+			closeButton: qsRequired(ShareButton.selectors.closeButton, this),
+			successMessage: qsRequired(ShareButton.selectors.successMessage, this),
+			urlInput: qsRequired(ShareButton.selectors.urlInput, this),
 		}
 		this.urlToShare = this.elements.urlInput
 			? this.elements.urlInput.value
@@ -36,11 +44,11 @@ export class ShareButton extends DetailsDisclosure {
 			})
 		} else {
 			this.mainDetailsToggle.addEventListener('toggle', this.toggleDetails.bind(this))
-			qsRequired('.share-button__copy', this.mainDetailsToggle).addEventListener(
+			qsRequired(ShareButton.selectors.copyButton, this.mainDetailsToggle).addEventListener(
 				'click',
 				this.copyToClipboard.bind(this)
 			)
-			qsRequired('.share-button__close', this.mainDetailsToggle).addEventListener(
+			qsRequired(ShareButton.selectors.closeButton, this.mainDetailsToggle).addEventListener(
 				'click',
 				this.close.bind(this)
 			)

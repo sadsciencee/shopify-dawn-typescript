@@ -23,7 +23,7 @@
 	-%}
 	{%- if section.blocks.size > 0
 		or section.settings.newsletter_enable
-		or section.settings.show_social
+		or section.settings.show_social and has_social_icons == true
 		or section.settings.enable_follow_on_shop
 	-%}
 		{%- unless only_empty_brand -%}
@@ -39,14 +39,14 @@
 						endif
 					-%}
 					<div
-						class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+						class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% render 'ucoast-animate', animation: 'slide-in' %}"
 						{% if settings.animations_reveal_on_scroll %}
 							data-cascade
 						{% endif %}
 					>
 						{%- for block in section.blocks -%}
 							<div
-								class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade
@@ -139,7 +139,7 @@
 				{%- endif -%}
 
 				<div
-					class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} flex"
+					class="footer-block--newsletter{% render 'ucoast-animate', animation: 'slide-in' %} flex"
 					{% if settings.animations_reveal_on_scroll %}
 						data-cascade
 					{% endif %}
@@ -240,7 +240,7 @@
 	{%- endif -%}
 
 	<div
-		class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+		class="footer__content-bottom{% render 'ucoast-animate', animation: 'slide-in' %}"
 		{% if settings.animations_reveal_on_scroll %}
 			data-cascade
 		{% endif %}

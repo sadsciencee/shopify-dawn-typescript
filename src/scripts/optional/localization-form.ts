@@ -4,6 +4,12 @@ import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class LocalizationForm extends UcoastEl {
 	static htmlSelector = 'localization-form'
+	static selectors = {
+		input: 'input[name="locale_code"], input[name="country_code"]',
+		button: '[data-uc-localization-button]',
+		panel: '[data-uc-localization-wrapper]',
+		target: '[data-uc-localization-target]'
+	}
 	elements: {
 		input: HTMLInputElement
 		button: HTMLButtonElement
@@ -12,15 +18,15 @@ export class LocalizationForm extends UcoastEl {
 	constructor() {
 		super()
 		this.elements = {
-			input: qsRequired('input[name="locale_code"], input[name="country_code"]', this),
-			button: qsRequired('button', this),
-			panel: qsRequired('.disclosure__list-wrapper', this),
+			input: qsRequired(LocalizationForm.selectors.input, this),
+			button: qsRequired(LocalizationForm.selectors.button, this),
+			panel: qsRequired(LocalizationForm.selectors.panel, this),
 		}
 		this.elements.button.addEventListener('click', this.openSelector.bind(this))
 		this.elements.button.addEventListener('focusout', this.closeSelector.bind(this))
 		this.addEventListener('keyup', this.onContainerKeyUp.bind(this))
 
-		this.querySelectorAll('a').forEach((item) =>
+		this.querySelectorAll(LocalizationForm.selectors.target).forEach((item) =>
 			item.addEventListener('click', this.onItemClick.bind(this))
 		)
 	}

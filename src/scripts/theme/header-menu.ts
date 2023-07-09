@@ -1,13 +1,14 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
-import { qsRequired } from '@/scripts/functions';
+import { qsRequired, scaleValue } from '@/scripts/functions';
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
+import { SELECTORS } from '@/scripts/theme/constants';
 
 export class HeaderMenu extends DetailsDisclosure {
   static override htmlSelector = 'header-menu'
   header: StickyHeader | null
   constructor() {
     super()
-    this.header = qsRequired<StickyHeader>('.header-wrapper')
+    this.header = qsRequired<StickyHeader>(SELECTORS.headerWrapper)
   }
 
   override onToggle() {
@@ -19,9 +20,10 @@ export class HeaderMenu extends DetailsDisclosure {
       ''
     )
       return
+    const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
     document.documentElement.style.setProperty(
       '--header-bottom-position-desktop',
-      `${Math.floor(this.header.getBoundingClientRect().bottom)}px`
+      `calc(${scaleValue(this.header.getBoundingClientRect().bottom, viewport)} * var(--ax))`
     )
   }
 }

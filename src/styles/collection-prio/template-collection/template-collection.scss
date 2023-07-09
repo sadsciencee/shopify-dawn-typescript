@@ -13,7 +13,7 @@
   }
 }
 
-.collection .loading-overlay {
+.collection [data-uc-loading-overlay] {
   top: 0;
   right: 0;
   bottom: 0;
@@ -25,13 +25,13 @@
 }
 
 @include media-query($s-up) {
-  .collection .loading-overlay {
+  .collection [data-uc-loading-overlay] {
     padding-left: #{$ax50};
     padding-right: #{$ax50};
   }
 }
 
-.collection.loading .loading-overlay {
+.collection.loading [data-uc-loading-overlay] {
   display: block;
 }
 

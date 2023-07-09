@@ -4,9 +4,12 @@
 	endcapture
 -%}
 
-
-
-<cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+<cart-items
+	class="page-width{% unless cart == empty %} {{ spacing }}{% endunless %}"
+	{% if cart == empty %}
+		data-uc-cart-empty
+	{% endif %}
+>
 	<div class="title-wrapper-with-link">
 		<h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
 		<a href="{{ routes.all_products_collection_url }}" class="underlined-link">
@@ -34,7 +37,7 @@
 		method="post"
 		id="cart"
 	>
-		<div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
+		<div class="cart__items" id='main-cart-items' data-id="{{ section.id }}">
 			<div class="js-contents">
 				{%- if cart != empty -%}
 					<table class="cart-items">
@@ -72,7 +75,7 @@
 
 						<tbody>
 							{%- for item in cart.items -%}
-								<tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
+								<tr class="cart-item" data-uc-cart-item id="CartPage-Item-{{ item.index | plus: 1 }}">
 									<td class="cart-item__media">
 										{% if item.image %}
 											{% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -103,7 +106,7 @@
 											</p>
 										{%- endif -%}
 
-										<a href="{{ item.url }}" class="cart-item__name h4 break">
+										<a href="{{ item.url }}" class="h4 break" data-uc-cart-item-name>
 											{{- item.product.title | escape -}}
 										</a>
 
@@ -197,8 +200,8 @@
 									</td>
 
 									<td class="cart-item__totals right medium-hide large-up-hide">
-										<div class="loading-overlay hidden">
-											<div class="loading-overlay__spinner">
+										<div class="hidden" data-uc-loading-overlay>
+											<div data-uc-loading-overlay-spinner>
 												<svg
 													aria-hidden="true"
 													focusable="false"
@@ -296,7 +299,7 @@
 													{% render 'icon-default', icon: 'minus' %}
 												</button>
 												<input
-													class="quantity__input"
+													data-uc-quantity-input
 													data-quantity-variant-id="{{ item.variant.id }}"
 													type="number"
 													name="updates[]"
@@ -310,7 +313,7 @@
 													step="{{ item.variant.quantity_rule.increment }}"
 													{% # theme-check-enable %}
 													aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-													id="Quantity-{{ item.index | plus: 1 }}"
+													id="CartPage-LineItemQuantity-{{ item.index | plus: 1 }}"
 													data-index="{{ item.index | plus: 1 }}"
 												>
 												<button
@@ -344,10 +347,10 @@
 										</div>
 										<div
 											class="cart-item__error"
-											id="Line-item-error-{{ item.index | plus: 1 }}"
+											id="CartPage-LineItemError-{{ item.index | plus: 1 }}"
 											role="alert"
 										>
-											<small class="cart-item__error-text"></small>
+											<small data-uc-cart-item-error-text></small>
 											<svg
 												aria-hidden="true"
 												focusable="false"
@@ -363,8 +366,8 @@
 									</td>
 
 									<td class="cart-item__totals right small-hide">
-										<div class="loading-overlay hidden">
-											<div class="loading-overlay__spinner">
+										<div class="hidden" data-uc-loading-overlay>
+											<div data-uc-loading-overlay-spinner>
 												<svg
 													aria-hidden="true"
 													focusable="false"
@@ -446,13 +449,13 @@
 			</div>
 		</div>
 
-		<p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+		<p class="visually-hidden" id="CartPage-LiveRegionText" aria-live="polite" role="status"></p>
 		<p
 			class="visually-hidden"
-			id="shopping-cart-line-item-status"
 			aria-live="polite"
 			aria-hidden="true"
 			role="status"
+			data-uc-cart-page-status
 		>
 			{{ 'accessibility.loading' | t }}
 		</p>

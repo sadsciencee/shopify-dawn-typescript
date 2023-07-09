@@ -851,18 +851,18 @@ button.shopify-payment-button__button--unbranded {
 	width: 100%;
 }
 
-.button.loading {
+.button[data-uc-loading] {
 	color: transparent;
 	position: relative;
 }
 
 @media screen and (forced-colors: active) {
-	.button.loading {
+	.button[data-uc-loading] {
 		color: rgb(#{$schemaColorForeground});
 	}
 }
 
-.button.loading > .loading-overlay__spinner {
+.button[data-uc-loading] > [data-uc-loading-overlay-spinner] {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -872,11 +872,11 @@ button.shopify-payment-button__button--unbranded {
 	align-items: center;
 }
 
-.button.loading > .loading-overlay__spinner .spinner {
+.button[data-uc-loading] > [data-uc-loading-overlay-spinner] .spinner {
 	width: fit-content;
 }
 
-.button.loading > .loading-overlay__spinner .path {
+.button[data-uc-loading] > [data-uc-loading-overlay-spinner] .path {
 	stroke: rgb(#{$schemaColorButtonText});
 }
 
@@ -986,30 +986,30 @@ details[open] > .share-button__fallback {
 	transform: scale(1.07);
 }
 
-.share-button__close:not(.hidden) + .share-button__copy {
+[data-uc-share-button-close]:not(.hidden) + [data-uc-share-button-copy] {
 	display: none;
 }
 
-.share-button__close,
-.share-button__copy {
+[data-uc-share-button-close],
+[data-uc-share-button-copy] {
 	background-color: transparent;
 	color: rgb(#{$schemaColorForeground});
 }
 
-.share-button__copy:focus-visible,
-.share-button__close:focus-visible {
+[data-uc-share-button-copy]:focus-visible,
+[data-uc-share-button-close]:focus-visible {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
-.share-button__copy:focus,
-.share-button__close:focus {
+[data-uc-share-button-copy]:focus,
+[data-uc-share-button-close]:focus {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
-.field:not(:focus-visible):not(.focused) + .share-button__copy:not(:focus-visible):not(.focused),
-.field:not(:focus-visible):not(.focused) + .share-button__close:not(:focus-visible):not(.focused) {
+.field:not(:focus-visible):not(.focused) + [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
+.field:not(:focus-visible):not(.focused) + [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
 	background-color: inherit;
 }
 
@@ -1052,7 +1052,7 @@ details[open] > .share-button__fallback {
 	height: #{$ax15};
 }
 
-.share-button__message:not(:empty) {
+[data-uc-share-message]:not(:empty) {
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -1062,7 +1062,7 @@ details[open] > .share-button__fallback {
 	margin: #{$inputsBorderWidth};
 }
 
-.share-button__message:not(:empty):not(.hidden) ~ * {
+[data-uc-share-message]:not(:empty):not(.hidden) ~ * {
 	display: none;
 }
 
@@ -1413,7 +1413,7 @@ input[type='checkbox'] {
 	z-index: -1;
 }
 
-.quantity__input {
+[data-uc-quantity-input] {
 	color: currentColor;
 	font-size: #{$ax14};
 	font-weight: 500;
@@ -1456,63 +1456,63 @@ input[type='checkbox'] {
 }
 
 .quantity__button:focus-visible,
-.quantity__input:focus-visible {
+[data-uc-quantity-input]:focus-visible {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
 .quantity__button:focus,
-.quantity__input:focus {
+[data-uc-quantity-input]:focus {
 	background-color: rgb(#{$schemaColorBackground});
 	z-index: 2;
 }
 
 .quantity__button:not(:focus-visible):not(.focused),
-.quantity__input:not(:focus-visible):not(.focused) {
+[data-uc-quantity-input]:not(:focus-visible):not(.focused) {
 	box-shadow: inherit;
 	background-color: inherit;
 }
 
-.quantity__input:-webkit-autofill,
-.quantity__input:-webkit-autofill:hover,
-.quantity__input:-webkit-autofill:active {
+[data-uc-quantity-input]:-webkit-autofill,
+[data-uc-quantity-input]:-webkit-autofill:hover,
+[data-uc-quantity-input]:-webkit-autofill:active {
 	box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
 	-webkit-box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
 }
 
-.quantity__input::-webkit-outer-spin-button,
-.quantity__input::-webkit-inner-spin-button {
+[data-uc-quantity-input]::-webkit-outer-spin-button,
+[data-uc-quantity-input]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
 
-.quantity__input[type='number'] {
+[data-uc-quantity-input][type='number'] {
 	-moz-appearance: textfield;
 }
 
-.quantity__rules {
+[data-uc-quantity-rules] {
 	margin-top: #{$ax12};
 	position: relative;
 	font-size: #{$ax12};
 }
 
-.quantity__rules .caption {
+[data-uc-quantity-rules] .caption {
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-.quantity__rules .divider + .divider::before {
+[data-uc-quantity-rules] .divider + .divider::before {
 	content: '\2022';
 	margin: 0 #{$ax5};
 }
 
-.quantity__rules-cart {
+[data-uc-quantity-rules-cart] {
 	position: relative;
 }
 
-product-info .loading-overlay:not(.hidden) ~ *,
-.quantity__rules-cart .loading-overlay:not(.hidden) ~ * {
+product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
+[data-uc-quantity-rules-cart] [data-uc-loading-overlay]:not(.hidden) ~ * {
 	visibility: hidden;
 }
 
@@ -1786,7 +1786,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 	top: calc(-1 * var(--header-height));
 }
 
-.shopify-section-header-hidden.menu-open {
+.shopify-section-header-hidden[data-uc-header-menu-open] {
 	top: 0;
 }
 
@@ -1803,13 +1803,13 @@ product-info .loading-overlay:not(.hidden) ~ *,
 }
 
 /* Main Header Layout */
-.header-wrapper {
+[data-uc-header-wrapper] {
 	display: block;
 	position: relative;
 	background-color: rgb(#{$schemaColorBackground});
 }
 
-.header-wrapper--border-bottom {
+[data-uc-header-wrapper="border-bottom"] {
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
@@ -2070,11 +2070,11 @@ details[open] > .header__icon--menu .icon-hamburger {
 	transform: scale(0.8);
 }
 
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-close {
+.js details[open]:not([data-uc-menu-opening]) > .header__icon--menu .icon-close {
 	visibility: hidden;
 }
 
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-hamburger {
+.js details[open]:not([data-uc-menu-opening]) > .header__icon--menu .icon-hamburger {
 	visibility: visible;
 	opacity: 1;
 	transform: scale(1.07);

@@ -129,7 +129,6 @@ noscript .localization-selector.link {
 }
 
 .disclosure__list {
-  position: relative;
   overflow-y: auto;
   font-size: #{$ax14};
   padding-bottom: #{$ax5};
@@ -139,7 +138,6 @@ noscript .localization-selector.link {
   max-height: ax(206.5);
   max-width: #{ax(220)};
   min-width: #{ax(120)};
-  width: max-content;
 }
 
 .disclosure__item {

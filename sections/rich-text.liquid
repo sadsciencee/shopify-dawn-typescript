@@ -12,7 +12,7 @@
 					{%- case block.type -%}
 						{%- when 'heading' -%}
 							<h2
-								class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade
@@ -23,7 +23,7 @@
 							</h2>
 						{%- when 'caption' -%}
 							<p
-								class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade
@@ -34,7 +34,7 @@
 							</p>
 						{%- when 'text' -%}
 							<div
-								class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="rich-text__text rte{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade
@@ -45,7 +45,7 @@
 							</div>
 						{%- when 'button' -%}
 							<div
-								class="rich-text__buttons inline-flex flex-wrap w-100 {% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+								class="rich-text__buttons inline-flex flex-wrap w-100 {% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% render 'ucoast-animate', animation: 'slide-in' %}"
 								{{ block.shopify_attributes }}
 								{% if settings.animations_reveal_on_scroll %}
 									data-cascade

@@ -13,8 +13,12 @@
         render 'ucoast', ucoast: base_file
     endcapture
     assign base_url = base_url | strip
-
-    if preload_stylesheet == true
+    if base_url contains '::'
+        render 'ucoast', ucoast: base_file
+        unless ignore_s_up
+            render 'ucoast', ucoast: s_up_file
+        endunless
+    elsif preload_stylesheet == true
         echo base_url | stylesheet_tag: preload: true
         unless ignore_s_up
             capture s_up_url
@@ -30,7 +34,7 @@
                 render 'ucoast', ucoast: s_up_file
             endcapture
             assign s_up_url = s_up_url | strip
-            render 'ucoast-defer-style', url: base_url, media: '(min-width: 750px)'
+            render 'ucoast-defer-style', url: s_up_url, media: '(min-width: 750px)'
         endunless
     endif
 %}

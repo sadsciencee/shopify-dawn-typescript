@@ -4,9 +4,10 @@ import { FacetFiltersForm, beforeFacetFiltersForm, afterFacetFiltersForm } from 
 import { PriceRange } from '@/scripts/catalog/price-range'
 import { FacetRemove } from '@/scripts/catalog/facet-remove'
 import { MainSearch } from '@/scripts/catalog/main-search'
+import { ShowMoreButton } from '@/scripts/catalog/show-more-button';
 
 safeDefineElement(FacetFiltersForm, beforeFacetFiltersForm, afterFacetFiltersForm)
 safeDefineElement(PriceRange)
 safeDefineElement(FacetRemove)
 safeDefineElement(MainSearch)
-
+safeDefineElement(ShowMoreButton)

@@ -1,57 +1,71 @@
-import { MenuDrawer } from '@/scripts/theme/menu-drawer';
-import { closestOptional, qsRequired } from '@/scripts/functions';
-import { trapFocus } from '@/scripts/global';
+import { MenuDrawer } from '@/scripts/theme/menu-drawer'
+import { qsRequired } from '@/scripts/functions'
+import { trapFocus } from '@/scripts/global'
+import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants'
 
 export class HeaderDrawer extends MenuDrawer {
-  static override htmlSelector = 'header-drawer'
-  header?: HTMLElement
-  borderOffset?: number
-  constructor() {
-    super();
-  }
+	static override htmlSelector = 'header-drawer'
+	static override selectors = {
+		...MenuDrawer.selectors,
+	}
+	header?: HTMLElement
+	borderOffset?: number
+	constructor() {
+		super()
+	}
 
-  setHeader() {
-    return this.header || qsRequired('.section-header')
-  }
+	override getInstanceSelectors() {
+		this.instanceSelectors = HeaderDrawer.selectors
+	}
 
-  setBorderOffset() {
-    return this.borderOffset || closestOptional(this,'.header-wrapper')?.classList.contains('header-wrapper--border-bottom') ? 1 : 0;
-  }
+	setHeader() {
+		return this.header || qsRequired(SELECTORS.sectionHeader)
+	}
 
-  override openMenuDrawer(summaryElement:HTMLElement) {
-    this.header = this.setHeader()
-    this.borderOffset = this.setBorderOffset();
-    document.documentElement.style.setProperty(
-      '--header-bottom-position',
-      `${Math.round(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
-    );
-    this.header.classList.add('menu-open');
+	setBorderOffset() {
+		return this.borderOffset ||
+			qsRequired(SELECTORS.headerWrapper).dataset.ucHeaderWrapper == 'border-bottom'
+			? 1
+			: 0
+	}
 
-    setTimeout(() => {
-      this.mainDetailsToggle.classList.add('menu-opening');
-    });
+	override openMenuDrawer(summaryElement: HTMLElement) {
+		this.header = this.setHeader()
+		this.borderOffset = this.setBorderOffset()
+		document.documentElement.style.setProperty(
+			'--header-bottom-position',
+			`${Math.round(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+		)
+		this.header.setAttribute('data-uc-header-menu-open', '')
 
-    summaryElement.setAttribute('aria-expanded', 'true');
-    window.addEventListener('resize', this.onResize);
-    trapFocus(this.mainDetailsToggle, summaryElement);
-    document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
-  }
+		setTimeout(() => {
+			this.mainDetails.setAttribute(ATTRIBUTES.menuOpening, '')
+		})
 
-  override closeMenuDrawer(event:Event | undefined, elementToFocus: HTMLElement | undefined = undefined) {
-    if (!elementToFocus) return;
-    this.header = this.setHeader()
-    super.closeMenuDrawer(event, elementToFocus);
-    this.header.classList.remove('menu-open');
-    window.removeEventListener('resize', this.onResize);
-  }
+		summaryElement.setAttribute('aria-expanded', 'true')
+		window.addEventListener('resize', this.onResize)
+		trapFocus(this.mainDetails, summaryElement)
+		document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`)
+	}
 
-  onResize = () => {
-    if (!this.header) return;
-    this.borderOffset = this.setBorderOffset();
-    document.documentElement.style.setProperty(
-      '--header-bottom-position',
-      `${Math.round(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
-    );
-    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
-  };
+	override closeMenuDrawer(
+		event: Event | undefined,
+		elementToFocus: HTMLElement | undefined = undefined
+	) {
+		if (!elementToFocus) return
+		this.header = this.setHeader()
+		super.closeMenuDrawer(event, elementToFocus)
+		this.header.removeAttribute('data-uc-header-menu-open')
+		window.removeEventListener('resize', this.onResize)
+	}
+
+	onResize = () => {
+		if (!this.header) return
+		this.borderOffset = this.setBorderOffset()
+		document.documentElement.style.setProperty(
+			'--header-bottom-position',
+			`${Math.round(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+		)
+		document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`)
+	}
 }

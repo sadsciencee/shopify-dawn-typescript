@@ -9,7 +9,7 @@
 		<div class="collapsible-content__wrapper section-{{ section.id }}-padding{% if section.settings.layout == 'section' %} content-container color-{{ section.settings.container_color_scheme }} gradient{% endif %}">
 			<div class="{% if section.settings.image == blank %}collapsible-content-wrapper-narrow my-0 mx-auto {% else %}page-width{% endif %}">
 				<div
-					class="collapsible-content__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					class="collapsible-content__header{% render 'ucoast-animate', animation: 'slide-in' %}"
 					style="text-align: {{ section.settings.heading_alignment }};"
 				>
 					{%- if section.settings.caption != blank -%}
@@ -27,7 +27,7 @@
 						</h2>
 					{% endif %}
 				</div>
-				<div class="grid grid--1-col grid--2-col-tablet collapsible-content__grid{% if section.settings.desktop_layout == 'image_second' %} collapsible-content__grid--reverse{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+				<div class="grid grid--1-col grid--2-col-tablet collapsible-content__grid{% if section.settings.desktop_layout == 'image_second' %} collapsible-content__grid--reverse{% endif %}{% render 'ucoast-animate', animation: 'slide-in' %}">
 					{%- if section.settings.image != blank -%}
 						<div class="grid__item collapsible-content__grid-item">
 							<div

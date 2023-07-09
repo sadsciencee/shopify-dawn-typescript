@@ -1,6 +1,6 @@
 {%- if cart != empty -%}
 	{%- for item in cart.items -%}
-		<div id="cart-notification-product-{{ item.key }}" class="cart-item">
+		<div id="cart-notification-product-{{ item.key }}" data-uc-cart-item>
 			{%- if item.image -%}
 				<div class="cart-notification-product__image global-media-settings">
 					{% render 'ucoast-image', image: item.image %}

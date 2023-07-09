@@ -18,7 +18,7 @@
 		{% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
 		{%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
 			<facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
-				<form class="facets-vertical-form" id="FacetSortForm">
+				<form class="facets-vertical-form" data-uc-facet-form="sort">
 					<div class="facet-filters sorting caption">
 						<div class="facet-filters__field">
 							<h2 class="facet-filters__label caption-large text-body">
@@ -86,7 +86,7 @@
 								{%- endif -%}
 							</span>
 						</h2>
-						<div class="loading-overlay__spinner">
+						<div data-uc-loading-overlay-spinner>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -121,7 +121,7 @@
 			{%- endif -%}
 
 			<div
-				class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+				class="product-grid-container{% render 'ucoast-animate', animation: 'slide-in' %}"
 				id="ProductGridContainer"
 				{% if settings.animations_reveal_on_scroll %}
 					data-cascade
@@ -132,8 +132,9 @@
 						class="collection collection--empty page-width"
 						id="product-grid"
 						data-id="{{ section.id }}"
+						data-uc-product-grid-collection
 					>
-						<div class="loading-overlay gradient"></div>
+						<div class="gradient" data-uc-loading-overlay></div>
 						<div class="title-wrapper center">
 							<h2 class="title title--primary">
 								{{ 'sections.collection_template.empty' | t -}}
@@ -146,8 +147,11 @@
 						</div>
 					</div>
 				{%- else -%}
-					<div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
-						<div class="loading-overlay gradient"></div>
+					<div
+						class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+						data-uc-product-grid-collection
+					>
+						<div class="gradient" data-uc-loading-overlay></div>
 
 						<ul
 							id="product-grid"
@@ -163,7 +167,7 @@
 									{%- assign lazy_load = true -%}
 								{%- endif -%}
 								<li
-									class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+									class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %}"
 									{% if settings.animations_reveal_on_scroll %}
 										data-cascade
 										style="--animation-order: {{ forloop.index }};"

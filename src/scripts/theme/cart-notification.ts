@@ -8,9 +8,14 @@ import { removeTrapFocus, trapFocus } from '@/scripts/global';
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme';
 import { type SectionApiResponse } from '@/scripts/types/responses';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { SELECTORS } from '@/scripts/theme/constants';
 
 export class CartNotification extends UcoastEl {
   static htmlSelector = 'cart-notification';
+  static selectors = {
+    notification: '[data-uc-cart-notification]',
+    closeButton: '[data-uc-cart-notification-close]'
+  }
   notification: HTMLElement;
   header: StickyHeader;
   onBodyClick: (event: MouseEvent) => void;
@@ -20,12 +25,12 @@ export class CartNotification extends UcoastEl {
 
     super();
 
-    this.notification = qsRequired('#cart-notification')
+    this.notification = qsRequired(CartNotification.selectors.notification)
     this.header = qsRequired('sticky-header')
     this.onBodyClick = this.handleBodyClick.bind(this);
 
     this.notification.addEventListener('keyup', (event) => event.code === 'Escape' && this.close());
-    this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
+    this.querySelectorAll(CartNotification.selectors.closeButton).forEach((closeButton) =>
       closeButton.addEventListener('click', this.close.bind(this))
     );
   }
@@ -80,6 +85,7 @@ export class CartNotification extends UcoastEl {
       },
       {
         id: 'cart-icon-bubble',
+        selector: SELECTORS.cartLink
       },
     ];
   }

@@ -3,8 +3,15 @@ import { qsaOptional } from '@/scripts/functions';
 
 export class VariantRadios extends VariantSelects {
   static override htmlSelector = 'variant-radios';
+  static override selectors = {
+    ...VariantSelects.selectors,
+  }
   constructor() {
     super();
+  }
+
+  override setInstanceSelectors() {
+    this.instanceSelectors = VariantRadios.selectors
   }
 
   override setInputAvailability(listOfOptions:(HTMLInputElement|HTMLOptionElement)[], listOfAvailableOptions:(string|null)[]) {

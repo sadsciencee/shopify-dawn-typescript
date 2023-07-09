@@ -10,6 +10,7 @@ import {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { ProductModel } from '@/scripts/optional/product-model'
+import { ATTRIBUTES } from '@/scripts/theme/constants'
 
 // local types
 
@@ -277,17 +278,17 @@ export const toggleActive = (el: HTMLElement, active: boolean) => {
 
 export const toggleIsEmpty = (el: HTMLElement, isEmpty: boolean) => {
 	if (isEmpty) {
-		el.setAttribute('data-uc-is-empty', '')
+		el.setAttribute('data-uc-cart-empty', '')
 	} else {
-		el.removeAttribute('data-uc-is-empty')
+		el.removeAttribute('data-uc-cart-empty')
 	}
 }
 
 export const toggleLoading = (el: HTMLElement, loading: boolean) => {
 	if (loading) {
-		el.setAttribute('data-uc-loading', '')
+		el.setAttribute(ATTRIBUTES.loading, '')
 	} else {
-		el.removeAttribute('data-uc-loading')
+		el.removeAttribute(ATTRIBUTES.loading)
 	}
 }
 
@@ -387,7 +388,7 @@ export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
 // this sets all relevant height variables for the app
 
 export const setHeightVars = (header: HTMLElement, announcement: HTMLElement | undefined) => {
-	const viewport = window.innerWidth >= 990 ? 'desktop' : 'mobile'
+	const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
 	const viewportHeight =
 		viewport === 'desktop'
 			? '100vh'
@@ -432,14 +433,13 @@ export function initializeSummaryA11y() {
 		if (nextElementSibling && nextElementSibling.hasAttribute('id')) {
 			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
 		}
-
 		summary.addEventListener('click', (event) => {
 			const currentTarget = currentTargetRequired(event)
 			const closestTarget = targetClosestRequired(event, 'details')
 			currentTarget.setAttribute('aria-expanded', `${!closestTarget.hasAttribute('open')}`)
 		})
-
 		if (summary.closest('header-drawer, menu-drawer')) return
+
 		const parentElement =
 			summary.parentElement instanceof HTMLElement ? summary.parentElement : undefined
 		if (!parentElement) return
@@ -585,6 +585,8 @@ type AddToCartFormValues = {
 }
 
 export function addToCartConfig(body: FormData) {
+	const definedQuantity = getOrUndefined(body, 'quantity')
+	console.log({ definedQuantity })
 	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
@@ -676,14 +678,6 @@ export function trackRecentlyViewedProducts() {
 	}
 }
 
-export function parseFormData(formData: FormData) {
-	const formDataObj: Record<string, string> = {};
-	formData.forEach((value, key:string) => {
-		formDataObj[key] = value.toString();
-	});
-	return formDataObj;
-}
-
 // used in critical.js
 
 export function disableDesktopCSS() {
@@ -691,21 +685,18 @@ export function disableDesktopCSS() {
 	const mUp = qsaOptional('link[href*=".m-up"]')
 	mUp?.forEach((link) => {
 		const href = link.getAttribute('href')
-		if (!href) return
+		if (!href || href.includes('::')) return // vite urls contain ::
 		link.removeAttribute('href')
 		link.setAttribute('data-href', href)
 	})
 	if (window.innerWidth < 750) {
-		const sUp = qsaOptional('link[href*=".s-up"]');
+		const sUp = qsaOptional('link[href*=".s-up"]')
 		sUp?.forEach((link) => {
 			const href = link.getAttribute('href')
-			if (!href) return
+			if (!href || href.includes('::')) return
 			link.removeAttribute('href')
 			link.setAttribute('data-href', href)
 		})
 		return
 	}
-
-
-
 }

@@ -11,10 +11,19 @@
 	}
 </style>
 
-<cart-drawer class="drawer fixed left-0 top-0 h-100 flex justify-end {% if cart == empty %} is-empty{% endif %}">
+<cart-drawer
+	class="drawer fixed left-0 top-0 h-100 flex justify-end"
+	{% if cart == empty %}
+		data-uc-cart-empty
+	{% endif %}
+>
 	<div id="CartDrawer" class="cart-drawer">
-		<div id="CartDrawer-Overlay" class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"></div>
 		<div
+			data-uc-cart-drawer-overlay
+			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"
+		></div>
+		<div
+			data-uc-cart-drawer-inner
 			class="drawer__inner h-100 flex flex-column overflow-hidden"
 			role="dialog"
 			aria-modal="true"
@@ -22,7 +31,10 @@
 			tabindex="-1"
 		>
 			{%- if cart == empty -%}
-				<div class="drawer__inner-empty flex flex-column overflow-hidden h-100">
+				<div
+					data-uc-cart-drawer-inner-empty
+					class="flex flex-column overflow-hidden h-100"
+				>
 					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
 						<div class="cart-drawer__empty-content">
 							<h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
@@ -31,6 +43,7 @@
 								type="button"
 								onclick="this.closest('cart-drawer').close()"
 								aria-label="{{ 'accessibility.close' | t }}"
+								data-uc-cart-drawer-close-button
 							>
 								{% render 'icon-default', icon: 'close' %}
 							</button>
@@ -64,7 +77,7 @@
 			<div class="drawer__header relative flex justify-between align-center">
 				<h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
 				<button
-					class="drawer__close"
+					class="drawer__close inline-block p-0 absolute bg-transparent b-0"
 					type="button"
 					onclick="this.closest('cart-drawer').close()"
 					aria-label="{{ 'accessibility.close' | t }}"
@@ -74,7 +87,7 @@
 			</div>
 			<cart-drawer-items
 				{% if cart == empty %}
-					class=" is-empty"
+					data-uc-cart-empty
 				{% endif %}
 			>
 				<form
@@ -83,7 +96,10 @@
 					class="cart__contents cart-drawer__form flex flex-wrap"
 					method="post"
 				>
-					<div id="CartDrawer-CartItems" class="drawer__contents flex flex-column js-contents">
+					<div
+						data-uc-cart-drawer-main
+						class="drawer__contents flex flex-column js-contents"
+					>
 						{%- if cart != empty -%}
 							<div class="drawer__cart-items-wrapper">
 								<table class="cart-items" role="table">
@@ -127,6 +143,7 @@
 												id="CartDrawer-Item-{{ item.index | plus: 1 }}"
 												class="cart-item"
 												role="row"
+												data-uc-cart-item
 											>
 												<td
 													class="cart-item__media"
@@ -139,7 +156,7 @@
 															class="cart-item__link"
 															tabindex="-1"
 															aria-hidden="true"
-														><span></span>
+															><span></span>
 														</a>
 														{% render 'ucoast-image',
 															image: item.image,
@@ -161,7 +178,8 @@
 
 													<a
 														href="{{ item.url }}"
-														class="cart-item__name h4 break"
+														class="h4 break"
+														data-uc-cart-item-name
 													>
 														{{- item.product.title | escape -}}
 													</a>
@@ -278,8 +296,8 @@
 													role="cell"
 													headers="CartDrawer-ColumnTotal"
 												>
-													<div class="loading-overlay hidden">
-														<div class="loading-overlay__spinner">
+													<div class="hidden" data-uc-loading-overlay>
+														<div data-uc-loading-overlay-spinner>
 															<svg
 																aria-hidden="true"
 																focusable="false"
@@ -390,7 +408,7 @@
 																%}
 															</button>
 															<input
-																class="quantity__input"
+																data-uc-quantity-input
 																type="number"
 																data-quantity-variant-id="{{ item.variant.id }}"
 																name="updates[]"
@@ -406,7 +424,7 @@
 																step="{{ item.variant.quantity_rule.increment }}"
 																{% # theme-check-enable %}
 																aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-																id="Drawer-quantity-{{ item.index | plus: 1 }}"
+																id="CartDrawer-Quantity-{{ item.index | plus: 1 }}"
 																data-index="{{ item.index | plus: 1 }}"
 															>
 															<button
@@ -450,7 +468,7 @@
 														role="alert"
 													>
 														<small
-															class="cart-item__error-text"
+															data-uc-cart-item-error-text
 														></small>
 														<svg
 															aria-hidden="true"
@@ -471,23 +489,27 @@
 								</table>
 							</div>
 						{%- endif -%}
-						<p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
 						<p
-							id="CartDrawer-LineItemStatus"
+							data-uc-cart-drawer-live-region-text
+							class="visually-hidden"
+							role="status"
+						></p>
+						<p
 							class="visually-hidden"
 							aria-hidden="true"
 							role="status"
+							data-uc-cart-drawer-status
 						>
 							{{ 'accessibility.loading' | t }}
 						</p>
 					</div>
-					<div id="CartDrawer-CartErrors" role="alert"></div>
+					<div role="alert" data-uc-cart-drawer-errors></div>
 				</form>
 			</cart-drawer-items>
 			<div class="drawer__footer">
 				{%- if settings.show_cart_note -%}
-					<details id="Details-CartDrawer">
-						<summary class='flex relative lh-1'>
+					<details id="Details-CartDrawer" data-uc-cart-note-details>
+						<summary class="flex relative lh-1" data-uc-cart-note-summary>
 							<span class="summary__title">
 								{{ 'sections.cart.note' | t }}
 								{% render 'icon-default', icon: 'caret' %}

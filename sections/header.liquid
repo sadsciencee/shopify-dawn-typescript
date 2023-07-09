@@ -93,8 +93,6 @@
 	}
 {%- endstyle -%}
 
-
-
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
 	<symbol id="icon-search" viewbox="0 0 18 19" fill="none">
 	    <path fill-rule="evenodd" clip-rule="evenodd"
@@ -301,23 +299,8 @@
             {%- endfor -%}
 
             <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset"
-               id="cart-icon-bubble">
-                {%- liquid
-                    if cart == empty
-                        render 'icon-default', icon: 'cart-empty'
-                    else
-                        render 'icon-default', icon: 'cart'
-                    endif
-                -%}
-                <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-                {%- if cart != empty -%}
-                    <div class="cart-count-bubble">
-                        {%- if cart.item_count < 100 -%}
-                            <span aria-hidden="true">{{ cart.item_count }}</span>
-                        {%- endif -%}
-                        <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-                    </div>
-                {%- endif -%}
+               id="CartIconBubble">
+				{% render 'cart-icon-bubble' %}
             </a>
         </div>
     </header>
@@ -325,14 +308,24 @@
 {% if section.settings.sticky_header_type != 'none' %}
 	<sticky-header
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+		class="color-{{ section.settings.color_scheme }} gradient"
+		{% if section.settings.show_line_separator %}
+			data-uc-header-wrapper="border-bottom"
+		{% else %}
+			data-uc-header-wrapper="border-none"
+		{% endif %}
 	>
 		{{ header_contents }}
 	</sticky-header>
 {% else %}
 	<div
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+		class="color-{{ section.settings.color_scheme }} gradient"
+		{% if section.settings.show_line_separator %}
+			data-uc-header-wrapper="border-bottom"
+		{% else %}
+			data-uc-header-wrapper="border-none"
+		{% endif %}
 	>
 		{{ header_contents }}
 	</div>

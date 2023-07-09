@@ -5,7 +5,7 @@
 }
 
 .js menu-drawer > details > summary::before,
-.js menu-drawer > details[open]:not(.menu-opening) > summary::before {
+.js menu-drawer > details[open]:not([data-uc-menu-opening]) > summary::before {
   content: '';
   position: absolute;
   cursor: default;
@@ -55,13 +55,13 @@ menu-drawer > details[open] > summary::before {
 }
 
 .no-js details[open] > .menu-drawer,
-.js details[open].menu-opening > .menu-drawer,
-details[open].menu-opening > .menu-drawer__submenu {
+.js details[open][data-uc-menu-opening] > .menu-drawer,
+details[open][data-uc-menu-opening] > .menu-drawer__submenu {
   transform: translateX(0);
   visibility: visible;
 }
 
-.js .menu-drawer__navigation .submenu-open {
+.js .menu-drawer__navigation [data-uc-submenu="open"] {
   visibility: hidden; /* hide menus from screen readers when hidden by submenu */
 }
 

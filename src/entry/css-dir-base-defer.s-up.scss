@@ -1,6 +1,4 @@
-
 @import '../styles/base-defer/component-cart-items/component-cart-items.s-up.scss';
-@import '../styles/base-defer/component-facets/component-facets.s-up.scss';
 @import '../styles/base-defer/component-list-payment/component-list-payment.s-up.scss';
 @import '../styles/base-defer/component-list-social/component-list-social.s-up.scss';
 @import '../styles/base-defer/component-loading-overlay/component-loading-overlay.s-up.scss';
@@ -13,9 +11,12 @@
 @import '../styles/base-defer/component-cart/component-cart.s-up.scss';
 @import '../styles/base-defer/component-cart-drawer/component-cart-drawer.s-up.scss';
 @import '../styles/base-defer/component-predictive-search/component-predictive-search.s-up.scss';
-@import '../styles/base-prio/section-collection-list/section-collection-list.s-up.scss';
-@import '../styles/base-prio/section-featured-blog/section-featured-blog.s-up.scss';
-@import '../styles/base-prio/section-featured-product/section-featured-product.s-up.scss';
-@import '../styles/base-prio/section-multicolumn/section-multicolumn.s-up.scss';
-@import '../styles/base-prio/section-rich-text/section-rich-text.s-up.scss';
-@import '../styles/base-prio/video-section/video-section.s-up.scss';
+@import '../styles/base-defer/section-collection-list/section-collection-list.s-up.scss';
+@import '../styles/base-defer/section-featured-blog/section-featured-blog.s-up.scss';
+@import '../styles/base-defer/section-featured-product/section-featured-product.s-up.scss';
+@import '../styles/base-defer/section-multicolumn/section-multicolumn.s-up.scss';
+@import '../styles/base-defer/section-rich-text/section-rich-text.s-up.scss';
+@import '../styles/base-defer/video-section/video-section.s-up.scss';
+@import '../styles/base-defer/component-cart-notification/component-cart-notification.s-up.scss';
+@import '../styles/base-defer/collage/collage.s-up.scss';
+@import '../styles/base-defer/component-article-card/component-article-card.s-up.scss';

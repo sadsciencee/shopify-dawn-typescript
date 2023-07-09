@@ -1,0 +1,48 @@
+@import '../../global/variables';
+@import '../../global/functions';
+.featured-product .product__media-list {
+	width: 100%;
+	margin: 0;
+	padding-bottom: 0;
+}
+
+.featured-product .product-media-container {
+	margin-bottom: #{$mediaShadowVerticalOffset};
+	max-width: 100%;
+}
+
+.featured-product .product__media-item {
+	padding-left: 0;
+	width: 100%;
+}
+
+.featured-product .product__media-item:not(:first-child) {
+	display: none;
+}
+
+.featured-product .placeholder-svg {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.background-secondary .featured-product {
+	padding: #{$ax25};
+}
+
+.featured-product .share-button:nth-last-child(2) {
+	display: inline-flex;
+}
+
+.share-button + .product__view-details {
+	display: inline-flex;
+	float: right;
+	align-items: center;
+	min-height: #{$ax44};
+}
+
+.share-button + .product__view-details::after {
+	content: '';
+	clear: both;
+	display: table;
+}

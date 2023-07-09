@@ -26,7 +26,7 @@
   transition: transform var(--duration-default) ease;
 }
 
-.drawer__inner-empty {
+[data-uc-cart-drawer-inner-empty] {
   padding: 0 $ax15;
   background-color: rgb(#{$schemaColorBackground});
 }
@@ -35,19 +35,19 @@
   flex: 1;
 }
 
-cart-drawer.is-empty .drawer__inner {
+cart-drawer[data-uc-cart-empty] .drawer__inner {
   display: grid;
   grid-template-rows: 1fr;
   align-items: center;
   padding: 0;
 }
 
-cart-drawer.is-empty .drawer__header {
+cart-drawer[data-uc-cart-empty] .drawer__header {
   display: none;
 }
 
-cart-drawer:not(.is-empty) .cart-drawer__warnings,
-cart-drawer:not(.is-empty) .cart-drawer__collection {
+cart-drawer:not([data-uc-cart-empty]) .cart-drawer__warnings,
+cart-drawer:not([data-uc-cart-empty]) .cart-drawer__collection {
   display: none;
 }
 
@@ -97,7 +97,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   padding: $ax15 0;
 }
 
-cart-drawer-items.is-empty + .drawer__footer {
+cart-drawer-items[data-uc-cart-empty] + .drawer__footer {
   display: none;
 }
 
@@ -168,14 +168,14 @@ cart-drawer-items {
   }
 }
 
-.cart-drawer .cart-item {
+.cart-drawer [data-uc-cart-item] {
   display: grid;
   grid-template: repeat(2, auto) / repeat(4, 1fr);
   gap: $ax15;
   margin-bottom: 0;
 }
 
-.cart-drawer .cart-item:last-child {
+.cart-drawer [data-uc-cart-item]:last-child {
   margin-bottom: #{$ax10};
 }
 
@@ -211,11 +211,11 @@ cart-drawer-items {
   border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
-.cart-drawer .cart-item:last-child {
+.cart-drawer [data-uc-cart-item]:last-child {
   margin-bottom: $ax15;
 }
 
-.cart-drawer .cart-item .loading-overlay {
+.cart-drawer [data-uc-cart-item] [data-uc-loading-overlay] {
   right: #{$ax5};
   padding-top: #{$ax25};
 }
@@ -224,7 +224,7 @@ cart-drawer-items {
   padding-top: #{$ax20};
 }
 
-.cart-drawer .cart-item > td + td {
+.cart-drawer [data-uc-cart-item] > td + td {
   padding-left: #{$ax10};
 }
 
@@ -260,7 +260,7 @@ cart-drawer-items {
 }
 
 @include media-query($s-down) {
-  .cart-drawer .cart-item cart-remove-button {
+  .cart-drawer [data-uc-cart-item] cart-remove-button {
     margin-left: 0;
   }
 }

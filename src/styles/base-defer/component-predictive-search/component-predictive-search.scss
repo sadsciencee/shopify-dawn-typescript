@@ -50,7 +50,7 @@
 }
 
 predictive-search[open] .predictive-search,
-predictive-search[loading] .predictive-search {
+predictive-search[data-uc-loading] .predictive-search {
 	display: block;
 }
 
@@ -78,28 +78,28 @@ predictive-search .spinner {
 	line-height: 0;
 }
 
-predictive-search:not([loading]) .predictive-search__loading-state,
-predictive-search:not([loading]) .predictive-search-status__loading {
+predictive-search:not([data-uc-loading]) .predictive-search__loading-state,
+predictive-search:not([data-uc-loading]) .predictive-search-status__loading {
 	display: none;
 }
 
-predictive-search[loading] .predictive-search__loading-state {
+predictive-search[data-uc-loading] .predictive-search__loading-state {
 	display: flex;
 	justify-content: center;
 	padding: #{$ax10};
 }
 
-predictive-search[loading] .predictive-search__search-for-button {
+predictive-search[data-uc-loading] .predictive-search__search-for-button {
 	display: none;
 }
 
-predictive-search[loading]
+predictive-search[data-uc-loading]
 	.predictive-search__results-groups-wrapper
 	~ .predictive-search__loading-state {
 	display: none;
 }
 
-predictive-search[loading]
+predictive-search[data-uc-loading]
 	.predictive-search__results-groups-wrapper
 	~ .predictive-search__search-for-button {
 	display: initial;

@@ -1,11 +1,21 @@
 import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { isVariantChangeEvent, publish, subscribe } from '@/scripts/theme/pubsub';
+import { isVariantChangeEvent, publish, subscribe } from '@/scripts/theme/pubsub'
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
-import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/functions';
-import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/functions'
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class ProductInfo extends UcoastEl {
 	static htmlSelector = 'product-info'
+	static selectors = {
+		quantityForm: '[data-uc-product-form-quantity]',
+		quantityInput: '[data-uc-quantity-input]',
+		quantityRules: '[data-uc-quantity-rules]',
+		quantityRulesCart: '[data-uc-quantity-rules-cart]',
+		quantityLabel: '[data-uc-quantity-label]',
+		currentVariant: '[data-uc-product-variant-id]',
+		variantSelects: 'variant-radios, variant-selects',
+		submitButton: '[type="submit"]',
+	}
 	input: HTMLInputElement
 	currentVariant: HTMLInputElement
 	variantSelects?: VariantRadios
@@ -16,15 +26,15 @@ export class ProductInfo extends UcoastEl {
 
 	constructor() {
 		super()
-		this.input = qsRequired('.quantity__input', this)
-		this.currentVariant = qsRequired('.product-variant-id', this)
-		this.variantSelects = qsOptional('variant-radios, variant-selects', this)
-		this.submitButton = qsRequired('[type="submit"]', this)
+		this.input = qsRequired(ProductInfo.selectors.quantityInput, this)
+		this.currentVariant = qsRequired(ProductInfo.selectors.currentVariant, this)
+		this.variantSelects = qsOptional(ProductInfo.selectors.variantSelects, this)
+		this.submitButton = qsRequired(ProductInfo.selectors.submitButton, this)
 	}
 
 	override connectedCallback() {
 		if (!this.input) return
-		this.quantityForm = qsOptional('.product-form__quantity', this)
+		this.quantityForm = qsOptional(ProductInfo.selectors.quantityForm, this)
 		if (!this.quantityForm) return
 		this.setQuantityBoundries()
 		if (!this.dataset.originalSection) {
@@ -34,7 +44,7 @@ export class ProductInfo extends UcoastEl {
 			)
 		}
 		this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-      if (!isVariantChangeEvent(event)) return
+			if (!isVariantChangeEvent(event)) return
 			const sectionId = this.dataset.originalSection
 				? this.dataset.originalSection
 				: this.dataset.section
@@ -76,7 +86,7 @@ export class ProductInfo extends UcoastEl {
 
 	fetchQuantityRules() {
 		if (!this.currentVariant || !this.currentVariant.value) return
-		qsRequired('.quantity__rules-cart .loading-overlay', this).classList.remove('hidden')
+		qsRequired('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.remove('hidden')
 		fetch(
 			`${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`
 		)
@@ -85,7 +95,7 @@ export class ProductInfo extends UcoastEl {
 			})
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-        const sectionId = getAttributeOrThrow('data-section', this)
+				const sectionId = getAttributeOrThrow('data-section', this)
 				this.updateQuantityRules(sectionId, html)
 				this.setQuantityBoundries()
 			})
@@ -93,19 +103,23 @@ export class ProductInfo extends UcoastEl {
 				console.error(e)
 			})
 			.finally(() => {
-        qsRequired('.quantity__rules-cart .loading-overlay', this).classList.add('hidden')
+				qsRequired('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.add('hidden')
 			})
 	}
 
-	updateQuantityRules(sectionId:string, html:Document) {
+	updateQuantityRules(sectionId: string, html: Document) {
 		const quantityFormUpdated = html.getElementById(`Quantity-Form-${sectionId}`)
-		const selectors = ['.quantity__input', '.quantity__rules', '.quantity__label']
+		const selectors = [
+			ProductInfo.selectors.quantityInput,
+			ProductInfo.selectors.quantityRules,
+			ProductInfo.selectors.quantityLabel,
+		]
 		for (let selector of selectors) {
-      if (!quantityFormUpdated) continue
+			if (!quantityFormUpdated) continue
 			const current = qsOptional(selector, this.quantityForm)
 			const updated = qsOptional(selector, quantityFormUpdated)
 			if (!current || !updated) continue
-			if (selector === '.quantity__input') {
+			if (selector === ProductInfo.selectors.quantityInput) {
 				const attributes = ['data-cart-quantity', 'data-min', 'data-max', 'step']
 				for (let attribute of attributes) {
 					const valueUpdated = updated.getAttribute(attribute)

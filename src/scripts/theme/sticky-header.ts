@@ -1,8 +1,9 @@
-import { qsaOptional, qsOptional, qsRequired } from '@/scripts/functions';
+import { qsaOptional, qsOptional, qsRequired, scaleValue } from '@/scripts/functions';
 import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
 import { type DetailsModal } from '@/scripts/theme/details-modal'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
+import { SELECTORS } from '@/scripts/theme/constants';
 
 export class StickyHeader extends UcoastEl {
 	static htmlSelector = 'sticky-header'
@@ -20,11 +21,11 @@ export class StickyHeader extends UcoastEl {
 	disclosures?: [] | NodeListOf<HeaderMenu>
 	constructor() {
 		super()
-		this.header = qsRequired('.section-header')
+		this.header = qsRequired(SELECTORS.sectionHeader)
 	}
 
 	override connectedCallback() {
-		this.header = qsRequired('.section-header')
+		this.header = qsRequired(SELECTORS.sectionHeader)
 		this.headerIsAlwaysSticky =
 			this.getAttribute('data-sticky-type') === 'always' ||
 			this.getAttribute('data-sticky-type') === 'reduce-logo-size'
@@ -55,9 +56,10 @@ export class StickyHeader extends UcoastEl {
 
 	setHeaderHeight() {
 		if (!this.header) throw new Error('no header element found')
+		const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
 		document.documentElement.style.setProperty(
 			'--header-height',
-			`${this.header.offsetHeight}px`
+			`calc(${scaleValue(this.header.offsetHeight, viewport)} * var(--ax))`
 		)
 	}
 
