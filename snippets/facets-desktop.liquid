@@ -386,12 +386,13 @@
 											</facet-remove>
 										{%- endif -%}
 									</div>
-									<price-range class="facets__price">
+									<price-range class="facets__price flex">
 										<span class="field-currency">
 											{{- cart.currency.symbol -}}
 										</span>
 										<div class="field">
 											<input
+												data-uc-price-range-input='min'
 												class="field__input"
 												name="{{ filter.min_value.param_name }}"
 												id="Filter-{{ filter.label | escape }}-GTE"
@@ -425,6 +426,7 @@
 										{%- endif -%}
 										<div class="field">
 											<input
+													data-uc-price-range-input='max'
 												class="field__input"
 												name="{{ filter.max_value.param_name }}"
 												id="Filter-{{ filter.label | escape }}-LTE"
