@@ -85,9 +85,12 @@
 											class="mobile-facets__details"
 											data-index="mobile-{{ forloop.index }}"
 											data-uc-js-filter
-											data-uc-drawer-sub-details='menu-drawer'
+											data-uc-drawer-sub-details="menu-drawer"
 										>
-											<summary class="mobile-facets__summary focus-inset" data-uc-drawer-sub-summary='menu-drawer'>
+											<summary
+												class="mobile-facets__summary focus-inset"
+												data-uc-drawer-sub-summary="menu-drawer"
+											>
 												<div>
 													<span>{{ filter.label | escape }}</span>
 													<span class="mobile-facets__arrow no-js-hidden">
@@ -215,9 +218,12 @@
 											class="mobile-facets__details"
 											data-index="mobile-{{ forloop.index }}"
 											data-uc-js-filter
-											data-uc-drawer-sub-details='menu-drawer'
+											data-uc-drawer-sub-details="menu-drawer"
 										>
-											<summary class="mobile-facets__summary focus-inset" data-uc-drawer-sub-summary='menu-drawer'>
+											<summary
+												class="mobile-facets__summary focus-inset"
+												data-uc-drawer-sub-summary="menu-drawer"
+											>
 												<div>
 													<span>{{ filter.label | escape }}</span>
 													<span class="mobile-facets__arrow no-js-hidden">
@@ -259,6 +265,7 @@
 													</span>
 													<div class="field">
 														<input
+															data-uc-price-range-input="min"
 															class="field__input"
 															name="{{ filter.min_value.param_name }}"
 															id="Mobile-Filter-{{ filter.label | escape }}-GTE"
@@ -292,6 +299,7 @@
 													</span>
 													<div class="field">
 														<input
+															data-uc-price-range-input="max"
 															class="field__input"
 															name="{{ filter.max_value.param_name }}"
 															id="Mobile-Filter-{{ filter.label | escape }}-LTE"
