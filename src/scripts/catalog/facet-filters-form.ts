@@ -16,6 +16,7 @@ import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { ATTRIBUTES } from '@/scripts/theme/constants'
+import { mediaLoader } from '@/scripts/mediaLoader';
 
 type FilterDataType = { html: string; url: string }
 
@@ -151,6 +152,7 @@ export class FacetFiltersForm extends UcoastEl {
 			.getElementById('ProductGridContainer')?.innerHTML
 		if (newHTML) {
 			productGridContainer.innerHTML = newHTML
+			mediaLoader()
 		}
 
 		// TODO: would like scroll triggers to be a data attribute

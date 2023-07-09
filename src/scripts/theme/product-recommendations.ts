@@ -1,5 +1,6 @@
 import { getAttributeOrThrow, qsOptional } from '@/scripts/functions';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { mediaLoader } from '@/scripts/mediaLoader';
 
 export class ProductRecommendations extends UcoastEl {
   static htmlSelector = 'product-recommendations';
@@ -23,6 +24,7 @@ export class ProductRecommendations extends UcoastEl {
 
           if (recommendations && recommendations.innerHTML.trim().length) {
             this.innerHTML = recommendations.innerHTML;
+            mediaLoader()
           }
 
           if (!this.querySelector('slideshow-component') && this.classList.contains('complementary-products')) {

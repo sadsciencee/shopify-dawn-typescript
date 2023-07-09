@@ -1,5 +1,5 @@
-@import '../../global/variables.scss';
-@import '../../global/functions.scss';
+@import '../../global/variables';
+@import '../../global/functions';
 .video-section__media {
 	--ratio-percent: 56.25%;
 	padding-bottom: calc(var(--ratio-percent) - #{$mediaBorderWidth});

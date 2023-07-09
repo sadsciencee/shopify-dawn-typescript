@@ -1,6 +1,7 @@
 import { closestOptional, qsaOptional, targetRequired } from '@/scripts/functions'
 import { type ProductModal } from '@/scripts/product/product-modal'
 import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
+import { mediaLoader } from '@/scripts/mediaLoader';
 export function initializeThemeEditor() {
 	function hideProductModal() {
 		const productModal = qsaOptional<ProductModal>('product-modal[open]')
@@ -40,6 +41,7 @@ export function initializeThemeEditor() {
 	})
 
 	document.addEventListener('shopify:section:load', () => {
+		mediaLoader()
 		hideProductModal()
 		const zoomOnHoverScripts = qsaOptional<HTMLScriptElement>('[id^=EnableZoomOnHover] script')
 		zoomOnHoverScripts?.forEach((zoomOnHoverScript) => {

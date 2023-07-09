@@ -1,5 +1,5 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import "../../global/variables";
+@import "../../global/functions";
 @include media-query($m-only) {
   .slider.collection-list--1-items,
   .slider.collection-list--2-items,

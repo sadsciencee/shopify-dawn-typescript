@@ -1,5 +1,5 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import "../../global/variables";
+@import "../../global/functions";
 
 .rich-text__wrapper {
   width: calc(100% - #{$ax40} / #{$fontBodyScale});

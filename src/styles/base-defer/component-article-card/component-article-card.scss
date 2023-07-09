@@ -1,5 +1,5 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
+@import "../../global/variables";
+@import "../../global/functions";
 @include media-query($s-down) {
   .articles-wrapper .article {
     width: 100%;

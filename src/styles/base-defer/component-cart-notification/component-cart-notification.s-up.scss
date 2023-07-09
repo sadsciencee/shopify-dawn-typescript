@@ -1,5 +1,5 @@
-@import '../../global/variables.scss';
-@import '../../global/functions.scss';
+@import '../../global/variables';
+@import '../../global/functions';
 @include media-query($s-up) {
 	[data-uc-header-wrapper="border-none"] + cart-notification .cart-notification {
 		border-top-width: #{$popupBorderWidth};

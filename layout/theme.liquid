@@ -55,6 +55,11 @@
 					file: 'css-dir-collection-prio',
 					preload_stylesheet: true
 				%}
+			{% when 'search' %}
+				{% render 'ucoast-style-tag',
+						file: 'css-dir-collection-prio',
+						preload_stylesheet: true
+				%}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-prio', preload_stylesheet: true %}
 			{% when 'article' %}
@@ -144,6 +149,11 @@
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-collection-defer',
 					preload_stylesheet: true
+				%}
+			{% when 'search' %}
+				{% render 'ucoast-style-tag',
+						file: 'css-dir-collection-defer',
+						preload_stylesheet: true
 				%}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-defer' %}
