@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Nhãn nút đặc"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Nút viền ngoài"
         },
         "shadow": {

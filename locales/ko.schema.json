@@ -19,7 +19,7 @@
         "button_label": {
           "label": "단색 버튼 레이블"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "윤곽선 버튼"
         },
         "shadow": {

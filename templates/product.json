@@ -18,7 +18,6 @@
         "caption": {
           "type": "text",
           "settings": {
-            "text": "{{ product.metafields.descriptors.subtitle.value }}",
             "text_style": "subtitle"
           }
         },
@@ -64,7 +63,7 @@
           "settings": {
             "heading": "Shipping & Returns",
             "icon": "truck",
-            "content": "<p>{{ product.metafields.test_data.binding_mount.value }}<\/p>",
+
             "page": ""
           }
         },

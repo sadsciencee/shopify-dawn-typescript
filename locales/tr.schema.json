@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Sabit düğme etiketi"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Dış çizgi düğmesi"
         },
         "shadow": {

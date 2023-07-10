@@ -43,11 +43,6 @@
 		{% render 'ucoast-style-tag', file: 'css-dir-base-prio', preload_stylesheet: true %}
 
 		{% case request.page_type %}
-			{% when 'product' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-product-prio',
-					preload_stylesheet: true
-				%}
 			{% when 'page' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
 			{% when 'collection' %}
@@ -57,8 +52,8 @@
 				%}
 			{% when 'search' %}
 				{% render 'ucoast-style-tag',
-						file: 'css-dir-collection-prio',
-						preload_stylesheet: true
+					file: 'css-dir-collection-prio',
+					preload_stylesheet: true
 				%}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-prio', preload_stylesheet: true %}
@@ -136,8 +131,6 @@
 		{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
 
 		{% case request.page_type %}
-			{% when 'product' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-product-defer' %}
 			{% when 'page' %}
 				{% comment %}
 					{% render 'ucoast-style-tag',
@@ -152,8 +145,8 @@
 				%}
 			{% when 'search' %}
 				{% render 'ucoast-style-tag',
-						file: 'css-dir-collection-defer',
-						preload_stylesheet: true
+					file: 'css-dir-collection-defer',
+					preload_stylesheet: true
 				%}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-defer' %}
@@ -166,8 +159,6 @@
 			  {% render 'ucoast-style-tag', file: 'css-dir-customer-defer', preload_stylesheet: true %}
 			{% endif %}
 		{% endcomment %}
-
-
 
 		{%- if settings.cart_type == 'drawer' -%}
 			{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}

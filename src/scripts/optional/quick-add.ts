@@ -15,6 +15,7 @@ import { type VariantSelects } from '@/scripts/theme/variant-selects'
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { type ProductInfo } from '@/scripts/product/product-info'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/theme/constants';
+import {mediaLoader} from "@/scripts/mediaLoader";
 
 declare let window: uCoastWindow
 
@@ -54,6 +55,7 @@ export class QuickAddModal extends ModalDialog {
 				this.preventDuplicatedIDs()
 				this.removeDOMElements()
 				this.setInnerHTML(this.modalContent, this.productElement.innerHTML)
+				mediaLoader()
 
 				if (window.Shopify && window.Shopify.PaymentButton) {
 					window.Shopify.PaymentButton.init()

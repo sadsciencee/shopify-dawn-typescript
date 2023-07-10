@@ -39,8 +39,8 @@ a.pagination__item:hover::after {
 	width: #{$ax20};
 	position: absolute;
 	bottom: #{$ax8};
-	left: 50%;
-	transform: translateX(-50%);
+	left: 0;
+	transform: translateX(calc(-50% + #{$ax10}));
 	background-color: currentColor;
 }
 

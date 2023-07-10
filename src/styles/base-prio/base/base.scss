@@ -674,10 +674,10 @@ summary::-webkit-details-marker {
 /* component-button */
 /* Button - default */
 
-.button--secondary,
+.button--outline,
 .button--tertiary {
-	--c-button: #{$schemaColorSecondaryButton};
-	--c-button-text: #{$schemaColorSecondaryButtonText};
+	--c-button: #{$schemaColorOutlineButton};
+	--c-button-text: #{$schemaColorOutlineButtonText};
 }
 
 .button--tertiary {
@@ -784,7 +784,7 @@ button.shopify-payment-button__button--unbranded {
 			rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
-.button--secondary:after {
+.button--outline:after {
 	--border-opacity: #{$buttonsBorderOpacity};
 }
 
@@ -2792,7 +2792,7 @@ details-disclosure > details {
 			0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
 	}
 
-	.animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {
+	.animate--hover-vertical-lift .button:not([disabled]).button--outline:hover:after {
 		--border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
 	}
 }

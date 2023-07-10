@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Fylt knappetikett"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Omriss rundt knapp"
         },
         "shadow": {

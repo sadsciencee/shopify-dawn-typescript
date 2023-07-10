@@ -130,7 +130,13 @@
 				"button_label": {
 					"label": "Solid button label"
 				},
+				"secondary_button_background": {
+					"label": "Secondary button background"
+				},
 				"secondary_button_label": {
+					"label": "Secondary button label"
+				},
+				"outline_button_label": {
 					"label": "Outline button"
 				},
 				"shadow": {

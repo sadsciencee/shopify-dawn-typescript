@@ -72,8 +72,20 @@
           },
           {
             "type": "color",
+            "id": "secondary_button",
+            "label": "t:settings_schema.colors.settings.secondary_button_background.label",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
             "id": "secondary_button_label",
             "label": "t:settings_schema.colors.settings.secondary_button_label.label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "outline_button_label",
+            "label": "t:settings_schema.colors.settings.outline_button_label.label",
             "default": "#121212"
           },
           {
@@ -89,14 +101,14 @@
             "solid": "background",
             "gradient": "background_gradient"
           },
-          "links": "secondary_button_label",
+          "links": "outline_button_label",
           "icons": "text",
           "primary_button": "button",
           "on_primary_button": "button_label",
           "primary_button_border": "button",
           "secondary_button": "background",
-          "on_secondary_button": "secondary_button_label",
-          "secondary_button_border": "secondary_button_label"
+          "on_secondary_button": "outline_button_label",
+          "secondary_button_border": "outline_button_label"
         }
       }
     ]
@@ -256,7 +268,7 @@
         "min": 0,
         "max": 12,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -276,7 +288,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },

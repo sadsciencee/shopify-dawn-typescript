@@ -2,18 +2,17 @@
 	assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
 	assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
 	assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
-
-	if settings.buttons_radius > 0
-		assign button_radius_outset = settings.buttons_radius | plus: settings.buttons_border_thickness
-	else
-		assign buttons_radius_outset = 0
+	assign button_radius = settings.buttons_radius | plus: 0
+	assign button_radius_outset = 0
+	if button_radius > 0
+		assign button_radius_outset = button_radius | plus: settings.buttons_border_thickness
 	endif
 	if settings.buttons_border_opacity > 0
 		assign buttons_border_width = settings.buttons_border_thickness
 	else
 		assign buttons_border_width = 0
 	endif
-	if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0
+	if button_radius > 0 or settings.buttons_shadow_opacity > 0
 		assign buttons_border_offset = 0.3
 	else
 		assign buttons_border_offset = 0
@@ -81,9 +80,11 @@
 	    --c-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
 	    --c-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
 	    --c-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
-	    --c-alt-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
-	    --c-alt-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
-	    --c-link: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+		--c-secondary-button: {{ scheme.settings.secondary_button.red }},{{ scheme.settings.secondary_button.green }},{{ scheme.settings.secondary_button.blue }};
+		--c-secondary-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+	    --c-outline-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+	    --c-outline-button-text: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
+	    --c-link: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
 	    --c-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
 	    --c-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
 	    --c-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
@@ -188,9 +189,8 @@
 	--tb-shadow-horizontal-offset: {%- render 'ucoast-ax', value: settings.text_boxes_shadow_horizontal_offset -%};
 	--tb-shadow-vertical-offset: {%- render 'ucoast-ax', value: settings.text_boxes_shadow_vertical_offset -%};
 	--tb-shadow-blur-radius: {%- render 'ucoast-ax', value: settings.text_boxes_shadow_blur -%};
-
-	--btn-radius: {%- render 'ucoast-ax', value: settings.buttons_radius -%};
-	--btn-radius-outset: {%- render 'ucoast-ax', value: buttons_radius_outset -%};
+	--btn-radius: {%- render 'ucoast-ax', value: button_radius -%};
+	--btn-radius-outset:  calc({{ button_radius_outset }} * var(--ax));
 	--btn-border-width: {%- render 'ucoast-ax', value: buttons_border_width -%};
 	--btn-border-opacity: {{- settings.buttons_border_opacity | divided_by: 100.0 -}};
 	--btn-shadow-opacity: {{- settings.buttons_shadow_opacity | divided_by: 100.0 -}};

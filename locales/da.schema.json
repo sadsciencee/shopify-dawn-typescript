@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Udfyldt knaptekst"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Rammeknap"
         },
         "shadow": {

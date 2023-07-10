@@ -116,18 +116,18 @@ h2,
   box-shadow: 0 0 0 #{$ax2} rgb(#{$schemaColorButton});
 }
 
-.button--secondary {
-  color: rgb(var(--c-alt-button-label));
-  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label));
+.button--outline {
+  color: rgb(var(--c-outline-button-label));
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label));
   background-color: transparent;
 }
 
-.button--secondary::selection {
-  background-color: rgba(var(--c-alt-button-label), 0.3);
+.button--outline::selection {
+  background-color: rgba(var(--c-outline-button-label), 0.3);
 }
 
-.button--secondary:hover {
-  box-shadow: 0 0 0 #{$ax2} rgb(var(--c-alt-button-label));
+.button--outline:hover {
+  box-shadow: 0 0 0 #{$ax2} rgb(var(--c-outline-button-label));
 }
 
 @media (forced-colors: active) {
@@ -293,13 +293,13 @@ h2,
     0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
-.button--secondary:focus-visible {
-  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+.button--outline:focus-visible {
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
     0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
-.button--secondary:focus {
-  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-alt-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+.button--outline:focus {
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
     0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 

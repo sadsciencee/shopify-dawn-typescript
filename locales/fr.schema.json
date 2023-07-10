@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Texte de bouton plein"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Bouton en relief"
         },
         "shadow": {

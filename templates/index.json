@@ -22,7 +22,7 @@
           "settings": {
             "button_label_1": "Shop all",
             "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": true,
+            "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
@@ -38,11 +38,11 @@
         "enable_lazy_load": false,
         "image": "shopify:\/\/shop_images\/Hydrosol-BloodOrange-BOR.jpg",
         "image_overlay_opacity": 30,
-        "image_height": "large",
+        "image_height": "medium",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
-        "color_scheme": "inverse",
+        "color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
         "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
@@ -93,57 +93,18 @@
         "products_to_show": 8,
         "columns_desktop": 4,
         "full_width": false,
-        "show_view_all": false,
+        "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
+        "enable_desktop_slider": true,
         "color_scheme": "background-1",
-        "image_ratio": "adapt",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
+        "show_rating": true,
+        "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": "dresses"
-          }
-        },
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "abrego-dress",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "hydrogen"
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "background-1",
         "space_above": 4,
         "mobile_space_above": -1
       }
@@ -337,7 +298,6 @@
     "image_banner",
     "rich_text",
     "featured_collection",
-    "collage",
     "video",
     "multicolumn",
     "13d0b711-48ba-483a-84fc-bcbb440aeb82",

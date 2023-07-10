@@ -19,7 +19,7 @@
         "button_label": {
           "label": "純色按鈕標籤"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "外框按鈕"
         },
         "shadow": {

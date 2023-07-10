@@ -1,7 +1,5 @@
-{% render 'ucoast-style-tag', file: 'css-dir-product-prio' %}
-{% render 'ucoast-style-tag', file: 'css-dir-product-defer' %}
-
 {%- liquid
+	render 'ucoast-style-tag', file: 'css-dir-product-prio'
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
@@ -374,6 +372,7 @@
 		</div>
 		{% render 'product-media-modal', product: product, variant_images: media_to_render %}
 	</div>
+	{% render 'ucoast-style-tag', file: 'css-dir-product-defer' %}
 </section>
 
 {%- if section.settings.image_zoom == 'hover' -%}

@@ -9,6 +9,7 @@
 	class="page-width {{ spacing }}"
 	data-section="{{ section.id }}"
 >
+	{% render 'ucoast-style-tag', file: 'css-dir-product-prio', preload_stylesheet: true %}
 	{% render 'ucoast', ucoast: 'js-dir-product.ts' %}
 	{% if section.settings.image_zoom == 'hover' %}
 		<div id="EnableZoomOnHover-main">
@@ -232,7 +233,7 @@
 				})
 		})
 	</script>
-
+	{% render 'ucoast-style-tag', file: 'css-dir-product-defer' %}
 	{%- liquid
 		if current_variant.featured_media
 			assign seo_media = current_variant.featured_media

@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Effen knoplabel"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Knop Omlijnen"
         },
         "shadow": {

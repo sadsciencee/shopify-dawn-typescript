@@ -1,3 +1,7 @@
 [environments.dev]
-store = "ucoast-bundles-dev"
+store = "aromatics-uc-dev"
+live-reload = 'off'
+
+[environments.prod]
+store = "aromatics-oils"
 live-reload = 'off'

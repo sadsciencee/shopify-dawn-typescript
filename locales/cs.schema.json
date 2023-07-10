@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Text tlačítka v jednolité barvě"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Tlačítko s obrysem"
         },
         "shadow": {

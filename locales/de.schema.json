@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Beschriftung für durchgehende Schaltfläche"
         },
-        "secondary_button_label": {
+        "outline_button_label": {
           "label": "Umriss-Schaltfläche"
         },
         "shadow": {
