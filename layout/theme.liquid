@@ -68,22 +68,30 @@
 		{% endif %}
 
 		{%- unless settings.type_body_font.system? -%}
-			<link
-				rel="preload"
-				as="font"
-				href="{{ settings.type_body_font | font_url }}"
-				type="font/woff2"
-				crossorigin
-			>
+			{% if settings.body_font_custom %}
+				{% render 'brand-font-body', preload: true %}
+			{% else %}
+				<link
+					rel="preload"
+					as="font"
+					href="{{ settings.type_body_font | font_url }}"
+					type="font/woff2"
+					crossorigin
+				>
+			{% endif %}
 		{%- endunless -%}
 		{%- unless settings.type_header_font.system? -%}
-			<link
-				rel="preload"
-				as="font"
-				href="{{ settings.type_header_font | font_url }}"
-				type="font/woff2"
-				crossorigin
-			>
+			{% if settings.header_font_custom %}
+				{% render 'brand-font-header', preload: true %}
+			{% else %}
+				<link
+					rel="preload"
+					as="font"
+					href="{{ settings.type_header_font | font_url }}"
+					type="font/woff2"
+					crossorigin
+				>
+			{% endif %}
 		{%- endunless -%}
 
 		<script>
@@ -134,8 +142,8 @@
 			{% when 'page' %}
 				{% comment %}
 					{% render 'ucoast-style-tag',
-						file: 'css-dir-page-defer',
-						preload_stylesheet: true
+					    file: 'css-dir-page-defer',
+					    preload_stylesheet: true
 					%}
 				{% endcomment %}
 			{% when 'collection' %}

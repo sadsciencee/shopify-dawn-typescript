@@ -58,58 +58,82 @@
 %}
 
 {% style %}
-	{{ settings.type_body_font | font_face: font_display: 'swap' }}
-	{{ body_font_bold | font_face: font_display: 'swap' }}
-	{{ body_font_italic | font_face: font_display: 'swap' }}
-	{{ body_font_bold_italic | font_face: font_display: 'swap' }}
-	{{ settings.type_header_font | font_face: font_display: 'swap' }}
+	{% if settings.body_font_custom %}
+		{% render 'brand-font-body', preload: false %}
+	{% else %}
+		{{ settings.type_body_font | font_face: font_display: 'swap' }}
+		{{ body_font_bold | font_face: font_display: 'swap' }}
+		{{ body_font_italic | font_face: font_display: 'swap' }}
+		{{ body_font_bold_italic | font_face: font_display: 'swap' }}
+	{% endif %}
+	{% if settings.header_font_custom %}
+		{% render 'brand-font-header', preload: false %}
+	{% else %}
+		{{ settings.type_header_font | font_face: font_display: 'swap' }}
+	{% endif %}
+
+
 
 	{% for scheme in settings.color_schemes -%}
-	    {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
-	    {% if forloop.index == 1 -%}
-	        :root,
-	    {%- endif %}
-	    .color-{{ scheme.id }} {
-	    --c-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
-	    {% if scheme.settings.background_gradient != empty %}
-	        --gradient-background: {{ scheme.settings.background_gradient }};
-	    {% else %}
-	        --gradient-background: {{ scheme.settings.background }};
-	    {% endif %}
-	    --c-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
-	    --c-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
-	    --c-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
-	    --c-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
+		{% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+		{% if forloop.index == 1 -%}
+			:root,
+		{%- endif %}
+		.color-{{ scheme.id }} {
+		--c-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+		{% if scheme.settings.background_gradient != empty %}
+			--gradient-background: {{ scheme.settings.background_gradient }};
+		{% else %}
+			--gradient-background: {{ scheme.settings.background }};
+		{% endif %}
+		--c-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+		--c-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
+		--c-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
+		--c-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
 		--c-secondary-button: {{ scheme.settings.secondary_button.red }},{{ scheme.settings.secondary_button.green }},{{ scheme.settings.secondary_button.blue }};
 		--c-secondary-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
-	    --c-outline-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
-	    --c-outline-button-text: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
-	    --c-link: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
-	    --c-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
-	    --c-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
-	    --c-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
-	    --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
-	    }
+		--c-outline-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+		--c-outline-button-text: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
+		--c-link: {{ scheme.settings.outline_button_label.red }},{{ scheme.settings.outline_button_label.green }},{{ scheme.settings.outline_button_label.blue }};
+		--c-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+		--c-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+		--c-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+		--payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+		}
 	{% endfor %}
 
 	{{ scheme_classes | prepend: 'body' }} {
-	    color: rgba(var(--c-foreground), 0.75);
-	    background-color: rgb(var(--c-background));
+	color: rgba(var(--c-foreground), 0.75);
+	background-color: rgb(var(--c-background));
 	}
 
 	:root {
-	--f-body-family: {{- settings.type_body_font.family -}}, {{- settings.type_body_font.fallback_families -}};
-	--f-body-style: {{- settings.type_body_font.style -}};
-	--f-body-weight: {{- settings.type_body_font.weight -}};
-	--f-body-weight-bold: {{- settings.type_body_font.weight | plus: 300 | at_most: 1000 -}};
-
-	--f-heading-family: {{- settings.type_header_font.family -}}, {{- settings.type_header_font.fallback_families -}};
-	--f-heading-style: {{- settings.type_header_font.style -}};
-	--f-heading-weight: {{- settings.type_header_font.weight -}};
-
-	--f-body-scale: {{- settings.body_scale | divided_by: 100.0 -}};
-	--f-heading-scale: {{- settings.heading_scale | times: 1.0 | divided_by: settings.body_scale -}};
-
+	{% if settings.body_font_custom %}
+		--f-body-family: arobody, {{- settings.type_body_font.fallback_families -}};
+		--f-body-style: normal;
+		--f-body-weight: 400;
+		--f-body-weight-bold: 700;
+		--f-body-weight-extra-bold: 800;
+		--f-body-scale: {{- settings.body_scale | divided_by: 100.0 -}};
+	{% else %}
+		--f-body-family: {{- settings.type_body_font.family -}}, {{- settings.type_body_font.fallback_families -}};
+		--f-body-style: {{- settings.type_body_font.style -}};
+		--f-body-weight: {{- settings.type_body_font.weight -}};
+		--f-body-weight-bold: {{- settings.type_body_font.weight | plus: 300 | at_most: 1000 -}};
+		--f-body-weight-extra-bold: {{- settings.type_body_font.weight | plus: 400 | at_most: 1000 -}};
+		--f-body-scale: 1;
+	{% endif %}
+	{% if settings.header_font_custom %}
+		--f-heading-family: aroheading, {{- settings.type_header_font.fallback_families -}};
+		--f-heading-style: normal;
+		--f-heading-weight: 400;
+		--f-heading-scale: 1;
+	{% else %}
+		--f-heading-family: {{- settings.type_header_font.family -}}, {{- settings.type_header_font.fallback_families -}};
+		--f-heading-style: {{- settings.type_header_font.style -}};
+		--f-heading-weight: {{- settings.type_header_font.weight -}};
+		--f-heading-scale: {{- settings.heading_scale | times: 1.0 | divided_by: settings.body_scale -}};
+	{% endif %}
 	--me-padding: {%- render 'ucoast-ax', value: settings.media_padding -%};
 	--me-border-opacity: {{- settings.media_border_opacity | divided_by: 100.0 -}};
 	--me-border-width: {%- render 'ucoast-ax', value: settings.media_border_thickness -%};
@@ -235,7 +259,7 @@
 	--combo-popup-content-shadow: var(--pop-shadow-horizontal-offset) var(--pop-shadow-vertical-offset)
 	var(--pop-shadow-blur-radius) rgba(var(--c-shadow), var(--pop-shadow-opacity));
 
-    --combo-outline-1: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
+	--combo-outline-1: #{$ax2} solid rgba(#{$schemaColorForeground}, 0.5);
 
 	}
 {% endstyle %}

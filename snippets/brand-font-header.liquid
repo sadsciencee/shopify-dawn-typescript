@@ -1,0 +1,13 @@
+{% if preload %}
+	{{ 'HEADER_FONT_FILE_NAME.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2' }}
+{% else %}
+	{% style %}
+		@font-face {
+			font-display: block;
+			font-family: heading;
+			src: url("{{ 'HEADER_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
+			font-style: normal;
+			font-weight: 400;
+		}
+	{% endstyle %}
+{% endif %}

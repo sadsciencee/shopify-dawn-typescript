@@ -187,6 +187,14 @@
 		"typography": {
 			"name": "Typography",
 			"settings": {
+				"body_font_custom": {
+					"label": "Custom body font",
+					"info": "This will be checked if we have developed a custom theme that requires body fonts not found in Shopify. If check, all body-related font settings will be disabled, including font scale."
+				},
+				"header_font_custom": {
+					"label": "Custom header font",
+					"info": "This will be checked if we have developed a custom theme that requires header fonts not found in Shopify. If check, all header-related font settings will be disabled, including font scale."
+				},
 				"type_header_font": {
 					"label": "Font",
 					"info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https://help.shopify.com/manual/online-store/os/store-speed/improving-speed#fonts)"

@@ -1,8 +1,8 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "uCoast Dawn",
-    "theme_version": "10.0.1",
+    "theme_name": "uCoast",
+    "theme_version": "10.0.2",
     "theme_author": "uCoast Web",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://ucoastweb.com/"
@@ -22,7 +22,7 @@
         "max": 300,
         "step": 10,
         "default": 100,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.logo.settings.logo_width.label"
       },
       {
@@ -121,6 +121,13 @@
         "content": "t:settings_schema.typography.settings.header__1.content"
       },
       {
+        "type": "checkbox",
+        "id": "header_font_custom",
+        "label": "t:settings_schema.typography.settings.header_font_custom.label",
+        "info": "t:settings_schema.typography.settings.header_font_custom.info",
+        "default": false
+      },
+      {
         "type": "font_picker",
         "id": "type_header_font",
         "default": "assistant_n4",
@@ -140,6 +147,13 @@
       {
         "type": "header",
         "content": "t:settings_schema.typography.settings.header__2.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "body_font_custom",
+        "label": "t:settings_schema.typography.settings.body_font_custom.label",
+        "info": "t:settings_schema.typography.settings.body_font_custom.info",
+        "default": false
       },
       {
         "type": "font_picker",
@@ -170,7 +184,7 @@
         "max": 1600,
         "step": 100,
         "default": 1200,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.layout.settings.page_width.label"
       },
       {
@@ -208,7 +222,7 @@
         "max": 40,
         "step": 4,
         "default": 8,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.layout.settings.spacing_grid_horizontal.label"
       },
       {
@@ -218,7 +232,7 @@
         "max": 40,
         "step": 4,
         "default": 8,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.layout.settings.spacing_grid_vertical.label"
       }
     ]
@@ -312,7 +326,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -322,7 +336,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -332,7 +346,7 @@
         "min": 0,
         "max": 20,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -355,7 +369,7 @@
         "min": 0,
         "max": 12,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -375,7 +389,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 40
       },
@@ -399,7 +413,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -409,7 +423,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -419,7 +433,7 @@
         "min": 0,
         "max": 20,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -438,7 +452,7 @@
         "min": 0,
         "max": 12,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -458,7 +472,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -482,7 +496,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -492,7 +506,7 @@
         "min": -12,
         "max": 12,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -502,7 +516,7 @@
         "min": 0,
         "max": 20,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -533,7 +547,7 @@
         "min": 0,
         "max": 20,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.image_padding.label",
         "default": 0
       },
@@ -573,7 +587,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 0
       },
@@ -593,7 +607,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -617,7 +631,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -627,7 +641,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -637,7 +651,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -668,7 +682,7 @@
         "min": 0,
         "max": 20,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.image_padding.label",
         "default": 0
       },
@@ -708,7 +722,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 0
       },
@@ -728,7 +742,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -752,7 +766,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -762,7 +776,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -772,7 +786,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -803,7 +817,7 @@
         "min": 0,
         "max": 20,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.image_padding.label",
         "default": 0
       },
@@ -843,7 +857,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 0
       },
@@ -863,7 +877,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -887,7 +901,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -897,7 +911,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -907,7 +921,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -926,7 +940,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 0
       },
@@ -946,7 +960,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -970,7 +984,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -980,7 +994,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -990,7 +1004,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -1009,7 +1023,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -1029,7 +1043,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -1053,7 +1067,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -1063,7 +1077,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -1073,7 +1087,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -1096,7 +1110,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -1116,7 +1130,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 0
       },
@@ -1140,7 +1154,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -1150,7 +1164,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -1160,7 +1174,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -1179,7 +1193,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.thickness.label",
         "default": 1
       },
@@ -1213,7 +1227,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.horizontal_offset.label",
         "default": 0
       },
@@ -1223,7 +1237,7 @@
         "min": -40,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.vertical_offset.label",
         "default": 0
       },
@@ -1233,7 +1247,7 @@
         "min": 0,
         "max": 40,
         "step": 5,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.blur.label",
         "default": 0
       }
@@ -1272,7 +1286,7 @@
         "min": 0,
         "max": 40,
         "step": 2,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.global.settings.corner_radius.label",
         "default": 40
       },
@@ -1319,7 +1333,7 @@
         "max": 550,
         "step": 5,
         "default": 100,
-        "unit": "px",
+        "unit": "ax",
         "label": "t:settings_schema.brand_information.settings.brand_image_width.label"
       }
     ]
