@@ -227,15 +227,6 @@
 		padding-bottom: 63%;
 	}
 
-	.utility-bar--bottom-border-social-only {
-		border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
-	}
-
-	.utility-bar__grid {
-		grid-template-columns: 3fr 4fr 3fr;
-		grid-template-areas: 'social-icons announcements language-currency';
-	}
-
 	.announcement-bar.announcement-bar--one-announcement,
 	.announcement-bar--one-announcement .announcement-bar__link {
 		width: fit-content;

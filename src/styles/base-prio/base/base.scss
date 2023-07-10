@@ -1607,27 +1607,47 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 }
 
 /* utility-bar */
-.utility-bar {
+/* section-announcement-bar */
+.announcement-bar-section {
+	position: relative;
+	overflow: hidden;
+
+	.grid {
+		row-gap: 0;
+		column-gap: 0;
+		width: max-content;
+		max-width: 100%;
+	}
+}
+.announcement-bar {
 	height: 100%;
+	overflow: hidden;
+	&__link {
+		text-decoration: none;
+	}
+	&__message {
+		padding: $ax6 0;
+		margin: 0;
+		@include clampSize(10, 12);
+
+		@include media-query($m-up) {
+			padding: ax(12.5) 0;
+		}
+	}
 }
 
-.utility-bar--bottom-border {
+.announcement-bar--bottom-border {
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
-.utility-bar__grid {
-	display: grid;
-	grid-template-columns: 1fr;
-}
-
-.utility-bar__grid .list-social {
+.announcement-bar .list-social {
 	justify-content: flex-start;
 	align-content: center;
 	margin-left: ax(-12);
 }
 
 @include media-query($m-down) {
-	.utility-bar .utility-bar__grid .list-social {
+	.announcement-bar .list-social {
 		display: none;
 	}
 }
@@ -2818,3 +2838,47 @@ details-disclosure > details {
 	top: 0;
 	width: 100%;
 }
+
+// schema classes
+.c-background {
+	background: rgb($schemaColorBackground);
+	&--gradient {
+		background: $schemaGradientBackground;
+	}
+}
+.c-foreground {
+	color: rgb($schemaColorForeground);
+}
+/*.c-shadow {
+	// TODO: add shadow classes
+}*/
+.c-button-bg {
+	background-color: rgb($schemaColorButton);
+}
+.c-button-text {
+	color: rgb($schemaColorButtonText);
+}
+.c-secondary-button-bg {
+	background-color: rgb($schemaColorSecondaryButton);
+}
+.c-secondary-button-text {
+	color: rgb($schemaColorSecondaryButtonText);
+}
+/*.c-outline-button {
+
+}
+.c-outline-button-text {
+
+}
+.c-link {
+
+}
+.c-badge-foreground {
+
+}
+.c-badge-background {
+
+}
+.c-badge-border {
+
+}*/
