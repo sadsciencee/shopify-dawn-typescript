@@ -5,8 +5,8 @@
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
   {{- '_critical-css-f773db36.css' | asset_url | split: '?' | first -}}
-{% elsif path == "/src/entry/_critical-js.ts" or path == "_critical-js.ts" %}
-  <script src="{{ '_critical-js-8243a8ee.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
+{% elsif path == "/src/entry/_critical.ts" or path == "_critical.ts" %}
+  <script src="{{ '_critical-8243a8ee.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'global-167e4f88.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
 {% elsif path == "/src/entry/css-dir-article-defer.s-up.scss" or path == "css-dir-article-defer.s-up.scss" %}
   {{- 'css-dir-article-defer.s-up-4ed993c7.js' | asset_url | split: '?' | first -}}
