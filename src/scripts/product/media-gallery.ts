@@ -4,7 +4,7 @@ import {
 	pauseAllMedia,
 	qsOptional,
 	qsRequired,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 import { isSliderComponent, type SliderComponent } from '@/scripts/theme/slider-component';
 import { type uCoastWindow } from '@/scripts/setup'
 import { type StickyHeader } from '@/scripts/theme/sticky-header'

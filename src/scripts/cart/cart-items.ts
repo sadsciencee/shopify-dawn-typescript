@@ -1,4 +1,4 @@
-import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/theme/constants';
+import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global';
 import {
 	debounce,
 	fetchConfig,
@@ -7,12 +7,12 @@ import {
 	qsOptional,
 	qsRequired,
 	targetRequired,
-} from '@/scripts/functions'
-import { publish, PubSubEvent, subscribe } from '@/scripts/theme/pubsub'
+} from '@/scripts/core/global'
+import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
 import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
-import { trapFocus } from '@/scripts/global'
-import { type CartDrawer } from '@/scripts/cart-drawer/cart-drawer'
+import { trapFocus } from '@/scripts/core/global'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 declare let window: uCoastWindow
@@ -23,8 +23,8 @@ export class CartItems extends UcoastEl {
 	static selectors = {
 		element: 'cart-items',
 		itemLink: '[data-uc-cart-item-name]',
-		lineItemStatus: '[data-uc-cart-page-status]',
-		errors: '[data-uc-cart-page-errors]',
+		lineItemStatus: '[data-uc-cart-status]',
+		errors: '[data-uc-cart-errors]',
 		liveRegionText: '#CartPage-LiveRegionText',
 		main: '#main-cart-items',
 		cartDrawerInner: '[data-uc-cart-drawer-inner]',

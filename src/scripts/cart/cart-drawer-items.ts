@@ -1,5 +1,5 @@
-import { CartItems } from '@/scripts/cart-page/cart-items'
-import { SELECTORS } from '@/scripts/theme/constants';
+import { CartItems } from '@/scripts/cart/cart-items'
+import { SELECTORS } from '@/scripts/core/global';
 
 export class CartDrawerItems extends CartItems {
 	static override htmlSelector = 'cart-drawer-items'

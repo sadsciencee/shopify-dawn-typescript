@@ -1,5 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { qsaOptional, qsaRequired } from '@/scripts/functions'
+import { qsaOptional, qsaRequired } from '@/scripts/core/global'
 import { uCoastWindow } from '@/scripts/setup'
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
 declare let window: uCoastWindow

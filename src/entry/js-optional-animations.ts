@@ -1,5 +1,5 @@
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations';
-import { targetRequired } from '@/scripts/functions';
+import { targetRequired } from '@/scripts/core/global';
 
 window.addEventListener('DOMContentLoaded', () => initializeScrollAnimationTrigger())
 

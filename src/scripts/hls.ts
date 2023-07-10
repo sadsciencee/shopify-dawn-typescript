@@ -1,6 +1,6 @@
 // @ts-ignore
 import Hls from 'hls.js/dist/hls.light.min.js'
-import { qsaOptional, qsRequired, safeDefineElement } from '@/scripts/functions'
+import { qsaOptional, qsRequired, safeDefineElement } from '@/scripts/core/global'
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
 import { type HlsLoader } from '@/scripts/core/hls-loader'
 

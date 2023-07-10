@@ -6,10 +6,10 @@ import {
 	qsRequired,
 	targetClosestOptional,
 	targetClosestRequired,
-} from '@/scripts/functions'
-import { removeTrapFocus, trapFocus } from '@/scripts/global'
+} from '@/scripts/core/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES } from '@/scripts/theme/constants'
+import { ATTRIBUTES } from '@/scripts/core/global'
 
 export class MenuDrawer extends UcoastEl {
 	static htmlSelector = 'menu-drawer'

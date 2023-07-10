@@ -1,11 +1,11 @@
-import { Shopify } from '@/scripts/shopify'
+import { Shopify } from '@/scripts/customer/shopify'
 import {
 	currentTargetRequired,
 	qsaRequired,
 	qsOptional,
 	qsRequired,
 	targetClosestOptional,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 
 const selectors = {
 	customerAddresses: '[data-customer-addresses]',

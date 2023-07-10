@@ -1,4 +1,4 @@
-import { qsRequired } from '@/scripts/functions'
+import { qsRequired } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class DetailsDisclosure extends UcoastEl {

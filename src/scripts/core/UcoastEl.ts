@@ -1,4 +1,4 @@
-import { qsaOptional } from '@/scripts/functions'
+import { qsaOptional } from '@/scripts/core/global'
 
 export class UcoastEl extends HTMLElement {
 	animateSelf: boolean

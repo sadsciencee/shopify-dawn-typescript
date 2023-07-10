@@ -10,13 +10,13 @@ import {
 	qsRequired,
 	targetClosestOptional,
 	targetClosestRequired,
-} from '@/scripts/functions'
+} from '@/scripts/core/global'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES } from '@/scripts/theme/constants'
-import { mediaLoader } from '@/scripts/mediaLoader';
+import { ATTRIBUTES } from '@/scripts/core/global'
+import { mediaLoader } from '@/scripts/core/global';
 
 type FilterDataType = { html: string; url: string }
 

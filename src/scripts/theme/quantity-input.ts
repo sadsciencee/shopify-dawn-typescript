@@ -1,6 +1,6 @@
-import { PUB_SUB_EVENTS } from '@/scripts/theme/constants'
-import { subscribe, type SubscriberCallback } from '@/scripts/theme/pubsub'
-import { qsRequired, targetRequired } from '@/scripts/functions'
+import { PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { subscribe, type SubscriberCallback } from '@/scripts/core/global'
+import { qsRequired, targetRequired } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class QuantityInput extends UcoastEl {

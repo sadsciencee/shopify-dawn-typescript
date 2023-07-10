@@ -1,5 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { isTenPercentInViewport, qsRequired } from '@/scripts/functions'
+import { isTenPercentInViewport, qsRequired } from '@/scripts/core/global'
 import { uCoastWindow } from '@/scripts/setup'
 import { HlsLoader } from '@/scripts/core/hls-loader'
 

@@ -1,4 +1,4 @@
-import { pauseAllMedia, qsRequired } from '@/scripts/functions'
+import { pauseAllMedia, qsRequired } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class DeferredMedia extends UcoastEl {

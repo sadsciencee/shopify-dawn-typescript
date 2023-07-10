@@ -1,4 +1,4 @@
-import { CountryProvinceSelector } from './shopify';
+import { CountryProvinceSelector } from './customer/shopify';
 import { type WindowProductModel } from '@/scripts/optional/product-model';
 
 // this file used to have a bunch of functions as well as the uCoastShopify class

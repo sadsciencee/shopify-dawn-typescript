@@ -1,6 +1,6 @@
-import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/functions'
+import { pauseAllMedia, qsOptional, qsRequired, targetClosestOptional } from '@/scripts/core/global'
 import { type DeferredMedia } from '@/scripts/theme/deferred-media'
-import { removeTrapFocus, trapFocus } from '@/scripts/global'
+import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class ModalDialog extends UcoastEl {

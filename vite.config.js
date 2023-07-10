@@ -28,5 +28,19 @@ export default defineConfig({
 		sourcemap: true,
 		minify: 'esbuild',
 		cssMinify: false,
+		rollupOptions: {
+			output: {
+				output: {
+					manualChunks: {
+						'core-chunk': (id) => id.includes('/src/core/'),
+						'theme-chunk': (id) => id.includes('/src/theme/'),
+						'catalog-chunk': (id) => id.includes('/src/catalog/'),
+						'product-chunk': (id) => id.includes('/src/product/'),
+						'cart-chunk': (id) => id.includes('/src/cart/'),
+						'customer-chunk': (id) => id.includes('/src/customer/'),
+					},
+				}
+			}
+		}
 	},
 })

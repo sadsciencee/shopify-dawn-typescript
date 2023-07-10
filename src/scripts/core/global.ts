@@ -1,16 +1,132 @@
+import { type UcoastVideo } from '@/scripts/core/ucoast-video'
+import type {
+	DebounceCallback,
+	EventWithRelatedTarget,
+	FocusableHTMLElement,
+} from '@/scripts/types/theme'
+import { type ProductModel } from '@/scripts/optional/product-model'
+import { type ProductVariant } from '@/scripts/types/api'
+// CONSTANTS
+export const ON_CHANGE_DEBOUNCE_TIMER = 300
+
+export const PUB_SUB_EVENTS = {
+	cartUpdate: 'cart-update',
+	quantityUpdate: 'quantity-update',
+	variantChange: 'variant-change',
+	cartError: 'cart-error',
+}
+
+//  common attributes. sometimes these are used as elements selectors, if the attribute is added/removed
+export const ATTRIBUTES = {
+	cartEmpty: 'data-uc-cart-empty',
+	loading: 'data-uc-loading',
+	submenu: 'data-uc-submenu',
+	menuOpening: 'data-uc-menu-opening'
+}
+
+// selectors for common elements where the selector won't be added/removed
+export const SELECTORS = {
+	cartLink: '[data-uc-cart-icon-bubble]',
+	loadingOverlay: '[data-uc-loading-overlay]',
+	loadingOverlaySpinner: '[data-uc-loading-overlay-spinner]',
+	sectionHeader: '.section-header',
+	headerWrapper: '[data-uc-header-wrapper]',
+}
+
+// PUB SUB
+// todo: add additional data types as needed
+
+export type CartUpdateEvent = {
+	source: 'cart-items' | 'product-form'
+	productVariantId?: string
+}
+
+export type CartErrorEvent = {
+	source: 'product-form'
+	productVariantId: string
+	errors: string | string[] | { [key: string]: string[] }
+	message: string
+}
+
+export type VariantChangeEvent = {
+	source: 'product-form'
+	data: {
+		sectionId: string
+		html: Document
+		variant: ProductVariant
+	}
+}
+
+export type PubSubEvent = CartUpdateEvent | CartErrorEvent | VariantChangeEvent | undefined
+
+// typeguards for events
+
+export function isCartUpdateEvent(obj: PubSubEvent): obj is CartUpdateEvent {
+	if (!obj) return false
+	if (!('source' in obj)) return false
+	if (!('productVariantId' in obj)) return false
+	return true
+}
+
+export function isCartErrorEvent(obj: PubSubEvent): obj is CartErrorEvent {
+	if (!obj) return false
+	if (!('source' in obj)) return false
+	if (!('productVariantId' in obj)) return false
+	if (!('message' in obj)) return false
+	if (!('errors' in obj)) return false
+	return true
+}
+
+export function createVariantChangeEvent(event:VariantChangeEvent) {
+	if (!isVariantChangeEvent(event)) {
+		throw new Error('Event is not a VariantChangeEvent')
+	}
+	return event
+}
+
+export function isVariantChangeEvent(obj: PubSubEvent): obj is VariantChangeEvent {
+	if (!obj) return false
+	if (!('data' in obj)) return false
+	if (!('sectionId' in obj.data)) return false
+	if (!('html' in obj.data)) return false
+	if (!('variant' in obj.data)) return false
+	return true
+}
+
+export type SubscriberCallback = (pubSubEvent: PubSubEvent) => void
+
+let subscribers: Record<string, SubscriberCallback[]> = {}
+
+export function subscribe(eventName: string, callback: SubscriberCallback) {
+	if (subscribers[eventName] === undefined) {
+		subscribers[eventName] = []
+	}
+
+	subscribers[eventName] = [...subscribers[eventName], callback]
+
+	return function unsubscribe() {
+		subscribers[eventName] = subscribers[eventName].filter((cb) => {
+			return cb !== callback
+		})
+	}
+}
+
+export function publish(eventName: string, pubSubEvent: PubSubEvent = undefined) {
+	if (subscribers[eventName]) {
+		subscribers[eventName].forEach((callback) => {
+			callback(pubSubEvent)
+		})
+	}
+}
+
+// FUNCTIONS.ts
+
 // in general, these functions are for enforcing types when access HTML dom elements so I don't have to think about it so much
 // right now I've avoided any other helper functions but if we get another sub category of functions we should change this to a folder 'functions'
 
 // TODO: add KlaviyoPopup back in
 //import { type KlaviyoPopup, type Modal, type NotifyMe } from '@/scripts/content/modal'
 //import { type QuickAddModal } from '@/scripts/optional/quick-add'
-import {
-	DebounceCallback,
-	EventWithRelatedTarget,
-	FocusableHTMLElement,
-} from '@/scripts/types/theme'
-import { ProductModel } from '@/scripts/optional/product-model'
-import { ATTRIBUTES } from '@/scripts/theme/constants'
 
 // local types
 
@@ -91,7 +207,7 @@ export const qsaOptional = <T extends HTMLElement = HTMLElement>(
 export const currentTargetRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	const element = event.currentTarget as (EventTarget & T) | null
@@ -102,7 +218,7 @@ export const currentTargetRequired = <
 export const relatedTargetRequired = <
 	E extends EventWithRelatedTarget = EventWithRelatedTarget,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	const element = event.relatedTarget as (EventTarget & T) | null
@@ -113,7 +229,7 @@ export const relatedTargetRequired = <
 export const relatedTargetOptional = <
 	E extends EventWithRelatedTarget = EventWithRelatedTarget,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	return (event.relatedTarget as EventTarget & T) ?? undefined
@@ -122,7 +238,7 @@ export const relatedTargetOptional = <
 export const targetRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement | Document = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	const element = event.target as T | null
@@ -134,7 +250,7 @@ export const targetRequired = <
 export const currentTargetOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	return (event.currentTarget as EventTarget & T) ?? undefined
@@ -143,7 +259,7 @@ export const currentTargetOptional = <
 export const targetOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E
 ) => {
 	return (event.target as EventTarget & T) ?? undefined
@@ -152,7 +268,7 @@ export const targetOptional = <
 export const targetClosestRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E,
 	selector: string
 ) => {
@@ -167,7 +283,7 @@ export const targetClosestRequired = <
 export const targetClosestOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
->(
+	>(
 	event: E,
 	selector: string
 ) => {
@@ -700,3 +816,207 @@ export function disableDesktopCSS() {
 		return
 	}
 }
+
+// startoriginal global
+
+// type checkers - turns out loading these in class files makes the whole file load
+// TODO: migrate other checkers in here
+
+export function isVideoComponent(obj: HTMLElement | Element): obj is UcoastVideo {
+	if (!obj) return false
+	if (obj.localName !== 'ucoast-video') return false
+	return true
+}
+
+// media loader stuff - this was in a separate file but was getting issues w/buildpack
+
+export const mediaLoader = () => {
+	const images = qsaOptional('img')
+	const videos = qsaOptional<UcoastVideo>('ucoast-video')
+
+	if (images) {
+		images.forEach((image) => {
+			if (!(image instanceof HTMLImageElement) || !isInViewport(image)) return
+			replaceSrcSet(image)
+		})
+		const imageObserver = new IntersectionObserver(onImageIntersection, {
+			rootMargin: '100% 0% 100% 0%',
+		})
+		images.forEach((element) => imageObserver.observe(element))
+	}
+
+	if (videos) {
+		const videoObserver = new IntersectionObserver(onVideoIntersection, {
+			threshold: 0.1,
+		})
+		videos.forEach((element) => videoObserver.observe(element))
+		const videoPreloadObserver = new IntersectionObserver(onVideoPreloadIntersection, {
+			rootMargin: '100% 0% 100% 0%',
+		})
+		videos.forEach((element) => videoPreloadObserver.observe(element))
+	}
+}
+
+function onImageIntersection(elements: IntersectionObserverEntry[], _: IntersectionObserver) {
+	elements.forEach((element) => {
+		if (element.isIntersecting) {
+			const image = element.target
+			if (!(image instanceof HTMLImageElement)) throw 'element target not found'
+			replaceSrcSet(image)
+		}
+	})
+}
+
+function onVideoIntersection(elements: IntersectionObserverEntry[], _: IntersectionObserver) {
+	elements.forEach((element) => {
+		const video = element.target
+
+		if (element.isIntersecting) {
+			if (isVideoComponent(video)) {
+				void video.play()
+			}
+		} else {
+			if (isVideoComponent(video)) {
+				void video.pause()
+			}
+		}
+	})
+}
+
+function onVideoPreloadIntersection(
+	elements: IntersectionObserverEntry[],
+	_: IntersectionObserver
+) {
+	elements.forEach((element) => {
+		const video = element.target
+		if (isVideoComponent(video) && element.isIntersecting) {
+			void video.preload()
+		}
+	})
+}
+
+export const replaceSrcSet = (
+	image: HTMLImageElement,
+	options?: { overrideTargetSize?: Number; loadImmediately?: boolean }
+) => {
+	const srcSet = image.getAttribute('data-srcset')
+	if (!srcSet) return
+	const devicePixelRatio = window.devicePixelRatio ?? 2
+	const targetSize =
+		options?.overrideTargetSize ??
+		(image.getBoundingClientRect().width * devicePixelRatio).toFixed(0)
+	let newSrc = image.getAttribute('src')
+	if (!newSrc || !newSrc.includes('&width=')) return
+	const srcArr = newSrc.split('&width=')
+	newSrc = `${srcArr[0]}&width=${targetSize}`
+
+	const defer = image.hasAttribute('data-uc-defer')
+	if (defer) {
+		image.setAttribute('data-src', newSrc)
+	} else if (options?.loadImmediately) {
+		image.removeAttribute('loading')
+		let preloadedImage = new Image()
+		preloadedImage.src = newSrc
+		image.setAttribute('src', newSrc)
+	} else {
+		image.setAttribute('loading', 'eager')
+		image.setAttribute('src', newSrc)
+	}
+}
+
+// this is a default shopify function that normally runs in global scope
+// I moved it to functions for clarity
+
+// trapFocusHandlers variable and associated functions are part of the global scope
+// this function should always run first
+
+const trapFocusHandlers: {
+	focusin?: (event: Event) => void
+	focusout?: (event: Event) => void
+	keydown?: (event: KeyboardEvent) => void
+} = {}
+
+export function trapFocus(
+	container: HTMLElement,
+	elementToFocus: HTMLElement | undefined = container
+) {
+	const elements = getFocusableElements(container)
+	const first = elements[0]
+	const last = elements[elements.length - 1]
+
+	removeTrapFocus()
+
+	trapFocusHandlers.focusin = (event) => {
+		if (event.target !== container && event.target !== last && event.target !== first) return
+
+		if (!trapFocusHandlers.keydown)
+			throw new Error('trapFocusHandlers.focusin called before .keydown is defined')
+
+		document.addEventListener('keydown', trapFocusHandlers.keydown)
+	}
+
+	trapFocusHandlers.focusout = function () {
+		if (!trapFocusHandlers.keydown)
+			throw new Error('trapFocusHandlers.focusout called before .keydown is defined')
+		document.removeEventListener('keydown', trapFocusHandlers.keydown)
+	}
+
+	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
+		if (event.code.toUpperCase() !== 'TAB') return // If not TAB key
+		// On the last focusable element and tab forward, focus the first element.
+		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
+		if (target === last && !event.shiftKey) {
+			event.preventDefault()
+			first.focus()
+		}
+
+		//  On the first focusable element and tab backward, focus the last element.
+		if ((event.target === container || event.target === first) && event.shiftKey) {
+			event.preventDefault()
+			last.focus()
+		}
+	}
+
+	document.addEventListener('focusout', trapFocusHandlers.focusout)
+	document.addEventListener('focusin', trapFocusHandlers.focusin)
+
+	elementToFocus.focus()
+
+	if (
+		elementToFocus instanceof HTMLInputElement &&
+		['search', 'text', 'email', 'url'].includes(elementToFocus.type) &&
+		elementToFocus.value
+	) {
+		elementToFocus.setSelectionRange(0, elementToFocus.value.length)
+	}
+}
+
+// don't know why shopify put this function below the above but I'm not about to go debug it
+
+export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefined) {
+	if (trapFocusHandlers.focusin) {
+		document.removeEventListener('focusin', trapFocusHandlers.focusin)
+	}
+	if (trapFocusHandlers.focusout) {
+		document.removeEventListener('focusout', trapFocusHandlers.focusout)
+	}
+
+	if (trapFocusHandlers.keydown) {
+		document.removeEventListener('keydown', trapFocusHandlers.keydown)
+	}
+
+	if (elementToFocus) elementToFocus.focus()
+}
+export function globalSetup() {
+	initializeSummaryA11y()
+	try {
+		document.querySelector(':focus-visible')
+	} catch (e) {
+		focusVisiblePolyfill()
+	}
+	// mediaLoader
+	mediaLoader()
+}
+
+// export all modules here so we can ensure it all gets bundled as single file
+

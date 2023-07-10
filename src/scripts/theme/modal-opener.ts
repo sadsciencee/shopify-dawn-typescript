@@ -1,4 +1,4 @@
-import { qsOptional } from '@/scripts/functions';
+import { qsOptional } from '@/scripts/core/global';
 import { type ModalDialog } from '@/scripts/theme/modal-dialog';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

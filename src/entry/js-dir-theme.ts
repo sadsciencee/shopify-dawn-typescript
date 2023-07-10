@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/functions'
+import { safeDefineElement } from '@/scripts/core/global'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
 import { SliderComponent } from '@/scripts/theme/slider-component'
