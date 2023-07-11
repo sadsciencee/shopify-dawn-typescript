@@ -16,6 +16,17 @@
         "label": "t:settings_schema.logo.settings.logo_image.label"
       },
       {
+        "id": "logo_scale",
+        "label": "t:settings_schema.logo.settings.logo_scale.label",
+        "type": "range",
+        "min": 50,
+        "max": 150,
+        "step": 1,
+        "default": 100,
+        "unit": "%",
+        "info": "t:settings_schema.logo.settings.logo_scale.info"
+      },
+      {
         "type": "range",
         "id": "logo_width",
         "min": 50,
@@ -181,8 +192,8 @@
         "type": "range",
         "id": "page_width",
         "min": 1000,
-        "max": 1600,
-        "step": 100,
+        "max": 2000,
+        "step": 20,
         "default": 1200,
         "unit": "ax",
         "label": "t:settings_schema.layout.settings.page_width.label"

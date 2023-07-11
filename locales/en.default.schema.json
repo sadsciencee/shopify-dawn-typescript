@@ -158,6 +158,10 @@
 					"label": "Desktop logo width",
 					"info": "Logo width is automatically optimized for mobile."
 				},
+				"logo_scale": {
+					"label": "Logo scale",
+					"info": "Use this to adjust the whitespace around your logo asset. You can increase or reduce whitepsace depending on how the brand asset looks."
+				},
 				"favicon": {
 					"label": "Favicon image",
 					"info": "Will be scaled down to 32 x 32px"

@@ -1847,7 +1847,6 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 
 .header__heading-link {
 	display: inline-block;
-	padding: ax(7.5);
 	text-decoration: none;
 	word-break: break-word;
 }
@@ -1865,13 +1864,24 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	height: auto;
 	max-width: 100%;
 }
-
 .header__heading-logo-wrapper {
+	position: relative;
 	width: 100%;
 	display: inline-block;
 	transition: width 0.3s cubic-bezier(0.52, 0, 0.61, 0.99);
-}
 
+	aspect-ratio: var(--logo-ratio);
+	img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		right: 0;
+		width: calc(100% * var(--logo-scale));
+		height: auto;
+		max-width: unset;
+		transform: translate(-50%, -50%);
+	}
+}
 @include media-query($m-down) {
 	.header__heading,
 	.header__heading-link {
