@@ -594,3 +594,16 @@ deferred-media {
 		}
 	}
 }
+
+ucoast-video[data-uc-has-played="false"] video {
+	opacity: 0;
+	backdrop-filter: blur(15px);
+	transition: opacity .3s cubic-bezier(.32, .24, .15, 1), filter .3s cubic-bezier(.32, .24, .15, 1);
+}
+
+
+ucoast-video[data-uc-has-played="true"] video {
+	opacity: 1;
+	backdrop-filter: blur(0);
+	transition: opacity .3s cubic-bezier(.32, .24, .15, 1), filter .3s cubic-bezier(.32, .24, .15, 1);
+}

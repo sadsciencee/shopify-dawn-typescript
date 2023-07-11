@@ -1,4 +1,4 @@
-import { type UcoastVideo } from '@/scripts/core/ucoast-video'
+import { UcoastVideo } from '@/scripts/core/ucoast-video'
 import type {
 	DebounceCallback,
 	EventWithRelatedTarget,
@@ -869,17 +869,17 @@ function onImageIntersection(elements: IntersectionObserverEntry[], _: Intersect
 
 function onVideoIntersection(elements: IntersectionObserverEntry[], _: IntersectionObserver) {
 	elements.forEach((element) => {
-		const video = element.target
-
-		if (element.isIntersecting) {
-			if (isVideoComponent(video)) {
-				void video.play()
-			}
-		} else {
-			if (isVideoComponent(video)) {
-				void video.pause()
+		const ucoastVideo = element.target
+		if (isVideoComponent(ucoastVideo)) {
+			if (element.isIntersecting) {
+				void ucoastVideo.play()
+			} else if (!isTenPercentInViewport(ucoastVideo)) {
+				console.log({element})
+				void ucoastVideo.pause()
 			}
 		}
+
+
 	})
 }
 
@@ -1008,6 +1008,7 @@ export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefi
 	if (elementToFocus) elementToFocus.focus()
 }
 export function globalSetup() {
+	safeDefineElement(UcoastVideo)
 	initializeSummaryA11y()
 	try {
 		document.querySelector(':focus-visible')

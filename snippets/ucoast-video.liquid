@@ -1,4 +1,4 @@
-<ucoast-video class='{{ wrapper_class }}'>
+<ucoast-video class='{{ wrapper_class }}' data-uc-has-played="false">
     {% liquid
         for source in video.sources
             if source.mime_type == 'video/mp4'

@@ -1,17 +1,15 @@
 // @ts-ignore
 import Hls from 'hls.js/dist/hls.light.min.js'
-import { qsaOptional, qsRequired, safeDefineElement } from '@/scripts/core/global'
+import { qsaOptional, safeDefineElement } from '@/scripts/core/global'
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
-import { type HlsLoader } from '@/scripts/core/hls-loader'
+console.log('this might run on import')
 
 export const loadHls = async () => {
-	const hlsLoader = qsRequired<HlsLoader>('hls-loader')
-	hlsLoader.loaded = true
+	UcoastVideo.hlsLoaded = true
 	if (UcoastVideo === undefined) {
 		safeDefineElement(UcoastVideo)
 	}
 	const videos = qsaOptional('ucoast-video')
-	console.log('loadHls Triggered');
 	if (!videos) return
 	for (let i = 0; i < videos.length; i++) {
 		const video = videos[i]

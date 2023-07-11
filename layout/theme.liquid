@@ -127,14 +127,6 @@
 		{%- if settings.animations_reveal_on_scroll -%}
 			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
 		{%- endif -%}
-		<hls-loader>
-			{% liquid
-				capture input
-					render 'ucoast', ucoast: 'js-function-load-hls.ts'
-				endcapture
-				render 'ucoast-strip-src', input: input
-			%}
-		</hls-loader>
 
 		{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
 
