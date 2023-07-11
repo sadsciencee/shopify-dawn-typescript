@@ -874,12 +874,11 @@ function onVideoIntersection(elements: IntersectionObserverEntry[], _: Intersect
 			if (element.isIntersecting) {
 				void ucoastVideo.play()
 			} else if (!isTenPercentInViewport(ucoastVideo)) {
-				console.log({element})
 				void ucoastVideo.pause()
+			} else if (isTenPercentInViewport(ucoastVideo)) {
+				void ucoastVideo.play()
 			}
 		}
-
-
 	})
 }
 
