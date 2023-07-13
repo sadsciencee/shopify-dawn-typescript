@@ -1,24 +1,23 @@
 {% if preload %}
     {{ 'BODY_FONT_FILE_NAME.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2' }}
 {% else %}
-    {% style %}
         @font-face {
             font-display: block;
-            font-family: body;
+            font-family: brandbody;
             src: url("{{ 'BODY_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
             font-style: normal;
             font-weight: 400;
         }
         @font-face {
             font-display: block;
-            font-family: body;
+            font-family: brandbody;
             src: url("{{ 'BODY_ITALIC_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
             font-style: italic;
             font-weight: 400;
         }
         @font-face {
             font-display: block;
-            font-family: body;
+            font-family: brandbody;
             src: url("{{ 'BODY_BOLD_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
             font-style: italic;
             font-weight: 700;
@@ -35,5 +34,4 @@
             font-style: italic;
             font-weight: 800;
         }
-    {% endstyle %}
 {% endif %}
