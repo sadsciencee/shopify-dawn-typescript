@@ -84,13 +84,21 @@ export class UcoastVideo extends UcoastEl {
 		}, 100)
 	}
 	async play() {
-		if (this.videoEl.paused) {
+		if (!this.hasPlayed()) {
+			this.preload().then(() => {
+				this.videoEl.play()
+				this.setHasPlayed()
+			})
+		}
+		else if (this.videoEl.paused) {
 			this.videoEl
 				.play()
 				.then(() => {
 					this.setHasPlayed()
 				})
 				.catch((e) => console.log('error playing video', e))
+		} else {
+			console.log('video is already palying')
 		}
 	}
 	async pause() {
