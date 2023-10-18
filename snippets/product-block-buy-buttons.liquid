@@ -43,6 +43,15 @@
 				<span data-uc-product-form-error-message></span>
 			</div>
 
+			{%- liquid
+				capture inventory_status
+					render 'variant-availability', variant: product.selected_or_first_available_variant
+				endcapture
+				capture inventory_status_text
+					render 'variant-availability', variant: product.selected_or_first_available_variant, output_translation: true
+				endcapture
+			-%}
+
 			{%- form 'product',
 				product,
 				id: product_form_id,
@@ -81,20 +90,17 @@
 						type="submit"
 						name="add"
 						class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--outline{% else %}button--primary{% endif %}"
-						{% if product.selected_or_first_available_variant.available == false
+						{% if product.selected_or_first_available_variant.available == false and inventory_status == 'ComingSoon' %}
+							data-uc-klaviyo-oos-popup-trigger="{{ current_variant.id }}"
+						{% elsif product.selected_or_first_available_variant.available == false
 							or quantity_rule_soldout
+							or inventory_status == 'OutOfStock'
 						%}
 							disabled
 						{% endif %}
 					>
-						<span>
-							{%- if product.selected_or_first_available_variant.available == false
-								or quantity_rule_soldout
-							-%}
-								{{ 'products.product.sold_out' | t }}
-							{%- else -%}
-								{{ 'products.product.add_to_cart' | t }}
-							{%- endif -%}
+						<span data-uc-inventory-status-text>
+							{{ inventory_status_text }}
 						</span>
 						<div class="hidden" data-uc-loading-overlay-spinner>
 							<svg

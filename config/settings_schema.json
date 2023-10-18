@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "uCoast",
-    "theme_version": "10.0.2",
+    "theme_version": "10.0.3",
     "theme_author": "uCoast Web",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://ucoastweb.com/"
@@ -56,6 +56,11 @@
             "id": "background",
             "label": "t:settings_schema.colors.settings.background.label",
             "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "card_background",
+            "label": "t:settings_schema.colors.settings.card_background.label"
           },
           {
             "type": "color_background",
