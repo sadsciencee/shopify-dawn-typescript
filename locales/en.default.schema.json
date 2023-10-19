@@ -117,6 +117,9 @@
 				"background": {
 					"label": "Background"
 				},
+				"card_background": {
+					"label": "Card Background"
+				},
 				"background_gradient": {
 					"label": "Background gradient",
 					"info": "Background gradient replaces background where possible."

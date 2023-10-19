@@ -31,6 +31,16 @@
 		if ratio == 0 or ratio == null
 			assign ratio = 1
 		endif
+
+		assign product_form_section_id = section.id | append: card_product.id | append: '_quick-add'
+		assign product_form_id = 'product-form-' | append: product_form_section_id
+		assign current_variant = card_product.selected_or_first_available_variant
+		capture inventory_status
+			render 'variant-availability', variant: current_variant
+		endcapture
+		capture inventory_status_text
+			render 'variant-availability', variant: current_variant, output_translation: true, quick_add_no_plus: true
+		endcapture
 	-%}
 	<div class="card-wrapper product-card-wrapper underline-links-hover">
 		<div
@@ -185,7 +195,7 @@
 						{%- liquid
 							assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
 							assign qty_rules = false
-							if card_product.selected_or_first_available_variant.quantity_rule.min > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
+							if current_variant.quantity_rule.min > 1 or current_variant.quantity_rule.max != null or current_variant.quantity_rule.increment > 1
 								assign qty_rules = true
 							endif
 						-%}
@@ -248,10 +258,10 @@
 							<product-form>
 								<div data-uc-product-form-error-message-wrapper role="alert" hidden>
 									<svg
-											aria-hidden="true"
-											focusable="false"
-											class="icon icon-error"
-											viewBox="0 0 13 13"
+										aria-hidden="true"
+										focusable="false"
+										class="icon icon-error"
+										viewBox="0 0 13 13"
 									>
 										<circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
 										<circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
@@ -270,7 +280,7 @@
 									<input
 										type="hidden"
 										name="id"
-										value="{{ card_product.selected_or_first_available_variant.id }}"
+										value="{{ current_variant.id }}"
 										disabled
 									>
 									<button
@@ -282,21 +292,12 @@
 										aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
 										aria-live="polite"
 										data-sold-out-message="true"
-										{% if card_product.selected_or_first_available_variant.available
-												== false
-										%}
+										{% if current_variant.available == false %}
 											disabled
 										{% endif %}
 									>
-										<span>
-											{%- if card_product.selected_or_first_available_variant.available -%}
-												{{ 'products.product.add_to_cart' | t }}
-											{%- else -%}
-												{{ 'products.product.sold_out' | t }}
-											{%- endif -%}
-										</span>
-										<span class="hidden" data-uc-sold-out-message>
-											{{ 'products.product.sold_out' | t }}
+										<span data-uc-inventory-status-text>
+											{{ inventory_status_text }}
 										</span>
 										{%- if horizontal_quick_add -%}
 											<span class="icon-wrap">

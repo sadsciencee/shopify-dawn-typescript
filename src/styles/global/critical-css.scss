@@ -132,6 +132,21 @@ body {
 .z-2 {
 	z-index: 2;
 }
+.z-3 {
+	z-index: 3;
+}
+
+.tt-none {
+	text-transform: none;
+}
+
+.tt-uppercase {
+	text-transform: uppercase;
+}
+
+.tt-capitalize {
+	text-transform: capitalize;
+}
 
 .object-cover {
 	object-fit: cover;
@@ -240,6 +255,11 @@ body {
 
 .w-max {
 	width: max-content;
+}
+
+.w-max-contain {
+	width: max-content;
+	max-width: 100%;
 }
 
 .lh-1 {
@@ -606,4 +626,16 @@ ucoast-video[data-uc-has-played="true"] video {
 	opacity: 1;
 	backdrop-filter: blur(0);
 	transition: opacity .3s cubic-bezier(.32, .24, .15, 1), filter .3s cubic-bezier(.32, .24, .15, 1);
+}
+
+.p-section-background {
+	padding-top: calc(#{$sectionSpacing} * 2.2);
+	padding-bottom: calc(#{$sectionSpacing} * 2.2);
+}
+
+.viewport-minus-combined {
+	height: #{$viewportMinusCombined};
+}
+.viewport-minus-header {
+	height: #{$viewportMinusHeader};
 }

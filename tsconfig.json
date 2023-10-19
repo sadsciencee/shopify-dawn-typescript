@@ -21,7 +21,7 @@
     "outDir": "../built/local",
     "pretty": true,
     "lib": [
-      "es2019",
+      "es2021",
       "dom"
     ],
     "target": "es2019",

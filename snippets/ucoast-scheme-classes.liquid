@@ -1,0 +1,6 @@
+{% assign color_scheme = color_scheme | lstrip | rstrip %}
+{% unless color_scheme == 'background-1'
+%}
+    p-section-background
+{% endunless %}
+color-{{ color_scheme }}
