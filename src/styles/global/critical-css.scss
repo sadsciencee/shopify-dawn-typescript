@@ -639,3 +639,18 @@ ucoast-video[data-uc-has-played="true"] video {
 .viewport-minus-header {
 	height: #{$viewportMinusHeader};
 }
+.underline-on-hover {
+	@include underline-on-hover();
+}
+
+.underline-always {
+	@include underline-always();
+}
+
+.underline-on-hover-child {
+	@include underline-on-hover-child();
+}
+
+.underline-always-child {
+	@include underline-always-child();
+}
