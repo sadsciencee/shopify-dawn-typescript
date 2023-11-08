@@ -2,9 +2,12 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient {{ spacing }}">
+<div class="{{ color_scheme }} gradient {{ spacing }}">
 	<div class="collapsible-content relative collapsible-{{ section.settings.layout }}-layout isolate{% if section.settings.layout == 'section' %} page-width{% elsif section.settings.layout == 'none' %} content-container content-container--full-width{% endif %}">
 		<div class="collapsible-content__wrapper section-{{ section.id }}-padding{% if section.settings.layout == 'section' %} content-container color-{{ section.settings.container_color_scheme }} gradient{% endif %}">
 			<div class="{% if section.settings.image == blank %}collapsible-content-wrapper-narrow my-0 mx-auto {% else %}page-width{% endif %}">

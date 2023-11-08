@@ -1,6 +1,11 @@
 {%- if section.settings.menu_type_desktop == 'mega' -%}
 	{% render 'ucoast-style-tag', file: 'css-optional-component-mega-menu' %}
 {%- endif -%}
+{% liquid
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+%}
 
 <style>
 	header-drawer {
@@ -308,7 +313,7 @@
 {% if section.settings.sticky_header_type != 'none' %}
 	<sticky-header
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="color-{{ section.settings.color_scheme }} gradient"
+		class="{{ color_scheme }} gradient"
 		{% if section.settings.show_line_separator %}
 			data-uc-header-wrapper="border-bottom"
 		{% else %}
@@ -320,7 +325,7 @@
 {% else %}
 	<div
 		data-sticky-type="{{ section.settings.sticky_header_type }}"
-		class="color-{{ section.settings.color_scheme }} gradient"
+		class="{{ color_scheme }} gradient"
 		{% if section.settings.show_line_separator %}
 			data-uc-header-wrapper="border-bottom"
 		{% else %}

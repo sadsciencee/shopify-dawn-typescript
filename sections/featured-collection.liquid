@@ -11,6 +11,9 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
 {%- liquid
@@ -33,7 +36,7 @@
 	endif
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} isolate gradient {{ spacing }}">
+<div class="{{ color_scheme }} isolate gradient {{ spacing }}">
 	<div class="collection section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}">
 		<div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
 			{%- if section.settings.title != blank -%}

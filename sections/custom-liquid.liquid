@@ -2,9 +2,12 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient {{ spacing }}">
+<div class="{{ color_scheme }} gradient {{ spacing }}">
 	<div class="section-{{ section.id }}-padding">
 		{{ section.settings.custom_liquid }}
 	</div>

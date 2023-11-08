@@ -2,6 +2,9 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
 {%- liquid
@@ -11,7 +14,7 @@
 		assign posts_displayed = section.settings.post_limit
 	endif
 -%}
-<div class="blog color-{{ section.settings.color_scheme }} gradient{% if section.settings.heading == blank %} no-heading{% endif %} {{ spacing }}">
+<div class="blog {{ color_scheme }} gradient{% if section.settings.heading == blank %} no-heading{% endif %} {{ spacing }}">
 	<div class="page-width-desktop isolate{% if posts_displayed < 3 %} page-width-tablet{% endif %}">
 		{%- unless section.settings.heading == blank -%}
 			<div class="title-wrapper-with-link{% if posts_displayed > 2 %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %} title-wrapper--no-top-margin">
