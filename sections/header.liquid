@@ -3,7 +3,7 @@
 {%- endif -%}
 {% liquid
 	capture color_scheme
-		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+		echo 'color-' | append: section.settings.color_scheme
 	endcapture
 %}
 
