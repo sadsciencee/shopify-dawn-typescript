@@ -2,10 +2,13 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %} {{ spacing }}">
-	<div class="rich-text z-1 content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %}">
+	<div class="rich-text z-1 content-container {{ color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %}">
 		<div class="flex justify-center rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
 			<div class="rich-text__blocks w-100 {{ section.settings.content_alignment }}">
 				{%- for block in section.blocks -%}

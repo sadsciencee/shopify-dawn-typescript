@@ -2,6 +2,9 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
 {%- liquid
@@ -18,7 +21,7 @@
 	endif
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
+<div class="{{ color_scheme }} gradient">
 	<div class="video-section isolate{% unless section.settings.full_width %} page-width{% endunless %} section-{{ section.id }}-padding">
 		<div
 				{% if section.settings.full_width %}

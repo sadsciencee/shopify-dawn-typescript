@@ -2,9 +2,12 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient {{ spacing }}">
+<div class="{{ color_scheme }} gradient {{ spacing }}">
 	<div class="page-width page-width--narrow section-{{ section.id }}-padding">
 		<h2 class="page-title {{ section.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}">
 			{%- if section.settings.page.title != blank -%}

@@ -2,9 +2,12 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient isolate {{ spacing }}">
+<div class="{{ color_scheme }} gradient isolate {{ spacing }}">
 	<div class="page-width{% if section.settings.heading == blank %} no-heading{% endif %} section-{{ section.id }}-padding">
 		<h2 class="collage-wrapper-title mt-0 inline-richtext {{ section.settings.heading_size }}{% render 'ucoast-animate', animation: 'slide-in' %}">
 			{{ section.settings.heading }}

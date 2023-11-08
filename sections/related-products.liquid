@@ -6,9 +6,12 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient no-js-hidden {{ spacing }}">
+<div class="{{ color_scheme }} gradient no-js-hidden {{ spacing }}">
 	<product-recommendations
 		class="related-products page-width isolate{% render 'ucoast-animate', animation: 'slide-in' %}"
 		data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}"

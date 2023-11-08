@@ -223,3 +223,130 @@ $comboPopupContentShadow: var(--combo-popup-content-shadow);
 @mixin box-shadow-pre {
   box-shadow: $ax2 $ax3 ax(55) $ax7 rgba(217,217,217, 0);
 }
+
+@mixin underline-on-hover {
+  @include media-query($s-up) {
+    position: relative;
+    text-decoration: none;
+    &:before {
+      content: '';
+      left: 0;
+      position: absolute;
+      bottom: ax(-1);
+      transition: width 0.3s $bezier;
+      width: 0;
+      display: block;
+      height: 1px;
+      background: currentColor;
+    }
+    &:hover:before,
+    &:focus:before,
+    &:focus-visible:before {
+      width: 100%;
+      transition: width 0.3s $bezier;
+    }
+    &:focus:before,
+    &:focus-visible:before,
+    &:focus:after,
+    &:focus-visible:after,
+    &:focus,
+    &:focus-visible {
+      box-shadow: none;
+      outline: none;
+      outline-offset: 0;
+    }
+  }
+}
+
+@mixin underline-on-hover-child {
+  @include media-query($s-up) {
+    > span,
+    + label {
+      position: relative;
+      &:before {
+        content: '';
+        left: 0;
+        position: absolute;
+        bottom: ax(-1);
+        transition: width 0.3s $bezier;
+        width: 0;
+        display: block;
+        height: 1px;
+        background: currentColor;
+      }
+    }
+    &:hover > span:before,
+    &:focus > span:before,
+    &:focus-visible > span:before,
+    &:hover + label:before,
+    &:focus + label:before,
+    &:focus-visible + label:before {
+      width: 100%;
+      transition: width 0.3s $bezier;
+      box-shadow: none;
+    }
+    &:focus-visible + label:after,
+    &:focus-visible > span:after {
+      box-shadow: none;
+    }
+    &:focus:after,
+    &:focus-visible:after,
+    &:focus:before,
+    &:focus-visible:before {
+      box-shadow: none;
+      outline: none;
+      outline-offset: 0;
+    }
+  }
+}
+
+@mixin underline-always {
+  position: relative;
+  &:before {
+    content: '';
+    left: 0;
+    position: absolute;
+    bottom: ax(-1);
+    transition: width 0.3s $bezier;
+    width: 0;
+    display: block;
+    height: 1px;
+    background: currentColor;
+  }
+  &:before {
+    width: 100%;
+    transition: width 0.3s $bezier;
+  }
+  &:hover::before {
+    width: calc(100% - #{$ax8});
+    transition: width 0.3s $bezier;
+  }
+}
+
+@mixin underline-always-child {
+  > span,
+  + label {
+    position: relative;
+    &:before {
+      content: '';
+      left: 0;
+      position: absolute;
+      bottom: ax(-1);
+      transition: width 0.3s $bezier;
+      width: 0;
+      display: block;
+      height: 1px;
+      background: currentColor;
+    }
+    &:before {
+      width: 100%;
+      transition: width 0.3s $bezier;
+    }
+    @include media-query($s-up) {
+      &:hover::before {
+        width: calc(100% - #{$ax8});
+        transition: width 0.3s $bezier;
+      }
+    }
+  }
+}

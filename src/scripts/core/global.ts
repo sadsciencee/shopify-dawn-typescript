@@ -207,7 +207,7 @@ export const qsaOptional = <T extends HTMLElement = HTMLElement>(
 export const currentTargetRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	const element = event.currentTarget as (EventTarget & T) | null
@@ -218,7 +218,7 @@ export const currentTargetRequired = <
 export const relatedTargetRequired = <
 	E extends EventWithRelatedTarget = EventWithRelatedTarget,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	const element = event.relatedTarget as (EventTarget & T) | null
@@ -229,7 +229,7 @@ export const relatedTargetRequired = <
 export const relatedTargetOptional = <
 	E extends EventWithRelatedTarget = EventWithRelatedTarget,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	return (event.relatedTarget as EventTarget & T) ?? undefined
@@ -238,7 +238,7 @@ export const relatedTargetOptional = <
 export const targetRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement | Document = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	const element = event.target as T | null
@@ -250,7 +250,7 @@ export const targetRequired = <
 export const currentTargetOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	return (event.currentTarget as EventTarget & T) ?? undefined
@@ -259,7 +259,7 @@ export const currentTargetOptional = <
 export const targetOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E
 ) => {
 	return (event.target as EventTarget & T) ?? undefined
@@ -268,7 +268,7 @@ export const targetOptional = <
 export const targetClosestRequired = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E,
 	selector: string
 ) => {
@@ -283,7 +283,7 @@ export const targetClosestRequired = <
 export const targetClosestOptional = <
 	E extends Event = CommonEventType,
 	T extends HTMLElement = HTMLElement
-	>(
+>(
 	event: E,
 	selector: string
 ) => {
@@ -375,7 +375,7 @@ export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
 // get attribute from element or throw error
 export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
 	const data = el.getAttribute(attribute)
-	if (!data) throw new Error(`Attribute ${attribute} no found on element ${el}`)
+	if (!data) throw new Error(`Attribute ${attribute} no found on element ${{el}}`)
 	return data
 }
 // browser safe replace all
@@ -459,6 +459,18 @@ export const isElementInViewport = (el: HTMLElement) => {
 		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 	return result
 }
+
+export const isAnyPartOfElementInViewport = (el: HTMLElement) => {
+	const rect = el.getBoundingClientRect();
+
+	return (
+		rect.top < window.innerHeight &&
+		rect.left < window.innerWidth &&
+		rect.bottom > 0 &&
+		rect.right > 0
+	);
+}
+
 
 export const isInViewport = (element: HTMLElement) => {
 	const rect = element.getBoundingClientRect()
@@ -830,28 +842,50 @@ export function isVideoComponent(obj: HTMLElement | Element): obj is UcoastVideo
 
 // media loader stuff - this was in a separate file but was getting issues w/buildpack
 
-export const mediaLoader = () => {
+export const mediaLoader = (runOnce = false) => {
 	const images = qsaOptional('img')
 	const videos = qsaOptional<UcoastVideo>('ucoast-video')
 
 	if (images) {
 		images.forEach((image) => {
-			if (!(image instanceof HTMLImageElement) || !isInViewport(image)) return
+			if (!(image instanceof HTMLImageElement)) {
+				return
+			}
+			if (image.getAttribute('loading') === 'eager') {
+				replaceSrcSet(image, {
+					loadImmediately: true
+				})
+				return
+			}
+			/*if (!isAnyPartOfElementInViewport(image)) {
+				return
+			}
+			if (isAnyPartOfElementInViewport(image) && image.hasAttribute('data-uc-mega-image-defer') && !qsOptional('[data-uc-mega-menu-details][open]')) {
+				return
+			}*/
 			replaceSrcSet(image)
 		})
-		const imageObserver = new IntersectionObserver(onImageIntersection, {
-			rootMargin: '100% 0% 100% 0%',
-		})
-		images.forEach((element) => imageObserver.observe(element))
+		if (!runOnce) {
+			const imageObserver = new IntersectionObserver(onImageIntersection, {
+				root: null,
+				rootMargin: '50px 0px 50px 0px',
+				threshold: 0
+			})
+			images.forEach((element) => imageObserver.observe(element))
+		}
 	}
 
-	if (videos) {
+	if (videos && !runOnce) {
 		const videoObserver = new IntersectionObserver(onVideoIntersection, {
-			threshold: 0.1,
+			root: null,
+			rootMargin: '50px 0px 50px 0px',
+			threshold: 0
 		})
 		videos.forEach((element) => videoObserver.observe(element))
 		const videoPreloadObserver = new IntersectionObserver(onVideoPreloadIntersection, {
-			rootMargin: '100% 0% 100% 0%',
+			root: null,
+			rootMargin: '50px 0px 50px 0px',
+			threshold: 0
 		})
 		videos.forEach((element) => videoPreloadObserver.observe(element))
 	}
@@ -862,7 +896,9 @@ function onImageIntersection(elements: IntersectionObserverEntry[], _: Intersect
 		if (element.isIntersecting) {
 			const image = element.target
 			if (!(image instanceof HTMLImageElement)) throw 'element target not found'
-			replaceSrcSet(image)
+			replaceSrcSet(image, {
+				loadImmediately: true
+			})
 		}
 	})
 }
@@ -888,7 +924,10 @@ function onVideoPreloadIntersection(
 ) {
 	elements.forEach((element) => {
 		const video = element.target
-		if (isVideoComponent(video) && element.isIntersecting) {
+		if (isVideoComponent(video) && element.isIntersecting && video.hasAttribute('data-uc-megamenu-defer-video') && !qsOptional('[data-uc-mega-menu-details][open]')) {
+			return
+		}
+		else if (isVideoComponent(video) && element.isIntersecting) {
 			void video.preload()
 		}
 	})

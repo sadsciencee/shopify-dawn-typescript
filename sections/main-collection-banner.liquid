@@ -1,3 +1,9 @@
+{% liquid
+  capture color_scheme
+    render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+  endcapture
+%}
+
 {% assign offset = settings.media_shadow_vertical_offset | at_least: 0 %}
 {%- style -%}
   @media screen and (max-width: 749px) {
@@ -7,7 +13,7 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} {{ color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% render 'ucoast-animate', animation: 'fade-in' %}">
     <div class="collection-hero__text-wrapper">
       <h1 class="collection-hero__title">
