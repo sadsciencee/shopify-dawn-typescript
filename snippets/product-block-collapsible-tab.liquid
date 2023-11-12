@@ -1,9 +1,9 @@
 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
     <details id="Details-{{ block.id }}-{{ section.id }}">
-        <summary>
+        <summary class='underline-on-hover-child'>
             <div class="summary__title">
                 {% render 'icon-accordion', icon: block.settings.icon %}
-                <h2 class="h4 accordion__title inline-richtext">
+                <h2 class="h4 accordion__title inline-richtext hover-child">
                     {{ block.settings.heading | default: block.settings.page.title }}
                 </h2>
             </div>

@@ -47,7 +47,6 @@
   padding-bottom: #{$ax6};
   padding-top: #{$ax6};
   text-decoration: none;
-  transition: text-decoration var(--duration-short) ease;
   word-wrap: break-word;
 }
 
@@ -65,16 +64,6 @@
 .header--top-center .mega-menu__list > li {
   width: 16%;
   padding-right: #{$ax24};
-}
-
-.mega-menu__link:hover,
-.mega-menu__link--active {
-  color: rgb(#{$schemaColorForeground});
-  text-decoration: underline;
-}
-
-.mega-menu__link--active:hover {
-  text-decoration-thickness: #{$ax2};
 }
 
 .mega-menu .mega-menu__list--condensed {

@@ -75,14 +75,7 @@
 }
 
 [data-uc-cart-item-name] {
-  text-decoration: none;
   display: block;
-}
-
-[data-uc-cart-item-name]:hover {
-  text-decoration: underline;
-  text-underline-offset: #{$ax3};
-  text-decoration-thickness: #{$ax2};
 }
 
 .cart-item__price-wrapper > * {

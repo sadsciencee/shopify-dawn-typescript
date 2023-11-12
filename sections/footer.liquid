@@ -81,7 +81,7 @@
 													<li>
 														<a
 															href="{{ link.url }}"
-															class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+															class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active underline-always {% else %} underline-on-hover{% endif %}"
 														>
 															{{ link.title }}
 														</a>
@@ -386,16 +386,16 @@
 		</div>
 		<div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center justify-center{% endif %}">
 			<div class="footer__copyright caption">
-				<small class="copyright__content"
+				<small class="copyright__content underline-always-child"
 					>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
 				</small>
-				<small class="copyright__content">{{ powered_by_link }}</small>
+				<small class="copyright__content underline-always-child">{{ powered_by_link }}</small>
 				{%- if section.settings.show_policy -%}
 					<ul class="policies list-unstyled">
 						{%- for policy in shop.policies -%}
 							{%- if policy != blank -%}
 								<li>
-									<small class="copyright__content"
+									<small class="copyright__content underline-always-child"
 										><a href="{{ policy.url }}">{{ policy.title }}</a></small
 									>
 								</li>

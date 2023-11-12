@@ -311,14 +311,6 @@ details > * {
 }
 
 .underlined-link,
-.customer a,
-.inline-richtext a {
-	text-underline-offset: #{$ax3};
-	text-decoration-thickness: #{$ax1};
-	transition: text-decoration-thickness ease 100ms;
-}
-
-.underlined-link,
 .customer a {
 	color: rgba(#{$schemaColorLink}, var(--alpha-link));
 }
@@ -332,7 +324,6 @@ details > * {
 .customer a:hover,
 .inline-richtext a:hover {
 	color: rgb(#{$schemaColorLink});
-	text-decoration-thickness: #{$ax2};
 }
 
 .icon-arrow {
@@ -904,11 +895,6 @@ button.shopify-payment-button__button--unbranded {
 
 details[open] > .share-button__fallback {
 	animation: animateMenuOpen var(--duration-default) ease;
-}
-
-.share-button__button:hover {
-	text-decoration: underline;
-	text-underline-offset: #{$ax3};
 }
 
 .share-button__button,
@@ -1695,10 +1681,6 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	align-items: center;
 }
 
-.announcement-bar__link:hover {
-	text-decoration: underline;
-}
-
 .announcement-bar__link .icon-arrow {
 	display: inline-block;
 	pointer-events: none;
@@ -2140,36 +2122,16 @@ details[open] > .header__submenu {
 	color: rgb(#{$schemaColorForeground});
 }
 
-.header__menu-item span {
-	transition: text-decoration var(--duration-short) ease;
-}
-
-.header__menu-item:hover span {
-	text-decoration: underline;
-	text-underline-offset: #{$ax3};
+details .header__menu-item {
+	@include underline-on-hover-child;
 }
 
 details[open] > .header__menu-item {
-	text-decoration: underline;
-}
-
-details[open]:hover > .header__menu-item {
-	text-decoration-thickness: #{$ax2};
+	@include underline-always-child;
 }
 
 details[open] > .header__menu-item .icon-caret {
 	transform: rotate(180deg);
-}
-
-.header__active-menu-item {
-	transition: text-decoration-thickness var(--duration-short) ease;
-	color: rgb(#{$schemaColorForeground});
-	text-decoration: underline;
-	text-underline-offset: #{$ax3};
-}
-
-.header__menu-item:hover .header__active-menu-item {
-	text-decoration-thickness: #{$ax2};
 }
 
 .header__submenu {
@@ -2204,10 +2166,6 @@ details[open] > .header__menu-item .icon-caret {
 .header__submenu .header__menu-item {
 	justify-content: space-between;
 	padding: #{$ax8} #{$ax20};
-}
-
-.header__submenu .header__menu-item:hover {
-	text-decoration-line: underline;
 }
 
 .header__menu-item .icon-caret {
@@ -2498,14 +2456,10 @@ details-disclosure > details {
 
 .rte a {
 	color: rgba(#{$schemaColorLink}, var(--alpha-link));
-	text-underline-offset: #{$ax3};
-	text-decoration-thickness: #{$ax1};
-	transition: text-decoration-thickness var(--duration-short) ease;
 }
 
 .rte a:hover {
 	color: rgb(#{$schemaColorLink});
-	text-decoration-thickness: #{$ax2};
 }
 
 .rte blockquote {

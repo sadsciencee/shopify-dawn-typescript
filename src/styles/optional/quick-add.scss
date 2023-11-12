@@ -159,9 +159,6 @@ quick-add-modal .product__title > a {
 
 quick-add-modal .product__title > a:hover {
 	color: rgb(#{$schemaColorForeground});
-	text-decoration: underline;
-	text-underline-offset: #{$ax2};
-	text-decoration-thickness: #{$ax3};
 }
 
 quick-add-modal .product-form__buttons {

@@ -58,9 +58,9 @@
 										open
 									{% endif %}
 								>
-									<summary id="Summary-{{ block.id }}-{{ section.id }}">
+									<summary id="Summary-{{ block.id }}-{{ section.id }}" class='underline-on-hover-child'>
 										{% render 'icon-accordion', icon: block.settings.icon %}
-										<h3 class="accordion__title inline-richtext h4">
+										<h3 class="accordion__title inline-richtext h4 hover-child">
 											{{
 												block.settings.heading
 												| default: block.settings.page.title

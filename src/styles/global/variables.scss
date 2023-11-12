@@ -260,6 +260,7 @@ $comboPopupContentShadow: var(--combo-popup-content-shadow);
 
 @mixin underline-on-hover-child {
   @include media-query($s-up) {
+    .hover-child,
     > span,
     + label {
       position: relative;
@@ -275,20 +276,25 @@ $comboPopupContentShadow: var(--combo-popup-content-shadow);
         background: currentColor;
       }
     }
+    &:hover .hover-child:before,
     &:hover > span:before,
     &:focus > span:before,
+    &:focus-visible .hover-child:before,
     &:focus-visible > span:before,
     &:hover + label:before,
     &:focus + label:before,
-    &:focus-visible + label:before {
+    &:focus-visible + label:before,
+    &:focus .hover-child:before {
       width: 100%;
       transition: width 0.3s $bezier;
       box-shadow: none;
     }
     &:focus-visible + label:after,
-    &:focus-visible > span:after {
+    &:focus-visible > span:after,
+    &:focus-visible .hover-child:after {
       box-shadow: none;
     }
+    &:focus:after,
     &:focus:after,
     &:focus-visible:after,
     &:focus:before,
@@ -324,6 +330,7 @@ $comboPopupContentShadow: var(--combo-popup-content-shadow);
 }
 
 @mixin underline-always-child {
+  .hover-child,
   > span,
   + label {
     position: relative;

@@ -115,8 +115,7 @@ predictive-search[data-uc-loading]
 
 .predictive-search__list-item[aria-selected='true'] .predictive-search__item-heading,
 .predictive-search__list-item:hover .predictive-search__item-heading {
-	text-decoration: underline;
-	text-underline-offset: #{$ax3};
+	@include underline-always;
 }
 
 .predictive-search__item {

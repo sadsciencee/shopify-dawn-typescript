@@ -13,12 +13,12 @@
 {% render 'ucoast', ucoast: 'js-optional-share-button.ts' %}
 
 <share-button id="Share-{{ section.id }}" class="share-button quick-add-hidden" {{ block.shopify_attributes }}>
-  <button class="share-button__button hidden" data-uc-share-button>
+  <button class="share-button__button underline-on-hover hidden" data-uc-share-button>
     {% render 'icon-default', icon: 'share' %}
     {{ block.settings.share_label | escape }}
   </button>
   <details id="Details-{{ block.id }}-{{ section.id }}">
-    <summary class="share-button__button" data-uc-share-summary>
+    <summary class="share-button__button underline-on-hover" data-uc-share-summary>
       {% render 'icon-default', icon: 'share' %}
       {{ block.settings.share_label | escape }}
     </summary>

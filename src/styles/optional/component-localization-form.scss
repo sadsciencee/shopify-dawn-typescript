@@ -157,9 +157,7 @@ noscript .localization-selector.link {
   color: rgb(#{$schemaColorForeground});
 }
 
-.disclosure__link--active {
-  text-decoration: underline;
-}
+
 
 .disclosure__button[aria-expanded='true'] .icon-caret {
   transform: rotate(180deg);
@@ -175,10 +173,6 @@ noscript .localization-selector.link {
   letter-spacing: 0.043em;
   height: auto;
   background: transparent;
-}
-
-.header__localization .disclosure .localization-form__select:hover {
-  text-decoration: underline;
 }
 
 .header__localization .localization-form__select.link:after,

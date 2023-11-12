@@ -66,10 +66,6 @@
 	background: rgba(#{$schemaColorForeground}, 0.04);
 }
 
-.collapsible-content summary:hover .accordion__title {
-	text-decoration: underline;
-	text-underline-offset: #{$ax3};
-}
 @include media-query($s-up) {
 	.collapsible-section-layout {
 		padding-bottom: ax(70);

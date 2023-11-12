@@ -96,10 +96,6 @@ product-recommendations.is-accordion + .accordion {
   text-decoration: initial;
 }
 
-.complementary-products-contains-quick-add .card__heading:hover a {
-  text-decoration: underline;
-}
-
 .complementary-products__container .card--card .card__inner .card__media {
   border-radius: calc(var(--corner-radius) - var(--border-width) - var(--image-padding));
 }
