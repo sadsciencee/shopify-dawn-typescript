@@ -10,12 +10,13 @@
 }
 
 
-.collapsible-content__media--small {
+.collapsible-content__media--portrait {
 	height: ax(194);
 }
 
-.collapsible-content__media--large {
-	height: #{ax(435)};
+.collapsible-content__media--landscape {
+	height: auto;
+	width: 100%;
 }
 
 .collapsible-content-wrapper-narrow {

@@ -2,11 +2,11 @@
 	this should only be called from ucoast-media
 {% endcomment %}
 <span
-	class="{{ wrapper_class }} media media--transparent"
+	class="{{ wrapper_class }} media global-media-settings media--transparent"
 
-	{% if aspect_ratio == 'auto' and image != blank %}
+	{% if aspect_ratio == 'adapt' and image != blank %}
 		style="--media-ratio: {{ 1 | divided_by: image.aspect_ratio }};"
-	{% elsif aspect_ratio == 'auto' %}
+	{% elsif aspect_ratio == 'adapt' %}
 		style="--media-ratio: 1;"
 	{% endif %}
 >

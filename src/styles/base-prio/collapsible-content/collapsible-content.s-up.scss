@@ -6,12 +6,13 @@
 		padding-top: ax(70);
 	}
 
-	.collapsible-content__media--small {
+	.collapsible-content__media--portrait {
 		height: ax(314);
 	}
 
-	.collapsible-content__media--large {
-		height: ax(695);
+	.collapsible-content__media--landscape {
+		height: auto;
+		width: 100%;
 	}
 
 	.collapsible-content__grid--reverse {

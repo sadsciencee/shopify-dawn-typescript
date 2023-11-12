@@ -8,8 +8,8 @@
     -- loading (lazy, eager, defer)
     -- id
     -- starting_width
-    -- aspect_ratio (portrait, landscape, square, fill, auto)
-    -- aspect_ratio_mobile (portrait, landscape, square, fill, auto)
+    -- aspect_ratio (portrait, landscape, square, fill, adapt)
+    -- aspect_ratio_mobile (portrait, landscape, square, fill, adapt)
     -- class
     -- class_mobile
     -- position_class
@@ -62,11 +62,11 @@
             assign aspect_ratio_class = 'r-square'
         when 'fill'
             assign aspect_ratio_class = 'r-fill'
-        when 'auto'
-            assign aspect_ratio_class = 'r-auto'
+        when 'adapt'
+            assign aspect_ratio_class = 'r-adapt'
         else
-            assign aspect_ratio = 'auto'
-            assign aspect_ratio_class = 'r-auto'
+            assign aspect_ratio = 'adapt'
+            assign aspect_ratio_class = 'r-adapt'
     endcase
     unless aspect_ratio_class_mobile
         assign aspect_ratio_class_mobile = aspect_ratio_class
@@ -80,11 +80,11 @@
                 assign aspect_ratio_class_mobile = 'r-square--s-down'
             when 'fill'
                 assign aspect_ratio_class_mobile = 'r-fill--s-down'
-            when 'auto'
-                assign aspect_ratio_class_mobile = 'r-auto--s-down'
+            when 'adapt'
+                assign aspect_ratio_class_mobile = 'r-adapt--s-down'
             else
-                assign aspect_ratio_mobile = 'auto'
-                assign aspect_ratio_class_mobile = 'r-auto--s-down'
+                assign aspect_ratio_mobile = 'adapt'
+                assign aspect_ratio_class_mobile = 'r-adapt--s-down'
         endcase
     endunless
 

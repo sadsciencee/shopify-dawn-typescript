@@ -3,13 +3,13 @@
 {% endcomment %}
 
 <ucoast-video
-	class="{{ wrapper_class }} media media--transparent"
+	class="{{ wrapper_class }} media global-media-settings media--transparent"
 	data-loading="{{ loading }}"
 	data-uc-has-played="false"
 	{{ custom_attributes }}
-	{% if aspect_ratio == 'auto' and video != blank %}
+	{% if aspect_ratio == 'adapt' and video != blank %}
 		style="--media-ratio: {{ 1 | divided_by: video.preview_image.aspect_ratio }};"
-	{% elsif aspect_ratio == 'auto' %}
+	{% elsif aspect_ratio == 'adapt' %}
 		style="--media-ratio: 1;"
 	{% endif %}
 >
