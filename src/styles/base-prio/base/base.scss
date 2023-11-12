@@ -2331,6 +2331,24 @@ details-disclosure > details {
 	overflow: visible !important;
 	background-color: rgb(#{$schemaColorBackground});
 }
+.global-media-settings.overflow-hidden {
+	overflow: hidden !important;
+}
+.global-media-settings.absolute {
+	position: absolute;
+}
+.global-media-settings.fixed {
+	position: fixed;
+}
+.global-media-settings.static {
+	position: static;
+}
+.global-media-settings.relative {
+	position: relative;
+}
+.global-media-settings.sticky {
+	position: sticky;
+}
 
 .global-media-settings:after {
 	content: '';
@@ -2884,4 +2902,15 @@ details-disclosure > details {
 	.r-adapt--s-down {
 		aspect-ratio: var(--media-ratio);
 	}
+}
+
+.reveal-on-hover {
+	opacity: 0;
+	transition: opacity .3s $bezier;
+	&:hover {
+		opacity: 1;
+	}
+}
+.card-wrapper:hover .reveal-on-hover {
+	opacity: 1;
 }

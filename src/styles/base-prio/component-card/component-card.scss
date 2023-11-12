@@ -74,17 +74,6 @@
 	background: transparent;
 }
 
-.card .card__inner .card__media {
-	overflow: hidden;
-	/* Fix for Safari border bug on hover */
-	z-index: 0;
-	border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
-}
-
-.card--card .card__inner .card__media {
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
 
 .card--standard.card--text {
 	background-color: transparent;
@@ -92,17 +81,6 @@
 
 .card-information {
 	text-align: var(--text-alignment);
-}
-
-.card__media,
-.card .media {
-	bottom: 0;
-	position: absolute;
-	top: 0;
-}
-
-.card .media {
-	width: 100%;
 }
 
 .card__media {

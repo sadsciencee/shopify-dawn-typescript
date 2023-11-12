@@ -210,8 +210,8 @@
 						data-media-position="{{ media_index }}"
 					>
 						{%- capture thumbnail_id -%}
-              Thumbnail-{{ section.id }}-0{{ id_append }}
-            {%- endcapture -%}
+                            Thumbnail-{{ section.id }}-0{{ id_append }}
+                        {%- endcapture -%}
 						<button
 							class="thumbnail global-media-settings global-media-settings--no-shadow"
 							aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
@@ -219,7 +219,7 @@
 							aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 							aria-describedby="{{ thumbnail_id }}"
 						>
-							{% render 'ucoast-image',
+							{% render 'ucoast-media',
 								image: featured_media.preview_image,
 								id: thumbnail_id,
 								alt: featured_media.alt
@@ -261,8 +261,8 @@
 								</span>
 							{%- endif -%}
 							{%- capture thumbnail_id -%}
-                Thumbnail-{{ section.id }}-{{ forloop.index }}{{ id_append }}
-              {%- endcapture -%}
+                                Thumbnail-{{ section.id }}-{{ forloop.index }}{{ id_append }}
+                            {%- endcapture -%}
 							<button
 								class="thumbnail global-media-settings global-media-settings--no-shadow"
 								aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
@@ -277,7 +277,7 @@
 								aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 								aria-describedby="{{ thumbnail_id }}"
 							>
-								{% render 'ucoast-image',
+								{% render 'ucoast-media',
 									image: media.preview_image,
 									id: thumbnail_id,
 									alt: media.alt
