@@ -40,7 +40,11 @@
         assign id = image.id
     endunless
     unless starting_width
-        assign starting_width = 180
+        if loading == 'eager'
+            assign starting_width = 3600
+        else
+            assign starting_width = 180
+        endif
     endunless
     unless position_class
         assign position_class = 'relative'
@@ -155,7 +159,8 @@
                 multiplier: multiplier,
                 alt: alt,
                 media_child: media_child,
-                aspect_ratio: aspect_ratio_mobile
+                aspect_ratio: aspect_ratio_mobile,
+                starting_width: starting_width
         %}
         {% render 'ucoast-video',
                 video: video,
@@ -194,7 +199,8 @@
                 multiplier: multiplier,
                 alt: alt,
                 media_child: media_child,
-                aspect_ratio: aspect_ratio_mobile
+                aspect_ratio: aspect_ratio_mobile,
+                starting_width: starting_width
         %}
         {% render 'ucoast-image',
                 image: image,
@@ -205,7 +211,8 @@
                 multiplier: multiplier,
                 alt: alt,
                 media_child: media_child,
-                aspect_ratio: aspect_ratio
+                aspect_ratio: aspect_ratio,
+                starting_width: starting_width
         %}
     {% else %}
         {% render 'ucoast-image',
@@ -217,7 +224,8 @@
                 multiplier: multiplier,
                 alt: alt,
                 media_child: media_child,
-                aspect_ratio: aspect_ratio
+                aspect_ratio: aspect_ratio,
+                starting_width: starting_width
         %}
     {% endif %}
 {%- else -%}

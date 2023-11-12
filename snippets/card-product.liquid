@@ -41,11 +41,14 @@
         capture inventory_status_text
             render 'variant-availability', variant: current_variant, output_translation: true, quick_add_no_plus: true
         endcapture
-        if lazy_load
-            assign loading = 'lazy'
-        else
-            assign loading = 'eager'
-        endif
+        unless loading
+            if lazy_load
+                assign loading = 'lazy'
+            else
+                assign loading = 'eager'
+            endif
+        endunless
+
     -%}
     <div class="card-wrapper product-card-wrapper underline-links-hover">
         <div
