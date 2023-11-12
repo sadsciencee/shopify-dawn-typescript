@@ -2828,3 +2828,23 @@ details-disclosure > details {
 	top: 0;
 	width: 100%;
 }
+
+// maybe move to critical - added in 10.1
+
+.r-portrait {
+	aspect-ratio: .75;
+}
+
+.r-landscape {
+	aspect-ratio: 1.5;
+}
+
+.r-square {
+	aspect-ratio: 1;
+}
+.r-fill {
+
+}
+.r-auto {
+	aspect-ratio: var(--media-ratio);
+}

@@ -11,6 +11,13 @@
         render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
     endcapture
 -%}
+{%- liquid
+    if section.settings.desktop_layout == 'left'
+        assign large_block = 0
+    else
+        assign large_block = section.blocks.size | minus: 1
+    endif
+-%}
 
 <div class="{{ color_scheme }} gradient isolate {{ spacing }}">
     <div class="page-width{% if section.settings.heading == blank %} no-heading{% endif %} section-{{ section.id }}-padding">
@@ -31,40 +38,21 @@
                     {%- case block.type -%}
                         {%- when 'image' -%}
                             <div class="collage-card h-100 relative {% if section.settings.card_styles == 'none' %}global-media-settings{% else %}card-wrapper {{ section.settings.card_styles }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-                                <div
-                                        class="media media--transparent ratio"
-                                        {% if block.settings.image != blank %}
-                                            style="--ratio-percent: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%"
-                                        {% else %}
-                                            style="--ratio-percent: 100%"
-                                        {% endif %}
-                                >
-                                    {%- if block.settings.image != blank -%}
-                                        {%- liquid
-                                            if section.settings.desktop_layout == 'left'
-                                                assign large_block = forloop.first
-                                            else
-                                                assign large_block = forloop.last
-                                            endif
-                                        -%}
-                                        {%- if large_block -%}
-                                            {% render 'ucoast-image',
-                                                    image: block.settings.image,
-                                                    loading: loading
-                                            %}
-                                        {%- else -%}
-                                            {% render 'ucoast-image',
-                                                    image: block.settings.image,
-                                                    loading: loading
-                                            %}
-                                        {%- endif -%}
-                                    {%- else -%}
-                                        {{
-                                        'detailed-apparel-1'
-                                        | placeholder_svg_tag: 'placeholder-svg'
-                                        }}
-                                    {%- endif -%}
-                                </div>
+
+                                {% if forloop.index0 == large_block %}
+                                    {% render 'ucoast-media',
+                                            image: block.settings.image,
+                                            wrapper_class: 'h-100',
+                                            aspect_ratio: 'fill',
+                                            loading: loading
+                                    %}
+                                {% else %}
+                                    {% render 'ucoast-media',
+                                            image: block.settings.image,
+                                            loading: loading
+                                    %}
+                                {% endif %}
+
                             </div>
                         {%- when 'product' -%}
                             {%- assign placeholder_image = 'product-apparel-'
@@ -129,30 +117,18 @@
                                                 aria-haspopup="dialog"
                                                 data-media-id="{{ block.settings.video_url.id }}"
                                         >
-                                            <div
-                                                    class="media media--transparent ratio h-100"
-                                                    {% if block.settings.cover_image != blank %}
-                                                        style="--ratio-percent: {{ 1 | divided_by: block.settings.cover_image.aspect_ratio | times: 100 }}%"
-                                                    {% else %}
-                                                        style="--ratio-percent: 100%"
-                                                    {% endif %}
-                                            >
-												<span class="deferred-media__poster-button motion-reduce">
-													{%- render 'icon-default', icon: 'play' -%}
-												</span>
+                                            {% capture media_child %}
+                                                <span class="deferred-media__poster-button motion-reduce">
+													    {%- render 'icon-default', icon: 'play' -%}
+												    </span>
+                                            {% endcapture %}
 
-                                                {%- if block.settings.cover_image != blank -%}
-                                                    {% render 'ucoast-image',
-                                                            image: block.settings.cover_image,
-                                                            loading: loading
-                                                    %}
-                                                {%- else -%}
-                                                    {{
-                                                    'hero-apparel-3'
-                                                    | placeholder_svg_tag: 'placeholder-svg placeholder'
-                                                    }}
-                                                {%- endif -%}
-                                            </div>
+                                            {% render 'ucoast-media',
+                                                    image: block.settings.cover_image,
+                                                    loading: loading,
+                                                    wrapper_class: 'h-100',
+                                                    media_child: media_child
+                                            %}
                                         </button>
                                     </div>
                                 </modal-opener>

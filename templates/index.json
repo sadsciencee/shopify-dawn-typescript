@@ -35,13 +35,13 @@
         "button"
       ],
       "settings": {
+        "color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
         "image": "shopify:\/\/shop_images\/Hydrosol-BloodOrange-BOR.jpg",
         "image_overlay_opacity": 30,
         "image_height": "medium",
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
-        "color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
         "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
@@ -72,9 +72,9 @@
         "text"
       ],
       "settings": {
+        "color_scheme": "background-1",
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "background-1",
         "full_width": true,
         "space_above": 4,
         "mobile_space_above": -1
@@ -111,6 +111,7 @@
     "video": {
       "type": "video",
       "settings": {
+        "color_scheme": "background-1",
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
@@ -118,7 +119,6 @@
         "cover_image": "shopify:\/\/shop_images\/EssentialOil-Angelica-ANGj.pg.jpg",
         "description": "",
         "full_width": false,
-        "color_scheme": "background-1",
         "space_above": 4,
         "mobile_space_above": -1
       }
@@ -161,6 +161,7 @@
         "column3"
       ],
       "settings": {
+        "color_scheme": "background-1",
         "title": "",
         "heading_size": "h1",
         "image_width": "third",
@@ -170,7 +171,6 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "color_scheme": "background-1",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "space_above": 8,
@@ -220,6 +220,7 @@
         "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2"
       ],
       "settings": {
+        "color_scheme": "",
         "image_height": "medium",
         "desktop_image_width": "medium",
         "heading_size": "h1",
@@ -291,6 +292,44 @@
         "space_above": 4,
         "mobile_space_above": -1
       }
+    },
+    "0026a19f-baba-419e-b405-504c014c4a12": {
+      "type": "collage",
+      "blocks": {
+        "template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EssentialOil-Angelica-ANGj.pg.jpg"
+          }
+        },
+        "b8538249-5a0e-4287-b8e2-64a312cee6b9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Essentialoil-BalsamCopaiba-COP.jpg"
+          }
+        },
+        "fb608a36-9c54-4ed7-aa64-8fff0d84e16a": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EssentialOil-BalsamFir-BFR.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1",
+        "b8538249-5a0e-4287-b8e2-64a312cee6b9",
+        "fb608a36-9c54-4ed7-aa64-8fff0d84e16a"
+      ],
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper contains-card--product",
+        "color_scheme": "",
+        "space_above": 4,
+        "mobile_space_above": -1
+      }
     }
   },
   "order": [
@@ -300,6 +339,7 @@
     "video",
     "multicolumn",
     "13d0b711-48ba-483a-84fc-bcbb440aeb82",
-    "f0d6d105-6481-4c63-9ff2-e2d191a0f414"
+    "f0d6d105-6481-4c63-9ff2-e2d191a0f414",
+    "0026a19f-baba-419e-b405-504c014c4a12"
   ]
 }

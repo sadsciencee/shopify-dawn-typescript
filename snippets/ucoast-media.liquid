@@ -47,6 +47,12 @@
     unless position_class_mobile
         assign position_class_mobile = position_class
     endunless
+    unless display_class
+        assign display_class = 'block'
+    endunless
+    unless display_class_mobile
+        assign display_class_mobile = display_class
+    endunless
     case aspect_ratio
         when 'portrait'
             assign aspect_ratio_class = 'r-portrait'
@@ -59,7 +65,8 @@
         when 'auto'
             assign aspect_ratio_class = 'r-auto'
         else
-            assign aspect_ratio_class = 'r-fill'
+            assign aspect_ratio = 'auto'
+            assign aspect_ratio_class = 'r-auto'
     endcase
     unless aspect_ratio_class_mobile
         assign aspect_ratio_class_mobile = aspect_ratio_class
@@ -76,14 +83,15 @@
             when 'auto'
                 assign aspect_ratio_class_mobile = 'r-auto--s-down'
             else
-                assign aspect_ratio_class_mobile = 'r-fill--s-down'
+                assign aspect_ratio_mobile = 'auto'
+                assign aspect_ratio_class_mobile = 'r-auto--s-down'
         endcase
     endunless
 
-    assign wrapper_class = wrapper_class | append: ' ' | append: aspect_ratio_class | append: ' ' | append: position_class
-    assign media_class = class | append: ' w-100 h-100 object-cover'
-    assign wrapper_class_mobile = wrapper_class | append: ' s-up-hide ' | append: aspect_ratio_class_mobile | append: ' ' | append: position_class_mobile
-    assign media_class_mobile = class_mobile | append: ' w-100 h-100 object-cover'
+    assign wrapper_class = wrapper_class | append: ' ' | append: aspect_ratio_class | append: ' ' | append: position_class | append: ' ' | append: display_class
+    assign media_class = media_class | append: ' w-100 h-100 object-cover media__item'
+    assign wrapper_class_mobile = wrapper_class | append: ' s-up-hide ' | append: aspect_ratio_class_mobile | append: ' ' | append: position_class_mobile | append: ' ' | append: display_class
+    assign media_class_mobile = media_class_mobile | append: ' w-100 h-100 object-cover media__item'
 
     if video and image
         assign preview_image = image
@@ -111,7 +119,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio_mobile
         %}
         {% render 'ucoast-video',
                 video: video,
@@ -121,7 +131,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio
         %}
     {% elsif image_mobile != blank %}
         {% render 'ucoast-image',
@@ -131,7 +143,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio_mobile
         %}
         {% render 'ucoast-video',
                 video: video,
@@ -141,7 +155,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio
         %}
     {% else %}
         {% render 'ucoast-video',
@@ -152,7 +168,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio
         %}
     {% endif %}
 {%- elsif image != blank -%}
@@ -164,7 +182,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio_mobile
         %}
         {% render 'ucoast-image',
                 image: image,
@@ -173,7 +193,9 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio
         %}
     {% else %}
         {% render 'ucoast-image',
@@ -183,7 +205,16 @@
                 loading: loading,
                 custom_attributes: custom_attributes,
                 multiplier: multiplier,
-                alt: alt
+                alt: alt,
+                media_child: media_child,
+                aspect_ratio: aspect_ratio
         %}
     {% endif %}
+{%- else -%}
+    <div class='{{ wrapper_class }}'>
+        {{
+        'detailed-apparel-1'
+        | placeholder_svg_tag: media_class
+        }}
+    </div>
 {%- endif -%}
