@@ -4,7 +4,7 @@
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
 {% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-eddff9de.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
+  {{ '_critical-css-6dbd47ed.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
 {% elsif path == "/src/entry/_critical.ts" or path == "_critical.ts" %}
   <script src="{{ '_critical-01e5ca78.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
   <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">

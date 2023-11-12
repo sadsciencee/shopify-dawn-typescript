@@ -660,8 +660,8 @@ quick-add-modal .product__title > a,
 	@include underline-on-hover();
 }
 
-.link,
-.customer a,
+.rte a,
+.rte .link,
 .mega-menu__link--active,
 .shopify-payment-button__more-options,
 .underline-always {
