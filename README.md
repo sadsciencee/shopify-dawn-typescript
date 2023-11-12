@@ -97,3 +97,17 @@ Ensure that you follow the list of [theme store requirements](https://shopify.de
 ## License
 
 Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+
+## Updates
+
+10.1.0:
+- uniform media rendering snippet
+- remove shopify's default underlines and replace with underline classes
+- refactor media query splitting so it's all in the same file & simpler
+  
+will continue to bug fix during next build
+
+Goals for 10.2.0:
+- implement media loading strategy from experiment to fix pixel issue
+- implement klaviyo popup and preorder functionality as a default
+- fix logo scaling problem
