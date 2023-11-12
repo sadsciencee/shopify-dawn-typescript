@@ -117,21 +117,27 @@ body {
 .top-0 {
 	top: 0;
 }
+
 .left-0 {
 	left: 0;
 }
+
 .bottom-0 {
 	bottom: 0;
 }
+
 .right-0 {
 	right: 0;
 }
+
 .z-1 {
 	z-index: 1;
 }
+
 .z-2 {
 	z-index: 2;
 }
+
 .z-3 {
 	z-index: 3;
 }
@@ -296,15 +302,19 @@ body {
 .block {
 	display: block;
 }
+
 .inline-block {
 	display: inline-block;
 }
+
 .inline-flex {
 	display: inline-flex;
 }
+
 .display-grid {
 	display: grid;
 }
+
 .flex {
 	display: flex;
 }
@@ -498,9 +508,7 @@ body {
 
 /* component-media */
 .media {
-	display: block;
 	background-color: rgba(#{$schemaColorForeground}, 0.1);
-	position: relative;
 	overflow: hidden;
 }
 
@@ -570,6 +578,7 @@ deferred-media {
 .bg-transparent {
 	background: transparent;
 }
+
 @include media-query($s-up) {
 	:root {
 		--announcement-height: calc(var(--ax) * 27);
@@ -585,6 +594,7 @@ deferred-media {
 		font-size: #{$ax16};
 	}
 }
+
 @include media-query($m-up) {
 	.m-up-hide {
 		display: none !important;
@@ -615,17 +625,18 @@ deferred-media {
 	}
 }
 
-ucoast-video[data-uc-has-played="false"] video {
+ucoast-video[data-uc-has-played='false'] video {
 	opacity: 0;
 	backdrop-filter: blur(15px);
-	transition: opacity .3s cubic-bezier(.32, .24, .15, 1), filter .3s cubic-bezier(.32, .24, .15, 1);
+	transition: opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
+		filter 0.3s cubic-bezier(0.32, 0.24, 0.15, 1);
 }
 
-
-ucoast-video[data-uc-has-played="true"] video {
+ucoast-video[data-uc-has-played='true'] video {
 	opacity: 1;
 	backdrop-filter: blur(0);
-	transition: opacity .3s cubic-bezier(.32, .24, .15, 1), filter .3s cubic-bezier(.32, .24, .15, 1);
+	transition: opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
+		filter 0.3s cubic-bezier(0.32, 0.24, 0.15, 1);
 }
 
 .p-section-background {
@@ -636,17 +647,29 @@ ucoast-video[data-uc-has-played="true"] video {
 .viewport-minus-combined {
 	height: #{$viewportMinusCombined};
 }
+
 .viewport-minus-header {
 	height: #{$viewportMinusHeader};
 }
+
+.header__localization .disclosure .localization-form__select,
+.mega-menu__link,
+quick-add-modal .product__title > a,
+.header__submenu .header__menu-item,
 .underline-on-hover {
 	@include underline-on-hover();
 }
 
+.rte a,
+.rte .link,
+.mega-menu__link--active,
+.shopify-payment-button__more-options,
 .underline-always {
 	@include underline-always();
 }
 
+.underline-links-hover,
+.complementary-products-contains-quick-add .card__heading,
 .underline-on-hover-child {
 	@include underline-on-hover-child();
 }

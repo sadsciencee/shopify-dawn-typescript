@@ -2,6 +2,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -35,16 +40,11 @@
 	class="email-signup-banner banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.image_height == 'adapt-image' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %} {{ spacing }}"
 >
 	{%- if section.settings.show_background_image -%}
-		<div class="banner__media{% if section.settings.image != blank %} media{% endif %}">
-			{%- if section.settings.image != blank -%}
-				{% render 'ucoast-image',
-						image: section.settings.image
-				%}
-			{%- else -%}
-				{%- render 'email-signup-banner-background' -%}
-				{%- render 'email-signup-banner-background-mobile' -%}
-			{%- endif -%}
-		</div>
+		{% render 'ucoast-media',
+				image: section.settings.image,
+				loading: loading,
+				wrapper_class: 'banner__media'
+		%}
 	{%- endif -%}
 	<div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width">
 		<div class="email-signup-banner__box banner__box newsletter newsletter__wrapper isolate{% if section.settings.show_background_image == false %} email-signup-banner__box--no-image{% endif %} content-container {{ color_scheme }} gradient content-container--full-width-mobile">

@@ -41,8 +41,6 @@
 		{% endstyle %}
 		{% render 'ucoast', ucoast: '_critical.ts' %}
 
-		{% render 'ucoast-style-tag', file: 'css-dir-base-prio', preload_stylesheet: true %}
-
 		{% case request.page_type %}
 			{% when 'page' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
@@ -63,10 +61,19 @@
 					file: 'css-dir-article-prio',
 					preload_stylesheet: true
 				%}
+			{% else %}
+				{% if request.page_type contains 'customers' %}
+					{% render 'ucoast-style-tag',
+						file: 'css-dir-customer-prio',
+						preload_stylesheet: true
+					%}
+				{% else %}
+					{% render 'ucoast-style-tag',
+						file: 'css-dir-base-prio',
+						preload_stylesheet: true
+					%}
+				{% endif %}
 		{% endcase %}
-		{% if request.page_type contains 'customers' %}
-			{% render 'ucoast-style-tag', file: 'css-dir-customer-prio', preload_stylesheet: true %}
-		{% endif %}
 
 		{%- unless settings.type_body_font.system? -%}
 			{% if settings.body_font_custom %}
@@ -128,37 +135,24 @@
 			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
 		{%- endif -%}
 
-		{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
-
 		{% case request.page_type %}
 			{% when 'page' %}
-				{% comment %}
-					{% render 'ucoast-style-tag',
-					    file: 'css-dir-page-defer',
-					    preload_stylesheet: true
-					%}
-				{% endcomment %}
+				{% render 'ucoast-style-tag', file: 'css-dir-page-defer' %}
 			{% when 'collection' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-collection-defer',
-					preload_stylesheet: true
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-collection-defer' %}
 			{% when 'search' %}
-				{% render 'ucoast-style-tag',
-					file: 'css-dir-collection-defer',
-					preload_stylesheet: true
-				%}
+				{% render 'ucoast-style-tag', file: 'css-dir-collection-defer' %}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-defer' %}
 			{% when 'article' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-article-defer' %}
+			{% else %}
+				{% if request.page_type contains 'customers' %}
+					{% render 'ucoast-style-tag', file: 'css-dir-customer-defer' %}
+				{% else %}
+					{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
+				{% endif %}
 		{% endcase %}
-
-		{% comment %}
-			{% if request.page_type contains 'customers' %}
-			  {% render 'ucoast-style-tag', file: 'css-dir-customer-defer', preload_stylesheet: true %}
-			{% endif %}
-		{% endcomment %}
 
 		{%- if settings.cart_type == 'drawer' -%}
 			{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}

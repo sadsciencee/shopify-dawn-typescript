@@ -2,6 +2,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -12,26 +17,34 @@
 <div class="image-with-text image-with-text--{{ section.settings.content_layout }} page-width isolate{% if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0 %} collapse-borders{% endif %}{% unless section.settings.color_scheme == scheme1 and settings.media_border_thickness > 0 and settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0 %} collapse-corners{% endunless %} section-{{ section.id }}-padding{% render 'ucoast-animate', animation: 'slide-in' %}">
 	<div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}">
 		<div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
-			<div
-				class="image-with-text__media image-with-text__media--{{ section.settings.height }} gradient {{ color_scheme }} global-media-settings {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}"
-				{% if section.settings.height == 'adapt' and section.settings.image != blank %}
-					style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"
-				{% endif %}
-			>
-				{%- if section.settings.image != blank -%}
-					{%- if section.settings.image_behavior == 'ambient'
-						or section.settings.image_behavior == 'zoom-in'
-					-%}
-						{%- assign widths = '198, 432, 642, 900, 1284, 1800' -%}
-						{% render 'ucoast-image', image: section.settings.image, multiplier: 2 %}
-					{% else %}
-						{% render 'ucoast-image', image: section.settings.image %}
-					{%- endif -%}
-
-				{%- else -%}
-					{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-				{%- endif -%}
-			</div>
+			{% liquid
+				if section.settings.height == 'adapt'
+					assign aspect_ratio = 'adapt'
+				else
+					assign aspect_ratio = 'fill'
+				endif
+			%}
+			{% capture wrapper_class %}
+          image-with-text__media image-with-text__media--{{ section.settings.height }} gradient {{ color_scheme }} global-media-settings {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}
+          {% endcapture %}
+			{%- if section.settings.image_behavior == 'ambient'
+				or section.settings.image_behavior == 'zoom-in'
+			-%}
+				{% render 'ucoast-media',
+					image: section.settings.image,
+					multiplier: 2,
+					loading: loading,
+					wrapper_class: wrapper_class,
+					aspect_ratio: aspect_ratio
+				%}
+			{% else %}
+				{% render 'ucoast-media',
+					image: section.settings.image,
+					loading: loading,
+					wrapper_class: wrapper_class,
+					aspect_ratio: aspect_ratio
+				%}
+			{%- endif -%}
 		</div>
 		<div class="image-with-text__text-item grid__item">
 			<div

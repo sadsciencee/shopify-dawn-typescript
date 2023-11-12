@@ -5,6 +5,11 @@
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %} {{ spacing }}">
@@ -97,6 +102,12 @@
 		},
 		"settings": [
 			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
 				"type": "select",
 				"id": "desktop_content_position",
 				"options": [
@@ -136,12 +147,6 @@
 				],
 				"default": "center",
 				"label": "t:sections.rich-text.settings.content_alignment.label"
-			},
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "t:sections.all.colors.label",
-				"default": "background-1"
 			},
 			{
 				"type": "checkbox",

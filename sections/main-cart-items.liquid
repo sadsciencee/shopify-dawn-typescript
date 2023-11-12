@@ -2,6 +2,14 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
 <cart-items
@@ -106,7 +114,7 @@
 											</p>
 										{%- endif -%}
 
-										<a href="{{ item.url }}" class="h4 break" data-uc-cart-item-name>
+										<a href="{{ item.url }}" class="h4 block break underline-on-hover" data-uc-cart-item-name>
 											{{- item.product.title | escape -}}
 										</a>
 
@@ -466,6 +474,12 @@
 	{
 		"name": "t:sections.main-cart-items.name",
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
 			{
 				"type": "header",
 				"content": "t:sections.all.spacing"

@@ -5,9 +5,11 @@
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
--%}
-
-{%- liquid
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	assign columns_mobile_int = section.settings.columns_mobile | plus: 0
 	assign show_mobile_slider = false
 	if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_int
@@ -78,17 +80,12 @@
 									{% assign spaced_image = true %}
 								{% endif %}
 								<div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
-									<div
-										class="media media--transparent media--{{ section.settings.image_ratio }}"
-										{% if section.settings.image_ratio == 'adapt' %}
-											style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
-										{% endif %}
-									>
-										{% render 'ucoast-image',
+									{% render 'ucoast-media',
 											image: block.settings.image,
-											class: 'multicolumn-card__image'
-										%}
-									</div>
+											media_class: 'multicolumn-card__image',
+											loading: loading,
+											aspect_ratio: section.settings.image_ratio
+									%}
 								</div>
 							{%- endif -%}
 							<div class="multicolumn-card__info">
@@ -173,6 +170,12 @@
 		},
 		"settings": [
 			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
 				"type": "inline_richtext",
 				"id": "title",
 				"default": "Multicolumn",
@@ -237,6 +240,10 @@
 					{
 						"value": "circle",
 						"label": "t:sections.multicolumn.settings.image_ratio.options__4.label"
+					},
+					{
+						"value": "landscape",
+						"label": "t:sections.multicolumn.settings.image_ratio.options__5.label"
 					}
 				],
 				"default": "adapt",
@@ -293,12 +300,6 @@
 				"type": "url",
 				"id": "button_link",
 				"label": "t:sections.multicolumn.settings.button_link.label"
-			},
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "t:sections.all.colors.label",
-				"default": "background-1"
 			},
 			{
 				"type": "header",

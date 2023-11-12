@@ -22,7 +22,7 @@
         <p class="caption">{{ closest_location.pick_up_time }}</p>
         <button
           id="ShowPickupAvailabilityDrawer"
-          class="pickup-availability-button link link--text underlined-link"
+          class="pickup-availability-button link link--text underline-always"
           aria-haspopup="dialog"
         >
           {%- if pick_up_availabilities.size == 1 -%}
@@ -41,7 +41,7 @@
         {%- if pick_up_availabilities.size > 1 -%}
           <button
             id="ShowPickupAvailabilityDrawer"
-            class="pickup-availability-button link link--text underlined-link"
+            class="pickup-availability-button link link--text underline-always"
             aria-haspopup="dialog"
           >
             {{ 'products.product.pickup_availability.check_other_stores' | t }}

@@ -1,0 +1,333 @@
+@import "../global/variables";
+@import "../global/functions";
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a:empty,
+ul:empty,
+dl:empty,
+div:empty,
+section:empty,
+article:empty,
+p:empty,
+h1:empty,
+h2:empty,
+h3:empty,
+h4:empty,
+h5:empty,
+h6:empty {
+  display: none;
+}
+
+html {
+  font-size: calc(#{$fontBodyScale} * 62.5%);
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  background-color: rgb(#{$schemaColorBackground});
+  color: rgb(#{$schemaColorForeground});
+  letter-spacing: 0.04375em;
+  line-height: calc(1 + 0.8 / #{$fontBodyScale});
+  max-width: #{$pageWidth};
+  margin: 0 auto;
+  flex: 1 0 auto;
+  font-family: #{$fontBodyFamily};
+  font-style: #{$fontBodyStyle};
+  font-weight: #{$fontBodyWeight};
+}
+
+@include media-query($s-up) {
+  body {
+    line-height: calc(1 + 0.8 / #{$fontBodyScale});
+  }
+}
+
+::selection {
+  background-color: rgba(#{$schemaColorForeground}, 0.2);
+}
+
+h1,
+.h1,
+h2,
+.h2 {
+  font-family: #{$fontHeadingFamily};
+  font-style: #{$fontHeadingStyle};
+  font-weight: #{$fontHeadingWeight};
+  letter-spacing: calc(#{$fontHeadingScale} * #{ax(.6)});
+  line-height: calc(1 + 0.3 / max(1, #{$fontHeadingScale}));
+  text-align: center;
+}
+
+h1,
+.h1 {
+  font-size: calc(#{$fontHeadingScale} * #{$ax30});
+}
+
+@include media-query($s-up) {
+  h1,
+  .h1 {
+    font-size: calc(#{$fontHeadingScale} * #{$ax40});
+  }
+}
+
+h2,
+.h2 {
+  font-size: calc(#{$fontHeadingScale} * #{$ax20});
+}
+
+@include media-query($s-up) {
+  h2,
+  .h2 {
+    font-size: calc(#{$fontHeadingScale} * #{$ax24});
+  }
+}
+
+.button {
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  padding: #{$ax15} #{$ax30};
+  text-decoration: none;
+  background-color: rgb(#{$schemaColorButton});
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton});
+  color: rgb(var(--c-button-label));
+  min-width: #{ax(120)};
+  height: auto;
+  font-size: #{$ax15};
+  letter-spacing: 0.00667em;
+  line-height: calc(1 + 0.2 / #{$fontBodyScale});
+}
+
+.button::selection {
+  background-color: rgba(var(--c-button-label), 0.3);
+}
+
+.button:hover {
+  box-shadow: 0 0 0 #{$ax2} rgb(#{$schemaColorButton});
+}
+
+.button--outline {
+  color: rgb(var(--c-outline-button-label));
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label));
+  background-color: transparent;
+}
+
+.button--outline::selection {
+  background-color: rgba(var(--c-outline-button-label), 0.3);
+}
+
+.button--outline:hover {
+  box-shadow: 0 0 0 #{$ax2} rgb(var(--c-outline-button-label));
+}
+
+@media (forced-colors: active) {
+  .button {
+    border: transparent solid #{$ax1};
+  }
+}
+
+.gift-card {
+  padding: #{$ax30};
+}
+
+@include media-query($s-up) {
+  .gift-card {
+    padding: #{$ax50} #{$ax50} #{$ax30};
+  }
+}
+
+.gift-card__image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: #{$ax30} auto;
+  max-width: ax(400);
+}
+
+.gift-card__image {
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+  max-height: ax(260);
+}
+
+@include media-query($s-up) {
+  .gift-card__image {
+    padding: 0;
+  }
+}
+
+.gift-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0rem #{$ax10};
+  align-items: center;
+  justify-content: center;
+  letter-spacing: #{$ax1};
+  opacity: 0.8;
+}
+
+.gift-card__price h1 {
+  margin: 0;
+}
+
+.gift-card__number {
+  color: rgb(#{$schemaColorForeground});
+  font-size: #{$ax18};
+  line-height: calc(1 + 0.6 / #{$fontBodyScale});
+  text-align: center;
+  letter-spacing: 0.139em;
+  opacity: 0.8;
+  margin: #{$ax30} 0;
+}
+
+.gift-card__text-wrapper {
+  max-width: ax(300);
+  margin: 0 auto;
+}
+
+.gift-card__text {
+  text-align: center;
+  font-size: #{$ax17};
+  opacity: 0.6;
+  margin: 0;
+  line-height: calc(1 + 0.5 / #{$fontBodyScale});
+}
+
+.badge {
+  border: #{$ax1} solid transparent;
+  border-radius: #{$ax40};
+  display: inline-block;
+  font-size: #{$ax12};
+  letter-spacing: 0.08334em;
+  line-height: 1;
+  padding: #{$ax6} #{$ax13};
+  text-align: center;
+  background-color: rgb(#{$schemaColorBackground});
+  border-color: rgba(#{$schemaColorForeground}, 0.04);
+  color: rgb(#{$schemaColorForeground});
+}
+
+.badge--expired {
+  background-color: rgb(var(--color-soldout-badge));
+  color: rgb(var(--color-soldout-badge-label));
+  border-color: rgba(var(--color-soldout-badge-label), 0.04);
+}
+
+.gift-card__qr-code {
+  margin: #{$ax30} 0;
+}
+
+.gift-card__qr-code img {
+  margin: 0 auto;
+}
+
+.gift_card__apple-wallet {
+  line-height: 0;
+  display: block;
+  margin-bottom: #{$ax30};
+  text-align: center;
+}
+
+.gift-card__buttons {
+  display: flex;
+  flex-direction: column;
+  max-width: ax(250);
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.gift-card__buttons > .button {
+  display: block;
+  margin: #{$ax10} 0;
+}
+
+/*
+  Focus ring - default (with offset)
+*/
+
+/* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
+*:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+*:focus-visible {
+  outline: $comboOutline1;
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+/* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
+.focused,
+.no-js *:focus {
+  outline: $comboOutline1;
+  outline-offset: #{$ax3};
+  box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}), 0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+/* Negate the fallback side-effect for browsers that support :focus-visible */
+.no-js *:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+.button:focus {
+  box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorButton}), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+.button--outline:focus-visible {
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+.button--outline:focus {
+  box-shadow: 0 0 0 #{$ax1} rgb(var(--c-outline-button-label)), 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
+    0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+}
+
+.form__message {
+  align-items: center;
+  display: flex;
+  font-size: #{$ax12};
+  line-height: #{$ax15};
+  justify-content: center;
+  margin-bottom: #{$ax5};
+  opacity: 0.8;
+}
+
+.form__message .icon {
+  flex-shrink: 0;
+  height: #{$ax13};
+  margin-right: #{$ax5};
+  width: #{$ax13};
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+.gradient {
+  background: rgb(#{$schemaColorBackground});
+  background: #{$schemaGradientBackground};
+  background-attachment: fixed;
+}

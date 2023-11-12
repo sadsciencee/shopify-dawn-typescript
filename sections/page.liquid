@@ -5,6 +5,11 @@
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
 <div class="{{ color_scheme }} gradient {{ spacing }}">
@@ -38,6 +43,12 @@
 		},
 		"settings": [
 			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
 				"type": "page",
 				"id": "page",
 				"label": "t:sections.page.settings.page.label"
@@ -61,12 +72,6 @@
 				],
 				"default": "h1",
 				"label": "t:sections.all.heading_size.label"
-			},
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "t:sections.all.colors.label",
-				"default": "background-1"
 			},
 			{
 				"type": "header",

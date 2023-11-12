@@ -1,0 +1,23 @@
+@import "../global/variables";
+@import "../global/functions";
+.list-payment {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: ax(-5) 0;
+  padding-top: #{$ax10};
+  padding-left: 0;
+}
+
+.list-payment__item {
+  align-items: center;
+  display: flex;
+  padding: #{$ax5};
+}
+@include media-query($s-up) {
+  .list-payment {
+    justify-content: flex-end;
+    margin: ax(-5);
+    padding-top: 0;
+  }
+}

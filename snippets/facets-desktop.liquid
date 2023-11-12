@@ -120,7 +120,7 @@
 									data-uc-facet-summary
 									aria-label="{{ filter.label }} ({{ 'products.facets.filters_selected.one' | t: count: filter.active_values.size }})"
 								>
-									<div>
+									<div class='underline-on-hover-child'>
 										<span>
 											{{- filter.label | escape }}
 											{%- if filter_type == 'vertical' -%}
@@ -354,7 +354,7 @@
 									class="facets__summary caption-large focus-offset"
 									data-uc-facet-summary
 								>
-									<div>
+									<div class='underline-on-hover-child'>
 										<span>{{ filter.label | escape }}</span>
 										{% render 'icon-default', icon: 'caret' %}
 									</div>

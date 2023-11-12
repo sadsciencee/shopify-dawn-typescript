@@ -1,26 +1,47 @@
-<ucoast-video class='{{ wrapper_class }}' data-uc-has-played="false">
-    {% liquid
-        for source in video.sources
-            if source.mime_type == 'video/mp4'
-                assign mp4_source = 'data-mp4-src="' | append: source.url | append: '" '
-            elsif source.mime_type == 'application/x-mpegURL'
-                assign hls_source = 'data-hls-src="' | append: source.url | append: '" '
-                assign hls_source_obj = source
-            endif
-        endfor
-    %}
-    <video
-            class='{{ video_class }}'
-            playsinline='playsinline'
-            preload='metadata'
-            muted='muted'
-            poster='{{ video.preview_image | image_url: width: 800 }}'
-            loop='true'
-            {{ mp4_source }}
-            {{ hls_source }}
-    >
-        {% if hls_source_obj %}
-            <source src="{{ hls_source_obj.url }}" type="{{ hls_source_obj.mime_type }}">
-        {% endif %}
-    </video>
+{% comment %}
+	this should only be called from ucoast-media
+{% endcomment %}
+
+<ucoast-video
+	class="{{ wrapper_class }} media media--transparent"
+	data-loading="{{ loading }}"
+	data-uc-has-played="false"
+	{{ custom_attributes }}
+	{% if aspect_ratio == 'adapt' and video != blank %}
+		style="--media-ratio: {{ video.preview_image.aspect_ratio | divided_by: 1 }};"
+	{% elsif aspect_ratio == 'adapt' %}
+		style="--media-ratio: 1;"
+	{% endif %}
+>
+	{% liquid
+		if media_child
+			echo media_child
+		endif
+
+		for source in video.sources
+			if source.mime_type == 'video/mp4'
+				assign mp4_source = 'data-mp4-src="' | append: source.url | append: '" '
+				assign mp4_source_obj = source
+			elsif source.mime_type == 'application/x-mpegURL'
+				assign hls_source = 'data-hls-src="' | append: source.url | append: '" '
+				assign hls_source_obj = source
+			endif
+		endfor
+	%}
+	<video
+		class="{{ video_class }}"
+		playsinline="playsinline"
+		preload="metadata"
+		muted="muted"
+		poster="{{ preview_image | image_url: width: 800 }}"
+		loop="true"
+		{{ mp4_source }}
+		{{ hls_source }}
+	>
+		{% if hls_source_obj %}
+			<source src="{{ hls_source_obj.url }}" type="{{ hls_source_obj.mime_type }}">
+		{% elsif mp4_source_obj %}
+			<source src="{{ mp4_source_obj.url }}" type="{{ mp4_source_obj.mime_type }}">
+		{% endif %}
+	</video>
 </ucoast-video>

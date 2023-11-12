@@ -1,7 +1,0 @@
-@import "../../global/variables.scss";
-@import "../../global/functions.scss";
-@include media-query($s-up) {
-  [data-uc-loading-overlay] {
-    left: 0;
-  }
-}

@@ -1,29 +1,29 @@
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
 	{%- style -%}
 		@media screen and (max-width: 749px) {
-		  #Banner-{{ section.id }}::before,
-		  #Banner-{{ section.id }} .banner__media::before,
-		  #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-		    padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-		    content: '';
-		    display: block;
-		  }
+		#Banner-{{ section.id }}::before,
+		#Banner-{{ section.id }} .banner__media::before,
+		#Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+		padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+		content: '';
+		display: block;
+		}
 		}
 
 		@media screen and (min-width: 750px) {
-		  #Banner-{{ section.id }}::before,
-		  #Banner-{{ section.id }} .banner__media::before {
-		    padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-		    content: '';
-		    display: block;
-		  }
+		#Banner-{{ section.id }}::before,
+		#Banner-{{ section.id }} .banner__media::before {
+		padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+		content: '';
+		display: block;
+		}
 		}
 	{%- endstyle -%}
 {%- endif -%}
 
 {%- style -%}
 	#Banner-{{ section.id }}::after {
-	  opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+	opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
 	}
 {%- endstyle -%}
 
@@ -41,6 +41,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -65,10 +70,11 @@
 					assign sizes = full_width
 				endif
 			-%}
-			{% render 'ucoast-image',
+			{% render 'ucoast-media',
 				image: section.settings.image,
-				image_class: image_class,
-				lazy_load: section.settings.enable_lazy_load
+				media_class: image_class,
+				loading: loading,
+				disable_media_settings: true
 			%}
 		</div>
 	{%- elsif section.settings.image_2 == blank -%}
@@ -91,10 +97,11 @@
 					assign sizes = full_width
 				endif
 			-%}
-			{% render 'ucoast-image',
-					image: section.settings.image_2,
-					image_class: image_class_2,
-					lazy_load: section.settings.enable_lazy_load
+			{% render 'ucoast-media',
+				image: section.settings.image_2,
+				media_class: image_class_2,
+				loading: loading,
+				disable_media_settings: true
 			%}
 		</div>
 	{%- endif -%}
@@ -162,11 +169,10 @@
 		},
 		"settings": [
 			{
-				"type": "checkbox",
-				"id": "enable_lazy_load",
-				"label": "t:sections.all.enable_lazy_load.label",
-				"info": "t:sections.all.enable_lazy_load.info",
-				"default": true
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
 			},
 			{
 				"type": "image_picker",
@@ -282,12 +288,6 @@
 				],
 				"default": "center",
 				"label": "t:sections.image-banner.settings.desktop_content_alignment.label"
-			},
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "t:sections.all.colors.label",
-				"default": "background-1"
 			},
 			{
 				"type": "header",

@@ -42,18 +42,20 @@
 			>
 				{%- if show_image == true and article.image -%}
 					<div class="article-card__image-wrapper card__media">
-						<div
-							class="article-card__image media media--hover-effect"
-							{% if section.settings.media_height == 'adapt' %}
-								style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
-							{% endif %}
-						>
-							{% render 'ucoast-image',
-								image: article.image,
-								lazy_load: lazy_load,
-								image_class: 'motion-reduce'
-							%}
-						</div>
+						{% liquid
+							if section.settings.media_height
+								assign aspect_ratio = 'adapt'
+							else
+								assign aspect_ratio = 'fill'
+							endif
+						%}
+						{% render 'ucoast-media',
+							image: article.image,
+							lazy_load: lazy_load,
+							media_class: 'motion-reduce',
+							wrapper_class: 'article-card__image media--hover-effect',
+							aspect_ratio: aspect_ratio
+						%}
 					</div>
 				{%- endif -%}
 				<div class="card__content">

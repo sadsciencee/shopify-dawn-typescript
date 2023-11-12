@@ -1,0 +1,33 @@
+@import "../global/variables";
+@import "../global/functions";
+.discounts {
+  font-size: #{$ax12};
+}
+
+.discounts__discount {
+  display: flex;
+  align-items: center;
+  line-height: calc(1 + 0.5 / #{$fontBodyScale});
+}
+
+.discounts__discount svg {
+  color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
+}
+
+.discounts__discount--position {
+  justify-content: center;
+}
+
+
+
+.discounts__discount > .icon {
+  color: rgb(#{$schemaColorForeground});
+  width: #{$ax12};
+  height: #{$ax12};
+  margin-right: #{$ax7};
+}
+@include media-query($s-up) {
+  .discounts__discount--position {
+    justify-content: flex-end;
+  }
+}

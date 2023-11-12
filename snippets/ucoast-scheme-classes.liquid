@@ -1,6 +1,8 @@
-{% assign color_scheme = color_scheme | lstrip | rstrip %}
-{% unless color_scheme == 'background-1'
+{% liquid
+	assign color_scheme = color_scheme | lstrip | rstrip
+	assign scheme1 = settings.color_schemes | first
+	unless color_scheme == 'background-1'
+		echo ' p-section-background '
+		echo 'color-' | append: color_scheme | append: ' '
+	endunless
 %}
-    p-section-background
-{% endunless %}
-color-{{ color_scheme }}

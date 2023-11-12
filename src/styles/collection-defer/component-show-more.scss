@@ -1,0 +1,12 @@
+@import "../global/variables";
+@import "../global/functions";
+[data-uc-show-more] {
+  padding-left: 0;
+  justify-content: flex-start;
+  padding-bottom: #{$ax11};
+}
+
+[data-uc-show-more],
+.button-show-less {
+  margin-top: #{$ax15};
+}

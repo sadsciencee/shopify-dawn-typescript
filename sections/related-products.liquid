@@ -9,6 +9,11 @@
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
 <div class="{{ color_scheme }} gradient no-js-hidden {{ spacing }}">
@@ -50,6 +55,13 @@
 		"tag": "section",
 		"class": "section",
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"info": "t:sections.image-banner.settings.color_scheme.info",
+				"default": "background-1"
+			},
 			{
 				"type": "paragraph",
 				"content": "t:sections.related-products.settings.paragraph__1.content"
@@ -97,13 +109,6 @@
 				"step": 1,
 				"default": 4,
 				"label": "t:sections.related-products.settings.columns_desktop.label"
-			},
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "t:sections.all.colors.label",
-				"info": "t:sections.image-banner.settings.color_scheme.info",
-				"default": "background-1"
 			},
 			{
 				"type": "header",

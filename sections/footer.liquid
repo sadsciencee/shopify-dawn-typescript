@@ -4,6 +4,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -76,7 +81,7 @@
 													<li>
 														<a
 															href="{{ link.url }}"
-															class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+															class="list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active underline-always {% else %} underline-on-hover{% endif %}"
 														>
 															{{ link.title }}
 														</a>
@@ -95,7 +100,8 @@
 													style="max-width: min(100%, {% render 'ucoast-ax', value: settings.brand_image_width %});"
 												>
 													{% render 'ucoast-image',
-														image: settings.brand_image
+														image: settings.brand_image,
+														loading: loading
 													%}
 												</div>
 											{%- endif -%}
@@ -125,7 +131,7 @@
 													style="max-width: min(100%, {% render 'ucoast-ax', value: block.settings.image_width %});"
 												>
 													{% render 'ucoast-image',
-														image: block.settings.image, image_class: 'block h-auto'
+														image: block.settings.image, image_class: 'block h-auto', loading: loading
 													%}
 												</div>
 											{%- else -%}
@@ -380,16 +386,16 @@
 		</div>
 		<div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center justify-center{% endif %}">
 			<div class="footer__copyright caption">
-				<small class="copyright__content"
+				<small class="copyright__content underline-always-child"
 					>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
 				</small>
-				<small class="copyright__content">{{ powered_by_link }}</small>
+				<small class="copyright__content underline-always-child">{{ powered_by_link }}</small>
 				{%- if section.settings.show_policy -%}
 					<ul class="policies list-unstyled">
 						{%- for policy in shop.policies -%}
 							{%- if policy != blank -%}
 								<li>
-									<small class="copyright__content"
+									<small class="copyright__content underline-always-child"
 										><a href="{{ policy.url }}">{{ policy.title }}</a></small
 									>
 								</li>

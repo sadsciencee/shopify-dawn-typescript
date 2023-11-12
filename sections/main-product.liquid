@@ -2,7 +2,14 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
-	assign current_variant = product.selected_or_first_available_variant
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 <section
 	id="MainProduct-{{ section.id }}"
@@ -168,7 +175,7 @@
 							{% render 'product-block-icon-with-text', block: block %}
 					{%- endcase -%}
 				{%- endfor -%}
-				<a href="{{ product.url }}" class="link product__view-details animate-arrow">
+				<a href="{{ product.url }}" class="link product__view-details underline-on-hover animate-arrow">
 					{{ 'products.product.view_full_details' | t }}
 					{% render 'icon-default', icon: 'arrow' %}
 				</a>
@@ -1577,6 +1584,12 @@
 			}
 		],
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
 			{
 				"type": "checkbox",
 				"id": "enable_sticky_info",
