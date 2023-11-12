@@ -2,9 +2,15 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
--%}
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 
-{%- liquid
 	if section.settings.image_layout contains 'right'
 		assign odd_class = ' image-with-text__grid--reverse'
 	else
@@ -32,7 +38,7 @@
 	endunless
 -%}
 
-<div class="multirow {{ spacing }} gradient color-{{ section.settings.section_color_scheme }}">
+<div class="multirow {{ spacing }} gradient {{ color_scheme }}">
 	<div class="multirow__inner page-width">
 		{%- for block in section.blocks -%}
 			<div
@@ -50,7 +56,7 @@
 							{% endif %}
 						>
 							{%- if block.settings.image != blank -%}
-								{% render 'ucoast-image', image: block.settings.image %}
+								{% render 'ucoast-image', image: block.settings.image, loading: loading %}
 							{%- else -%}
 								{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
 							{%- endif -%}
@@ -101,6 +107,12 @@
 			"groups": ["header", "footer"]
 		},
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
 			{
 				"type": "select",
 				"id": "image_height",

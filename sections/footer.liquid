@@ -4,6 +4,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -95,7 +100,8 @@
 													style="max-width: min(100%, {% render 'ucoast-ax', value: settings.brand_image_width %});"
 												>
 													{% render 'ucoast-image',
-														image: settings.brand_image
+														image: settings.brand_image,
+														loading: loading
 													%}
 												</div>
 											{%- endif -%}
@@ -125,7 +131,7 @@
 													style="max-width: min(100%, {% render 'ucoast-ax', value: block.settings.image_width %});"
 												>
 													{% render 'ucoast-image',
-														image: block.settings.image, image_class: 'block h-auto'
+														image: block.settings.image, image_class: 'block h-auto', loading: loading
 													%}
 												</div>
 											{%- else -%}

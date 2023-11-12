@@ -2,6 +2,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -23,9 +28,9 @@
 						or section.settings.image_behavior == 'zoom-in'
 					-%}
 						{%- assign widths = '198, 432, 642, 900, 1284, 1800' -%}
-						{% render 'ucoast-image', image: section.settings.image, multiplier: 2 %}
+						{% render 'ucoast-image', image: section.settings.image, multiplier: 2, loading: loading %}
 					{% else %}
-						{% render 'ucoast-image', image: section.settings.image %}
+						{% render 'ucoast-image', image: section.settings.image, loading: loading %}
 					{%- endif -%}
 
 				{%- else -%}

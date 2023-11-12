@@ -162,8 +162,7 @@
                                     image: settings.logo,
                                     image_class: 'header__heading-logo motion-reduce',
                                     alt: logo_alt,
-                                    preload: true,
-									lazy_load: false
+									loading: loading
                             %}
                         </div>
                     {%- else -%}
@@ -196,7 +195,7 @@
                     {%- if settings.logo != blank -%}
                         <div class="header__heading-logo-wrapper">
                             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                            {% render 'ucoast-image', image: settings.logo, image_class: 'header__heading-logo', alt: logo_alt, preload: true %}
+                            {% render 'ucoast-image', image: settings.logo, image_class: 'header__heading-logo', alt: logo_alt, loading: loading %}
                         </div>
                     {%- else -%}
                         <span class="h2">{{ shop.name }}</span>

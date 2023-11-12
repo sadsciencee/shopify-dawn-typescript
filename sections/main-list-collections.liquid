@@ -2,7 +2,16 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
+
 <div class="page-width {{ spacing }}">
 	<h1 class="title title--primary inline-richtext{% render 'ucoast-animate', animation: 'fade-in' %}">
 		{{ section.settings.title }}
@@ -54,6 +63,12 @@
 		"name": "t:sections.main-list-collections.name",
 		"class": "section",
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
 			{
 				"type": "inline_richtext",
 				"id": "title",

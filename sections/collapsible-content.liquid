@@ -2,6 +2,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -39,7 +44,7 @@
 									style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"
 								{% endif %}
 							>
-								{% render 'ucoast-image', image: section.settings.image %}
+								{% render 'ucoast-image', image: section.settings.image, loading: loading %}
 							</div>
 						</div>
 					{% endif %}

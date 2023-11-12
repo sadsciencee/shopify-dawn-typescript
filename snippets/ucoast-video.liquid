@@ -1,8 +1,9 @@
-<ucoast-video class='{{ wrapper_class }}' data-uc-has-played="false">
+<ucoast-video class='{{ wrapper_class }}' data-loading='{{ loading }}' data-uc-has-played="false" {{ custom_attributes }}>
     {% liquid
         for source in video.sources
             if source.mime_type == 'video/mp4'
                 assign mp4_source = 'data-mp4-src="' | append: source.url | append: '" '
+                assign mp4_source_obj = source
             elsif source.mime_type == 'application/x-mpegURL'
                 assign hls_source = 'data-hls-src="' | append: source.url | append: '" '
                 assign hls_source_obj = source
@@ -14,13 +15,15 @@
             playsinline='playsinline'
             preload='metadata'
             muted='muted'
-            poster='{{ video.preview_image | image_url: width: 800 }}'
+            poster='{{ preview_image | image_url: width: 800 }}'
             loop='true'
             {{ mp4_source }}
             {{ hls_source }}
     >
         {% if hls_source_obj %}
             <source src="{{ hls_source_obj.url }}" type="{{ hls_source_obj.mime_type }}">
+        {% elsif mp4_source_obj %}
+            <source src="{{ mp4_source_obj.url }}" type="{{ mp4_source_obj.mime_type }}">
         {% endif %}
     </video>
 </ucoast-video>

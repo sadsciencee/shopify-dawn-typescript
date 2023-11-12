@@ -5,6 +5,11 @@
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
 {%- liquid
@@ -49,7 +54,7 @@
 							class="video-section__poster media media--transparent{% if poster == null %} video-section__placeholder{% endif %}"
 					>
 						{%- if poster != null -%}
-							{% render 'ucoast-image', image: poster, alt: alt %}
+							{% render 'ucoast-image', image: poster, alt: alt, loading: loading %}
 						{%- else -%}
 							{{
 							'hero-apparel-3'
@@ -98,7 +103,7 @@
 						aria-label="{{ alt }}"
 				>
 					{%- if poster != null -%}
-						{% render 'ucoast-image', image: poster, alt: alt %}
+						{% render 'ucoast-image', image: poster, alt: alt, loading: loading %}
 					{%- else -%}
 						{{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
 					{%- endif -%}
@@ -157,6 +162,12 @@
 		"groups": ["header", "footer"]
 	},
 	"settings": [
+		{
+			"type": "color_scheme",
+			"id": "color_scheme",
+			"label": "t:sections.all.colors.label",
+			"default": "background-1"
+		},
 		{
 			"type": "inline_richtext",
 			"id": "heading",
@@ -234,12 +245,6 @@
 			"id": "full_width",
 			"label": "t:sections.video.settings.full_width.label",
 			"default": false
-		},
-		{
-			"type": "color_scheme",
-			"id": "color_scheme",
-			"label": "t:sections.all.colors.label",
-			"default": "background-1"
 		},
 		{
 			"type": "header",

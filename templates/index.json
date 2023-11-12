@@ -35,7 +35,6 @@
         "button"
       ],
       "settings": {
-        "enable_lazy_load": false,
         "image": "shopify:\/\/shop_images\/Hydrosol-BloodOrange-BOR.jpg",
         "image_overlay_opacity": 30,
         "image_height": "medium",

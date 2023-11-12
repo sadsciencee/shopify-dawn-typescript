@@ -2,9 +2,17 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 -%}
 
-<div class="customer activate {{ spacing }}">
+<div class="customer activate {{ spacing }} {{ color_scheme }}">
 	<svg style="display: none">
 		<symbol id="icon-error" viewBox="0 0 13 13">
 		  <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
@@ -108,6 +116,12 @@
 	{
 		"name": "t:sections.main-activate-account.name",
 		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
 			{
 				"type": "header",
 				"content": "t:sections.all.spacing"

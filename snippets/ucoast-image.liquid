@@ -1,43 +1,24 @@
 {% comment %}
-	image: image_picker
-	image_class: text
-	lazy_load: bool
+	this should only be called from ucoast-media
 {% endcomment %}
+<span class='{{ wrapper_class }}'>
+    {% liquid
+        capture input
+            echo image | image_url: width: starting_width | image_tag: loading: loading, class: image_class, id: id, style: style, preload: preload, alt: alt
+        endcapture
+        assign starting_src = image | image_url: width: starting_width
+        assign replace_src = ' src="' | append: starting_src | append: '" data-src='
+        if defer
+            assign replace_src = ' data-uc-defer ' | append: replace_src
+        endif
+        if multiplier != 1
+            assign replace_src = ' data-uc-multiplier=' | append: multiplier | append: replace_src
+        endif
+        if custom_attributes
+            assign replace_src = ' ' | append: custom_attributes | append: ' ' | append: replace_src
+        endif
+        assign output = input | replace: 'srcset="', 'data-srcset="' | replace: ' src=', replace_src
+        echo output
+    %}
+</span>
 
-{% liquid
-    unless multiplier
-        assign multiplier = 1
-    endunless
-    unless alt
-        assign alt = image.alt
-    endunless
-    unless preload == true
-        assign preload = false
-    endunless
-    unless id
-        assign id = image.id
-    endunless
-
-    unless lazy_load == false or loading == 'eager'
-        assign loading = 'lazy'
-    endunless
-    unless starting_width
-        assign starting_width = 180
-    endunless
-    capture input
-        echo image | image_url: width: starting_width | image_tag: loading: loading, class: image_class, id: id, style: style, preload: preload, alt: alt
-    endcapture
-    assign starting_src = image | image_url: width: starting_width
-    assign replace_src = ' src="' | append: starting_src | append: '" data-src='
-    if defer
-        assign replace_src = ' data-uc-defer ' | append: replace_src
-    endif
-    if multiplier != 1
-        assign replace_src = ' data-uc-multiplier=' | append: multiplier | append: replace_src
-    endif
-    if custom_attributes
-        assign replace_src = ' ' | append: custom_attributes | append: ' ' | append: replace_src
-    endif
-    assign output = input | replace: 'srcset="', 'data-srcset="' | replace: ' src=', replace_src
-    echo output
-%}

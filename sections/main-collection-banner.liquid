@@ -28,7 +28,7 @@
 
     {%- if section.settings.show_collection_image and collection.image -%}
       <div class="collection-hero__image-container media gradient">
-        {% render 'ucoast-image', image: collection.image, loading: 'eager', lazy_load: false %}
+        {% render 'ucoast-image', image: collection.image, loading: 'eager' %}
       </div>
     {%- endif -%}
   </div>

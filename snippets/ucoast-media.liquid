@@ -1,0 +1,189 @@
+{% comment %}
+    -- image
+    -- image_mobile
+    -- video
+    -- video_mobile
+    -- multiplier
+    -- alt
+    -- loading (lazy, eager, defer)
+    -- id
+    -- starting_width
+    -- aspect_ratio (portrait, landscape, square, fill, auto)
+    -- aspect_ratio_mobile (portrait, landscape, square, fill, auto)
+    -- class
+    -- class_mobile
+    -- position_class
+    -- position_class_mobile
+    -- custom_attributes
+{% endcomment %}
+{% liquid
+    unless multiplier
+        assign multiplier = 1
+    endunless
+    unless alt
+        assign alt = image.alt
+        assign alt_mobile = image_mobile.alt
+    endunless
+    unless loading
+        assign loading = 'eager'
+    endunless
+    case loading
+        when 'lazy'
+            assign preload = false
+        when 'eager'
+            assign preload = true
+        when 'defer'
+            assign preload = false
+    endcase
+    unless id
+        assign id = image.id
+    endunless
+    unless starting_width
+        assign starting_width = 180
+    endunless
+    unless position_class
+        assign position_class = 'relative'
+    endunless
+    unless position_class_mobile
+        assign position_class_mobile = position_class
+    endunless
+    case aspect_ratio
+        when 'portrait'
+            assign aspect_ratio_class = 'r-portrait'
+        when 'landscape'
+            assign aspect_ratio_class = 'r-landscape'
+        when 'square'
+            assign aspect_ratio_class = 'r-square'
+        when 'fill'
+            assign aspect_ratio_class = 'r-fill'
+        when 'auto'
+            assign aspect_ratio_class = 'r-auto'
+        else
+            assign aspect_ratio_class = 'r-fill'
+    endcase
+    unless aspect_ratio_class_mobile
+        assign aspect_ratio_class_mobile = aspect_ratio_class
+    else
+        case aspect_ratio_mobile
+            when 'portrait'
+                assign aspect_ratio_class_mobile = 'r-portrait--s-down'
+            when 'landscape'
+                assign aspect_ratio_class_mobile = 'r-landscape--s-down'
+            when 'square'
+                assign aspect_ratio_class_mobile = 'r-square--s-down'
+            when 'fill'
+                assign aspect_ratio_class_mobile = 'r-fill--s-down'
+            when 'auto'
+                assign aspect_ratio_class_mobile = 'r-auto--s-down'
+            else
+                assign aspect_ratio_class_mobile = 'r-fill--s-down'
+        endcase
+    endunless
+
+    assign wrapper_class = wrapper_class | append: ' ' | append: aspect_ratio_class | append: ' ' | append: position_class
+    assign media_class = class | append: ' w-100 h-100 object-cover'
+    assign wrapper_class_mobile = wrapper_class | append: ' s-up-hide ' | append: aspect_ratio_class_mobile | append: ' ' | append: position_class_mobile
+    assign media_class_mobile = class_mobile | append: ' w-100 h-100 object-cover'
+
+    if video and image
+        assign preview_image = image
+    else
+        assign preview_image = video.preview_image
+    endif
+
+    if video_mobile and image_mobile
+        assign preview_image_mobile = image_mobile
+    elsif video_mobile and image
+        assign preview_image_mobile = image
+    else
+        assign preview_image_mobile = video_mobile.preview_image
+    endif
+
+
+%}
+{%- if video != blank -%}
+    {% if video_mobile != blank %}
+        {% render 'ucoast-video',
+                video: video_mobile,
+                wrapper_class: wrapper_class_mobile,
+                video_class: media_class_mobile,
+                preview_image: preview_image_mobile,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+        {% render 'ucoast-video',
+                video: video,
+                wrapper_class: wrapper_class,
+                video_class: media_class,
+                preview_image: preview_image,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+    {% elsif image_mobile != blank %}
+        {% render 'ucoast-image',
+                image: image,
+                image_class: media_class_mobile,
+                wrapper_class: wrapper_class_mobile,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+        {% render 'ucoast-video',
+                video: video,
+                preview_image: preview_image,
+                wrapper_class: wrapper_class,
+                video_class: media_class,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+    {% else %}
+        {% render 'ucoast-video',
+                video: video,
+                wrapper_class: wrapper_class,
+                video_class: media_class,
+                preview_image: preview_image,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+    {% endif %}
+{%- elsif image != blank -%}
+    {% if image_mobile != blank %}
+        {% render 'ucoast-image',
+                image: image_mobile,
+                image_class: media_class_mobile,
+                wrapper_class: wrapper_class_mobile,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+        {% render 'ucoast-image',
+                image: image,
+                image_class: media_class,
+                wrapper_class: wrapper_class,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+    {% else %}
+        {% render 'ucoast-image',
+                image: image,
+                image_class: image_class,
+                wrapper_class: wrapper_class,
+                loading: loading,
+                custom_attributes: custom_attributes,
+                multiplier: multiplier,
+                alt: alt
+        %}
+    {% endif %}
+{%- endif -%}

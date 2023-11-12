@@ -2,6 +2,11 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -38,7 +43,8 @@
 		<div class="banner__media{% if section.settings.image != blank %} media{% endif %}">
 			{%- if section.settings.image != blank -%}
 				{% render 'ucoast-image',
-						image: section.settings.image
+						image: section.settings.image,
+						loading: loading
 				%}
 			{%- else -%}
 				{%- render 'email-signup-banner-background' -%}
