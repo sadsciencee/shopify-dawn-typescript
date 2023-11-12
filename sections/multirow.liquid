@@ -47,20 +47,22 @@
 			>
 				<div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.image_layout contains 'alternate' %}{% cycle odd_class, even_class %}{% else %}{{ odd_class }}{% endif %}">
 					<div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
-						<div
-							class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if block.settings.image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-							{% if section.settings.image_height == 'adapt'
-								and block.settings.image != blank
-							%}
-								style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
-							{% endif %}
-						>
-							{%- if block.settings.image != blank -%}
-								{% render 'ucoast-image', image: block.settings.image, loading: loading %}
-							{%- else -%}
-								{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-							{%- endif -%}
-						</div>
+						{% capture wrapper_class %}
+                            image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }}
+                        {% endcapture %}
+						{% liquid
+							if section.settings.image_height == 'adapt'
+								assign aspect_ratio = 'adapt'
+							else
+								assign aspect_ratio = 'fill'
+							endif
+						%}
+						{% render 'ucoast-media',
+							image: block.settings.image,
+							loading: loading,
+							aspect_ratio: aspect_ratio,
+							wrapper_class: wrapper_class
+						%}
 					</div>
 					<div class="image-with-text__text-item grid__item">
 						<div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% endunless %}">

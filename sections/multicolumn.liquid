@@ -80,18 +80,12 @@
 									{% assign spaced_image = true %}
 								{% endif %}
 								<div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
-									<div
-										class="media media--transparent media--{{ section.settings.image_ratio }}"
-										{% if section.settings.image_ratio == 'adapt' %}
-											style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
-										{% endif %}
-									>
-										{% render 'ucoast-image',
+									{% render 'ucoast-media',
 											image: block.settings.image,
-											class: 'multicolumn-card__image',
-											loading: loading
-										%}
-									</div>
+											media_class: 'multicolumn-card__image',
+											loading: loading,
+											aspect_ratio: section.settings.image_ratio
+									%}
 								</div>
 							{%- endif -%}
 							<div class="multicolumn-card__info">
@@ -246,6 +240,10 @@
 					{
 						"value": "circle",
 						"label": "t:sections.multicolumn.settings.image_ratio.options__4.label"
+					},
+					{
+						"value": "landscape",
+						"label": "t:sections.multicolumn.settings.image_ratio.options__5.label"
 					}
 				],
 				"default": "adapt",

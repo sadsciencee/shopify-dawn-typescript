@@ -74,7 +74,8 @@
             {% render 'ucoast-media',
                     image: section.settings.image,
                     media_class: image_class,
-                    loading: loading
+                    loading: loading,
+                    disable_media_settings: true
             %}
         </div>
     {%- elsif section.settings.image_2 == blank -%}
@@ -100,7 +101,8 @@
             {% render 'ucoast-media',
                     image: section.settings.image_2,
                     media_class: image_class_2,
-                    loading: loading
+                    loading: loading,
+                    disable_media_settings: true
             %}
         </div>
     {%- endif -%}

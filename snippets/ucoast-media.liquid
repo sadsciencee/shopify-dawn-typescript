@@ -1,8 +1,8 @@
 {% comment %}
-    -- image
-    -- image_mobile
-    -- video
-    -- video_mobile
+    -- image (image_picker)
+    -- image_mobile (image_picker)
+    -- video (video)
+    -- video_mobile (video)
     -- multiplier
     -- alt
     -- loading (lazy, eager, defer)
@@ -15,6 +15,7 @@
     -- position_class
     -- position_class_mobile
     -- custom_attributes
+    -- disable_media_settings (bool)
 {% endcomment %}
 {% liquid
     unless multiplier
@@ -62,6 +63,8 @@
             assign aspect_ratio_class = 'r-square'
         when 'fill'
             assign aspect_ratio_class = 'r-fill'
+        when 'circle'
+            assign aspect_ratio_class = 'r-circle'
         when 'adapt'
             assign aspect_ratio_class = 'r-adapt'
         else
@@ -80,6 +83,8 @@
                 assign aspect_ratio_class_mobile = 'r-square--s-down'
             when 'fill'
                 assign aspect_ratio_class_mobile = 'r-fill--s-down'
+            when 'circle'
+                assign aspect_ratio_class_mobile = 'r-circle--s-down'
             when 'adapt'
                 assign aspect_ratio_class_mobile = 'r-adapt--s-down'
             else
@@ -106,6 +111,11 @@
     else
         assign preview_image_mobile = video_mobile.preview_image
     endif
+
+    unless disable_media_settings
+        assign wrapper_class = wrapper_class | append: ' global-media-settings' | append: class
+        assign wrapper_class_mobile = wrapper_class_mobile | append: ' global-media-settings' | append: class_mobile
+    endunless
 
 
 %}

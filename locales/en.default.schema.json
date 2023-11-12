@@ -242,7 +242,17 @@
 			"paragraph": "Affects areas like navigation dropdowns, pop-up modals, and cart pop-ups."
 		},
 		"media": {
-			"name": "Media"
+			"name": "Media",
+			"settings": {
+				"aspect_ratio": {
+					"label": "Aspect ratio",
+					"portrait": "Portrait",
+					"square": "Square",
+					"landscape": "Landscape",
+					"adapt": "Adapt to image",
+					"fill": "Fill Container"
+				}
+			}
 		},
 		"drawers": {
 			"name": "Drawers"
@@ -2506,7 +2516,10 @@
 					},
 					"options__4": {
 						"label": "Circle"
-					}
+					},
+					"options__5": {
+						"label": "Landscape"
+					},,
 				},
 				"columns_desktop": {
 					"label": "Number of columns on desktop"

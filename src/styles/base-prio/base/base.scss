@@ -1,5 +1,6 @@
 @import '../../global/variables.scss';
 @import '../../global/functions.scss';
+
 :root {
 	--alpha-button-background: 1;
 	--alpha-button-border: 1;
@@ -1008,8 +1009,10 @@ details[open] > .share-button__fallback {
 	z-index: 2;
 }
 
-.field:not(:focus-visible):not(.focused) + [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
-.field:not(:focus-visible):not(.focused) + [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
+.field:not(:focus-visible):not(.focused)
+	+ [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
+.field:not(:focus-visible):not(.focused)
+	+ [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
 	background-color: inherit;
 }
 
@@ -1809,7 +1812,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	background-color: rgb(#{$schemaColorBackground});
 }
 
-[data-uc-header-wrapper="border-bottom"] {
+[data-uc-header-wrapper='border-bottom'] {
 	border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
 }
 
@@ -1864,6 +1867,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	height: auto;
 	max-width: 100%;
 }
+
 .header__heading-logo-wrapper {
 	position: relative;
 	width: 100%;
@@ -1871,6 +1875,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	transition: width 0.3s cubic-bezier(0.52, 0, 0.61, 0.99);
 
 	aspect-ratio: var(--logo-ratio);
+
 	img {
 		position: absolute;
 		top: 50%;
@@ -1882,6 +1887,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 		transform: translate(-50%, -50%);
 	}
 }
+
 @include media-query($m-down) {
 	.header__heading,
 	.header__heading-link {
@@ -2832,19 +2838,50 @@ details-disclosure > details {
 // maybe move to critical - added in 10.1
 
 .r-portrait {
-	aspect-ratio: .75;
+	aspect-ratio: 0.75;
 }
 
 .r-landscape {
 	aspect-ratio: 1.5;
 }
 
-.r-square {
+.r-square,
+.r-circle {
 	aspect-ratio: 1;
 }
-.r-fill {
 
+.r-circle {
+	border-radius: 100%;
+	overflow: hidden !important;
 }
+
+.r-fill {
+}
+
 .r-adapt {
 	aspect-ratio: var(--media-ratio);
+}
+
+@include media-query($s-down) {
+	.r-portrait--s-down {
+		aspect-ratio: 0.75;
+	}
+
+	.r-landscape--s-down {
+		aspect-ratio: 1.5;
+	}
+
+	.r-square,
+	.r-circle--s-down {
+		aspect-ratio: 1;
+	}
+	.r-circle--s-down {
+		border-radius: 100%;
+		overflow: hidden !important;
+	}
+	.r-fill--s-down {
+	}
+	.r-adapt--s-down {
+		aspect-ratio: var(--media-ratio);
+	}
 }
