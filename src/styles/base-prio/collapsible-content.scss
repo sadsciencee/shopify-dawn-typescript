@@ -1,0 +1,114 @@
+@import '../global/variables';
+@import '../global/functions';
+.collapsible-content {
+	z-index: 0;
+}
+
+.collapsible-section-layout {
+	padding-bottom: #{$ax50};
+	padding-top: #{$ax50};
+}
+
+
+.collapsible-content__media--portrait {
+	height: ax(194);
+}
+
+.collapsible-content__media--landscape {
+	height: auto;
+	width: 100%;
+}
+
+.collapsible-content-wrapper-narrow {
+	padding-right: #{$ax15};
+	padding-left: #{$ax15};
+	max-width: ax(734);
+}
+
+.collapsible-content__header {
+	word-break: break-word;
+}
+
+.collapsible-content__heading {
+	margin-bottom: #{$ax20};
+}
+
+.collapsible-none-layout .accordion + .accordion {
+	border-top: 0;
+}
+
+.collapsible-row-layout .accordion:not(:first-child):not(.color-background-1) {
+	margin-top: #{$ax10};
+}
+
+.caption-with-letter-spacing + h2 {
+	margin-top: #{$ax10};
+}
+
+.collapsible-row-layout .accordion {
+	border: #{$textBoxesBorderWidth} solid
+		rgba(#{$schemaColorForeground}, #{$textBoxesBorderOpacity});
+	margin-bottom: #{$ax15};
+	/* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
+	transform: perspective(0);
+}
+
+.collapsible-row-layout .accordion summary,
+.collapsible-row-layout .accordion .accordion__content {
+	padding: #{$ax15};
+}
+
+.collapsible-row-layout .accordion .accordion__content {
+	padding-top: 0;
+}
+
+.collapsible-content summary:hover {
+	background: rgba(#{$schemaColorForeground}, 0.04);
+}
+
+.collapsible-content summary:hover .accordion__title {
+	text-decoration: underline;
+	text-underline-offset: #{$ax3};
+}
+@include media-query($s-up) {
+	.collapsible-section-layout {
+		padding-bottom: ax(70);
+		padding-top: ax(70);
+	}
+
+	.collapsible-content__media--portrait {
+		height: ax(314);
+	}
+
+	.collapsible-content__media--landscape {
+		height: auto;
+		width: 100%;
+	}
+
+	.collapsible-content__grid--reverse {
+		flex-direction: row-reverse;
+	}
+
+	.collapsible-content__heading {
+		margin-bottom: #{$ax30};
+	}
+
+	.collapsible-content .accordion {
+		margin-top: 0;
+	}
+}
+@supports not (inset: 10px) {
+	@include media-query($s-up) {
+		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
+		.collapsible-content__grid--reverse .collapsible-content__grid-item {
+			padding-left: #{$ax50};
+			padding-right: 0;
+		}
+	}
+	@include media-query($m-up) {
+		.collapsible-content__grid:not(.collapsible-content__grid--reverse) .grid__item:last-child,
+		.collapsible-content__grid--reverse .collapsible-content__grid-item {
+			padding-left: ax(70);
+		}
+	}
+}

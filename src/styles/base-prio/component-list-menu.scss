@@ -1,0 +1,32 @@
+@import "../global/variables";
+@import "../global/functions";
+.list-menu--right {
+  right: 0;
+}
+
+.list-menu--disclosure {
+  position: absolute;
+  min-width: 100%;
+  width: #{ax(200)};
+  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
+}
+
+.list-menu--disclosure:focus {
+  outline: none;
+}
+
+.list-menu__item--active {
+  text-decoration: underline;
+  text-underline-offset: #{$ax3};
+}
+
+.list-menu__item--active:hover {
+  text-decoration-thickness: #{$ax2};
+}
+
+.list-menu--disclosure.localization-selector {
+  max-height: #{ax(180)};
+  overflow: auto;
+  width: #{ax(100)};
+  padding: #{$ax5};
+}

@@ -1,0 +1,37 @@
+@import '../global/variables';
+@import '../global/functions';
+.contact img {
+	max-width: 100%;
+}
+
+.contact .form__message {
+	align-items: flex-start;
+}
+
+.contact .icon-success {
+	margin-top: #{$ax2};
+}
+
+.contact .field {
+	margin-bottom: #{$ax15};
+}
+
+.contact__button {
+	margin-top: #{$ax30};
+}
+
+@include media-query($s-up) {
+	.contact .field {
+		margin-bottom: #{$ax20};
+	}
+
+	.contact__button {
+		margin-top: #{$ax40};
+	}
+
+	.contact__fields {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: #{$ax20};
+	}
+}

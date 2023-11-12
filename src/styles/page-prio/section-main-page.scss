@@ -1,0 +1,25 @@
+@import '../global/variables';
+@import '../global/functions';
+.page-title {
+	margin-top: 0;
+}
+
+.main-page-title {
+	margin-bottom: #{$ax30};
+}
+
+.page-placeholder-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.page-placeholder {
+	width: ax(525);
+	height: ax(525);
+}
+
+@include media-query($s-up) {
+	.main-page-title {
+		margin-bottom: #{$ax40};
+	}
+}
