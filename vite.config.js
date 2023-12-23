@@ -42,6 +42,7 @@ export default {
 			entrypointsDir: 'src/entry',
 			additionalEntrypoints: [],
 			snippetFile: 'ucoast.liquid',
+			versionNumbers: true
 		}),
 	],
 	build: {

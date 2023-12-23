@@ -1,15 +1,14 @@
 import { qsOptional, qsRequired } from '@/scripts/core/global'
-import { routes } from '@/scripts/setup'
+import { routes, type uCoastWindow } from '@/scripts/setup'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
-import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { ModalDialog } from '@/scripts/theme/modal-dialog';
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
 // - check quick add modal stuff to see if anything needs to be moved around
 // - look into making the 'handleError' a callback that's passed in - i.e. the caller gets to decide what happens on error, or let drawer handle as default
-
+declare let window: uCoastWindow
 type SectionsResponse = Record<string, string>
 
 export type CartErrorResponse = {
@@ -261,6 +260,7 @@ function createAddToCartInputFromFormData(
 	let form_type: string | undefined = undefined
 	for (let [key, value] of formData.entries()) {
 		console.log(key, value)
+		if (value instanceof File) continue
 		switch (key) {
 			case 'id':
 				id = parseInt(value)
