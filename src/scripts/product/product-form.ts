@@ -1,21 +1,14 @@
 import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global'
 import { closestOptional, qsRequired } from '@/scripts/core/global'
-import { type CartNotification } from '@/scripts/theme/cart-notification'
-import { type CartDrawer } from '@/scripts/cart/cart-drawer'
-import { type uCoastWindow } from '@/scripts/setup'
 import { publish } from '@/scripts/core/global'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
 	addItemsToCart,
 	CartErrorResponse,
-	getDOMCart,
 	getDOMCartSectionApiIds, hasDomCart,
 	renderResponseToCartDrawer
 } from '@/scripts/core/cart-functions';
-import { has } from 'immutable';
-
-declare let window: uCoastWindow
 
 export class ProductForm extends UcoastEl {
 	static htmlSelector = 'product-form'

@@ -21,11 +21,11 @@
     "outDir": "../built/local",
     "pretty": true,
     "lib": [
-      "es2021",
+      "es2022",
       "dom"
     ],
-    "target": "es2021",
-    "module": "CommonJS",
+    "target": "es2022",
+    "module": "ES2022",
     "moduleResolution": "node",
     "declaration": true,
     "declarationMap": true,

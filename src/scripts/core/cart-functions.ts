@@ -3,7 +3,7 @@ import { routes } from '@/scripts/setup'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
-import { ModalDialog } from '@/scripts/theme/modal-dialog'
+import { ModalDialog } from '@/scripts/theme/modal-dialog';
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -200,6 +200,8 @@ export async function getCart(): Promise<Cart | CartErrorResponse> {
 	}
 }
 
+
+
 export function getDOMCart() {
 	return (
 		qsOptional<CartNotification>(CartNotification.htmlSelector) ??
@@ -387,7 +389,7 @@ export async function addItemsToCart(
 	input: AddToCartItem[] | FormData,
 	sections?: string[]
 ): Promise<CartAdd | CartAddWithSections | CartErrorResponse> {
-	// TODO: real talk I think the whole form data parse this is a waste of time - like, 90% sure shopify just does this #natty
+	// TO
 	const data =
 		input instanceof FormData
 			? createAddToCartInputFromFormData(input, sections)

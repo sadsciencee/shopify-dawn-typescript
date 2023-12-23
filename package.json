@@ -1,6 +1,7 @@
 {
   "name": "ucoast-vite-shopify",
   "license": "UNLICENSED",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "cross-env DEBUG=vite-plugin-shopify:* vite",
@@ -10,15 +11,15 @@
     "pull-json": "shopify theme pull -o templates/*.json -o sections/*.json -o config/settings_data.json"
   },
   "devDependencies": {
-    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-basic-ssl": "^1.0.2",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.15",
     "hls.js": "^1.4.3",
     "sass": "^1.59.3",
-    "tsconfig": "workspace:*",
-    "vite": "^4.0.4",
+    "vite": "^5.0.10",
     "vite-plugin-mkcert": "^1.13.3",
-    "vite-plugin-shopify": "workspace:*"
+    "@shopify/prettier-plugin-liquid": "^1.0.6",
+    "vite-plugin-shopify": "^3.0.0"
   },
   "dependencies": {
     "@shopify/prettier-plugin-liquid": "^1.0.6",
@@ -26,8 +27,6 @@
     "cssnano-preset-advanced": "^5.3.10",
     "dom-event-types": "^1.1.0",
     "lodash-es": "^4.17.21",
-    "postcss": "^8.4.21",
-    "postcss-functions": "^4.0.2",
     "prettier": "^2.8.4",
     "typescript": "^5.3.3"
   }
