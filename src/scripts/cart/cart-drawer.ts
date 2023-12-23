@@ -127,6 +127,7 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
+		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
 			const sectionId = section.id
 			if (!sectionId) throw new Error('Section id is required')
@@ -161,7 +162,8 @@ export class CartDrawer extends UcoastEl {
 		]
 	}
 
-	setActiveElement(element: Element) {
+	setActiveElement(element: Element | null) {
+		if (!element) throw new Error('Active element is required')
 		this.activeElement = element as HTMLElement
 	}
 }

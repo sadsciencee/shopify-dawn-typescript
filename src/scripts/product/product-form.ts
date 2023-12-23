@@ -1,5 +1,5 @@
 import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global'
-import { closestOptional, qsOptional, qsRequired } from '@/scripts/core/global'
+import { closestOptional, qsRequired } from '@/scripts/core/global'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { type uCoastWindow } from '@/scripts/setup'
@@ -9,9 +9,11 @@ import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
 	addItemsToCart,
 	CartErrorResponse,
-	getDOMCartSectionApiIds,
-	renderResponseToCartDrawer,
-} from '@/scripts/core/cart-functions'
+	getDOMCart,
+	getDOMCartSectionApiIds, hasDomCart,
+	renderResponseToCartDrawer
+} from '@/scripts/core/cart-functions';
+import { has } from 'immutable';
 
 declare let window: uCoastWindow
 
@@ -29,7 +31,6 @@ export class ProductForm extends UcoastEl {
 
 	form: HTMLFormElement
 	formIdEl: HTMLInputElement
-	cart?: CartNotification | CartDrawer
 	submitButton: HTMLButtonElement
 	errorMessageWrapper?: HTMLElement
 	errorMessage?: HTMLElement
@@ -43,12 +44,11 @@ export class ProductForm extends UcoastEl {
 		this.formIdEl = qsRequired(ProductForm.selectors.formIdEl, this.form)
 		this.formIdEl.disabled = false
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
-		this.cart =
-			qsOptional<CartNotification>('cart-notification') ||
-			qsOptional<CartDrawer>('cart-drawer')
+
 		this.submitButton = qsRequired(ProductForm.selectors.submitButton, this)
-		if (this.cart?.localName === 'cart-drawer')
+		if (hasDomCart()) {
 			this.submitButton.setAttribute('aria-haspopup', 'dialog')
+		}
 
 		this.hideErrors = this.dataset.hideErrors === 'true'
 	}

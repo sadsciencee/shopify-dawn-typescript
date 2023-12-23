@@ -1,11 +1,14 @@
-import {
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
+import { qsOptional, qsRequired } from '@/scripts/core/global'
 import { routes } from '@/scripts/setup'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
+import { ModalDialog } from '@/scripts/theme/modal-dialog'
+
+// TODO: next steps on refactor
+// - finish up debugging current changes in cart notification and cart page
+// - check quick add modal stuff to see if anything needs to be moved around
+// - look into making the 'handleError' a callback that's passed in - i.e. the caller gets to decide what happens on error, or let drawer handle as default
 
 type SectionsResponse = Record<string, string>
 
@@ -174,8 +177,6 @@ export type CartUpdateWithSections = Cart & {
 	sections: SectionsResponse
 }
 
-export function selectCart() {}
-
 export async function getCart(): Promise<Cart | CartErrorResponse> {
 	try {
 		const cart = await fetch('/cart.js', {
@@ -199,25 +200,30 @@ export async function getCart(): Promise<Cart | CartErrorResponse> {
 	}
 }
 
+export function getDOMCart() {
+	return (
+		qsOptional<CartNotification>(CartNotification.htmlSelector) ??
+		qsOptional<CartDrawer>(CartDrawer.htmlSelector)
+	)
+}
+
+export function hasDomCart() {
+	return getDOMCart() !== undefined
+}
+
 export function getDOMCartSectionApiIds() {
-  const cartEl =
-    qsOptional<CartNotification>(CartNotification.htmlSelector) ??
-    qsOptional<CartDrawer>(CartDrawer.htmlSelector)
-
-  if (!cartEl) {
-    return undefined
-  }
-
-  return cartEl.sectionApiIds
+	const cartEl = getDOMCart()
+	if (!cartEl) return undefined
+	return cartEl.sectionApiIds
 }
 
 const ignoredProperties = ['utf8', 'product-id']
 
 export function renderResponseToCartDrawer(
 	cart: CartAddWithSections | CartUpdateWithSections | CartAdd,
-	quickAddModal?: QuickAddModal
+	modal?: ModalDialog
 ) {
-	if (quickAddModal) {
+	if (modal) {
 		document.body.addEventListener(
 			'modalClosed',
 			() => {
@@ -227,13 +233,11 @@ export function renderResponseToCartDrawer(
 			},
 			{ once: true }
 		)
-		quickAddModal.hide(true)
+		modal.hide(true)
 		return
 	}
 
-	const cartEl =
-		qsOptional<CartNotification>(CartNotification.htmlSelector) ??
-		qsOptional<CartDrawer>(CartDrawer.htmlSelector)
+	const cartEl = getDOMCart()
 
 	if (!cartEl) {
 		window.location = window.routes.cart_url
@@ -241,11 +245,6 @@ export function renderResponseToCartDrawer(
 	}
 
 	if ('sections' in cart) {
-		const activeElement = document.activeElement
-		if (activeElement) {
-			cartEl.setActiveElement(activeElement)
-		}
-
 		cartEl.renderContents(cart)
 	}
 }
@@ -271,7 +270,10 @@ function createAddToCartInputFromFormData(
 				form_type = value
 				break
 			default:
-				if (!ignoredProperties.includes(key) && !key.includes('options[')) {
+				if (
+					!ignoredProperties.includes(key) &&
+					!key.includes('options[')
+				) {
 					properties[key] = value.toString()
 				}
 		}
@@ -344,29 +346,21 @@ export function renderRawHTMLToDOM({
 	destinationSelector,
 	destinationSelectorContainer,
 }: RenderRawHTMLToDOMInput) {
-  console.log({
-    sourceHTML,
-    sourceSelector,
-    destinationSelector,
-    destinationSelectorContainer,
-  })
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
-  console.log({
-    sourceSelectorOrDefault,
-  })
+	console.log({
+		sourceSelectorOrDefault,
+	})
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
-  console.log(
-    {
-      newDocument,
-    }
-  )
+	console.log({
+		newDocument,
+	})
 	const sourceElement = qsRequired(
 		sourceSelectorOrDefault,
 		newDocument.documentElement
 	)
-  console.log({
-    sourceElement,
-  })
+	console.log({
+		sourceElement,
+	})
 	if (destinationSelectorContainer) {
 		const container = qsRequired(destinationSelectorContainer)
 		const destinationElement = qsRequired(destinationSelector, container)
@@ -393,6 +387,7 @@ export async function addItemsToCart(
 	input: AddToCartItem[] | FormData,
 	sections?: string[]
 ): Promise<CartAdd | CartAddWithSections | CartErrorResponse> {
+	// TODO: real talk I think the whole form data parse this is a waste of time - like, 90% sure shopify just does this #natty
 	const data =
 		input instanceof FormData
 			? createAddToCartInputFromFormData(input, sections)

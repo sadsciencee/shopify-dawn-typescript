@@ -25,7 +25,6 @@ export class CartNotification extends UcoastEl {
 	header: StickyHeader
 	onBodyClick: (event: MouseEvent) => void
 	activeElement?: HTMLElement
-	cartItemKey?: string
 	sectionApiIds = ['cart-notification-product', 'cart-icon-bubble','cart-notification-button']
 	constructor() {
 		super()
@@ -66,7 +65,7 @@ export class CartNotification extends UcoastEl {
 	}
 
 	renderContents(cart: CartAddWithSections) {
-		this.cartItemKey = cart.items[0].key
+		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
 			const sectionId = section.id
 			if (!sectionId) throw new Error('Section id is required')
@@ -117,7 +116,8 @@ export class CartNotification extends UcoastEl {
 		}
 	}
 
-	setActiveElement(element: Element) {
+	setActiveElement(element: Element | null) {
+		if (!element) throw new Error('Active element is required')
 		this.activeElement = element as HTMLElement
 	}
 }
