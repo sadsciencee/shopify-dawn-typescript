@@ -1,4 +1,4 @@
-export type ShopifySectionRenderingSchema = { id?: string; section?: string; selector?: string }
+export type ShopifySectionRenderingSchema = { id: string; section?: string; selector: string }
 export type DebounceCallback = (...args: unknown[]) => unknown
 export type FocusableHTMLElement =
 	| HTMLAnchorElement

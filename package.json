@@ -13,12 +13,12 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.15",
+    "hls.js": "^1.4.3",
     "sass": "^1.59.3",
     "tsconfig": "workspace:*",
     "vite": "^4.0.4",
     "vite-plugin-mkcert": "^1.13.3",
-    "vite-plugin-shopify": "workspace:*",
-    "hls.js": "^1.4.3"
+    "vite-plugin-shopify": "workspace:*"
   },
   "dependencies": {
     "@shopify/prettier-plugin-liquid": "^1.0.6",
@@ -28,6 +28,7 @@
     "lodash-es": "^4.17.21",
     "postcss": "^8.4.21",
     "postcss-functions": "^4.0.2",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "typescript": "^5.3.3"
   }
 }

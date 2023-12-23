@@ -356,7 +356,7 @@ interface ProductVariant {
 	inventory_status_text: string
 }
 
-interface LineItem {
+/*interface LineItem {
 	discount_allocations: DiscountAllocation[]
 	final_line_price: number
 	final_price: number
@@ -413,7 +413,7 @@ interface Cart {
 	total_discount: number
 	total_price: number
 	total_weight: number
-}
+}*/
 
 export {
 	FilterValue,

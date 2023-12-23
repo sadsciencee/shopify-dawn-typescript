@@ -107,7 +107,8 @@ Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further d
   
 will continue to bug fix during next build
 
-Goals for 10.2.0:
-- implement media loading strategy from experiment to fix pixel issue
+Goals for 11.0.0
+
+- refactor functionality to have more consistent functions for add to cart, etc.
 - implement klaviyo popup and preorder functionality as a default
 - fix logo scaling problem
