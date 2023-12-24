@@ -38,12 +38,12 @@ export const SELECTORS = {
 
 export type CartUpdateEvent = {
 	source: 'cart-items' | 'product-form'
-	productVariantId?: string
+	productVariantId?: number
 }
 
 export type CartErrorEvent = {
 	source: 'product-form'
-	productVariantId: string
+	productVariantId: number
 	errors: string | string[] | { [key: string]: string[] }
 	message: string
 }
@@ -727,6 +727,7 @@ export function addToCartConfig(body: FormData) {
 		sections: getOrUndefined(body, 'sections'),
 		sections_url: getOrUndefined(body, 'sections_url'),
 	}
+	console.log({data})
 	return {
 		method: 'POST',
 		headers: {

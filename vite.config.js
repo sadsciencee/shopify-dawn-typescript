@@ -1,13 +1,32 @@
-import { defineConfig } from 'vite'
 import shopify from 'vite-plugin-shopify'
 import { resolve } from 'node:path'
+import cssnano from 'cssnano'
+import advancedPreset from 'cssnano-preset-advanced'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
-export default defineConfig({
-	server: {
-		host: true,
-		https: false,
-		port: 3000,
+export default {
+	css: {
+		transformer: 'postcss',
+		postcss: {
+			plugins: [
+				cssnano(
+					advancedPreset({
+						autoprefix: false,
+						mergeRules: true,
+						discardDuplicates: true,
+						reduceIdents: false,
+						zindex: false,
+					})
+				),
+			],
+		}
 	},
+	server: {
+		secure: false,
+		host: 'localhost',
+		https: true,
+		port: 3000,
+	} ,
 	publicDir: 'public',
 	resolve: {
 		alias: {
@@ -16,18 +35,20 @@ export default defineConfig({
 		},
 	},
 	plugins: [
+		basicSsl(),
 		shopify({
 			themeRoot: './',
 			sourceCodeDir: 'src',
 			entrypointsDir: 'src/entry',
 			additionalEntrypoints: [],
 			snippetFile: 'ucoast.liquid',
+			versionNumbers: true
 		}),
 	],
 	build: {
 		sourcemap: true,
 		minify: 'esbuild',
-		cssMinify: false,
+		cssMinify: 'postcss',
 		rollupOptions: {
 			output: {
 				output: {
@@ -43,4 +64,4 @@ export default defineConfig({
 			}
 		}
 	},
-})
+}

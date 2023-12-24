@@ -1,9 +1,5 @@
 import {Image, Product} from "@/scripts/types/api";
 
-type SectionApiResponse = { id: string; key: string; sections: Record<string, string> }
-
-export { SectionApiResponse }
-
 export interface JsonApiResponse {
     intent: string
     products: JsonProduct[] | Product[]

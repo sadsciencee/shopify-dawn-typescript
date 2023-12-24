@@ -28,15 +28,14 @@ export class QuickAddModal extends ModalDialog {
 		this.modalContent = qsRequired('[id^="QuickAddInfo-"]', this)
 	}
 
-	override hide(preventFocus = false) {
+	override hide(preventFocus: boolean) {
 		const cartNotification =
 			qsOptional<CartNotification>('cart-notification') ||
 			qsRequired<CartDrawer>('cart-drawer')
 		if (cartNotification && this.openedBy) cartNotification.setActiveElement(this.openedBy)
 		this.modalContent.innerHTML = ''
 
-		if (preventFocus) this.openedBy = undefined
-		super.hide()
+		super.hide(preventFocus)
 	}
 
 	override show(opener: HTMLElement) {

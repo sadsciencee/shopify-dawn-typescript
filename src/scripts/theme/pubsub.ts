@@ -1,14 +1,13 @@
 // todo: add additional data types as needed
-import { ProductVariant } from '@/scripts/types/api'
 
-export type CartUpdateEvent = {
+/*export type CartUpdateEvent = {
 	source: 'cart-items' | 'product-form'
-	productVariantId?: string
+	productVariantId?: number
 }
 
 export type CartErrorEvent = {
 	source: 'product-form'
-	productVariantId: string
+	productVariantId: number
 	errors: string | string[] | { [key: string]: string[] }
 	message: string
 }
@@ -22,11 +21,11 @@ export type VariantChangeEvent = {
 	}
 }
 
-export type PubSubEvent = CartUpdateEvent | CartErrorEvent | VariantChangeEvent | undefined
+export type PubSubEvent = CartUpdateEvent | CartErrorEvent | VariantChangeEvent | undefined*/
 
 // typeguards for events
 
-export function isCartUpdateEvent(obj: PubSubEvent): obj is CartUpdateEvent {
+/*export function isCartUpdateEvent(obj: PubSubEvent): obj is CartUpdateEvent {
 	if (!obj) return false
 	if (!('source' in obj)) return false
 	if (!('productVariantId' in obj)) return false
@@ -40,29 +39,31 @@ export function isCartErrorEvent(obj: PubSubEvent): obj is CartErrorEvent {
 	if (!('message' in obj)) return false
 	if (!('errors' in obj)) return false
 	return true
-}
+}*/
 
+/*
 export function createVariantChangeEvent(event:VariantChangeEvent) {
 	if (!isVariantChangeEvent(event)) {
 		throw new Error('Event is not a VariantChangeEvent')
 	}
 	return event
 }
+*/
 
-export function isVariantChangeEvent(obj: PubSubEvent): obj is VariantChangeEvent {
+/*export function isVariantChangeEvent(obj: PubSubEvent): obj is VariantChangeEvent {
 	if (!obj) return false
 	if (!('data' in obj)) return false
 	if (!('sectionId' in obj.data)) return false
 	if (!('html' in obj.data)) return false
 	if (!('variant' in obj.data)) return false
 	return true
-}
+}*/
 
-export type SubscriberCallback = (pubSubEvent: PubSubEvent) => void
+/*export type SubscriberCallback = (pubSubEvent: PubSubEvent) => void*/
 
-let subscribers: Record<string, SubscriberCallback[]> = {}
+//let subscribers: Record<string, SubscriberCallback[]> = {}
 
-export function subscribe(eventName: string, callback: SubscriberCallback) {
+/*export function subscribe(eventName: string, callback: SubscriberCallback) {
 	if (subscribers[eventName] === undefined) {
 		subscribers[eventName] = []
 	}
@@ -74,8 +75,9 @@ export function subscribe(eventName: string, callback: SubscriberCallback) {
 			return cb !== callback
 		})
 	}
-}
+}*/
 
+/*
 export function publish(eventName: string, pubSubEvent: PubSubEvent = undefined) {
 	if (subscribers[eventName]) {
 		subscribers[eventName].forEach((callback) => {
@@ -83,3 +85,4 @@ export function publish(eventName: string, pubSubEvent: PubSubEvent = undefined)
 		})
 	}
 }
+*/

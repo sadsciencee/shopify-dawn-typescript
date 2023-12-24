@@ -3,132 +3,27 @@
   Do not attempt to modify this file directly, as any changes will be overwritten by the next build.
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
-{% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-6dbd47ed.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/_critical.ts" or path == "_critical.ts" %}
-  <script src="{{ '_critical-01e5ca78.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/css-dir-article-defer.scss" or path == "css-dir-article-defer.scss" %}
-  {{ 'css-dir-article-defer-e76df445.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
-  {{ 'css-dir-article-prio-b5639658.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
-  {{ 'css-dir-article-defer-e76df445.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
-  {{ 'css-dir-base-prio-92796e7a.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-blog-defer.scss" or path == "css-dir-blog-defer.scss" %}
-  {{ 'css-dir-article-defer-e76df445.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-blog-prio.scss" or path == "css-dir-blog-prio.scss" %}
-  {{ 'css-dir-blog-prio-26d50ee5.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-collection-defer.scss" or path == "css-dir-collection-defer.scss" %}
-  {{ 'css-dir-collection-defer-768b2028.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-collection-prio.scss" or path == "css-dir-collection-prio.scss" %}
-  {{ 'css-dir-collection-prio-f35a5136.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-customer-defer.scss" or path == "css-dir-customer-defer.scss" %}
-  {{ 'css-dir-article-defer-e76df445.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-customer-prio.scss" or path == "css-dir-customer-prio.scss" %}
-  {{ 'css-dir-customer-prio-677cf42b.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-page-defer.scss" or path == "css-dir-page-defer.scss" %}
-  {{ 'css-dir-article-defer-e76df445.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-page-prio.scss" or path == "css-dir-page-prio.scss" %}
-  {{ 'css-dir-page-prio-4c6e9e48.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-product-defer.scss" or path == "css-dir-product-defer.scss" %}
-  {{ 'css-dir-product-defer-51622439.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
-  {{ 'css-dir-product-prio-cac19be5.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
-  {{ 'css-optional-component-localization-form-0d16aa44.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-mega-menu.scss" or path == "css-optional-component-mega-menu.scss" %}
-  {{ 'css-optional-component-mega-menu-b5c2c922.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-model-viewer-ui.scss" or path == "css-optional-component-model-viewer-ui.scss" %}
-  {{ 'css-optional-component-model-viewer-ui-25cb13cd.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-pagination.scss" or path == "css-optional-component-pagination.scss" %}
-  {{ 'css-optional-component-pagination-89ea6b7f.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
-  {{ 'css-optional-component-pickup-availability-37ef3d9f.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
-  {{ 'css-optional-component-product-model-55ccf03d.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
-  {{ 'css-optional-component-recipient-form-b6e25a12.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}
-  {{ 'css-optional-mask-blobs-5821cb0c.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-quick-add.scss" or path == "css-optional-quick-add.scss" %}
-  {{ 'css-optional-quick-add-f8327938.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-section-contact-form.scss" or path == "css-optional-section-contact-form.scss" %}
-  {{ 'css-optional-section-contact-form-9036c1f4.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-section-password.scss" or path == "css-optional-section-password.scss" %}
-  {{ 'css-optional-section-password-4f262a6c.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
-  {{ 'css-optional-template-giftcard-1785153c.css' | asset_url | split: '?' | first | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
-  <script src="{{ 'js-dir-cart-drawer-03a3cdbd.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-94dbcbc5.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-cea8f1e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-48e76f86.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-modal-a101bbff.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-b469f2e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-catalog.ts" or path == "js-dir-catalog.ts" %}
-  <script src="{{ 'js-dir-catalog-73c1135b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-65920be2.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-cea8f1e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-customer.ts" or path == "js-dir-customer.ts" %}
-  <script src="{{ 'js-dir-customer-34191f2d.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'shopify-b469f2e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-product.ts" or path == "js-dir-product.ts" %}
-  <script src="{{ 'js-dir-product-87307e76.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-6bb50bb6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-94dbcbc5.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-347b7daa.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-986d421a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-b469f2e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-theme.ts" or path == "js-dir-theme.ts" %}
-  <script src="{{ 'js-dir-theme-d9973bc3.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-347b7daa.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-48e76f86.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-986d421a.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-function-load-hls.ts" or path == "js-function-load-hls.ts" %}
-  <script src="{{ 'js-function-load-hls-5da3a893.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'hls-f69a4d00.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-animations.ts" or path == "js-optional-animations.ts" %}
-  <script src="{{ 'js-optional-animations-c76d11fd.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'animations-65920be2.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-localization-form.ts" or path == "js-optional-localization-form.ts" %}
-  <script src="{{ 'js-optional-localization-form-ef4a97b3.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-magnify.ts" or path == "js-optional-magnify.ts" %}
-  <script src="{{ 'js-optional-magnify-9863d9e4.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-{% elsif path == "/src/entry/js-optional-password-modal.ts" or path == "js-optional-password-modal.ts" %}
-  <script src="{{ 'js-optional-password-modal-737bccf3.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'details-modal-a101bbff.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-pickup-availability.ts" or path == "js-optional-pickup-availability.ts" %}
-  <script src="{{ 'js-optional-pickup-availability-43fe79cb.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-product-model.ts" or path == "js-optional-product-model.ts" %}
-  <script src="{{ 'js-optional-product-model-f13b22a9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'deferred-media-347b7daa.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-quick-add.ts" or path == "js-optional-quick-add.ts" %}
-  <script src="{{ 'js-optional-quick-add-4fefe90b.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modal-dialog-94dbcbc5.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-6bb50bb6.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'shopify-b469f2e1.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
-  <script src="{{ 'js-optional-recipient-form-3409c6a8.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-share-button.ts" or path == "js-optional-share-button.ts" %}
-  <script src="{{ 'js-optional-share-button-64684a89.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-48e76f86.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-theme-editor.ts" or path == "js-optional-theme-editor.ts" %}
-  <script src="{{ 'js-optional-theme-editor-7fe0fbd9.js' | asset_url | split: '?' | first }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-ffffb739.js' | asset_url | split: '?' | first }}" crossorigin="anonymous">
+{% liquid
+  assign path_prefix = path | slice: 0
+  if path_prefix == '/'
+    assign file_url_prefix = 'https://localhost:3000'
+  else
+    assign file_url_prefix = 'https://localhost:3000/src/entry/'
+  endif
+  assign file_url = path | prepend: file_url_prefix
+  assign file_name = path | split: '/' | last
+  if file_name contains '.'
+    assign file_extension = file_name | split: '.' | last
+  endif
+  assign css_extensions = 'css|less|sass|scss|styl|stylus|pcss|postcss' | split: '|'
+  assign is_css = false
+  if css_extensions contains file_extension
+    assign is_css = true
+  endif
+%}
+<script src="https://localhost:3000/@vite/client" type="module"></script>
+{% if is_css == true %}
+  {{ file_url | stylesheet_tag }}
+{% else %}
+  <script src="{{ file_url }}" type="module"></script>
 {% endif %}

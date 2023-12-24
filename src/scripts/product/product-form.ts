@@ -1,13 +1,14 @@
-import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global';
-import { addToCartConfig, closestOptional, qsOptional, qsRequired } from '@/scripts/core/global'
-import { type CartNotification } from '@/scripts/theme/cart-notification'
-import { type CartDrawer } from '@/scripts/cart/cart-drawer'
-import { routes, type uCoastWindow } from '@/scripts/setup'
+import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global'
+import { closestOptional, qsRequired } from '@/scripts/core/global'
 import { publish } from '@/scripts/core/global'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-
-declare let window: uCoastWindow
+import {
+	addItemsToCart,
+	CartErrorResponse,
+	getDOMCartSectionApiIds, hasDomCart,
+	renderResponseToCartDrawer
+} from '@/scripts/core/cart-functions';
 
 export class ProductForm extends UcoastEl {
 	static htmlSelector = 'product-form'
@@ -21,10 +22,8 @@ export class ProductForm extends UcoastEl {
 		errorMessage: '[data-uc-product-form-error-message]',
 	}
 
-
 	form: HTMLFormElement
 	formIdEl: HTMLInputElement
-	cart?: CartNotification | CartDrawer
 	submitButton: HTMLButtonElement
 	errorMessageWrapper?: HTMLElement
 	errorMessage?: HTMLElement
@@ -38,12 +37,11 @@ export class ProductForm extends UcoastEl {
 		this.formIdEl = qsRequired(ProductForm.selectors.formIdEl, this.form)
 		this.formIdEl.disabled = false
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
-		this.cart =
-			qsOptional<CartNotification>('cart-notification') ||
-			qsOptional<CartDrawer>('cart-drawer')
+
 		this.submitButton = qsRequired(ProductForm.selectors.submitButton, this)
-		if (this.cart?.localName === 'cart-drawer')
+		if (hasDomCart()) {
 			this.submitButton.setAttribute('aria-haspopup', 'dialog')
+		}
 
 		this.hideErrors = this.dataset.hideErrors === 'true'
 	}
@@ -63,92 +61,75 @@ export class ProductForm extends UcoastEl {
 		this.getSpinner().classList.remove('hidden')
 
 		const formData = new FormData(this.form)
-		if (this.cart) {
-			const sectionIdsToRender = this.cart
-				.getSectionsToRender()
-				.filter((section) => section.id)
-				.map((section) => section.id)
-			if (!sectionIdsToRender.length) throw Error('getSectionsToRender returned empty array')
-			formData.append('sections', sectionIdsToRender.join(','))
-			formData.append('sections_url', window.location.pathname)
-			if (!(document.activeElement instanceof HTMLElement)) throw Error('no activeElement')
-			this.cart.setActiveElement(document.activeElement)
-		}
-		const config = addToCartConfig(formData)
-		const addedVariantId = formData.get('id') as string
-		if (!addedVariantId) throw Error('No variant id found')
+		let formVariantId = formData.get('id')
+		if (!formVariantId) throw Error('No variant id found')
+		const addedVariantId = parseInt(formVariantId.toString())
 
-		fetch(`${routes.cart_add_url}`, config)
-			.then((response) => response.json())
-			.then((response) => {
-				if (response.status) {
-					publish(PUB_SUB_EVENTS.cartError, {
-						source: 'product-form',
-						productVariantId: addedVariantId,
-						errors: response.errors || response.description,
-						message: response.message,
-					})
-					this.handleErrorMessage(response.description)
-
-					const soldOutMessage = this.submitButton.querySelector(ProductForm.selectors.soldOutMessage)
-					if (!soldOutMessage) return
-					this.submitButton.setAttribute('aria-disabled', 'true')
-					const submitButtonText = qsRequired(ProductForm.selectors.submitButtonMessage, this.submitButton)
-					submitButtonText.classList.add('hidden')
-					soldOutMessage.classList.remove('hidden')
-					this.error = true
-					return
-				} else if (!this.cart) {
-					window.location = window.routes.cart_url
+		addItemsToCart(formData, getDOMCartSectionApiIds())
+			.then((cart) => {
+				if ('status' in cart) {
+					this.handleError(cart, addedVariantId)
 					return
 				}
 
-				if (!this.error)
-					publish(PUB_SUB_EVENTS.cartUpdate, {
-						source: 'product-form',
-						productVariantId: addedVariantId,
-					})
-				this.error = false
-				const quickAddModal = closestOptional<QuickAddModal>(this, 'quick-add-modal')
-				if (quickAddModal) {
-					document.body.addEventListener(
-						'modalClosed',
-						() => {
-							setTimeout(() => {
-								if (this.cart) {
-									this.cart.renderContents(response)
-								}
-							})
-						},
-						{ once: true }
-					)
-					quickAddModal.hide(true)
-				} else {
-					this.cart.renderContents(response)
-				}
+				publish(PUB_SUB_EVENTS.cartUpdate, {
+					source: 'product-form',
+					productVariantId: addedVariantId,
+				})
+				const quickAddModal = closestOptional<QuickAddModal>(
+					this,
+					'quick-add-modal'
+				)
+				renderResponseToCartDrawer(cart, quickAddModal)
 			})
 			.catch((e) => {
 				console.error(e)
 			})
 			.finally(() => {
 				this.submitButton.removeAttribute(ATTRIBUTES.loading)
-				this.cart?.hasAttribute(ATTRIBUTES.cartEmpty) &&
-					this.cart.removeAttribute(ATTRIBUTES.cartEmpty)
 
-				if (!this.error) this.submitButton.removeAttribute('aria-disabled')
+				if (!this.error)
+					this.submitButton.removeAttribute('aria-disabled')
 				this.getSpinner().classList.add('hidden')
 			})
+	}
+
+	handleError(cart: CartErrorResponse, addedVariantId: number) {
+		publish(PUB_SUB_EVENTS.cartError, {
+			source: 'product-form',
+			productVariantId: addedVariantId,
+			message: cart.message,
+			errors: cart.errors ?? cart.description,
+		})
+		this.handleErrorMessage(cart.description)
+
+		const soldOutMessage = this.submitButton.querySelector(
+			ProductForm.selectors.soldOutMessage
+		)
+		if (!soldOutMessage) return
+		this.submitButton.setAttribute('aria-disabled', 'true')
+		const submitButtonText = qsRequired(
+			ProductForm.selectors.submitButtonMessage,
+			this.submitButton
+		)
+		submitButtonText.classList.add('hidden')
+		soldOutMessage.classList.remove('hidden')
 	}
 
 	handleErrorMessage(errorMessage?: string) {
 		if (this.hideErrors) return
 
 		this.errorMessageWrapper =
-			this.errorMessageWrapper || qsRequired(ProductForm.selectors.errorMessageWrapper, this)
-		if (!this.errorMessageWrapper) throw new Error('No error message wrapper found')
+			this.errorMessageWrapper ||
+			qsRequired(ProductForm.selectors.errorMessageWrapper, this)
+		if (!this.errorMessageWrapper)
+			throw new Error('No error message wrapper found')
 		this.errorMessage =
 			this.errorMessage ||
-			qsRequired(ProductForm.selectors.errorMessage, this.errorMessageWrapper)
+			qsRequired(
+				ProductForm.selectors.errorMessage,
+				this.errorMessageWrapper
+			)
 
 		this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage)
 

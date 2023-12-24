@@ -47,10 +47,12 @@ export class ModalDialog extends UcoastEl {
 		pauseAllMedia()
 	}
 
-	hide() {
+	hide(preventFocus = false) {
+		if (preventFocus) this.openedBy = undefined
 		document.body.classList.remove('overflow-hidden')
 		document.body.dispatchEvent(new CustomEvent('modalClosed'))
 		this.removeAttribute('open')
+
 		removeTrapFocus(this.openedBy)
 		pauseAllMedia()
 	}
