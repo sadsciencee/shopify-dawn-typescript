@@ -10,7 +10,7 @@
 	--header-height: #{ax(45)};
 	--announcement-height: #{ax(26)};
 	--viewport-height: 100vh;
-	--drawer-height: var(--viewport-height);
+	--drawer-height: 100dvh;
 	--section-spacing: #{$sectionSpacingMobile};
 	--ax1: calc(var(--ax) * 1);
 	--ax2: calc(var(--ax) * 2);
