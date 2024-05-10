@@ -2,7 +2,7 @@ import { qsOptional, qsRequired } from '@/scripts/core/global'
 import { routes, type uCoastWindow } from '@/scripts/setup'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
-import { ModalDialog } from '@/scripts/theme/modal-dialog';
+import { ModalDialog } from '@/scripts/theme/modal-dialog'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -199,8 +199,6 @@ export async function getCart(): Promise<Cart | CartErrorResponse> {
 	}
 }
 
-
-
 export function getDOMCart() {
 	return (
 		qsOptional<CartNotification>(CartNotification.htmlSelector) ??
@@ -257,6 +255,7 @@ function createAddToCartInputFromFormData(
 	const properties: Record<string, string> = {}
 	let id: number | undefined = undefined
 	let quantity: number | undefined = undefined
+	let selling_plan: number | undefined = undefined
 	let form_type: string | undefined = undefined
 	for (let [key, value] of formData.entries()) {
 		console.log(key, value)
@@ -271,6 +270,9 @@ function createAddToCartInputFromFormData(
 			case 'form_type':
 				form_type = value
 				break
+			case 'selling_plan':
+				selling_plan = parseInt(value)
+				break
 			default:
 				if (
 					!ignoredProperties.includes(key) &&
@@ -283,27 +285,25 @@ function createAddToCartInputFromFormData(
 	if (!id) throw Error('No variant id found')
 	if (!quantity) quantity = 1
 	if (!form_type) throw Error('No form type found')
+	const item: AddToCartItem = {
+		id,
+		quantity,
+		properties,
+	}
+
+	if (selling_plan) {
+		item.selling_plan = selling_plan
+	}
+
 	if (sections && sections.length) {
 		return {
-			items: [
-				{
-					id,
-					quantity,
-					properties,
-				},
-			],
+			items: [item],
 			form_type,
 			sections,
 		}
 	} else {
 		return {
-			items: [
-				{
-					id,
-					quantity,
-					properties,
-				},
-			],
+			items: [item],
 			form_type,
 		}
 	}
@@ -312,6 +312,7 @@ function createAddToCartInputFromFormData(
 type AddToCartItem = {
 	id: number
 	quantity: number
+	selling_plan?: number
 	properties: Record<string, string>
 }
 
@@ -320,19 +321,6 @@ type AddToCartInput = {
 	form_type: string
 	sections?: string[]
 	sections_url?: string
-}
-
-export function getSectionInnerHTML(
-	html: string,
-	selector = '.shopify-section'
-) {
-	const newDocument = new DOMParser().parseFromString(html, 'text/html')
-	const newSection = qsRequired(selector, newDocument.documentElement)
-	return newSection.innerHTML
-}
-
-export function sectionSelectorFromId(id: string) {
-	return `#shopify-section-${id}`
 }
 
 type RenderRawHTMLToDOMInput = {
@@ -427,8 +415,55 @@ export async function addItemsToCart(
 	}
 }
 
-export async function removeItemFromCart() {}
+type CartUpdateByKeyItem = {
+	key: string
+	quantity: number
+}
 
-export async function updateQuantityByLineKey() {}
+type CartUpdateByIdItem = {
+	id: number
+	quantity: number
+}
 
-export async function upsertCartItems() {}
+export async function updateCartRequest(
+	newItems: CartUpdateByIdItem[],
+	existingItems: CartUpdateByKeyItem[],
+	sections?: string[]
+) {
+	const updates: Record<number | string, number> = {}
+	newItems.forEach((item) => {
+		updates[item.id] = item.quantity
+	})
+	existingItems.forEach((item) => {
+		updates[item.key] = item.quantity
+	})
+	const data =
+		sections && sections.length
+			? {
+					updates,
+					sections,
+			  }
+			: {
+					updates,
+			  }
+
+	try {
+		const response = await fetch(
+			`${routes.cart_update_url}`,
+			configPostRequest(data)
+		)
+		const cart = await response.json()
+		if (cart.status) {
+			return cart as CartErrorResponse
+		}
+		return cart as Cart
+	} catch (error) {
+		console.error(error)
+		return {
+			status: 500,
+			description: 'Error in HTTP request',
+			message:
+				'This cart operation failed, but Shopify did not return an error',
+		}
+	}
+}
