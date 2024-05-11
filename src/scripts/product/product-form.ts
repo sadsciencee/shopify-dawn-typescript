@@ -8,6 +8,7 @@ import {
 	getDOMCartSectionApiIds, hasDomCart,
 	renderResponseToCartDrawer
 } from '@/scripts/core/cart-functions';
+import { CartErrorResponse } from '@/scripts/shopify'
 
 export class ProductForm extends UcoastEl {
 	static htmlSelector = 'product-form'

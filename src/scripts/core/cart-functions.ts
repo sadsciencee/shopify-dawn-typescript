@@ -1,8 +1,17 @@
-import { qsOptional, qsRequired, qsRequiredFromDocument } from '@/scripts/core/global'
+import {
+	qsOptional,
+	qsRequired,
+	qsRequiredFromDocument,
+} from '@/scripts/core/global'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import type { CartItem, Cart, CartErrorResponse, ProductVariant } from '@/scripts/shopify'
+import type {
+	CartItem,
+	Cart,
+	CartErrorResponse,
+	ProductVariant,
+} from '@/scripts/shopify'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -62,7 +71,7 @@ export function getDOMCartSectionApiIds() {
 	return cartEl.sectionApiIds
 }
 
-const ignoredProperties = ['utf8', 'product-id']
+const ignoredProperties = ['utf8', 'product-id', 'section-id']
 
 export function renderResponseToCartDrawer(
 	cart: CartAddWithSections | CartUpdateWithSections | CartAdd,
@@ -222,10 +231,8 @@ export async function addItemsToCart(
 						items: input,
 						sections: sections,
 					}
-				: {
-						items: input,
-					}
-
+				: { items: input }
+	console.log({data})
 	try {
 		const response = await fetch(
 			`${window.routes.cart_add_url}`,
@@ -326,7 +333,7 @@ export function variantFromProductOptions(
 
 export async function getSectionHTMLForResource(
 	url: string,
-	sectionId: string,
+	sectionId: string
 ): Promise<string | undefined> {
 	try {
 		return await fetch(`${url}?sections=${sectionId}`)

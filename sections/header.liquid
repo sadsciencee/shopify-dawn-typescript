@@ -75,7 +75,7 @@
 %}
 
 {%- style -%}
-	.header {
+	.header, .header, .header.page-width {
 	padding: {% render 'ucoast-ax', value: header_padding_top %} {% render 'ucoast-ax', value: 30 %} {% render 'ucoast-ax', value: header_padding_bottom %} {% render 'ucoast-ax', value: 30 %};
 	}
 
@@ -91,7 +91,7 @@
 	}
 
 	@media screen and (min-width: 990px) {
-	.header {
+	.header, .header.page-width {
 	padding-top: {% render 'ucoast-ax', value: section.settings.padding_top %};
 	padding-bottom: {% render 'ucoast-ax', value: section.settings.padding_bottom %};
 	}

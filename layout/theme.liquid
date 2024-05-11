@@ -161,6 +161,9 @@
 			{% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
 		{% endcomment %}
 
+		{% render 'ucoast-style-tag', file: 'css-optional-quick-add' %}
+		{% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
+
 		<ul hidden>
 			<li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
 			<li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
