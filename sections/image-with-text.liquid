@@ -20,12 +20,14 @@
 			{% liquid
 				if section.settings.height == 'adapt'
 					assign aspect_ratio = 'adapt'
+					assign media_class = 'w-100 block h-auto'
 				else
 					assign aspect_ratio = 'fill'
+					assign media_class = 'w-100 h-100 block object-cover absolute top-0 left-0'
 				endif
 			%}
 			{% capture wrapper_class %}
-          image-with-text__media image-with-text__media--{{ section.settings.height }} gradient {{ color_scheme }} global-media-settings {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}
+          image-with-text__media image-with-text__media--{{ section.settings.height }} gradient {{ color_scheme }} global-media-settings {% if section.settings.image != blank %}media{% else %}image-with-text__media--placeholder placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %} w-100 h-auto block
           {% endcapture %}
 			{%- if section.settings.image_behavior == 'ambient'
 				or section.settings.image_behavior == 'zoom-in'
@@ -35,14 +37,16 @@
 					multiplier: 2,
 					loading: loading,
 					wrapper_class: wrapper_class,
-					aspect_ratio: aspect_ratio
+					aspect_ratio: aspect_ratio,
+					media_class: media_class
 				%}
 			{% else %}
 				{% render 'ucoast-media',
 					image: section.settings.image,
 					loading: loading,
 					wrapper_class: wrapper_class,
-					aspect_ratio: aspect_ratio
+					aspect_ratio: aspect_ratio,
+					media_class: media_class
 				%}
 			{%- endif -%}
 		</div>

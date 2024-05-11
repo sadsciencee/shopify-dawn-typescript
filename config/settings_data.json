@@ -3,9 +3,9 @@
     "logo": "{{ shop.brand.logo }}",
     "logo_width": 90,
     "favicon": "{{ shop.brand.square_logo }}",
-    "type_header_font": "georgia_pro_n4",
+    "type_header_font": "josefin_sans_n3",
     "heading_scale": 100,
-    "type_body_font": "inter_n4",
+    "type_body_font": "basic_commercial_soft_rounded_n4",
     "body_scale": 100,
     "page_width": 1300,
     "spacing_sections": 40,
@@ -137,10 +137,11 @@
       "background-1": {
         "settings": {
           "background": "#ffffff",
+          "card_background": "",
           "background_gradient": "",
           "text": "#000000",
           "button": "#133a48",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button": "#322f69",
           "secondary_button_label": "#133a48",
           "outline_button_label": "#000000",
@@ -149,11 +150,12 @@
       },
       "background-2": {
         "settings": {
-          "background": "#F9F9F9",
+          "background": "#f9f9f9",
+          "card_background": "",
           "background_gradient": "",
           "text": "#000000",
           "button": "#133a48",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#000000",
           "outline_button_label": "#133a48",
@@ -163,10 +165,11 @@
       "inverse": {
         "settings": {
           "background": "#270731",
+          "card_background": "",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#133a48",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button": "#322f69",
           "secondary_button_label": "#133a48",
           "outline_button_label": "#ffffff",
@@ -175,13 +178,14 @@
       },
       "accent-1": {
         "settings": {
-          "background": "#FFF",
+          "background": "#ffffff",
+          "card_background": "",
           "background_gradient": "",
           "text": "#000000",
           "button": "#ffffff",
           "button_label": "#270731",
-          "secondary_button": "#FFFFFF",
-          "secondary_button_label": "#FFF",
+          "secondary_button": "#ffffff",
+          "secondary_button_label": "#ffffff",
           "outline_button_label": "#322f69",
           "shadow": "#d9d9d9"
         }
@@ -189,10 +193,11 @@
       "accent-2": {
         "settings": {
           "background": "#f8f7f7",
+          "card_background": "",
           "background_gradient": "",
           "text": "#000000",
           "button": "#133a48",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#ffffff",
           "outline_button_label": "#133a48",
@@ -202,13 +207,14 @@
       "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c": {
         "settings": {
           "background": "rgba(0,0,0,0)",
+          "card_background": "",
           "background_gradient": "",
-          "text": "#FFFFFF",
-          "button": "#FFFFFF",
+          "text": "#ffffff",
+          "button": "#ffffff",
           "button_label": "#270731",
           "secondary_button": "#322f69",
           "secondary_button_label": "#133a48",
-          "outline_button_label": "#FFFFFF",
+          "outline_button_label": "#ffffff",
           "shadow": "#d9d9d9"
         }
       }

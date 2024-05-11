@@ -8,6 +8,17 @@
     "theme_support_url": "https://ucoastweb.com/"
   },
   {
+    "name": "Placeholders",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "placeholder_image",
+        "label": "Placeholder Image",
+        "info": "Brand image that appears when an image field is left blank."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
