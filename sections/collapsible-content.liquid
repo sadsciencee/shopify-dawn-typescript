@@ -41,7 +41,7 @@
 							{% capture wrapper_class %}
 							bg-transparent collapsible-content__media collapsible-content__media--{{ section.settings.image_ratio }} global-media-settings gradient
 							{% endcapture %}
-							{% render 'ucoast-media', image: section.settings.image, loading: loading, wrapper_class: wrapper_class, aspect_ratio: section.settings.image_ratio %}
+							{% render 'ucoast-media', media: section.settings.image, loading: loading, wrapper_class: wrapper_class, aspect_ratio: section.settings.image_ratio %}
 						</div>
 					{% endif %}
 					<div class="grid__item">

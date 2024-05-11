@@ -41,14 +41,14 @@
 
                                 {% if forloop.index0 == large_block %}
                                     {% render 'ucoast-media',
-                                            image: block.settings.image,
+                                            media: block.settings.image,
                                             wrapper_class: 'h-100',
                                             aspect_ratio: 'fill',
                                             loading: loading
                                     %}
                                 {% else %}
                                     {% render 'ucoast-media',
-                                            image: block.settings.image,
+                                            media: block.settings.image,
                                             loading: loading
                                     %}
                                 {% endif %}
@@ -93,8 +93,8 @@
                                                 {% endif %}
                                         >
                                             {%- if block.settings.cover_image != blank -%}
-                                                {% render 'image-shopify',
-                                                        image: block.settings.cover_image
+                                                {% render 'ucoast-media',
+                                                        media: block.settings.cover_image
                                                 %}
                                             {%- else -%}
                                                 {{
@@ -124,7 +124,7 @@
                                             {% endcapture %}
 
                                             {% render 'ucoast-media',
-                                                    image: block.settings.cover_image,
+                                                    media: block.settings.cover_image,
                                                     loading: loading,
                                                     wrapper_class: 'h-100',
                                                     media_child: media_child
