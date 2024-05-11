@@ -104,7 +104,6 @@ function createAddToCartInputFromFormData(
 	let selling_plan: number | undefined = undefined
 	let form_type: string | undefined = undefined
 	for (let [key, value] of formData.entries()) {
-		console.log(key, value)
 		if (value instanceof File) continue
 		switch (key) {
 			case 'id':
@@ -183,20 +182,11 @@ export function renderRawHTMLToDOM({
 	destinationSelectorContainer,
 }: RenderRawHTMLToDOMInput) {
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
-	console.log({
-		sourceSelectorOrDefault,
-	})
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
-	console.log({
-		newDocument,
-	})
 	const sourceElement = qsRequired(
 		sourceSelectorOrDefault,
 		newDocument.documentElement
 	)
-	console.log({
-		sourceElement,
-	})
 	if (destinationSelectorContainer) {
 		const container = qsRequired(destinationSelectorContainer)
 		const destinationElement = qsRequired(destinationSelector, container)

@@ -720,7 +720,6 @@ type AddToCartFormValues = {
 
 export function addToCartConfig(body: FormData) {
 	const definedQuantity = getOrUndefined(body, 'quantity')
-	console.log({ definedQuantity })
 	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
@@ -733,7 +732,6 @@ export function addToCartConfig(body: FormData) {
 		sections: getOrUndefined(body, 'sections'),
 		sections_url: getOrUndefined(body, 'sections_url'),
 	}
-	console.log({data})
 	return {
 		method: 'POST',
 		headers: {

@@ -560,6 +560,13 @@ a.product__text {
 	overflow: auto;
 }
 
+.product-media-modal__content img,
+.product-media-modal__content video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
 .product-media-modal__content > *:not(.active),
 .product__media-list .deferred-media {
 	display: none;
@@ -1043,7 +1050,7 @@ a.product__text {
 
 .product-media-container.constrain-height {
 	/* arbitrary offset value based on average theme spacing and header height */
-	--viewport-offset: #{ax(400)};
+	--viewport-offset: #{ax(220)};
 	--constrained-min-height: #{ax(300)};
 	--constrained-height: max(var(--constrained-min-height), calc(100vh - var(--viewport-offset)));
 	margin-right: auto;

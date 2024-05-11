@@ -2,8 +2,11 @@
 	this should only be called from ucoast-media
 {% endcomment %}
 {% liquid
+	unless id
+		assign id = image.id
+	endunless
 	if x_position and y_position
-		assign wrapper_id = 'image-wrapper-' | append: image.id | append: x_position | append: y_position
+		assign wrapper_id = 'image-wrapper-' | append: id | append: x_position | append: y_position
 	endif
 %}
 <span
@@ -17,6 +20,7 @@
 		{% if wrapper_id %}
 			data-wrapper-id='{{ wrapper_id }}'
 		{% endif %}
+		data-media-id='{{ id }}'
 >
 	{% liquid
 		unless image

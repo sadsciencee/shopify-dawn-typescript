@@ -13,10 +13,8 @@ export class ModalOpener extends UcoastEl {
     button.addEventListener('click', (e) => {
       e.preventDefault()
       const modalSelector = this.getAttribute('data-modal')
-      console.log({modalSelector})
       if (!modalSelector) return;
       const modal = qsOptional<ModalDialog>(modalSelector);
-      console.log({modal})
       if (modal) modal.show(button);
     });
   }
