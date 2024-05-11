@@ -8,26 +8,31 @@
     "build": "cross-env DEBUG=vite-plugin-shopify:* vite build",
     "lint": "eslint .",
     "push": "shopify theme push -x templates/*.json -x sections/*.json -x config/settings_data.json",
-    "pull-json": "shopify theme pull -o templates/*.json -o sections/*.json -o config/settings_data.json"
+    "pull-json": "shopify theme pull -o templates/*.json -o sections/*.json -o config/settings_data.json",
+    "push-assets": "shopify theme push -o assets/* -o snippets/ucoast.liquid"
   },
   "devDependencies": {
-    "@vitejs/plugin-basic-ssl": "^1.0.2",
+    "@shopify/prettier-plugin-liquid": "^1.5.0",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.15",
-    "hls.js": "^1.4.3",
-    "sass": "^1.59.3",
-    "vite": "^5.0.10",
-    "vite-plugin-mkcert": "^1.13.3",
-    "@shopify/prettier-plugin-liquid": "^1.0.6",
-    "vite-plugin-shopify": "^3.0.0"
-  },
-  "dependencies": {
-    "@shopify/prettier-plugin-liquid": "^1.0.6",
-    "@webcomponents/webcomponentsjs": "^2.7.0",
     "cssnano-preset-advanced": "^5.3.10",
     "dom-event-types": "^1.1.0",
-    "lodash-es": "^4.17.21",
-    "prettier": "^2.8.4",
-    "typescript": "^5.3.3"
+    "hls.js": "^1.5.7",
+    "prettier": "^3.1.1",
+    "sass": "^1.77.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-mkcert": "^1.17.5",
+    "vite-plugin-shopify": "^3.0.1"
+  },
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.8.0",
+    "embla-carousel": "8.0.4",
+    "embla-carousel-auto-height": "8.0.4",
+    "embla-carousel-autoplay": "8.0.4",
+    "embla-carousel-class-names": "8.0.4",
+    "embla-carousel-wheel-gestures": "8.0.0-rc05",
+    "lodash-es": "^4.17.21"
   }
 }

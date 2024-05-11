@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Fylt knappetikett"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "Omriss rundt knapp"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "Sosiale medier",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X / Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -139,7 +139,7 @@
           "label": "Aktiver søkeforslag"
         },
         "predictive_search_show_vendor": {
-          "label": "Vis produktleverandør",
+          "label": "Vis produktselger",
           "info": "Synlig når søkeforslag er aktivert."
         },
         "predictive_search_show_price": {
@@ -388,7 +388,7 @@
           "label": "Liten"
         },
         "options__2": {
-          "label": "Middels"
+          "label": "Medie"
         },
         "options__3": {
           "label": "Stor"
@@ -476,7 +476,7 @@
           "label": "Roter kunngjøringer automatisk"
         },
         "change_slides_speed": {
-          "label": "Endre lysbilde hvert"
+          "label": "Endre hver"
         },
         "header__1": {
           "content": "Ikoner for sosiale medier",
@@ -487,6 +487,20 @@
         },
         "show_social": {
           "label": "Vis ikoner på skrivebordet"
+        },
+        "header__3": {
+          "content": "Land-/områdevelger",
+          "info": "Gå til [markedsinnstillinger](/admin/settings/markets) for å legge til land/område."
+        },
+        "enable_country_selector": {
+          "label": "Aktiver land-/områdevelger"
+        },
+        "header__4": {
+          "content": "Språkvelger",
+          "info": "Gå til [språkinnstillingene](/admin/settings/languages) for å legge til et språk."
+        },
+        "enable_language_selector": {
+          "label": "Aktiver språkvelger"
         }
       },
       "presets": {
@@ -596,7 +610,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           },
           "info": "Legg til bilder ved å redigere samlingene dine. [Finn ut mer](https://help.shopify.com/manual/products/collections)"
         },
@@ -646,8 +660,8 @@
       "name": "Egendefinert Liquid",
       "settings": {
         "custom_liquid": {
-          "label": "Egendefinert Liquid",
-          "info": "Legg til kodeutdrag fra apper eller annen Liquid-kode for å opprette avanserte tilpasninger."
+          "label": "Liquid-kode",
+          "info": "Legg til kodeutdrag fra app eller en annen kode for å opprette avanserte tilpasninger. [Finn ut mer](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -714,7 +728,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           }
         },
         "show_secondary_image": {
@@ -998,9 +1012,6 @@
         "image_2": {
           "label": "Andre bilde"
         },
-        "color_scheme": {
-          "info": "Synlig når beholderen vises."
-        },
         "stack_images_on_mobile": {
           "label": "Stable bilder på mobil"
         },
@@ -1022,7 +1033,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "info": "Bruk et bilde med størrelsesforhold 3:2 for best resultat. [Finn ut mer](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)",
           "options__4": {
@@ -1160,7 +1171,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "label": "Bildehøyde",
           "options__4": {
@@ -1182,7 +1193,7 @@
             "label": "Liten"
           },
           "options__2": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__3": {
             "label": "Stor"
@@ -1271,6 +1282,9 @@
             },
             "button_link": {
               "label": "Knappekobling"
+            },
+            "outline_button": {
+              "label": "Bruk knappestil med omriss"
             }
           }
         },
@@ -1295,7 +1309,7 @@
                 "label": "Liten"
               },
               "options__2": {
-                "label": "Middels"
+                "label": "Medie"
               },
               "options__3": {
                 "label": "Stor"
@@ -1323,7 +1337,7 @@
                 "label": "Liten"
               },
               "options__3": {
-                "label": "Middels"
+                "label": "Medie"
               },
               "info": "Bruk et bilde med størrelsesforhold 16:9 for best resultat. [Finn ut mer](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)",
               "options__4": {
@@ -1399,7 +1413,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__4": {
             "label": "Stor"
@@ -1459,7 +1473,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           }
         },
         "show_secondary_image": {
@@ -1497,10 +1511,6 @@
             "label": "2 kolonner"
           }
         },
-        "enable_quick_buy": {
-          "label": "Aktiver knapp for hurtigtillegging",
-          "info": "Optimal med popup- eller handlekurvskuff-typen."
-        },
         "filter_type": {
           "label": "Filtreringsoppsett på datamaskin",
           "options__1": {
@@ -1513,6 +1523,15 @@
             "label": "Skuff"
           },
           "info": "Skuff er standardoppsett for mobil."
+        },
+        "quick_add": {
+          "label": "Hurtigregistrering",
+          "info": "Bulk er optimalisert for varer som kjøpes i større antall.",
+          "options": {
+            "option_1": "Ingen",
+            "option_2": "Standard",
+            "option_3": "Bulk"
+          }
         }
       }
     },
@@ -1552,7 +1571,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           },
           "info": "Legg til bilder ved å redigere samlingene dine. [Finn ut mer](https://help.shopify.com/manual/products/collections)"
         },
@@ -1625,12 +1644,25 @@
           "name": "Variantvelger",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stil",
               "options__1": {
                 "label": "Rullegardin"
               },
               "options__2": {
                 "label": "Knapper"
+              }
+            },
+            "swatch_shape": {
+              "label": "Fargekart",
+              "info": "Aktiver [fargekart](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) på produktalternativer.",
+              "options__1": {
+                "label": "Sirkel"
+              },
+              "options__2": {
+                "label": "Kvadratisk"
+              },
+              "options__3": {
+                "label": "Ingen"
               }
             }
           }
@@ -1829,15 +1861,6 @@
             }
           }
         },
-        "custom_liquid": {
-          "name": "Egendefinert liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Egendefinert liquid",
-              "info": "Legg til kodeutdrag fra apper eller annen Liquid-kode for å opprette avanserte tilpasninger."
-            }
-          }
-        },
         "rating": {
           "name": "Produktvurdering",
           "settings": {
@@ -1882,7 +1905,7 @@
               "label": "Bildeforhold",
               "options": {
                 "option_1": "Portrett",
-                "option_2": "Firkant"
+                "option_2": "Kvadratisk"
               }
             },
             "enable_quick_add": {
@@ -2016,7 +2039,7 @@
             "label": "Liten"
           },
           "options__2": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__3": {
             "label": "Stor"
@@ -2084,7 +2107,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           }
         },
         "show_secondary_image": {
@@ -2154,7 +2177,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           },
           "options__4": {
             "label": "Sirkel"
@@ -2370,7 +2393,7 @@
                 "label": "Liten"
               },
               "options__2": {
-                "label": "Middels"
+                "label": "Medie"
               },
               "options__3": {
                 "label": "Stor"
@@ -2477,12 +2500,25 @@
           "name": "Variantvelger",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stil",
               "options__1": {
                 "label": "Rullegardin"
               },
               "options__2": {
                 "label": "Knapper"
+              }
+            },
+            "swatch_shape": {
+              "label": "Fargekart",
+              "info": "Aktiver [fargekart](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) på produktalternativer.",
+              "options__1": {
+                "label": "Sirkel"
+              },
+              "options__2": {
+                "label": "Kvadratisk"
+              },
+              "options__3": {
+                "label": "Ingen"
               }
             }
           }
@@ -2510,14 +2546,6 @@
             },
             "text": {
               "label": "Tekst"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Egendefinert liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Egendefinert liquid"
             }
           }
         },
@@ -2610,7 +2638,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__4": {
             "label": "Stor"
@@ -2673,6 +2701,9 @@
             "label": "Høyre"
           },
           "label": "Innholdsjustering på mobiltelefon"
+        },
+        "color_scheme": {
+          "info": "Synlig når beholderen vises."
         }
       },
       "blocks": {
@@ -2730,7 +2761,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__4": {
             "label": "Stor"
@@ -3092,7 +3123,10 @@
       "name": "Adresser"
     },
     "main-login": {
-      "name": "Logg på"
+      "name": "Logg på",
+      "shop_login_button": {
+        "enable": "Aktiver Logg inn med Shop"
+      }
     },
     "main-order": {
       "name": "Bestilling"
@@ -3130,7 +3164,7 @@
             "label": "Portrett"
           },
           "options__3": {
-            "label": "Firkant"
+            "label": "Kvadratisk"
           }
         },
         "show_secondary_image": {
@@ -3171,7 +3205,7 @@
             "label": "Liten"
           },
           "options__3": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__4": {
             "label": "Stor"
@@ -3183,7 +3217,7 @@
             "label": "Liten"
           },
           "options__2": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__3": {
             "label": "Stor"
@@ -3196,7 +3230,7 @@
             "label": "Liten"
           },
           "options__2": {
-            "label": "Middels"
+            "label": "Medie"
           },
           "options__3": {
             "label": "Stor"
@@ -3308,6 +3342,20 @@
       },
       "presets": {
         "name": "Flere rader"
+      }
+    },
+    "quick-order-list": {
+      "name": "Hurtigordreliste",
+      "settings": {
+        "show_image": {
+          "label": "Vis bilder"
+        },
+        "show_sku": {
+          "label": "Vis SKU-er"
+        }
+      },
+      "presets": {
+        "name": "Hurtigordreliste"
       }
     }
   }

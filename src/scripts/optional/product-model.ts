@@ -1,8 +1,10 @@
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
-import { ModelViewerUIReference, uCoastWindow } from '@/scripts/setup'
 import { qsaOptional, qsRequired } from '@/scripts/core/global'
 
-declare let window: uCoastWindow
+export type ModelViewerUIReference = {
+	pause: () => void
+	new (modelViewEl: HTMLElement): ModelViewerUIReference
+} & typeof HTMLElement
 
 export class ProductModel extends DeferredMedia {
 	static override htmlSelector = 'product-model'
@@ -38,9 +40,11 @@ export class ProductModel extends DeferredMedia {
 
 export class WindowProductModel {
 	loadShopifyXR() {
-		if (!window.Shopify.loadFeatures)
+		const loadFeatures = window?.Shopify?.loadFeatures
+		if (!loadFeatures) {
 			throw new Error('window.Shopify.loadFeatures is not defined')
-		window.Shopify.loadFeatures([
+		}
+		loadFeatures([
 			{
 				name: 'shopify-xr',
 				version: '1.0',
@@ -52,16 +56,22 @@ export class WindowProductModel {
 		if (errors) return
 
 		if (!window.ShopifyXR) {
-			document.addEventListener('shopify_xr_initialized', () => this.setupShopifyXR())
+			document.addEventListener('shopify_xr_initialized', () =>
+				this.setupShopifyXR()
+			)
 			return
 		}
 
-		const productJsonScripts = qsaOptional<HTMLScriptElement>('[id^="ProductJSON-"]')
+		const productJsonScripts = qsaOptional<HTMLScriptElement>(
+			'[id^="ProductJSON-"]'
+		)
 		if (productJsonScripts) {
 			productJsonScripts.forEach((modelJSON) => {
-				if (!window.ShopifyXR) throw new Error('window.ShopifyXR is not defined')
+				if (!window.ShopifyXR)
+					throw new Error('window.ShopifyXR is not defined')
 				const textContent = modelJSON.textContent
-				if (!textContent) throw new Error('modelJSON.textContent is not defined')
+				if (!textContent)
+					throw new Error('modelJSON.textContent is not defined')
 				window.ShopifyXR.addModels(JSON.parse(textContent))
 				modelJSON.remove()
 			})
@@ -74,7 +84,10 @@ export function loadProductModel() {
 	window.ProductModel = new WindowProductModel()
 
 	window.addEventListener('DOMContentLoaded', () => {
-		if (window.ProductModel && window.ProductModel instanceof WindowProductModel)
+		if (
+			window.ProductModel &&
+			window.ProductModel instanceof WindowProductModel
+		)
 			window.ProductModel.loadShopifyXR()
 	})
 }

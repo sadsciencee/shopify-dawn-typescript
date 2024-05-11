@@ -3,27 +3,124 @@
   Do not attempt to modify this file directly, as any changes will be overwritten by the next build.
 {% endcomment %}
 {% assign path = ucoast | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
-{% liquid
-  assign path_prefix = path | slice: 0
-  if path_prefix == '/'
-    assign file_url_prefix = 'https://localhost:3000'
-  else
-    assign file_url_prefix = 'https://localhost:3000/src/entry/'
-  endif
-  assign file_url = path | prepend: file_url_prefix
-  assign file_name = path | split: '/' | last
-  if file_name contains '.'
-    assign file_extension = file_name | split: '.' | last
-  endif
-  assign css_extensions = 'css|less|sass|scss|styl|stylus|pcss|postcss' | split: '|'
-  assign is_css = false
-  if css_extensions contains file_extension
-    assign is_css = true
-  endif
-%}
-<script src="https://localhost:3000/@vite/client" type="module"></script>
-{% if is_css == true %}
-  {{ file_url | stylesheet_tag }}
-{% else %}
-  <script src="{{ file_url }}" type="module"></script>
+{% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
+  {{ '_critical-css-C4ht7IEy.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/_critical.ts" or path == "_critical.ts" %}
+  <script src="{{ '_critical-Q_gHl7Nn.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/css-dir-article-defer.scss" or path == "css-dir-article-defer.scss" %}
+  {{ 'css-dir-article-defer-WFkcb3Yc.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
+  {{ 'css-dir-article-prio-Ba3MJME7.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
+  {{ 'css-dir-article-defer-WFkcb3Yc.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
+  {{ 'css-dir-base-prio-CHbkLg03.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-blog-defer.scss" or path == "css-dir-blog-defer.scss" %}
+  {{ 'css-dir-article-defer-WFkcb3Yc.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-blog-prio.scss" or path == "css-dir-blog-prio.scss" %}
+  {{ 'css-dir-blog-prio-ATxR0DFU.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-collection-defer.scss" or path == "css-dir-collection-defer.scss" %}
+  {{ 'css-dir-collection-defer-B045Z_0A.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-collection-prio.scss" or path == "css-dir-collection-prio.scss" %}
+  {{ 'css-dir-collection-prio-CXN6JW9r.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-customer-defer.scss" or path == "css-dir-customer-defer.scss" %}
+  {{ 'css-dir-article-defer-WFkcb3Yc.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-customer-prio.scss" or path == "css-dir-customer-prio.scss" %}
+  {{ 'css-dir-customer-prio-DSfLmTIe.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-page-defer.scss" or path == "css-dir-page-defer.scss" %}
+  {{ 'css-dir-article-defer-WFkcb3Yc.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-page-prio.scss" or path == "css-dir-page-prio.scss" %}
+  {{ 'css-dir-page-prio-Decr78qt.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-product-defer.scss" or path == "css-dir-product-defer.scss" %}
+  {{ 'css-dir-product-defer-aRVcnTBq.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
+  {{ 'css-dir-product-prio-LaVSpy1Y.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
+  {{ 'css-optional-component-localization-form-CtLCyfYl.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-mega-menu.scss" or path == "css-optional-component-mega-menu.scss" %}
+  {{ 'css-optional-component-mega-menu-DGMnsZkp.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-model-viewer-ui.scss" or path == "css-optional-component-model-viewer-ui.scss" %}
+  {{ 'css-optional-component-model-viewer-ui-CCzGQC4s.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-pagination.scss" or path == "css-optional-component-pagination.scss" %}
+  {{ 'css-optional-component-pagination-CONOYtO3.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
+  {{ 'css-optional-component-pickup-availability-DlQWgm1h.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
+  {{ 'css-optional-component-product-model-DPUCMwxD.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
+  {{ 'css-optional-component-recipient-form-BLpkzOin.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}
+  {{ 'css-optional-mask-blobs-DU6QEz_2.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-quick-add.scss" or path == "css-optional-quick-add.scss" %}
+  {{ 'css-optional-quick-add-C9O_c9b1.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-section-contact-form.scss" or path == "css-optional-section-contact-form.scss" %}
+  {{ 'css-optional-section-contact-form-I0wQcCVp.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-section-password.scss" or path == "css-optional-section-password.scss" %}
+  {{ 'css-optional-section-password-C5lY-Yto.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
+  {{ 'css-optional-template-giftcard-i2_vFruo.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
+{% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
+  <script src="{{ 'js-dir-cart-drawer-PAI_QF0W.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-kOV04qjn.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-C7uv1mSa.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-BhmfmKWf.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-modal-Dkvx8Rbb.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-catalog.ts" or path == "js-dir-catalog.ts" %}
+  <script src="{{ 'js-dir-catalog-Cxysd-O6.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'animations-BPE9AHwx.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'search-form-C7uv1mSa.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-customer.ts" or path == "js-dir-customer.ts" %}
+  <script src="{{ 'js-dir-customer-BDWKoTkd.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-product.ts" or path == "js-dir-product.ts" %}
+  <script src="{{ 'js-dir-product-nds4KTh2.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-BTK59UaL.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'modal-dialog-kOV04qjn.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-q_GuLEks.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-DqkluGo5.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-dir-theme.ts" or path == "js-dir-theme.ts" %}
+  <script src="{{ 'js-dir-theme-Cr90qxRJ.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'deferred-media-q_GuLEks.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-BhmfmKWf.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'slider-component-DqkluGo5.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-animations.ts" or path == "js-optional-animations.ts" %}
+  <script src="{{ 'js-optional-animations-DyhtyySv.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'animations-BPE9AHwx.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-localization-form.ts" or path == "js-optional-localization-form.ts" %}
+  <script src="{{ 'js-optional-localization-form-C_6pzXZN.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-magnify.ts" or path == "js-optional-magnify.ts" %}
+  <script src="{{ 'js-optional-magnify-Bt4jHmWt.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+{% elsif path == "/src/entry/js-optional-password-modal.ts" or path == "js-optional-password-modal.ts" %}
+  <script src="{{ 'js-optional-password-modal-B7Pcd9ri.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'details-modal-Dkvx8Rbb.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-pickup-availability.ts" or path == "js-optional-pickup-availability.ts" %}
+  <script src="{{ 'js-optional-pickup-availability-BH0WUk52.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-product-model.ts" or path == "js-optional-product-model.ts" %}
+  <script src="{{ 'js-optional-product-model-BI-q80KO.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'deferred-media-q_GuLEks.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-quick-add.ts" or path == "js-optional-quick-add.ts" %}
+  <script src="{{ 'js-optional-quick-add-DjJiIyoO.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'modal-dialog-kOV04qjn.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'product-form-BTK59UaL.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
+  <script src="{{ 'js-optional-recipient-form-DvRNbQ6t.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-share-button.ts" or path == "js-optional-share-button.ts" %}
+  <script src="{{ 'js-optional-share-button-BXOM2dZP.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
+  <link rel="modulepreload" href="{{ 'details-disclosure-BhmfmKWf.js' | asset_url }}" crossorigin="anonymous">
+{% elsif path == "/src/entry/js-optional-theme-editor.ts" or path == "js-optional-theme-editor.ts" %}
+  <script src="{{ 'js-optional-theme-editor-Dz6aO1cL.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
+  <link rel="modulepreload" href="{{ 'global-clmoPhL2.js' | asset_url }}" crossorigin="anonymous">
 {% endif %}

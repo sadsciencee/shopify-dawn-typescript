@@ -7,15 +7,12 @@ import {
 	qsOptional,
 	qsRequired,
 } from '@/scripts/core/global'
-import { type ProductVariant } from '@/scripts/types/api'
-import { type uCoastWindow } from '@/scripts/setup'
 import { type ProductForm } from '@/scripts/product/product-form'
 import { type MediaGallery } from '@/scripts/product/media-gallery'
 import { type ShareButton } from '@/scripts/optional/share-button'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-
-declare let window: uCoastWindow
+import { type ProductVariant } from '@/scripts/shopify'
 
 export class VariantSelects extends UcoastEl {
 	static htmlSelector = 'variant-selects'

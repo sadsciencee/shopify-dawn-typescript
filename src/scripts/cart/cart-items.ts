@@ -9,13 +9,10 @@ import {
 	targetRequired,
 } from '@/scripts/core/global'
 import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
-import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/core/global'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-
-declare let window: uCoastWindow
 
 export class CartItems extends UcoastEl {
 	// static
@@ -95,7 +92,7 @@ export class CartItems extends UcoastEl {
 	}
 
 	onCartUpdate() {
-		fetch(`${routes.cart_url}?section_id=main-cart-items`)
+		fetch(`${window.routes.cart_url}?section_id=main-cart-items`)
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
@@ -143,7 +140,7 @@ export class CartItems extends UcoastEl {
 			sections_url: window.location.pathname,
 		})
 
-		fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+		fetch(`${window.routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
 			.then((response) => {
 				return response.text()
 			})

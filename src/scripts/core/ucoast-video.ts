@@ -1,17 +1,25 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { isTenPercentInViewport, qsRequired } from '@/scripts/core/global'
-import { uCoastWindow } from '@/scripts/setup'
+import { qsRequired } from '@/scripts/core/global'
+import { type Hls } from '@/scripts/global'
 
-declare let window: uCoastWindow
+
+function sleep(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export class UcoastVideo extends UcoastEl {
 	static htmlSelector = 'ucoast-video'
-	static hlsLoaded = false
 	videoEl: HTMLVideoElement
 	hasHls: boolean
 	hlsReady: boolean
 	hlsSource?: string
 	mp4Source?: string
 	initialized = false
+	preloaded: boolean
+	isLoading: boolean
+	isPlaying: boolean
+	hasPlayed: boolean
+	hlsInstance: Hls
 
 	constructor() {
 		super()
@@ -21,7 +29,12 @@ export class UcoastVideo extends UcoastEl {
 		this.hlsReady = hlsReady
 		this.hlsSource = hlsSource
 		this.mp4Source = mp4Source
+		this.preloaded = false
+		this.isLoading = false
+		this.hasPlayed = false
+		this.isPlaying = false
 	}
+
 	init() {
 		const videoEl = qsRequired<HTMLVideoElement>('video', this)
 		const hlsSource = videoEl.getAttribute('data-hls-src') ?? undefined
@@ -36,74 +49,129 @@ export class UcoastVideo extends UcoastEl {
 		}
 	}
 
-	setHasPlayed() {
-		this.setAttribute('data-uc-has-played', 'true')
-	}
-	hasPlayed() {
-		const hasPlayed = this.getAttribute('data-uc-has-played') === 'true'
-		return hasPlayed
-	}
 	override async connectedCallback() {
 		super.connectedCallback()
-		if (
-			this.hasHls &&
-			!this.hlsReady &&
-			!this.videoEl.canPlayType('application/vnd.apple.mpegurl') &&
-			!UcoastVideo.hlsLoaded
-		) {
-			console.log('loading hls')
-			const { loadHls } = await import(`@/scripts/hls`)
-			await loadHls()
-		} else if (
-			this.hasHls &&
-			this.videoEl.canPlayType('application/vnd.apple.mpegurl') &&
-			this.hlsSource
-		) {
-			this.videoEl.setAttribute('src', this.hlsSource)
-			await this.playIfInView()
-		} else if (this.mp4Source) {
-			this.videoEl.setAttribute('src', this.mp4Source)
-			await this.playIfInView()
-		}
 	}
-	async playIfInView() {
-		if (isTenPercentInViewport(this.videoEl) && this.videoEl.paused) {
-			await this.play()
-		}
-	}
-	async preload() {
-		if (this.hasPlayed() && !this.videoEl.paused) return
-		await this.videoEl.play()
-		window.setTimeout(() => {
-			this.removeAttribute('data-uc-preloading')
-			if (!isTenPercentInViewport(this.videoEl)) {
-				console.log('pausing')
-				void this.pause()
-				this.videoEl.currentTime = 0
-			}
-		}, 100)
-	}
+
 	async play() {
-		if (!this.hasPlayed()) {
-			this.preload().then(() => {
-				this.videoEl.play()
-				this.setHasPlayed()
-			})
-		}
-		else if (this.videoEl.paused) {
-			this.videoEl
-				.play()
-				.then(() => {
-					this.setHasPlayed()
-				})
-				.catch((e) => console.log('error playing video', e))
+		if (this.isHiddenForViewport()) return
+		// if (this.isPlaying || this.isLoading) return
+		if (this.isPlaying) return
+
+		this.isLoading = true
+		if (
+			window.Ucoast.mediaManager.hlsRequired &&
+			window.Ucoast.mediaManager.hlsLibraryLoaded &&
+			!this.hasPlayed
+		) {
+			await this.playHLS()
 		} else {
-			console.log('video is already palying')
+			await this.playStandard()
 		}
 	}
-	async pause() {
-		if (!this.videoEl.paused && this.hasPlayed()) {
-			await this.videoEl.pause()
+
+	async preload() {
+		if (
+			this.isPlaying ||
+			this.preloaded ||
+			this.hasPlayed ||
+			this.isLoading
+		)
+			return
+
+		if (this.isHiddenForViewport()) return
+
+		this.isLoading = true
+		if (
+			window.Ucoast.mediaManager.hlsRequired &&
+			window.Ucoast.mediaManager.hlsLibraryLoaded &&
+			!this.hasPlayed
+		) {
+			await this.preloadHLS()
+			this.isLoading = false
+		} else {
+			if (this.hlsSource) {
+				this.videoEl.src = this.hlsSource
+			}
+			await this.preloadStandard()
+			this.isLoading = false
 		}
+	}
+
+	async playStandard() {
+		this.videoEl.muted = true
+		this.videoEl.currentTime = 0
+		await sleep(1)
+		this.setAttribute('data-uc-has-played', 'true')
+		await this.videoEl.play()
+		this.isLoading = false
+		this.hasPlayed = true
+		this.preloaded = true
+		this.isPlaying = true
+	}
+
+	async preloadStandard() {
+		this.videoEl.muted = true
+		await this.videoEl.play()
+		this.isLoading = false
+		this.hasPlayed = true
+		this.preloaded = true
+		this.isPlaying = true
+		this.setAttribute('data-uc-has-played', 'true')
+		window.setTimeout(() => {
+			this.videoEl.pause()
+			this.isPlaying = false
+		}, 3)
+	}
+
+	async preloadHLS() {
+		if (
+			window.Ucoast.mediaManager.hlsLibIsSupported &&
+			this.hlsSource &&
+			!this.preloaded
+		) {
+			this.hlsInstance = new window.Ucoast.mediaManager.Hls.default()
+			this.hlsInstance.on('hlsMediaAttached', async () => {
+				await this.preloadStandard()
+			})
+
+			this.videoEl.src = this.hlsSource
+			await this.hlsInstance.loadSource(this.hlsSource)
+			await this.hlsInstance.attachMedia(this.videoEl)
+		} else {
+			await this.preloadStandard()
+		}
+	}
+
+	async playHLS() {
+		if (
+			window.Ucoast.mediaManager.hlsLibIsSupported &&
+			this.hlsSource &&
+			!this.preloaded
+		) {
+			this.hlsInstance = new window.Ucoast.mediaManager.Hls.default()
+			this.hlsInstance.on('hlsMediaAttached', async () => {
+				await this.playStandard()
+			})
+
+			this.videoEl.src = this.hlsSource
+			await this.hlsInstance.loadSource(this.hlsSource)
+			await this.hlsInstance.attachMedia(this.videoEl)
+		} else {
+			await this.playStandard()
+		}
+	}
+
+	async pause() {
+		this.videoEl.pause()
+		this.videoEl.currentTime = 0
+		this.isPlaying = false
+	}
+
+	isHiddenForViewport() {
+		return (
+			this.videoEl.getBoundingClientRect().height < 1 ||
+			this.videoEl.getBoundingClientRect().width < 1
+		)
 	}
 }

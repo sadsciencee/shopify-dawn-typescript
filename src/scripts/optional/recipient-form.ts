@@ -6,10 +6,7 @@ import {
 	subscribe,
 } from '@/scripts/core/global'
 import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/core/global';
-import { type uCoastWindow } from '@/scripts/setup'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-
-declare let window: uCoastWindow
 
 export class RecipientForm extends UcoastEl {
 	static htmlSelector = 'recipient-form'

@@ -5,7 +5,8 @@ import type {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { type ProductModel } from '@/scripts/optional/product-model'
-import { type ProductVariant } from '@/scripts/types/api'
+import { MediaManager } from '@/scripts/core/media'
+import { type ProductVariant } from '@/scripts/shopify'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -376,6 +377,11 @@ export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
 export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
 	const data = el.getAttribute(attribute)
 	if (!data) throw new Error(`Attribute ${attribute} no found on element ${{el}}`)
+	return data
+}
+export const getAttributeOrUndefined = (attribute: string, el: HTMLElement) => {
+	const data = el.getAttribute(attribute)
+	if (!data) return undefined
 	return data
 }
 // browser safe replace all
@@ -1046,7 +1052,46 @@ export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefi
 
 	if (elementToFocus) elementToFocus.focus()
 }
+export function initializeShopifyConsentAPI() {
+	window.Shopify?.loadFeatures(
+		[
+			{
+				name: 'consent-tracking-api',
+				version: '0.1',
+			},
+		],
+		(error) => {
+			if (error) {
+				console.error('error initializing privacy api')
+				console.log('error', error)
+			} else {
+				window.Ucoast.shopifyConsentAPILoaded = true
+			}
+		}
+	)
+}
+
+function initGlobalUcoast() {
+	safeDefineElement(UcoastVideo)
+	const iOS = window.Ucoast?.iOS ?? false
+	const Ucoast: typeof window.Ucoast = {
+		shopifyConsentAPILoaded: false,
+		iOS,
+		mediaManager: new MediaManager()
+	}
+	if (!window.Ucoast) {
+		window.Ucoast = Ucoast
+	}
+	if (!window.Ucoast.mediaManager) {
+		window.Ucoast.mediaManager = new MediaManager()
+	}
+}
+
+
+
 export function globalSetup() {
+	initGlobalUcoast()
+	initializeShopifyConsentAPI()
 	safeDefineElement(UcoastVideo)
 	initializeSummaryA11y()
 	try {
@@ -1055,8 +1100,6 @@ export function globalSetup() {
 		focusVisiblePolyfill()
 	}
 	// mediaLoader
-	mediaLoader()
+	void window.Ucoast.mediaManager.initialLoad()
 }
-
-// export all modules here so we can ensure it all gets bundled as single file
 

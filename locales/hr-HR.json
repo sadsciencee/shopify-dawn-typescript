@@ -13,11 +13,11 @@
     "social": {
       "alt_text": {
         "share_on_facebook": "Podijeli na Facebooku",
-        "share_on_twitter": "Tweetaj na Twitteru",
+        "share_on_twitter": "Podijeli na mreži X",
         "share_on_pinterest": "Prikvači na Pinterest"
       },
       "links": {
-        "twitter": "Twitter",
+        "twitter": "X (Twitter)",
         "facebook": "Facebook",
         "pinterest": "Pinterest",
         "instagram": "Instagram",
@@ -108,6 +108,8 @@
   "products": {
     "product": {
       "add_to_cart": "Dodaj u košaricu",
+      "preorder": "Preorder",
+      "add_to_waitlist": "Add to Waitlist",
       "description": "Opis",
       "on_sale": "Rasprodaja",
       "product_variants": "Varijante proizvoda",
@@ -126,7 +128,10 @@
         "minimum_of": "Minimalno {{ quantity }}",
         "maximum_of": "Maksimalno {{ quantity }}",
         "multiples_of": "Povećanje od {{ quantity }}",
-        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> u košarici"
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> u košarici",
+        "note": "Prikaži pravila o količini",
+        "min_of": "Min. {{ quantity }}",
+        "max_of": "Maks. {{ quantity }}"
       },
       "price": {
         "from_price_html": "Od {{ price }}",
@@ -166,7 +171,14 @@
       "inventory_low_stock_show_count": "Preostalo malo komada: samo {{ quantity }}",
       "inventory_out_of_stock": "Nema na zalihama",
       "inventory_out_of_stock_continue_selling": "Dostupno",
-      "sku": "Inventarna šifra proizvoda (SKU)"
+      "sku": "Inventarna šifra proizvoda (SKU)",
+      "volume_pricing": {
+        "title": "Popust na količinu",
+        "note": "Dostupan je popust na količinu",
+        "minimum": "Više od {{ quantity }}",
+        "price_at_each": "po cijeni od {{ price }}/ea",
+        "price_range": "{{ minimum }} – {{ maximum }}"
+      }
     },
     "modal": {
       "label": "Galerija medijskih zapisa"
@@ -202,7 +214,8 @@
       "clear_filter": "Ukloni filtar",
       "filter_selected_accessibility": "{{ type }} (broj odabranih filtra: {{ count }})",
       "show_more": "Prikaži više",
-      "show_less": "Prikaži manje"
+      "show_less": "Prikaži manje",
+      "filter_and_operator_subtitle": "Uskladi sve"
     }
   },
   "templates": {
@@ -274,17 +287,15 @@
       "title": "Vaša košarica",
       "caption": "Artikli u kokšarici",
       "remove_title": "Ukloni {{ title }}",
-      "subtotal": "Podzbroj",
-      "new_subtotal": "Novi podzbroj",
       "note": "Ostale posebne upute",
       "checkout": "Završi kupnju",
       "empty": "Vaša je košarica prazna",
       "cart_error": "Došlo je do pogreške prilikom ažuriranja košarice. Pokušajte ponovno.",
       "cart_quantity_error_html": "U svoju košaricu možete dodati {{ quantity }} kom ovog artikla.",
-      "taxes_and_shipping_policy_at_checkout_html": "Porezi i <a href=\"{{ link }}\">troškovi dostave</a> obračunavaju se prilikom završetka kupovine",
-      "taxes_included_but_shipping_at_checkout": "Porez je uključen, a troškovi dostave obračunavaju se prilikom završetka kupovine",
-      "taxes_included_and_shipping_policy_html": "Porez je uključen. <a href=\"{{ link }}\">Troškovi dostave</a> obračunavaju se prilikom završetka kupovine.",
-      "taxes_and_shipping_at_checkout": "Porezi i troškovi dostave obračunavaju se prilikom završetka kupovine",
+      "taxes_and_shipping_policy_at_checkout_html": "Porezi, popusti i <a href=\"{{ link }}\">poštarina</a> obračunavaju se prilikom plaćanja",
+      "taxes_included_but_shipping_at_checkout": "Porez je uključen u cijenu, a poštarina i popusti obračunavaju se prilikom plaćanja",
+      "taxes_included_and_shipping_policy_html": "Porez je uključen. <a href=\"{{ link }}\">Poštarina</a> i popusti obračunavaju se prilikom plaćanja.",
+      "taxes_and_shipping_at_checkout": "Porezi, popusti i poštarina obračunavaju se prilikom plaćanja",
       "update": "Ažuriraj",
       "headings": {
         "product": "Proizvod",
@@ -296,7 +307,9 @@
       "login": {
         "title": "Imate li račun?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Prijavite se</a> za bržu provjeru."
-      }
+      },
+      "estimated_total": "Procijenjen ukupni iznos",
+      "new_estimated_total": "Novi procijenjeni ukupni iznos"
     },
     "footer": {
       "payment": "Načini plaćanja"
@@ -339,13 +352,43 @@
       "carousel": "Vrtuljak",
       "announcement": "Objava",
       "announcement_bar": "Traka za objave"
+    },
+    "quick_order_list": {
+      "product_total": "Podzbroj proizvoda",
+      "view_cart": "Prikaži košaricu",
+      "each": "Jedinična cijena: {{ money }}",
+      "product": "Proizvod",
+      "variant": "Varijanta",
+      "variant_total": "Ukupno za varijantu",
+      "items_added": {
+        "one": "Broj dodanih artikala: {{ quantity }}",
+        "other": "Broj dodanih artikala: {{ quantity }}",
+        "few": "Broj dodanih artikala: {{ quantity }}"
+      },
+      "items_removed": {
+        "one": "Broj uklonjenih artikala: {{ quantity }}",
+        "other": "Broj uklonjenih artikala: {{ quantity }}",
+        "few": "Broj uklonjenih artikala: {{ quantity }}"
+      },
+      "product_variants": "Varijante proizvoda",
+      "total_items": "Ukupni broj artikala",
+      "remove_all_items_confirmation": "Želite li ukloniti sve artikle ({{ quantity }}) iz svoje košarice?",
+      "remove_all": "Ukloni sve",
+      "cancel": "Odustani",
+      "remove_all_single_item_confirmation": "Želite li ukloniti 1 artikl iz košarice?",
+      "min_error": "Minimum za ovaj artikl iznosi {{ min }}",
+      "max_error": "Maksimum za ovaj artikl iznosi {{ max }}",
+      "step_error": "Ovaj artikl možete dodavati samo u rasponima povećanja od {{ step }}"
     }
   },
   "localization": {
     "country_label": "Država/regija",
     "language_label": "Jezik",
     "update_language": "Ažuriraj jezik",
-    "update_country": "Ažuriraj državu/regiju"
+    "update_country": "Ažuriraj državu/regiju",
+    "search": "Traži",
+    "popular_countries_regions": "Popularne zemlje/regije",
+    "country_results_count": "Pronađen je sljedeći broj zemalja/regija: {{ count }}"
   },
   "customer": {
     "account": {
@@ -398,7 +441,8 @@
       "password": "Lozinka",
       "title": "Prijava",
       "sign_in": "Registracija",
-      "submit": "Pošalji"
+      "submit": "Pošalji",
+      "alternate_provider_separator": "ili"
     },
     "orders": {
       "title": "Povijest narudžbe",

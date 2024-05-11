@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Udfyldt knaptekst"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "Rammeknap"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "Sociale medier",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X/Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -476,7 +476,7 @@
           "label": "Roter meddelelser automatisk"
         },
         "change_slides_speed": {
-          "label": "Skift slide hver"
+          "label": "Skift hver"
         },
         "header__1": {
           "content": "Ikoner for sociale medier",
@@ -487,7 +487,24 @@
         },
         "show_social": {
           "label": "Vis ikoner på skrivebordet"
+        },
+        "header__3": {
+          "content": "Lande-/områdevælger",
+          "info": "Hvis du vil tilføje et land/område, skal du gå til dine [markedsindstillinger.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Aktivér lande-/områdevælger"
+        },
+        "header__4": {
+          "content": "Sprogvælger",
+          "info": "Hvis du vil tilføje et sprog, skal du gå til dine [sprogindstillinger.](/admin/settings/languages)"
+        },
+        "enable_language_selector": {
+          "label": "Aktivér sprogvælger"
         }
+      },
+      "presets": {
+        "name": "Meddelelseslinje"
       }
     },
     "collage": {
@@ -593,7 +610,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           },
           "info": "Tilføj billeder ved at redigere dine kollektioner. [Få mere at vide](https://help.shopify.com/manual/products/collections)"
         },
@@ -643,8 +660,8 @@
       "name": "Tilpasset Liquid",
       "settings": {
         "custom_liquid": {
-          "label": "Tilpasset Liquid",
-          "info": "Tilføj appkodestykker eller anden Liquid-kode for at oprette avancerede tilpasninger."
+          "label": "Liquid-kode",
+          "info": "Tilføj appkodestykker eller anden kode for at oprette avancerede tilpasninger. [Få mere at vide](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -711,7 +728,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           }
         },
         "show_secondary_image": {
@@ -883,7 +900,7 @@
         },
         "header__9": {
           "content": "Følg på Shop",
-          "info": "Hvis du vil give kunder mulighed for at følge din butik i Shop-appen via din butiksfacade, skal du have aktiveret Shop Pay. [Få mere at vide](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+          "info": "Hvis du vil give kunder mulighed for at følge din butik i Shop-appen via dit butikslayout, skal du have aktiveret Shop Pay. [Få mere at vide](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
         },
         "enable_follow_on_shop": {
           "label": "Aktivér Følg på Shop"
@@ -994,9 +1011,6 @@
         },
         "image_2": {
           "label": "Andet billede"
-        },
-        "color_scheme": {
-          "info": "Synlig, når containeren vises."
         },
         "stack_images_on_mobile": {
           "label": "Stabl billeder på mobilenheder"
@@ -1268,6 +1282,9 @@
             },
             "button_link": {
               "label": "Knaplink"
+            },
+            "outline_button": {
+              "label": "Brug rammeknaptypografi"
             }
           }
         },
@@ -1449,7 +1466,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           }
         },
         "show_secondary_image": {
@@ -1479,10 +1496,6 @@
           "label": "Vis produktbedømmelser",
           "info": "Hvis du vil vise bedømmelser, skal du tilføje en app til produktbedømmelse. [Få mere at vide](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
         },
-        "enable_quick_buy": {
-          "label": "Aktivér knap til hurtig tilføjelse",
-          "info": "Optimal med indkøbskurv som pop op-vindue eller skuffe."
-        },
         "columns_desktop": {
           "label": "Antallet af kolonner på computer"
         },
@@ -1510,6 +1523,15 @@
             "label": "Skuffe"
           },
           "info": "Skuffe er standardlayoutet til mobil."
+        },
+        "quick_add": {
+          "label": "Hurtig tilføjelse",
+          "info": "Masse er optimeret til varer, der købes i højere antal.",
+          "options": {
+            "option_1": "Ingen",
+            "option_2": "Standard",
+            "option_3": "Masse"
+          }
         }
       }
     },
@@ -1549,7 +1571,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           },
           "info": "Tilføj billeder ved at redigere dine kollektioner. [Få mere at vide](https://help.shopify.com/manual/products/collections)"
         },
@@ -1623,12 +1645,25 @@
           "name": "Variantvælger",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stil",
               "options__1": {
                 "label": "Rullemenu"
               },
               "options__2": {
                 "label": "Etiketter"
+              }
+            },
+            "swatch_shape": {
+              "label": "Prøve",
+              "info": "Aktivér [prøver](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) for produktmuligheder.",
+              "options__1": {
+                "label": "Cirkel"
+              },
+              "options__2": {
+                "label": "Kvadrat"
+              },
+              "options__3": {
+                "label": "Ingen"
               }
             }
           }
@@ -1824,15 +1859,6 @@
             },
             "page": {
               "label": "Side"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Tilpasset Liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Tilpasset Liquid",
-              "info": "Tilføj appkodestykker eller anden Liquid-kode for at oprette avancerede tilpasninger."
             }
           }
         },
@@ -2081,7 +2107,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           }
         },
         "show_secondary_image": {
@@ -2151,7 +2177,7 @@
             "label": "Stående"
           },
           "options__3": {
-            "label": "Firkantet"
+            "label": "Kvadrat"
           },
           "options__4": {
             "label": "Cirkel"
@@ -2474,12 +2500,25 @@
           "name": "Variantvælger",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stil",
               "options__1": {
                 "label": "Rullemenu"
               },
               "options__2": {
                 "label": "Etiketter"
+              }
+            },
+            "swatch_shape": {
+              "label": "Prøve",
+              "info": "Aktivér [prøver](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) for produktmuligheder.",
+              "options__1": {
+                "label": "Cirkel"
+              },
+              "options__2": {
+                "label": "Kvadrat"
+              },
+              "options__3": {
+                "label": "Ingen"
               }
             }
           }
@@ -2507,14 +2546,6 @@
             },
             "text": {
               "label": "Tekst"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Tilpasset Liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Tilpasset Liquid"
             }
           }
         },
@@ -2670,6 +2701,9 @@
             "label": "Højre"
           },
           "label": "Justering af indhold på mobil"
+        },
+        "color_scheme": {
+          "info": "Synlig, når objektbeholderen vises."
         }
       },
       "blocks": {
@@ -3089,7 +3123,10 @@
       "name": "Adresser"
     },
     "main-login": {
-      "name": "Login"
+      "name": "Login",
+      "shop_login_button": {
+        "enable": "Aktiver log ind med shop"
+      }
     },
     "main-order": {
       "name": "Ordre"
@@ -3305,6 +3342,20 @@
       },
       "presets": {
         "name": "Flere rækker"
+      }
+    },
+    "quick-order-list": {
+      "name": "Hurtig ordreliste",
+      "settings": {
+        "show_image": {
+          "label": "Vis billeder"
+        },
+        "show_sku": {
+          "label": "Vis SKU'er"
+        }
+      },
+      "presets": {
+        "name": "Hurtig ordreliste"
       }
     }
   }

@@ -2,7 +2,7 @@
 	this should only be called from ucoast-media
 {% endcomment %}
 <span
-	class="{{ wrapper_class }} media media--transparent"
+	class="{% if wrapper_class %}{{ wrapper_class }} {% else %} media media--transparent {% endif %}"
 
 	{% if aspect_ratio == 'adapt' and image != blank %}
 		style="--media-ratio: {{ image.aspect_ratio | divided_by: 1 }};"
@@ -11,6 +11,16 @@
 	{% endif %}
 >
 	{% liquid
+		unless starting_width
+			assign starting_width = 1
+		endunless
+		unless alt
+			assign alt = image.alt
+		endunless
+		unless alt
+			assign alt = ''
+		endunless
+
 		if media_child
 			echo media_child
 		endif
@@ -22,8 +32,11 @@
 		if defer
 			assign replace_src = ' data-uc-defer ' | append: replace_src
 		endif
+		 if load_on_event
+			assign replace_src = ' data-uc-load-on-event ' | append: replace_src
+		endif
 		if multiplier != 1
-			assign replace_src = ' data-uc-multiplier=' | append: multiplier | append: replace_src
+			assign replace_src = ' data-uc-multiplier="' | append: multiplier | append: '"' | append: replace_src
 		endif
 		if custom_attributes
 			assign replace_src = ' ' | append: custom_attributes | append: ' ' | append: replace_src

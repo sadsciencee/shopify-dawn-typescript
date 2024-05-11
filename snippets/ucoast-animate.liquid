@@ -1,9 +1,6 @@
 {% liquid
-	if settings.animations_reveal_on_scroll
-		case animation
-			when 'fade-in'
-				echo ' scroll-trigger animate--fade-in '
-			when 'slide-in'
-		endcase
-	endif
+	case animation
+		when 'fade-in'
+			echo ' scroll-trigger animate--fade-in '
+	endcase
 %}

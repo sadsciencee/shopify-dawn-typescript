@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Text tlačítka v jednolité barvě"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "Tlačítko s obrysem"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "Sociální sítě",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X/Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -139,7 +139,7 @@
           "label": "Povolit návrhy hledaných výrazů"
         },
         "predictive_search_show_vendor": {
-          "label": "Zobrazit dodavatele produktu",
+          "label": "Zobrazit vendora produktu",
           "info": "Zobrazuje se v případě, že jsou povoleny návrhy hledaných výrazů."
         },
         "predictive_search_show_price": {
@@ -476,7 +476,7 @@
           "label": "Automaticky střídat oznámení"
         },
         "change_slides_speed": {
-          "label": "Změnit snímek co"
+          "label": "Změnit co"
         },
         "header__1": {
           "content": "Ikony sociálních sítí",
@@ -487,7 +487,24 @@
         },
         "show_social": {
           "label": "Zobrazit ikony na ploše"
+        },
+        "header__3": {
+          "content": "Selektor země/oblasti",
+          "info": "Pokud chcete přidat zemi nebo oblast, přejděte na [nastavení trhu.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Povolit selektor země/oblasti"
+        },
+        "header__4": {
+          "content": "Selektor jazyka",
+          "info": "Pokud chcete přidat jazyk, přejděte na [jazykové nastavení.](/admin/settings/languages)"
+        },
+        "enable_language_selector": {
+          "label": "Povolit selektor jazyka"
         }
+      },
+      "presets": {
+        "name": "Panel oznámení"
       }
     },
     "collage": {
@@ -643,8 +660,8 @@
       "name": "Vlastní kód Liquidu",
       "settings": {
         "custom_liquid": {
-          "label": "Vlastní kód Liquidu",
-          "info": "Přidejte fragmenty aplikací nebo jiný kód Liquidu a vytvořte pokročilá přizpůsobení."
+          "label": "Kód Liquidu",
+          "info": "Přidejte fragmenty aplikací nebo jiný kód a vytvořte pokročilá přizpůsobení. [Zjistit více](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -995,9 +1012,6 @@
         "image_2": {
           "label": "Druhý obrázek"
         },
-        "color_scheme": {
-          "info": "Zobrazuje se v případě, že se zobrazuje kontejner."
-        },
         "stack_images_on_mobile": {
           "label": "Zobrazit obrázky na mobilním zařízení nad sebou"
         },
@@ -1268,6 +1282,9 @@
             },
             "button_link": {
               "label": "Tlačítkový odkaz"
+            },
+            "outline_button": {
+              "label": "Použít styl tlačítka s obrysem"
             }
           }
         },
@@ -1494,10 +1511,6 @@
             "label": "2 sloupce"
           }
         },
-        "enable_quick_buy": {
-          "label": "Povolit tlačítko Rychlé přidání",
-          "info": "Je optimální pro košík typu vyskakovací okno nebo výsuvný košík."
-        },
         "filter_type": {
           "label": "Rozvržení filtru v počítači",
           "options__1": {
@@ -1510,6 +1523,15 @@
             "label": "Výsuvný panel"
           },
           "info": "Výchozí mobilní rozvržení představuje výsuvný panel."
+        },
+        "quick_add": {
+          "label": "Rychlé přidání",
+          "info": "Možnost Hromadné je optimalizována pro položky nakoupené ve vyšších množstvích.",
+          "options": {
+            "option_1": "Žádné",
+            "option_2": "Standardní",
+            "option_3": "Hromadné"
+          }
         }
       }
     },
@@ -1620,15 +1642,28 @@
           "name": "Selektor množství"
         },
         "variant_picker": {
-          "name": "Výběr varianty",
+          "name": "Selektor variant",
           "settings": {
             "picker_type": {
-              "label": "Typ",
+              "label": "Styl",
               "options__1": {
                 "label": "Rozevírací nabídka"
               },
               "options__2": {
                 "label": "Kulaté přepínače"
+              }
+            },
+            "swatch_shape": {
+              "label": "Vzorník",
+              "info": "Zapněte [vzorníky](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) u možností produktů.",
+              "options__1": {
+                "label": "Kruh"
+              },
+              "options__2": {
+                "label": "Čtverec"
+              },
+              "options__3": {
+                "label": "Žádný"
               }
             }
           }
@@ -1824,15 +1859,6 @@
             },
             "page": {
               "label": "Stránka"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Vlastní kód Liquidu",
-          "settings": {
-            "custom_liquid": {
-              "label": "Vlastní kód Liquidu",
-              "info": "Přidejte fragmenty aplikací nebo jiný kód Liquidu a vytvořte pokročilá přizpůsobení."
             }
           }
         },
@@ -2471,15 +2497,28 @@
           "name": "Selektor množství"
         },
         "variant_picker": {
-          "name": "Výběr varianty",
+          "name": "Selektor variant",
           "settings": {
             "picker_type": {
-              "label": "Typ",
+              "label": "Styl",
               "options__1": {
                 "label": "Rozevírací nabídka"
               },
               "options__2": {
                 "label": "Kulaté přepínače"
+              }
+            },
+            "swatch_shape": {
+              "label": "Vzorník",
+              "info": "Zapněte [vzorníky](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) u možností produktů.",
+              "options__1": {
+                "label": "Kruh"
+              },
+              "options__2": {
+                "label": "Čtverec"
+              },
+              "options__3": {
+                "label": "Žádný"
               }
             }
           }
@@ -2507,14 +2546,6 @@
             },
             "text": {
               "label": "Text"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Vlastní kód Liquidu",
-          "settings": {
-            "custom_liquid": {
-              "label": "Vlastní kód Liquidu"
             }
           }
         },
@@ -2670,6 +2701,9 @@
         },
         "header": {
           "content": "Mobilní rozvržení"
+        },
+        "color_scheme": {
+          "info": "Zobrazuje se v případě, že se zobrazuje kontejner."
         }
       },
       "blocks": {
@@ -3089,7 +3123,10 @@
       "name": "Adresy"
     },
     "main-login": {
-      "name": "Přihlášení"
+      "name": "Přihlášení",
+      "shop_login_button": {
+        "enable": "Povolit přihlášení přes Shop"
+      }
     },
     "main-order": {
       "name": "Objednávka"
@@ -3305,6 +3342,20 @@
       },
       "presets": {
         "name": "Více řádků"
+      }
+    },
+    "quick-order-list": {
+      "name": "Seznam pro rychlé objednávky",
+      "settings": {
+        "show_image": {
+          "label": "Zobrazit obrázky"
+        },
+        "show_sku": {
+          "label": "Zobrazit SKU"
+        }
+      },
+      "presets": {
+        "name": "Seznam pro rychlé objednávky"
       }
     }
   }

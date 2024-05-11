@@ -1,12 +1,155 @@
-// Liquid API -> Typescript
+import { nil } from '@/scripts/types/api'
 
-import { string } from 'postcss-selector-parser'
+export as namespace shopify;
 
-export type nil = null
+type nil = null
 
-export type Attributes = Record<string, string>
+type Cart = {
+	token: string
+	note: string | null
+	attributes: Record<string, string>
+	original_total_price: number
+	total_price: number
+	total_discount: number
+	total_weight: number
+	item_count: number
+	items: CartItem[]
+	requires_shipping: boolean
+	currency: string
+	items_subtotal_price: number
+	cart_level_discount_applications: DiscountApplication[]
+}
 
-interface FilterValue {
+type CartItem = {
+	id: number
+	properties: Record<string, any>
+	quantity: number
+	variant_id: number
+	key: string
+	title: string
+	price: number
+	original_price: number
+	discounted_price: number
+	line_price: number
+	original_line_price: number
+	total_discount: number
+	discounts: Discount[]
+	sku: string
+	grams: number
+	vendor: string
+	taxable: boolean
+	product_id: number
+	product_has_only_default_variant: boolean
+	gift_card: boolean
+	final_price: number
+	final_line_price: number
+	url: string
+	featured_image: FeaturedImage
+	image: string
+	handle: string
+	requires_shipping: boolean
+	product_type: string
+	product_title: string
+	product_description: string
+	variant_title: string | null
+	variant_options: string[]
+	options_with_values: OptionWithValue[]
+	line_level_discount_allocations: DiscountAllocation[]
+	line_level_total_discount: number
+	quantity_rule: QuantityRule
+	has_components: boolean
+	selling_plan_allocation?: SellingPlanAllocation
+	unit_price?: number
+	unit_price_measurement?: UnitPriceMeasurement
+}
+
+type Discount = {
+	amount: number
+	title: string
+}
+
+type FeaturedImage = {
+	aspect_ratio: number
+	alt: string
+	height: number
+	url: string
+	width: number
+}
+
+type OptionWithValue = {
+	name: string
+	value: string
+}
+
+type DiscountApplication = {
+	type: string
+	key: string
+	title: string
+	description: string
+	value: string
+	created_at: string
+	value_type: string
+	allocation_method: string
+	target_selection: string
+	target_type: string
+	total_allocated_amount: number
+}
+
+type DiscountAllocation = {
+	amount: number
+	discount_application: DiscountApplication
+}
+
+type QuantityRule = {
+	min: number
+	max: number | null
+	increment: number
+}
+
+type SellingPlanAllocation = {
+	price_adjustments: PriceAdjustment[]
+	price: number
+	compare_at_price: number
+	per_delivery_price: number
+	selling_plan: SellingPlan
+}
+
+type PriceAdjustment = {
+	position: number
+	price: number
+}
+
+type SellingPlan = {
+	id: number
+	name: string
+	description: string | null
+	options: SellingPlanOption[]
+	recurring_deliveries: boolean
+	fixed_selling_plan: boolean
+	price_adjustments: SellingPlanPriceAdjustment[]
+}
+
+type SellingPlanOption = {
+	name: string
+	position: number
+	value: string
+}
+
+type SellingPlanPriceAdjustment = {
+	order_count: number | null
+	position: number
+	value_type: string
+	value: number
+}
+
+type CartErrorResponse = {
+	status: number
+	errors?: string | string[] | { [key: string]: string[] }
+	description: string
+	message: string
+}
+
+type FilterValue = {
 	active: boolean
 	count: number | nil
 	label: string | nil
@@ -16,14 +159,14 @@ interface FilterValue {
 	value: string
 }
 
-interface TaxLine {
+type TaxLine = {
 	price: number
 	rate: number
 	rate_percentage: number
 	title: string
 }
 
-interface Filter {
+type Filter = {
 	active_values: FilterValue[]
 	false_value: FilterValue | nil
 	inactive_values: FilterValue[]
@@ -38,7 +181,7 @@ interface Filter {
 	values: FilterValue[]
 }
 
-interface Collection {
+type Collection = {
 	all_products_count: number
 	all_tags: string[]
 	all_types: string[]
@@ -76,7 +219,7 @@ interface Collection {
 	url: string
 }
 
-interface UnitPriceMeasurement {
+type UnitPriceMeasurement = {
 	measured_type: 'volume' | 'weight' | 'dimension'
 	quantity_value: number
 	quantity_unit: string
@@ -84,30 +227,30 @@ interface UnitPriceMeasurement {
 	reference_unit: 'kg'
 }
 
-interface SellingPlanCheckoutCharge {
+type SellingPlanCheckoutCharge = {
 	value: number
 	value_type: 'percentage' | 'price'
 }
 
-interface Currency {
+type Currency = {
 	iso_code: string
 	name: string
 	symbol: string
 }
 
-interface Measurement {
+type Measurement = {
 	type: 'dimension' | 'volume' | 'weight'
 	volume: string
 	value: number
 }
 
-interface Market {
+type Market = {
 	handle: string
 	id: string
 	metafields: any
 }
 
-interface Country {
+type Country = {
 	currency: Currency
 	iso_code: string
 	market: Market
@@ -115,7 +258,7 @@ interface Country {
 	unit_system: 'metric' | 'imperial'
 }
 
-interface Address {
+type Address = {
 	address1: string
 	address2: string
 	city: string
@@ -135,7 +278,7 @@ interface Address {
 	zip: string
 }
 
-interface Location {
+type Location = {
 	address: {}
 	id: number
 	latitude: number
@@ -144,61 +287,21 @@ interface Location {
 	name: string
 }
 
-interface StoreAvailability {
+type StoreAvailability = {
 	available: true
 	location: Location
 	pick_up_enabled: true
 	pick_up_time: string
 }
 
-interface SellingPlanOption {
-	name: string
-	position: number
-	value: string
-}
-
-interface SellingPlanPriceAdjustment {
-	order_count: number | nil
-	position: number
-	value: number
-	value_type: 'percentage' | 'fixed_amount' | 'price'
-}
-
-interface SellingPlan {
-	checkout_charge: SellingPlanCheckoutCharge
-	description: string | nil
-	group_id: string
-	id: number
-	name: string
-	options: SellingPlanOption[]
-	price_adjustments: SellingPlanPriceAdjustment[]
-	recurring_deliveries: boolean
-	selected: boolean
-}
-
-interface SellingPlanAllocation {
-	checkout_charge_amount: number
-	compare_at_price: number
-	per_delivery_price: number
-	price: number
-	price_adjustments: {
-		position: number
-		price: number
-	}[]
-	remaining_balance_charge_amount: number
-	selling_plan: SellingPlan
-	selling_plan_group_id: string
-	unit_price: number
-}
-
-interface SellingPlanGroupOption {
+type SellingPlanGroupOption = {
 	name: string
 	position: number
 	selected_value: string | nil
 	values: string[]
 }
 
-interface SellingPlanGroup {
+type SellingPlanGroup = {
 	app_id: string
 	id: string
 	name: string
@@ -207,21 +310,10 @@ interface SellingPlanGroup {
 	selling_plans: SellingPlan[]
 }
 
-interface DiscountApplication {
-	target_selection: 'all' | 'entitled' | 'explicit'
-	target_type: 'line_item' | 'shipping_line'
-	title: string
-	total_allocated_amount: number
-	type: 'automatic' | 'discount_code' | 'manual' | 'script'
-	value: number
-	value_type: 'fixed_amount' | 'percentage'
-}
-
 type OptionsByName = Record<string, string[]>
 type OptionsWithValues = { name: string; value: string }[]
-type DiscountAllocation = { amount: number; discount_application: DiscountApplication }
 
-interface Media {
+type Media = {
 	media_type: 'image' | 'model' | 'video' | 'external_video'
 	id: number
 	alt: string
@@ -229,20 +321,20 @@ interface Media {
 	preview_image: Image
 }
 
-interface Rating {
+type Rating = {
 	rating: number
 	scale_max: number
 	scale_min: number
 }
 
-interface ProductOption {
+type ProductOption = {
 	name: string
 	position: number
 	selected_value: string
 	values: string[]
 }
 
-interface Image {
+type Image = {
 	alt: string
 	aspect_ratio: number
 	'attached_to_variant?': boolean
@@ -255,21 +347,15 @@ interface Image {
 	width: number
 	image_presentation:
 		| {
-				focal_point: {
-					x: number
-					y: number
-				}
-		  }
+		focal_point: {
+			x: number
+			y: number
+		}
+	}
 		| nil
 }
 
-interface QuantityRule {
-	min: number | nil
-	max: number | nil
-	increment: number
-}
-
-interface Product {
+type Product = {
 	available: boolean
 	collections: any[]
 	compare_at_price: string
@@ -315,7 +401,7 @@ interface Product {
 
 type ProductVariantOptionKeys = 'option1' | 'option2' | 'option3'
 
-interface ProductVariant {
+type ProductVariant = {
 	available: boolean
 	barcode: string
 	compare_at_price: number
@@ -354,96 +440,4 @@ interface ProductVariant {
 	weight_unit: string
 	inventory_status: 'PreOrder' | 'InStock' | 'OutOfStock'
 	inventory_status_text: string
-}
-
-/*interface LineItem {
-	discount_allocations: DiscountAllocation[]
-	final_line_price: number
-	final_price: number
-	fulfillment: any | undefined
-	fulfillment_service: string | undefined
-	gift_card: boolean
-	grams: number
-	id: number
-	image: Image
-	key: string
-	line_level_discount_allocations: DiscountAllocation[]
-	line_level_total_discount: number
-	line_price: string
-	message: string
-	options_with_values: OptionsWithValues
-	original_line_price: number
-	original_price: number
-	price: number
-	product: Product
-	product_id: number
-	properties: { name: string; value: string }[]
-	quantity: number
-	requires_shipping: boolean
-	selling_plan_allocation: SellingPlanAllocation | nil
-	sku: string
-	successfully_fulfilled_quantity: number
-	tax_lines: TaxLine[]
-	taxable: boolean
-	title: string
-	total_discount: number
-	unit_price: number
-	unit_price_measurement: UnitPriceMeasurement
-	url: string
-	url_to_remove: string
-	variant: ProductVariant
-	variant_id: number
-	vendor: string
-}
-
-interface Cart {
-	attributes: Attributes
-	cart_level_discount_applications: DiscountApplication[]
-	checkout_charge_amount: number
-	currency: Currency
-	discount_applications: DiscountApplication[]
-	'empty?': boolean
-	item_count: number
-	items: LineItem[]
-	items_subtotal_price: number
-	note: string
-	original_total_price: number
-	requires_shipping: boolean
-	taxes_included: boolean
-	total_discount: number
-	total_price: number
-	total_weight: number
-}*/
-
-export {
-	FilterValue,
-	TaxLine,
-	Filter,
-	Collection,
-	UnitPriceMeasurement,
-	SellingPlanCheckoutCharge,
-	Currency,
-	Measurement,
-	Market,
-	Country,
-	Address,
-	Location,
-	StoreAvailability,
-	SellingPlanOption,
-	SellingPlanPriceAdjustment,
-	SellingPlan,
-	SellingPlanAllocation,
-	SellingPlanGroupOption,
-	SellingPlanGroup,
-	DiscountApplication,
-	Media,
-	Rating,
-	ProductOption,
-	Image,
-	QuantityRule,
-	Product,
-	ProductVariant,
-	LineItem,
-	Cart,
-	ProductVariantOptionKeys,
 }

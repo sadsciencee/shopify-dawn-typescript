@@ -5,7 +5,6 @@ import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
 	addItemsToCart,
-	CartErrorResponse,
 	getDOMCartSectionApiIds, hasDomCart,
 	renderResponseToCartDrawer
 } from '@/scripts/core/cart-functions';

@@ -6,13 +6,10 @@ import {
 	qsRequired,
 } from '@/scripts/core/global'
 import { isSliderComponent, type SliderComponent } from '@/scripts/theme/slider-component';
-import { type uCoastWindow } from '@/scripts/setup'
 import { type StickyHeader } from '@/scripts/theme/sticky-header'
 import { type DeferredMedia } from '@/scripts/theme/deferred-media'
 import { type SlideChangedEvent } from '@/scripts/types/events'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-
-declare let window: uCoastWindow
 
 export class MediaGallery extends UcoastEl {
 	static htmlSelector = 'media-gallery'

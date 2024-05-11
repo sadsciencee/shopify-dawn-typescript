@@ -1,168 +1,14 @@
 import { qsOptional, qsRequired } from '@/scripts/core/global'
-import { routes, type uCoastWindow } from '@/scripts/setup'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
+import type { CartItem, Cart, CartErrorResponse } from '@/scripts/shopify'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
 // - check quick add modal stuff to see if anything needs to be moved around
 // - look into making the 'handleError' a callback that's passed in - i.e. the caller gets to decide what happens on error, or let drawer handle as default
-declare let window: uCoastWindow
 type SectionsResponse = Record<string, string>
-
-export type CartErrorResponse = {
-	status: number
-	errors?: string | string[] | { [key: string]: string[] }
-	description: string
-	message: string
-}
-
-type Cart = {
-	token: string
-	note: string | null
-	attributes: Record<string, string>
-	original_total_price: number
-	total_price: number
-	total_discount: number
-	total_weight: number
-	item_count: number
-	items: CartItem[]
-	requires_shipping: boolean
-	currency: string
-	items_subtotal_price: number
-	cart_level_discount_applications: DiscountApplication[]
-}
-
-type CartItem = {
-	id: number
-	properties: Record<string, any>
-	quantity: number
-	variant_id: number
-	key: string
-	title: string
-	price: number
-	original_price: number
-	discounted_price: number
-	line_price: number
-	original_line_price: number
-	total_discount: number
-	discounts: Discount[]
-	sku: string
-	grams: number
-	vendor: string
-	taxable: boolean
-	product_id: number
-	product_has_only_default_variant: boolean
-	gift_card: boolean
-	final_price: number
-	final_line_price: number
-	url: string
-	featured_image: FeaturedImage
-	image: string
-	handle: string
-	requires_shipping: boolean
-	product_type: string
-	product_title: string
-	product_description: string
-	variant_title: string | null
-	variant_options: string[]
-	options_with_values: OptionWithValue[]
-	line_level_discount_allocations: DiscountAllocation[]
-	line_level_total_discount: number
-	quantity_rule: QuantityRule
-	has_components: boolean
-	selling_plan_allocation?: SellingPlanAllocation
-	unit_price?: number
-	unit_price_measurement?: UnitPriceMeasurement
-}
-
-type Discount = {
-	amount: number
-	title: string
-}
-
-type FeaturedImage = {
-	aspect_ratio: number
-	alt: string
-	height: number
-	url: string
-	width: number
-}
-
-type OptionWithValue = {
-	name: string
-	value: string
-}
-
-type DiscountApplication = {
-	type: string
-	key: string
-	title: string
-	description: string
-	value: string
-	created_at: string
-	value_type: string
-	allocation_method: string
-	target_selection: string
-	target_type: string
-	total_allocated_amount: number
-}
-
-type DiscountAllocation = {
-	amount: number
-	discount_application: DiscountApplication
-}
-
-type QuantityRule = {
-	min: number
-	max: number | null
-	increment: number
-}
-
-type SellingPlanAllocation = {
-	price_adjustments: PriceAdjustment[]
-	price: number
-	compare_at_price: number
-	per_delivery_price: number
-	selling_plan: SellingPlan
-}
-
-type PriceAdjustment = {
-	position: number
-	price: number
-}
-
-type SellingPlan = {
-	id: number
-	name: string
-	description: string | null
-	options: SellingPlanOption[]
-	recurring_deliveries: boolean
-	fixed_selling_plan: boolean
-	price_adjustments: SellingPlanPriceAdjustment[]
-}
-
-type SellingPlanOption = {
-	name: string
-	position: number
-	value: string
-}
-
-type SellingPlanPriceAdjustment = {
-	order_count: number | null
-	position: number
-	value_type: string
-	value: number
-}
-
-type UnitPriceMeasurement = {
-	measured_type: string
-	quantity_value: string
-	quantity_unit: string
-	reference_value: number
-	reference_unit: string
-}
 
 type CartAdd = {
 	items: CartItem[]
@@ -239,7 +85,7 @@ export function renderResponseToCartDrawer(
 	const cartEl = getDOMCart()
 
 	if (!cartEl) {
-		window.location = window.routes.cart_url
+		window.location.href = window.routes.cart_url
 		return
 	}
 
@@ -382,17 +228,17 @@ export async function addItemsToCart(
 		input instanceof FormData
 			? createAddToCartInputFromFormData(input, sections)
 			: sections && sections.length
-			? {
-					items: input,
-					sections: sections,
-			  }
-			: {
-					items: input,
-			  }
+				? {
+						items: input,
+						sections: sections,
+					}
+				: {
+						items: input,
+					}
 
 	try {
 		const response = await fetch(
-			`${routes.cart_add_url}`,
+			`${window.routes.cart_add_url}`,
 			configPostRequest(data)
 		)
 		const cart = await response.json()
@@ -442,14 +288,14 @@ export async function updateCartRequest(
 			? {
 					updates,
 					sections,
-			  }
+				}
 			: {
 					updates,
-			  }
+				}
 
 	try {
 		const response = await fetch(
-			`${routes.cart_update_url}`,
+			`${window.routes.cart_update_url}`,
 			configPostRequest(data)
 		)
 		const cart = await response.json()

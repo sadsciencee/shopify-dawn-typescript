@@ -1,4 +1,3 @@
-import { Shopify } from '@/scripts/customer/shopify'
 import {
 	currentTargetRequired,
 	qsaRequired,
@@ -60,10 +59,8 @@ class CustomerAddresses {
 	}
 
 	_setupCountries() {
+		const Shopify = window.Shopify
 		if (Shopify && Shopify.CountryProvinceSelector && this.elements) {
-			// eslint-disable-next-line no-new
-			// shopify is ignoring this, so we have to ignore it too
-			// @ts-ignore
 			new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
 				hideElement: 'AddressProvinceContainerNew',
 			})
@@ -121,8 +118,9 @@ class CustomerAddresses {
 		const confirmMessage = currentTarget.getAttribute(attributes.confirmMessage)
 		const target = currentTarget.dataset.target
 		if (!confirmMessage || !target) return
-		// eslint-disable-next-line no-alert
 		if (confirm(confirmMessage)) {
+			const Shopify = window.Shopify
+			if (!Shopify?.postLink) return
 			Shopify.postLink(target, {
 				parameters: { _method: 'delete' },
 			})
