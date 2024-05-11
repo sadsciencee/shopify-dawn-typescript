@@ -42,7 +42,7 @@
     endif
 
     if media.media_type == 'image'
-        assign image_class = 'image-magnify-' | append: section.settings.image_zoom
+        assign image_class = 'image-magnify-' | append: section.settings.image_zoom | append: ' block w-100 h-100 object-cover'
     endif
 -%}
 
@@ -109,8 +109,8 @@
                     loading: loading,
                     media_class: image_class,
                     aspect_ratio: 'fill',
-                    position_class: 'absolute',
-                    wrapper_class: 'w-100 h-100 left-0 top-0'
+                    position_class: '',
+                    wrapper_class: 'w-100 h-100  block'
             %}
         </div>
         <button

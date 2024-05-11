@@ -1056,11 +1056,11 @@ a.product__text {
 }
 
 .product-media-container .product-media {
-	padding-top: var(--ratio-percent);
+	aspect-ratio: var(--aspect-ratio);
 }
 
 .product-media-container.constrain-height .product-media {
-	padding-top: min(var(--constrained-height), var(--ratio-percent));
+	aspect-ratio: var(--aspect-ratio);
 }
 
 @include media-query($s-down) {

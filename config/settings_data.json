@@ -139,24 +139,24 @@
           "background": "#ffffff",
           "background_gradient": "",
           "text": "#000000",
-          "button": "{{ shop.brand.colors.secondary[1].background }}",
-          "button_label": "{{ shop.brand.colors.primary[0].foreground }}",
-          "secondary_button": "{{ shop.brand.colors.secondary[0].background }}",
-          "secondary_button_label": "{{ shop.brand.colors.secondary[1].background }}",
+          "button": "#133a48",
+          "button_label": "#FFFFFF",
+          "secondary_button": "#322f69",
+          "secondary_button_label": "#133a48",
           "outline_button_label": "#000000",
           "shadow": "#d9d9d9"
         }
       },
       "background-2": {
         "settings": {
-          "background": "{{ shop.brand.colors.secondary[0].background }}",
+          "background": "#F9F9F9",
           "background_gradient": "",
           "text": "#000000",
-          "button": "{{ shop.brand.colors.secondary[1].background }}",
-          "button_label": "{{ shop.brand.colors.primary[0].foreground }}",
+          "button": "#133a48",
+          "button_label": "#FFFFFF",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#000000",
-          "outline_button_label": "{{ shop.brand.colors.secondary[1].background }}",
+          "outline_button_label": "#133a48",
           "shadow": "#d9d9d9"
         }
       },
@@ -165,24 +165,24 @@
           "background": "#270731",
           "background_gradient": "",
           "text": "#ffffff",
-          "button": "{{ shop.brand.colors.secondary[1].background }}",
-          "button_label": "{{ shop.brand.colors.primary[0].foreground }}",
-          "secondary_button": "{{ shop.brand.colors.secondary[0].background }}",
-          "secondary_button_label": "{{ shop.brand.colors.secondary[1].background }}",
+          "button": "#133a48",
+          "button_label": "#FFFFFF",
+          "secondary_button": "#322f69",
+          "secondary_button_label": "#133a48",
           "outline_button_label": "#ffffff",
           "shadow": "#d9d9d9"
         }
       },
       "accent-1": {
         "settings": {
-          "background": "{{ shop.brand.colors.primary[0].background }}",
+          "background": "#FFF",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#000000",
           "button": "#ffffff",
           "button_label": "#270731",
-          "secondary_button": "{{ shop.brand.colors.primary[0].foreground }}",
-          "secondary_button_label": "{{ shop.brand.colors.primary[0].background }}",
-          "outline_button_label": "{{ shop.brand.colors.secondary[0].background }}",
+          "secondary_button": "#FFFFFF",
+          "secondary_button_label": "#FFF",
+          "outline_button_label": "#322f69",
           "shadow": "#d9d9d9"
         }
       },
@@ -191,11 +191,11 @@
           "background": "#f8f7f7",
           "background_gradient": "",
           "text": "#000000",
-          "button": "{{ shop.brand.colors.secondary[1].background }}",
-          "button_label": "{{ shop.brand.colors.primary[0].foreground }}",
+          "button": "#133a48",
+          "button_label": "#FFFFFF",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#ffffff",
-          "outline_button_label": "{{ shop.brand.colors.secondary[1].background }}",
+          "outline_button_label": "#133a48",
           "shadow": "#d9d9d9"
         }
       },
@@ -203,12 +203,12 @@
         "settings": {
           "background": "rgba(0,0,0,0)",
           "background_gradient": "",
-          "text": "{{ shop.brand.colors.primary[0].foreground }}",
-          "button": "{{ shop.brand.colors.primary[0].foreground }}",
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
           "button_label": "#270731",
-          "secondary_button": "{{ shop.brand.colors.secondary[0].background }}",
-          "secondary_button_label": "{{ shop.brand.colors.secondary[1].background }}",
-          "outline_button_label": "{{ shop.brand.colors.primary[0].foreground }}",
+          "secondary_button": "#322f69",
+          "secondary_button_label": "#133a48",
+          "outline_button_label": "#FFFFFF",
           "shadow": "#d9d9d9"
         }
       }

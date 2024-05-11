@@ -1,16 +1,18 @@
 {% liquid
 	if desktop_video
-		assign desktop_media = desktop_video
+		assign desktop_image = desktop_video
+		assign desktop_video = true
 	elsif desktop_image
-		assign desktop_media = desktop_image
+		assign desktop_image = desktop_image
 	endif
 	if mobile_video
 		assign mobile_media = mobile_video
+		assign mobile_video = true
 	elsif mobile_image
 		assign mobile_media = mobile_image
 	endif
 	unless mobile_media
-		assign mobile_media = desktop_media
+		assign mobile_media = desktop_image
 	endunless
 	if wrapper_class
 		assign desktop_wrapper_class = wrapper_class | append: ' m-down-hide'
@@ -22,21 +24,35 @@
 	unless defer
 		assign defer = false
 	endunless
-	unless load_on_event
-		assign load_on_event = false
+	unless test_mode == true
+		assign test_mode = false
 	endunless
+	if desktop_video or override_shopify_position_desktop == false
+		assign y_position_desktop = y_position_desktop
+		assign x_position_desktop = x_position_desktop
+	endif
+	if mobile_video or override_shopify_position_mobile == false
+		assign y_position_mobile = y_position_mobile
+		assign x_position_mobile = x_position_mobile
+	endif
 %}
-{% render 'ucoast-image-or-video',
-	wrapper_class: desktop_wrapper_class,
-	media_class: media_class,
-	media: desktop_media,
-	defer: defer,
-	load_on_event: load_on_event
+{% render 'ucoast-media',
+		wrapper_class: desktop_wrapper_class,
+		media_class: media_class,
+		media: desktop_image,
+		defer: defer,
+		aspect_ratio: aspect_ratio,
+		test_mode: test_mode,
+		y_position: y_position_desktop,
+		x_position: x_position_desktop
 %}
-{% render 'ucoast-image-or-video',
-	wrapper_class: mobile_wrapper_class,
-	media_class: media_class,
-	media: mobile_media,
-	defer: defer,
-	load_on_event: load_on_event
+{% render 'ucoast-media',
+		wrapper_class: mobile_wrapper_class,
+		media_class: media_class,
+		media: mobile_media,
+		defer: defer,
+		aspect_ratio: aspect_ratio,
+		test_mode: test_mode,
+		y_position: y_position_mobile,
+		x_position: x_position_mobile
 %}

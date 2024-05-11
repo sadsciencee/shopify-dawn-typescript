@@ -2,23 +2,34 @@
 	this should only be called from ucoast-media
 {% endcomment %}
 {% if video %}
-	{% unless preview_image %}
-		{% assign preview_image = video.preview_image %}
-	{% endunless %}
+	{% liquid
+		unless preview_image
+			assign preview_image = video.preview_image
+		endunless
+		if x_position and y_position
+			assign wrapper_id = 'video-wrapper-' | append: video.id | append: x_position | append: y_position
+		endif
+	%}
 
 	<ucoast-video
-		class="{% if wrapper_class %} {{ wrapper_class }} {% else %}media media--transparent{% endif %}"
-		data-loading="{{ loading }}"
-		data-uc-has-played="false"
-		{% if load_on_event %}
-			data-uc-load-on-event
-		{% endif %}
-		{{ custom_attributes }}
-		{% if aspect_ratio == 'adapt' and video != blank %}
-			style="--media-ratio: {{ video.preview_image.aspect_ratio | divided_by: 1 }};"
-		{% elsif aspect_ratio == 'adapt' %}
-			style="--media-ratio: 1;"
-		{% endif %}
+			class="{% if wrapper_class %} {{ wrapper_class }} {% else %}media media--transparent{% endif %}"
+			data-loading="{{ loading }}"
+			data-uc-has-played="false"
+			{% if load_on_event %}
+				data-uc-load-on-event
+			{% endif %}
+			{{ custom_attributes }}
+			{% if aspect_ratio == 'adapt' and video != blank %}
+				style="--media-ratio: {{ video.preview_image.aspect_ratio | divided_by: 1 }};"
+			{% elsif aspect_ratio == 'adapt' %}
+				style="--media-ratio: 1;"
+			{% endif %}
+			{% if test_mode %}
+				data-test-mode
+			{% endif %}
+			{% if wrapper_id %}
+				data-wrapper-id='{{ wrapper_id }}'
+			{% endif %}
 	>
 		{% liquid
 			if media_child
@@ -36,25 +47,32 @@
 			endfor
 		%}
 		<video
-			class="{{ video_class }}"
-			playsinline="playsinline"
-			preload="metadata"
-			muted="muted"
-			poster="{{ preview_image | image_url: width: 800 }}"
-			loop="true"
-			{{ mp4_source }}
-			{{ hls_source }}
+				class="{{ video_class }}"
+				playsinline="playsinline"
+				preload="metadata"
+				muted="muted"
+				poster="{{ preview_image | image_url: width: 800 }}"
+				loop="true"
+				{{ mp4_source }}
+				{{ hls_source }}
 		>
 			{% comment %}
+            <source
+                src="{{ mp4_source_obj.url }}"
+                type="{{ mp4_source_obj.mime_type }}"
+            >
+            {% endcomment %}
 			<source
-				src="{{ mp4_source_obj.url }}"
-				type="{{ mp4_source_obj.mime_type }}"
-			>
-			{% endcomment %}
-			<source
-				src="{{ hls_source_obj.url }}"
-				type="{{ hls_source_obj.mime_type }}"
+					src="{{ hls_source_obj.url }}"
+					type="{{ hls_source_obj.mime_type }}"
 			>
 		</video>
+		{% if wrapper_id %}
+			{% style %}
+				[data-wrapper-id="{{ wrapper_id }}"] video {
+				object-position: {{ x_position }}% {{ y_position }}% !important;
+				}
+			{% endstyle %}
+		{% endif %}
 	</ucoast-video>
 {% endif %}
