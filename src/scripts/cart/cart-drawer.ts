@@ -84,6 +84,7 @@ export class CartDrawer extends UcoastEl {
 					qsOptional(CartDrawer.selectors.inner, this) ||
 					qsRequired(CartDrawer.selectors.closeButton, this)
 				trapFocus(containerToTrapFocusOn, focusElement)
+				void window.Ucoast.mediaManager.loadAllInContainer(this)
 			},
 			{ once: true }
 		)

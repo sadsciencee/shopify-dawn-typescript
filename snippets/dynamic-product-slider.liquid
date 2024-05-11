@@ -1,0 +1,26 @@
+{% assign unique_id = section.id | append: collection.id %}
+<product-slider
+	data-collection-url="{{ collection.url }}"
+	data-unique-id="{{ unique_id }}"
+	{% if defer == true %}
+		data-uc-animate
+	{% endif %}
+		data-collection-id='{{ collection.id }}'
+	class="embla product-slider"
+>
+	<div class="product-slider__viewport embla__viewport">
+		<ul
+			class="list-unstyled embla__container product-slider__container"
+			data-dynamic-content
+		>
+			{% unless defer == true %}
+				{% render 'dynamic-product-list',
+					collection: collection,
+					enable_defer: false,
+					slider: true,
+					section_id: unique_id
+				%}
+			{% endunless %}
+		</ul>
+	</div>
+</product-slider>

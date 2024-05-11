@@ -1035,6 +1035,26 @@
       },
       {
         "type": "range",
+        "id": "card_aspect_ratio",
+        "label": "Card Aspect Ratio",
+        "min": 51,
+        "max": 225,
+        "step": 3,
+        "default": 66,
+        "unit": "%"
+      },
+      {
+        "type": "range",
+        "id": "pdp_aspect_ratio",
+        "label": "PDP Aspect Ratio",
+        "min": 51,
+        "max": 225,
+        "step": 3,
+        "default": 66,
+        "unit": "%"
+      },
+      {
+        "type": "range",
         "id": "media_border_thickness",
         "min": 0,
         "max": 24,

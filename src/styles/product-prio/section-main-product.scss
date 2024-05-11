@@ -1034,8 +1034,8 @@ a.product__text {
 /* Product-thumbnail snippet */
 
 .product-media-container {
-	--aspect-ratio: var(--preview-ratio);
-	--ratio-percent: calc(1 / var(--aspect-ratio) * 100%);
+	--aspect-ratio: #{$pdpAspectRatio};
+	--ratio-percent: calc(1 / #{$pdpAspectRatio} * 100%);
 	position: relative;
 	width: 100%;
 	max-width: calc(100% - calc(#{$mediaBorderWidth} * 2));
@@ -1056,11 +1056,11 @@ a.product__text {
 }
 
 .product-media-container .product-media {
-	aspect-ratio: var(--aspect-ratio);
+	aspect-ratio: $pdpAspectRatio;
 }
 
 .product-media-container.constrain-height .product-media {
-	aspect-ratio: var(--aspect-ratio);
+	aspect-ratio: $pdpAspectRatio;
 }
 
 @include media-query($s-down) {
@@ -1296,7 +1296,7 @@ a.product__text {
 
 	.product-media-container:not(.media-type-image) {
 		/* override to use actual media ratio (not poster ratio) for video/models on desktop */
-		--aspect-ratio: var(--ratio);
+		--aspect-ratio: #{$pdpAspectRatio};
 	}
 
 	.product-media-container.constrain-height {

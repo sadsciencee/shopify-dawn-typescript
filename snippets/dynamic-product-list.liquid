@@ -1,0 +1,33 @@
+{% liquid
+	assign defer = false
+	unless section_id
+		assign section_id = section.id
+	endunless
+	if search_products
+		assign product_list = search_products
+	else
+		assign product_list = collection.products
+	endif
+%}
+{%- for product in product_list -%}
+	{%- if forloop.index == 4 and enable_defer == true -%}
+		{%- assign defer = true -%}
+	{%- endif -%}
+	<li
+		class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %} {% if slider %} embla__slide{% endif %}"
+		data-cascade
+		style="--animation-order: {{ forloop.index }};"
+	>
+		{% render 'card-product',
+			card_product: product,
+			defer: defer,
+			section_id: section_id,
+			allow_upsell: true
+		%}
+	</li>
+	{% if forloop.index0 == insert_after %}
+		<li class="grid__item grid__item--insert {% if slider %} embla__slide{% endif %}">
+			{{ insert_markup }}
+		</li>
+	{% endif %}
+{%- endfor -%}

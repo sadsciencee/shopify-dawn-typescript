@@ -215,6 +215,10 @@ $comboPopupShadow: var(--combo-popup-shadow);
 $comboPopupFocusShadow: var(--combo-popup-focus-shadow);
 $comboPopupContentShadow: var(--combo-popup-content-shadow);
 
+// aspect ratios
+$cardAspectRatio: var(--card-aspect-ratio);
+$pdpAspectRatio: var(--pdp-aspect-ratio);
+
 
 @mixin box-shadow {
   box-shadow: $ax2 $ax3 ax(55) $ax7 rgba(217,217,217, 0.61);

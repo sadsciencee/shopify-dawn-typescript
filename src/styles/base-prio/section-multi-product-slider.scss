@@ -1,0 +1,50 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'multi-product-slider';
+.#{$block} {
+	max-width: 100vw;
+	overflow: hidden;
+	&__nav-wrapper {
+		width: 100%;
+		max-width: 100vw;
+		overflow-x: auto;
+		overflow-y: hidden;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	&__nav {
+		padding: 0 $ax20;
+		column-gap: $ax20;
+		width: max-content;
+		@include media-query($s-up) {
+			padding: 0 $ax30;
+		}
+	}
+	&__button {
+		opacity: 0.5;
+		transition: opacity 0.3s $bezier;
+
+		&.active {
+			opacity: 1;
+			transition: opacity 0.3s $bezier;
+			&:before {
+				display: block;
+			}
+		}
+	}
+	&__container {
+		margin-top: $ax30;
+		height: ax(550);
+	}
+	&__slider-wrapper {
+		opacity: 0;
+		pointer-events: none;
+		&.active {
+			opacity: 1;
+			pointer-events: unset;
+		}
+	}
+}

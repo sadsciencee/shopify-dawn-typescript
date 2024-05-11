@@ -1,8 +1,8 @@
-import { qsOptional, qsRequired } from '@/scripts/core/global'
+import { qsOptional, qsRequired, qsRequiredFromDocument } from '@/scripts/core/global'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import type { CartItem, Cart, CartErrorResponse } from '@/scripts/shopify'
+import type { CartItem, Cart, CartErrorResponse, ProductVariant } from '@/scripts/shopify'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -311,5 +311,55 @@ export async function updateCartRequest(
 			message:
 				'This cart operation failed, but Shopify did not return an error',
 		}
+	}
+}
+
+export type ShopifyProductOptions = {
+	option1: string
+	option2?: string
+	option3?: string
+}
+
+export function variantFromProductOptions(
+	options: ShopifyProductOptions,
+	variants: ProductVariant[]
+): ProductVariant {
+	const variant = variants.find((variant) => {
+		if (variant.option1 !== options.option1) return false
+		if (options.option2 && variant.option2 !== options.option2) return false
+		if (options.option3 && variant.option3 !== options.option3) return false
+		return true
+	})
+	if (!variant) throw Error('No variant found')
+	return variant
+}
+
+export async function getSectionHTMLForResource(
+	url: string,
+	sectionId: string,
+): Promise<string | undefined> {
+	try {
+		return await fetch(`${url}?sections=${sectionId}`)
+			.then((response) => {
+				return response.json()
+			})
+			.then((response) => {
+				const html = response[sectionId]
+				const parser = new DOMParser()
+				const doc = parser.parseFromString(html, 'text/html')
+				return qsRequiredFromDocument('.shopify-section', doc).innerHTML
+			})
+	} catch (e) {
+		console.error('error in getSectionHTMLForResource')
+		console.log(e)
+	}
+}
+
+export function getActiveOrAccessibilityElement(): HTMLElement {
+	const activeElement = document.activeElement
+	if (activeElement instanceof HTMLElement) {
+		return activeElement
+	} else {
+		return qsRequired('[data-uc-accessibility-focus]')
 	}
 }
