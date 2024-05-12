@@ -1,14 +1,34 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
-import { qsRequired, scaleValue } from '@/scripts/core/global';
+import { getAttributeOrUndefined, onKeyUpEscape, qsOptional, qsRequired, scaleValue } from '@/scripts/core/global'
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
 import { SELECTORS } from '@/scripts/core/global';
 
 export class HeaderMenu extends DetailsDisclosure {
   static override htmlSelector = 'header-menu'
   header: StickyHeader | null
+  hoverSummary?: HTMLElement
+  detailsId?: string
   constructor() {
     super()
     this.header = qsRequired<StickyHeader>(SELECTORS.headerWrapper)
+    this.hoverSummary = qsOptional('summary[data-summary-hover="on"]', this)
+    this.detailsId = getAttributeOrUndefined('id', this.mainDetailsToggle)
+    this.initHoverSummary()
+  }
+
+  initHoverSummary() {
+    if (!this.hoverSummary || !this.detailsId) return
+
+    this.hoverSummary.addEventListener('mouseenter', (_) => {
+      const openMenuId = window.Ucoast.openMenuId
+      if (openMenuId && openMenuId === this.detailsId) return
+      window.Ucoast.openMenuId = this.detailsId
+      this.mainDetailsToggle.setAttribute('open', '')
+      this.animations?.forEach((animation) => animation.play())
+      this.hoverSummary?.setAttribute('aria-expanded', 'true')
+    })
+
+    this.mainDetailsToggle.addEventListener('keyup', onKeyUpEscape)
   }
 
   override onToggle() {

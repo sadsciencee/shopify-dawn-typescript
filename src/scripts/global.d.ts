@@ -10,6 +10,7 @@ interface Ucoast {
 	shopifyConsentAPILoaded: boolean
 	mediaManager: MediaManager
 	iOS: boolean
+	openMenuId?: string
 }
 
 type PaymentButtonReference = {

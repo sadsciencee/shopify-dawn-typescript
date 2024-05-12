@@ -7,6 +7,7 @@ import type {
 import { type ProductModel } from '@/scripts/optional/product-model'
 import { MediaManager } from '@/scripts/core/media'
 import { type ProductVariant } from '@/scripts/shopify'
+import { type HeaderMenu } from '@/scripts/theme/header-menu'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -552,7 +553,7 @@ export const setDrawerHeight = () => {
 export function initializeSummaryA11y() {
 	// this is from shopify
 	// it adds some accessibility features to summary elements
-	document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
+	document.querySelectorAll('[id^="Details-"] summary:not([data-summary-hover])').forEach((summary) => {
 		summary.setAttribute('role', 'button')
 		const parentNode =
 			summary.parentNode instanceof HTMLElement ? summary.parentNode : undefined
@@ -579,6 +580,27 @@ export function initializeSummaryA11y() {
 		if (!parentElement) return
 		parentElement.addEventListener('keyup', onKeyUpEscape)
 	})
+
+	document.querySelectorAll('[data-summary-hover="off"]').forEach((el) => {
+		el.addEventListener('mouseenter', (_) => {
+			closeAllHeaderMenus()
+		})
+	})
+
+	const closeOnExitContainers = qsaOptional('[data-close-menus-on-mouse-exit]')
+	closeOnExitContainers?.forEach(el => {
+		el.addEventListener('mouseleave', (_) => {
+			closeAllHeaderMenus()
+		})
+	})
+}
+
+function closeAllHeaderMenus() {
+	console.log('close all', window.Ucoast.openMenuId)
+	if (!window.Ucoast.openMenuId) return
+	const headerMenus = qsaOptional<HeaderMenu>('header-menu')
+	headerMenus?.forEach(el => el.close())
+	window.Ucoast.openMenuId = undefined
 }
 
 export function getFocusableElements(container: HTMLElement): FocusableHTMLElement[] {

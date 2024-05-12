@@ -1,5 +1,6 @@
 {
   "current": {
+    "placeholder_image": "shopify:\/\/shop_images\/98_41495123-7124-45aa-9e7a-21d3e4c0e5d6.jpg",
     "logo": "{{ shop.brand.logo }}",
     "logo_width": 90,
     "favicon": "{{ shop.brand.square_logo }}",

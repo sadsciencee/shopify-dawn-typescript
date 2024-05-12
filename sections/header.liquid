@@ -318,6 +318,9 @@
 		{% else %}
 			data-uc-header-wrapper="border-none"
 		{% endif %}
+			{% if section.settings.open_menu_on_hover %}
+				data-close-menus-on-mouse-exit
+			{% endif %}
 	>
 		{{ header_contents }}
 	</sticky-header>
@@ -330,6 +333,9 @@
 		{% else %}
 			data-uc-header-wrapper="border-none"
 		{% endif %}
+			{% if section.settings.open_menu_on_hover %}
+				data-close-menus-on-mouse-exit
+			{% endif %}
 	>
 		{{ header_contents }}
 	</div>
@@ -401,6 +407,12 @@
 				"default": "dropdown",
 				"label": "t:sections.header.settings.menu_type_desktop.label",
 				"info": "t:sections.header.settings.menu_type_desktop.info"
+			},
+			{
+				"type": "checkbox",
+				"id": "open_menu_on_hover",
+				"label": "Open Megamenu on Hover",
+				"default": true
 			},
 			{
 				"type": "select",

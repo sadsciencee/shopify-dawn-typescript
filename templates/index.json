@@ -21,7 +21,7 @@
 					"type": "buttons",
 					"settings": {
 						"button_label_1": "Shop all",
-						"button_link_1": "shopify://collections/all",
+						"button_link_1": "shopify:\/\/collections\/all",
 						"button_style_secondary_1": false,
 						"button_label_2": "",
 						"button_link_2": "",
@@ -29,7 +29,11 @@
 					}
 				}
 			},
-			"block_order": ["heading", "text", "button"],
+			"block_order": [
+				"heading",
+				"text",
+				"button"
+			],
 			"settings": {
 				"color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
 				"image_overlay_opacity": 30,
@@ -58,11 +62,14 @@
 				"text": {
 					"type": "text",
 					"settings": {
-						"text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+						"text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
 					}
 				}
 			},
-			"block_order": ["heading", "text"],
+			"block_order": [
+				"heading",
+				"text"
+			],
 			"settings": {
 				"color_scheme": "background-1",
 				"desktop_content_position": "center",
@@ -90,7 +97,10 @@
 					}
 				}
 			},
-			"block_order": ["collection_xUaq4j", "collection_YDaN8g"],
+			"block_order": [
+				"collection_xUaq4j",
+				"collection_YDaN8g"
+			],
 			"settings": {
 				"color_scheme": "background-1",
 				"space_above": 4,
@@ -104,7 +114,7 @@
 				"heading": "",
 				"heading_size": "h1",
 				"enable_video_looping": false,
-				"video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+				"video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
 				"description": "",
 				"full_width": false,
 				"space_above": 4,
@@ -118,7 +128,7 @@
 					"type": "column",
 					"settings": {
 						"title": "Column",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"link_label": "",
 						"link": ""
 					}
@@ -127,7 +137,7 @@
 					"type": "column",
 					"settings": {
 						"title": "Column",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"link_label": "",
 						"link": ""
 					}
@@ -136,13 +146,17 @@
 					"type": "column",
 					"settings": {
 						"title": "Column",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"link_label": "",
 						"link": ""
 					}
 				}
 			},
-			"block_order": ["column1", "column2", "column3"],
+			"block_order": [
+				"column1",
+				"column2",
+				"column3"
+			],
 			"settings": {
 				"color_scheme": "background-1",
 				"title": "",
@@ -168,7 +182,7 @@
 					"settings": {
 						"caption": "Caption",
 						"heading": "Row",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"button_label": "Button label",
 						"button_link": ""
 					}
@@ -178,7 +192,7 @@
 					"settings": {
 						"caption": "Caption",
 						"heading": "Row",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"button_label": "Button label",
 						"button_link": ""
 					}
@@ -188,7 +202,7 @@
 					"settings": {
 						"caption": "Caption",
 						"heading": "Row",
-						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
 						"button_label": "Button label",
 						"button_link": ""
 					}
@@ -201,7 +215,7 @@
 			],
 			"settings": {
 				"color_scheme": "",
-				"image_height": "medium",
+				"image_height": "adapt",
 				"desktop_image_width": "medium",
 				"heading_size": "h1",
 				"text_style": "body",
@@ -276,21 +290,28 @@
 			"blocks": {
 				"template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1": {
 					"type": "image",
-					"settings": {}
+					"settings": {
+						"image": "shopify:\/\/shop_images\/cin3.jpg"
+					}
 				},
-				"b8538249-5a0e-4287-b8e2-64a312cee6b9": {
-					"type": "image",
-					"settings": {}
+				"product_JKMTiY": {
+					"type": "product",
+					"settings": {
+						"product": "andros-dress",
+						"second_image": false
+					}
 				},
-				"fb608a36-9c54-4ed7-aa64-8fff0d84e16a": {
+				"image_wEYkDw": {
 					"type": "image",
-					"settings": {}
+					"settings": {
+						"image": "shopify:\/\/shop_images\/cin2.jpg"
+					}
 				}
 			},
 			"block_order": [
 				"template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1",
-				"b8538249-5a0e-4287-b8e2-64a312cee6b9",
-				"fb608a36-9c54-4ed7-aa64-8fff0d84e16a"
+				"product_JKMTiY",
+				"image_wEYkDw"
 			],
 			"settings": {
 				"heading": "Multimedia collage",
