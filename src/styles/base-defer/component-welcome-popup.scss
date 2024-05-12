@@ -1,0 +1,63 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'welcome-popup';
+.#{$block} {
+	opacity: 0;
+	transition: opacity 0.5s $bezier 0.02s;
+	visibility: hidden;
+	z-index: -1;
+	box-shadow: none !important;
+	&[open] {
+		transition: opacity 0.5s $bezier 0.02s;
+		opacity: 1;
+		visibility: visible;
+		z-index: 101;
+	}
+	&__main {
+		left: $ax20;
+		bottom: $ax20;
+		padding: $ax5;
+		width: calc(100% - #{$ax40});
+		max-width: ax(420);
+		border: $ax1 solid rgb(#{$schemaColorForeground});
+		box-shadow: none !important;
+
+		@include media-query($s-up) {
+			left: $ax30;
+			bottom: $ax30;
+			padding: $ax5;
+			width: ax(310);
+		}
+	}
+	&__media {
+		border: $ax1 solid rgb(#{$schemaColorForeground});
+		aspect-ratio: 1.6;
+	}
+	&__content {
+		padding: $ax18 $ax15;
+		@include media-query($s-down) {
+			margin-top: $ax25;
+		}
+	}
+	&__title {
+	}
+	&__text {
+		margin-top: $ax13;
+	}
+	.klaviyo-form {
+		margin-top: $ax22;
+		display: block;
+		@include media-query($s-up) {
+			margin-top: $ax12;
+		}
+	}
+	&__close-button {
+		padding: $ax15;
+		svg {
+			width: var(--ax9);
+		}
+		@include media-query($s-down) {
+			padding: $ax20;
+		}
+	}
+}

@@ -18,19 +18,41 @@ type PaymentButtonReference = {
 } & typeof HTMLElement
 
 interface CustomerPrivacy {
+	analyticsProcessingAllowed: () => boolean
+	doesMerchantSupportGranularConsent: () => boolean
+	firstPartyMarketingAllowed: () => boolean
+	getCCPAConsent: () => string
+	getRegion: () => string
+	getRegulation: () => string
+	getShopPrefs: () => { limit: unknown[] }
+	getTrackingConsent: () => string
+
+	currentVisitorConsent: () => {
+		marketing: string
+		analytics: string
+		preferences: string
+		sale_of_data: string
+	}
 	shouldShowGDPRBanner: () => boolean
 	shouldShowCCPABanner: () => boolean
 	userCanBeTracked: () => boolean
-	getTrackingConsent: () => string
 	setTrackingConsent: (
 		consent: boolean,
 		callback: (error?: string) => void
 	) => void
 	preferencesProcessingAllowed: () => boolean
 	thirdPartyMarketingAllowed: () => boolean
-	analyticsProcessingAllowed: () => boolean
-	currentVisitorConsent: () => string
 	userDataCanBeSold: () => boolean
+	getTrackingConsentMetafield: () => undefined | unknown
+	isRegulationEnforced: () => boolean
+	marketingAllowed: () => boolean
+	saleOfDataAllowed: () => boolean
+	saleOfDataRegion: () => string
+	setCCPAConsent: (
+		consent: boolean,
+		callback: (error?: string) => void
+	) => void
+	shouldShowBanner: () => boolean
 }
 interface Shopify {
 	shop?: string
@@ -74,6 +96,7 @@ interface Shopify {
 		errorCallback?: (error: unknown) => void
 	) => void
 	postLink?: (target: string, options: ShopifyPostLinkOptions) => void
+	trackingConsent?: {}
 }
 
 interface Routes {

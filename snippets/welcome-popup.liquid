@@ -1,0 +1,71 @@
+{% if settings.welcome_popup_enabled %}
+    {%- capture cache_key -%}
+        {{- settings.welcome_popup_enabled -}}_
+        {{- settings.welcome_popup_video -}}_
+        {{- settings.welcome_popup_image -}}_
+        {{- settings.welcome_popup_title -}}_
+        {{- settings.welcome_popup_text -}}_
+        {{- settings.welcome_popup_terms -}}_
+        {{- settings.welcome_popup_form_id -}}_
+        {{- settings.welcome_popup_button_label -}}_
+        {{- settings.welcome_popup_placeholder -}}_
+        {{- settings.welcome_popup_list_id -}}
+    {%- endcapture -%}
+    {% assign cache_key = cache_key | md5 %}
+    {% assign unique_id = 'welcome-popup' %}
+    <welcome-popup
+            class="welcome-popup fixed w-100 h-100 left-0 top-0 z-3"
+            data-uc-open-after="3"
+            data-uc-cache-key="{{ cache_key }}"
+            data-uc-demo-mode="{{ settings.welcome_popup_demo_mode }}"
+            id="PopupModal-{{ unique_id }}"
+            aria-label="{{ settings.welcome_popup_title }}"
+    >
+        <div
+                class="welcome-popup__main absolute z-2 color-background-1"
+                role="dialog"
+                aria-modal="true"
+                tabindex="-1"
+        >
+            <button
+                    class="semantic-button welcome-popup__close-button absolute right-0 top-0 z-2"
+                    id="ModalClose-{{ unique_id }}"
+                    aria-label="{{ 'accessibility.close' | t }}"
+            >
+                {% render 'icon-default',
+                        icon: 'close',
+                        class: 'h-auto block'
+                %}
+            </button>
+            {% render 'ucoast-art-direction',
+                    desktop_video: settings.welcome_popup_video,
+                    desktop_image: settings.welcome_popup_image,
+                    wrapper_class: 'welcome-popup__media w-100 relative block s-down-hide',
+                    media_class: 'absolute left-0 top-0 w-100 h-100 object-cover'
+            %}
+            <div class="welcome-popup__content">
+                <h2 class="welcome-popup__title nav-item m-0">
+                    {{ settings.welcome_popup_title }}
+                </h2>
+                <p class="welcome-popup__text text-body m-0">
+                    {{ settings.welcome_popup_text }}
+                </p>
+                {% render 'klaviyo-form',
+                        terms_text: settings.welcome_popup_terms,
+                        form_id: settings.welcome_popup_form_id,
+                        cta_text: settings.welcome_popup_button_label,
+                        placeholder: settings.welcome_popup_placeholder,
+                        list_id: settings.welcome_list_id,
+                        form_location: unique_id,
+                        form_id: unique_id
+                %}
+            </div>
+        </div>
+        <button
+                class="semantic-button fixed left-0 top-0 w-100 h-100 z-1"
+                data-close
+                aria-label="{{ 'accessibility.close' | t }}"
+                id="ModalClose-{{ unique_id }}-overlay"
+        ></button>
+    </welcome-popup>
+{% endif %}

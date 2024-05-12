@@ -2,7 +2,10 @@
 @import '../global/functions';
 $block: 'product-slider';
 .#{$block} {
-	--slide-spacing: #{$ax25};
+	--slide-spacing: #{$ax12};
+	@include media-query($m-up) {
+		--slide-spacing: #{$ax25};
+	}
 	.embla {
 	}
 	.embla__viewport {
@@ -30,7 +33,6 @@ $block: 'product-slider';
 			margin-left: var(--slide-spacing);
 		}
 		@include media-query($s-down) {
-			padding-left: 0;
 			&:first-of-type {
 				margin-left: $ax10;
 			}

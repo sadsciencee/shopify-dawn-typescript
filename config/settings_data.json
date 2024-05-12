@@ -15,6 +15,7 @@
     "spacing_grid_vertical": 40,
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "vertical-lift",
+    "welcome_popup_enabled": true,
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
     "buttons_radius": 4,

@@ -441,3 +441,10 @@ type ProductVariant = {
 	inventory_status: 'PreOrder' | 'InStock' | 'OutOfStock'
 	inventory_status_text: string
 }
+
+type ShopifyConsentAPIDetail = {
+	marketingAllowed: boolean
+	saleOfDataAllowed: boolean
+	analyticsAllowed: boolean
+	preferencesAllowed: boolean
+}

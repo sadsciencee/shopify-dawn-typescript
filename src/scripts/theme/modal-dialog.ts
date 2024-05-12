@@ -34,26 +34,54 @@ export class ModalDialog extends UcoastEl {
 	override connectedCallback() {
 		if (this.moved) return
 		this.moved = true
+		if (this.isInline()) {
+		}
 		document.body.appendChild(this)
+	}
+
+	getHtmlSelector() {
+		return ModalDialog.htmlSelector
+	}
+
+	isInline(): boolean {
+		if (
+			this.hasAttribute('data-no-desktop-move') &&
+			window.matchMedia('(min-width: 750px)').matches
+		) {
+			return true
+		}
+		if (this.getHtmlSelector() === 'welcome-popup') {
+			return true
+		}
+
+		return false
 	}
 
 	show(opener: HTMLElement) {
 		this.openedBy = opener
 		const popup = qsOptional<DeferredMedia>('.template-popup', this)
-		document.body.classList.add('overflow-hidden')
+		if (!this.isInline()) {
+			document.body.classList.add('overflow-hidden')
+		}
 		this.setAttribute('open', '')
 		if (popup) popup.loadContent()
 		trapFocus(this, qsRequired('[role="dialog"]', this))
-		pauseAllMedia()
+		if (!this.isInline()) {
+			pauseAllMedia()
+		}
 	}
 
 	hide(preventFocus = false) {
 		if (preventFocus) this.openedBy = undefined
-		document.body.classList.remove('overflow-hidden')
+		if (!this.isInline()) {
+			document.body.classList.remove('overflow-hidden')
+		}
 		document.body.dispatchEvent(new CustomEvent('modalClosed'))
 		this.removeAttribute('open')
 
 		removeTrapFocus(this.openedBy)
-		pauseAllMedia()
+		if (!this.isInline()) {
+			pauseAllMedia()
+		}
 	}
 }

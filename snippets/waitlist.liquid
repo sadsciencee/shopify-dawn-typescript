@@ -1,0 +1,74 @@
+{% assign form_id = 'WaitlistModalForm' %}
+<modal-dialog
+        id="WaitlistModal"
+        class="product-popup-modal product-popup-modal--waitlist top-0 left-0 w-100 h-100 my-0 mx-auto"
+        data-no-desktop-move
+>
+    <div
+            role="dialog"
+            aria-label="{{ settings.waitlist_popup_title }}"
+            aria-modal="true"
+            class="product-popup-modal__content absolute top-0 mx-auto"
+            tabindex="-1"
+    >
+        <button
+                id="ModalClose-{{ form_id }}"
+                type="button"
+                class="product-popup-modal__toggle flex align-center justify-center z-2 sticky"
+                aria-label="{{ 'accessibility.close' | t }}"
+        >
+            {% render 'icon-default', icon: 'close' %}
+        </button>
+        <div class="product-popup-modal__content-info">
+            <h2 class="cta tt-uppercase">
+                {{ settings.waitlist_popup_title }}
+            </h2>
+            <p>{{ settings.welcome_popup_text }}</p>
+            <waitlist-form
+                    class="block"
+                    data-success="Added to Waitlist"
+                    data-error="{{ 'accessibility.skip_to_text' | t }}"
+                    data-company-id='{{ settings.klaviyo_company_id }}'
+            >
+                <form
+                        class="waitlist__form w-100 relative"
+                        id="{{ form_id }}"
+                        data-form="submitKlaviyo"
+                        data-success="{{ 'newsletter.success' | t }}"
+                >
+                    <input
+                            type="hidden"
+                            name="variant"
+                            value="{{ product.variants[0].id }}"
+                    >
+                    <div class="field">
+                        <label
+                                class="visually-hidden"
+                                for="{{ form_id }}-email"
+                        >
+                            {{- settings.waitlist_popup_placeholder -}}
+                        </label>
+                        <input
+                                type="email"
+                                name="email"
+                                id="{{ form_id }}-email"
+                                class="field__input"
+                                value=""
+                                placeholder="{{ settings.waitlist_popup_placeholder }}"
+                                aria-label="{{ 'newsletter.label' | t }}"
+                                aria-required="true"
+                                autocorrect="off"
+                                autocapitalize="off"
+                        >
+                    </div>
+                    <button
+                            class="waitlist__button button w-100"
+                            type="submit"
+                    >
+                        {{ settings.waitlist_popup_button_label }}
+                    </button>
+                </form>
+            </waitlist-form>
+        </div>
+    </div>
+</modal-dialog>
