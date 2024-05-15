@@ -1,4 +1,10 @@
-import { ATTRIBUTES, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global'
+import {
+	ATTRIBUTES,
+	getAttributeOrUndefined,
+	openWaitlistModal,
+	PUB_SUB_EVENTS,
+	SELECTORS,
+} from '@/scripts/core/global'
 import { closestOptional, qsRequired } from '@/scripts/core/global'
 import { publish } from '@/scripts/core/global'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
@@ -53,7 +59,11 @@ export class ProductForm extends UcoastEl {
 	onSubmitHandler(event: Event) {
 		event.preventDefault()
 		if (this.submitButton.getAttribute('aria-disabled') === 'true') return
-
+		const oosId = getAttributeOrUndefined('data-oos-popup-trigger', this.submitButton)
+		if (oosId) {
+			openWaitlistModal(parseInt(oosId), this.submitButton)
+			return
+		}
 		this.handleErrorMessage()
 
 		this.submitButton.setAttribute('aria-disabled', 'true')

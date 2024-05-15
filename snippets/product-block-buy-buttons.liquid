@@ -44,11 +44,12 @@
 			</div>
 
 			{%- liquid
+				assign current_variant = product.selected_or_first_available_variant
 				capture inventory_status
-					render 'variant-availability', variant: product.selected_or_first_available_variant
+					render 'variant-availability', variant: current_variant
 				endcapture
 				capture inventory_status_text
-					render 'variant-availability', variant: product.selected_or_first_available_variant, output_translation: true
+					render 'variant-availability', variant: current_variant, output_translation: true
 				endcapture
 			-%}
 
@@ -62,7 +63,7 @@
 				<input
 					type="hidden"
 					name="id"
-					value="{{ product.selected_or_first_available_variant.id }}"
+					value="{{ current_variant.id }}"
 					disabled
 					data-uc-product-variant-id
 				>
@@ -78,10 +79,10 @@
 				<div class="product-form__buttons">
 					{%- liquid
 						assign check_against_inventory = true
-						if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+						if current_variant.inventory_management != 'shopify' or current_variant.inventory_policy == 'continue'
 							assign check_against_inventory = false
 						endif
-						if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+						if current_variant.quantity_rule.min > current_variant.inventory_quantity and check_against_inventory
 							assign quantity_rule_soldout = true
 						endif
 					-%}
@@ -90,13 +91,12 @@
 						type="submit"
 						name="add"
 						class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--outline{% else %}button--primary{% endif %}"
-						{% if product.selected_or_first_available_variant.available == false and inventory_status == 'ComingSoon' %}
-							data-uc-klaviyo-oos-popup-trigger="{{ current_variant.id }}"
-						{% elsif product.selected_or_first_available_variant.available == false
-							or quantity_rule_soldout
-							or inventory_status == 'OutOfStock'
+						{% if inventory_status == 'ComingSoon' %}
+							data-oos-popup-trigger="{{ current_variant.id }}"
+						{% elsif inventory_status == 'OutOfStock'
 						%}
 							disabled
+							aria-disabled='true'
 						{% endif %}
 					>
 						<span data-uc-inventory-status-text>
@@ -138,19 +138,19 @@
 	{%- if show_pickup_availability -%}
 		{% render 'ucoast-style-tag', file: 'css-optional-component-pickup-availability' %}
 
-		{%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+		{%- assign pick_up_availabilities = current_variant.store_availabilities
 			| where: 'pick_up_enabled', true
 		-%}
 
 		<pickup-availability
 			class="product__pickup-availabilities no-js-hidden quick-add-hidden"
-			{% if product.selected_or_first_available_variant.available
+			{% if current_variant.available
 				and pick_up_availabilities.size > 0
 			%}
 				available
 			{% endif %}
 			data-root-url="{{ routes.root_url }}"
-			data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+			data-variant-id="{{ current_variant.id }}"
 			data-has-only-default-variant="{{ product.has_only_default_variant }}"
 		>
 			<template>

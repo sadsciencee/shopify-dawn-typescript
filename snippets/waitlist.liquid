@@ -46,7 +46,7 @@
                                 class="visually-hidden"
                                 for="{{ form_id }}-email"
                         >
-                            {{- settings.waitlist_popup_placeholder -}}
+                            {{- 'templates.contact.form.email' | t -}}
                         </label>
                         <input
                                 type="email"
@@ -54,13 +54,33 @@
                                 id="{{ form_id }}-email"
                                 class="field__input"
                                 value=""
-                                placeholder="{{ settings.waitlist_popup_placeholder }}"
-                                aria-label="{{ 'newsletter.label' | t }}"
+                                placeholder="{{- 'templates.contact.form.email' | t -}}"
+                                aria-label="{{- 'templates.contact.form.email' | t -}}"
                                 aria-required="true"
-                                autocorrect="off"
                                 autocapitalize="off"
                         >
                     </div>
+                    {% if settings.klaviyo_collect_sms %}
+                        <div class="field">
+                            <label
+                                    class="visually-hidden"
+                                    for="{{ form_id }}-phone_number"
+                            >
+                                {{- 'templates.contact.form.phone' | t -}}
+                            </label>
+                            <input
+                                    type="tel"
+                                    name="phone_number"
+                                    id="{{ form_id }}-phone_number"
+                                    class="field__input"
+                                    value=""
+                                    placeholder="{{- 'templates.contact.form.phone' | t -}}"
+                                    aria-label="{{- 'templates.contact.form.phone' | t -}}"
+                                    aria-required="true"
+                                    autocapitalize="off"
+                            >
+                        </div>
+                    {% endif %}
                     <button
                             class="waitlist__button button w-100"
                             type="submit"

@@ -1,6 +1,17 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { getAttributeOrThrow, getBackendRoute, notifyMeConfig, qsRequired } from '@/scripts/core/global'
+import {
+	getAttributeOrThrow,
+	getBackendRoute,
+	getOrThrow,
+	qsRequired,
+} from '@/scripts/core/global'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
+
+type NotifyMeConfigValues = {
+	email: string
+	variant: string
+	phone_number?: string
+}
 
 export class WaitlistForm extends UcoastEl {
 	static htmlSelector = 'waitlist-form'
@@ -36,9 +47,12 @@ export class WaitlistForm extends UcoastEl {
 
 		const formData = new FormData(this.form)
 
-		const config = notifyMeConfig(formData)
+		const config = this.notifyMeConfig(formData)
 
-		fetch(`https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=${this.companyId}`, config)
+		fetch(
+			`https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=${this.companyId}`,
+			config
+		)
 			.then((response) => response.text())
 			.then((_) => {
 				this.emailInput.value = ''
@@ -47,7 +61,6 @@ export class WaitlistForm extends UcoastEl {
 				window.setTimeout(() => {
 					qsRequired<ModalDialog>('#WaitlistModal')?.hide()
 				}, 5000)
-
 			})
 			.catch((e) => {
 				this.emailInput.placeholder = this.errorMessage
@@ -57,5 +70,36 @@ export class WaitlistForm extends UcoastEl {
 				this.submitButton.classList.remove('loading')
 				this.submitButton.removeAttribute('aria-disabled')
 			})
+	}
+	notifyMeConfig(body: FormData) {
+		const data: NotifyMeConfigValues = {
+			email: getOrThrow(body, 'email'),
+			variant: getOrThrow(body, 'variant'),
+		}
+		let phone_number = getOrThrow(body, 'phone_number')
+		if (phone_number) {
+			data.phone_number = this.formatPhoneNumber(phone_number)
+		}
+		return {
+			method: 'POST',
+			mode: 'cors' as RequestMode,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		}
+	}
+	formatPhoneNumber(unchecked_number: string) {
+		let phone_number = unchecked_number
+			.replace('(', '')
+			.replace(')', '')
+			.replace('+', '')
+			.replaceAll('-', '')
+			.replaceAll(' ','')
+			.trim()
+		if (window?.Shopify?.country === 'US' && phone_number.length === 10) {
+			phone_number = `1${phone_number}`
+		}
+		return phone_number
 	}
 }

@@ -259,8 +259,12 @@
                                             aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                                             aria-live="polite"
                                             data-sold-out-message="true"
-                                            {% if current_variant.available == false %}
+                                            {% if inventory_status == 'ComingSoon' %}
+                                                data-oos-popup-trigger="{{ current_variant.id }}"
+                                            {% elsif inventory_status == 'OutOfStock'
+                                            %}
                                                 disabled
+                                                aria-disabled='true'
                                             {% endif %}
                                     >
 										<span data-uc-inventory-status-text>

@@ -1,4 +1,4 @@
-import { PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { getAttributeOrUndefined, PUB_SUB_EVENTS } from '@/scripts/core/global'
 import { createVariantChangeEvent, publish } from '@/scripts/core/global'
 import {
 	getAttributeOrThrow,
@@ -260,6 +260,7 @@ export class VariantSelects extends UcoastEl {
 					`Inventory-${this.dataset.section}`
 				)
 
+
 				if (source && destination) destination.innerHTML = source.innerHTML
 				if (inventorySource && inventoryDestination)
 					inventoryDestination.innerHTML = inventorySource.innerHTML
@@ -286,6 +287,26 @@ export class VariantSelects extends UcoastEl {
 					addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
 					window.variantStrings.soldOut
 				)
+
+				const ctaSource = html.getElementById(
+					`ProductSubmitButton-${
+						this.dataset.originalSection
+							? this.dataset.originalSection
+							: this.dataset.section
+					}`
+				)
+				const ctaDestination = document.getElementById(`ProductSubmitButton-${this.dataset.section}`)
+
+				if (ctaSource && ctaDestination) {
+					ctaDestination.innerHTML = ctaSource.innerHTML
+					const sourceDataOosPopupTrigger = getAttributeOrUndefined('data-oos-popup-trigger', ctaSource)
+					if (sourceDataOosPopupTrigger) {
+						ctaDestination.setAttribute('data-oos-popup-trigger', sourceDataOosPopupTrigger)
+					} else {
+						ctaDestination.removeAttribute('data-oos-popup-trigger')
+					}
+
+				}
 
 				publish(
 					PUB_SUB_EVENTS.variantChange,

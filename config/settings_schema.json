@@ -260,6 +260,12 @@
         "label": "Terms"
       },
       {
+        "type": "checkbox",
+        "id": "klaviyo_collect_sms",
+        "label": "Collect SMS on Klaviyo Forms",
+        "default": true
+      },
+      {
         "type": "header",
         "content": "Media"
       },
@@ -294,18 +300,6 @@
         "id": "waitlist_popup_text",
         "label": "Text",
         "default": "Register to receive a notification when this item comes back in stock."
-      },
-      {
-        "type": "text",
-        "id": "waitlist_popup_button_label",
-        "label": "Button Label",
-        "default": "Notify Me When Available"
-      },
-      {
-        "type": "text",
-        "id": "waitlist_popup_placeholder",
-        "label": "Placeholder",
-        "default": "Email Address"
       }
     ]
   },

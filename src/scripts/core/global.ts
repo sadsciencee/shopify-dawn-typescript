@@ -8,6 +8,8 @@ import { type ProductModel } from '@/scripts/optional/product-model'
 import { MediaManager } from '@/scripts/core/media'
 import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
+import { WaitlistForm } from '@/scripts/theme/waitlist-form'
+import { ModalDialog } from '@/scripts/theme/modal-dialog'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -789,25 +791,7 @@ export function addToKlaviyoListConfig(body: FormData) {
 	}
 }
 
-type NotifyMeConfigValues = {
-	email: string
-	variant: string
-}
 
-export function notifyMeConfig(body: FormData) {
-	const data: NotifyMeConfigValues = {
-		email: getOrThrow(body, 'email'),
-		variant: getOrThrow(body, 'variant'),
-	}
-	return {
-		method: 'POST',
-		mode: 'cors' as RequestMode,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	}
-}
 
 // recentlyViewedProducts isn't part of dawn, but it's in my 9.0 build pack so leaving here for now
 
@@ -1071,6 +1055,13 @@ export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefi
 	}
 
 	if (elementToFocus) elementToFocus.focus()
+}
+
+export function openWaitlistModal(variantId: number, opener: HTMLElement) {
+	const modal = qsRequired<ModalDialog>(`#WaitlistModal`)
+	const waitlistForm = qsRequired<WaitlistForm>('waitlist-form', modal)
+	waitlistForm.variantInput.value = `${variantId}`
+	if (modal) modal.show(opener)
 }
 export function initializeShopifyConsentAPI() {
 	window.Shopify?.loadFeatures(
