@@ -26,13 +26,23 @@ export class CartDrawerItems extends CartItems {
 		return [
 			{
 				id: 'CartDrawer',
-				section: 'cart-drawer',
-				selector: this.instanceSelectors.cartDrawerInner,
+				section: 'cart-drawer-items',
+				selector: 'cart-drawer-items',
 			},
 			{
 				id: 'CartIconBubble',
 				section: 'cart-icon-bubble',
 				selector: SELECTORS.cartLink,
+			},
+			{
+				id: 'CartDrawer',
+				section: 'dynamic-shipping-bar',
+				selector: 'dynamic-shipping-bar',
+			},
+			{
+				id: 'CartDrawer',
+				section: 'dynamic-cart-footer',
+				selector: '.drawer__footer',
 			},
 		]
 	}

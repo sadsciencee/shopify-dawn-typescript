@@ -7,19 +7,19 @@
   box-sizing: inherit;
 }
 
-a:empty,
-ul:empty,
-dl:empty,
-div:empty,
-section:empty,
-article:empty,
-p:empty,
-h1:empty,
-h2:empty,
-h3:empty,
-h4:empty,
-h5:empty,
-h6:empty {
+a:empty:not(.empty),
+ul:empty:not(.empty),
+dl:empty:not(.empty),
+div:empty:not(.empty),
+section:empty:not(.empty),
+article:empty:not(.empty),
+p:empty:not(.empty),
+h1:empty:not(.empty),
+h2:empty:not(.empty),
+h3:empty:not(.empty),
+h4:empty:not(.empty),
+h5:empty:not(.empty),
+h6:empty:not(.empty) {
   display: none;
 }
 

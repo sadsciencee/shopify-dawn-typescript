@@ -12,6 +12,7 @@ import {
 	CartAddWithSections,
 	CartUpdateWithSections,
 	renderRawHTMLToDOM,
+	updateShippingBar,
 } from '@/scripts/core/cart-functions'
 
 export class CartDrawer extends UcoastEl {
@@ -26,7 +27,6 @@ export class CartDrawer extends UcoastEl {
 		noteSummary: '[data-uc-cart-note-summary]',
 		noteDetails: '[data-uc-cart-note-details]',
 	}
-	sectionApiIds = ['cart-drawer', 'cart-icon-bubble']
 	activeElement?: HTMLElement
 	constructor() {
 		super()
@@ -130,12 +130,17 @@ export class CartDrawer extends UcoastEl {
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
 		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
-			const sectionId = section.id
-			if (!sectionId) throw new Error('Section id is required')
+			if (section.section === 'dynamic-shipping-bar') {
+				updateShippingBar(cart.sections[section.section])
+				return
+			}
+			const sectionHandle = section.section
+			if (!sectionHandle) throw new Error('Section id is required')
 			renderRawHTMLToDOM({
-				sourceHTML: cart.sections[sectionId],
+				sourceHTML: cart.sections[sectionHandle],
 				sourceSelector: section.selector,
 				destinationSelector: section.selector,
+				destinationSelectorContainer: `#${section.id}`,
 			})
 		})
 
@@ -147,18 +152,31 @@ export class CartDrawer extends UcoastEl {
 			} else {
 				this.setAttribute(ATTRIBUTES.cartEmpty, '')
 			}
-		})
+			void window.Ucoast.mediaManager.loadAllInContainer(this)
+		}, 1)
 	}
 
 	getSectionsToRender(): ShopifySectionRenderingSchema[] {
 		return [
 			{
-				id: 'cart-drawer',
-				selector: CartDrawer.selectors.container,
+				id: 'CartDrawer',
+				section: 'cart-drawer-items',
+				selector: 'cart-drawer-items',
 			},
 			{
-				id: 'cart-icon-bubble',
+				id: 'CartIconBubble',
+				section: 'cart-icon-bubble',
 				selector: SELECTORS.cartLink,
+			},
+			{
+				id: 'CartDrawer',
+				section: 'dynamic-shipping-bar',
+				selector: 'dynamic-shipping-bar',
+			},
+			{
+				id: 'CartDrawer',
+				section: 'dynamic-cart-footer',
+				selector: '.drawer__footer',
 			},
 		]
 	}

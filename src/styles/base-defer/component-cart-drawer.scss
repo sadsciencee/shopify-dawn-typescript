@@ -65,7 +65,7 @@ cart-drawer:not([data-uc-cart-empty]) .cart-drawer__collection {
 }
 
 .drawer__heading {
-  margin: 0 0 #{$ax10};
+  margin: 0;
 }
 
 .drawer__close {
@@ -156,6 +156,7 @@ cart-drawer {
 cart-drawer-items {
   overflow: auto;
   flex: 1;
+  margin-top: $ax15;
 }
 
 @media screen and (max-height: 650px) {

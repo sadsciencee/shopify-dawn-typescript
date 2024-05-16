@@ -13,6 +13,8 @@ import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/core/global'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
+import { updateShippingBar } from '@/scripts/core/cart-functions'
+
 
 export class CartItems extends UcoastEl {
 	// static
@@ -170,6 +172,10 @@ export class CartItems extends UcoastEl {
 				}
 
 				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {
+					if (section.section === 'dynamic-shipping-bar') {
+						updateShippingBar(parsedState.sections[section.section])
+						return
+					}
 					const sectionEl = qsRequired(`#${section.id}`)
 					const elementToReplace =
 						(section.selector && sectionEl.querySelector(section.selector)) || sectionEl
@@ -212,6 +218,7 @@ export class CartItems extends UcoastEl {
 				} else if (document.querySelector(this.instanceSelectors.item) && cartDrawerWrapper) {
 					trapFocus(cartDrawerWrapper, qsRequired(this.instanceSelectors.itemLink))
 				}
+				void window.Ucoast.mediaManager.loadAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
 			.catch((error) => {

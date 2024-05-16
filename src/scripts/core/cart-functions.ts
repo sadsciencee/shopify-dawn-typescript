@@ -12,6 +12,7 @@ import type {
 	CartErrorResponse,
 	ProductVariant,
 } from '@/scripts/shopify'
+import { type DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -68,10 +69,17 @@ export function hasDomCart() {
 export function getDOMCartSectionApiIds() {
 	const cartEl = getDOMCart()
 	if (!cartEl) return undefined
-	return cartEl.sectionApiIds
+	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-shipping-bar']
 }
 
 const ignoredProperties = ['utf8', 'product-id', 'section-id']
+
+export function updateShippingBar(rawHTML: string) {
+	console.log('dynamic-shipping-bar')
+	const shippingBar = qsOptional<DynamicShippingBar>('dynamic-shipping-bar')
+	if (!shippingBar) return
+	shippingBar.animateFromRawHTML(rawHTML)
+}
 
 export function renderResponseToCartDrawer(
 	cart: CartAddWithSections | CartUpdateWithSections | CartAdd,
@@ -190,6 +198,8 @@ export function renderRawHTMLToDOM({
 	destinationSelector,
 	destinationSelectorContainer,
 }: RenderRawHTMLToDOMInput) {
+	console.log({sourceHTML})
+	console.log({sourceSelector, destinationSelector, destinationSelectorContainer})
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
 	const sourceElement = qsRequired(
