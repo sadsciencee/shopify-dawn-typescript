@@ -1,5 +1,6 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
+	formatPhoneNumber,
 	getAttributeOrThrow,
 	getBackendRoute,
 	getOrThrow,
@@ -78,7 +79,7 @@ export class WaitlistForm extends UcoastEl {
 		}
 		let phone_number = getOrThrow(body, 'phone_number')
 		if (phone_number) {
-			data.phone_number = this.formatPhoneNumber(phone_number)
+			data.phone_number = formatPhoneNumber(phone_number)
 		}
 		return {
 			method: 'POST',
@@ -89,17 +90,5 @@ export class WaitlistForm extends UcoastEl {
 			body: JSON.stringify(data),
 		}
 	}
-	formatPhoneNumber(unchecked_number: string) {
-		let phone_number = unchecked_number
-			.replace('(', '')
-			.replace(')', '')
-			.replace('+', '')
-			.replaceAll('-', '')
-			.replaceAll(' ','')
-			.trim()
-		if (window?.Shopify?.country === 'US' && phone_number.length === 10) {
-			phone_number = `1${phone_number}`
-		}
-		return phone_number
-	}
+
 }

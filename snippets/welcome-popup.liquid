@@ -9,13 +9,15 @@
         {{- settings.welcome_popup_form_id -}}_
         {{- settings.welcome_popup_button_label -}}_
         {{- settings.welcome_popup_placeholder -}}_
-        {{- settings.welcome_popup_list_id -}}
+        {{- settings.klaviyo_company_id -}}_
+        {{- settings.welcome_popup_list_id -}}_
+        {{- settings.klaviyo_collect_sms -}}
     {%- endcapture -%}
     {% assign cache_key = cache_key | md5 %}
     {% assign unique_id = 'welcome-popup' %}
     <welcome-popup
             class="welcome-popup fixed w-100 h-100 left-0 top-0 z-3"
-            data-uc-open-after="3"
+            data-uc-open-after="{{ settings.welcome_popup_delay }}"
             data-uc-cache-key="{{ cache_key }}"
             data-uc-demo-mode="{{ settings.welcome_popup_demo_mode }}"
             id="PopupModal-{{ unique_id }}"
@@ -54,6 +56,7 @@
                         terms_text: settings.welcome_popup_terms,
                         form_id: settings.welcome_popup_form_id,
                         cta_text: settings.welcome_popup_button_label,
+                        klaviyo_collect_sms: settings.klaviyo_collect_sms,
                         placeholder: settings.welcome_popup_placeholder,
                         list_id: settings.welcome_list_id,
                         form_location: unique_id,

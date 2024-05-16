@@ -9,18 +9,20 @@ export class ModalDialog extends UcoastEl {
 	openedBy?: HTMLElement
 	constructor() {
 		super()
-		this.querySelector('[id^="ModalClose-"]')?.addEventListener(
-			'click',
-			this.hide.bind(this, false)
-		)
+		this.querySelectorAll('[id^="ModalClose-"]')?.forEach((closeButton) => {
+			closeButton.addEventListener('click', this.hide.bind(this, false))
+		})
 		this.addEventListener('keyup', (event) => {
-			if (event.code.toUpperCase() === 'ESCAPE') this.hide()
+			if (event.code?.toUpperCase() === 'ESCAPE') this.hide()
 		})
 		if (this.classList.contains('media-modal')) {
 			this.addEventListener('pointerup', (event) => {
 				if (
 					event.pointerType === 'mouse' &&
-					!targetClosestOptional(event, 'deferred-media, product-model')
+					!targetClosestOptional(
+						event,
+						'deferred-media, product-model'
+					)
 				)
 					this.hide()
 			})

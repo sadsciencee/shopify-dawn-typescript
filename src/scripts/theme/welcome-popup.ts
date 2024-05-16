@@ -6,7 +6,6 @@ import {
 	qsRequired,
 } from '@/scripts/core/global'
 import { getActiveOrAccessibilityElement } from '@/scripts/core/cart-functions'
-import { ShopifyConsentAPIDetail } from '@/scripts/shopify'
 
 export class WelcomePopup extends ModalDialog {
 	static override htmlSelector = 'welcome-popup'
@@ -18,7 +17,7 @@ export class WelcomePopup extends ModalDialog {
 
 	constructor() {
 		super()
-		this.klaviyoForm = qsRequired('klaviyo-form', this)
+		this.klaviyoForm = qsRequired<KlaviyoForm>('klaviyo-form', this)
 		this.openAfter =
 			parseInt(getAttributeOrThrow('data-uc-open-after', this)) * 1000
 		this.cacheKey = getAttributeOrThrow('data-uc-cache-key', this)

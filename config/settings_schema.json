@@ -216,6 +216,15 @@
         "label": "Enable Welcome Popup"
       },
       {
+        "type": "range",
+        "id": "welcome_popup_delay",
+        "label": "Welcome Popup Delay",
+        "min": 1,
+        "max": 5,
+        "default": 3,
+        "unit": "sec"
+      },
+      {
         "type": "checkbox",
         "id": "welcome_popup_demo_mode",
         "label": "Demo Mode",
@@ -252,7 +261,8 @@
       {
         "type": "text",
         "id": "welcome_list_id",
-        "label": "Klaviyo List ID"
+        "label": "Klaviyo List ID",
+        "default": "XXXXXX"
       },
       {
         "type": "textarea",

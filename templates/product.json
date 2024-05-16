@@ -116,7 +116,8 @@
         "image_zoom": "lightbox",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
-        "enable_video_looping": false
+        "enable_video_looping": false,
+        "space_above": 2
       }
     },
     "image-with-text": {

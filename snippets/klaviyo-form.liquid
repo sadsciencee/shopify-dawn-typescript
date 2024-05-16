@@ -5,107 +5,132 @@
 	success: string
 {% endcomment %}
 {% liquid
-    assign market_handle = localization.country.market.handle
-    assign language_iso = localization.language.iso_code
-    unless form_location
-        assign form_location = 'default'
-    endunless
-    unless placeholder
-        capture placeholder
-            echo 'newsletter.label' | t
-        endcapture
-    endunless
-    if terms_text and terms_text != blank and terms_text != empty and terms_text != ''
-        assign show_terms = true
-    else
-        assign show_terms = false
-    endif
+	assign market_handle = localization.country.market.handle
+	assign language_iso = localization.language.iso_code
+	unless form_location
+		assign form_location = 'default'
+	endunless
+	unless placeholder
+		capture placeholder
+			echo 'newsletter.label' | t
+		endcapture
+	endunless
+	if terms_text and terms_text != blank and terms_text != empty and terms_text != ''
+		assign show_terms = true
+	else
+		assign show_terms = false
+	endif
+	unless list_id
+		assign list_id = settings.welcome_list_id
+	endunless
 %}
 
-<klaviyo-form class="klaviyo-form">
-    <form
-            class="klaviyo-form__form w-100 relative"
-            id="{{ form_id }}"
-            data-form="submitKlaviyo"
-            data-success="{{ 'newsletter.success' | t }}"
-    >
-        <input
-                type="hidden"
-                name="list_id"
-                value="{{ list_id }}"
-        >
-        <input
-                type="hidden"
-                name="language_iso"
-                value="{{ language_iso }}"
-        >
-        <input
-                type="hidden"
-                name="market_handle"
-                value="{{ market_handle }}"
-        >
-        <input
-                type="hidden"
-                name="form_location"
-                value="{{ form_location }}"
-        >
-        <div class="field">
-            <label
-                    class="visually-hidden"
-                    for="{{ formId }}-email"
-            >Email Address</label
-            >
-            <input
-                    type="email"
-                    name="email"
-                    id="{{ formId }}-email"
-                    class="field__input"
-                    value=""
-                    placeholder="{{ placeholder }}"
-                    aria-label="{{ placeholder }}"
-                    aria-required="true"
-                    autocorrect="off"
-                    autocapitalize="off"
-            >
-        </div>
-        <button
-                class="klaviyo-form__button {% if cta_link_on_desktop %} klaviyo-form__button--link-on-desktop  underline-always-child cta {% endif %} button button--full-width semantic-button {{ class }}"
-                type="submit"
-                {% if show_terms %}
-                    disabled
-                {% endif %}
-        >
-            <span>{{ 'newsletter.button_label' | t }}</span>
-        </button>
+<klaviyo-form data-company-id="{{ settings.klaviyo_company_id }}">
+	<form
+		class="form w-100 relative"
+		id="{{ form_id }}"
+		data-form="submitKlaviyo"
+		data-success="{{ 'newsletter.success' | t }}"
+	>
+		<input
+			type="hidden"
+			name="list_id"
+			value="{{ list_id }}"
+		>
+		<input type="hidden" name="custom_source" value="{{ form_location }}">
+		<input
+			type="hidden"
+			name="language_iso"
+			value="{{ language_iso }}"
+		>
+		<input
+			type="hidden"
+			name="market_handle"
+			value="{{ market_handle }}"
+		>
+		<input
+			type="hidden"
+			name="form_location"
+			value="{{ form_location }}"
+		>
+		<div class="field">
+			<input
+				type="email"
+				name="email"
+				id="{{ form_id }}-email"
+				class="field__input"
+				value=""
+				placeholder="{{- 'templates.contact.form.email' | t -}}"
+				aria-label="{{- 'templates.contact.form.email' | t -}}"
+				aria-required="true"
+				autocapitalize="off"
+			>
+			<label
+				for="{{ form_id }}-email"
+				class="field__label"
+			>
+				{{- 'templates.contact.form.email' | t -}}
+			</label>
+		</div>
+		{% if klaviyo_collect_sms %}
+			<div class="field">
+				<input
+					type="tel"
+					name="phone_number"
+					id="{{ form_id }}-phone_number"
+					class="field__input"
+					value=""
+					placeholder="{{- 'templates.contact.form.phone' | t -}}"
+					aria-label="{{- 'templates.contact.form.phone' | t -}}"
+					aria-required="true"
+					autocapitalize="off"
+				>
+				<label
+					class="field__label"
+					for="{{ form_id }}-phone_number"
+				>
+					{{- 'templates.contact.form.phone' | t -}}
+				</label>
+			</div>
+		{% endif %}
+		<button
+			class="klaviyo-form__button {% if cta_link_on_desktop %} klaviyo-form__button--link-on-desktop  underline-always-child cta {% endif %} button button--full-width semantic-button {{ class }}"
+			type="submit"
+			{% if show_terms %}
+				disabled
+			{% endif %}
+		>
+			<span>{{ 'newsletter.button_label' | t }}</span>
+		</button>
 
-        <p
-                class="klaviyo-form__message klaviyo-form__message--success absolute left-0 w-100 m-0 lh-1 hidden"
-                tabindex="-1"
-                data-form-status
-                data-uc-form-status
-                style="transform: translateY(1.5em);"
-        >
-            {{ 'newsletter.success' | t }}
-        </p>
-    </form>
-    {% if show_terms %}
-        <div class="klaviyo-form__terms flex align-start justify-start">
-            <button
-                    class="klaviyo-form__checkbox semantic-button relative block"
-                    type="button"
-                    aria-label="Agree to terms"
-                    id="{{ form_id }}-terms"
-                    data-terms-accepted="false"
-            >
-                <span class="klaviyo-form__checkbox__marker absolute"></span>
-            </button>
-            <label
-                    class="klaviyo-form__terms-text text-small"
-                    for="{{ form_id }}-terms"
-                    data-terms-label
-            >
-                {{ terms_text }}
-            </label>
-        </div>
-    {% endif %}
+		<p
+			class="klaviyo-form__message klaviyo-form__message--success absolute left-0 w-100 m-0 lh-1 hidden"
+			tabindex="-1"
+			data-form-status
+			data-uc-form-status
+			style="transform: translateY(1.5em);"
+		>
+			{{ 'newsletter.success' | t }}
+		</p>
+	</form>
+	{% if show_terms %}
+		<div class="klaviyo-form__terms flex align-start justify-start">
+			<button
+				class="klaviyo-form__checkbox semantic-button relative block"
+				type="button"
+				aria-label="Agree to terms"
+				id="{{ form_id }}-terms"
+				data-terms-accepted="false"
+			>
+				<span class="klaviyo-form__checkbox__marker absolute"></span>
+			</button>
+			<label
+				class="klaviyo-form__terms-text text-small"
+				for="{{ form_id }}-terms"
+				data-terms-label
+			>
+				{{ terms_text }}
+			</label>
+		</div>
+	{% endif %}
 </klaviyo-form>

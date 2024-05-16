@@ -632,7 +632,7 @@ export function focusVisiblePolyfill() {
 	let mouseClick: boolean | null = null
 
 	window.addEventListener('keydown', (event) => {
-		if (navKeys.includes(event.code.toUpperCase())) {
+		if (navKeys.includes(event.code?.toUpperCase())) {
 			mouseClick = false
 		}
 	})
@@ -658,7 +658,7 @@ export function focusVisiblePolyfill() {
 }
 
 export function onKeyUpEscape(event: KeyboardEvent) {
-	if (event.code.toUpperCase() !== 'ESCAPE') return
+	if (event.code?.toUpperCase() !== 'ESCAPE') return
 
 	const openDetailsElement = targetClosestOptional(event, 'details[open]')
 	if (!openDetailsElement) return
@@ -767,31 +767,19 @@ export function addToCartConfig(body: FormData) {
 	}
 }
 
-// klaviyo & notify me not part of initial dawn but will be in every project
-
-type AddToKlaviyoListFormValues = {
-	email: string
-	list_id: string
-	phone_number?: string
-}
-
-export function addToKlaviyoListConfig(body: FormData) {
-	const data: AddToKlaviyoListFormValues = {
-		email: getOrThrow(body, 'email'),
-		list_id: getOrThrow(body, 'list_id'),
-		phone_number: getOrUndefined(body, 'phone_number'),
+export function formatPhoneNumber(unchecked_number: string) {
+	let phone_number = unchecked_number
+		.replace('(', '')
+		.replace(')', '')
+		.replace('+', '')
+		.replaceAll('-', '')
+		.replaceAll(' ','')
+		.trim()
+	if (window?.Shopify?.country === 'US' && phone_number.length === 10) {
+		phone_number = `+1${phone_number}`
 	}
-	return {
-		method: 'POST',
-		mode: 'cors' as RequestMode,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	}
+	return phone_number
 }
-
-
 
 // recentlyViewedProducts isn't part of dawn, but it's in my 9.0 build pack so leaving here for now
 
@@ -1011,7 +999,7 @@ export function trapFocus(
 	}
 
 	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
-		if (event.code.toUpperCase() !== 'TAB') return // If not TAB key
+		if (event.code?.toUpperCase() !== 'TAB') return // If not TAB key
 		// On the last focusable element and tab forward, focus the first element.
 		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
 		if (target === last && !event.shiftKey) {

@@ -1,7 +1,9 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
-	addToKlaviyoListConfig,
-	getBackendRoute,
+	formatPhoneNumber,
+	getAttributeOrThrow,
+	getOrThrow,
+	getOrUndefined,
 	qsOptional,
 	qsRequired,
 } from '@/scripts/core/global'
@@ -20,6 +22,7 @@ export class KlaviyoForm extends UcoastEl {
 		termsLabel: HTMLLabelElement
 	}
 	termsAccepted = true
+	companyId: string
 
 	constructor() {
 		super()
@@ -27,11 +30,12 @@ export class KlaviyoForm extends UcoastEl {
 		this.submitButton = qsRequired('[type="submit"]', this)
 		this.emailInput = qsRequired('[type="email"]', this)
 		this.successMessage = this.getSuccessMessage()
-		this.route = `${getBackendRoute()}/api/klaviyo-list`
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
 		this.popup = qsOptional<WelcomePopup>('welcome-popup')
 		this.termsElements = this.getTermsElements()
 		this.termsSetup()
+		this.companyId = getAttributeOrThrow('data-company-id', this)
+		this.route = `https://a.klaviyo.com/client/subscriptions/?company_id=${this.companyId}`
 	}
 
 	getTermsElements() {
@@ -93,7 +97,7 @@ export class KlaviyoForm extends UcoastEl {
 
 		const formData = new FormData(this.form)
 
-		const config = addToKlaviyoListConfig(formData)
+		const config = this.addToKlaviyoListConfig(formData)
 
 		fetch(this.route, config)
 			.then((response) => response.json())
@@ -118,5 +122,58 @@ export class KlaviyoForm extends UcoastEl {
 				this.submitButton.classList.remove('loading')
 				this.submitButton.removeAttribute('aria-disabled')
 			})
+	}
+
+	addToKlaviyoListConfig(body: FormData) {
+		const values = {
+			email: getOrThrow(body, 'email'),
+			list_id: getOrThrow(body, 'list_id'),
+			custom_source: getOrThrow(body,'custom_source'),
+			phone_number: getOrUndefined(body, 'phone_number'),
+			language_iso: getOrUndefined(body, 'language_iso') ?? 'en',
+			market_handle: getOrUndefined(body, 'market_handle') ?? 'us'
+		}
+		if (values.phone_number) {
+			values.phone_number = formatPhoneNumber(values.phone_number)
+		}
+		const data ={
+			data: {
+				type: "subscription",
+				attributes: {
+					custom_source: values.custom_source,
+					profile: {
+						data: {
+							type: "profile",
+							attributes: {
+								email: values.email,
+								phone_number: values.phone_number,
+								properties: {
+									language_iso: values.language_iso,
+									market_handle: values.market_handle,
+								}
+							},
+						}
+					}
+				},
+				relationships: {
+					list: {
+						data: {
+							type: "list",
+							id: values.list_id
+						}
+					}
+				}
+			}
+		}
+		console.log({data})
+		return {
+			method: 'POST',
+			mode: 'cors' as RequestMode,
+			headers: {
+				'Content-Type': 'application/json',
+				'Revision': '2024-05-15'
+			},
+			body: JSON.stringify(data),
+		}
 	}
 }

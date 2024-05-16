@@ -22,7 +22,7 @@ export class DetailsModal extends UcoastEl {
 
 		this.detailsContainer.addEventListener(
 			'keyup',
-			(event) => event.code.toUpperCase() === 'ESCAPE' && this.close()
+			(event) => event.code?.toUpperCase() === 'ESCAPE' && this.close()
 		)
 		this.summaryToggle.addEventListener('click', this.onSummaryClick.bind(this))
 		this.button.addEventListener('click', this.close.bind(this))

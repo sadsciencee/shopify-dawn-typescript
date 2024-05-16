@@ -44,9 +44,12 @@ $block: 'welcome-popup';
 	&__text {
 		margin-top: $ax13;
 	}
-	.klaviyo-form {
+	.form {
+		display: flex;
+		flex-wrap: wrap;
 		margin-top: $ax22;
-		display: block;
+		column-gap: calc(#{$xSpacing} / 2);
+		row-gap: calc(#{$ySpacing} / 2);
 		@include media-query($s-up) {
 			margin-top: $ax12;
 		}

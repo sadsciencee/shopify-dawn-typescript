@@ -18,7 +18,7 @@ export class PickupAvailabilityDrawer extends UcoastEl {
 		})
 
 		this.addEventListener('keyup', (event) => {
-			if (event.code.toUpperCase() === 'ESCAPE') this.hide()
+			if (event.code?.toUpperCase() === 'ESCAPE') this.hide()
 		})
 	}
 

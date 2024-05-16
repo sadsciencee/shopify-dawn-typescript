@@ -52,7 +52,7 @@ export class CartDrawer extends UcoastEl {
 			this.open(cartLink)
 		})
 		cartLink.addEventListener('keydown', (event) => {
-			if (event.code.toUpperCase() === 'SPACE') {
+			if (event.code?.toUpperCase() === 'SPACE') {
 				event.preventDefault()
 				this.open(cartLink)
 			}
