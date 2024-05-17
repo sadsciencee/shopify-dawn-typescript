@@ -1,4 +1,4 @@
-import { PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { getAttributeOrUndefined, PUB_SUB_EVENTS } from '@/scripts/core/global'
 import { createVariantChangeEvent, publish } from '@/scripts/core/global'
 import {
 	getAttributeOrThrow,
@@ -7,15 +7,12 @@ import {
 	qsOptional,
 	qsRequired,
 } from '@/scripts/core/global'
-import { type ProductVariant } from '@/scripts/types/api'
-import { type uCoastWindow } from '@/scripts/setup'
 import { type ProductForm } from '@/scripts/product/product-form'
 import { type MediaGallery } from '@/scripts/product/media-gallery'
 import { type ShareButton } from '@/scripts/optional/share-button'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-
-declare let window: uCoastWindow
+import { type ProductVariant } from '@/scripts/shopify'
 
 export class VariantSelects extends UcoastEl {
 	static htmlSelector = 'variant-selects'
@@ -263,6 +260,7 @@ export class VariantSelects extends UcoastEl {
 					`Inventory-${this.dataset.section}`
 				)
 
+
 				if (source && destination) destination.innerHTML = source.innerHTML
 				if (inventorySource && inventoryDestination)
 					inventoryDestination.innerHTML = inventorySource.innerHTML
@@ -289,6 +287,26 @@ export class VariantSelects extends UcoastEl {
 					addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
 					window.variantStrings.soldOut
 				)
+
+				const ctaSource = html.getElementById(
+					`ProductSubmitButton-${
+						this.dataset.originalSection
+							? this.dataset.originalSection
+							: this.dataset.section
+					}`
+				)
+				const ctaDestination = document.getElementById(`ProductSubmitButton-${this.dataset.section}`)
+
+				if (ctaSource && ctaDestination) {
+					ctaDestination.innerHTML = ctaSource.innerHTML
+					const sourceDataOosPopupTrigger = getAttributeOrUndefined('data-oos-popup-trigger', ctaSource)
+					if (sourceDataOosPopupTrigger) {
+						ctaDestination.setAttribute('data-oos-popup-trigger', sourceDataOosPopupTrigger)
+					} else {
+						ctaDestination.removeAttribute('data-oos-popup-trigger')
+					}
+
+				}
 
 				publish(
 					PUB_SUB_EVENTS.variantChange,

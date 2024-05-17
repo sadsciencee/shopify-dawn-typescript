@@ -24,6 +24,7 @@ export class DeferredMedia extends UcoastEl {
 				throw new Error('No template content found')
 			}
 			content.appendChild(template.content.firstElementChild.cloneNode(true))
+			void window.Ucoast.mediaManager.loadAllInContainer(this)
 
 			this.setAttribute('loaded', 'true')
 			const deferredElement = this.appendChild(

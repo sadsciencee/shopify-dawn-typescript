@@ -75,7 +75,7 @@ export class MenuDrawer extends UcoastEl {
 	}
 
 	onKeyUp(event: KeyboardEvent) {
-		if (event.code.toUpperCase() !== 'ESCAPE') return
+		if (event.code?.toUpperCase() !== 'ESCAPE') return
 
 		const openDetailsElement = targetClosestOptional(event, 'details[open]')
 		if (!openDetailsElement) return

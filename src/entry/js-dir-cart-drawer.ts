@@ -14,6 +14,7 @@ import { MenuDrawer } from '@/scripts/theme/menu-drawer';
 import { HeaderDrawer } from '@/scripts/theme/header-drawer';
 import { ModalDialog } from '@/scripts/theme/modal-dialog';
 import { ModalOpener } from '@/scripts/theme/modal-opener';
+import { DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
 
 safeDefineElement(QuantityInput)
 safeDefineElement(CartNotification)
@@ -30,3 +31,4 @@ safeDefineElement(MenuDrawer)
 safeDefineElement(HeaderDrawer)
 safeDefineElement(ModalDialog)
 safeDefineElement(ModalOpener)
+safeDefineElement(DynamicShippingBar)

@@ -242,7 +242,6 @@ export class FacetFiltersForm extends UcoastEl {
 		const mobileFacets = qsRequired(FacetFiltersForm.selectors.mobileForm)
 		const menuDrawer = closestRequired<MenuDrawer>(mobileFacets, 'menu-drawer')
 		if (!menuDrawer) throw new Error('menu-drawer not found, cant close mobile facets')
-		console.log('on reload')
 		menuDrawer.onReload()
 	}
 

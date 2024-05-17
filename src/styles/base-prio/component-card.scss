@@ -86,6 +86,10 @@
 .card__media {
 	margin: var(--image-padding);
 	width: calc(100% - 2 * var(--image-padding));
+	img, video {
+		aspect-ratio: $cardAspectRatio;
+		object-fit: cover;
+	}
 }
 
 .card--standard .card__media {

@@ -9,13 +9,12 @@ import {
 	targetRequired,
 } from '@/scripts/core/global'
 import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
-import { routes, type uCoastWindow } from '@/scripts/setup'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { trapFocus } from '@/scripts/core/global'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
+import { updateShippingBar } from '@/scripts/core/cart-functions'
 
-declare let window: uCoastWindow
 
 export class CartItems extends UcoastEl {
 	// static
@@ -95,7 +94,7 @@ export class CartItems extends UcoastEl {
 	}
 
 	onCartUpdate() {
-		fetch(`${routes.cart_url}?section_id=main-cart-items`)
+		fetch(`${window.routes.cart_url}?section_id=main-cart-items`)
 			.then((response) => response.text())
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
@@ -143,7 +142,7 @@ export class CartItems extends UcoastEl {
 			sections_url: window.location.pathname,
 		})
 
-		fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+		fetch(`${window.routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
 			.then((response) => {
 				return response.text()
 			})
@@ -173,6 +172,10 @@ export class CartItems extends UcoastEl {
 				}
 
 				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {
+					if (section.section === 'dynamic-shipping-bar') {
+						updateShippingBar(parsedState.sections[section.section])
+						return
+					}
 					const sectionEl = qsRequired(`#${section.id}`)
 					const elementToReplace =
 						(section.selector && sectionEl.querySelector(section.selector)) || sectionEl
@@ -215,6 +218,7 @@ export class CartItems extends UcoastEl {
 				} else if (document.querySelector(this.instanceSelectors.item) && cartDrawerWrapper) {
 					trapFocus(cartDrawerWrapper, qsRequired(this.instanceSelectors.itemLink))
 				}
+				void window.Ucoast.mediaManager.loadAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
 			.catch((error) => {

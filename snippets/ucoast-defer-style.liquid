@@ -1,11 +1,16 @@
 {% comment %}
-    'url' should already be formatted as asset url
-    'media' represents the media query to shift to after the page is loaded
-        - the only value that should ever be passed here is '(min-width: 750px)'
+	'url' should already be formatted as asset url
+	'media' represents the media query to shift to after the page is loaded
+	    - the only value that should ever be passed here is '(min-width: 750px)'
 {% endcomment %}
 {% liquid
-    unless media
-        assign media = 'all'
-    endunless
+	unless media
+		assign media = 'all'
+	endunless
 %}
-<link rel="stylesheet" href="{{- url -}}" media="print" onload="this.media='{{- media -}}'" />
+<link
+	rel="stylesheet"
+	href="{{- url -}}"
+	media="print"
+	onload="this.media='{{- media -}}'"
+>

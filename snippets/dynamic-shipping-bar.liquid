@@ -1,0 +1,50 @@
+{% liquid
+	assign success = "you're getting free shipping!"
+	assign meter_suffix = "away from free shipping"
+
+	assign display = true
+	assign threshold = localization.market.metafields.custom.free_shipping_threshold.value
+	unless threshold
+		assign display = false
+	endunless
+	assign current_cart_amount = cart.items | map: 'final_line_price' | sum
+	assign difference = threshold | minus: current_cart_amount
+	assign current_cart_amount = current_cart_amount | plus: 0.0
+	assign threshold = threshold | plus: 0.0
+	if difference <= 0
+		assign percent = 100
+	else
+		assign percent = current_cart_amount | divided_by: threshold | times: 100 | round
+	endif
+%}
+
+{% if threshold %}
+	<dynamic-shipping-bar
+		data-percent='{{ percent }}'
+		data-success="{{ success }}"
+		class="w-100 block relative dynamic-shipping-bar"
+		style="--progress-percent: {{ percent }}%"
+	>
+		<span
+			class="absolute left-0 top-0 h-100 w-100 dynamic-shipping-bar__status__container empty flex align-center justify-start"
+			role="status"
+		>
+			<span
+				class="dynamic-shipping-bar__status__text relative z-3 h5 tt-uppercase lh-1 m-0"
+				data-shipping-bar-status
+			>
+				{% if difference <= 0 %}
+					{{ success }}
+				{% else %}
+					{{ difference | money_without_trailing_zeros }} {{ meter_suffix }}
+				{% endif %}
+			</span>
+		</span>
+		<span
+			class="dynamic-shipping-bar__indicator absolute left-0 top-0 h-100 z-2 empty"
+		></span>
+		<span
+			class="dynamic-shipping-bar__background w-100 absolute left-0 top-0 h-100 z-1 empty"
+		></span>
+	</dynamic-shipping-bar>
+{% endif %}

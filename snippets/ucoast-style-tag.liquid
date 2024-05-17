@@ -6,9 +6,19 @@
 
 {% liquid
 	assign base_file = file | append: '.scss'
-	if preload_stylesheet
-		render 'ucoast' with base_file, preload_stylesheet: true
+	capture stylesheet
+		if preload_stylesheet
+			render 'ucoast' with base_file, preload_stylesheet: true
+		else
+			render 'ucoast' with base_file
+		endif
+	endcapture
+	if stylesheet contains '@vite/client'
+		echo stylesheet
+	elsif file contains 'defer'
+		assign stylesheet = stylesheet | replace: 'type="text/css"', 'type="text/css" defer="defer"'
+		echo stylesheet
 	else
-		render 'ucoast' with base_file
+		echo stylesheet
 	endif
 %}

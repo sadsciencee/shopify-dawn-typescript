@@ -37,6 +37,11 @@
 .cart-item__image {
   height: auto;
   max-width: calc(#{ax(100)} / #{$fontBodyScale});
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: $cardAspectRatio;
+  }
 }
 
 @include media-query($s-up) {

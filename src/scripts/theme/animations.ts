@@ -1,12 +1,9 @@
-import { type uCoastWindow } from '@/scripts/setup';
 import { throttle } from '@/scripts/core/global';
 
 const SCROLL_ANIMATION_TRIGGER_CLASSNAME = 'scroll-trigger';
 const SCROLL_ANIMATION_OFFSCREEN_CLASSNAME = 'scroll-trigger--offscreen';
 const SCROLL_ZOOM_IN_TRIGGER_CLASSNAME = 'animate--zoom-in';
 const SCROLL_ANIMATION_CANCEL_CLASSNAME = 'scroll-trigger--cancel';
-
-declare let window:uCoastWindow
 
 // Scroll in animation logic
 function onIntersection(elements: IntersectionObserverEntry[], observer: IntersectionObserver) {
@@ -102,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initializeScrollZoomAnimationTrigger();
 });
 
-if (window.Shopify.designMode) {
+if (window.Shopify?.designMode) {
   document.addEventListener('shopify:section:load', (event:Event) => {
     if (event.target instanceof HTMLElement || event.target instanceof Document) {
       initializeScrollAnimationTrigger(event.target, true)

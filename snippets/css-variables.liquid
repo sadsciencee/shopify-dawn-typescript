@@ -150,6 +150,9 @@
 	--page-width: {%- render 'ucoast-ax', value: page_width -%};
 	--page-width-margin: {%- render 'ucoast-ax', value: page_width_margin -%};
 
+	--card-aspect-ratio: {{ settings.card_aspect_ratio | divided_by: 100.0 }};
+	--pdp-aspect-ratio: {{ settings.pdp_aspect_ratio | divided_by: 100.0 }};
+
 	--p-crd-image-padding: {%- render 'ucoast-ax', value: product_card_image_padding -%};
 	--p-crd-corner-radius: {%- render 'ucoast-ax', value: card_corner_radius -%};
 	--p-crd-text-alignment: {{- settings.card_text_alignment -}};

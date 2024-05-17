@@ -1,6 +1,5 @@
 import { SearchForm } from '@/scripts/theme/search-form'
 import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/core/global';
-import { routes } from '@/scripts/setup'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 export class PredictiveSearch extends SearchForm {
@@ -213,7 +212,7 @@ export class PredictiveSearch extends SearchForm {
 		}
 
 		fetch(
-			`${routes.predictive_search_url}?q=${encodeURIComponent(
+			`${window.routes.predictive_search_url}?q=${encodeURIComponent(
 				searchTerm
 			)}&section_id=predictive-search`,
 			{

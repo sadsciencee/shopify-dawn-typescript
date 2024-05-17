@@ -157,5 +157,13 @@ $desktopBaseScale: calc(#{scaleValue(100, false)} * 0.01);
   appearance: none;
   cursor: pointer;
 }
+@mixin semanticLink {
+  text-decoration: none;
+  color: currentColor;
+  line-height: 1;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
 
 $bezier: cubic-bezier(0.32, 0.24, 0.15, 1);

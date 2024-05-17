@@ -13,11 +13,11 @@
     "social": {
       "alt_text": {
         "share_on_facebook": "Partilhar no Facebook",
-        "share_on_twitter": "Twittar no Twitter",
+        "share_on_twitter": "Partilhar no X",
         "share_on_pinterest": "Marcar com um pin no Pinterest"
       },
       "links": {
-        "twitter": "Twitter",
+        "twitter": "X (Twitter)",
         "facebook": "Facebook",
         "pinterest": "Pinterest",
         "instagram": "Instagram",
@@ -108,6 +108,9 @@
   "products": {
     "product": {
       "add_to_cart": "Adicionar ao carrinho",
+      "preorder": "Preorder",
+      "add_to_waitlist": "Add to Waitlist",
+      "coming_soon": "Get Notified",
       "description": "Descrição",
       "on_sale": "Em promoção",
       "product_variants": "Variantes de produtos",
@@ -119,7 +122,10 @@
         "minimum_of": "Mínimo de {{ quantity }}",
         "maximum_of": "Máximo de {{ quantity }}",
         "multiples_of": "Incrementos de {{ quantity }}",
-        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> no carrinho"
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> no carrinho",
+        "note": "Ver regras de quantidade",
+        "min_of": "Mín. de {{ quantity }}",
+        "max_of": "Máx. de {{ quantity }}"
       },
       "price": {
         "from_price_html": "A partir de {{ price }}",
@@ -166,7 +172,14 @@
       "inventory_low_stock_show_count": "Stock reduzido: {{ quantity }} restantes",
       "inventory_out_of_stock": "Esgotado",
       "inventory_out_of_stock_continue_selling": "Em stock",
-      "sku": "SKU"
+      "sku": "SKU",
+      "volume_pricing": {
+        "title": "Preços por volume",
+        "note": "Preços por volume disponível",
+        "minimum": "{{ quantity }} ou mais",
+        "price_at_each": "a {{ price }}/ea",
+        "price_range": "{{ minimum }} - {{ maximum }}"
+      }
     },
     "modal": {
       "label": "Galeria de conteúdo multimédia"
@@ -202,7 +215,8 @@
       "clear_filter": "Remover filtro",
       "filter_selected_accessibility": "{{ type }} ({{ count }} filtros selecionados)",
       "show_more": "Mostrar mais",
-      "show_less": "Mostrar menos"
+      "show_less": "Mostrar menos",
+      "filter_and_operator_subtitle": "Corresponder todos"
     }
   },
   "templates": {
@@ -274,17 +288,15 @@
       "title": "O seu carrinho",
       "caption": "Itens do carrinho",
       "remove_title": "Eliminar {{ title }}",
-      "subtotal": "Subtotal",
-      "new_subtotal": "Novo subtotal",
       "note": "Instruções especiais da encomenda",
       "checkout": "Finalizar a compra",
       "empty": "O seu carrinho está vazio",
       "cart_error": "Ocorreu um erro ao atualizar o seu carrinho. Tente novamente.",
       "cart_quantity_error_html": "É possível adicionar apenas {{ quantity }} unidade(s) deste item ao carrinho.",
-      "taxes_and_shipping_policy_at_checkout_html": "Impostos e <a href=\"{{ link }}\">shipping</a> calculados na finalização da compra",
-      "taxes_included_but_shipping_at_checkout": "Imposto incluído e envio calculado na finalização da compra",
-      "taxes_included_and_shipping_policy_html": "Imposto incluído. <a href=\"{{ link }}\">Envio</a> calculado na finalização da compra.",
-      "taxes_and_shipping_at_checkout": "Impostos e envio calculados na finalização da compra",
+      "taxes_and_shipping_policy_at_checkout_html": "Impostos, descontos e <a href=\"{{ link }}\">envio</a> calculados na finalização da compra",
+      "taxes_included_but_shipping_at_checkout": "Imposto incluído, envio e descontos calculados na finalização da compra",
+      "taxes_included_and_shipping_policy_html": "Imposto incluído. <a href=\"{{ link }}\">Envio</a> e descontos calculados na finalização da compra.",
+      "taxes_and_shipping_at_checkout": "Impostos, descontos e envio calculados na finalização da compra",
       "headings": {
         "product": "Produto",
         "price": "Preço",
@@ -296,7 +308,9 @@
       "login": {
         "title": "Tem uma conta?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Inicie sessão</a> para finalizar a compra mais rápido."
-      }
+      },
+      "estimated_total": "Total estimado",
+      "new_estimated_total": "Novo total estimado"
     },
     "footer": {
       "payment": "Métodos de pagamento"
@@ -339,13 +353,43 @@
       "carousel": "Carrossel",
       "announcement": "Comunicado",
       "announcement_bar": "Barra de comunicado"
+    },
+    "quick_order_list": {
+      "product_total": "Subtotal dos produtos",
+      "view_cart": "Ver carrinho",
+      "each": "{{ money }}/cada",
+      "product": "Produto",
+      "variant": "Variante",
+      "variant_total": "Variante total",
+      "items_added": {
+        "one": "{{ quantity }} item adicionado",
+        "other": "{{ quantity }} itens adicionados",
+        "many": "{{ quantity }} itens adicionados"
+      },
+      "items_removed": {
+        "one": "{{ quantity }} item removido",
+        "other": "{{ quantity }} itens removidos",
+        "many": "{{ quantity }} itens removidos"
+      },
+      "product_variants": "Variantes de produtos",
+      "total_items": "Total de itens",
+      "remove_all_items_confirmation": "Remover todos os {{ quantity }} itens do seu carrinho?",
+      "remove_all": "Remover tudo",
+      "cancel": "Cancelar",
+      "remove_all_single_item_confirmation": "Remover 1 item do seu carrinho?",
+      "min_error": "Este item tem um mínimo de {{ min }}",
+      "max_error": "Este item tem um máximo de {{ max }}",
+      "step_error": "Só pode adicionar este item em incrementos de {{ step }}"
     }
   },
   "localization": {
     "country_label": "País/região",
     "language_label": "Idioma",
     "update_language": "Atualizar idioma",
-    "update_country": "Atualizar país/região"
+    "update_country": "Atualizar país/região",
+    "search": "Pesquisar",
+    "popular_countries_regions": "Países/regiões populares",
+    "country_results_count": "{{ count }} países/regiões encontrados"
   },
   "customer": {
     "account": {
@@ -398,7 +442,8 @@
       "password": "Palavra-passe",
       "title": "Iniciar sessão",
       "sign_in": "Iniciar sessão",
-      "submit": "Submeter"
+      "submit": "Submeter",
+      "alternate_provider_separator": "ou"
     },
     "order": {
       "title": "Encomenda {{ name }}",

@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Effen knoplabel"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "Knop Omlijnen"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "Social media",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X / voorheen Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -476,7 +476,7 @@
           "label": "Aankondigingen automatisch draaien"
         },
         "change_slides_speed": {
-          "label": "Wissel dia's elke"
+          "label": "Wijzig elke"
         },
         "header__1": {
           "content": "Pictogrammen voor social media",
@@ -487,6 +487,20 @@
         },
         "show_social": {
           "label": "Pictogrammen op bureaublad weergeven"
+        },
+        "header__3": {
+          "content": "Kiezer voor land/regio",
+          "info": "Ga naar de [marktinstellingen](/admin/settings/markets) om een land/regio toe te voegen."
+        },
+        "enable_country_selector": {
+          "label": "Kiezer voor land/regio inschakelen"
+        },
+        "header__4": {
+          "content": "Taalkiezer",
+          "info": "Ga naar je [taalinstellingen](/admin/settings/languages) om een taal toe te voegen."
+        },
+        "enable_language_selector": {
+          "label": "Taalkiezer inschakelen"
         }
       },
       "presets": {
@@ -596,7 +610,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           },
           "info": "Voeg afbeeldingen toe door je collecties bij te werken. [Meer informatie](https://help.shopify.com/manual/products/collections)"
         },
@@ -646,8 +660,8 @@
       "name": "Aangepaste Liquid",
       "settings": {
         "custom_liquid": {
-          "label": "Aangepaste Liquid",
-          "info": "Voeg app-fragmenten of andere Liquid-code toe om geavanceerde aanpassingen aan te maken."
+          "label": "Liquid-code",
+          "info": "Voeg app-fragmenten of andere code toe om geavanceerde aanpassingen aan te maken. [Meer informatie](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -714,7 +728,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           }
         },
         "show_secondary_image": {
@@ -998,9 +1012,6 @@
         "image_2": {
           "label": "Tweede afbeelding"
         },
-        "color_scheme": {
-          "info": "Zichtbaar wanneer de container wordt weergegeven."
-        },
         "stack_images_on_mobile": {
           "label": "Afbeeldingen stapelen op mobiel"
         },
@@ -1271,6 +1282,9 @@
             },
             "button_link": {
               "label": "Knop met link"
+            },
+            "outline_button": {
+              "label": "Gebruik de knopstijl Omlijnen"
             }
           }
         },
@@ -1452,7 +1466,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           }
         },
         "show_secondary_image": {
@@ -1497,10 +1511,6 @@
             "label": "2 kolommen"
           }
         },
-        "enable_quick_buy": {
-          "label": "Knop 'Snel toevoegen' inschakelen",
-          "info": "Optimaal met een pop-up of een winkelwagentype."
-        },
         "filter_type": {
           "label": "Opmaak voor desktopfilter",
           "options__1": {
@@ -1513,6 +1523,15 @@
             "label": "Lade"
           },
           "info": "Lade is de standaardopmaak voor mobiele apparaten"
+        },
+        "quick_add": {
+          "label": "Snel toevoegen",
+          "info": "Bulk is geoptimaliseerd voor artikelen waar hogere aantallen van zijn gekocht.",
+          "options": {
+            "option_1": "Geen",
+            "option_2": "Standaard",
+            "option_3": "Bulk"
+          }
         }
       }
     },
@@ -1552,7 +1571,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           },
           "info": "Voeg afbeeldingen toe door je collecties bij te werken. [Meer informatie](https://help.shopify.com/manual/products/collections)"
         },
@@ -1626,12 +1645,25 @@
           "name": "Variantkiezer",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stijl",
               "options__1": {
                 "label": "Vervolgkeuzelijst"
               },
               "options__2": {
                 "label": "Pillen"
+              }
+            },
+            "swatch_shape": {
+              "label": "Staal",
+              "info": "Schakel [stalen](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) in bij productopties.",
+              "options__1": {
+                "label": "Cirkel"
+              },
+              "options__2": {
+                "label": "Vierkant"
+              },
+              "options__3": {
+                "label": "Geen"
               }
             }
           }
@@ -1827,15 +1859,6 @@
             },
             "page": {
               "label": "Pagina"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Aangepaste liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Aangepaste liquid",
-              "info": "Voeg app-fragmenten of andere Liquid-code toe om geavanceerde aanpassingen aan te maken."
             }
           }
         },
@@ -2084,7 +2107,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           }
         },
         "show_secondary_image": {
@@ -2154,7 +2177,7 @@
             "label": "Portret"
           },
           "options__3": {
-            "label": "Square"
+            "label": "Vierkant"
           },
           "options__4": {
             "label": "Cirkel"
@@ -2477,12 +2500,25 @@
           "name": "Variantkiezer",
           "settings": {
             "picker_type": {
-              "label": "Type",
+              "label": "Stijl",
               "options__1": {
                 "label": "Vervolgkeuzelijst"
               },
               "options__2": {
                 "label": "Keuzeopties"
+              }
+            },
+            "swatch_shape": {
+              "label": "Staal",
+              "info": "Schakel [stalen](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) in bij productopties.",
+              "options__1": {
+                "label": "Cirkel"
+              },
+              "options__2": {
+                "label": "Vierkant"
+              },
+              "options__3": {
+                "label": "Geen"
               }
             }
           }
@@ -2510,14 +2546,6 @@
             },
             "text": {
               "label": "Tekstkleur"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Aangepaste liquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "Aangepaste liquid"
             }
           }
         },
@@ -2673,6 +2701,9 @@
             "label": "Rechts"
           },
           "label": "Uitlijning van content op mobiel"
+        },
+        "color_scheme": {
+          "info": "Zichtbaar wanneer de container wordt weergegeven."
         }
       },
       "blocks": {
@@ -3092,7 +3123,10 @@
       "name": "Adressen"
     },
     "main-login": {
-      "name": "Inloggen"
+      "name": "Inloggen",
+      "shop_login_button": {
+        "enable": "Inloggen met Shop inschakelen"
+      }
     },
     "main-order": {
       "name": "Bestelling"
@@ -3308,6 +3342,20 @@
       },
       "presets": {
         "name": "Meerdere rijen"
+      }
+    },
+    "quick-order-list": {
+      "name": "Snelle lijst met bestellingen",
+      "settings": {
+        "show_image": {
+          "label": "Afbeeldingen weergeven"
+        },
+        "show_sku": {
+          "label": "SKU's weergeven"
+        }
+      },
+      "presets": {
+        "name": "Snelle lijst met bestellingen"
       }
     }
   }

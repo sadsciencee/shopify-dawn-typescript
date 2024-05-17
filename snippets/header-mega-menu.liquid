@@ -14,6 +14,12 @@
             <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
               <summary
                 id="HeaderMenu-{{ link.handle }}"
+                role='button'
+                aria-expanded='false'
+                aria-controls='Details-HeaderMenu-{{ forloop.index }}'
+                {% if section.settings.open_menu_on_hover %}
+                    data-summary-hover='on'
+                  {% endif %}
                 class="header__menu-item list-menu__item link focus-inset {% if link.child_active %} underline-always-child {% else %} underline-on-hover-child {% endif %}"
               >
                 <span
@@ -78,6 +84,9 @@
             {% if link.current %}
               aria-current="page"
             {% endif %}
+            {% if section.settings.open_menu_on_hover %}
+                data-summary-hover='off'
+                {% endif %}
           >
             <span
               {% if link.child_active %}

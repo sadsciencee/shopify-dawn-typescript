@@ -19,7 +19,7 @@
         "button_label": {
           "label": "ソリッドカラーのボタンのラベル"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "アウトラインボタン"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "SNS",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X / Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -476,7 +476,7 @@
           "label": "自動切り替えのお知らせ"
         },
         "change_slides_speed": {
-          "label": "スライドを変更する間隔"
+          "label": "変更する間隔"
         },
         "header__1": {
           "content": "SNSのアイコン",
@@ -487,7 +487,24 @@
         },
         "show_social": {
           "label": "デスクトップのアイコンを表示する"
+        },
+        "header__3": {
+          "content": "国/地域セレクター",
+          "info": "国/地域を追加するには、[マーケット設定](/admin/settings/markets) に移動します"
+        },
+        "enable_country_selector": {
+          "label": "国/地域セレクターを有効にする"
+        },
+        "header__4": {
+          "content": "言語セレクター",
+          "info": "言語を追加するには、[言語設定](/admin/settings/languages) に移動します"
+        },
+        "enable_language_selector": {
+          "label": "言語セレクターを有効にする"
         }
+      },
+      "presets": {
+        "name": "告知バー"
       }
     },
     "collage": {
@@ -643,8 +660,8 @@
       "name": "カスタマイズされたLiquid",
       "settings": {
         "custom_liquid": {
-          "label": "カスタマイズされたLiquid",
-          "info": "アプリのスニペットやその他のLiquidコードを追加して、高度なカスタマイズを作成します。"
+          "label": "Liquidコード",
+          "info": "アプリのスニペットやその他のコードを追加して、高度なカスタマイズを作成します。[詳しくはこちら](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -995,9 +1012,6 @@
         "image_2": {
           "label": "2番目の画像"
         },
-        "color_scheme": {
-          "info": "コンテナが表示された時に表示。"
-        },
         "stack_images_on_mobile": {
           "label": "モバイルで画像を重ねる"
         },
@@ -1267,6 +1281,9 @@
             },
             "button_link": {
               "label": "ボタンのリンク"
+            },
+            "outline_button": {
+              "label": "アウトラインボタンのスタイルを使用する"
             }
           },
           "name": "ボタン"
@@ -1479,10 +1496,6 @@
           "label": "商品の評価を表示",
           "info": "評価を表示するには、商品評価アプリを追加します。[詳しくはこちら](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
         },
-        "enable_quick_buy": {
-          "label": "「クイック追加」ボタンを有効にする",
-          "info": "ポップアップやドロワーカートのタイプに最適です。"
-        },
         "columns_desktop": {
           "label": "デスクトップの列数"
         },
@@ -1510,6 +1523,15 @@
             "label": "ドロワー"
           },
           "info": "ドロワーはデフォルトのモバイルレイアウトです。"
+        },
+        "quick_add": {
+          "label": "クイック追加",
+          "info": "一括操作は大量に購入するアイテム向けに最適化されています。",
+          "options": {
+            "option_1": "なし",
+            "option_2": "スタンダード",
+            "option_3": "一括"
+          }
         }
       }
     },
@@ -1611,18 +1633,31 @@
           "name": "テキスト"
         },
         "variant_picker": {
+          "name": "バリエーションピッカー",
           "settings": {
             "picker_type": {
-              "label": "タイプ",
+              "label": "スタイル",
               "options__1": {
                 "label": "ドロップダウン"
               },
               "options__2": {
                 "label": "ピル型ボタン"
               }
+            },
+            "swatch_shape": {
+              "label": "見本",
+              "info": "商品オプションの[見本](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches)を有効にする。",
+              "options__1": {
+                "label": "円形"
+              },
+              "options__2": {
+                "label": "正方形"
+              },
+              "options__3": {
+                "label": "なし"
+              }
             }
-          },
-          "name": "バリエーションピッカー"
+          }
         },
         "buy_buttons": {
           "settings": {
@@ -1826,15 +1861,6 @@
         },
         "description": {
           "name": "商品説明"
-        },
-        "custom_liquid": {
-          "name": "カスタムLiquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "カスタムLiquid",
-              "info": "アプリのスニペットやその他のLiquidコードを追加して、高度なカスタマイズを作成します。"
-            }
-          }
         },
         "rating": {
           "name": "商品評価",
@@ -2474,12 +2500,25 @@
           "name": "バリエーションピッカー",
           "settings": {
             "picker_type": {
-              "label": "タイプ",
+              "label": "スタイル",
               "options__1": {
                 "label": "ドロップダウン"
               },
               "options__2": {
                 "label": "ピル型ボタン"
+              }
+            },
+            "swatch_shape": {
+              "label": "見本",
+              "info": "商品オプションの[見本](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches)を有効にする。",
+              "options__1": {
+                "label": "円形"
+              },
+              "options__2": {
+                "label": "正方形"
+              },
+              "options__3": {
+                "label": "なし"
               }
             }
           }
@@ -2507,14 +2546,6 @@
             },
             "text": {
               "label": "テキスト"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "カスタムLiquid",
-          "settings": {
-            "custom_liquid": {
-              "label": "カスタムLiquid"
             }
           }
         },
@@ -2670,6 +2701,9 @@
             "label": "右"
           },
           "label": "モバイルのコンテンツアライメント"
+        },
+        "color_scheme": {
+          "info": "コンテナが表示されたタイミングで表示されます。"
         }
       },
       "blocks": {
@@ -3089,7 +3123,10 @@
       "name": "アドレス"
     },
     "main-login": {
-      "name": "ログイン"
+      "name": "ログイン",
+      "shop_login_button": {
+        "enable": "[Shopにログインする] を有効にする"
+      }
     },
     "main-order": {
       "name": "注文"
@@ -3305,6 +3342,20 @@
       },
       "presets": {
         "name": "複数列"
+      }
+    },
+    "quick-order-list": {
+      "name": "迅速な注文リスト",
+      "settings": {
+        "show_image": {
+          "label": "画像を表示"
+        },
+        "show_sku": {
+          "label": "SKUを表示"
+        }
+      },
+      "presets": {
+        "name": "迅速な注文リスト"
       }
     }
   }

@@ -13,11 +13,11 @@
     "social": {
       "alt_text": {
         "share_on_facebook": "Distribuiți pe Facebook",
-        "share_on_twitter": "Dați un Tweet pe Twitter",
+        "share_on_twitter": "Partajează pe X",
         "share_on_pinterest": "Postați un Pin pe Pinterest"
       },
       "links": {
-        "twitter": "Twitter",
+        "twitter": "X (Twitter)",
         "facebook": "Facebook",
         "pinterest": "Pinterest",
         "instagram": "Instagram",
@@ -108,6 +108,9 @@
   "products": {
     "product": {
       "add_to_cart": "Adăugați în coș",
+      "preorder": "Preorder",
+      "add_to_waitlist": "Add to Waitlist",
+      "coming_soon": "Get Notified",
       "description": "Descriere",
       "on_sale": "Vânzare",
       "product_variants": "Variante de produse",
@@ -126,7 +129,10 @@
         "minimum_of": "Minimum {{ quantity }}",
         "maximum_of": "Maximum {{ quantity }}",
         "multiples_of": "Incrementuri de {{ quantity }}",
-        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> în coș"
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> în coș",
+        "note": "Vezi regulile legate de cantitate",
+        "min_of": "Minimum {{ quantity }}",
+        "max_of": "Maximum {{ quantity }}"
       },
       "price": {
         "from_price_html": "Începând cu {{ price }}",
@@ -166,7 +172,14 @@
       "inventory_low_stock_show_count": "Stoc redus: doar {{ quantity }} articole rămase",
       "inventory_out_of_stock": "Nu există în stoc",
       "inventory_out_of_stock_continue_selling": "În stoc",
-      "sku": "SKU"
+      "sku": "SKU",
+      "volume_pricing": {
+        "title": "Stabilire preț per volum",
+        "note": "Stabilirea prețului per volum este disponibilă",
+        "minimum": "Peste {{ quantity }}",
+        "price_at_each": "la {{ price }}/buc.",
+        "price_range": "{{ minimum }} - {{ maximum }}"
+      }
     },
     "modal": {
       "label": "Galerie media"
@@ -202,7 +215,8 @@
       "clear_filter": "Elimină filtrul",
       "filter_selected_accessibility": "{{ type }} ({{ count }} filtre selectate)",
       "show_more": "Afișează mai mult",
-      "show_less": "Afișează mai puțin"
+      "show_less": "Afișează mai puțin",
+      "filter_and_operator_subtitle": "Potrivește-le pe toate"
     }
   },
   "templates": {
@@ -274,17 +288,15 @@
       "title": "Coșul dvs.",
       "caption": "Articole din coș",
       "remove_title": "Eliminați {{ title }}",
-      "subtotal": "Subtotal",
-      "new_subtotal": "Subtotal nou",
       "note": "Instrucțiuni speciale legate de comandă",
       "checkout": "Finalizați comanda",
       "empty": "Coșul dvs. este gol",
       "cart_error": "A apărut o eroare în timpul actualizării coșului. Încercați din nou.",
       "cart_quantity_error_html": "Cantitatea maximă pe care o poți adăuga în coș din acest articol: {{ quantity }}.",
-      "taxes_and_shipping_policy_at_checkout_html": "Taxele și <a href=\"{{ link }}\">transportul</a> sunt calculate la finalizarea comenzii",
-      "taxes_included_but_shipping_at_checkout": "Taxele sunt incluse și transportul este calculat la finalizarea comenzii",
-      "taxes_included_and_shipping_policy_html": "Taxele sunt incluse. <a href=\"{{ link }}\">Transportul</a> este calculat la finalizarea comenzii.",
-      "taxes_and_shipping_at_checkout": "Taxele și transportul sunt calculate la finalizarea comenzii",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxele, reducerile și <a href=\"{{ link }}\">transportul</a> sunt calculate la finalizarea comenzii",
+      "taxes_included_but_shipping_at_checkout": "Taxele sunt incluse, iar transportul și reducerile sunt calculate la finalizarea comenzii",
+      "taxes_included_and_shipping_policy_html": "Taxele sunt incluse. <a href=\"{{ link }}\">Transportul</a> și reducerile sunt calculate la finalizarea comenzii.",
+      "taxes_and_shipping_at_checkout": "Taxele, reducerile și transportul sunt calculate la finalizarea comenzii",
       "update": "Actualizați",
       "headings": {
         "product": "Produs",
@@ -296,7 +308,9 @@
       "login": {
         "title": "Ai un cont?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Conectează-te</a> pentru a finaliza comanda mai rapid."
-      }
+      },
+      "estimated_total": "Total estimat",
+      "new_estimated_total": "Noul total estimat"
     },
     "footer": {
       "payment": "Metode de plată"
@@ -339,13 +353,43 @@
       "carousel": "Carusel",
       "announcement": "Anunț",
       "announcement_bar": "Bară cu anunțuri"
+    },
+    "quick_order_list": {
+      "product_total": "Subtotal produs",
+      "view_cart": "Vezi coșul",
+      "each": "{{ money }}/buc.",
+      "product": "Produs",
+      "variant": "Variantă",
+      "variant_total": "Total variantă",
+      "items_added": {
+        "one": "{{ quantity }} articol adăugat",
+        "other": "{{ quantity }} articole adăugate",
+        "few": "{{ quantity }} articole adăugate"
+      },
+      "items_removed": {
+        "one": "{{ quantity }} articol eliminat",
+        "other": "{{ quantity }} articole eliminate",
+        "few": "{{ quantity }} articole eliminate"
+      },
+      "product_variants": "Variante de produse",
+      "total_items": "Total articole",
+      "remove_all_items_confirmation": "Elimini toate cele {{ quantity }} articole din coș?",
+      "remove_all": "Elimină tot",
+      "cancel": "Anulează",
+      "remove_all_single_item_confirmation": "Elimini 1 articol din coș?",
+      "min_error": "Pentru acest articol, valoarea minimă este de {{ min }}",
+      "max_error": "Pentru acest articol, valoarea maximă este de {{ max }}",
+      "step_error": "Poți introduce acest articol numai în incrementuri de {{ step }}"
     }
   },
   "localization": {
     "country_label": "Țară/Regiune",
     "language_label": "Limbă",
     "update_language": "Actualizați limba",
-    "update_country": "Actualizați țara/regiunea"
+    "update_country": "Actualizați țara/regiunea",
+    "search": "Caută",
+    "popular_countries_regions": "Țări/regiuni populare",
+    "country_results_count": "{{ count }} țări/regiuni găsite"
   },
   "customer": {
     "account": {
@@ -398,7 +442,8 @@
       "password": "Parolă",
       "title": "Conectați-vă",
       "sign_in": "Conectați-vă",
-      "submit": "Trimiteți"
+      "submit": "Trimiteți",
+      "alternate_provider_separator": "sau"
     },
     "orders": {
       "title": "Istoric comenzi",

@@ -1,0 +1,41 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'product-slider';
+.#{$block} {
+	--slide-spacing: #{$ax12};
+	@include media-query($m-up) {
+		--slide-spacing: #{$ax25};
+	}
+	.embla {
+	}
+	.embla__viewport {
+		overflow: hidden;
+		padding-bottom: $ax1;
+	}
+	.embla__container {
+		backface-visibility: hidden;
+		display: flex;
+		touch-action: pan-y;
+		margin-left: calc(var(--slide-spacing) * -1);
+		@include media-query($s-down) {
+			margin-left: 0;
+		}
+	}
+	.embla__slide,
+	.grid__item {
+		flex-grow: 1;
+		width: ax(270);
+		max-width: ax(270);
+		min-width: 0;
+		padding-left: var(--slide-spacing);
+		position: relative;
+		&:first-of-type {
+			margin-left: var(--slide-spacing);
+		}
+		@include media-query($s-down) {
+			&:first-of-type {
+				margin-left: $ax10;
+			}
+		}
+	}
+}

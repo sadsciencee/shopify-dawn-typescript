@@ -45,7 +45,7 @@
 			{%- if block.settings.image_1 == null -%}
 				{%- render 'icon-accordion', icon: block.settings.icon_1 -%}
 			{%- else -%}
-				{% render 'ucoast-media', image: block.settings.image_1 %}
+				{% render 'ucoast-media', media: block.settings.image_1 %}
 			{%- endif -%}
 			<span class="h4 inline-richtext">
 				{{- block.settings.heading_1 -}}
@@ -57,7 +57,7 @@
 			{%- if block.settings.image_2 == null -%}
 				{% render 'icon-accordion', icon: block.settings.icon_2 -%}
 			{%- else -%}
-				{% render 'ucoast-media', image: block.settings.image_2 %}
+				{% render 'ucoast-media', media: block.settings.image_2 %}
 			{%- endif -%}
 			<span class="h4 inline-richtext">
 				{{- block.settings.heading_2 -}}
@@ -69,7 +69,7 @@
 			{%- if block.settings.image_3 == null -%}
 				{% render 'icon-accordion', icon: block.settings.icon_3 -%}
 			{%- else -%}
-				{% render 'ucoast-media', image: block.settings.image_3 %}
+				{% render 'ucoast-media', media: block.settings.image_3 %}
 			{%- endif -%}
 			<span class="h4 inline-richtext">
 				{{- block.settings.heading_3 -}}

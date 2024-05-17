@@ -81,7 +81,7 @@
 								{% endif %}
 								<div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
 									{% render 'ucoast-media',
-											image: block.settings.image,
+											media: block.settings.image,
 											media_class: 'multicolumn-card__image',
 											loading: loading,
 											aspect_ratio: section.settings.image_ratio

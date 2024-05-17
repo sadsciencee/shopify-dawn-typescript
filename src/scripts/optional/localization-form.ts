@@ -37,7 +37,7 @@ export class LocalizationForm extends UcoastEl {
 	}
 
 	onContainerKeyUp(event: KeyboardEvent) {
-		if (event.code.toUpperCase() !== 'ESCAPE') return
+		if (event.code?.toUpperCase() !== 'ESCAPE') return
 
 		if (this.elements.button.getAttribute('aria-expanded') == 'false') return
 		this.hidePanel()

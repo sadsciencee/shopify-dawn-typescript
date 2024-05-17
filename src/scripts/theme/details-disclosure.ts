@@ -1,4 +1,6 @@
-import { qsRequired } from '@/scripts/core/global'
+import {
+	qsRequired,
+} from '@/scripts/core/global'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class DetailsDisclosure extends UcoastEl {
@@ -6,6 +8,7 @@ export class DetailsDisclosure extends UcoastEl {
 	mainDetailsToggle: HTMLDetailsElement
 	content: HTMLElement
 	animations?: Animation[]
+
 	constructor() {
 		super()
 		this.mainDetailsToggle = qsRequired('details', this)
@@ -14,6 +17,8 @@ export class DetailsDisclosure extends UcoastEl {
 		this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this))
 		this.mainDetailsToggle.addEventListener('toggle', this.onToggle.bind(this))
 	}
+
+
 
 	onFocusOut() {
 		setTimeout(() => {
@@ -34,5 +39,6 @@ export class DetailsDisclosure extends UcoastEl {
 	close() {
 		this.mainDetailsToggle.removeAttribute('open')
 		qsRequired('summary', this.mainDetailsToggle).setAttribute('aria-expanded', 'false')
+		window.Ucoast.openMenuId = undefined
 	}
 }

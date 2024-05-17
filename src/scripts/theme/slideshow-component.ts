@@ -7,9 +7,6 @@ import {
 	qsRequired,
 	targetRequired,
 } from '@/scripts/core/global'
-import { type uCoastWindow } from '@/scripts/setup'
-
-declare let window: uCoastWindow
 
 export class SlideshowComponent extends SliderComponent {
 	static override htmlSelector = 'slideshow-component'

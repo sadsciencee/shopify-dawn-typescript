@@ -19,19 +19,12 @@
 	Usage:
 	{% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
+{% liquid
+    assign show_quick_add = true
+%}
 
 {%- if card_product and card_product != empty -%}
     {%- liquid
-        assign ratio = 1
-        if card_product.featured_media and media_aspect_ratio == 'portrait'
-            assign ratio = 0.8
-        elsif card_product.featured_media and media_aspect_ratio == 'adapt'
-            assign ratio = card_product.featured_media.aspect_ratio
-        endif
-        if ratio == 0 or ratio == null
-            assign ratio = 1
-        endif
-
         assign product_form_section_id = section.id | append: card_product.id | append: '_quick-add'
         assign product_form_id = 'product-form-' | append: product_form_section_id
         assign current_variant = card_product.selected_or_first_available_variant
@@ -54,11 +47,9 @@
         <div
                 class="
 				card card--{{ settings.card_style }}
-				{% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
+				card--media
 				{% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
 				{% if image_shape and image_shape != 'default' %} card--shape{% endif %}
-				{% if extend_height %} card--extend-height{% endif %}
-				{% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
 				{% if horizontal_class %} card--horizontal{% endif %}
 			"
         >
@@ -68,9 +59,9 @@
                 {%- if card_product.featured_media -%}
                     <div class="card__media relative global-media-settings overflow-hidden {% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
                         {% render 'ucoast-media',
-                                image: card_product.featured_media,
-                                media_class: 'motion-reduce',
-                                wrapper_class: 'media--transparent media--hover-effect',
+                                media: card_product.featured_media,
+                                media_class: 'motion-reduce block w-100 h-auto',
+                                wrapper_class: 'media--transparent media--hover-effect block',
                                 loading: loading,
                                 aspect_ratio: media_aspect_ratio,
                                 disable_media_settings: true
@@ -78,9 +69,9 @@
 
                         {%- if card_product.media[1] != null and show_secondary_image -%}
                             {% render 'ucoast-media',
-                                    image: card_product.media[1],
-                                    media_class: 'motion-reduce',
-                                    wrapper_class: 'media--transparent media--hover-effect reveal-on-hover top-0 left-0 w-100 h-100 z-2',
+                                    media: card_product.media[1],
+                                    media_class: 'motion-reduce block w-100 h-auto',
+                                    wrapper_class: 'media--transparent media--hover-effect reveal-on-hover top-0 left-0 w-100 h-100 z-2 block absolute',
                                     loading: loading,
                                     aspect_ratio: 'fill',
                                     position_class: 'absolute',
@@ -89,46 +80,6 @@
                         {%- endif -%}
                     </div>
                 {%- endif -%}
-                <div class="card__content">
-                    <div class="card__information">
-                        <h3
-                                class="card__heading"
-                                {% if card_product.featured_media == null
-                                and settings.card_style == 'standard'
-                                %}
-                                    id="title-{{ section_id }}-{{ card_product.id }}"
-                                {% endif %}
-                        >
-                            <a
-                                    href="{{ card_product.url }}"
-                                    id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
-                                    class="full-unstyled-link"
-                                    aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                            >
-                                {{ card_product.title | escape }}
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="card__badge {{ settings.badge_position }}">
-                        {%- if card_product.available == false -%}
-                            <span
-                                    id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                                    class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-                            >
-								{{- 'products.product.sold_out' | t -}}
-							</span>
-                        {%- elsif card_product.compare_at_price > card_product.price
-                        and card_product.available
-                        -%}
-                            <span
-                                    id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                                    class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-                            >
-								{{- 'products.product.on_sale' | t -}}
-							</span>
-                        {%- endif -%}
-                    </div>
-                </div>
             </div>
             <div class="card__content">
                 <div class="card__information">
@@ -217,7 +168,7 @@
                                         id="{{ product_form_id }}-submit"
                                         type="submit"
                                         name="add"
-                                        class="quick-add__submit button button--full-width button--outline{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+                                        class="quick-add__submit button button--full-width button--outline{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %} relative z-2"
                                         aria-haspopup="dialog"
                                         aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                                         data-product-url="{{ card_product.url }}"
@@ -308,8 +259,12 @@
                                             aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                                             aria-live="polite"
                                             data-sold-out-message="true"
-                                            {% if current_variant.available == false %}
+                                            {% if inventory_status == 'ComingSoon' %}
+                                                data-oos-popup-trigger="{{ current_variant.id }}"
+                                            {% elsif inventory_status == 'OutOfStock'
+                                            %}
                                                 disabled
+                                                aria-disabled='true'
                                             {% endif %}
                                     >
 										<span data-uc-inventory-status-text>

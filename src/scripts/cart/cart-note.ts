@@ -1,5 +1,4 @@
 import { ON_CHANGE_DEBOUNCE_TIMER } from '@/scripts/core/global'
-import { routes } from '@/scripts/setup'
 import { debounce, fetchConfig, qsRequired, targetRequired } from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
@@ -15,7 +14,7 @@ export class CartNote extends UcoastEl {
 			debounce((event: Event) => {
 				const target = targetRequired<Event, HTMLTextAreaElement>(event)
 				const body = JSON.stringify({ note: target.value })
-				void fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
+				void fetch(`${window.routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
 			}, ON_CHANGE_DEBOUNCE_TIMER)
 		)
 	}

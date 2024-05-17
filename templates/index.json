@@ -1,345 +1,338 @@
 {
-  "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
-        "image": "shopify:\/\/shop_images\/Hydrosol-BloodOrange-BOR.jpg",
-        "image_overlay_opacity": 30,
-        "image_height": "medium",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false,
-        "space_above": 0,
-        "mobile_space_above": -1
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "background-1",
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "full_width": true,
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": true,
-        "color_scheme": "background-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "enable_quick_add": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "color_scheme": "background-1",
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": false,
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "cover_image": "shopify:\/\/shop_images\/EssentialOil-Angelica-ANGj.pg.jpg",
-        "description": "",
-        "full_width": false,
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Copaiba-Balsam-100ml-Back-CapOn-Lightcopy.jpg",
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "color_scheme": "background-1",
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "space_above": 8,
-        "mobile_space_above": -1
-      }
-    },
-    "13d0b711-48ba-483a-84fc-bcbb440aeb82": {
-      "type": "multirow",
-      "blocks": {
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-0": {
-          "type": "row",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EssentialOil-CinnamonBark-CIB.jpg",
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-1": {
-          "type": "row",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Hydrosol-BayLaurel-BAL.jpg",
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2": {
-          "type": "row",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EssentialOil-SiberianFir-PNE.jpg",
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-0",
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-1",
-        "template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "image_height": "medium",
-        "desktop_image_width": "medium",
-        "heading_size": "h1",
-        "text_style": "body",
-        "button_style": "secondary",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "image_layout": "alternate-left",
-        "section_color_scheme": "",
-        "row_color_scheme": "",
-        "mobile_content_alignment": "left",
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "f0d6d105-6481-4c63-9ff2-e2d191a0f414": {
-      "type": "slideshow",
-      "blocks": {
-        "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-0": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/carrier-cocoabutter.jpg",
-            "heading": "Image slide",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 0,
-            "color_scheme": "",
-            "text_alignment_mobile": "center"
-          }
-        },
-        "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EssentialOil-SiberianFir-PNE.jpg",
-            "heading": "Image slide",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 0,
-            "color_scheme": "",
-            "text_alignment_mobile": "center"
-          }
-        }
-      },
-      "block_order": [
-        "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-0",
-        "template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-1"
-      ],
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand",
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    },
-    "0026a19f-baba-419e-b405-504c014c4a12": {
-      "type": "collage",
-      "blocks": {
-        "template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EssentialOil-Angelica-ANGj.pg.jpg"
-          }
-        },
-        "b8538249-5a0e-4287-b8e2-64a312cee6b9": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Essentialoil-BalsamCopaiba-COP.jpg"
-          }
-        },
-        "fb608a36-9c54-4ed7-aa64-8fff0d84e16a": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/EssentialOil-BalsamFir-BFR.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1",
-        "b8538249-5a0e-4287-b8e2-64a312cee6b9",
-        "fb608a36-9c54-4ed7-aa64-8fff0d84e16a"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h1",
-        "desktop_layout": "left",
-        "mobile_layout": "column",
-        "card_styles": "product-card-wrapper contains-card--product",
-        "color_scheme": "",
-        "space_above": 4,
-        "mobile_space_above": -1
-      }
-    }
-  },
-  "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "video",
-    "multicolumn",
-    "13d0b711-48ba-483a-84fc-bcbb440aeb82",
-    "f0d6d105-6481-4c63-9ff2-e2d191a0f414",
-    "0026a19f-baba-419e-b405-504c014c4a12"
-  ]
+	"sections": {
+		"image_banner": {
+			"type": "image-banner",
+			"blocks": {
+				"heading": {
+					"type": "heading",
+					"settings": {
+						"heading": "Image banner",
+						"heading_size": "h0"
+					}
+				},
+				"text": {
+					"type": "text",
+					"settings": {
+						"text": "Give customers details about the banner image(s) or content on the template.",
+						"text_style": "body"
+					}
+				},
+				"button": {
+					"type": "buttons",
+					"settings": {
+						"button_label_1": "Shop all",
+						"button_link_1": "shopify:\/\/collections\/all",
+						"button_style_secondary_1": false,
+						"button_label_2": "",
+						"button_link_2": "",
+						"button_style_secondary_2": false
+					}
+				}
+			},
+			"block_order": [
+				"heading",
+				"text",
+				"button"
+			],
+			"settings": {
+				"color_scheme": "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c",
+				"image_overlay_opacity": 30,
+				"image_height": "medium",
+				"desktop_content_position": "bottom-center",
+				"show_text_box": false,
+				"desktop_content_alignment": "center",
+				"image_behavior": "none",
+				"mobile_content_alignment": "center",
+				"stack_images_on_mobile": false,
+				"show_text_below": false,
+				"space_above": 0,
+				"mobile_space_above": -1
+			}
+		},
+		"rich_text": {
+			"type": "rich-text",
+			"blocks": {
+				"heading": {
+					"type": "heading",
+					"settings": {
+						"heading": "Talk about your brand",
+						"heading_size": "h1"
+					}
+				},
+				"text": {
+					"type": "text",
+					"settings": {
+						"text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+					}
+				}
+			},
+			"block_order": [
+				"heading",
+				"text"
+			],
+			"settings": {
+				"color_scheme": "background-1",
+				"desktop_content_position": "center",
+				"content_alignment": "center",
+				"full_width": true,
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		},
+		"featured_collection": {
+			"type": "featured-collection",
+			"blocks": {
+				"collection_xUaq4j": {
+					"type": "collection",
+					"settings": {
+						"title": "Featured collection",
+						"collection": "featured"
+					}
+				},
+				"collection_YDaN8g": {
+					"type": "collection",
+					"settings": {
+						"title": "Featured collection",
+						"collection": "rare"
+					}
+				}
+			},
+			"block_order": [
+				"collection_xUaq4j",
+				"collection_YDaN8g"
+			],
+			"settings": {
+				"color_scheme": "background-1",
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		},
+		"video": {
+			"type": "video",
+			"settings": {
+				"color_scheme": "background-1",
+				"heading": "",
+				"heading_size": "h1",
+				"enable_video_looping": false,
+				"video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+				"description": "",
+				"full_width": false,
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		},
+		"multicolumn": {
+			"type": "multicolumn",
+			"blocks": {
+				"column1": {
+					"type": "column",
+					"settings": {
+						"title": "Column",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"link_label": "",
+						"link": ""
+					}
+				},
+				"column2": {
+					"type": "column",
+					"settings": {
+						"title": "Column",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"link_label": "",
+						"link": ""
+					}
+				},
+				"column3": {
+					"type": "column",
+					"settings": {
+						"title": "Column",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"link_label": "",
+						"link": ""
+					}
+				}
+			},
+			"block_order": [
+				"column1",
+				"column2",
+				"column3"
+			],
+			"settings": {
+				"color_scheme": "background-1",
+				"title": "",
+				"heading_size": "h1",
+				"image_width": "third",
+				"image_ratio": "adapt",
+				"columns_desktop": 3,
+				"column_alignment": "center",
+				"background_style": "none",
+				"button_label": "",
+				"button_link": "",
+				"columns_mobile": "1",
+				"swipe_on_mobile": false,
+				"space_above": 8,
+				"mobile_space_above": -1
+			}
+		},
+		"13d0b711-48ba-483a-84fc-bcbb440aeb82": {
+			"type": "multirow",
+			"blocks": {
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-0": {
+					"type": "row",
+					"settings": {
+						"caption": "Caption",
+						"heading": "Row",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"button_label": "Button label",
+						"button_link": ""
+					}
+				},
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-1": {
+					"type": "row",
+					"settings": {
+						"caption": "Caption",
+						"heading": "Row",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"button_label": "Button label",
+						"button_link": ""
+					}
+				},
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2": {
+					"type": "row",
+					"settings": {
+						"caption": "Caption",
+						"heading": "Row",
+						"text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+						"button_label": "Button label",
+						"button_link": ""
+					}
+				}
+			},
+			"block_order": [
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-0",
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-1",
+				"template--19718447169816__13d0b711-48ba-483a-84fc-bcbb440aeb82-168869994992d6431d-2"
+			],
+			"settings": {
+				"color_scheme": "",
+				"image_height": "adapt",
+				"desktop_image_width": "medium",
+				"heading_size": "h1",
+				"text_style": "body",
+				"button_style": "secondary",
+				"desktop_content_position": "middle",
+				"desktop_content_alignment": "left",
+				"image_layout": "alternate-left",
+				"section_color_scheme": "",
+				"row_color_scheme": "",
+				"mobile_content_alignment": "left",
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		},
+		"f0d6d105-6481-4c63-9ff2-e2d191a0f414": {
+			"type": "slideshow",
+			"blocks": {
+				"template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-0": {
+					"type": "slide",
+					"settings": {
+						"heading": "Image slide",
+						"heading_size": "h1",
+						"subheading": "Tell your brand's story through images",
+						"button_label": "Button label",
+						"link": "",
+						"button_style_secondary": false,
+						"box_align": "middle-center",
+						"show_text_box": true,
+						"text_alignment": "center",
+						"image_overlay_opacity": 0,
+						"color_scheme": "",
+						"text_alignment_mobile": "center"
+					}
+				},
+				"template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-1": {
+					"type": "slide",
+					"settings": {
+						"heading": "Image slide",
+						"heading_size": "h1",
+						"subheading": "Tell your brand's story through images",
+						"button_label": "Button label",
+						"link": "",
+						"button_style_secondary": false,
+						"box_align": "middle-center",
+						"show_text_box": true,
+						"text_alignment": "center",
+						"image_overlay_opacity": 0,
+						"color_scheme": "",
+						"text_alignment_mobile": "center"
+					}
+				}
+			},
+			"block_order": [
+				"template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-0",
+				"template--19718447169816__f0d6d105-6481-4c63-9ff2-e2d191a0f414-16886999624e1a7988-1"
+			],
+			"settings": {
+				"layout": "full_bleed",
+				"slide_height": "medium",
+				"slider_visual": "counter",
+				"auto_rotate": false,
+				"change_slides_speed": 5,
+				"image_behavior": "none",
+				"show_text_below": true,
+				"accessibility_info": "Slideshow about our brand",
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		},
+		"0026a19f-baba-419e-b405-504c014c4a12": {
+			"type": "collage",
+			"blocks": {
+				"template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1": {
+					"type": "image",
+					"settings": {
+						"image": "shopify:\/\/shop_images\/cin3.jpg"
+					}
+				},
+				"product_JKMTiY": {
+					"type": "product",
+					"settings": {
+						"product": "andros-dress",
+						"second_image": false
+					}
+				},
+				"image_wEYkDw": {
+					"type": "image",
+					"settings": {
+						"image": "shopify:\/\/shop_images\/cin2.jpg"
+					}
+				}
+			},
+			"block_order": [
+				"template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1",
+				"product_JKMTiY",
+				"image_wEYkDw"
+			],
+			"settings": {
+				"heading": "Multimedia collage",
+				"heading_size": "h1",
+				"desktop_layout": "left",
+				"mobile_layout": "column",
+				"card_styles": "product-card-wrapper contains-card--product",
+				"color_scheme": "",
+				"space_above": 4,
+				"mobile_space_above": -1
+			}
+		}
+	},
+	"order": [
+		"image_banner",
+		"rich_text",
+		"featured_collection",
+		"video",
+		"multicolumn",
+		"13d0b711-48ba-483a-84fc-bcbb440aeb82",
+		"f0d6d105-6481-4c63-9ff2-e2d191a0f414",
+		"0026a19f-baba-419e-b405-504c014c4a12"
+	]
 }

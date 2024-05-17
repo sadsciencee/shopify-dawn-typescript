@@ -8,6 +8,17 @@
     "theme_support_url": "https://ucoastweb.com/"
   },
   {
+    "name": "Placeholders",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "placeholder_image",
+        "label": "Placeholder Image",
+        "info": "Brand image that appears when an image field is left blank."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
@@ -187,6 +198,118 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Welcome Popup",
+    "settings": [
+      {
+        "type": "text",
+        "id": "klaviyo_company_id",
+        "label": "Klaviyo Company ID",
+        "default": "XXXXXX"
+      },
+      {
+        "type": "checkbox",
+        "id": "welcome_popup_enabled",
+        "label": "Enable Welcome Popup"
+      },
+      {
+        "type": "range",
+        "id": "welcome_popup_delay",
+        "label": "Welcome Popup Delay",
+        "min": 1,
+        "max": 5,
+        "default": 3,
+        "unit": "sec"
+      },
+      {
+        "type": "checkbox",
+        "id": "welcome_popup_demo_mode",
+        "label": "Demo Mode",
+        "info": "Enable demo mode to show the popup even if it has already been closed or submitted."
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.content"
+      },
+      {
+        "type": "text",
+        "id": "welcome_popup_title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "welcome_popup_text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "welcome_popup_button_label",
+        "label": "Button Label"
+      },
+      {
+        "type": "text",
+        "id": "welcome_popup_placeholder",
+        "label": "Placeholder"
+      },
+      {
+        "type": "header",
+        "content": "Klaviyo Settings"
+      },
+      {
+        "type": "text",
+        "id": "welcome_list_id",
+        "label": "Klaviyo List ID",
+        "default": "XXXXXX"
+      },
+      {
+        "type": "textarea",
+        "id": "welcome_popup_terms",
+        "label": "Terms"
+      },
+      {
+        "type": "checkbox",
+        "id": "klaviyo_collect_sms",
+        "label": "Collect SMS on Klaviyo Forms",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Media"
+      },
+      {
+        "type": "image_picker",
+        "id": "welcome_popup_image",
+        "label": "t:sections.all.image"
+      },
+      {
+        "type": "video",
+        "id": "welcome_popup_video",
+        "label": "t:sections.all.video",
+        "info": "t:sections.all.replaces_image"
+      }
+    ]
+  },
+  {
+    "name": "Waitlist Popup",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.content"
+      },
+      {
+        "type": "text",
+        "id": "waitlist_popup_title",
+        "label": "Title",
+        "default": "Out of Stock"
+      },
+      {
+        "type": "text",
+        "id": "waitlist_popup_text",
+        "label": "Text",
+        "default": "Register to receive a notification when this item comes back in stock."
       }
     ]
   },
@@ -1032,6 +1155,26 @@
       {
         "type": "header",
         "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "card_aspect_ratio",
+        "label": "Card Aspect Ratio",
+        "min": 51,
+        "max": 225,
+        "step": 3,
+        "default": 66,
+        "unit": "%"
+      },
+      {
+        "type": "range",
+        "id": "pdp_aspect_ratio",
+        "label": "PDP Aspect Ratio",
+        "min": 51,
+        "max": 225,
+        "step": 3,
+        "default": 66,
+        "unit": "%"
       },
       {
         "type": "range",

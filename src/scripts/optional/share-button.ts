@@ -1,8 +1,5 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
 import { qsRequired } from '@/scripts/core/global'
-import { type uCoastWindow } from '@/scripts/setup';
-
-declare let window: uCoastWindow
 
 export class ShareButton extends DetailsDisclosure {
 	static override htmlSelector = 'share-button'

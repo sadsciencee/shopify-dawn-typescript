@@ -5,7 +5,11 @@ import type {
 	FocusableHTMLElement,
 } from '@/scripts/types/theme'
 import { type ProductModel } from '@/scripts/optional/product-model'
-import { type ProductVariant } from '@/scripts/types/api'
+import { MediaManager } from '@/scripts/core/media'
+import { type ProductVariant } from '@/scripts/shopify'
+import { type HeaderMenu } from '@/scripts/theme/header-menu'
+import { WaitlistForm } from '@/scripts/theme/waitlist-form'
+import { ModalDialog } from '@/scripts/theme/modal-dialog'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -378,6 +382,11 @@ export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
 	if (!data) throw new Error(`Attribute ${attribute} no found on element ${{el}}`)
 	return data
 }
+export const getAttributeOrUndefined = (attribute: string, el: HTMLElement) => {
+	const data = el.getAttribute(attribute)
+	if (!data) return undefined
+	return data
+}
 // browser safe replace all
 export const replaceAll = (str: string, find: string, replace: string) => {
 	return str.split(find).join(replace)
@@ -546,7 +555,7 @@ export const setDrawerHeight = () => {
 export function initializeSummaryA11y() {
 	// this is from shopify
 	// it adds some accessibility features to summary elements
-	document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
+	document.querySelectorAll('[id^="Details-"] summary:not([data-summary-hover])').forEach((summary) => {
 		summary.setAttribute('role', 'button')
 		const parentNode =
 			summary.parentNode instanceof HTMLElement ? summary.parentNode : undefined
@@ -562,9 +571,11 @@ export function initializeSummaryA11y() {
 			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
 		}
 		summary.addEventListener('click', (event) => {
+			//event.preventDefault()
 			const currentTarget = currentTargetRequired(event)
 			const closestTarget = targetClosestRequired(event, 'details')
-			currentTarget.setAttribute('aria-expanded', `${!closestTarget.hasAttribute('open')}`)
+			const shouldOpen = !closestTarget.hasAttribute('open')
+			currentTarget.setAttribute('aria-expanded', `${shouldOpen}`)
 		})
 		if (summary.closest('header-drawer, menu-drawer')) return
 
@@ -573,6 +584,27 @@ export function initializeSummaryA11y() {
 		if (!parentElement) return
 		parentElement.addEventListener('keyup', onKeyUpEscape)
 	})
+
+	document.querySelectorAll('[data-summary-hover="off"]').forEach((el) => {
+		el.addEventListener('mouseenter', (_) => {
+			closeAllHeaderMenus()
+		})
+	})
+
+	const closeOnExitContainers = qsaOptional('[data-close-menus-on-mouse-exit]')
+	closeOnExitContainers?.forEach(el => {
+		el.addEventListener('mouseleave', (_) => {
+			closeAllHeaderMenus()
+		})
+	})
+}
+
+function closeAllHeaderMenus() {
+	console.log('close all', window.Ucoast.openMenuId)
+	if (!window.Ucoast.openMenuId) return
+	const headerMenus = qsaOptional<HeaderMenu>('header-menu')
+	headerMenus?.forEach(el => el.close())
+	window.Ucoast.openMenuId = undefined
 }
 
 export function getFocusableElements(container: HTMLElement): FocusableHTMLElement[] {
@@ -602,7 +634,7 @@ export function focusVisiblePolyfill() {
 	let mouseClick: boolean | null = null
 
 	window.addEventListener('keydown', (event) => {
-		if (navKeys.includes(event.code.toUpperCase())) {
+		if (navKeys.includes(event.code?.toUpperCase())) {
 			mouseClick = false
 		}
 	})
@@ -628,7 +660,7 @@ export function focusVisiblePolyfill() {
 }
 
 export function onKeyUpEscape(event: KeyboardEvent) {
-	if (event.code.toUpperCase() !== 'ESCAPE') return
+	if (event.code?.toUpperCase() !== 'ESCAPE') return
 
 	const openDetailsElement = targetClosestOptional(event, 'details[open]')
 	if (!openDetailsElement) return
@@ -714,7 +746,6 @@ type AddToCartFormValues = {
 
 export function addToCartConfig(body: FormData) {
 	const definedQuantity = getOrUndefined(body, 'quantity')
-	console.log({ definedQuantity })
 	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
@@ -727,7 +758,6 @@ export function addToCartConfig(body: FormData) {
 		sections: getOrUndefined(body, 'sections'),
 		sections_url: getOrUndefined(body, 'sections_url'),
 	}
-	console.log({data})
 	return {
 		method: 'POST',
 		headers: {
@@ -739,48 +769,18 @@ export function addToCartConfig(body: FormData) {
 	}
 }
 
-// klaviyo & notify me not part of initial dawn but will be in every project
-
-type AddToKlaviyoListFormValues = {
-	email: string
-	list_id: string
-	phone_number?: string
-}
-
-export function addToKlaviyoListConfig(body: FormData) {
-	const data: AddToKlaviyoListFormValues = {
-		email: getOrThrow(body, 'email'),
-		list_id: getOrThrow(body, 'list_id'),
-		phone_number: getOrUndefined(body, 'phone_number'),
+export function formatPhoneNumber(unchecked_number: string) {
+	let phone_number = unchecked_number
+		.replace('(', '')
+		.replace(')', '')
+		.replace('+', '')
+		.replaceAll('-', '')
+		.replaceAll(' ','')
+		.trim()
+	if (window?.Shopify?.country === 'US' && phone_number.length === 10) {
+		phone_number = `+1${phone_number}`
 	}
-	return {
-		method: 'POST',
-		mode: 'cors' as RequestMode,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	}
-}
-
-type NotifyMeConfigValues = {
-	email: string
-	variant: string
-}
-
-export function notifyMeConfig(body: FormData) {
-	const data: NotifyMeConfigValues = {
-		email: getOrThrow(body, 'email'),
-		variant: getOrThrow(body, 'variant'),
-	}
-	return {
-		method: 'POST',
-		mode: 'cors' as RequestMode,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	}
+	return phone_number
 }
 
 // recentlyViewedProducts isn't part of dawn, but it's in my 9.0 build pack so leaving here for now
@@ -1001,7 +1001,7 @@ export function trapFocus(
 	}
 
 	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
-		if (event.code.toUpperCase() !== 'TAB') return // If not TAB key
+		if (event.code?.toUpperCase() !== 'TAB') return // If not TAB key
 		// On the last focusable element and tab forward, focus the first element.
 		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
 		if (target === last && !event.shiftKey) {
@@ -1046,7 +1046,53 @@ export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefi
 
 	if (elementToFocus) elementToFocus.focus()
 }
+
+export function openWaitlistModal(variantId: number, opener: HTMLElement) {
+	const modal = qsRequired<ModalDialog>(`#WaitlistModal`)
+	const waitlistForm = qsRequired<WaitlistForm>('waitlist-form', modal)
+	waitlistForm.variantInput.value = `${variantId}`
+	if (modal) modal.show(opener)
+}
+export function initializeShopifyConsentAPI() {
+	window.Shopify?.loadFeatures(
+		[
+			{
+				name: 'consent-tracking-api',
+				version: '0.1',
+			},
+		],
+		(error) => {
+			if (error) {
+				console.error('error initializing privacy api')
+				console.log('error', error)
+			} else {
+				window.Ucoast.shopifyConsentAPILoaded = true
+			}
+		}
+	)
+}
+
+function initGlobalUcoast() {
+	safeDefineElement(UcoastVideo)
+	const iOS = window.Ucoast?.iOS ?? false
+	const Ucoast: typeof window.Ucoast = {
+		shopifyConsentAPILoaded: false,
+		iOS,
+		mediaManager: new MediaManager()
+	}
+	if (!window.Ucoast) {
+		window.Ucoast = Ucoast
+	}
+	if (!window.Ucoast.mediaManager) {
+		window.Ucoast.mediaManager = new MediaManager()
+	}
+}
+
+
+
 export function globalSetup() {
+	initGlobalUcoast()
+	initializeShopifyConsentAPI()
 	safeDefineElement(UcoastVideo)
 	initializeSummaryA11y()
 	try {
@@ -1055,8 +1101,6 @@ export function globalSetup() {
 		focusVisiblePolyfill()
 	}
 	// mediaLoader
-	mediaLoader()
+	void window.Ucoast.mediaManager.initialLoad()
 }
-
-// export all modules here so we can ensure it all gets bundled as single file
 

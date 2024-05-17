@@ -24,7 +24,7 @@
     endif
     assign custom_attributes = 'data-media-id="' | append: media.id | append: '"'
   %}
-  {% render 'ucoast-media', image: media.preview_image, custom_attributes: custom_attributes, wrapper_class: media_class %}
+  {% render 'ucoast-media', media: media, custom_attributes: custom_attributes, wrapper_class: media_class %}
 {%- else -%}
   {%- if media.media_type == 'model' -%}
     <div class="product-media-modal__model w-100" data-media-id="{{ media.id }}">
@@ -41,7 +41,7 @@
           {%- render 'icon-default', icon: 'play' -%}
         {%- endif -%}
       </span>
-      {% render 'ucoast-media', image: media.preview_image %}
+      {% render 'ucoast-media', media: media.preview_image %}
     </button>
     <template>
       {%- case media.media_type -%}

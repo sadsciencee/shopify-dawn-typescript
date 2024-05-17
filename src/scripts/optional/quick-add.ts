@@ -7,7 +7,6 @@ import {
 	replaceAll,
 } from '@/scripts/core/global'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
-import { type uCoastWindow } from '@/scripts/setup'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'
 import { type ProductModal } from '@/scripts/product/product-modal'
@@ -16,8 +15,6 @@ import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { type ProductInfo } from '@/scripts/product/product-info'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 import {mediaLoader} from "@/scripts/core/global";
-
-declare let window: uCoastWindow
 
 export class QuickAddModal extends ModalDialog {
 	static override htmlSelector = 'quick-add-modal'

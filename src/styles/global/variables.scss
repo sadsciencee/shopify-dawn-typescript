@@ -117,7 +117,7 @@ $pageWidth: var(--page-width);
 $pageWidthMargin: var(--page-width-margin);
 // product card
 $productCardImagePadding: var(--p-crd-image-padding);
-$productCardCornerRadius: var(--p-crd-corner-radius);
+$productCardCornerRadius: var(--me-radius);
 $productCardTextAlignment: var(--p-crd-text-alignment);
 $productCardBorderWidth: var(--p-crd-border-width);
 $productCardBorderOpacity: var(--p-crd-border-opacity);
@@ -128,7 +128,7 @@ $productCardShadowVerticalOffset: var(--p-crd-shadow-vertical-offset);
 $productCardShadowBlurRadius: var(--p-crd-shadow-blur-radius);
 // collection card
 $collectionCardImagePadding: var(--c-crd-image-padding);
-$collectionCardCornerRadius: var(--c-crd-corner-radius);
+$collectionCardCornerRadius: var(--me-radius);
 $collectionCardTextAlignment: var(--c-crd-text-alignment);
 $collectionCardBorderWidth: var(--c-crd-border-width);
 $collectionCardBorderOpacity: var(--c-crd-border-opacity);
@@ -139,7 +139,7 @@ $collectionCardShadowVerticalOffset: var(--c-crd-shadow-vertical-offset);
 $collectionCardShadowBlurRadius: var(--c-crd-shadow-blur-radius);
 // blog card
 $blogCardImagePadding: var(--b-crd-image-padding);
-$blogCardCornerRadius: var(--b-crd-corner-radius);
+$blogCardCornerRadius: var(--me-radius);
 $blogCardTextAlignment: var(--b-crd-text-alignment);
 $blogCardBorderWidth: var(--b-crd-border-width);
 $blogCardBorderOpacity: var(--b-crd-border-opacity);
@@ -214,6 +214,10 @@ $comboOutline1: var(--combo-outline-1);
 $comboPopupShadow: var(--combo-popup-shadow);
 $comboPopupFocusShadow: var(--combo-popup-focus-shadow);
 $comboPopupContentShadow: var(--combo-popup-content-shadow);
+
+// aspect ratios
+$cardAspectRatio: var(--card-aspect-ratio);
+$pdpAspectRatio: var(--pdp-aspect-ratio);
 
 
 @mixin box-shadow {

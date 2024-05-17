@@ -23,6 +23,7 @@ export class SliderComponent extends UcoastEl {
 	pageTotalElement?: HTMLElement
 	prevButton?: HTMLButtonElement
 	nextButton?: HTMLButtonElement
+	mediaLoaded = false
 	constructor() {
 		super()
 		this.slider = qsRequired('[id^="Slider-"]', this)
@@ -64,6 +65,7 @@ export class SliderComponent extends UcoastEl {
 	}
 
 	createSlideChangedEvent(): SlideChangedEvent {
+		this.loadMedia()
 		const currentPage = this.currentPage
 		if (!currentPage)
 			throw new Error('cannot createSlideChangedEvent - currentPage is undefined')
@@ -156,5 +158,11 @@ export class SliderComponent extends UcoastEl {
 		this.slider.scrollTo({
 			left: position,
 		})
+	}
+
+	loadMedia() {
+		if (this.mediaLoaded) return
+		this.mediaLoaded = true
+		void window.Ucoast.mediaManager.loadAllInContainer(this)
 	}
 }

@@ -19,7 +19,7 @@
         "button_label": {
           "label": "Nhãn nút đặc"
         },
-        "outline_button_label": {
+        "secondary_button_label": {
           "label": "Nút viền ngoài"
         },
         "shadow": {
@@ -56,8 +56,8 @@
       "name": "Truyền thông xã hội",
       "settings": {
         "social_twitter_link": {
-          "label": "Twitter",
-          "info": "https://twitter.com/shopify"
+          "label": "X/Twitter",
+          "info": "https://x.com/shopify"
         },
         "social_facebook_link": {
           "label": "Facebook",
@@ -476,7 +476,7 @@
           "label": "Tự động xoay vòng thông báo"
         },
         "change_slides_speed": {
-          "label": "Đổi trang chiếu sau mỗi"
+          "label": "Thay đổi sau mỗi"
         },
         "header__1": {
           "content": "Biểu tượng mạng xã hội",
@@ -487,7 +487,24 @@
         },
         "show_social": {
           "label": "Hiển thị biểu tượng trên máy tính để bàn"
+        },
+        "header__3": {
+          "content": "Hộp chọn quốc gia/khu vực",
+          "info": "Để thêm quốc gia/khu vực, vào [cài đặt thị trường.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Bật hộp chọn quốc gia/khu vực"
+        },
+        "header__4": {
+          "content": "Hộp chọn ngôn ngữ",
+          "info": "Để thêm ngôn ngữ, vào [cài đặt ngôn ngữ](/admin/settings/languages)."
+        },
+        "enable_language_selector": {
+          "label": "Bật hộp chọn ngôn ngữ"
         }
+      },
+      "presets": {
+        "name": "Thanh thông báo"
       }
     },
     "collage": {
@@ -643,8 +660,8 @@
       "name": "Liquid tùy chỉnh",
       "settings": {
         "custom_liquid": {
-          "label": "Liquid tùy chỉnh",
-          "info": "Thêm đoạn mã ứng dụng hoặc mã Liquid khác để tạo các tùy chỉnh nâng cao."
+          "label": "Mã Liquid",
+          "info": "Thêm đoạn mã ứng dụng hoặc mã khác để tạo các tùy chỉnh nâng cao. [Tìm hiểu thêm](https://shopify.dev/docs/api/liquid)"
         }
       },
       "presets": {
@@ -995,9 +1012,6 @@
         "image_2": {
           "label": "Hình ảnh thứ hai"
         },
-        "color_scheme": {
-          "info": "Có thể nhìn thấy khi vùng chứa hiển thị."
-        },
         "stack_images_on_mobile": {
           "label": "Xếp chồng hình ảnh trên điện thoại di động"
         },
@@ -1268,6 +1282,9 @@
             },
             "button_link": {
               "label": "Liên kết trên nút"
+            },
+            "outline_button": {
+              "label": "Sử dụng kiểu nút viền ngoài"
             }
           }
         },
@@ -1479,10 +1496,6 @@
           "label": "Hiển thị thứ hạng sản phẩm",
           "info": "Nếu muốn hiển thị thứ hạng, hãy thêm ứng dụng xếp hạng sản phẩm. [Tìm hiểu thêm](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
         },
-        "enable_quick_buy": {
-          "label": "Bật nút thêm nhanh",
-          "info": "Tối ưu với cửa sổ bật lên hoặc giỏ hàng kiểu ngăn kéo."
-        },
         "columns_desktop": {
           "label": "Số cột trên máy tính để bàn"
         },
@@ -1510,6 +1523,15 @@
             "label": "Ngăn"
           },
           "info": "Ngăn là bố cục mặc định trên di động."
+        },
+        "quick_add": {
+          "label": "Thêm nhanh",
+          "info": "Tùy chọn Số lượng lớn được tối ưu hóa cho các mặt hàng đã mua với số lượng lớn hơn.",
+          "options": {
+            "option_1": "Không",
+            "option_2": "Tiêu chuẩn",
+            "option_3": "Số lượng lớn"
+          }
         }
       }
     },
@@ -1623,12 +1645,25 @@
           "name": "Trình chọn mẫu mã",
           "settings": {
             "picker_type": {
-              "label": "Loại",
+              "label": "Kiểu",
               "options__1": {
                 "label": "Menu thả xuống"
               },
               "options__2": {
                 "label": "Góc bo tròn"
+              }
+            },
+            "swatch_shape": {
+              "label": "Mẫu",
+              "info": "Bật [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) cho tùy chọn sản phẩm.",
+              "options__1": {
+                "label": "Tròn"
+              },
+              "options__2": {
+                "label": "Vuông"
+              },
+              "options__3": {
+                "label": "Không"
               }
             }
           }
@@ -1824,15 +1859,6 @@
             },
             "page": {
               "label": "Trang"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Liquid tùy chỉnh",
-          "settings": {
-            "custom_liquid": {
-              "label": "Liquid tùy chỉnh",
-              "info": "Thêm đoạn mã ứng dụng hoặc mã Liquid khác để tạo các tùy chỉnh nâng cao."
             }
           }
         },
@@ -2474,12 +2500,25 @@
           "name": "Trình chọn mẫu mã",
           "settings": {
             "picker_type": {
-              "label": "Loại",
+              "label": "Kiểu",
               "options__1": {
                 "label": "Menu thả xuống"
               },
               "options__2": {
                 "label": "Ô chọn"
+              }
+            },
+            "swatch_shape": {
+              "label": "Mẫu",
+              "info": "Bật [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) cho tùy chọn sản phẩm.",
+              "options__1": {
+                "label": "Tròn"
+              },
+              "options__2": {
+                "label": "Vuông"
+              },
+              "options__3": {
+                "label": "Không"
               }
             }
           }
@@ -2507,14 +2546,6 @@
             },
             "text": {
               "label": "Văn bản"
-            }
-          }
-        },
-        "custom_liquid": {
-          "name": "Liquid tùy chỉnh",
-          "settings": {
-            "custom_liquid": {
-              "label": "Liquid tùy chỉnh"
             }
           }
         },
@@ -2670,6 +2701,9 @@
             "label": "Bên phải"
           },
           "label": "Căn chỉnh nội dung trên thiết bị di động"
+        },
+        "color_scheme": {
+          "info": "Có thể nhìn thấy khi vùng chứa hiển thị."
         }
       },
       "blocks": {
@@ -3089,7 +3123,10 @@
       "name": "Địa chỉ"
     },
     "main-login": {
-      "name": "Đăng nhập"
+      "name": "Đăng nhập",
+      "shop_login_button": {
+        "enable": "Bật Đăng nhập bằng Shop"
+      }
     },
     "main-order": {
       "name": "Đơn hàng"
@@ -3305,6 +3342,20 @@
       },
       "presets": {
         "name": "Multirow"
+      }
+    },
+    "quick-order-list": {
+      "name": "Danh sách đặt hàng nhanh",
+      "settings": {
+        "show_image": {
+          "label": "Hiển thị hình ảnh"
+        },
+        "show_sku": {
+          "label": "Hiển thị SKU"
+        }
+      },
+      "presets": {
+        "name": "Danh sách đặt hàng nhanh"
       }
     }
   }

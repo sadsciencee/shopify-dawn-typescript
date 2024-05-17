@@ -13,5 +13,6 @@
 				"singleQuote": false
 			}
 		}
-	]
+	],
+	"plugins": ["@shopify/prettier-plugin-liquid"]
 }
