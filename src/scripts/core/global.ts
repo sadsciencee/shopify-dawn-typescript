@@ -571,9 +571,11 @@ export function initializeSummaryA11y() {
 			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
 		}
 		summary.addEventListener('click', (event) => {
+			//event.preventDefault()
 			const currentTarget = currentTargetRequired(event)
 			const closestTarget = targetClosestRequired(event, 'details')
-			currentTarget.setAttribute('aria-expanded', `${!closestTarget.hasAttribute('open')}`)
+			const shouldOpen = !closestTarget.hasAttribute('open')
+			currentTarget.setAttribute('aria-expanded', `${shouldOpen}`)
 		})
 		if (summary.closest('header-drawer, menu-drawer')) return
 

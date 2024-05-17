@@ -1,5 +1,12 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
-import { getAttributeOrUndefined, onKeyUpEscape, qsOptional, qsRequired, scaleValue } from '@/scripts/core/global'
+import {
+  currentTargetRequired,
+  getAttributeOrUndefined,
+  onKeyUpEscape,
+  qsOptional,
+  qsRequired,
+  scaleValue, targetClosestRequired,
+} from '@/scripts/core/global'
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
 import { SELECTORS } from '@/scripts/core/global';
 
@@ -19,13 +26,22 @@ export class HeaderMenu extends DetailsDisclosure {
   initHoverSummary() {
     if (!this.hoverSummary || !this.detailsId) return
 
+    this.hoverSummary.addEventListener('click', (_) => {
+      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      window.setTimeout(() => {
+        void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      }, 3)
+    })
+
     this.hoverSummary.addEventListener('mouseenter', (_) => {
+      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
       const openMenuId = window.Ucoast.openMenuId
       if (openMenuId && openMenuId === this.detailsId) return
       window.Ucoast.openMenuId = this.detailsId
       this.mainDetailsToggle.setAttribute('open', '')
       this.animations?.forEach((animation) => animation.play())
       this.hoverSummary?.setAttribute('aria-expanded', 'true')
+      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
     })
 
     this.mainDetailsToggle.addEventListener('keyup', onKeyUpEscape)

@@ -1,0 +1,193 @@
+{% comment %}
+	Renders a megamenu for the header.
+
+	Usage:
+	{% render 'header-mega-menu' %}
+{% endcomment %}
+
+<nav class="header__inline-menu">
+	<ul class="list-menu list-menu--inline" role="list">
+		{%- for block in mega_menu_blocks -%}
+			{% assign menu = block.settings.menu %}
+			<li>
+				{%- if menu.links != blank -%}
+					{% liquid
+						assign active_block = false
+						assign active_child_count = menu.links | where: 'child_active', true
+						assign active_parent_count = menu.links | where: 'active', true
+						if active_child_count > 0 or active_parent_count > 0
+							assign active_block = true
+						endif
+					%}
+					{% if block.settings.image != empty
+						or block.settings.video != empty
+					%}
+						{% capture media_markup %}
+                            {% render 'ucoast-art-direction',
+                                    desktop_video: block.settings.video,
+                                    desktop_image: block.settings.image,
+                                    wrapper_class: 'mega-menu__media w-100 relative block',
+                                    media_class: 'absolute left-0 top-0 w-100 h-100 object-cover'
+                            %}
+                        {% endcapture %}
+					{% endif %}
+
+					<header-menu>
+						<details
+							id="Details-HeaderMenu-{{ forloop.index }}"
+							class="mega-menu"
+						>
+							<summary
+								id="HeaderMenu-{{ block.id }}"
+								role="button"
+								aria-expanded="false"
+								aria-controls="Details-HeaderMenu-{{ forloop.index }}"
+								{% if section.settings.open_menu_on_hover %}
+									data-summary-hover="on"
+								{% endif %}
+								class="header__menu-item list-menu__item link focus-inset {% if active_block %} underline-always-child {% else %} underline-on-hover-child {% endif %}"
+							>
+								<span
+									{% if active_block %}
+										class="header__active-menu-item"
+									{% endif %}
+								>
+									{{- block.settings.title | escape -}}
+								</span>
+								{% render 'icon-default', icon: 'caret' %}
+							</summary>
+							<div
+								id="MegaMenu-Content-{{ forloop.index }}"
+								class="mega-menu__content {% if media_markup %} w-100 mega-menu__content--with-media {% endif %} left-0 right-0 absolute color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
+								tabindex="-1"
+							>
+								{% if media_markup %}
+									<div class="flex flex-wrap w-100 justify-start page-width">
+										<ul
+											class="mega-menu__list {% if media_markup %} mega-menu__list--with-media {% else %} page-width {% endif %} {% if menu.levels == 1 %} mega-menu__list--condensed{% endif %}"
+											role="list"
+										>
+											{%- for link in menu.links -%}
+												<li>
+													<a
+														id="HeaderMenu-{{ block.id }}-{{ link.handle }}"
+														href="{{ link.url }}"
+														class="mega-menu__link mega-menu__link--level-2 link{% if link.current %} mega-menu__link--active{% endif %}"
+														{% if link.current %}
+															aria-current="page"
+														{% endif %}
+													>
+														{{
+															link.title
+															| escape
+														}}
+													</a>
+													{%- if link.links != blank
+													-%}
+														<ul
+															class="list-unstyled"
+															role="list"
+														>
+															{%- for child_link in link.links -%}
+																<li>
+																	<a
+																		id="HeaderMenu-{{ block.id }}-{{ link.handle }}-{{ child_link.handle }}"
+																		href="{{ child_link.url }}"
+																		class="mega-menu__link link{% if child_link.current %} mega-menu__link--active{% endif %}"
+																		{% if child_link.current %}
+																			aria-current="page"
+																		{% endif %}
+																	>
+																		{{
+																			child_link.title
+																			| escape
+																		}}
+																	</a>
+																</li>
+															{%- endfor -%}
+														</ul>
+													{%- endif -%}
+												</li>
+											{%- endfor -%}
+										</ul>
+										{{ media_markup }}
+									</div>
+								{% else %}
+									<ul
+										class="mega-menu__list {% if media_markup %} mega-menu__list--with-media {% else %} page-width {% endif %} {% if menu.levels == 1 %} mega-menu__list--condensed{% endif %}"
+										role="list"
+									>
+										{%- for link in menu.links -%}
+											<li>
+												<a
+													id="HeaderMenu-{{ block.id }}-{{ link.handle }}"
+													href="{{ link.url }}"
+													class="mega-menu__link mega-menu__link--level-2 link{% if link.current %} mega-menu__link--active{% endif %}"
+													{% if link.current %}
+														aria-current="page"
+													{% endif %}
+												>
+													{{ link.title | escape }}
+												</a>
+												{%- if link.links != blank -%}
+													<ul
+														class="list-unstyled"
+														role="list"
+													>
+														{%- for child_link in link.links -%}
+															<li>
+																<a
+																	id="HeaderMenu-{{ block.id }}-{{ link.handle }}-{{ child_link.handle }}"
+																	href="{{ child_link.url }}"
+																	class="mega-menu__link link{% if child_link.current %} mega-menu__link--active{% endif %}"
+																	{% if child_link.current %}
+																		aria-current="page"
+																	{% endif %}
+																>
+																	{{
+																		child_link.title
+																		| escape
+																	}}
+																</a>
+															</li>
+														{%- endfor -%}
+													</ul>
+												{%- endif -%}
+											</li>
+										{%- endfor -%}
+									</ul>
+								{% endif %}
+							</div>
+						</details>
+					</header-menu>
+				{%- else -%}
+					{% liquid
+						assign active_block = false
+						if block.settings.top_level_url == request.path or block.settings.top_level_url contains request.path
+							assign active_block = true
+						endif
+					%}
+					<a
+						id="HeaderMenu-{{ block.id }}"
+						href="{{ block.settings.top_level_url }}"
+						class="header__menu-item list-menu__item link link--text focus-inset {% if active_block %} underline-always-child {% else %} underline-on-hover-child {% endif %}"
+						{% if active_block %}
+							aria-current="page"
+						{% endif %}
+						{% if section.settings.open_menu_on_hover %}
+							data-summary-hover="off"
+						{% endif %}
+					>
+						<span
+							{% if active_block %}
+								class="header__active-menu-item"
+							{% endif %}
+						>
+							{{- block.settings.title | escape -}}
+						</span>
+					</a>
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
+	</ul>
+</nav>
