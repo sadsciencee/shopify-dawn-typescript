@@ -100,19 +100,19 @@ export class KlaviyoForm extends UcoastEl {
 		const config = this.addToKlaviyoListConfig(formData)
 
 		fetch(this.route, config)
-			.then((response) => response.json())
+			.then((response) => response.text())
 			.then((response) => {
 				this.emailInput.value = ''
-				if (response.success) {
+				if (response && response?.length > 0) {
+					this.emailInput.placeholder =
+						'This email address is invalid.'
+				} else {
 					this.emailInput.placeholder = this.successMessage
 					if (this.popup) {
 						window.setTimeout(() => {
 							this.popup?.hide()
 						}, 1000)
 					}
-				} else {
-					this.emailInput.placeholder =
-						'This email address is invalid.'
 				}
 			})
 			.catch((e) => {
@@ -165,7 +165,6 @@ export class KlaviyoForm extends UcoastEl {
 				}
 			}
 		}
-		console.log({data})
 		return {
 			method: 'POST',
 			mode: 'cors' as RequestMode,
