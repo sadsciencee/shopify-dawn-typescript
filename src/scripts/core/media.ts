@@ -22,56 +22,56 @@ export class MediaManager {
 
 	// public methods
 	async initialLoad() {
-		this.setImageDataSrcs(this.selectAllImages())
+		/*this.setImageDataSrcs(this.selectAllImages())
 		this.loadImagesImmediately(this.selectImagesInViewport())
 		if (this.hlsRequired && !this.hlsLibraryLoaded) {
 			await this.loadHls()
 		}
 		this.playVideosImmediately(this.selectVideosInViewport())
-		this.initEventListeners()
+		this.initEventListeners()*/
 	}
 
 	async reload() {
-		this.loadImagesImmediately(this.selectImagesInNextOrPreviousViewport())
+		/*this.loadImagesImmediately(this.selectImagesInNextOrPreviousViewport())
 		const videosToPlay = this.selectVideosInViewport()
-		this.playVideosImmediately(videosToPlay)
+		this.playVideosImmediately(videosToPlay)*/
 	}
 
 	async reloadAllDangerously() {
-		const images: HTMLImageElement[] = Array.from(
+		/*const images: HTMLImageElement[] = Array.from(
 			document.querySelectorAll('img[data-srcset]')
 		)
 		const videos: UcoastVideo[] = Array.from(
 			document.querySelectorAll('ucoast-video')
 		)
 		this.loadImagesImmediately(images)
-		this.playVideosImmediately(videos)
+		this.playVideosImmediately(videos)*/
 	}
 
 	async preloadContainer(container: HTMLElement) {
-		this.setImageDataSrcs(this.selectAllImages())
+		/*this.setImageDataSrcs(this.selectAllImages())
 		this.loadImagesImmediately(this.selectImagesInViewport())
 		this.enableLazyLoad(this.selectAllImages(container))
 		const videos = this.selectAllVideos(container)
-		this.preloadSelectedVideos(videos)
+		this.preloadSelectedVideos(videos)*/
 	}
 
 	async loadAllInContainer(container: HTMLElement) {
-		const images = Array.from(container.querySelectorAll('img'))
+		/*const images = Array.from(container.querySelectorAll('img'))
 		const videos: UcoastVideo[] = Array.from(
 			container.querySelectorAll('ucoast-video')
 		)
 		this.loadImagesImmediately(images)
-		this.playVideosImmediately(videos)
+		this.playVideosImmediately(videos)*/
 	}
 
 	async pauseAllInContainer(container: HTMLElement) {
-		const videos: UcoastVideo[] = Array.from(
+		/*const videos: UcoastVideo[] = Array.from(
 			container.querySelectorAll('ucoast-video')
 		)
 		videos.forEach((video) => {
 			video.pause()
-		})
+		})*/
 	}
 
 	// scroll update pattern
@@ -90,7 +90,7 @@ export class MediaManager {
 	}
 
 	private handleScroll() {
-		this.lastKnownScrollPosition = window.scrollY
+		/*this.lastKnownScrollPosition = window.scrollY
 
 		if (!this.ticking) {
 			window.requestAnimationFrame(() => {
@@ -99,11 +99,11 @@ export class MediaManager {
 			})
 
 			this.ticking = true
-		}
+		}*/
 	}
 
 	private updateOnScroll() {
-		const imagesInViewport = this.selectImagesInViewport()
+		/*const imagesInViewport = this.selectImagesInViewport()
 		this.loadImagesImmediately(imagesInViewport)
 		const imagesNearViewport = this.selectImagesInNextOrPreviousViewport()
 		this.loadImagesImmediately(imagesNearViewport)
@@ -111,26 +111,26 @@ export class MediaManager {
 			this.selectUnloadedVideosInNextOrPreviousViewport()
 		this.preloadSelectedVideos(videosToPreload)
 		const videosToPlay = this.selectVideosInViewport()
-		this.playVideosImmediately(videosToPlay)
+		this.playVideosImmediately(videosToPlay)*/
 	}
 
 	// play or load actions
 
 	private setImageDataSrcs(images: HTMLImageElement[]) {
-		images.forEach((img) => this.setImageDataSrc(img))
+		/*images.forEach((img) => this.setImageDataSrc(img))*/
 	}
 
 	private enableLazyLoad(images: HTMLImageElement[]) {
-		images.forEach((img) => {
+		/*images.forEach((img) => {
 			this.setImageDataSrc(img)
 			const dataSrc = q.ra(img, 'data-src')
 			img.setAttribute('src', dataSrc)
 			img.setAttribute('loading', 'lazy')
-		})
+		})*/
 	}
 
 	private setImageDataSrc(image: HTMLImageElement) {
-		const srcSet = image.getAttribute('data-srcset')
+		/*const srcSet = image.getAttribute('data-srcset')
 		if (!srcSet) return
 		const devicePixelRatio = window.devicePixelRatio ?? 2
 		const targetSize = (
@@ -145,17 +145,17 @@ export class MediaManager {
 			return
 		}
 
-		image.setAttribute('data-src', newSrc)
+		image.setAttribute('data-src', newSrc)*/
 	}
 
 	private preloadSelectedVideos(videos: UcoastVideo[]) {
-		videos.forEach((video) => {
+		/*videos.forEach((video) => {
 			void video.preload()
-		})
+		})*/
 	}
 
 	private loadImagesImmediately(images: HTMLImageElement[]) {
-		this.setImageDataSrcs(images)
+		/*this.setImageDataSrcs(images)
 		images.forEach((image) => {
 			if (image.getBoundingClientRect().width === 0) return
 			if (image.hasAttribute('data-loaded')) {
@@ -170,59 +170,63 @@ export class MediaManager {
 				image.setAttribute('src', dataSrc)
 				image.setAttribute('data-loaded', 'true')
 			}
-		})
+		})*/
 	}
 
 	private playVideosImmediately(videos: UcoastVideo[]) {
-		videos.forEach((video) => {
+		/*videos.forEach((video) => {
 			void video.play()
-		})
+		})*/
 	}
 
 	// select methods
 
 	private selectVideosInViewport(container?: HTMLElement) {
-		return this.selectAllVideos(container).filter((video) => {
+		/*return this.selectAllVideos(container).filter((video) => {
 			return this.isTouchingViewport(video)
-		})
+		})*/
 	}
 
 	private selectAllVideos(container?: HTMLElement) {
-		const els: NodeListOf<UcoastVideo> = container
+		return []
+		/*const els: NodeListOf<UcoastVideo> = container
 			? container.querySelectorAll('ucoast-video')
 			: document.querySelectorAll(
 					'ucoast-video:not([data-uc-load-on-event])'
 				)
 
-		return Array.from(els)
+		return Array.from(els)*/
 	}
 
 	private selectAllImages(container?: HTMLElement) {
-		const els: NodeListOf<HTMLImageElement> = container
+		/*const els: NodeListOf<HTMLImageElement> = container
 			? container.querySelectorAll('img[data-srcset]')
 			: document.querySelectorAll(
 					'img[data-srcset]:not([data-uc-load-on-event])'
 				)
-		return Array.from(els)
+		return Array.from(els)*/
 	}
 
 	private selectImagesInViewport(
 		container?: HTMLElement
 	): HTMLImageElement[] {
-		return this.selectAllImages(container).filter((img) => {
+		return []
+		/*return this.selectAllImages(container).filter((img) => {
 			return this.isTouchingViewport(img)
-		})
+		})*/
 	}
 
 	private selectImagesInNextOrPreviousViewport(): HTMLImageElement[] {
-		return this.selectAllImages()
+		return []
+		/*return this.selectAllImages()
 			.filter((img) => {
 				return this.isInNextOrPreviousViewport(img)
-			})
+			})*/
 	}
 
 	private selectUnloadedVideosInNextOrPreviousViewport(): UcoastVideo[] {
-		return this.selectAllVideos()
+		return []
+		/*return this.selectAllVideos()
 			.filter((video) => {
 				const allowLoading =
 					!video.preloaded &&
@@ -234,7 +238,7 @@ export class MediaManager {
 			})
 			.filter((video) => {
 				return this.isInNextOrPreviousViewport(video)
-			})
+			})*/
 	}
 
 	// viewport detection

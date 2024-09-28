@@ -1,0 +1,9 @@
+{% liquid
+	capture spacer_class
+		echo ' sa-' | append: settings.space_above | append: ' '
+		if settings.mobile_space_above != -1
+			echo ' sa-' | append: settings.mobile_space_above | append: '--m-down '
+		endif
+	endcapture
+	echo '<div class="' | append: spacer_class | append: ' page-width empty"></div>'
+%}

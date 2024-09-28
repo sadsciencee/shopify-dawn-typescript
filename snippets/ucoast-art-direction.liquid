@@ -1,58 +1,155 @@
 {% liquid
-	if desktop_video
-		assign desktop_image = desktop_video
-		assign desktop_video = true
+	comment
+		1. determine media types for desktop/mobile
+		when possible, just pass media directly. however if you need to pass in media options, for example from the theme editor, use desktop_video, desktop_image, mobile_video, mobile_image
+	endcomment
+
+	assign desktop_media_type = 'none'
+	assign mobile_media_type = 'none'
+
+	if desktop_media
+		if desktop_media.duration > 0
+			assign desktop_media_type = 'video'
+		else
+			assign desktop_media_type = 'image'
+		endif
+	elsif desktop_video
+		assign desktop_media = desktop_video
+		assign desktop_media_type = 'video'
 	elsif desktop_image
-		assign desktop_image = desktop_image
+		assign desktop_media = desktop_image
+		assign desktop_media_type = 'image'
 	endif
-	if mobile_video
+	if mobile_media
+		if mobile_media.duration > 0
+			assign mobile_media_type = 'video'
+		else
+			assign mobile_media_type = 'image'
+		endif
+	elsif mobile_video
 		assign mobile_media = mobile_video
-		assign mobile_video = true
+		assign mobile_media_type = 'video'
 	elsif mobile_image
 		assign mobile_media = mobile_image
+		assign mobile_media_type = 'image'
 	endif
-	unless mobile_media
-		assign mobile_media = desktop_image
-	endunless
-	if wrapper_class
-		assign desktop_wrapper_class = wrapper_class | append: ' m-down-hide'
-		assign mobile_wrapper_class = wrapper_class | append: ' m-up-hide'
-	else
-		assign desktop_wrapper_class = 'media media--transparent m-down-hide'
-		assign mobile_wrapper_class = 'media media--transparent m-up-hide'
+	if mobile_media_type != 'none' and desktop_media_type == 'none'
+		assign desktop_media = mobile_media
+		assign desktop_media_type = mobile_media_type
 	endif
-	unless defer
-		assign defer = false
-	endunless
-	unless test_mode == true
-		assign test_mode = false
-	endunless
-	if desktop_video or override_shopify_position_desktop == false
-		assign y_position_desktop = y_position_desktop
-		assign x_position_desktop = x_position_desktop
-	endif
-	if mobile_video or override_shopify_position_mobile == false
-		assign y_position_mobile = y_position_mobile
-		assign x_position_mobile = x_position_mobile
-	endif
+
+	comment
+		calculate widths and sizes for image tag
+		always choose two widths for mobile and 3 for desktop
+		the media queries will be 495, 989, 1200, 1800, none
+
+		on mobile_size:
+		use 'sm' for anything definitely less than half the viewport
+		use 'md' for anything roughly half the viewport
+		leave blank aka 'lg' for anything else
+
+		on desktop_size:
+		use 'sm' for anything close to or less than 1/3 the viewport
+		use 'md' for anything between 1/3 and 2/3 of the viewport
+	endcomment
+
+	case mobile_size
+		when 'sm'
+			assign mobile_widths = '300, 600'
+			assign mobile_sizes = '(max-width: 495px) 30vw, (max-width: 989px) 30vw'
+		when 'md'
+			assign mobile_widths = '450, 900'
+			assign mobile_sizes = '(max-width: 495px) 45vw, (max-width: 989px) 45vw'
+		else
+			assign mobile_widths = '900, 1800'
+			assign mobile_sizes = '(max-width: 495px) 100vw, (max-width: 989px) 100vw'
+	endcase
+
+	case desktop_size
+		when 'sm'
+			assign desktop_widths = '600, 900, 1200'
+			assign desktop_sizes = '(max-width: 1200px) 25vw, (max-width: 1800px) 25vw, 25vw'
+			assign starting_width = 600
+		when 'md'
+			assign desktop_widths = '1200, 1800, 2400'
+			assign desktop_sizes = '(max-width: 1200px) 50vw, (max-width: 1800px) 50vw, 50vw'
+			assign starting_width = 1200
+		else
+			assign desktop_widths = '2400, 3600, 4800'
+			assign desktop_sizes = '(max-width: 1200px) 100vw, (max-width: 1800px) 100vw, 100vw'
+			assign starting_width = 2400
+	endcase
+
+	assign all_widths = mobile_widths | append: ', ' | append: desktop_widths
+	assign all_sizes = mobile_sizes | append: ', ' | append: desktop_sizes
+
+	comment
+		use a switch key to improve conditional performance. if desktop media type is none, that means the input is nil
+	endcomment
+	assign switch_key = desktop_media_type | append: '_' | append: mobile_media_type
 %}
-{% render 'ucoast-media',
-		wrapper_class: desktop_wrapper_class,
-		media_class: media_class,
-		media: desktop_image,
-		defer: defer,
-		aspect_ratio: aspect_ratio,
-		test_mode: test_mode,
-		y_position: y_position_desktop,
-		x_position: x_position_desktop
-%}
-{% render 'ucoast-media',
-		wrapper_class: mobile_wrapper_class,
-		media_class: media_class,
-		media: mobile_media,
-		defer: defer,
-		aspect_ratio: aspect_ratio,
-		test_mode: test_mode,
-		y_position: y_position_mobile,
-		x_position: x_position_mobile
-%}
+<span
+	class="{% if wrapper_class %}{{ wrapper_class }} {% else %} media media--transparent {% endif %}"
+>
+	{% case switch_key %}
+		{% when 'video_video' %}
+
+		{% when 'video_image' %}
+			<picture>
+				<source
+					media="(max-width: 989px)"
+					srcset="{% render 'srcset-from-widths', image: mobile_media, widths: mobile_widths %}"
+				>
+
+				<img
+						src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+						alt="{{ mobile_media.alt }}"
+						class="{{ media_class }}"
+				/>
+			</picture>
+		{% when 'image_video' %}
+			<picture>
+				<source
+					media="(min-width: 990px)"
+					srcset="{% render 'srcset-from-widths', image: desktop_media, widths: desktop_widths %}"
+				>
+				<img
+					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+					alt="{{ desktop_media.alt }}"
+					class="{{ media_class }}"
+				/>
+			</picture>
+		{% when 'none_none' %}
+			{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+		{% when 'image_none' %}
+			{{
+				desktop_media
+				| image_url: width: starting_width
+				| image_tag:
+					widths: all_widths,
+					sizes: all_sizes,
+					height: null,
+					class: media_class
+			}}
+		{% else %}
+			<picture>
+				<source
+					media="(max-width: 989px)"
+					srcset="{% render 'srcset-from-widths', image: mobile_media, widths: mobile_widths %}"
+				>
+				<source
+					media="(min-width: 990px)"
+					srcset="{% render 'srcset-from-widths', image: desktop_media, widths: desktop_widths %}"
+				>
+				{{
+					desktop_media
+					| image_url: width: starting_width
+					| image_tag:
+						widths: all_widths,
+						sizes: all_sizes,
+						height: null,
+						class: media_class
+				}}
+			</picture>
+	{% endcase %}
+</span>

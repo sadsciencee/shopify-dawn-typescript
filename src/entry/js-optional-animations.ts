@@ -1,5 +1,5 @@
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations';
-import { q.rt } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM';
 
 window.addEventListener('DOMContentLoaded', () => initializeScrollAnimationTrigger())
 

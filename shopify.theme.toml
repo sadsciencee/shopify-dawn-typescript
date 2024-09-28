@@ -1,5 +1,3 @@
 [environments.dev]
-store = "danny-theme-test"
+store = "ucoast-store-credit"
 live-reload = 'off'
-
-
