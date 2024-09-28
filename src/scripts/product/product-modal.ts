@@ -38,7 +38,7 @@ export class ProductModal extends ModalDialog {
 		const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null
 		activeMedia.classList.add('active')
 		activeMedia.scrollIntoView()
-		void window.Ucoast.mediaManager.loadAllInContainer(this)
+		void window.Ucoast.mediaManager.playAllInContainer(this)
 
 		const container = q.rs(ProductModal.selectors.container, this)
 		const activeMediaWidth = activeMedia.width

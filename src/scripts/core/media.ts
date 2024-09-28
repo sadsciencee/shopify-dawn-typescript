@@ -68,7 +68,7 @@ export class MediaManager {
 	playCallbacks: (() => void)[]
 	hlsLibIsSupported = false
 	lastKnownWindowWidth?: number
-	videos: NodeListOf<UcoastVideo> | undefined
+	videos: UcoastVideo[]
 
 	constructor() {
 		this.hlsLibraryLoaded = false
@@ -76,12 +76,13 @@ export class MediaManager {
 		this.ticking = false
 		this.playCallbacks = []
 		this.hlsRequired = this.isHlsRequired()
-		this.videos = q.ol<UcoastVideo>('ucoast-video')
+		this.videos = Array.from(q.ol<UcoastVideo>('ucoast-video') ?? [])
 	}
 
 	// public methods
 	async initialLoad() {
 		document.addEventListener('DOMContentLoaded', () => {
+			// image fade in
 			document
 				.querySelectorAll('picture, img.no-picture')
 				.forEach((element: Element) => {
@@ -99,12 +100,11 @@ export class MediaManager {
 						handleImgFadeIn(element, options)
 					}
 				})
+			// video autoplay inits
 			this.loadHls()
 			this.initEventListeners()
 		})
 	}
-
-	// scroll update pattern
 
 	private initEventListeners() {
 		window.addEventListener('resize', () => {
@@ -139,8 +139,11 @@ export class MediaManager {
 	}
 
 	private updateOnScroll() {
-		if (!this.videos) return
+		if (!this.videos.length) return
 		this.videos.forEach((video) => {
+			// note: video.play() and video.pause() are not html5 video methods
+			// on the ucoast-video component, they check several conditions to determine if the play/pause should be allowed
+			// outside of these basic conditions, any additional conditions for play/pause should be added there
 			if (
 				!this.isTouchingViewport(video.videoEl) ||
 				video.isHiddenForViewport()
@@ -208,5 +211,21 @@ export class MediaManager {
 		} catch (error) {
 			console.error('Failed to load the HLS library', error)
 		}
+	}
+
+	async playAllInContainer(container: HTMLElement) {
+		const videosInContainer = q.ol<UcoastVideo>('ucoast-video', container)
+		if (!videosInContainer) return
+		videosInContainer.forEach((video) => {
+			void video.playEventOn()
+		})
+	}
+
+	async pauseAllInContainer(container: HTMLElement) {
+		const videosInContainer = q.ol<UcoastVideo>('ucoast-video', container)
+		if (!videosInContainer) return
+		videosInContainer.forEach((video) => {
+			void video.pause()
+		})
 	}
 }

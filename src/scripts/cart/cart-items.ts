@@ -255,7 +255,7 @@ export class CartItems extends UcoastEl {
 						q.rs(this.instanceSelectors.itemLink)
 					)
 				}
-				void window.Ucoast.mediaManager.loadAllInContainer(this)
+				void window.Ucoast.mediaManager.playAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
 			.catch((error) => {

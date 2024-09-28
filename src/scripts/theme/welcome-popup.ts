@@ -35,7 +35,7 @@ export class WelcomePopup extends ModalDialog {
 		window.setTimeout(() => {
 			if (!this.dataPrivacyIsOpen()) {
 				this.show(getActiveOrAccessibilityElement())
-				window.Ucoast.mediaManager.loadAllInContainer(this)
+				void window.Ucoast.mediaManager.playAllInContainer(this)
 			}
 
 		}, this.openAfter)

@@ -23,21 +23,21 @@ export class HeaderMenu extends DetailsDisclosure {
     if (!this.hoverSummary || !this.detailsId) return
 
     this.hoverSummary.addEventListener('click', (_) => {
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       window.setTimeout(() => {
-        void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+        void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       }, 3)
     })
 
     this.hoverSummary.addEventListener('mouseenter', (_) => {
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       const openMenuId = window.Ucoast.openMenuId
       if (openMenuId && openMenuId === this.detailsId) return
       window.Ucoast.openMenuId = this.detailsId
       this.mainDetailsToggle.setAttribute('open', '')
       this.animations?.forEach((animation) => animation.play())
       this.hoverSummary?.setAttribute('aria-expanded', 'true')
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
     })
 
     this.mainDetailsToggle.addEventListener('keyup', q.onKeyUpEscape)

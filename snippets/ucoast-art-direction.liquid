@@ -95,24 +95,28 @@
 		{% when 'video_none' %}
 			{% render 'ucoast-video',
 				video: desktop_media,
-				video_class: media_class
+				video_class: media_class,
+				play_on_event: play_on_event
 			%}
 		{% when 'video_video' %}
 			{% render 'ucoast-video',
 				video: desktop_media,
 				video_class: media_class,
-				viewport_class: 'm-down-hide'
+				viewport_class: 'm-down-hide',
+				play_on_event: play_on_event
 			%}
 			{% render 'ucoast-video',
 				video: mobile_media,
 				video_class: media_class,
-				viewport_class: 'm-up-hide'
+				viewport_class: 'm-up-hide',
+				play_on_event: play_on_event
 			%}
 		{% when 'video_image' %}
 			{% render 'ucoast-video',
 				video: desktop_media,
 				video_class: media_class,
-				viewport_class: 'm-down-hide'
+				viewport_class: 'm-down-hide',
+				play_on_event: play_on_event
 			%}
 			<picture>
 				<source
@@ -130,7 +134,8 @@
 			{% render 'ucoast-video',
 				video: mobile_media,
 				video_class: media_class,
-				viewport_class: 'm-up-hide'
+				viewport_class: 'm-up-hide',
+				play_on_event: play_on_event
 			%}
 			<picture>
 				<source

@@ -163,6 +163,6 @@ export class SliderComponent extends UcoastEl {
 	loadMedia() {
 		if (this.mediaLoaded) return
 		this.mediaLoaded = true
-		void window.Ucoast.mediaManager.loadAllInContainer(this)
+		void window.Ucoast.mediaManager.playAllInContainer(this)
 	}
 }

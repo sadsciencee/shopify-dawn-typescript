@@ -15,8 +15,8 @@
 			class="absolute block w-100 h-100 top-0 left-0 object-cover {{ viewport_class }}"
 			data-loading="{{ loading }}"
 			data-uc-has-played="false"
-			{% if load_on_event %}
-				data-uc-load-on-event
+			{% if play_on_event %}
+				data-event-driven
 			{% endif %}
 			{{ custom_attributes }}
 			{% if aspect_ratio == 'adapt' and video != blank %}

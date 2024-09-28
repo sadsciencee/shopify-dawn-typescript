@@ -78,7 +78,7 @@ export class CartDrawer extends UcoastEl {
 					q.os(CartDrawer.selectors.inner, this) ||
 					q.rs(CartDrawer.selectors.closeButton, this)
 				window.TsDOM.trapFocus(containerToTrapFocusOn, focusElement)
-				void window.Ucoast.mediaManager.loadAllInContainer(this)
+				void window.Ucoast.mediaManager.playAllInContainer(this)
 			},
 			{ once: true }
 		)
@@ -146,7 +146,7 @@ export class CartDrawer extends UcoastEl {
 			} else {
 				this.setAttribute(ATTRIBUTES.cartEmpty, '')
 			}
-			void window.Ucoast.mediaManager.loadAllInContainer(this)
+			void window.Ucoast.mediaManager.playAllInContainer(this)
 		}, 1)
 	}
 
