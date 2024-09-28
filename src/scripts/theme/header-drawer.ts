@@ -1,6 +1,5 @@
 import { MenuDrawer } from '@/scripts/theme/menu-drawer'
-import { qsRequired } from '@/scripts/core/global'
-import { trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global'
 
 export class HeaderDrawer extends MenuDrawer {

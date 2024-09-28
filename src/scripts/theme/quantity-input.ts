@@ -1,6 +1,6 @@
 import { PUB_SUB_EVENTS } from '@/scripts/core/global'
 import { subscribe, type SubscriberCallback } from '@/scripts/core/global'
-import { qsRequired, targetRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class QuantityInput extends UcoastEl {

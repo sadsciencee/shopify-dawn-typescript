@@ -1,5 +1,5 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
-import { qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class ShareButton extends DetailsDisclosure {
 	static override htmlSelector = 'share-button'

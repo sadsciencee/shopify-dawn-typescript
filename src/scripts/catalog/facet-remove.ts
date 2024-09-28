@@ -1,5 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl';
-import { closestOptional, qsRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type FacetFiltersForm } from '@/scripts/catalog/facet-filters-form';
 
 export class FacetRemove extends UcoastEl {

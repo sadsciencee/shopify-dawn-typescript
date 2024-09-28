@@ -4,7 +4,11 @@ import {
 } from '@/scripts/customer/shopify'
 import { type Media, MediaManager } from '@/scripts/core/media'
 import { type Hls } from 'hls.js/dist/hls.light.js'
-import { type ModelViewerUIReference } from '@/scripts/optional/product-model'
+import {
+	type ModelViewerUIReference,
+	type WindowProductModel,
+} from '@/scripts/optional/product-model'
+import { type TsDOM } from '@/scripts/core/TsDOM'
 
 interface Ucoast {
 	shopifyConsentAPILoaded: boolean
@@ -147,6 +151,7 @@ declare global {
 		shopUrl: string
 		Shopify?: Shopify
 		Ucoast: Ucoast
+		TsDOM: TsDOM
 		cartStrings: CartStrings
 		variantStrings: VariantStrings
 		quickOrderListStrings: QuickOrderListStrings

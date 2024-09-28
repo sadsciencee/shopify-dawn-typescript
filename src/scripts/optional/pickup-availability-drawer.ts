@@ -1,5 +1,4 @@
-import { qsRequired, targetRequired } from '@/scripts/core/global'
-import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class PickupAvailabilityDrawer extends UcoastEl {

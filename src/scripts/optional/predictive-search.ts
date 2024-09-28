@@ -1,5 +1,5 @@
 import { SearchForm } from '@/scripts/theme/search-form'
-import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 export class PredictiveSearch extends SearchForm {

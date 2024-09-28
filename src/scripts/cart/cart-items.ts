@@ -1,20 +1,16 @@
-import { ATTRIBUTES, ON_CHANGE_DEBOUNCE_TIMER, PUB_SUB_EVENTS, SELECTORS } from '@/scripts/core/global';
 import {
-	debounce,
-	fetchConfig,
-	getAttributeOrThrow,
-	qsaOptional,
-	qsOptional,
-	qsRequired,
-	targetRequired,
+	ATTRIBUTES,
+	ON_CHANGE_DEBOUNCE_TIMER,
+	PUB_SUB_EVENTS,
+	SELECTORS,
 } from '@/scripts/core/global'
+import { fetchConfig } from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
-import { trapFocus } from '@/scripts/core/global'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { updateShippingBar } from '@/scripts/core/cart-functions'
-
 
 export class CartItems extends UcoastEl {
 	// static
@@ -51,7 +47,9 @@ export class CartItems extends UcoastEl {
 	constructor() {
 		super()
 		this.setInstanceSelectors()
-		this.lineItemStatusElement = qsRequired(this.instanceSelectors.lineItemStatus)
+		this.lineItemStatusElement = qsRequired(
+			this.instanceSelectors.lineItemStatus
+		)
 
 		const debouncedOnChange = debounce((event: Event) => {
 			this.onChange(event)
@@ -70,7 +68,11 @@ export class CartItems extends UcoastEl {
 		this.cartUpdateUnsubscriber = subscribe(
 			PUB_SUB_EVENTS.cartUpdate,
 			(pubSubEvent: PubSubEvent) => {
-				if (pubSubEvent && 'source' in pubSubEvent && pubSubEvent.source === 'cart-items') {
+				if (
+					pubSubEvent &&
+					'source' in pubSubEvent &&
+					pubSubEvent.source === 'cart-items'
+				) {
 					return
 				}
 				this.onCartUpdate()
@@ -97,9 +99,15 @@ export class CartItems extends UcoastEl {
 		fetch(`${window.routes.cart_url}?section_id=main-cart-items`)
 			.then((response) => response.text())
 			.then((responseText) => {
-				const html = new DOMParser().parseFromString(responseText, 'text/html')
+				const html = new DOMParser().parseFromString(
+					responseText,
+					'text/html'
+				)
 				// reference CartItems selectors here since this returns then inner HTML I guess
-				const source = qsRequired(CartItems.selectors.element, html.documentElement)
+				const source = qsRequired(
+					CartItems.selectors.element,
+					html.documentElement
+				)
 				this.innerHTML = source.innerHTML
 			})
 			.catch((e) => {
@@ -111,7 +119,10 @@ export class CartItems extends UcoastEl {
 		return [
 			{
 				id: 'main-cart-items',
-				section: getAttributeOrThrow('data-id', qsRequired(this.instanceSelectors.main)),
+				section: getAttributeOrThrow(
+					'data-id',
+					qsRequired(this.instanceSelectors.main)
+				),
 				selector: '.js-contents',
 			},
 			{
@@ -126,7 +137,10 @@ export class CartItems extends UcoastEl {
 			},
 			{
 				id: 'CartPage-Footer',
-				section: getAttributeOrThrow('data-id', qsRequired(this.instanceSelectors.footer)),
+				section: getAttributeOrThrow(
+					'data-id',
+					qsRequired(this.instanceSelectors.footer)
+				),
 				selector: '.js-contents',
 			},
 		]
@@ -138,11 +152,16 @@ export class CartItems extends UcoastEl {
 		const body = JSON.stringify({
 			line,
 			quantity,
-			sections: this.getSectionsToRender().map((section) => section.section),
+			sections: this.getSectionsToRender().map(
+				(section) => section.section
+			),
 			sections_url: window.location.pathname,
 		})
 
-		fetch(`${window.routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+		fetch(`${window.routes.cart_change_url}`, {
+			...fetchConfig(),
+			...{ body },
+		})
 			.then((response) => {
 				return response.text()
 			})
@@ -151,10 +170,15 @@ export class CartItems extends UcoastEl {
 				const quantityElement = qsRequired<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)
-				const items = document.querySelectorAll(this.instanceSelectors.item)
+				const items = document.querySelectorAll(
+					this.instanceSelectors.item
+				)
 
 				if (parsedState.errors) {
-					quantityElement.value = getAttributeOrThrow('value', quantityElement)
+					quantityElement.value = getAttributeOrThrow(
+						'value',
+						quantityElement
+					)
 					this.updateLiveRegions(line, parsedState.errors)
 					return
 				}
@@ -163,29 +187,41 @@ export class CartItems extends UcoastEl {
 				const cartFooter = qsOptional(this.instanceSelectors.footer)
 				if (parsedState.item_count === 0) {
 					this.setAttribute(ATTRIBUTES.cartEmpty, '')
-					cartFooter && cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
-					cartDrawerWrapper && cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartFooter &&
+						cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartDrawerWrapper &&
+						cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
 				} else {
 					this.removeAttribute(ATTRIBUTES.cartEmpty)
-					cartFooter && cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
-					cartDrawerWrapper && cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartFooter &&
+						cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartDrawerWrapper &&
+						cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
 				}
 
-				this.getSectionsToRender().forEach((section: ShopifySectionRenderingSchema) => {
-					if (section.section === 'dynamic-shipping-bar') {
-						updateShippingBar(parsedState.sections[section.section])
-						return
+				this.getSectionsToRender().forEach(
+					(section: ShopifySectionRenderingSchema) => {
+						if (section.section === 'dynamic-shipping-bar') {
+							updateShippingBar(
+								parsedState.sections[section.section]
+							)
+							return
+						}
+						const sectionEl = qsRequired(`#${section.id}`)
+						const elementToReplace =
+							(section.selector &&
+								sectionEl.querySelector(section.selector)) ||
+							sectionEl
+						if (!section.section)
+							throw new Error('no section.section')
+						if (!section.selector)
+							throw new Error('no section.selector')
+						elementToReplace.innerHTML = this.getSectionInnerHTML(
+							parsedState.sections[section.section],
+							section.selector
+						)
 					}
-					const sectionEl = qsRequired(`#${section.id}`)
-					const elementToReplace =
-						(section.selector && sectionEl.querySelector(section.selector)) || sectionEl
-					if (!section.section) throw new Error('no section.section')
-					if (!section.selector) throw new Error('no section.selector')
-					elementToReplace.innerHTML = this.getSectionInnerHTML(
-						parsedState.sections[section.section],
-						section.selector
-					)
-				})
+				)
 				const updatedValue = parsedState.items[parseInt(line) - 1]
 					? parsedState.items[parseInt(line) - 1].quantity
 					: undefined
@@ -205,27 +241,41 @@ export class CartItems extends UcoastEl {
 				}
 				this.updateLiveRegions(line, message)
 
-				const lineItem = qsOptional(`${this.instanceSelectors.line}-${line}`)
+				const lineItem = qsOptional(
+					`${this.instanceSelectors.line}-${line}`
+				)
 				if (lineItem?.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
-						? trapFocus(cartDrawerWrapper, qsRequired(`[name="${name}"]`, lineItem))
+						? trapFocus(
+								cartDrawerWrapper,
+								qsRequired(`[name="${name}"]`, lineItem)
+							)
 						: qsRequired(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
 					trapFocus(
-						qsRequired(this.instanceSelectors.cartDrawerInnerEmpty, cartDrawerWrapper),
+						qsRequired(
+							this.instanceSelectors.cartDrawerInnerEmpty,
+							cartDrawerWrapper
+						),
 						qsRequired('a', cartDrawerWrapper)
 					)
-				} else if (document.querySelector(this.instanceSelectors.item) && cartDrawerWrapper) {
-					trapFocus(cartDrawerWrapper, qsRequired(this.instanceSelectors.itemLink))
+				} else if (
+					document.querySelector(this.instanceSelectors.item) &&
+					cartDrawerWrapper
+				) {
+					trapFocus(
+						cartDrawerWrapper,
+						qsRequired(this.instanceSelectors.itemLink)
+					)
 				}
 				void window.Ucoast.mediaManager.loadAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
 			})
 			.catch((error) => {
 				console.error(error)
-				this.querySelectorAll(this.instanceSelectors.loadingOverlay).forEach((overlay) =>
-					overlay.classList.add('hidden')
-				)
+				this.querySelectorAll(
+					this.instanceSelectors.loadingOverlay
+				).forEach((overlay) => overlay.classList.add('hidden'))
 				const errors = qsRequired(this.instanceSelectors.errors)
 				errors.textContent = window.cartStrings.error
 			})
@@ -235,9 +285,14 @@ export class CartItems extends UcoastEl {
 	}
 
 	updateLiveRegions(line: string, message: string) {
-		const lineItemError = qsOptional(`${this.instanceSelectors.lineError}-${line}`)
+		const lineItemError = qsOptional(
+			`${this.instanceSelectors.lineError}-${line}`
+		)
 		if (lineItemError) {
-			const errorText = qsRequired(this.instanceSelectors.itemErrorText, lineItemError)
+			const errorText = qsRequired(
+				this.instanceSelectors.itemErrorText,
+				lineItemError
+			)
 			errorText.innerHTML = message
 		}
 
@@ -261,7 +316,9 @@ export class CartItems extends UcoastEl {
 		const mainCartItems = this.getMainCartItems()
 		mainCartItems.setAttribute(CartItems.attributes.disabled, '')
 
-		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.remove('hidden'))
+		this.getCartItemElements(line)?.forEach((overlay) =>
+			overlay.classList.remove('hidden')
+		)
 
 		if (document.activeElement instanceof HTMLElement) {
 			document.activeElement.blur()
@@ -283,6 +340,8 @@ export class CartItems extends UcoastEl {
 
 	disableLoading(line: string) {
 		this.getMainCartItems().removeAttribute(CartItems.attributes.disabled)
-		this.getCartItemElements(line)?.forEach((overlay) => overlay.classList.add('hidden'))
+		this.getCartItemElements(line)?.forEach((overlay) =>
+			overlay.classList.add('hidden')
+		)
 	}
 }

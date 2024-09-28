@@ -1,5 +1,5 @@
 import { DetailsModal } from '@/scripts/theme/details-modal'
-import { qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class PasswordModal extends DetailsModal {
 	static override htmlSelector = 'password-modal'

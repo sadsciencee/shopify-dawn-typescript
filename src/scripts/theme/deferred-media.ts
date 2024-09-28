@@ -1,4 +1,5 @@
-import { pauseAllMedia, qsRequired } from '@/scripts/core/global'
+import { pauseAllMedia } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class DeferredMedia extends UcoastEl {

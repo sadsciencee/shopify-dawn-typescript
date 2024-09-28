@@ -1,8 +1,4 @@
-import {
-	getAttributeOrThrow, qsaOptional,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class ShowMoreButton extends UcoastEl {

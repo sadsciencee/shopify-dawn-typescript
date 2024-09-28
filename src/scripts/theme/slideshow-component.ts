@@ -1,12 +1,5 @@
 import { SliderComponent } from '@/scripts/theme/slider-component'
-import {
-	currentTargetOptional,
-	currentTargetRequired,
-	qsaOptional,
-	qsOptional,
-	qsRequired,
-	targetRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class SlideshowComponent extends SliderComponent {
 	static override htmlSelector = 'slideshow-component'

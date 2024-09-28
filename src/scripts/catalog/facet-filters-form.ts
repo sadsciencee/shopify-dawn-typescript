@@ -1,16 +1,4 @@
-import {
-	closestRequired,
-	currentTargetRequired,
-	debounce,
-	getAttributeOrThrow,
-	onKeyUpEscape,
-	qsaOptional,
-	qsaRequired,
-	qsOptional,
-	qsRequired,
-	targetClosestOptional,
-	targetClosestRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'

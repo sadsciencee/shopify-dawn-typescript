@@ -1,11 +1,10 @@
 import {
 	ATTRIBUTES,
-	getAttributeOrUndefined,
 	openWaitlistModal,
 	PUB_SUB_EVENTS,
 	SELECTORS,
 } from '@/scripts/core/global'
-import { closestOptional, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { publish } from '@/scripts/core/global'
 import { QuickAddModal } from '@/scripts/optional/quick-add'
 import { UcoastEl } from '@/scripts/core/UcoastEl'

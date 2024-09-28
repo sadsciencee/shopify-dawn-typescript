@@ -1,8 +1,4 @@
-import {
-	currentTargetRequired,
-	getAttributeOrThrow,
-	qsaRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { ProductSlider } from '@/scripts/theme/product-slider'
 

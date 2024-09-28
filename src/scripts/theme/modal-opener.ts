@@ -1,4 +1,4 @@
-import { qsOptional } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ModalDialog } from '@/scripts/theme/modal-dialog';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

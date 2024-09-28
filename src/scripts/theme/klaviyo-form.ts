@@ -1,12 +1,8 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
 	formatPhoneNumber,
-	getAttributeOrThrow,
-	getOrThrow,
-	getOrUndefined,
-	qsOptional,
-	qsRequired,
 } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type WelcomePopup } from '@/scripts/theme/welcome-popup'
 
 export class KlaviyoForm extends UcoastEl {

@@ -1,4 +1,4 @@
-import { closestOptional, qsaOptional, targetRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ProductModal } from '@/scripts/product/product-modal'
 import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
 import { mediaLoader } from '@/scripts/core/global';

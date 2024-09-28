@@ -1,15 +1,13 @@
+import { pauseAllMedia } from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import {
-	debounce,
-	getAttributeOrThrow,
-	pauseAllMedia,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
-import { isSliderComponent, type SliderComponent } from '@/scripts/theme/slider-component';
+	isSliderComponent,
+	type SliderComponent,
+} from '@/scripts/theme/slider-component'
 import { type StickyHeader } from '@/scripts/theme/sticky-header'
 import { type DeferredMedia } from '@/scripts/theme/deferred-media'
 import { type SlideChangedEvent } from '@/scripts/types/events'
-import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class MediaGallery extends UcoastEl {
 	static htmlSelector = 'media-gallery'
@@ -34,39 +32,63 @@ export class MediaGallery extends UcoastEl {
 			'slideChanged',
 			debounce(this.onSlideChanged.bind(this), 500)
 		)
-		this.elements.thumbnails.querySelectorAll('[data-target]').forEach((mediaToSwitch) => {
-			if (!(mediaToSwitch instanceof HTMLElement)) return
-			const button = qsRequired('button', mediaToSwitch)
-			button.addEventListener(
-				'click',
-				this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false)
-			)
-		})
-		if (this.dataset.desktopLayout?.includes('thumbnail') && this.mql.matches)
+		this.elements.thumbnails
+			.querySelectorAll('[data-target]')
+			.forEach((mediaToSwitch) => {
+				if (!(mediaToSwitch instanceof HTMLElement)) return
+				const button = qsRequired('button', mediaToSwitch)
+				button.addEventListener(
+					'click',
+					this.setActiveMedia.bind(
+						this,
+						mediaToSwitch.dataset.target,
+						false
+					)
+				)
+			})
+		if (
+			this.dataset.desktopLayout?.includes('thumbnail') &&
+			this.mql.matches
+		)
 			this.removeListSemantic()
 	}
 
 	getActiveMediaParent(mediaId: string) {
-		return qsRequired(`[data-media-id="${mediaId}"]`, this.elements.viewer, 'parentElement')
+		return qsRequired(
+			`[data-media-id="${mediaId}"]`,
+			this.elements.viewer,
+			'parentElement'
+		)
 	}
 
 	getActiveThumbnail(mediaId: string) {
 		if (!this.elements.thumbnails) throw new Error('thumbnails is null')
-		return qsRequired(`[data-target="${mediaId}"]`, this.elements.thumbnails)
+		return qsRequired(
+			`[data-target="${mediaId}"]`,
+			this.elements.thumbnails
+		)
 	}
 
 	onSlideChanged(event: SlideChangedEvent) {
 		if (!this.elements.thumbnails) return
-		const mediaId = getAttributeOrThrow('data-media-id', event.detail.currentElement)
+		const mediaId = getAttributeOrThrow(
+			'data-media-id',
+			event.detail.currentElement
+		)
 		const thumbnail = this.getActiveThumbnail(mediaId)
 		this.setActiveThumbnail(thumbnail)
 	}
 
 	setActiveMedia(mediaId: string, prepend: boolean) {
-		const activeMedia = qsRequired(`[data-media-id="${mediaId}"]`, this.elements.viewer)
-		this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
-			element.classList.remove('is-active')
-		})
+		const activeMedia = qsRequired(
+			`[data-media-id="${mediaId}"]`,
+			this.elements.viewer
+		)
+		this.elements.viewer
+			.querySelectorAll('[data-media-id]')
+			.forEach((element) => {
+				element.classList.remove('is-active')
+			})
 		activeMedia.classList.add('is-active')
 
 		if (prepend) {
@@ -76,7 +98,8 @@ export class MediaGallery extends UcoastEl {
 				const activeThumbnail = this.getActiveThumbnail(mediaId)
 				activeMediaParent.prepend(activeThumbnail)
 			}
-			if (isSliderComponent(this.elements.viewer)) this.elements.viewer.resetPages()
+			if (isSliderComponent(this.elements.viewer))
+				this.elements.viewer.resetPages()
 		}
 
 		this.preventStickyHeader()
@@ -85,7 +108,10 @@ export class MediaGallery extends UcoastEl {
 				const activeMediaParent = this.getActiveMediaParent(mediaId)
 				activeMediaParent.scrollTo({ left: activeMedia.offsetLeft })
 			}
-			if (!this.elements.thumbnails || this.dataset.desktopLayout === 'stacked') {
+			if (
+				!this.elements.thumbnails ||
+				this.dataset.desktopLayout === 'stacked'
+			) {
 				activeMedia.scrollIntoView({ behavior: 'smooth' })
 			}
 		})
@@ -94,7 +120,10 @@ export class MediaGallery extends UcoastEl {
 		if (!this.elements.thumbnails) return
 		const activeThumbnail = this.getActiveThumbnail(mediaId)
 		this.setActiveThumbnail(activeThumbnail)
-		this.announceLiveRegion(activeMedia, getAttributeOrThrow('data-media-position', activeThumbnail))
+		this.announceLiveRegion(
+			activeMedia,
+			getAttributeOrThrow('data-media-position', activeThumbnail)
+		)
 	}
 
 	setActiveThumbnail(thumbnail: HTMLElement) {
@@ -105,21 +134,28 @@ export class MediaGallery extends UcoastEl {
 			.forEach((element) => element.removeAttribute('aria-current'))
 		const button = qsRequired('button', thumbnail)
 		button.setAttribute('aria-current', 'true')
-		if (this.elements.thumbnails && this.elements.thumbnails.isSlideVisible(thumbnail, 10))
+		if (
+			this.elements.thumbnails &&
+			this.elements.thumbnails.isSlideVisible(thumbnail, 10)
+		)
 			return
 
 		this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft })
 	}
 
 	announceLiveRegion(activeItem: HTMLElement, position: string) {
-		const image = qsRequired<HTMLImageElement>('.product__modal-opener--image img', activeItem)
+		const image = qsRequired<HTMLImageElement>(
+			'.product__modal-opener--image img',
+			activeItem
+		)
 		if (!image) return
 		image.onload = () => {
 			this.elements.liveRegion.setAttribute('aria-hidden', 'false')
-			this.elements.liveRegion.innerHTML = window.accessibilityStrings.imageAvailable.replace(
-				'[index]',
-				position
-			)
+			this.elements.liveRegion.innerHTML =
+				window.accessibilityStrings.imageAvailable.replace(
+					'[index]',
+					position
+				)
 			setTimeout(() => {
 				this.elements.liveRegion.setAttribute('aria-hidden', 'true')
 			}, 2000)
@@ -129,18 +165,22 @@ export class MediaGallery extends UcoastEl {
 
 	playActiveMedia(activeItem: HTMLElement) {
 		pauseAllMedia()
-		const deferredMedia = qsOptional<DeferredMedia>('.deferred-media', activeItem)
+		const deferredMedia = qsOptional<DeferredMedia>(
+			'.deferred-media',
+			activeItem
+		)
 		if (deferredMedia) deferredMedia.loadContent(false)
 	}
 
 	preventStickyHeader() {
-		this.stickyHeader = this.stickyHeader || qsRequired<StickyHeader>('sticky-header')
+		this.stickyHeader =
+			this.stickyHeader || qsRequired<StickyHeader>('sticky-header')
 		if (!this.stickyHeader) return
 		this.stickyHeader.dispatchEvent(new Event('preventHeaderReveal'))
 	}
 
 	removeListSemantic() {
-		if (!(isSliderComponent(this.elements.viewer))) return
+		if (!isSliderComponent(this.elements.viewer)) return
 		this.elements.viewer.slider.setAttribute('role', 'presentation')
 		this.elements.viewer.sliderItems?.forEach((slide) =>
 			slide.setAttribute('role', 'presentation')

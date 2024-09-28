@@ -1,4 +1,4 @@
-import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 

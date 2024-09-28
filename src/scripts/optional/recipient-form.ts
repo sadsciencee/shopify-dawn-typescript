@@ -5,8 +5,8 @@ import {
 	isVariantChangeEvent,
 	subscribe,
 } from '@/scripts/core/global'
-import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class RecipientForm extends UcoastEl {
 	static htmlSelector = 'recipient-form'

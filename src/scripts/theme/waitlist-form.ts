@@ -1,11 +1,9 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import {
 	formatPhoneNumber,
-	getAttributeOrThrow,
 	getBackendRoute,
-	getOrThrow,
-	qsRequired,
 } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
 
 type NotifyMeConfigValues = {

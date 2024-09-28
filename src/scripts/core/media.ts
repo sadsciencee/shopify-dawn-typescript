@@ -1,6 +1,6 @@
-import { getAttributeOrThrow, qsOptional } from '@/scripts/core/global'
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
 import { type Hls } from '../global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class MediaManager {
 	hlsRequired: boolean

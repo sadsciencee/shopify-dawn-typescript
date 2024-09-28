@@ -13,6 +13,7 @@ import type {
 	ProductVariant,
 } from '@/scripts/shopify'
 import { type DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page

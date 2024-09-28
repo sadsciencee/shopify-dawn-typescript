@@ -1,4 +1,4 @@
-import { currentTargetRequired, qsRequired, relatedTargetOptional } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type EventWithRelatedTarget } from '@/scripts/types/theme';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 

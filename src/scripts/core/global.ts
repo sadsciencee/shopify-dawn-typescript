@@ -1,15 +1,11 @@
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
-import type {
-	DebounceCallback,
-	EventWithRelatedTarget,
-	FocusableHTMLElement,
-} from '@/scripts/types/theme'
 import { type ProductModel } from '@/scripts/optional/product-model'
 import { MediaManager } from '@/scripts/core/media'
 import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
+import { TsDOM as q, debounce, throttle } from '@/scripts/core/TsDOM'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -152,178 +148,8 @@ type CommonEventType = MouseEvent | KeyboardEvent | TouchEvent
 // this is a set of functions I wrote while refactoring Dawn 9.0 to typescript
 // ended up being very flexible and useful for enforcing types when accessing dom elements so we are reusing for Dawn 10.0
 
-export const qsRequired = <T extends HTMLElement = HTMLElement, U extends HTMLElement = T>(
-	selector: string,
-	component?: HTMLElement,
-	additionalProperty?: HTMLElementProperty
-) => {
-	const container = component ?? document
-	const element = container.querySelector(selector) as T | null
-	if (!element) throw new Error(`required element not found: ${selector}`)
-	if (!additionalProperty) return element
-	const elFromProperty = element[additionalProperty] as U | null
-	if (!elFromProperty) throw new Error(`required element not found: ${selector}`)
-	return elFromProperty
-}
 
-export const qsRequiredFromDocument = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	parsedDocument: Document
-) => {
-	const element = parsedDocument.querySelector(selector) as T | null
-	if (!element) throw `required element not found: ${selector}`
-	return element
-}
 
-// required querySelectorAll
-export const qsaRequired = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const elements = container.querySelectorAll(selector) as NodeListOf<T>
-	if (!elements.length) throw new Error(`required element group not found: ${selector}`)
-	return elements
-}
-
-// return undefined if the HTML element isn't found
-export const qsOptional = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const element = container.querySelector(selector) as T | null
-	return element ?? undefined
-}
-
-// optional querySelectorAll typecast
-export const qsaOptional = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const elements = container.querySelectorAll(selector) as NodeListOf<T>
-	if (!elements.length) return undefined
-	return elements
-}
-
-// required event targets
-export const currentTargetRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	const element = event.currentTarget as (EventTarget & T) | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-export const relatedTargetRequired = <
-	E extends EventWithRelatedTarget = EventWithRelatedTarget,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	const element = event.relatedTarget as (EventTarget & T) | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-export const relatedTargetOptional = <
-	E extends EventWithRelatedTarget = EventWithRelatedTarget,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.relatedTarget as EventTarget & T) ?? undefined
-}
-
-export const targetRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement | Document = HTMLElement
->(
-	event: E
-) => {
-	const element = event.target as T | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-// optional event targets. this is sort of not important but will probably make type casting easier
-export const currentTargetOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.currentTarget as EventTarget & T) ?? undefined
-}
-
-export const targetOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.target as EventTarget & T) ?? undefined
-}
-
-export const targetClosestRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E,
-	selector: string
-) => {
-	const element = event.target as T | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	const closest = element.closest(selector) as T
-	if (!closest)
-		throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
-	return closest
-}
-
-export const targetClosestOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E,
-	selector: string
-) => {
-	const element = event.target as T | null
-	if (!element) return undefined
-	const closest = element.closest(selector) as T
-	if (!closest) return undefined
-	return closest
-}
-
-// properties and methods of HTML elements that return an HTMLElement
-export const closestRequired = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	selector: string
-) => {
-	const closest = element.closest(selector) as T
-	if (!closest)
-		throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
-	return closest
-}
-
-export const closestOptional = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	selector: string
-) => {
-	return (element.closest(selector) as T) ?? undefined
-}
-
-export const elementPropertyRequired = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	property: HTMLElementProperty
-) => {
-	const parent = element[property] as T | null
-	if (!parent) throw new Error(`required element not found: ${element.nodeName}.parentNode`)
-	return parent
-}
 
 // this function is use to safely define a new custom element
 // it allows callbacks to be run before and after the element is defined -
@@ -333,88 +159,11 @@ interface CustomElementConstructorWithStaticTagName extends CustomElementConstru
 	htmlSelector: string
 }
 
-// throw error if something goes wrong with a constructor
-export const safeDefineElement = (
-	elementClass: CustomElementConstructorWithStaticTagName,
-	callbackBefore?: Function,
-	callbackAfter?: Function
-): void => {
-	try {
-		if (customElements.get(elementClass.htmlSelector)) return
-		if (callbackBefore instanceof Function) {
-			const elsInDocument = qsaOptional(elementClass.htmlSelector)
-			if (elsInDocument) {
-				callbackBefore()
-			}
-		}
-		customElements.define(elementClass.htmlSelector, elementClass)
-		if (callbackAfter instanceof Function) {
-			const elsInDocument = qsaOptional(elementClass.htmlSelector)
-			if (elsInDocument) {
-				callbackAfter()
-			}
-		}
-	} catch (error) {
-		console.error(
-			`Failed to define custom element '${elementClass.htmlSelector}': ${error.message}`
-		)
-	}
-}
 
-// formData helpers
-export const getOrThrow = <T extends FormData | Map<any, any> = FormData>(data: T, key: string) => {
-	const value = data.get(key)
-	if (!value) throw new Error(`Value ${key} not found in ${data}`)
-	return value
-}
-export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
-	data: T,
-	key: string
-) => {
-	const value = data.get(key)
-	if (!value) return undefined
-	return value
-}
 
-// get attribute from element or throw error
-export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
-	const data = el.getAttribute(attribute)
-	if (!data) throw new Error(`Attribute ${attribute} no found on element ${{el}}`)
-	return data
-}
-export const getAttributeOrUndefined = (attribute: string, el: HTMLElement) => {
-	const data = el.getAttribute(attribute)
-	if (!data) return undefined
-	return data
-}
 // browser safe replace all
 export const replaceAll = (str: string, find: string, replace: string) => {
 	return str.split(find).join(replace)
-}
-
-// toggle attributes specific to ucoast builds, not used in default dawn repack
-export const toggleActive = (el: HTMLElement, active: boolean) => {
-	if (active) {
-		el.setAttribute('data-uc-active', '')
-	} else {
-		el.removeAttribute('data-uc-active')
-	}
-}
-
-export const toggleIsEmpty = (el: HTMLElement, isEmpty: boolean) => {
-	if (isEmpty) {
-		el.setAttribute('data-uc-cart-empty', '')
-	} else {
-		el.removeAttribute('data-uc-cart-empty')
-	}
-}
-
-export const toggleLoading = (el: HTMLElement, loading: boolean) => {
-	if (loading) {
-		el.setAttribute(ATTRIBUTES.loading, '')
-	} else {
-		el.removeAttribute(ATTRIBUTES.loading)
-	}
 }
 
 // scroll to anchor link with some ucoast-specific features, not used in default dawn repack
@@ -607,13 +356,7 @@ function closeAllHeaderMenus() {
 	window.Ucoast.openMenuId = undefined
 }
 
-export function getFocusableElements(container: HTMLElement): FocusableHTMLElement[] {
-	return Array.from(
-		container.querySelectorAll(
-			"summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
-		)
-	)
-}
+
 
 export function focusVisiblePolyfill() {
 	const navKeys = [
@@ -659,18 +402,6 @@ export function focusVisiblePolyfill() {
 	)
 }
 
-export function onKeyUpEscape(event: KeyboardEvent) {
-	if (event.code?.toUpperCase() !== 'ESCAPE') return
-
-	const openDetailsElement = targetClosestOptional(event, 'details[open]')
-	if (!openDetailsElement) return
-
-	const summaryElement = qsRequired('summary', openDetailsElement)
-	openDetailsElement.removeAttribute('open')
-	summaryElement.setAttribute('aria-expanded', 'false')
-	summaryElement.focus()
-}
-
 export function pauseAllMedia() {
 	const jsYoutubeEls = qsaOptional<HTMLIFrameElement>('.js-youtube')
 	if (jsYoutubeEls) {
@@ -706,27 +437,8 @@ export function pauseAllMedia() {
 
 // event based functions
 
-export function debounce(fn: Function, wait: number): DebounceCallback {
-	let timeoutId: number
-	return (...args) => {
-		clearTimeout(timeoutId)
-		// @ts-ignore
-		// since this is a generic function that can literally be used for anything, I think 'any' is the best type here
-		// 'unknown' would be better but we can't assign a type without moving off of arrow functions
-		timeoutId = setTimeout(() => fn.apply(this, args), wait)
-	}
-}
-export function throttle(fn: Function, delay: number = 0) {
-	let lastCall = 0
-	return function (...args: unknown[]) {
-		const now = new Date().getTime()
-		if (now - lastCall < delay) {
-			return
-		}
-		lastCall = now
-		return fn(...args)
-	}
-}
+
+
 
 // fetch API configs
 
@@ -963,89 +675,6 @@ export const replaceSrcSet = (
 	}
 }
 
-// this is a default shopify function that normally runs in global scope
-// I moved it to functions for clarity
-
-// trapFocusHandlers variable and associated functions are part of the global scope
-// this function should always run first
-
-const trapFocusHandlers: {
-	focusin?: (event: Event) => void
-	focusout?: (event: Event) => void
-	keydown?: (event: KeyboardEvent) => void
-} = {}
-
-export function trapFocus(
-	container: HTMLElement,
-	elementToFocus: HTMLElement | undefined = container
-) {
-	const elements = getFocusableElements(container)
-	const first = elements[0]
-	const last = elements[elements.length - 1]
-
-	removeTrapFocus()
-
-	trapFocusHandlers.focusin = (event) => {
-		if (event.target !== container && event.target !== last && event.target !== first) return
-
-		if (!trapFocusHandlers.keydown)
-			throw new Error('trapFocusHandlers.focusin called before .keydown is defined')
-
-		document.addEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	trapFocusHandlers.focusout = function () {
-		if (!trapFocusHandlers.keydown)
-			throw new Error('trapFocusHandlers.focusout called before .keydown is defined')
-		document.removeEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
-		if (event.code?.toUpperCase() !== 'TAB') return // If not TAB key
-		// On the last focusable element and tab forward, focus the first element.
-		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
-		if (target === last && !event.shiftKey) {
-			event.preventDefault()
-			first.focus()
-		}
-
-		//  On the first focusable element and tab backward, focus the last element.
-		if ((event.target === container || event.target === first) && event.shiftKey) {
-			event.preventDefault()
-			last.focus()
-		}
-	}
-
-	document.addEventListener('focusout', trapFocusHandlers.focusout)
-	document.addEventListener('focusin', trapFocusHandlers.focusin)
-
-	elementToFocus.focus()
-
-	if (
-		elementToFocus instanceof HTMLInputElement &&
-		['search', 'text', 'email', 'url'].includes(elementToFocus.type) &&
-		elementToFocus.value
-	) {
-		elementToFocus.setSelectionRange(0, elementToFocus.value.length)
-	}
-}
-
-// don't know why shopify put this function below the above but I'm not about to go debug it
-
-export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefined) {
-	if (trapFocusHandlers.focusin) {
-		document.removeEventListener('focusin', trapFocusHandlers.focusin)
-	}
-	if (trapFocusHandlers.focusout) {
-		document.removeEventListener('focusout', trapFocusHandlers.focusout)
-	}
-
-	if (trapFocusHandlers.keydown) {
-		document.removeEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	if (elementToFocus) elementToFocus.focus()
-}
 
 export function openWaitlistModal(variantId: number, opener: HTMLElement) {
 	const modal = qsRequired<ModalDialog>(`#WaitlistModal`)

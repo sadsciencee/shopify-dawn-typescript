@@ -1,4 +1,4 @@
-import { getAttributeOrThrow, qsOptional } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 import { mediaLoader } from '@/scripts/core/global';
 

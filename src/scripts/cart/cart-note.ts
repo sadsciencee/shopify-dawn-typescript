@@ -1,5 +1,6 @@
 import { ON_CHANGE_DEBOUNCE_TIMER } from '@/scripts/core/global'
-import { debounce, fetchConfig, qsRequired, targetRequired } from '@/scripts/core/global';
+import { fetchConfig } from '@/scripts/core/global';
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class CartNote extends UcoastEl {

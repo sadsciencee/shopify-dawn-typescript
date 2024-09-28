@@ -1,9 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import {
-	getAttributeOrThrow,
-	qsRequired,
-	qsRequiredFromDocument,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class DynamicShippingBar extends UcoastEl {
 	static htmlSelector = 'dynamic-shipping-bar'

@@ -1,10 +1,6 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
 import { KlaviyoForm } from '@/scripts/theme/klaviyo-form'
-import {
-	getAttributeOrThrow,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { getActiveOrAccessibilityElement } from '@/scripts/core/cart-functions'
 
 export class WelcomePopup extends ModalDialog {

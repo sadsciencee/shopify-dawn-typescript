@@ -1,7 +1,7 @@
 import { PUB_SUB_EVENTS } from '@/scripts/core/global'
 import { isVariantChangeEvent, publish, subscribe } from '@/scripts/core/global'
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
-import { getAttributeOrThrow, qsOptional, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class ProductInfo extends UcoastEl {

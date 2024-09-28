@@ -3,7 +3,7 @@ import EmblaCarousel, {
 	EmblaCarouselType,
 	EmblaOptionsType,
 } from 'embla-carousel'
-import { getAttributeOrThrow, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import ClassNames from 'embla-carousel-class-names'
 import AutoHeight from 'embla-carousel-auto-height'

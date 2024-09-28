@@ -1,12 +1,8 @@
 import {
 	ATTRIBUTES,
-	closestOptional,
-	qsRequired,
-	targetClosestOptional,
-	targetRequired
 } from '@/scripts/core/global';
 import { type StickyHeader } from '@/scripts/theme/sticky-header'
-import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { SELECTORS } from '@/scripts/core/global'

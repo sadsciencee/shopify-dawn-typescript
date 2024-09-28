@@ -1,5 +1,5 @@
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
-import { qsaOptional, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export type ModelViewerUIReference = {
 	pause: () => void

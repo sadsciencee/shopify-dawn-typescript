@@ -1,4 +1,4 @@
-import { closestOptional, closestRequired, getAttributeOrThrow } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type CartItems } from '@/scripts/cart/cart-items'
 import { type CartDrawerItems } from '@/scripts/cart/cart-drawer-items'
 import { UcoastEl } from '@/scripts/core/UcoastEl'

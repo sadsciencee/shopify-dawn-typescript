@@ -1,6 +1,6 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { qsRequired } from '@/scripts/core/global'
 import { type Hls } from '@/scripts/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 
 function sleep(ms: number) {

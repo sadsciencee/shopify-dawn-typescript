@@ -1,11 +1,4 @@
-import {
-	currentTargetRequired,
-	qsaRequired,
-	qsOptional,
-	qsRequired,
-	targetClosestOptional,
-} from '@/scripts/core/global'
-
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 const selectors = {
 	customerAddresses: '[data-customer-addresses]',
 	addressCountrySelect: '[data-address-country-select]',

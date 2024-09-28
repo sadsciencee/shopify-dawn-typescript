@@ -1,4 +1,4 @@
-import { debounce, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class SearchForm extends UcoastEl {

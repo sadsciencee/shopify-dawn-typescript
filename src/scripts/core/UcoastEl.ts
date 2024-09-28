@@ -1,4 +1,4 @@
-import { qsaOptional } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class UcoastEl extends HTMLElement {
 	animateSelf: boolean

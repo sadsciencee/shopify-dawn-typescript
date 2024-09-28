@@ -1,10 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import {
-	currentTargetRequired,
-	getAttributeOrThrow,
-	qsaRequired,
-	qsRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class PriceRange extends UcoastEl {
 	static htmlSelector = 'price-range'

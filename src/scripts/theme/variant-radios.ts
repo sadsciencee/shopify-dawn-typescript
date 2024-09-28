@@ -1,5 +1,5 @@
 import { VariantSelects } from '@/scripts/theme/variant-selects';
-import { qsaOptional } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class VariantRadios extends VariantSelects {
   static override htmlSelector = 'variant-radios';

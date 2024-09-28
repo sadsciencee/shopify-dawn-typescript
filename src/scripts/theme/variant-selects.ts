@@ -1,12 +1,5 @@
-import { getAttributeOrUndefined, PUB_SUB_EVENTS } from '@/scripts/core/global'
-import { createVariantChangeEvent, publish } from '@/scripts/core/global'
-import {
-	getAttributeOrThrow,
-	qsaOptional,
-	qsaRequired,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
+import { createVariantChangeEvent, publish, PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ProductForm } from '@/scripts/product/product-form'
 import { type MediaGallery } from '@/scripts/product/media-gallery'
 import { type ShareButton } from '@/scripts/optional/share-button'

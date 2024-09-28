@@ -1,11 +1,8 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
 import {
-	getAttributeOrThrow,
-	qsaOptional,
-	qsOptional,
-	qsRequired,
 	replaceAll,
 } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type CartNotification } from '@/scripts/theme/cart-notification'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { type PickupAvailability } from '@/scripts/optional/pickup-availability'

@@ -1,5 +1,5 @@
 import { SearchForm } from '@/scripts/theme/search-form';
-import { qsaRequired, targetRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class MainSearch extends SearchForm {
   static override htmlSelector = 'main-search';

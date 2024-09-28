@@ -1,11 +1,8 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import {
-  currentTargetRequired,
-  getAttributeOrUndefined,
   onKeyUpEscape,
-  qsOptional,
-  qsRequired,
-  scaleValue, targetClosestRequired,
+  scaleValue,
 } from '@/scripts/core/global'
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
 import { SELECTORS } from '@/scripts/core/global';
