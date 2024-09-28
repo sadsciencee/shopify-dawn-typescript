@@ -2,11 +2,6 @@
 	capture spacing
 		render 'ucoast-spacing', settings: section.settings
 	endcapture
-	if section.index > 2
-		assign loading = 'lazy'
-	else
-		assign loading = 'eager'
-	endif
 	capture color_scheme
 		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
 	endcapture
@@ -40,24 +35,24 @@
 					-%}
 					{%- case block.type -%}
 						{%- when 'image' -%}
-                            {% capture wrapper_class %}
+							{% capture wrapper_class %}
                                 collage-card h-100 relative block w-100 overflow-hidden {% if section.settings.card_styles == 'none' %}global-media-settings{% else %}card-wrapper {{ section.settings.card_styles }} color-{{ settings.card_color_scheme }} gradient{% endif %}
                             {% endcapture %}
-                            {% if forloop.index0 == large_block %}
-                                {% render 'ucoast-media',
-                                        wrapper_class: wrapper_class,
-                                        media: block.settings.image,
-                                        media_class: 'h-100 w-100 object-cover',
-                                        loading: loading
-                                %}
-                            {% else %}
-                                {% render 'ucoast-media',
-                                        wrapper_class: wrapper_class,
-                                        media_class: 'h-100 w-100 object-cover',
-                                        media: block.settings.image,
-                                        loading: loading
-                                %}
-                            {% endif %}
+							{% if forloop.index0 == large_block %}
+								{% render 'ucoast-art-direction',
+									wrapper_class: wrapper_class,
+									desktop_media: block.settings.image,
+									media_class: 'h-100 w-100 object-cover',
+									desktop_size: 'md'
+								%}
+							{% else %}
+								{% render 'ucoast-art-direction',
+									wrapper_class: wrapper_class,
+									media_class: 'h-100 w-100 object-cover',
+									desktop_media: block.settings.image,
+									desktop_size: 'sm'
+								%}
+							{% endif %}
 						{%- when 'product' -%}
 							{%- assign placeholder_image = 'product-apparel-'
 								| append: placeholder_image_index

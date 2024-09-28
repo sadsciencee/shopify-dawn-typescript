@@ -24,9 +24,8 @@ export class UcoastVideo extends UcoastEl {
 		this.videoEl = q.rs<HTMLVideoElement>('video', this)
 		this.hlsSource = this.videoEl.getAttribute('data-hls-src') ?? undefined
 		this.hlsReady = false
-		;(this.mp4Source =
-			this.videoEl.getAttribute('data-mp4-src') ?? undefined),
-			(this.usingMp4Source = false)
+		this.mp4Source = this.videoEl.getAttribute('data-mp4-src') ?? undefined
+		this.usingMp4Source = false
 		this.initialized = true
 		this.eventDriven = this.hasAttribute('data-event-driven')
 		this.eventEnabled = false
@@ -34,22 +33,45 @@ export class UcoastVideo extends UcoastEl {
 
 	override async connectedCallback() {
 		super.connectedCallback()
+		this.onConnectedCallback()
+	}
+
+	onConnectedCallback() {
 		if (window?.Ucoast?.mediaManager?.hlsLibraryLoaded) {
 			void this.onLibraryLoad()
+		} else if (!this.hlsSource && this.mp4Source) {
+			window.Ucoast.mediaManager.addVideo(this)
+		} else if (
+			this.hlsSource &&
+			window.Ucoast?.mediaManager?.hlsRequired !== undefined &&
+			window.Ucoast.mediaManager.hlsRequired === false
+		) {
+			window.Ucoast.mediaManager.addVideo(this)
+		} else {
+			// mediaManager hasn't initialized - this happens on devices with native hls support
+			// flag the element with a data attribute - mediaManager will run this method again on initialization
+			this.markForRetry()
 		}
+	}
+
+	markForRetry() {
+		this.setAttribute('data-retry', 'true')
+	}
+
+	// used by mediaManager to retry initialization
+	unMarkForRetry() {
+		this.removeAttribute('data-retry')
 	}
 
 	override async disconnectedCallback() {
 		super.disconnectedCallback()
 		if (this.hlsInstance) {
 			this.hlsInstance.destroy()
-			window.Ucoast.mediaManager.videos =
-				window.Ucoast.mediaManager.videos.filter(
-					(video) => video !== this
-				)
+			window.Ucoast.mediaManager.removeVideo(this)
 		}
 	}
 
+	// both playEvent methods are used by remote components
 	async playEventOn() {
 		if (!this.eventDriven) return
 		this.eventEnabled = true
@@ -62,8 +84,23 @@ export class UcoastVideo extends UcoastEl {
 		this.pause()
 	}
 
+	isTouchingViewport() {
+		const rect = this.getBoundingClientRect()
+
+		const isVisible =
+			rect.top < window.innerHeight &&
+			rect.bottom > 0 &&
+			rect.left < window.innerWidth &&
+			rect.right > 0
+
+		console.log('checked isTouchingViewport', isVisible)
+
+		return isVisible
+	}
+
 	async play() {
 		// all conditions that should prevent the video from playing must go here
+		if (!this.isTouchingViewport()) return
 		if (this.eventDriven && !this.eventEnabled) return
 		if (this.isHiddenForViewport()) return
 		if (isVideoPlaying(this.videoEl)) return
@@ -108,13 +145,8 @@ export class UcoastVideo extends UcoastEl {
 		await this.hlsInstance.loadSource(this.hlsSource)
 		await this.hlsInstance.attachMedia(this.videoEl)
 		// all videos present in DOM at page load are added to the mediaManager.videos array, but if this video was added to the DOM later, it needs to be added to the array
-		if (
-			!Array.from(window.Ucoast.mediaManager.videos).some(
-				(video) => video === this
-			)
-		) {
-			window.Ucoast.mediaManager.videos.push(this)
-		}
+
+		window.Ucoast.mediaManager.addVideo(this)
 	}
 
 	isHiddenForViewport() {

@@ -55,7 +55,6 @@ export class ProductSlider extends UcoastEl {
 			this.uniqueId
 		)
 		this.dynamicContentContainer.innerHTML = contentWithUniqueId
-		await window.Ucoast.mediaManager.preloadContainer(this.dynamicContentContainer)
 		window.setTimeout(() => {
 			this.classList.add('loaded')
 		}, 5)
@@ -93,7 +92,7 @@ export class ProductSlider extends UcoastEl {
 			console.error(e)
 		}
 		if (!this.defer) {
-			await window.Ucoast.mediaManager.preloadContainer(this)
+
 		}
 		this.initialized = true
 	}

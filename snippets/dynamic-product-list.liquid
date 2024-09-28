@@ -10,8 +10,11 @@
 	endif
 %}
 {%- for product in product_list -%}
-	{%- if forloop.index == 4 and enable_defer == true -%}
-		{%- assign defer = true -%}
+	{%- if forloop.index == 4 -%}
+		{% if enable_defer == true %}
+			{%- assign defer = true -%}
+		{% endif %}
+		{% assign loading = 'lazy' %}
 	{%- endif -%}
 	<li
 		class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %} {% if slider %} embla__slide{% endif %}"
@@ -22,7 +25,9 @@
 			card_product: product,
 			defer: defer,
 			section_id: section_id,
-			allow_upsell: true
+			allow_upsell: true,
+			show_secondary_image: true,
+			loading: loading
 		%}
 	</li>
 	{% if forloop.index0 == insert_after %}
