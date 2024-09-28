@@ -102,10 +102,10 @@
 				>
 
 				<img
-						src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-						alt="{{ mobile_media.alt }}"
-						class="{{ media_class }}"
-				/>
+					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+					alt="{{ mobile_media.alt }}"
+					class="{{ media_class }}"
+				>
 			</picture>
 		{% when 'image_video' %}
 			<picture>
@@ -117,12 +117,12 @@
 					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 					alt="{{ desktop_media.alt }}"
 					class="{{ media_class }}"
-				/>
+				>
 			</picture>
 		{% when 'none_none' %}
 			{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
 		{% when 'image_none' %}
-		{% assign media_class = media_class | append: ' no-picture' %}
+			{% assign media_class = media_class | append: ' no-picture' %}
 			{{
 				desktop_media
 				| image_url: width: starting_width
@@ -130,7 +130,8 @@
 					widths: all_widths,
 					sizes: all_sizes,
 					height: null,
-					class: media_class
+					class: media_class,
+					loading: loading
 			}}
 		{% else %}
 			<picture>
@@ -149,7 +150,8 @@
 						widths: all_widths,
 						sizes: all_sizes,
 						height: null,
-						class: media_class
+						class: media_class,
+						loading: loading
 				}}
 			</picture>
 	{% endcase %}
