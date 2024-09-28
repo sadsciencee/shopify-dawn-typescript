@@ -2,6 +2,69 @@ import { UcoastVideo } from '@/scripts/core/ucoast-video'
 import { type Hls } from '../global'
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 
+interface FadeOptions {
+	duration?: number
+	initialOpacity?: number
+}
+
+function fadeInElement(element: HTMLElement, options: FadeOptions = {}): void {
+	const { duration = 300, initialOpacity = 0 } = options
+
+	element.style.opacity = initialOpacity.toString()
+	element.style.transition = `opacity ${duration}ms ease-in-out`
+
+	const fadeIn = (): void => {
+		element.style.opacity = '1'
+	}
+
+	requestAnimationFrame(fadeIn)
+}
+
+function handlePictureFadeIn(
+	pictureElement: HTMLPictureElement,
+	options: FadeOptions = {}
+): void {
+	const sources = q.ol<HTMLSourceElement>('source', pictureElement)
+	const img = q.os<HTMLImageElement>('img', pictureElement)
+
+	if (!img || !sources) {
+		console.error('No img element found in picture')
+		return
+	}
+
+	const loadHandler = (): void => {
+		sources.forEach((source) =>
+			source.removeEventListener('load', loadHandler)
+		)
+		img.removeEventListener('load', loadHandler)
+		fadeInElement(pictureElement, options)
+	}
+
+	sources.forEach((source) => source.addEventListener('load', loadHandler))
+	img.addEventListener('load', loadHandler)
+
+	if (img.complete || Array.from(sources).some((source) => source.complete)) {
+		loadHandler()
+	}
+}
+
+function handleImgFadeIn(
+	imgElement: HTMLImageElement,
+	options: FadeOptions = {}
+): void {
+	if (imgElement.complete) {
+		fadeInElement(imgElement, options)
+	} else {
+		imgElement.addEventListener('load', () =>
+			fadeInElement(imgElement, options)
+		)
+	}
+}
+
+// Usage
+
+// Usage
+
 export class MediaManager {
 	hlsRequired: boolean
 	hlsLibraryLoaded: boolean
@@ -22,6 +85,25 @@ export class MediaManager {
 
 	// public methods
 	async initialLoad() {
+		document.addEventListener('DOMContentLoaded', function () {
+			document
+				.querySelectorAll('picture, img.no-picture')
+				.forEach((element: Element) => {
+					const options: FadeOptions = {
+						duration: 300,
+						initialOpacity: 0,
+					}
+
+					if (element instanceof HTMLPictureElement) {
+						handlePictureFadeIn(element, options)
+					} else if (
+						element instanceof HTMLImageElement &&
+						element.classList.contains('no-picture')
+					) {
+						handleImgFadeIn(element, options)
+					}
+				})
+		})
 		/*this.setImageDataSrcs(this.selectAllImages())
 		this.loadImagesImmediately(this.selectImagesInViewport())
 		if (this.hlsRequired && !this.hlsLibraryLoaded) {
@@ -78,12 +160,12 @@ export class MediaManager {
 
 	private initEventListeners() {
 		window.addEventListener('resize', () => {
-			const currentWidth = window.innerWidth;
+			const currentWidth = window.innerWidth
 			if (currentWidth !== this.lastKnownWindowWidth) {
-				this.lastKnownWindowWidth = currentWidth;
+				this.lastKnownWindowWidth = currentWidth
 			}
 			this.updateOnScroll()
-		});
+		})
 		window.addEventListener('scroll', () => this.handleScroll(), {
 			passive: true,
 		})

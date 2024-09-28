@@ -122,6 +122,7 @@
 		{% when 'none_none' %}
 			{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
 		{% when 'image_none' %}
+		{% assign media_class = media_class | append: ' no-picture' %}
 			{{
 				desktop_media
 				| image_url: width: starting_width
