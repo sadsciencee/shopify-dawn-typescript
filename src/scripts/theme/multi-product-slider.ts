@@ -23,9 +23,9 @@ export class MultiProductSlider extends UcoastEl {
 
 	activateSlider(event: Event) {
 		const currentTarget = q.rct(event)
-		const blockId = getAttributeOrThrow('data-nav', currentTarget)
+		const blockId = q.ra(currentTarget, 'data-nav')
 		this.navButtons.forEach((navButton) => {
-			const navBlockId = getAttributeOrThrow('data-nav', navButton)
+			const navBlockId = q.ra(navButton, 'data-nav')
 			if (blockId === navBlockId) {
 				navButton.classList.add('active')
 			} else {
@@ -33,9 +33,9 @@ export class MultiProductSlider extends UcoastEl {
 			}
 		})
 		this.sliderWrappers.forEach((sliderWrapper) => {
-			const sliderBlockId = getAttributeOrThrow(
-				'data-slider',
-				sliderWrapper
+			const sliderBlockId = q.ra(
+				sliderWrapper,
+				'data-slider'
 			)
 			if (blockId === sliderBlockId) {
 				sliderWrapper.classList.add('active')

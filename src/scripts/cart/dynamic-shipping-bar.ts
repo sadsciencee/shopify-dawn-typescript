@@ -21,7 +21,7 @@ export class DynamicShippingBar extends UcoastEl {
 			newDocument
 		)
 		const newPercent = parseInt(
-			getAttributeOrThrow('data-percent', newShippingBar)
+			q.ra(newShippingBar, 'data-percent')
 		)
 		const newStatusEl = this.getStatusEl(newShippingBar)
 		this.statusEl.innerHTML = newStatusEl.innerHTML

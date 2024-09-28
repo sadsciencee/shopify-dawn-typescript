@@ -317,7 +317,7 @@ export function initializeSummaryA11y() {
 				: undefined
 
 		if (nextElementSibling && nextElementSibling.hasAttribute('id')) {
-			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
+			summary.setAttribute('aria-controls', q.ra(nextElementSibling, 'id'))
 		}
 		summary.addEventListener('click', (event) => {
 			//event.preventDefault()

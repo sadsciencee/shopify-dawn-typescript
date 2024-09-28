@@ -15,7 +15,7 @@ export class HeaderMenu extends DetailsDisclosure {
     super()
     this.header = q.rs<StickyHeader>(SELECTORS.headerWrapper)
     this.hoverSummary = q.os('summary[data-summary-hover="on"]', this)
-    this.detailsId = getAttributeOrUndefined('id', this.mainDetailsToggle)
+    this.detailsId = q.oa(this.mainDetailsToggle, 'id')
     this.initHoverSummary()
   }
 

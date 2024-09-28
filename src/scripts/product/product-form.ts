@@ -58,7 +58,7 @@ export class ProductForm extends UcoastEl {
 	onSubmitHandler(event: Event) {
 		event.preventDefault()
 		if (this.submitButton.getAttribute('aria-disabled') === 'true') return
-		const oosId = getAttributeOrUndefined('data-oos-popup-trigger', this.submitButton)
+		const oosId = q.oa(this.submitButton, 'data-oos-popup-trigger')
 		if (oosId) {
 			openWaitlistModal(parseInt(oosId), this.submitButton)
 			return

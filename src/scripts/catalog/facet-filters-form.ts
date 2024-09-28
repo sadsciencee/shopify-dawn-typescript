@@ -260,7 +260,7 @@ export class FacetFiltersForm extends UcoastEl {
 		const productGrid = q.rs('#product-grid')
 		return [
 			{
-				section: getAttributeOrThrow('data-id', productGrid),
+				section: q.ra(productGrid, 'data-id'),
 			},
 		]
 	}
@@ -304,7 +304,7 @@ export class FacetFiltersForm extends UcoastEl {
 				)?.getAttribute('data-uc-facet-form') === 'mobile'
 
 			sortFilterForms.forEach((form) => {
-				const formType = getAttributeOrThrow('data-uc-facet-form', form)
+				const formType = q.ra(form, 'data-uc-facet-form')
 				if (!isMobile) {
 					if (
 						formType === 'sort' ||

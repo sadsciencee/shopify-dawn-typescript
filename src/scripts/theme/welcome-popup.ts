@@ -15,10 +15,10 @@ export class WelcomePopup extends ModalDialog {
 		super()
 		this.klaviyoForm = q.rs<KlaviyoForm>('klaviyo-form', this)
 		this.openAfter =
-			parseInt(getAttributeOrThrow('data-uc-open-after', this)) * 1000
-		this.cacheKey = getAttributeOrThrow('data-uc-cache-key', this)
+			parseInt(q.ra(this, 'data-uc-open-after')) * 1000
+		this.cacheKey = q.ra(this, 'data-uc-cache-key')
 		this.demoMode =
-			getAttributeOrThrow('data-uc-demo-mode', this) === 'true'
+			q.ra(this, 'data-uc-demo-mode') === 'true'
 
 		this.initializePopup()
 		// note: the code below should be used if the consentmo app is used for customer consent

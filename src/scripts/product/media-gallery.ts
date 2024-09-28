@@ -71,9 +71,9 @@ export class MediaGallery extends UcoastEl {
 
 	onSlideChanged(event: SlideChangedEvent) {
 		if (!this.elements.thumbnails) return
-		const mediaId = getAttributeOrThrow(
-			'data-media-id',
-			event.detail.currentElement
+		const mediaId = q.ra(
+			event.detail.currentElement,
+			'data-media-id'
 		)
 		const thumbnail = this.getActiveThumbnail(mediaId)
 		this.setActiveThumbnail(thumbnail)
@@ -122,7 +122,7 @@ export class MediaGallery extends UcoastEl {
 		this.setActiveThumbnail(activeThumbnail)
 		this.announceLiveRegion(
 			activeMedia,
-			getAttributeOrThrow('data-media-position', activeThumbnail)
+			q.ra(activeThumbnail, 'data-media-position')
 		)
 	}
 

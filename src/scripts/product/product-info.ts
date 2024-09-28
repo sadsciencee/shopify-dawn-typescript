@@ -95,7 +95,7 @@ export class ProductInfo extends UcoastEl {
 			})
 			.then((responseText) => {
 				const html = new DOMParser().parseFromString(responseText, 'text/html')
-				const sectionId = getAttributeOrThrow('data-section', this)
+				const sectionId = q.ra(this, 'data-section')
 				this.updateQuantityRules(sectionId, html)
 				this.setQuantityBoundries()
 			})

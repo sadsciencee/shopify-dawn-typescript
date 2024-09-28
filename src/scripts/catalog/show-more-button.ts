@@ -14,7 +14,7 @@ export class ShowMoreButton extends UcoastEl {
 	constructor() {
 		super()
 		const button = q.rs(ShowMoreButton.selectors.button, this)
-		this.index = getAttributeOrThrow('data-uc-show-more', button)
+		this.index = q.ra(button, 'data-uc-show-more')
 		button.addEventListener('click', (event) => {
 			this.expandShowMore(event)
 

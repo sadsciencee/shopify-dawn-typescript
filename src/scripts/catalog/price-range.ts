@@ -33,13 +33,13 @@ export class PriceRange extends UcoastEl {
 		if (this.minInput.value) this.maxInput.setAttribute('min', this.minInput.value)
 		if (this.minInput.value === '') this.maxInput.setAttribute('min', '0')
 		if (this.maxInput.value === '')
-			this.minInput.setAttribute('max', getAttributeOrThrow('max', this.maxInput))
+			this.minInput.setAttribute('max', q.ra(this.maxInput, 'max'))
 	}
 
 	adjustToValidValues(input: HTMLInputElement) {
 		const value = Number(input.value)
-		const min = Number(getAttributeOrThrow('min', input))
-		const max = Number(getAttributeOrThrow('max', input))
+		const min = Number(q.ra(input, 'min'))
+		const max = Number(q.ra(input, 'max'))
 
 		if (value < min) input.value = `${min}`
 		if (value > max) input.value = `${max}`

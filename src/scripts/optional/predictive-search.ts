@@ -252,7 +252,7 @@ export class PredictiveSearch extends SearchForm {
 
 	setLiveRegionLoadingState() {
 		this.statusElement = this.statusElement || q.rs('.predictive-search-status', this)
-		this.loadingText = this.loadingText || getAttributeOrThrow('data-loading-text', this)
+		this.loadingText = this.loadingText || q.ra(this, 'data-loading-text')
 
 		this.setLiveRegionText(this.loadingText)
 		this.setAttribute(ATTRIBUTES.loading, '')

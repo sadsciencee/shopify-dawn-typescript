@@ -171,11 +171,11 @@ export class VariantSelects extends UcoastEl {
 	setInputAvailability(listOfOptions:(HTMLInputElement|HTMLOptionElement)[], listOfAvailableOptions:(string|null)[]) {
 		listOfOptions.forEach((input) => {
 			if (listOfAvailableOptions.includes(input.getAttribute('value'))) {
-				input.innerText = getAttributeOrThrow('value', input)
+				input.innerText = q.ra(input, 'value')
 			} else {
 				input.innerText = window.variantStrings.unavailable_with_option.replace(
 					'[value]',
-          getAttributeOrThrow('value', input)
+          q.ra(input, 'value')
 				)
 			}
 		})
@@ -208,7 +208,7 @@ export class VariantSelects extends UcoastEl {
 		const requestedVariantId = this.currentVariant.id
 		const sectionId = this.dataset.originalSection
 			? this.dataset.originalSection
-			: getAttributeOrThrow('data-section', this)
+			: q.ra(this, 'data-section')
 
 		fetch(
 			`${this.dataset.url}?variant=${requestedVariantId}&section_id=${
@@ -292,7 +292,7 @@ export class VariantSelects extends UcoastEl {
 
 				if (ctaSource && ctaDestination) {
 					ctaDestination.innerHTML = ctaSource.innerHTML
-					const sourceDataOosPopupTrigger = getAttributeOrUndefined('data-oos-popup-trigger', ctaSource)
+					const sourceDataOosPopupTrigger = q.oa(ctaSource, 'data-oos-popup-trigger')
 					if (sourceDataOosPopupTrigger) {
 						ctaDestination.setAttribute('data-oos-popup-trigger', sourceDataOosPopupTrigger)
 					} else {

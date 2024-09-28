@@ -13,7 +13,7 @@ export class CartRemoveButton extends UcoastEl {
 			const cartItems =
 				q.oc<CartItems>(this, 'cart-items') ||
 				q.rc<CartDrawerItems>(this, 'cart-drawer-items')
-			cartItems.updateQuantity(getAttributeOrThrow('data-index', this), '0')
+			cartItems.updateQuantity(q.ra(this, 'data-index'), '0')
 		})
 	}
 }

@@ -30,7 +30,7 @@ export class KlaviyoForm extends UcoastEl {
 		this.popup = q.os<WelcomePopup>('welcome-popup')
 		this.termsElements = this.getTermsElements()
 		this.termsSetup()
-		this.companyId = getAttributeOrThrow('data-company-id', this)
+		this.companyId = q.ra(this, 'data-company-id')
 		this.route = `https://a.klaviyo.com/client/subscriptions/?company_id=${this.companyId}`
 	}
 

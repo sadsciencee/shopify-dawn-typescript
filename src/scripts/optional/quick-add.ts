@@ -37,7 +37,7 @@ export class QuickAddModal extends ModalDialog {
 		opener.setAttribute(ATTRIBUTES.loading, '')
 		q.rs(SELECTORS.loadingOverlaySpinner, opener).classList.remove('hidden')
 
-		fetch(getAttributeOrThrow('data-product-url', opener))
+		fetch(q.ra(opener, 'data-product-url'))
 			.then((response) => response.text())
 			.then((responseText) => {
 				const responseHTML = new DOMParser().parseFromString(responseText, 'text/html')
@@ -105,7 +105,7 @@ export class QuickAddModal extends ModalDialog {
 	preventDuplicatedIDs() {
 		if (!this.productElement)
 			throw new Error('this.preventDuplicatedIDs called without this.productElement')
-		const sectionId = getAttributeOrThrow('data-section', this.productElement)
+		const sectionId = q.ra(this.productElement, 'data-section')
 		this.productElement.innerHTML = replaceAll(
 			this.productElement.innerHTML,
 			sectionId,

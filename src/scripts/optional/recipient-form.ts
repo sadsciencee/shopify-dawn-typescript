@@ -57,7 +57,7 @@ export class RecipientForm extends UcoastEl {
 		} else {
 			console.warn('RecipientForm: missing error message wrapper')
 		}
-		this.currentProductVariantId = getAttributeOrThrow('product-variant-id', this)
+		this.currentProductVariantId = q.ra(this, 'product-variant-id')
 		this.addEventListener('change', this.onChange.bind(this))
 		this.onChange()
 	}

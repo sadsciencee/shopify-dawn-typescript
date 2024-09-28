@@ -13,7 +13,7 @@ export class ProductRecommendations extends UcoastEl {
       if (!entries[0].isIntersecting) return;
       observer.unobserve(this);
 
-      const fetchUrl = getAttributeOrThrow('data-url', this);
+      const fetchUrl = q.ra(this, 'data-url');
 
       fetch(fetchUrl)
         .then((response) => response.text())

@@ -123,7 +123,7 @@ export class MediaManager {
 	private enableLazyLoad(images: HTMLImageElement[]) {
 		images.forEach((img) => {
 			this.setImageDataSrc(img)
-			const dataSrc = getAttributeOrThrow('data-src', img)
+			const dataSrc = q.ra(img, 'data-src')
 			img.setAttribute('src', dataSrc)
 			img.setAttribute('loading', 'lazy')
 		})
@@ -159,10 +159,10 @@ export class MediaManager {
 		images.forEach((image) => {
 			if (image.getBoundingClientRect().width === 0) return
 			if (image.hasAttribute('data-loaded')) {
-				const dataSrc = getAttributeOrThrow('data-src', image)
+				const dataSrc = q.ra(image, 'data-src')
 				image.setAttribute('src', dataSrc)
 			} else {
-				const dataSrc = getAttributeOrThrow('data-src', image)
+				const dataSrc = q.ra(image, 'data-src')
 				image.removeAttribute('loading')
 				let preloadedImage = new Image()
 				preloadedImage.src = dataSrc

@@ -31,9 +31,9 @@ export class WaitlistForm extends UcoastEl {
 		this.emailInput = q.rs('[type="email"]', this)
 		this.route = `${getBackendRoute()}/api/klaviyo-oos`
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
-		this.successMessage = getAttributeOrThrow('data-success', this)
-		this.errorMessage = getAttributeOrThrow('data-error', this)
-		this.companyId = getAttributeOrThrow('data-company-id', this)
+		this.successMessage = q.ra(this, 'data-success')
+		this.errorMessage = q.ra(this, 'data-error')
+		this.companyId = q.ra(this, 'data-company-id')
 	}
 
 	onSubmitHandler(event: Event) {

@@ -47,9 +47,7 @@ export class CartItems extends UcoastEl {
 	constructor() {
 		super()
 		this.setInstanceSelectors()
-		this.lineItemStatusElement = q.rs(
-			this.instanceSelectors.lineItemStatus
-		)
+		this.lineItemStatusElement = q.rs(this.instanceSelectors.lineItemStatus)
 
 		const debouncedOnChange = debounce((event: Event) => {
 			this.onChange(event)
@@ -88,10 +86,10 @@ export class CartItems extends UcoastEl {
 
 	onChange(event: Event) {
 		const target = q.rt<Event, HTMLInputElement>(event)
-		const targetIndex = getAttributeOrThrow('data-index', target)
+		const targetIndex = q.ra(target, 'data-index')
 		const activeElement = document.activeElement as HTMLElement
 		if (!activeElement) throw new Error('no document.activeElement')
-		const activeElementName = getAttributeOrThrow('name', activeElement)
+		const activeElementName = q.ra(activeElement, 'name')
 		this.updateQuantity(targetIndex, target.value, activeElementName)
 	}
 
@@ -119,10 +117,7 @@ export class CartItems extends UcoastEl {
 		return [
 			{
 				id: 'main-cart-items',
-				section: getAttributeOrThrow(
-					'data-id',
-					q.rs(this.instanceSelectors.main)
-				),
+				section: q.ra(q.rs(this.instanceSelectors.main), 'data-id'),
 				selector: '.js-contents',
 			},
 			{
@@ -137,10 +132,7 @@ export class CartItems extends UcoastEl {
 			},
 			{
 				id: 'CartPage-Footer',
-				section: getAttributeOrThrow(
-					'data-id',
-					q.rs(this.instanceSelectors.footer)
-				),
+				section: q.ra(q.rs(this.instanceSelectors.footer), 'data-id'),
 				selector: '.js-contents',
 			},
 		]
@@ -175,10 +167,7 @@ export class CartItems extends UcoastEl {
 				)
 
 				if (parsedState.errors) {
-					quantityElement.value = getAttributeOrThrow(
-						'value',
-						quantityElement
-					)
+					quantityElement.value = q.ra(quantityElement, 'value')
 					this.updateLiveRegions(line, parsedState.errors)
 					return
 				}
@@ -241,9 +230,7 @@ export class CartItems extends UcoastEl {
 				}
 				this.updateLiveRegions(line, message)
 
-				const lineItem = q.os(
-					`${this.instanceSelectors.line}-${line}`
-				)
+				const lineItem = q.os(`${this.instanceSelectors.line}-${line}`)
 				if (lineItem?.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
 						? window.TsDOM.trapFocus(

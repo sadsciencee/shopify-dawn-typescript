@@ -28,8 +28,8 @@ export class ProductSlider extends UcoastEl {
 			'[data-dynamic-content]',
 			this
 		)
-		this.collectionUrl = getAttributeOrThrow('data-collection-url', this)
-		this.uniqueId = getAttributeOrThrow('data-unique-id', this)
+		this.collectionUrl = q.ra(this, 'data-collection-url')
+		this.uniqueId = q.ra(this, 'data-unique-id')
 
 		if (!this.defer) {
 			// if the form is statically loaded, we need to initialize variantData outside the async flow
