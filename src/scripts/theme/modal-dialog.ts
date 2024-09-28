@@ -19,7 +19,7 @@ export class ModalDialog extends UcoastEl {
 			this.addEventListener('pointerup', (event) => {
 				if (
 					event.pointerType === 'mouse' &&
-					!targetClosestOptional(
+					!q.oClosestTarget(
 						event,
 						'deferred-media, product-model'
 					)
@@ -61,13 +61,13 @@ export class ModalDialog extends UcoastEl {
 
 	show(opener: HTMLElement) {
 		this.openedBy = opener
-		const popup = qsOptional<DeferredMedia>('.template-popup', this)
+		const popup = q.os<DeferredMedia>('.template-popup', this)
 		if (!this.isInline()) {
 			document.body.classList.add('overflow-hidden')
 		}
 		this.setAttribute('open', '')
 		if (popup) popup.loadContent()
-		trapFocus(this, qsRequired('[role="dialog"]', this))
+		window.TsDOM.trapFocus(this, q.rs('[role="dialog"]', this))
 		if (!this.isInline()) {
 			pauseAllMedia()
 		}
@@ -81,7 +81,7 @@ export class ModalDialog extends UcoastEl {
 		document.body.dispatchEvent(new CustomEvent('modalClosed'))
 		this.removeAttribute('open')
 
-		removeTrapFocus(this.openedBy)
+		window.TsDOM.removeTrapFocus(this.openedBy)
 		if (!this.isInline()) {
 			pauseAllMedia()
 		}

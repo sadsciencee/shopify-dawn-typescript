@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/core/global'
+import { TsDOM as q} from '@/scripts/core/TsDOM'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure'
 import { SliderComponent } from '@/scripts/theme/slider-component'
@@ -10,14 +10,14 @@ import { MultiProductSlider } from '@/scripts/theme/multi-product-slider'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { KlaviyoForm } from '@/scripts/theme/klaviyo-form'
 import { WelcomePopup } from '@/scripts/theme/welcome-popup'
-safeDefineElement(UcoastVideo)
-safeDefineElement(DeferredMedia)
-safeDefineElement(SliderComponent)
-safeDefineElement(SlideshowComponent)
-safeDefineElement(StickyHeader)
-safeDefineElement(DetailsDisclosure)
-safeDefineElement(ProductSlider)
-safeDefineElement(MultiProductSlider)
-safeDefineElement(KlaviyoForm)
-safeDefineElement(WelcomePopup)
-safeDefineElement(WaitlistForm)
+q.safeDefineElement(UcoastVideo)
+q.safeDefineElement(DeferredMedia)
+q.safeDefineElement(SliderComponent)
+q.safeDefineElement(SlideshowComponent)
+q.safeDefineElement(StickyHeader)
+q.safeDefineElement(DetailsDisclosure)
+q.safeDefineElement(ProductSlider)
+q.safeDefineElement(MultiProductSlider)
+q.safeDefineElement(KlaviyoForm)
+q.safeDefineElement(WelcomePopup)
+q.safeDefineElement(WaitlistForm)

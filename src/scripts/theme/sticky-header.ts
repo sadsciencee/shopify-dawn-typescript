@@ -22,11 +22,11 @@ export class StickyHeader extends UcoastEl {
 	disclosures?: [] | NodeListOf<HeaderMenu>
 	constructor() {
 		super()
-		this.header = qsRequired(SELECTORS.sectionHeader)
+		this.header = q.rs(SELECTORS.sectionHeader)
 	}
 
 	override connectedCallback() {
-		this.header = qsRequired(SELECTORS.sectionHeader)
+		this.header = q.rs(SELECTORS.sectionHeader)
 		this.headerIsAlwaysSticky =
 			this.getAttribute('data-sticky-type') === 'always' ||
 			this.getAttribute('data-sticky-type') === 'reduce-logo-size'
@@ -44,7 +44,7 @@ export class StickyHeader extends UcoastEl {
 
 		this.currentScrollTop = 0
 		this.preventReveal = false
-		this.predictiveSearch = qsOptional<PredictiveSearch>(
+		this.predictiveSearch = q.os<PredictiveSearch>(
 			'predictive-search',
 			this
 		)
@@ -159,7 +159,7 @@ export class StickyHeader extends UcoastEl {
 	closeMenuDisclosure() {
 		this.disclosures =
 			this.disclosures ||
-			qsaOptional<HeaderMenu>('header-menu', this.header)
+			q.ol<HeaderMenu>('header-menu', this.header)
 		this.disclosures?.forEach((disclosure) => {
 			disclosure.close()
 		})
@@ -168,7 +168,7 @@ export class StickyHeader extends UcoastEl {
 	closeSearchModal() {
 		this.searchModal =
 			this.searchModal ??
-			qsRequired<DetailsModal>('details-modal', this.header)
+			q.rs<DetailsModal>('details-modal', this.header)
 		this.searchModal.close(false)
 	}
 }

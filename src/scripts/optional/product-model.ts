@@ -32,7 +32,7 @@ export class ProductModel extends DeferredMedia {
 
 		if (!window.Shopify || !window.Shopify.ModelViewerUI)
 			throw new Error('window.Shopify.ModelViewerUI is not defined')
-		const modelViewerEl = qsRequired('model-viewer', this)
+		const modelViewerEl = q.rs('model-viewer', this)
 
 		this.modelViewerUI = new window.Shopify.ModelViewerUI(modelViewerEl)
 	}
@@ -62,7 +62,7 @@ export class WindowProductModel {
 			return
 		}
 
-		const productJsonScripts = qsaOptional<HTMLScriptElement>(
+		const productJsonScripts = q.ol<HTMLScriptElement>(
 			'[id^="ProductJSON-"]'
 		)
 		if (productJsonScripts) {

@@ -9,7 +9,7 @@ export class PickupAvailability extends UcoastEl {
 		super()
 
 		if (!this.hasAttribute('available')) return
-		const template = qsRequired<HTMLTemplateElement>('template', this)
+		const template = q.rs<HTMLTemplateElement>('template', this)
 		const content = template.content
 		const firstElementChild = content.firstElementChild
 		if (!content || !firstElementChild || firstElementChild === null) {
@@ -36,7 +36,7 @@ export class PickupAvailability extends UcoastEl {
 			.then((response) => response.text())
 			.then((text) => {
 				const newDocument = new DOMParser().parseFromString(text, 'text/html')
-				const sectionInnerHTML = qsRequired('.shopify-section', newDocument.documentElement)
+				const sectionInnerHTML = q.rs('.shopify-section', newDocument.documentElement)
 				this.renderPreview(sectionInnerHTML)
 			})
 			.catch((error) => {
@@ -57,14 +57,14 @@ export class PickupAvailability extends UcoastEl {
 		if (!this.errorHtml) throw new Error('renderError thrown too early')
 		this.appendChild(this.errorHtml)
 
-		const button = qsRequired('button', this)
+		const button = q.rs('button', this)
 		button.addEventListener('click', this.onClickRefreshList)
 	}
 
 	renderPreview(sectionInnerHTML: Document|HTMLElement) {
-		const drawer = qsOptional<PickupAvailabilityDrawer>('pickup-availability-drawer')
+		const drawer = q.os<PickupAvailabilityDrawer>('pickup-availability-drawer')
 		if (drawer) drawer.remove()
-		const pickupAvailabilityPreview = qsOptional(
+		const pickupAvailabilityPreview = q.os(
 			'pickup-availability-preview',
 			sectionInnerHTML
 		)
@@ -87,8 +87,8 @@ export class PickupAvailability extends UcoastEl {
 		const button = this.querySelector('button')
 		if (button)
 			button.addEventListener('click', (event: MouseEvent) => {
-				const drawer = qsRequired<PickupAvailabilityDrawer>('pickup-availability-drawer')
-				const target = targetRequired(event)
+				const drawer = q.rs<PickupAvailabilityDrawer>('pickup-availability-drawer')
+				const target = q.rt(event)
 				drawer.show(target)
 			})
 	}

@@ -18,12 +18,12 @@ export class HeaderDrawer extends MenuDrawer {
 	}
 
 	setHeader() {
-		return this.header || qsRequired(SELECTORS.sectionHeader)
+		return this.header || q.rs(SELECTORS.sectionHeader)
 	}
 
 	setBorderOffset() {
 		return this.borderOffset ||
-			qsRequired(SELECTORS.headerWrapper).dataset.ucHeaderWrapper == 'border-bottom'
+			q.rs(SELECTORS.headerWrapper).dataset.ucHeaderWrapper == 'border-bottom'
 			? 1
 			: 0
 	}
@@ -43,7 +43,7 @@ export class HeaderDrawer extends MenuDrawer {
 
 		summaryElement.setAttribute('aria-expanded', 'true')
 		window.addEventListener('resize', this.onResize)
-		trapFocus(this.mainDetails, summaryElement)
+		window.TsDOM.trapFocus(this.mainDetails, summaryElement)
 		document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`)
 	}
 

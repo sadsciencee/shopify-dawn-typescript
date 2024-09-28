@@ -1,7 +1,6 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 import {
-  onKeyUpEscape,
   scaleValue,
 } from '@/scripts/core/global'
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
@@ -14,8 +13,8 @@ export class HeaderMenu extends DetailsDisclosure {
   detailsId?: string
   constructor() {
     super()
-    this.header = qsRequired<StickyHeader>(SELECTORS.headerWrapper)
-    this.hoverSummary = qsOptional('summary[data-summary-hover="on"]', this)
+    this.header = q.rs<StickyHeader>(SELECTORS.headerWrapper)
+    this.hoverSummary = q.os('summary[data-summary-hover="on"]', this)
     this.detailsId = getAttributeOrUndefined('id', this.mainDetailsToggle)
     this.initHoverSummary()
   }
@@ -41,7 +40,7 @@ export class HeaderMenu extends DetailsDisclosure {
       void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
     })
 
-    this.mainDetailsToggle.addEventListener('keyup', onKeyUpEscape)
+    this.mainDetailsToggle.addEventListener('keyup', q.onKeyUpEscape)
   }
 
   override onToggle() {

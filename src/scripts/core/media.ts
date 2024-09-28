@@ -266,7 +266,7 @@ export class MediaManager {
 	// hls
 
 	private isHlsRequired() {
-		const video = qsOptional<UcoastVideo>('ucoast-video')
+		const video = q.os<UcoastVideo>('ucoast-video')
 		if (!video) {
 			return false
 		}

@@ -4,17 +4,17 @@ import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
 import { mediaLoader } from '@/scripts/core/global';
 export function initializeThemeEditor() {
 	function hideProductModal() {
-		const productModal = qsaOptional<ProductModal>('product-modal[open]')
+		const productModal = q.ol<ProductModal>('product-modal[open]')
 		productModal && productModal.forEach((modal) => modal.hide())
 	}
 
 	document.addEventListener('shopify:block:select', function (event: Event) {
 		hideProductModal()
-		const target = targetRequired(event)
+		const target = q.rt(event)
 		const blockSelectedIsSlide = target.classList.contains('slideshow__slide')
 		if (!blockSelectedIsSlide) return
 
-		const parentSlideshowComponent = closestOptional<SlideshowComponent>(
+		const parentSlideshowComponent = q.oc<SlideshowComponent>(
 			target,
 			'slideshow-component'
 		)
@@ -29,10 +29,10 @@ export function initializeThemeEditor() {
 	})
 
 	document.addEventListener('shopify:block:deselect', function (event) {
-		const target = targetRequired(event)
+		const target = q.rt(event)
 		const blockDeselectedIsSlide = target.classList.contains('slideshow__slide')
 		if (!blockDeselectedIsSlide) return
-		const parentSlideshowComponent = closestOptional<SlideshowComponent>(
+		const parentSlideshowComponent = q.oc<SlideshowComponent>(
 			target,
 			'slideshow-component'
 		)
@@ -43,7 +43,7 @@ export function initializeThemeEditor() {
 	document.addEventListener('shopify:section:load', () => {
 		mediaLoader()
 		hideProductModal()
-		const zoomOnHoverScripts = qsaOptional<HTMLScriptElement>('[id^=EnableZoomOnHover] script')
+		const zoomOnHoverScripts = q.ol<HTMLScriptElement>('[id^=EnableZoomOnHover] script')
 		zoomOnHoverScripts?.forEach((zoomOnHoverScript) => {
 			const zoomOnHoverScriptParent = zoomOnHoverScript.parentNode
 			if (!zoomOnHoverScriptParent) return

@@ -22,12 +22,12 @@ export class KlaviyoForm extends UcoastEl {
 
 	constructor() {
 		super()
-		this.form = qsRequired('form', this)
-		this.submitButton = qsRequired('[type="submit"]', this)
-		this.emailInput = qsRequired('[type="email"]', this)
+		this.form = q.rs('form', this)
+		this.submitButton = q.rs('[type="submit"]', this)
+		this.emailInput = q.rs('[type="email"]', this)
 		this.successMessage = this.getSuccessMessage()
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
-		this.popup = qsOptional<WelcomePopup>('welcome-popup')
+		this.popup = q.os<WelcomePopup>('welcome-popup')
 		this.termsElements = this.getTermsElements()
 		this.termsSetup()
 		this.companyId = getAttributeOrThrow('data-company-id', this)
@@ -35,11 +35,11 @@ export class KlaviyoForm extends UcoastEl {
 	}
 
 	getTermsElements() {
-		const termsAccepted = qsOptional<HTMLButtonElement>(
+		const termsAccepted = q.os<HTMLButtonElement>(
 			'button[data-terms-accepted]',
 			this
 		)
-		const termsLabel = qsOptional<HTMLLabelElement>(
+		const termsLabel = q.os<HTMLLabelElement>(
 			'[data-terms-label]',
 			this
 		)
@@ -122,12 +122,12 @@ export class KlaviyoForm extends UcoastEl {
 
 	addToKlaviyoListConfig(body: FormData) {
 		const values = {
-			email: getOrThrow(body, 'email'),
-			list_id: getOrThrow(body, 'list_id'),
-			custom_source: getOrThrow(body,'custom_source'),
-			phone_number: getOrUndefined(body, 'phone_number'),
-			language_iso: getOrUndefined(body, 'language_iso') ?? 'en',
-			market_handle: getOrUndefined(body, 'market_handle') ?? 'us'
+			email: q.rfd(body, 'email'),
+			list_id: q.rfd(body, 'list_id'),
+			custom_source: q.rfd(body,'custom_source'),
+			phone_number: q.ofd(body, 'phone_number'),
+			language_iso: q.ofd(body, 'language_iso') ?? 'en',
+			market_handle: q.ofd(body, 'market_handle') ?? 'us'
 		}
 		if (values.phone_number) {
 			values.phone_number = formatPhoneNumber(values.phone_number)

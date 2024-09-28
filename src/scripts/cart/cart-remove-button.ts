@@ -11,8 +11,8 @@ export class CartRemoveButton extends UcoastEl {
 		this.addEventListener('click', (event) => {
 			event.preventDefault()
 			const cartItems =
-				closestOptional<CartItems>(this, 'cart-items') ||
-				closestRequired<CartDrawerItems>(this, 'cart-drawer-items')
+				q.oc<CartItems>(this, 'cart-items') ||
+				q.rc<CartDrawerItems>(this, 'cart-drawer-items')
 			cartItems.updateQuantity(getAttributeOrThrow('data-index', this), '0')
 		})
 	}

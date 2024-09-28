@@ -1,5 +1,5 @@
 import {QuickAddModal} from '@/scripts/optional/quick-add';
-import {safeDefineElement} from '@/scripts/core/global';
+import { TsDOM as q} from '@/scripts/core/TsDOM'
 import { ProductForm } from '@/scripts/product/product-form';
-safeDefineElement(QuickAddModal);
-safeDefineElement(ProductForm)
+q.safeDefineElement(QuickAddModal);
+q.safeDefineElement(ProductForm)

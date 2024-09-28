@@ -168,8 +168,8 @@ export const replaceAll = (str: string, find: string, replace: string) => {
 
 // scroll to anchor link with some ucoast-specific features, not used in default dawn repack
 export const scrollToAnchor = (selector: string) => {
-	const header = qsRequired('[data-uc-header-wrapper]')
-	const anchor = qsRequired(selector)
+	const header = q.rs('[data-uc-header-wrapper]')
+	const anchor = q.rs(selector)
 	const headerHeight = header.offsetHeight
 	const collectionTop = anchor.getBoundingClientRect().top
 	const scrollToPosition =
@@ -187,7 +187,7 @@ export const getBackendRoute = () => {
 
 export const getCurrentHeaderHeight = () => {
 	let height = 0
-	const headerSections = qsaRequired('.shopify-section-group-header-group')
+	const headerSections = q.rl('.shopify-section-group-header-group')
 	headerSections.forEach((section) => {
 		const sectionHeight = section.getBoundingClientRect().height
 		height += sectionHeight
@@ -196,7 +196,7 @@ export const getCurrentHeaderHeight = () => {
 }
 
 /*export const closeAllModals = () => {
-	const modals = qsaOptional<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
+	const modals = q.ol<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
 		'modal-dialog, klaviyo-popup, notify-me, quick-add-modal'
 	)
 	if (!modals) return
@@ -321,8 +321,8 @@ export function initializeSummaryA11y() {
 		}
 		summary.addEventListener('click', (event) => {
 			//event.preventDefault()
-			const currentTarget = currentTargetRequired(event)
-			const closestTarget = targetClosestRequired(event, 'details')
+			const currentTarget = q.rct(event)
+			const closestTarget = q.rClosestTarget(event, 'details')
 			const shouldOpen = !closestTarget.hasAttribute('open')
 			currentTarget.setAttribute('aria-expanded', `${shouldOpen}`)
 		})
@@ -331,7 +331,7 @@ export function initializeSummaryA11y() {
 		const parentElement =
 			summary.parentElement instanceof HTMLElement ? summary.parentElement : undefined
 		if (!parentElement) return
-		parentElement.addEventListener('keyup', onKeyUpEscape)
+		parentElement.addEventListener('keyup', q.onKeyUpEscape)
 	})
 
 	document.querySelectorAll('[data-summary-hover="off"]').forEach((el) => {
@@ -340,7 +340,7 @@ export function initializeSummaryA11y() {
 		})
 	})
 
-	const closeOnExitContainers = qsaOptional('[data-close-menus-on-mouse-exit]')
+	const closeOnExitContainers = q.ol('[data-close-menus-on-mouse-exit]')
 	closeOnExitContainers?.forEach(el => {
 		el.addEventListener('mouseleave', (_) => {
 			closeAllHeaderMenus()
@@ -351,7 +351,7 @@ export function initializeSummaryA11y() {
 function closeAllHeaderMenus() {
 	console.log('close all', window.Ucoast.openMenuId)
 	if (!window.Ucoast.openMenuId) return
-	const headerMenus = qsaOptional<HeaderMenu>('header-menu')
+	const headerMenus = q.ol<HeaderMenu>('header-menu')
 	headerMenus?.forEach(el => el.close())
 	window.Ucoast.openMenuId = undefined
 }
@@ -403,7 +403,7 @@ export function focusVisiblePolyfill() {
 }
 
 export function pauseAllMedia() {
-	const jsYoutubeEls = qsaOptional<HTMLIFrameElement>('.js-youtube')
+	const jsYoutubeEls = q.ol<HTMLIFrameElement>('.js-youtube')
 	if (jsYoutubeEls) {
 		jsYoutubeEls.forEach((video) => {
 			if (!video.contentWindow) return
@@ -414,7 +414,7 @@ export function pauseAllMedia() {
 		})
 	}
 
-	const jsVimeoEls = qsaOptional<HTMLIFrameElement>('.js-vimeo')
+	const jsVimeoEls = q.ol<HTMLIFrameElement>('.js-vimeo')
 	if (jsVimeoEls) {
 		jsVimeoEls.forEach((video) => {
 			if (!video.contentWindow) return
@@ -422,12 +422,12 @@ export function pauseAllMedia() {
 		})
 	}
 
-	const html5Videos = qsaOptional<HTMLVideoElement>('video')
+	const html5Videos = q.ol<HTMLVideoElement>('video')
 	if (html5Videos) {
 		html5Videos.forEach((video) => video.pause())
 	}
 
-	const productModels = qsaOptional<ProductModel>('product-model')
+	const productModels = q.ol<ProductModel>('product-model')
 	if (productModels) {
 		productModels.forEach((model) => {
 			if (model.modelViewerUI) model.modelViewerUI.pause()
@@ -457,18 +457,18 @@ type AddToCartFormValues = {
 }
 
 export function addToCartConfig(body: FormData) {
-	const definedQuantity = getOrUndefined(body, 'quantity')
-	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
+	const definedQuantity = q.ofd(body, 'quantity')
+	const quantity = q.ofd(body, 'quantity') ? parseInt(q.rfd(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
 			{
 				quantity,
-				id: parseInt(getOrThrow(body, 'id')),
+				id: parseInt(q.rfd(body, 'id')),
 			},
 		],
-		form_type: getOrThrow(body, 'form_type'),
-		sections: getOrUndefined(body, 'sections'),
-		sections_url: getOrUndefined(body, 'sections_url'),
+		form_type: q.rfd(body, 'form_type'),
+		sections: q.ofd(body, 'sections'),
+		sections_url: q.ofd(body, 'sections_url'),
 	}
 	return {
 		method: 'POST',
@@ -523,7 +523,7 @@ export function trackRecentlyViewedProducts() {
 
 export function disableDesktopCSS() {
 	if (window.innerWidth >= 990) return
-	const mUp = qsaOptional('link[href*=".m-up"]')
+	const mUp = q.ol('link[href*=".m-up"]')
 	mUp?.forEach((link) => {
 		const href = link.getAttribute('href')
 		if (!href || href.includes('::')) return // vite urls contain ::
@@ -531,7 +531,7 @@ export function disableDesktopCSS() {
 		link.setAttribute('data-href', href)
 	})
 	if (window.innerWidth < 750) {
-		const sUp = qsaOptional('link[href*=".s-up"]')
+		const sUp = q.ol('link[href*=".s-up"]')
 		sUp?.forEach((link) => {
 			const href = link.getAttribute('href')
 			if (!href || href.includes('::')) return
@@ -556,8 +556,8 @@ export function isVideoComponent(obj: HTMLElement | Element): obj is UcoastVideo
 // media loader stuff - this was in a separate file but was getting issues w/buildpack
 
 export const mediaLoader = (runOnce = false) => {
-	const images = qsaOptional('img')
-	const videos = qsaOptional<UcoastVideo>('ucoast-video')
+	const images = q.ol('img')
+	const videos = q.ol<UcoastVideo>('ucoast-video')
 
 	if (images) {
 		images.forEach((image) => {
@@ -573,7 +573,7 @@ export const mediaLoader = (runOnce = false) => {
 			/*if (!isAnyPartOfElementInViewport(image)) {
 				return
 			}
-			if (isAnyPartOfElementInViewport(image) && image.hasAttribute('data-uc-mega-image-defer') && !qsOptional('[data-uc-mega-menu-details][open]')) {
+			if (isAnyPartOfElementInViewport(image) && image.hasAttribute('data-uc-mega-image-defer') && !q.os('[data-uc-mega-menu-details][open]')) {
 				return
 			}*/
 			replaceSrcSet(image)
@@ -637,7 +637,7 @@ function onVideoPreloadIntersection(
 ) {
 	elements.forEach((element) => {
 		const video = element.target
-		if (isVideoComponent(video) && element.isIntersecting && video.hasAttribute('data-uc-megamenu-defer-video') && !qsOptional('[data-uc-mega-menu-details][open]')) {
+		if (isVideoComponent(video) && element.isIntersecting && video.hasAttribute('data-uc-megamenu-defer-video') && !q.os('[data-uc-mega-menu-details][open]')) {
 			return
 		}
 		else if (isVideoComponent(video) && element.isIntersecting) {
@@ -677,8 +677,8 @@ export const replaceSrcSet = (
 
 
 export function openWaitlistModal(variantId: number, opener: HTMLElement) {
-	const modal = qsRequired<ModalDialog>(`#WaitlistModal`)
-	const waitlistForm = qsRequired<WaitlistForm>('waitlist-form', modal)
+	const modal = q.rs<ModalDialog>(`#WaitlistModal`)
+	const waitlistForm = q.rs<WaitlistForm>('waitlist-form', modal)
 	waitlistForm.variantInput.value = `${variantId}`
 	if (modal) modal.show(opener)
 }
@@ -702,7 +702,7 @@ export function initializeShopifyConsentAPI() {
 }
 
 function initGlobalUcoast() {
-	safeDefineElement(UcoastVideo)
+	q.safeDefineElement(UcoastVideo)
 	const iOS = window.Ucoast?.iOS ?? false
 	const Ucoast: typeof window.Ucoast = {
 		shopifyConsentAPILoaded: false,
@@ -722,7 +722,7 @@ function initGlobalUcoast() {
 export function globalSetup() {
 	initGlobalUcoast()
 	initializeShopifyConsentAPI()
-	safeDefineElement(UcoastVideo)
+	q.safeDefineElement(UcoastVideo)
 	initializeSummaryA11y()
 	try {
 		document.querySelector(':focus-visible')

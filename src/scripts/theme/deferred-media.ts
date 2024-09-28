@@ -13,7 +13,7 @@ export class DeferredMedia extends UcoastEl {
 	}
 
 	getTemplate() {
-		return qsRequired<HTMLTemplateElement>('template', this)
+		return q.rs<HTMLTemplateElement>('template', this)
 	}
 
 	loadContent(focus = true) {
@@ -29,7 +29,7 @@ export class DeferredMedia extends UcoastEl {
 
 			this.setAttribute('loaded', 'true')
 			const deferredElement = this.appendChild(
-				qsRequired('video, model-viewer, iframe', content)
+				q.rs('video, model-viewer, iframe', content)
 			)
 			if (focus) deferredElement.focus()
 			if (

@@ -7,6 +7,6 @@ export class PasswordModal extends DetailsModal {
 		super()
 
 		if (this.querySelector('input[aria-invalid="true"]'))
-			this.open({ target: qsRequired('details', this) })
+			this.open({ target: q.rs('details', this) })
 	}
 }

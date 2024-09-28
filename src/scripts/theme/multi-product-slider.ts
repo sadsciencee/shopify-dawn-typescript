@@ -9,9 +9,9 @@ export class MultiProductSlider extends UcoastEl {
 	sliders: NodeListOf<ProductSlider>
 	constructor() {
 		super()
-		this.navButtons = qsaRequired('button[data-nav]', this)
-		this.sliderWrappers = qsaRequired('[data-slider]', this)
-		this.sliders = qsaRequired(ProductSlider.htmlSelector, this)
+		this.navButtons = q.rl('button[data-nav]', this)
+		this.sliderWrappers = q.rl('[data-slider]', this)
+		this.sliders = q.rl(ProductSlider.htmlSelector, this)
 		this.addListeners()
 	}
 
@@ -22,7 +22,7 @@ export class MultiProductSlider extends UcoastEl {
 	}
 
 	activateSlider(event: Event) {
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		const blockId = getAttributeOrThrow('data-nav', currentTarget)
 		this.navButtons.forEach((navButton) => {
 			const navBlockId = getAttributeOrThrow('data-nav', navButton)

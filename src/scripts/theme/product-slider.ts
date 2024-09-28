@@ -24,7 +24,7 @@ export class ProductSlider extends UcoastEl {
 		if (this.hasAttribute('data-disable-auto-height')) {
 			this.disableAutoHeight = true
 		}
-		this.dynamicContentContainer = qsRequired(
+		this.dynamicContentContainer = q.rs(
 			'[data-dynamic-content]',
 			this
 		)
@@ -75,7 +75,7 @@ export class ProductSlider extends UcoastEl {
 			dragThreshold: 100,
 		}
 
-		const viewportNode = qsRequired('.embla__viewport', this)
+		const viewportNode = q.rs('.embla__viewport', this)
 		try {
 			if (this?.disableAutoHeight) {
 				this.emblaApi = EmblaCarousel(viewportNode, OPTIONS, [

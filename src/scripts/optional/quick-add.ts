@@ -19,13 +19,13 @@ export class QuickAddModal extends ModalDialog {
 	modalContent: HTMLElement
 	constructor() {
 		super()
-		this.modalContent = qsRequired('[id^="QuickAddInfo-"]', this)
+		this.modalContent = q.rs('[id^="QuickAddInfo-"]', this)
 	}
 
 	override hide(preventFocus: boolean) {
 		const cartNotification =
-			qsOptional<CartNotification>('cart-notification') ||
-			qsRequired<CartDrawer>('cart-drawer')
+			q.os<CartNotification>('cart-notification') ||
+			q.rs<CartDrawer>('cart-drawer')
 		if (cartNotification && this.openedBy) cartNotification.setActiveElement(this.openedBy)
 		this.modalContent.innerHTML = ''
 
@@ -35,13 +35,13 @@ export class QuickAddModal extends ModalDialog {
 	override show(opener: HTMLElement) {
 		opener.setAttribute('aria-disabled', 'true')
 		opener.setAttribute(ATTRIBUTES.loading, '')
-		qsRequired(SELECTORS.loadingOverlaySpinner, opener).classList.remove('hidden')
+		q.rs(SELECTORS.loadingOverlaySpinner, opener).classList.remove('hidden')
 
 		fetch(getAttributeOrThrow('data-product-url', opener))
 			.then((response) => response.text())
 			.then((responseText) => {
 				const responseHTML = new DOMParser().parseFromString(responseText, 'text/html')
-				this.productElement = qsRequired(
+				this.productElement = q.rs(
 					'section[id^="MainProduct-"]',
 					responseHTML.documentElement
 				)
@@ -64,7 +64,7 @@ export class QuickAddModal extends ModalDialog {
 			.finally(() => {
 				opener.removeAttribute('aria-disabled')
 				opener.removeAttribute(ATTRIBUTES.loading)
-				qsRequired(SELECTORS.loadingOverlaySpinner, opener).classList.add('hidden')
+				q.rs(SELECTORS.loadingOverlaySpinner, opener).classList.add('hidden')
 			})
 	}
 
@@ -94,9 +94,9 @@ export class QuickAddModal extends ModalDialog {
 	removeDOMElements() {
 		if (!this.productElement)
 			throw new Error('this.removeDOMElements called without this.productElement')
-		qsOptional<PickupAvailability>('pickup-availability', this.productElement)?.remove()
-		qsOptional<ProductModal>('product-modal', this.productElement)?.remove()
-		const modalDialogs = qsaOptional<ModalDialog>('modal-dialog', this.productElement)
+		q.os<PickupAvailability>('pickup-availability', this.productElement)?.remove()
+		q.os<ProductModal>('product-modal', this.productElement)?.remove()
+		const modalDialogs = q.ol<ModalDialog>('modal-dialog', this.productElement)
 		if (modalDialogs) {
 			modalDialogs.forEach((modal) => modal.remove())
 		}
@@ -111,7 +111,7 @@ export class QuickAddModal extends ModalDialog {
 			sectionId,
 			`quickadd-${sectionId}`
 		)
-		const formComponents = qsaOptional<VariantSelects | VariantRadios | ProductInfo>(
+		const formComponents = q.ol<VariantSelects | VariantRadios | ProductInfo>(
 			'variant-selects, variant-radios, product-info',
 			this.productElement
 		)
@@ -131,11 +131,11 @@ export class QuickAddModal extends ModalDialog {
 	}
 
 	updateImageSizes() {
-		const product = qsRequired('.product', this.modalContent)
+		const product = q.rs('.product', this.modalContent)
 		const desktopColumns = product.classList.contains('product--columns')
 		if (!desktopColumns) return
 
-		const mediaImages = qsaOptional<HTMLImageElement>('.product__media img', product)
+		const mediaImages = q.ol<HTMLImageElement>('.product__media img', product)
 		if (!mediaImages) return
 
 		let mediaImageSizes =

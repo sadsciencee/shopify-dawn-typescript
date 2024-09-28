@@ -47,7 +47,7 @@ export class CartItems extends UcoastEl {
 	constructor() {
 		super()
 		this.setInstanceSelectors()
-		this.lineItemStatusElement = qsRequired(
+		this.lineItemStatusElement = q.rs(
 			this.instanceSelectors.lineItemStatus
 		)
 
@@ -87,7 +87,7 @@ export class CartItems extends UcoastEl {
 	}
 
 	onChange(event: Event) {
-		const target = targetRequired<Event, HTMLInputElement>(event)
+		const target = q.rt<Event, HTMLInputElement>(event)
 		const targetIndex = getAttributeOrThrow('data-index', target)
 		const activeElement = document.activeElement as HTMLElement
 		if (!activeElement) throw new Error('no document.activeElement')
@@ -104,7 +104,7 @@ export class CartItems extends UcoastEl {
 					'text/html'
 				)
 				// reference CartItems selectors here since this returns then inner HTML I guess
-				const source = qsRequired(
+				const source = q.rs(
 					CartItems.selectors.element,
 					html.documentElement
 				)
@@ -121,7 +121,7 @@ export class CartItems extends UcoastEl {
 				id: 'main-cart-items',
 				section: getAttributeOrThrow(
 					'data-id',
-					qsRequired(this.instanceSelectors.main)
+					q.rs(this.instanceSelectors.main)
 				),
 				selector: '.js-contents',
 			},
@@ -139,7 +139,7 @@ export class CartItems extends UcoastEl {
 				id: 'CartPage-Footer',
 				section: getAttributeOrThrow(
 					'data-id',
-					qsRequired(this.instanceSelectors.footer)
+					q.rs(this.instanceSelectors.footer)
 				),
 				selector: '.js-contents',
 			},
@@ -167,7 +167,7 @@ export class CartItems extends UcoastEl {
 			})
 			.then((state) => {
 				const parsedState = JSON.parse(state)
-				const quantityElement = qsRequired<HTMLInputElement>(
+				const quantityElement = q.rs<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)
 				const items = document.querySelectorAll(
@@ -183,8 +183,8 @@ export class CartItems extends UcoastEl {
 					return
 				}
 
-				const cartDrawerWrapper = qsOptional<CartDrawer>('cart-drawer')
-				const cartFooter = qsOptional(this.instanceSelectors.footer)
+				const cartDrawerWrapper = q.os<CartDrawer>('cart-drawer')
+				const cartFooter = q.os(this.instanceSelectors.footer)
 				if (parsedState.item_count === 0) {
 					this.setAttribute(ATTRIBUTES.cartEmpty, '')
 					cartFooter &&
@@ -207,7 +207,7 @@ export class CartItems extends UcoastEl {
 							)
 							return
 						}
-						const sectionEl = qsRequired(`#${section.id}`)
+						const sectionEl = q.rs(`#${section.id}`)
 						const elementToReplace =
 							(section.selector &&
 								sectionEl.querySelector(section.selector)) ||
@@ -241,31 +241,31 @@ export class CartItems extends UcoastEl {
 				}
 				this.updateLiveRegions(line, message)
 
-				const lineItem = qsOptional(
+				const lineItem = q.os(
 					`${this.instanceSelectors.line}-${line}`
 				)
 				if (lineItem?.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
-						? trapFocus(
+						? window.TsDOM.trapFocus(
 								cartDrawerWrapper,
-								qsRequired(`[name="${name}"]`, lineItem)
+								q.rs(`[name="${name}"]`, lineItem)
 							)
-						: qsRequired(`[name="${name}"]`, lineItem).focus()
+						: q.rs(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
-					trapFocus(
-						qsRequired(
+					window.TsDOM.trapFocus(
+						q.rs(
 							this.instanceSelectors.cartDrawerInnerEmpty,
 							cartDrawerWrapper
 						),
-						qsRequired('a', cartDrawerWrapper)
+						q.rs('a', cartDrawerWrapper)
 					)
 				} else if (
 					document.querySelector(this.instanceSelectors.item) &&
 					cartDrawerWrapper
 				) {
-					trapFocus(
+					window.TsDOM.trapFocus(
 						cartDrawerWrapper,
-						qsRequired(this.instanceSelectors.itemLink)
+						q.rs(this.instanceSelectors.itemLink)
 					)
 				}
 				void window.Ucoast.mediaManager.loadAllInContainer(this)
@@ -276,7 +276,7 @@ export class CartItems extends UcoastEl {
 				this.querySelectorAll(
 					this.instanceSelectors.loadingOverlay
 				).forEach((overlay) => overlay.classList.add('hidden'))
-				const errors = qsRequired(this.instanceSelectors.errors)
+				const errors = q.rs(this.instanceSelectors.errors)
 				errors.textContent = window.cartStrings.error
 			})
 			.finally(() => {
@@ -285,11 +285,11 @@ export class CartItems extends UcoastEl {
 	}
 
 	updateLiveRegions(line: string, message: string) {
-		const lineItemError = qsOptional(
+		const lineItemError = q.os(
 			`${this.instanceSelectors.lineError}-${line}`
 		)
 		if (lineItemError) {
-			const errorText = qsRequired(
+			const errorText = q.rs(
 				this.instanceSelectors.itemErrorText,
 				lineItemError
 			)
@@ -298,7 +298,7 @@ export class CartItems extends UcoastEl {
 
 		this.lineItemStatusElement.setAttribute('aria-hidden', 'true')
 
-		const cartStatus = qsRequired(this.instanceSelectors.liveRegionText)
+		const cartStatus = q.rs(this.instanceSelectors.liveRegionText)
 		cartStatus.setAttribute('aria-hidden', 'false')
 
 		setTimeout(() => {
@@ -308,7 +308,7 @@ export class CartItems extends UcoastEl {
 
 	getSectionInnerHTML(html: string, selector: string) {
 		const newDocument = new DOMParser().parseFromString(html, 'text/html')
-		const newElement = qsRequired(selector, newDocument.documentElement)
+		const newElement = q.rs(selector, newDocument.documentElement)
 		return newElement.innerHTML
 	}
 
@@ -328,11 +328,11 @@ export class CartItems extends UcoastEl {
 	}
 
 	getMainCartItems() {
-		return qsRequired(this.instanceSelectors.main)
+		return q.rs(this.instanceSelectors.main)
 	}
 
 	getCartItemElements(line: string) {
-		return qsaOptional(
+		return q.ol(
 			`${this.instanceSelectors.line}-${line} ${this.instanceSelectors.loadingOverlay}`,
 			this
 		)

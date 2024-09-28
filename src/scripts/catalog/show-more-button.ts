@@ -13,16 +13,16 @@ export class ShowMoreButton extends UcoastEl {
 	index: string
 	constructor() {
 		super()
-		const button = qsRequired(ShowMoreButton.selectors.button, this)
+		const button = q.rs(ShowMoreButton.selectors.button, this)
 		this.index = getAttributeOrThrow('data-uc-show-more', button)
 		button.addEventListener('click', (event) => {
 			this.expandShowMore(event)
 
-			const nextElementToFocus = qsOptional(
+			const nextElementToFocus = q.os(
 				`[data-uc-show-more-item${this.index}]:not('.hidden)'`
 			)
 			if (!nextElementToFocus) return
-			const input = qsOptional('input', nextElementToFocus)
+			const input = q.os('input', nextElementToFocus)
 			if (!input) return
 			input.focus()
 		})
@@ -31,7 +31,7 @@ export class ShowMoreButton extends UcoastEl {
 		this.querySelectorAll(ShowMoreButton.selectors.label).forEach((element) =>
 			element.classList.toggle('hidden')
 		)
-		const items = qsaOptional(`[data-uc-show-more-item="${this.index}"]`)
+		const items = q.ol(`[data-uc-show-more-item="${this.index}"]`)
 		items?.forEach((item) => item.classList.toggle('hidden'))
 	}
 }

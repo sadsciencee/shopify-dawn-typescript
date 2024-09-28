@@ -9,14 +9,14 @@ export class DynamicShippingBar extends UcoastEl {
 		this.statusEl = this.getStatusEl(this)
 	}
 	getStatusEl(el: DynamicShippingBar) {
-		return qsRequired('[data-shipping-bar-status]', el)
+		return q.rs('[data-shipping-bar-status]', el)
 	}
 	animateFromRawHTML(rawHTML: string) {
 		const newDocument = new DOMParser().parseFromString(
 			rawHTML,
 			'text/html'
 		)
-		const newShippingBar = qsRequiredFromDocument<DynamicShippingBar>(
+		const newShippingBar = q.rs<DynamicShippingBar>(
 			DynamicShippingBar.htmlSelector,
 			newDocument
 		)

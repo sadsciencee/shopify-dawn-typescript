@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/core/global';
+import { TsDOM as q} from '@/scripts/core/TsDOM'
 import { LocalizationForm } from '@/scripts/optional/localization-form';
 
-safeDefineElement(LocalizationForm)
+q.safeDefineElement(LocalizationForm)

@@ -20,7 +20,7 @@ export class ProductRecommendations extends UcoastEl {
         .then((text) => {
           const html = document.createElement('div');
           html.innerHTML = text;
-          const recommendations = qsOptional<ProductRecommendations>('product-recommendations', html)
+          const recommendations = q.os<ProductRecommendations>('product-recommendations', html)
 
           if (recommendations && recommendations.innerHTML.trim().length) {
             this.innerHTML = recommendations.innerHTML;

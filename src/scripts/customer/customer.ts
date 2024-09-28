@@ -29,21 +29,21 @@ class CustomerAddresses {
 	}
 
 	_getElements() {
-		const container = qsOptional(selectors.customerAddresses)
+		const container = q.os(selectors.customerAddresses)
 		return container
 			? {
 					container,
-					addressContainer: qsRequired(selectors.addressContainer, container),
-					toggleButtons: qsaRequired<HTMLButtonElement>(selectors.toggleAddressButton),
-					cancelButtons: qsaRequired<HTMLButtonElement>(
+					addressContainer: q.rs(selectors.addressContainer, container),
+					toggleButtons: q.rl<HTMLButtonElement>(selectors.toggleAddressButton),
+					cancelButtons: q.rl<HTMLButtonElement>(
 						selectors.cancelAddressButton,
 						container
 					),
-					deleteButtons: qsaRequired<HTMLButtonElement>(
+					deleteButtons: q.rl<HTMLButtonElement>(
 						selectors.deleteAddressButton,
 						container
 					),
-					countrySelects: qsaRequired<HTMLSelectElement>(
+					countrySelects: q.rl<HTMLSelectElement>(
 						selectors.addressCountrySelect,
 						container
 					),
@@ -92,18 +92,18 @@ class CustomerAddresses {
 	}
 
 	_handleAddEditButtonClick = (event: Event) => {
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		this._toggleExpanded(currentTarget)
 	}
 
 	_handleCancelButtonClick = (event: Event) => {
-		const currentTarget = targetClosestOptional(event, selectors.addressContainer)
-		const toggleEl = qsRequired(`[${attributes.expanded}]`, currentTarget)
+		const currentTarget = q.oClosestTarget(event, selectors.addressContainer)
+		const toggleEl = q.rs(`[${attributes.expanded}]`, currentTarget)
 		this._toggleExpanded(toggleEl)
 	}
 
 	_handleDeleteButtonClick = (event: Event) => {
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		const confirmMessage = currentTarget.getAttribute(attributes.confirmMessage)
 		const target = currentTarget.dataset.target
 		if (!confirmMessage || !target) return

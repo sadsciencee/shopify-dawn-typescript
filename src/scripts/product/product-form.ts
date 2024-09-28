@@ -38,12 +38,12 @@ export class ProductForm extends UcoastEl {
 	constructor() {
 		super()
 
-		this.form = qsRequired(ProductForm.selectors.form, this)
-		this.formIdEl = qsRequired(ProductForm.selectors.formIdEl, this.form)
+		this.form = q.rs(ProductForm.selectors.form, this)
+		this.formIdEl = q.rs(ProductForm.selectors.formIdEl, this.form)
 		this.formIdEl.disabled = false
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
 
-		this.submitButton = qsRequired(ProductForm.selectors.submitButton, this)
+		this.submitButton = q.rs(ProductForm.selectors.submitButton, this)
 		if (hasDomCart()) {
 			this.submitButton.setAttribute('aria-haspopup', 'dialog')
 		}
@@ -52,7 +52,7 @@ export class ProductForm extends UcoastEl {
 	}
 
 	getSpinner() {
-		return qsRequired(SELECTORS.loadingOverlaySpinner, this)
+		return q.rs(SELECTORS.loadingOverlaySpinner, this)
 	}
 
 	onSubmitHandler(event: Event) {
@@ -85,7 +85,7 @@ export class ProductForm extends UcoastEl {
 					source: 'product-form',
 					productVariantId: addedVariantId,
 				})
-				const quickAddModal = closestOptional<QuickAddModal>(
+				const quickAddModal = q.oc<QuickAddModal>(
 					this,
 					'quick-add-modal'
 				)
@@ -117,7 +117,7 @@ export class ProductForm extends UcoastEl {
 		)
 		if (!soldOutMessage) return
 		this.submitButton.setAttribute('aria-disabled', 'true')
-		const submitButtonText = qsRequired(
+		const submitButtonText = q.rs(
 			ProductForm.selectors.submitButtonMessage,
 			this.submitButton
 		)
@@ -130,12 +130,12 @@ export class ProductForm extends UcoastEl {
 
 		this.errorMessageWrapper =
 			this.errorMessageWrapper ||
-			qsRequired(ProductForm.selectors.errorMessageWrapper, this)
+			q.rs(ProductForm.selectors.errorMessageWrapper, this)
 		if (!this.errorMessageWrapper)
 			throw new Error('No error message wrapper found')
 		this.errorMessage =
 			this.errorMessage ||
-			qsRequired(
+			q.rs(
 				ProductForm.selectors.errorMessage,
 				this.errorMessageWrapper
 			)

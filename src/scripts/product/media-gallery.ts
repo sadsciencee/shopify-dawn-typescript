@@ -21,9 +21,9 @@ export class MediaGallery extends UcoastEl {
 	constructor() {
 		super()
 		this.elements = {
-			liveRegion: qsRequired('[id^="GalleryStatus"]', this),
-			viewer: qsRequired('[id^="GalleryViewer"]', this),
-			thumbnails: qsOptional('[id^="GalleryThumbnails"]', this),
+			liveRegion: q.rs('[id^="GalleryStatus"]', this),
+			viewer: q.rs('[id^="GalleryViewer"]', this),
+			thumbnails: q.os('[id^="GalleryThumbnails"]', this),
 		}
 		this.mql = window.matchMedia('(min-width: 750px)')
 		if (!this.elements.thumbnails) return
@@ -36,7 +36,7 @@ export class MediaGallery extends UcoastEl {
 			.querySelectorAll('[data-target]')
 			.forEach((mediaToSwitch) => {
 				if (!(mediaToSwitch instanceof HTMLElement)) return
-				const button = qsRequired('button', mediaToSwitch)
+				const button = q.rs('button', mediaToSwitch)
 				button.addEventListener(
 					'click',
 					this.setActiveMedia.bind(
@@ -54,7 +54,7 @@ export class MediaGallery extends UcoastEl {
 	}
 
 	getActiveMediaParent(mediaId: string) {
-		return qsRequired(
+		return q.rs(
 			`[data-media-id="${mediaId}"]`,
 			this.elements.viewer,
 			'parentElement'
@@ -63,7 +63,7 @@ export class MediaGallery extends UcoastEl {
 
 	getActiveThumbnail(mediaId: string) {
 		if (!this.elements.thumbnails) throw new Error('thumbnails is null')
-		return qsRequired(
+		return q.rs(
 			`[data-target="${mediaId}"]`,
 			this.elements.thumbnails
 		)
@@ -80,7 +80,7 @@ export class MediaGallery extends UcoastEl {
 	}
 
 	setActiveMedia(mediaId: string, prepend: boolean) {
-		const activeMedia = qsRequired(
+		const activeMedia = q.rs(
 			`[data-media-id="${mediaId}"]`,
 			this.elements.viewer
 		)
@@ -132,7 +132,7 @@ export class MediaGallery extends UcoastEl {
 		this.elements.thumbnails
 			.querySelectorAll('button')
 			.forEach((element) => element.removeAttribute('aria-current'))
-		const button = qsRequired('button', thumbnail)
+		const button = q.rs('button', thumbnail)
 		button.setAttribute('aria-current', 'true')
 		if (
 			this.elements.thumbnails &&
@@ -144,7 +144,7 @@ export class MediaGallery extends UcoastEl {
 	}
 
 	announceLiveRegion(activeItem: HTMLElement, position: string) {
-		const image = qsRequired<HTMLImageElement>(
+		const image = q.rs<HTMLImageElement>(
 			'.product__modal-opener--image img',
 			activeItem
 		)
@@ -165,7 +165,7 @@ export class MediaGallery extends UcoastEl {
 
 	playActiveMedia(activeItem: HTMLElement) {
 		pauseAllMedia()
-		const deferredMedia = qsOptional<DeferredMedia>(
+		const deferredMedia = q.os<DeferredMedia>(
 			'.deferred-media',
 			activeItem
 		)
@@ -174,7 +174,7 @@ export class MediaGallery extends UcoastEl {
 
 	preventStickyHeader() {
 		this.stickyHeader =
-			this.stickyHeader || qsRequired<StickyHeader>('sticky-header')
+			this.stickyHeader || q.rs<StickyHeader>('sticky-header')
 		if (!this.stickyHeader) return
 		this.stickyHeader.dispatchEvent(new Event('preventHeaderReveal'))
 	}

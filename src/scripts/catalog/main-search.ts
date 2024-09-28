@@ -6,7 +6,7 @@ export class MainSearch extends SearchForm {
   allSearchInputs: NodeListOf<HTMLInputElement>;
   constructor() {
     super();
-    this.allSearchInputs = qsaRequired('input[type="search"]')
+    this.allSearchInputs = q.rl('input[type="search"]')
     this.setupEventListeners();
   }
 
@@ -33,7 +33,7 @@ export class MainSearch extends SearchForm {
   }
 
   onInput(event:Event) {
-    const target = targetRequired<Event, HTMLInputElement>(event);
+    const target = q.rt<Event, HTMLInputElement>(event);
     this.keepInSync(target.value, target);
   }
 

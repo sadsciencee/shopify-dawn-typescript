@@ -25,10 +25,10 @@ export class WaitlistForm extends UcoastEl {
 	companyId: string
 	constructor() {
 		super()
-		this.form = qsRequired('form', this)
-		this.submitButton = qsRequired('[type="submit"]', this)
-		this.variantInput = qsRequired('[name="variant"]', this)
-		this.emailInput = qsRequired('[type="email"]', this)
+		this.form = q.rs('form', this)
+		this.submitButton = q.rs('[type="submit"]', this)
+		this.variantInput = q.rs('[name="variant"]', this)
+		this.emailInput = q.rs('[type="email"]', this)
 		this.route = `${getBackendRoute()}/api/klaviyo-oos`
 		this.form.addEventListener('submit', this.onSubmitHandler.bind(this))
 		this.successMessage = getAttributeOrThrow('data-success', this)
@@ -58,7 +58,7 @@ export class WaitlistForm extends UcoastEl {
 				this.submitButton.classList.add('success')
 				this.emailInput.placeholder = this.successMessage
 				window.setTimeout(() => {
-					qsRequired<ModalDialog>('#WaitlistModal')?.hide()
+					q.rs<ModalDialog>('#WaitlistModal')?.hide()
 				}, 5000)
 			})
 			.catch((e) => {
@@ -72,10 +72,10 @@ export class WaitlistForm extends UcoastEl {
 	}
 	notifyMeConfig(body: FormData) {
 		const data: NotifyMeConfigValues = {
-			email: getOrThrow(body, 'email'),
-			variant: getOrThrow(body, 'variant'),
+			email: q.rfd(body, 'email'),
+			variant: q.rfd(body, 'variant'),
 		}
-		let phone_number = getOrThrow(body, 'phone_number')
+		let phone_number = q.rfd(body, 'phone_number')
 		if (phone_number) {
 			data.phone_number = formatPhoneNumber(phone_number)
 		}

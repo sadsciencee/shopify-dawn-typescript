@@ -27,7 +27,7 @@ export class ProductModal extends ModalDialog {
 				element.classList.remove('active')
 			}
 		)
-		const activeMedia = qsOptional<
+		const activeMedia = q.os<
 			HTMLImageElement | HTMLVideoElement | HTMLIFrameElement | DeferredMedia
 		>(`[data-media-id="${openedById}"]`, this)
 		if (!activeMedia) {
@@ -40,7 +40,7 @@ export class ProductModal extends ModalDialog {
 		activeMedia.scrollIntoView()
 		void window.Ucoast.mediaManager.loadAllInContainer(this)
 
-		const container = qsRequired(ProductModal.selectors.container, this)
+		const container = q.rs(ProductModal.selectors.container, this)
 		const activeMediaWidth = activeMedia.width
 			? parseInt(`${activeMedia.width}`)
 			: activeMedia.clientWidth

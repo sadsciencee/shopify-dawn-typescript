@@ -26,15 +26,15 @@ export class ProductInfo extends UcoastEl {
 
 	constructor() {
 		super()
-		this.input = qsRequired(ProductInfo.selectors.quantityInput, this)
-		this.currentVariant = qsRequired(ProductInfo.selectors.currentVariant, this)
-		this.variantSelects = qsOptional(ProductInfo.selectors.variantSelects, this)
-		this.submitButton = qsRequired(ProductInfo.selectors.submitButton, this)
+		this.input = q.rs(ProductInfo.selectors.quantityInput, this)
+		this.currentVariant = q.rs(ProductInfo.selectors.currentVariant, this)
+		this.variantSelects = q.os(ProductInfo.selectors.variantSelects, this)
+		this.submitButton = q.rs(ProductInfo.selectors.submitButton, this)
 	}
 
 	override connectedCallback() {
 		if (!this.input) return
-		this.quantityForm = qsOptional(ProductInfo.selectors.quantityForm, this)
+		this.quantityForm = q.os(ProductInfo.selectors.quantityForm, this)
 		if (!this.quantityForm) return
 		this.setQuantityBoundries()
 		if (!this.dataset.originalSection) {
@@ -86,7 +86,7 @@ export class ProductInfo extends UcoastEl {
 
 	fetchQuantityRules() {
 		if (!this.currentVariant || !this.currentVariant.value) return
-		qsRequired('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.remove('hidden')
+		q.rs('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.remove('hidden')
 		fetch(
 			`${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`
 		)
@@ -103,7 +103,7 @@ export class ProductInfo extends UcoastEl {
 				console.error(e)
 			})
 			.finally(() => {
-				qsRequired('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.add('hidden')
+				q.rs('[data-uc-quantity-rules-cart] [data-uc-loading-overlay]', this).classList.add('hidden')
 			})
 	}
 
@@ -116,8 +116,8 @@ export class ProductInfo extends UcoastEl {
 		]
 		for (let selector of selectors) {
 			if (!quantityFormUpdated) continue
-			const current = qsOptional(selector, this.quantityForm)
-			const updated = qsOptional(selector, quantityFormUpdated)
+			const current = q.os(selector, this.quantityForm)
+			const updated = q.os(selector, quantityFormUpdated)
 			if (!current || !updated) continue
 			if (selector === ProductInfo.selectors.quantityInput) {
 				const attributes = ['data-cart-quantity', 'data-min', 'data-max', 'step']

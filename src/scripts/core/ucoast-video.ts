@@ -36,7 +36,7 @@ export class UcoastVideo extends UcoastEl {
 	}
 
 	init() {
-		const videoEl = qsRequired<HTMLVideoElement>('video', this)
+		const videoEl = q.rs<HTMLVideoElement>('video', this)
 		const hlsSource = videoEl.getAttribute('data-hls-src') ?? undefined
 		const hasHls = hlsSource !== undefined
 		this.initialized = true

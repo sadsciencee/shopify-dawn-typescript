@@ -9,8 +9,8 @@ export class DetailsDisclosure extends UcoastEl {
 
 	constructor() {
 		super()
-		this.mainDetailsToggle = qsRequired('details', this)
-		this.content = qsRequired('summary', this.mainDetailsToggle, 'nextElementSibling')
+		this.mainDetailsToggle = q.rs('details', this)
+		this.content = q.rs('summary', this.mainDetailsToggle, 'nextElementSibling')
 
 		this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this))
 		this.mainDetailsToggle.addEventListener('toggle', this.onToggle.bind(this))
@@ -36,7 +36,7 @@ export class DetailsDisclosure extends UcoastEl {
 
 	close() {
 		this.mainDetailsToggle.removeAttribute('open')
-		qsRequired('summary', this.mainDetailsToggle).setAttribute('aria-expanded', 'false')
+		q.rs('summary', this.mainDetailsToggle).setAttribute('aria-expanded', 'false')
 		window.Ucoast.openMenuId = undefined
 	}
 }

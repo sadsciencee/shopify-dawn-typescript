@@ -23,11 +23,11 @@ export class ShareButton extends DetailsDisclosure {
 		super()
 
 		this.elements = {
-			shareButton: qsRequired(ShareButton.selectors.shareButton, this),
-			shareSummary: qsRequired(ShareButton.selectors.shareSummary, this),
-			closeButton: qsRequired(ShareButton.selectors.closeButton, this),
-			successMessage: qsRequired(ShareButton.selectors.successMessage, this),
-			urlInput: qsRequired(ShareButton.selectors.urlInput, this),
+			shareButton: q.rs(ShareButton.selectors.shareButton, this),
+			shareSummary: q.rs(ShareButton.selectors.shareSummary, this),
+			closeButton: q.rs(ShareButton.selectors.closeButton, this),
+			successMessage: q.rs(ShareButton.selectors.successMessage, this),
+			urlInput: q.rs(ShareButton.selectors.urlInput, this),
 		}
 		this.urlToShare = this.elements.urlInput
 			? this.elements.urlInput.value
@@ -41,11 +41,11 @@ export class ShareButton extends DetailsDisclosure {
 			})
 		} else {
 			this.mainDetailsToggle.addEventListener('toggle', this.toggleDetails.bind(this))
-			qsRequired(ShareButton.selectors.copyButton, this.mainDetailsToggle).addEventListener(
+			q.rs(ShareButton.selectors.copyButton, this.mainDetailsToggle).addEventListener(
 				'click',
 				this.copyToClipboard.bind(this)
 			)
-			qsRequired(ShareButton.selectors.closeButton, this.mainDetailsToggle).addEventListener(
+			q.rs(ShareButton.selectors.closeButton, this.mainDetailsToggle).addEventListener(
 				'click',
 				this.close.bind(this)
 			)

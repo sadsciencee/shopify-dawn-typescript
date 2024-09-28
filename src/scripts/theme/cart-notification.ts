@@ -25,8 +25,8 @@ export class CartNotification extends UcoastEl {
 	constructor() {
 		super()
 
-		this.notification = qsRequired(CartNotification.selectors.notification)
-		this.header = qsRequired('sticky-header')
+		this.notification = q.rs(CartNotification.selectors.notification)
+		this.header = q.rs('sticky-header')
 		this.onBodyClick = this.handleBodyClick.bind(this)
 
 		this.notification.addEventListener(
@@ -45,7 +45,7 @@ export class CartNotification extends UcoastEl {
 			'transitionend',
 			() => {
 				this.notification.focus()
-				trapFocus(this.notification)
+				window.TsDOM.trapFocus(this.notification)
 			},
 			{ once: true }
 		)
@@ -57,7 +57,7 @@ export class CartNotification extends UcoastEl {
 		this.notification.classList.remove('active')
 		document.body.removeEventListener('click', this.onBodyClick)
 
-		removeTrapFocus(this.activeElement)
+		window.TsDOM.removeTrapFocus(this.activeElement)
 	}
 
 	renderContents(cart: CartAddWithSections) {
@@ -100,14 +100,14 @@ export class CartNotification extends UcoastEl {
 	}
 
 	handleBodyClick(event: MouseEvent) {
-		const target = targetRequired(event)
-		const closestCartNotification = closestOptional<CartNotification>(
+		const target = q.rt(event)
+		const closestCartNotification = q.oc<CartNotification>(
 			target,
 			'cart-notification'
 		)
 		if (target !== this.notification && !closestCartNotification) {
-			const disclosure = targetClosestOptional(event, 'details-disclosure, header-menu')
-			this.activeElement = disclosure ? qsRequired('summary', disclosure) : undefined
+			const disclosure = q.oClosestTarget(event, 'details-disclosure, header-menu')
+			this.activeElement = disclosure ? q.rs('summary', disclosure) : undefined
 			this.close()
 		}
 	}

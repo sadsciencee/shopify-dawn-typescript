@@ -13,9 +13,9 @@ export class PriceRange extends UcoastEl {
 	minInput: HTMLInputElement
 	constructor() {
 		super()
-		this.maxInput = qsRequired(PriceRange.selectors.max, this)
-		this.minInput = qsRequired(PriceRange.selectors.min, this)
-		this.inputs = qsaRequired(PriceRange.selectors.input, this)
+		this.maxInput = q.rs(PriceRange.selectors.max, this)
+		this.minInput = q.rs(PriceRange.selectors.min, this)
+		this.inputs = q.rl(PriceRange.selectors.input, this)
 		this.inputs.forEach((element) =>
 			element.addEventListener('change', this.onRangeChange.bind(this))
 		)
@@ -23,7 +23,7 @@ export class PriceRange extends UcoastEl {
 	}
 
 	onRangeChange(event: Event) {
-		const currentTarget = currentTargetRequired<Event, HTMLInputElement>(event)
+		const currentTarget = q.rct<Event, HTMLInputElement>(event)
 		this.adjustToValidValues(currentTarget)
 		this.setMinAndMaxValues()
 	}

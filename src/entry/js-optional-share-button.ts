@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/core/global';
+import { TsDOM as q} from '@/scripts/core/TsDOM'
 import { ShareButton } from '@/scripts/optional/share-button';
 
-safeDefineElement(ShareButton)
+q.safeDefineElement(ShareButton)

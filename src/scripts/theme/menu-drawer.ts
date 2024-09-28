@@ -23,23 +23,23 @@ export class MenuDrawer extends UcoastEl {
 	constructor() {
 		super()
 		this.getInstanceSelectors()
-		this.mainDetails = qsRequired(this.instanceSelectors.mainDetails, this)
-		this.mainSummary = qsRequired(this.instanceSelectors.mainSummary, this)
-		this.subDetails = qsaOptional(this.instanceSelectors.subDetails, this)
-		this.subSummaries = qsaOptional(this.instanceSelectors.subSummary, this)
+		this.mainDetails = q.rs(this.instanceSelectors.mainDetails, this)
+		this.mainSummary = q.rs(this.instanceSelectors.mainSummary, this)
+		this.subDetails = q.ol(this.instanceSelectors.subDetails, this)
+		this.subSummaries = q.ol(this.instanceSelectors.subSummary, this)
 		// apply filters buttons
-		this.applyButtons = qsaOptional(this.instanceSelectors.applyButton, this)
+		this.applyButtons = q.ol(this.instanceSelectors.applyButton, this)
 		this.addEventListener('keyup', this.onKeyUp.bind(this))
 		this.addEventListener('focusout', this.onFocusOut.bind(this))
 		this.bindEvents()
 	}
 
 	onReload() {
-		this.mainDetails = qsRequired(this.instanceSelectors.mainDetails, this)
-		this.mainSummary = qsRequired(this.instanceSelectors.mainSummary, this)
-		this.subDetails = qsaOptional(this.instanceSelectors.subDetails, this)
-		this.subSummaries = qsaOptional(this.instanceSelectors.subSummary, this)
-		this.applyButtons = qsaOptional(this.instanceSelectors.applyButton, this)
+		this.mainDetails = q.rs(this.instanceSelectors.mainDetails, this)
+		this.mainSummary = q.rs(this.instanceSelectors.mainSummary, this)
+		this.subDetails = q.ol(this.instanceSelectors.subDetails, this)
+		this.subSummaries = q.ol(this.instanceSelectors.subSummary, this)
+		this.applyButtons = q.ol(this.instanceSelectors.applyButton, this)
 		this.bindEvents()
 	}
 
@@ -68,7 +68,7 @@ export class MenuDrawer extends UcoastEl {
 	onKeyUp(event: KeyboardEvent) {
 		if (event.code?.toUpperCase() !== 'ESCAPE') return
 
-		const openDetailsElement = targetClosestOptional(event, 'details[open]')
+		const openDetailsElement = q.oClosestTarget(event, 'details[open]')
 		if (!openDetailsElement) return
 
 		openDetailsElement === this.mainDetails
@@ -77,10 +77,10 @@ export class MenuDrawer extends UcoastEl {
 	}
 
 	onAllSummaryClick(event: MouseEvent) {
-		const summaryElement = currentTargetRequired(event)
+		const summaryElement = q.rct(event)
 		const detailsElement = summaryElement.parentNode
 		if (!(detailsElement instanceof HTMLElement)) throw new Error('detailsElement is null')
-		const parentMenuElement = closestOptional(detailsElement, this.instanceSelectors.submenu)
+		const parentMenuElement = q.oc(detailsElement, this.instanceSelectors.submenu)
 		const isOpen = detailsElement.hasAttribute('open')
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -91,7 +91,7 @@ export class MenuDrawer extends UcoastEl {
 			if (!(nextElementSibling instanceof HTMLElement))
 				throw new Error('cannot addTrapFocus, nextElementSibling is null')
 
-			trapFocus(nextElementSibling, qsOptional('button', detailsElement))
+			window.TsDOM.trapFocus(nextElementSibling, q.os('button', detailsElement))
 			nextElementSibling.removeEventListener('transitionend', addTrapFocus)
 		}
 		return {
@@ -135,7 +135,7 @@ export class MenuDrawer extends UcoastEl {
 			this.mainDetails.setAttribute(ATTRIBUTES.menuOpening, '')
 		})
 		summaryElement.setAttribute('aria-expanded', 'true')
-		trapFocus(this.mainDetails, summaryElement)
+		window.TsDOM.trapFocus(this.mainDetails, summaryElement)
 		document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`)
 	}
 
@@ -151,7 +151,7 @@ export class MenuDrawer extends UcoastEl {
 			submenu.setAttribute(ATTRIBUTES.submenu, 'closed')
 		})
 		document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`)
-		removeTrapFocus(elementToFocus)
+		window.TsDOM.removeTrapFocus(elementToFocus)
 		this.closeAnimation(this.mainDetails)
 
 		if (event instanceof KeyboardEvent) elementToFocus?.setAttribute('aria-expanded', 'false')
@@ -168,7 +168,7 @@ export class MenuDrawer extends UcoastEl {
 	}
 
 	onCloseButtonClick(event: MouseEvent) {
-		const detailsElement = targetClosestRequired(event, 'details')
+		const detailsElement = q.rClosestTarget(event, 'details')
 		this.closeSubmenu(detailsElement)
 	}
 
@@ -176,9 +176,9 @@ export class MenuDrawer extends UcoastEl {
 		const parentMenuElement = detailsElement.closest(this.instanceSelectors.submenuOpen)
 		parentMenuElement && parentMenuElement.setAttribute(ATTRIBUTES.submenu, 'closed')
 		detailsElement.removeAttribute(ATTRIBUTES.menuOpening)
-		const summaryElement = qsRequired('summary', detailsElement)
+		const summaryElement = q.rs('summary', detailsElement)
 		summaryElement.setAttribute('aria-expanded', 'false')
-		removeTrapFocus(summaryElement)
+		window.TsDOM.removeTrapFocus(summaryElement)
 		this.closeAnimation(detailsElement)
 	}
 
@@ -196,10 +196,10 @@ export class MenuDrawer extends UcoastEl {
 				window.requestAnimationFrame(handleAnimation)
 			} else {
 				detailsElement.removeAttribute('open')
-				const closestDetails = closestOptional(detailsElement, 'details[open]')
+				const closestDetails = q.oc(detailsElement, 'details[open]')
 				if (closestDetails) {
-					const summaryElement = qsRequired('summary', detailsElement)
-					trapFocus(closestDetails, summaryElement)
+					const summaryElement = q.rs('summary', detailsElement)
+					window.TsDOM.trapFocus(closestDetails, summaryElement)
 				}
 			}
 		}

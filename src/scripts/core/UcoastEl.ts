@@ -7,7 +7,7 @@ export class UcoastEl extends HTMLElement {
 	constructor() {
 		super()
 		this.animateSelf = this.hasAttribute('data-uc-animate')
-		this.animateableElements = qsaOptional('[data-uc-animate]', this)
+		this.animateableElements = q.ol('[data-uc-animate]', this)
 		this.animationObserver = null
 	}
 	connectedCallback() {

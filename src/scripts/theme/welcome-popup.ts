@@ -13,7 +13,7 @@ export class WelcomePopup extends ModalDialog {
 
 	constructor() {
 		super()
-		this.klaviyoForm = qsRequired<KlaviyoForm>('klaviyo-form', this)
+		this.klaviyoForm = q.rs<KlaviyoForm>('klaviyo-form', this)
 		this.openAfter =
 			parseInt(getAttributeOrThrow('data-uc-open-after', this)) * 1000
 		this.cacheKey = getAttributeOrThrow('data-uc-cache-key', this)
@@ -43,8 +43,8 @@ export class WelcomePopup extends ModalDialog {
 
 	dataPrivacyIsOpen() {
 		const dataPrivacyModal =
-			qsOptional('.cc-window') ??
-			qsOptional('[aria-describedby="cookieconsent:desc"]')
+			q.os('.cc-window') ??
+			q.os('[aria-describedby="cookieconsent:desc"]')
 		if (!dataPrivacyModal) return false
 		return !dataPrivacyModal.classList.contains('cc-invisible')
 	}
