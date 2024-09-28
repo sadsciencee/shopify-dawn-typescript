@@ -92,9 +92,28 @@
 	class="{% if wrapper_class %}{{ wrapper_class }} {% else %} media media--transparent {% endif %}"
 >
 	{% case switch_key %}
+		{% when 'video_none' %}
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class
+			%}
 		{% when 'video_video' %}
-
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class,
+				viewport_class: 'm-down-hide'
+			%}
+			{% render 'ucoast-video',
+				video: mobile_media,
+				video_class: media_class,
+				viewport_class: 'm-up-hide'
+			%}
 		{% when 'video_image' %}
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class,
+				viewport_class: 'm-down-hide'
+			%}
 			<picture>
 				<source
 					media="(max-width: 989px)"
@@ -104,10 +123,15 @@
 				<img
 					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 					alt="{{ mobile_media.alt }}"
-					class="{{ media_class }}"
+					class="{{ media_class }} m-up-hide"
 				>
 			</picture>
 		{% when 'image_video' %}
+			{% render 'ucoast-video',
+				video: mobile_media,
+				video_class: media_class,
+				viewport_class: 'm-up-hide'
+			%}
 			<picture>
 				<source
 					media="(min-width: 990px)"

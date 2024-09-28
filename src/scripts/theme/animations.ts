@@ -74,7 +74,7 @@ function initializeScrollZoomAnimationTrigger() {
   });
 }
 
-function percentageSeen(element:HTMLElement) {
+export function percentageSeen(element:HTMLElement) {
   const viewportHeight = window.innerHeight;
   const scrollY = window.scrollY;
   const elementPositionY = element.getBoundingClientRect().top + scrollY;

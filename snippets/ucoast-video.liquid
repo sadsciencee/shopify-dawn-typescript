@@ -12,7 +12,7 @@
 	%}
 
 	<ucoast-video
-			class="{% if wrapper_class %} {{ wrapper_class }} {% else %}media media--transparent{% endif %}"
+			class="absolute block w-100 h-100 top-0 left-0 object-cover {{ viewport_class }}"
 			data-loading="{{ loading }}"
 			data-uc-has-played="false"
 			{% if load_on_event %}
@@ -57,12 +57,10 @@
 				{{ mp4_source }}
 				{{ hls_source }}
 		>
-			{% comment %}
             <source
                 src="{{ mp4_source_obj.url }}"
                 type="{{ mp4_source_obj.mime_type }}"
             >
-            {% endcomment %}
 			<source
 					src="{{ hls_source_obj.url }}"
 					type="{{ hls_source_obj.mime_type }}"

@@ -5,7 +5,7 @@ import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import { TsDOM as q, debounce, throttle } from '@/scripts/core/TsDOM'
+import { TsDOM as q, debounce, throttle, init } from '@/scripts/core/TsDOM'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -720,6 +720,7 @@ function initGlobalUcoast() {
 
 
 export function globalSetup() {
+	init()
 	initGlobalUcoast()
 	initializeShopifyConsentAPI()
 	q.safeDefineElement(UcoastVideo)
