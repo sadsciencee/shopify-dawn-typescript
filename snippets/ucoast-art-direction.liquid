@@ -84,7 +84,7 @@
 	assign all_sizes = mobile_sizes | append: ', ' | append: desktop_sizes
 
 	comment
-		use a switch key to improve conditional performance. if desktop media type is none, that means the input is nil
+		use a switch key to improve conditional performance
 	endcomment
 	assign switch_key = desktop_media_type | append: '_' | append: mobile_media_type
 %}

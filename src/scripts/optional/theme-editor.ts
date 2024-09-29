@@ -1,7 +1,6 @@
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ProductModal } from '@/scripts/product/product-modal'
 import { type SlideshowComponent } from '@/scripts/theme/slideshow-component'
-import { mediaLoader } from '@/scripts/core/global';
 export function initializeThemeEditor() {
 	function hideProductModal() {
 		const productModal = q.ol<ProductModal>('product-modal[open]')
@@ -41,7 +40,6 @@ export function initializeThemeEditor() {
 	})
 
 	document.addEventListener('shopify:section:load', () => {
-		mediaLoader()
 		hideProductModal()
 		const zoomOnHoverScripts = q.ol<HTMLScriptElement>('[id^=EnableZoomOnHover] script')
 		zoomOnHoverScripts?.forEach((zoomOnHoverScript) => {

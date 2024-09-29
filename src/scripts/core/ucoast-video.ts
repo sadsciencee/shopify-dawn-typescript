@@ -37,6 +37,9 @@ export class UcoastVideo extends UcoastEl {
 	}
 
 	onConnectedCallback() {
+		if (!window?.Ucoast?.mediaManager) {
+			this.markForRetry()
+		}
 		if (window?.Ucoast?.mediaManager?.hlsLibraryLoaded) {
 			void this.onLibraryLoad()
 		} else if (!this.hlsSource && this.mp4Source) {
@@ -47,10 +50,6 @@ export class UcoastVideo extends UcoastEl {
 			window.Ucoast.mediaManager.hlsRequired === false
 		) {
 			window.Ucoast.mediaManager.addVideo(this)
-		} else {
-			// mediaManager hasn't initialized - this happens on devices with native hls support
-			// flag the element with a data attribute - mediaManager will run this method again on initialization
-			this.markForRetry()
 		}
 	}
 
@@ -79,7 +78,7 @@ export class UcoastVideo extends UcoastEl {
 	}
 
 	playEventOff() {
-		if (!this.eventDriven) return
+		this.eventDriven = true // sometimes we need to convert auto-play to event-driven
 		this.eventEnabled = false
 		this.pause()
 	}

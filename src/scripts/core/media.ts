@@ -80,10 +80,10 @@ export class MediaManager {
 		this.updateOnScroll()*/
 	}
 	loadEarlyVideos() {
-		if (this.hlsRequired) return
 		const videos = q.ol<UcoastVideo>('ucoast-video[data-retry="true"]')
 		if (!videos) return
 		videos.forEach((video) => {
+			if (this.videos.some((item) => video === item)) return
 			video.unMarkForRetry()
 			void video.onConnectedCallback()
 		})
@@ -94,6 +94,7 @@ export class MediaManager {
 		observer: IntersectionObserver
 	) {
 		elements.forEach((element, index) => {
+			if (!isVideoComponent(element.target)) return
 			if (element.isIntersecting) {
 				const elementTarget: UcoastVideo = element.target
 				void elementTarget.play()
@@ -159,9 +160,15 @@ export class MediaManager {
 		const videosInContainer = q.ol<UcoastVideo>('ucoast-video', container)
 		if (!videosInContainer) return
 		videosInContainer.forEach((video) => {
-			void video.pause()
+			void video.playEventOff()
 		})
 	}
+}
+
+export function isVideoComponent(obj: HTMLElement | Element): obj is UcoastVideo {
+	if (!obj) return false
+	if (obj.localName !== 'ucoast-video') return false
+	return true
 }
 
 // ai image fade functions that dont really work

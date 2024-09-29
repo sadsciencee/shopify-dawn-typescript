@@ -11,7 +11,6 @@ import { type VariantSelects } from '@/scripts/theme/variant-selects'
 import { type VariantRadios } from '@/scripts/theme/variant-radios'
 import { type ProductInfo } from '@/scripts/product/product-info'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
-import {mediaLoader} from "@/scripts/core/global";
 
 export class QuickAddModal extends ModalDialog {
 	static override htmlSelector = 'quick-add-modal'
@@ -48,7 +47,7 @@ export class QuickAddModal extends ModalDialog {
 				this.preventDuplicatedIDs()
 				this.removeDOMElements()
 				this.setInnerHTML(this.modalContent, this.productElement.innerHTML)
-				mediaLoader()
+				void window.Ucoast.mediaManager.playAllInContainer(this.modalContent)
 
 				if (window.Shopify && window.Shopify.PaymentButton) {
 					window.Shopify.PaymentButton.init()

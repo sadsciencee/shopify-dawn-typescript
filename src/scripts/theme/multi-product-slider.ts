@@ -33,14 +33,17 @@ export class MultiProductSlider extends UcoastEl {
 			}
 		})
 		this.sliderWrappers.forEach((sliderWrapper) => {
-			const sliderBlockId = q.ra(
-				sliderWrapper,
-				'data-slider'
-			)
+			const sliderBlockId = q.ra(sliderWrapper, 'data-slider')
 			if (blockId === sliderBlockId) {
 				sliderWrapper.classList.add('active')
+				void window.Ucoast.mediaManager.playAllInContainer(
+					sliderWrapper
+				)
 			} else {
 				sliderWrapper.classList.remove('active')
+				void window.Ucoast.mediaManager.pauseAllInContainer(
+					sliderWrapper
+				)
 			}
 		})
 	}
