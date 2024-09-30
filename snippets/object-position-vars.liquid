@@ -1,0 +1,28 @@
+{% comment %}
+	use like this:
+	    render 'object-position-vars', settings: block.settings
+
+    ex: input:
+		override_shopify_position_desktop: block.settings.override_shopify_position_desktop,
+	    override_shopify_position_mobile: block.settings.override_shopify_position_mobile,
+	    y_position_desktop: block.settings.y_position_desktop,
+	    x_position_desktop: block.settings.x_position_desktop,
+	    y_position_mobile: block.settings.y_position_mobile,
+	    x_position_mobile: block.settings.x_position_mobile,
+{% endcomment %}
+{% liquid
+    if settings.override_shopify_position_desktop
+        echo '--object-position-desktop: '
+        echo settings.x_position_desktop
+        echo '% '
+        echo settings.y_position_desktop
+        echo '%;'
+    endif
+    if settings.override_shopify_position_mobile
+        echo '--object-position-mobile: '
+        echo settings.x_position_mobile | default: settings.x_position_desktop
+        echo '% '
+        echo settings.y_position_mobile | default: settings.y_position_desktop
+        echo '%;'
+    endif
+%}

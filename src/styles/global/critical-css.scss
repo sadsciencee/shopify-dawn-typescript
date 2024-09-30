@@ -104,16 +104,6 @@ body {
 	}
 }
 
-.absolute-fill {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
 .top-0 {
 	top: 0;
 }
@@ -504,16 +494,18 @@ body {
 	}
 }
 
-// ensure media doesnt hit CLS
-
 /* component-media */
 .media {
-	background-color: rgba(#{$schemaColorForeground}, 0.1);
 	overflow: hidden;
-}
-
-.media--transparent {
 	background-color: transparent;
+	@include media-query($m-down) {
+		aspect-ratio: var(--aspect-ratio-mobile, unset);
+		object-position: var(--object-position-mobile);
+	}
+	@include media-query($m-up) {
+		aspect-ratio: var(--aspect-ratio-desktop, unset);
+		object-position: var(--object-position-desktop);
+	}
 }
 
 .media > *:not(.zoom):not(.deferred-media__poster-button),
@@ -527,39 +519,72 @@ body {
 	width: 100%;
 }
 
-.media > img {
-	object-fit: cover;
-	object-position: center center;
+.media > img, .media > picture > img {
 	transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.media--fill, .fill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+
+}
+
 .media--square {
-	padding-bottom: 100%;
+	--aspect-ratio-mobile: 1;
+	--aspect-ratio-desktop: 1;
 }
 
 .media--portrait {
-	padding-bottom: 125%;
+	//aspect-ratio: .8;
+	--aspect-ratio-mobile: .8;
+	--aspect-ratio-desktop: .8;
 }
 
 .media--landscape {
-	padding-bottom: 66.6%;
+	//aspect-ratio: 1.5;
+	--aspect-ratio-mobile: 1.5;
+	--aspect-ratio-desktop: 1.5;
 }
 
 .media--cropped {
-	padding-bottom: 56%;
+	//aspect-ratio: 1.786;
+	--aspect-ratio-mobile: 1.786;
 }
 
 .media--16-9 {
-	padding-bottom: 56.25%;
+	//padding-bottom: 56.25%;
+	--aspect-ratio-mobile: 1.7777777778;
+	--aspect-ratio-desktop: 1.7777777778;
 }
 
 .media--circle {
-	padding-bottom: 100%;
+	--aspect-ratio-mobile: 1;
+	--aspect-ratio-desktop: 1;
 	border-radius: 50%;
 }
 
 .media.media--hover-effect > img + img {
 	opacity: 0;
+}
+
+.settings-overlay {
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		background: #000;
+		z-index: 1;
+		opacity: var(--opacity);
+	}
 }
 
 deferred-media {
@@ -652,36 +677,4 @@ ucoast-video[data-uc-has-played='true'] video {
 	height: #{$viewportMinusHeader};
 }
 
-.header__localization .disclosure .localization-form__select,
-.mega-menu__link,
-quick-add-modal .product__title > a,
-.header__submenu .header__menu-item,
-.underline-on-hover {
-	@include underline-on-hover();
-}
 
-.rte a,
-.rte .link,
-.mega-menu__link--active,
-.shopify-payment-button__more-options,
-.underline-always {
-	@include underline-always();
-}
-
-.underline-links-hover,
-.complementary-products-contains-quick-add .card__heading,
-.underline-on-hover-child {
-	@include underline-on-hover-child();
-}
-
-.underline-always-child {
-	@include underline-always-child();
-}
-
-.semantic-button {
-	@include semanticButton();
-}
-
-.semantic-link {
-	@include semanticLink();
-}

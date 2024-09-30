@@ -3227,17 +3227,38 @@ details-disclosure > details {
 }
 
 
-.settings-overlay {
-	&::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		display: block;
-		background: #000;
-		z-index: 1;
-		opacity: var(--opacity);
-	}
+// moved from critical - just underlines so not relevant for CLS
+
+.header__localization .disclosure .localization-form__select,
+.mega-menu__link,
+quick-add-modal .product__title > a,
+.header__submenu .header__menu-item,
+.underline-on-hover {
+	@include underline-on-hover();
+}
+
+.rte a,
+.rte .link,
+.mega-menu__link--active,
+.shopify-payment-button__more-options,
+.underline-always {
+	@include underline-always();
+}
+
+.underline-links-hover,
+.complementary-products-contains-quick-add .card__heading,
+.underline-on-hover-child {
+	@include underline-on-hover-child();
+}
+
+.underline-always-child {
+	@include underline-always-child();
+}
+
+.semantic-button {
+	@include semanticButton();
+}
+
+.semantic-link {
+	@include semanticLink();
 }

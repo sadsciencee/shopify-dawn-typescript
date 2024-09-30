@@ -1,350 +1,339 @@
 {% liquid
-    if section.index == 1 and request.page_type != index
-        assign use_h1 = true
-    endif
-    case section.blocks.size
-        when 1
-            assign mobile_size = 'lg'
-            assign desktop_size = 'lg'
-        when 2
-            assign mobile_size = 'lg'
-            assign desktop_size = 'md'
-    endcase
+	if section.index == 1 and request.page_type != index
+		assign use_h1 = true
+	endif
+	case section.blocks.size
+		when 1
+			assign mobile_size = 'lg'
+			assign desktop_size = 'lg'
+		when 2
+			assign mobile_size = 'lg'
+			assign desktop_size = 'md'
+	endcase
 %}
 
 <div
-        id="UcHero-{{ section.id }}"
-        class="{% render 'ucoast-animate' %}"
+	id="UcHero-{{ section.id }}"
+	class="{% render 'ucoast-animate' %}"
 >
-    {% render 'ucoast-spacer', settings: section.settings %}
-    <div class="hero hero--height-{{ section.settings.height }} w-100 hero--{{ section.blocks.size }} grid grid--1-col grid--gapless grid--{{ section.blocks.size }}-col-desktop relative {% render 'ucoast-animate' %}">
-        {% for block in section.blocks %}
-            {% liquid
-                capture color_scheme
-                    render 'ucoast-scheme-classes', color_scheme: block.settings.color_scheme
-                endcapture
-            %}
-            {% capture block_markup %}
-                <span class="block media absolute top-0 left-0 w-100 h-100 absolute z-1 settings-overlay"
-                      style="{% render 'overlay-variables', overlay_opacity: block.settings.image_overlay_opacity %}">
-                        {% render 'ucoast-art-direction',
-                                desktop_image: block.settings.image,
-                                desktop_video: block.settings.video,
-                                mobile_image: block.settings.mobile_image,
-                                mobile_video: block.settings.mobile_video,
-                                defer: defer,
-                                preload: preload,
-                                wrapper_class: 'absolute left-0 top-0 w-100 h-100 media z-1',
-                                media_class: 'absolute left-0 top-0 w-100 h-100 media z-1 object-cover',
-                                aspect_ratio: 'fill',
-                                test_mode: false,
-                                override_shopify_position_desktop: block.settings.override_shopify_position_desktop,
-                                override_shopify_position_mobile: block.settings.override_shopify_position_mobile,
-                                y_position_desktop: block.settings.y_position_desktop,
-                                x_position_desktop: block.settings.x_position_desktop,
-                                y_position_mobile: block.settings.y_position_mobile,
-                                x_position_mobile: block.settings.x_position_mobile,
-                                mobile_size: mobile_size,
-                                desktop_size: desktop_size
-                        %}
-                    </span>
-                <span class="absolute top-0 left-0 w-100 h-100 absolute z-2 flex flex-column justify-center align-{{ block.settings.position }}">
+	{% render 'ucoast-spacer', settings: section.settings %}
+	<div class="hero hero--height-{{ section.settings.height }} w-100 hero--{{ section.blocks.size }} grid grid--1-col grid--gapless grid--{{ section.blocks.size }}-col-desktop relative {% render 'ucoast-animate' %}">
+		{% for block in section.blocks %}
+			{% liquid
+				capture color_scheme
+					render 'ucoast-scheme-classes', color_scheme: block.settings.color_scheme
+				endcapture
+				capture object_position_vars
+					render 'object-position-vars', settings: block.settings
+				endcapture
+			%}
+			{% capture block_markup %}
+				{% render 'ucoast-art-direction',
+						desktop_image: block.settings.image,
+						desktop_video: block.settings.video,
+						mobile_image: block.settings.mobile_image,
+						mobile_video: block.settings.mobile_video,
+						wrapper_class: 'z-1',
+						aspect_ratio: 'fill',
+						object_position_vars: object_position_vars,
+						mobile_size: mobile_size,
+						desktop_size: desktop_size,
+						overlay_opacity: block.settings.image_overlay_opacity
+				%}
+                    <span class="absolute top-0 left-0 w-100 h-100 absolute z-2 flex flex-column justify-center align-{{ block.settings.position }}">
                         {% render 'banner-content', settings: block.settings, use_h1: use_h1 %}
                     </span>
             {% endcapture %}
-            {% if block.settings.full_block_clickable
-            and block.settings.button_link != blank
-            %}
-                <a
-                        href="{{ block.settings.button_link }}"
-                        class="grid__item h-100 relative {{ color_scheme }}"
-                >
-                    {{ block_markup }}
-                </a>
-            {% else %}
-                <div class="grid__item h-100 relative {{ color_scheme }}">
-                    {{ block_markup }}
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+			{% if block.settings.full_block_clickable
+				and block.settings.button_link != blank
+			%}
+				<a
+					href="{{ block.settings.button_link }}"
+					class="grid__item h-100 relative {{ color_scheme }}"
+				>
+					{{ block_markup }}
+				</a>
+			{% else %}
+				<div class="grid__item h-100 relative {{ color_scheme }}">
+					{{ block_markup }}
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
 </div>
 
 {%- if request.design_mode -%}
-    {% render 'ucoast', ucoast: 'js-optional-theme-editor.ts' %}
+	{% render 'ucoast', ucoast: 'js-optional-theme-editor.ts' %}
 {%- endif -%}
 
 {% schema %}
-{
-  "name": "Hero",
-  "tag": "section",
-  "class": "section section--hero",
-  "max_blocks": 2,
-  "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
-  },
-  "settings": [
-    {
-      "type": "select",
-      "id": "height",
-      "options": [
-        {
-          "value": "viewport",
-          "label": "Viewport Height"
-        },
-        {
-          "value": "large",
-          "label": "Large (800px)"
-        },
-        {
-          "value": "medium",
-          "label": "Medium (650px)"
-        }
-      ],
-      "default": "viewport",
-      "label": "Section Height"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.spacing"
-    },
-    {
-      "type": "range",
-      "id": "space_above",
-      "label": "Space Above",
-      "info": "Set to -1 to disable space above",
-      "min": 0,
-      "max": 12,
-      "default": 0,
-      "unit": "spc",
-      "step": 1
-    },
-    {
-      "type": "range",
-      "id": "mobile_space_above",
-      "label": "Mobile Space Above",
-      "min": -1,
-      "max": 12,
-      "step": 1,
-      "default": -1,
-      "info": "Leave as '-1' to use the same value as the desktop setting."
-    }
-  ],
-  "blocks": [
-    {
-      "type": "media",
-      "name": "Media",
-      "limit": 2,
-      "settings": [
-        {
-          "type": "color_scheme",
-          "id": "color_scheme",
-          "label": "t:sections.all.colors.label",
-          "default": "transparent-bg"
-        },
-        {
-          "type": "header",
-          "content": "Layout"
-        },
-        {
-          "type": "select",
-          "id": "position",
-          "label": "Content Position",
-          "options": [
-            {
-              "value": "start",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            }
-          ],
-          "default": "center"
-        },
-        {
-          "type": "range",
-          "id": "wrap_width",
-          "min": 220,
-          "max": 1020,
-          "step": 10,
-          "unit": "ax",
-          "label": "Max Width",
-          "default": 700
-        },
-        {
-          "type": "range",
-          "id": "mobile_wrap_percent",
-          "label": "Mobile Text Wrap %",
-          "min": 51,
-          "max": 150,
-          "default": 100,
-          "unit": "%",
-          "step": 1,
-          "info": "Fine tune adjustment for mobile text wrap. % is based on the desktop text wrap limit."
-        },
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow",
-          "info": "Optional above-title text"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "title",
-          "default": "Image banner",
-          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "options": [
-            {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__2.label"
-            },
-            {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__3.label"
-            }
-          ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "text",
-          "label": "Body"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "default": "Button label",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
-          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "full_block_clickable",
-          "label": "Full Block Clickable",
-          "info": "Make the entire media blocks clickable, not just the button"
-        },
-        {
-          "type": "header",
-          "content": "Desktop/Default Media"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "video",
-          "id": "video",
-          "label": "Video"
-        },
-        {
-          "type": "range",
-          "id": "x_position_desktop",
-          "label": "Horizontal Crop",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "default": 50,
-          "unit": "%"
-        },
-        {
-          "type": "range",
-          "id": "y_position_desktop",
-          "label": "Vertical Crop",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "default": 50,
-          "unit": "%"
-        },
-        {
-          "type": "checkbox",
-          "id": "override_shopify_position_desktop",
-          "label": "Override Shopify Focal Points",
-          "default": true,
-          "info": "Replaces Shopify Focal Points for desktop only. Make sure to adjust on mobile separately, even if only a desktop image/video is assigned. If the media is a video, focal points do not work, and the settings above will be applied regardless of this setting."
-        },
-        {
-          "type": "range",
-          "id": "image_overlay_opacity",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "%",
-          "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-          "default": 10
-        },
-        {
-          "type": "header",
-          "content": "Mobile Overrides"
-        },
-        {
-          "type": "image_picker",
-          "id": "mobile_image",
-          "label": "Image (Mobile)"
-        },
-        {
-          "type": "video",
-          "id": "mobile_video",
-          "label": "Video (Mobile)"
-        },
-        {
-          "type": "range",
-          "id": "x_position_mobile",
-          "label": "Horizontal Crop",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "default": 50,
-          "unit": "%"
-        },
-        {
-          "type": "range",
-          "id": "y_position_mobile",
-          "label": "Vertical Crop",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "default": 50,
-          "unit": "%"
-        },
-        {
-          "type": "checkbox",
-          "id": "override_shopify_position_mobile",
-          "label": "Override Shopify Focal Points",
-          "default": true,
-          "info": "Replaces Shopify Focal Points for mobile. If the media is a video, focal points do not work, and the settings above will be applied regardless of this setting."
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Hero",
-      "blocks": [
-        {
-          "type": "media"
-        }
-      ]
-    }
-  ]
-}
+	{
+		"name": "Hero",
+		"tag": "section",
+		"class": "section section--hero",
+		"max_blocks": 2,
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "select",
+				"id": "height",
+				"options": [
+					{
+						"value": "viewport",
+						"label": "Viewport Height"
+					},
+					{
+						"value": "large",
+						"label": "Large (800px)"
+					},
+					{
+						"value": "medium",
+						"label": "Medium (650px)"
+					}
+				],
+				"default": "viewport",
+				"label": "Section Height"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.spacing"
+			},
+			{
+				"type": "range",
+				"id": "space_above",
+				"label": "Space Above",
+				"info": "Set to -1 to disable space above",
+				"min": 0,
+				"max": 12,
+				"default": 0,
+				"unit": "spc",
+				"step": 1
+			},
+			{
+				"type": "range",
+				"id": "mobile_space_above",
+				"label": "Mobile Space Above",
+				"min": -1,
+				"max": 12,
+				"step": 1,
+				"default": -1,
+				"info": "Leave as '-1' to use the same value as the desktop setting."
+			}
+		],
+		"blocks": [
+			{
+				"type": "media",
+				"name": "Media",
+				"limit": 2,
+				"settings": [
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "t:sections.all.colors.label",
+						"default": "transparent-bg"
+					},
+					{
+						"type": "header",
+						"content": "Layout"
+					},
+					{
+						"type": "select",
+						"id": "position",
+						"label": "Content Position",
+						"options": [
+							{
+								"value": "start",
+								"label": "Left"
+							},
+							{
+								"value": "center",
+								"label": "Center"
+							}
+						],
+						"default": "center"
+					},
+					{
+						"type": "range",
+						"id": "wrap_width",
+						"min": 220,
+						"max": 1020,
+						"step": 10,
+						"unit": "ax",
+						"label": "Max Width",
+						"default": 700
+					},
+					{
+						"type": "range",
+						"id": "mobile_wrap_percent",
+						"label": "Mobile Text Wrap %",
+						"min": 51,
+						"max": 150,
+						"default": 100,
+						"unit": "%",
+						"step": 1,
+						"info": "Fine tune adjustment for mobile text wrap. % is based on the desktop text wrap limit."
+					},
+					{
+						"type": "header",
+						"content": "Content"
+					},
+					{
+						"type": "text",
+						"id": "eyebrow",
+						"label": "Eyebrow",
+						"info": "Optional above-title text"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "title",
+						"default": "Image banner",
+						"label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+					},
+					{
+						"type": "select",
+						"id": "heading_size",
+						"options": [
+							{
+								"value": "h2",
+								"label": "t:sections.all.heading_size.options__2.label"
+							},
+							{
+								"value": "h1",
+								"label": "t:sections.all.heading_size.options__3.label"
+							}
+						],
+						"default": "h1",
+						"label": "t:sections.all.heading_size.label"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "text",
+						"label": "Body"
+					},
+					{
+						"type": "text",
+						"id": "button_label",
+						"default": "Button label",
+						"label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+						"info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+					},
+					{
+						"type": "url",
+						"id": "button_link",
+						"label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+					},
+					{
+						"type": "checkbox",
+						"id": "full_block_clickable",
+						"label": "Full Block Clickable",
+						"info": "Make the entire media blocks clickable, not just the button"
+					},
+					{
+						"type": "header",
+						"content": "Desktop/Default Media"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "video",
+						"id": "video",
+						"label": "Video"
+					},
+					{
+						"type": "range",
+						"id": "x_position_desktop",
+						"label": "Horizontal Crop",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"default": 50,
+						"unit": "%"
+					},
+					{
+						"type": "range",
+						"id": "y_position_desktop",
+						"label": "Vertical Crop",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"default": 50,
+						"unit": "%"
+					},
+					{
+						"type": "checkbox",
+						"id": "override_shopify_position_desktop",
+						"label": "Override Shopify Focal Points",
+						"default": true,
+						"info": "Replaces Shopify Focal Points for desktop only. Make sure to adjust on mobile separately, even if only a desktop image/video is assigned. If the media is a video, focal points do not work, and the settings above will be applied regardless of this setting."
+					},
+					{
+						"type": "range",
+						"id": "image_overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+						"default": 10
+					},
+					{
+						"type": "header",
+						"content": "Mobile Overrides"
+					},
+					{
+						"type": "image_picker",
+						"id": "mobile_image",
+						"label": "Image (Mobile)"
+					},
+					{
+						"type": "video",
+						"id": "mobile_video",
+						"label": "Video (Mobile)"
+					},
+					{
+						"type": "range",
+						"id": "x_position_mobile",
+						"label": "Horizontal Crop",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"default": 50,
+						"unit": "%"
+					},
+					{
+						"type": "range",
+						"id": "y_position_mobile",
+						"label": "Vertical Crop",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"default": 50,
+						"unit": "%"
+					},
+					{
+						"type": "checkbox",
+						"id": "override_shopify_position_mobile",
+						"label": "Override Shopify Focal Points",
+						"default": true,
+						"info": "Replaces Shopify Focal Points for mobile. If the media is a video, focal points do not work, and the settings above will be applied regardless of this setting."
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Hero",
+				"blocks": [
+					{
+						"type": "media"
+					}
+				]
+			}
+		]
+	}
 {% endschema %}
