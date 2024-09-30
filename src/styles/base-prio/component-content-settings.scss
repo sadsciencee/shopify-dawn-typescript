@@ -1,0 +1,11 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'content-settings';
+.#{$block} {
+  text-align: $componentTextAlign;
+  align-items: $componentFlexPosition;
+  max-width: calc(#{$componentWrapWidth} * $componentMobileWrapPercent * 0.01);
+  @include media-query($m-up) {
+    max-width: $componentWrapWidth;
+  }
+}

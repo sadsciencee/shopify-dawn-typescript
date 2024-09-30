@@ -1,12 +1,12 @@
 import { SearchForm } from '@/scripts/theme/search-form';
-import { qsaRequired, targetRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class MainSearch extends SearchForm {
   static override htmlSelector = 'main-search';
   allSearchInputs: NodeListOf<HTMLInputElement>;
   constructor() {
     super();
-    this.allSearchInputs = qsaRequired('input[type="search"]')
+    this.allSearchInputs = q.rl('input[type="search"]')
     this.setupEventListeners();
   }
 
@@ -33,7 +33,7 @@ export class MainSearch extends SearchForm {
   }
 
   onInput(event:Event) {
-    const target = targetRequired<Event, HTMLInputElement>(event);
+    const target = q.rt<Event, HTMLInputElement>(event);
     this.keepInSync(target.value, target);
   }
 

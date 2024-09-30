@@ -1,0 +1,63 @@
+{% comment %}
+	required vars (passed in settings obj)
+
+	position: 'start' | 'center'
+	wrap_width: int 220-720
+	mobile_wrap_percent: int 51-150
+	title: inline_richtext
+	heading_size: h1 | h2
+	text: inline_richtext
+	button_label: text
+	button_link: url
+	full_block_clickable: boolean
+	-- not settings
+	use_h1: boolean
+{% endcomment %}
+{% liquid
+    capture content_variables
+        render 'content-variables', position: settings.position, wrap_width: settings.wrap_width, mobile_wrap_percent: settings.mobile_wrap_percent
+    endcapture
+%}
+<span
+        class="banner-content flex flex-column justify-start content-settings"
+        style="{{ content_variables }}"
+>
+	{% if settings.eyebrow != blank %}
+        <p class="m-0 banner-content__eyebrow h4 tt-uppercase">
+			{{ settings.eyebrow }}
+		</p>
+    {% endif %}
+    {% if settings.title != blank or title != blank %}
+        {% unless use_h1 %}
+            <h2 class="{{ settings.heading_size }} banner-content__title m-0">
+				{{ title |default: settings.title }}
+			</h2>
+        {% else %}
+            <h1 class="{{ settings.heading_size }} banner-content__title m-0">
+				{{ title | default: settings.title }}
+			</h1>
+        {% endunless %}
+    {% endif %}
+    {% if settings.text != blank %}
+        <p class="banner-content__text text-body m-0">
+			{{ settings.text }}
+		</p>
+    {% endif %}
+    {% if settings.button_label != blank %}
+        {% unless settings.full_block_clickable %}
+            <a
+                    href="{{ settings.button_link }}"
+                    class="button banner-content__button"
+            >
+				<span>{{ settings.button_label }}</span>
+			</a>
+        {% else %}
+            <span
+                    href="{{ settings.button_link }}"
+                    class="button banner-content__button"
+            >
+				<span>{{ settings.button_label }}</span>
+			</span>
+        {% endunless %}
+    {% endif %}
+</span>

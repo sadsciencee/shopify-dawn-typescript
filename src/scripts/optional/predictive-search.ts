@@ -1,5 +1,5 @@
 import { SearchForm } from '@/scripts/theme/search-form'
-import { getAttributeOrThrow, qsaOptional, qsaRequired, qsOptional, qsRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global';
 
 export class PredictiveSearch extends SearchForm {
@@ -16,8 +16,8 @@ export class PredictiveSearch extends SearchForm {
 	constructor() {
 		super()
 		this.cachedResults = {}
-		this.predictiveSearchResults = qsRequired('[data-predictive-search]', this)
-		this.allPredictiveSearchInstances = qsaRequired<PredictiveSearch>('predictive-search')
+		this.predictiveSearchResults = q.rs('[data-predictive-search]', this)
+		this.allPredictiveSearchInstances = q.rl<PredictiveSearch>('predictive-search')
 		this.isOpen = false
 		this.abortController = new AbortController()
 		this.searchTerm = ''
@@ -121,7 +121,7 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	updateSearchForTerm(previousTerm: string, newTerm: string) {
-		const searchForTextElement = qsOptional('[data-predictive-search-search-for-text]', this)
+		const searchForTextElement = q.os('[data-predictive-search-search-for-text]', this)
 		if (!searchForTextElement) return
 		const currentButtonText = searchForTextElement.innerText
 		if (!currentButtonText) return
@@ -148,7 +148,7 @@ export class PredictiveSearch extends SearchForm {
 		// to this https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
 		// TODO: not sure about this assignemnt so check here if buggy
 		const allVisibleElementsNodes =
-			qsaOptional('li, button.predictive-search__item', this) ?? []
+			q.ol('li, button.predictive-search__item', this) ?? []
 		const allVisibleElements = Array.from(allVisibleElementsNodes).filter(
 			(element) => element.offsetParent !== null
 		)
@@ -194,7 +194,7 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	selectOption() {
-		const selectedOption = qsRequired<HTMLButtonElement | HTMLAnchorElement>(
+		const selectedOption = q.rs<HTMLButtonElement | HTMLAnchorElement>(
 			'[aria-selected="true"] a, button[aria-selected="true"]',
 			this
 		)
@@ -230,7 +230,7 @@ export class PredictiveSearch extends SearchForm {
 			})
 			.then((text) => {
 				const newDocument = new DOMParser().parseFromString(text, 'text/html')
-				const resultsMarkup = qsRequired(
+				const resultsMarkup = q.rs(
 					'#shopify-section-predictive-search',
 					newDocument.documentElement
 				).innerHTML
@@ -251,8 +251,8 @@ export class PredictiveSearch extends SearchForm {
 	}
 
 	setLiveRegionLoadingState() {
-		this.statusElement = this.statusElement || qsRequired('.predictive-search-status', this)
-		this.loadingText = this.loadingText || getAttributeOrThrow('data-loading-text', this)
+		this.statusElement = this.statusElement || q.rs('.predictive-search-status', this)
+		this.loadingText = this.loadingText || q.ra(this, 'data-loading-text')
 
 		this.setLiveRegionText(this.loadingText)
 		this.setAttribute(ATTRIBUTES.loading, '')
@@ -280,12 +280,12 @@ export class PredictiveSearch extends SearchForm {
 
 	setLiveRegionResults() {
 		this.removeAttribute(ATTRIBUTES.loading)
-		const liveRegionCountEl = qsOptional('[data-predictive-search-live-region-count]', this)
+		const liveRegionCountEl = q.os('[data-predictive-search-live-region-count]', this)
 		this.setLiveRegionText(liveRegionCountEl?.textContent ?? '')
 	}
 
 	getResultsMaxHeight() {
-		const header = qsRequired(SELECTORS.sectionHeader)
+		const header = q.rs(SELECTORS.sectionHeader)
 		this.resultsMaxHeight = window.innerHeight - header.getBoundingClientRect().bottom
 		return this.resultsMaxHeight
 	}

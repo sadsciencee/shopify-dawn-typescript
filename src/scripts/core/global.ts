@@ -1,15 +1,12 @@
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
-import type {
-	DebounceCallback,
-	EventWithRelatedTarget,
-	FocusableHTMLElement,
-} from '@/scripts/types/theme'
 import { type ProductModel } from '@/scripts/optional/product-model'
 import { MediaManager } from '@/scripts/core/media'
 import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
+import { TsDOM as q, debounce, throttle, init } from '@/scripts/core/TsDOM'
+import { ArtDirection } from '@/scripts/core/art-direction'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -152,178 +149,8 @@ type CommonEventType = MouseEvent | KeyboardEvent | TouchEvent
 // this is a set of functions I wrote while refactoring Dawn 9.0 to typescript
 // ended up being very flexible and useful for enforcing types when accessing dom elements so we are reusing for Dawn 10.0
 
-export const qsRequired = <T extends HTMLElement = HTMLElement, U extends HTMLElement = T>(
-	selector: string,
-	component?: HTMLElement,
-	additionalProperty?: HTMLElementProperty
-) => {
-	const container = component ?? document
-	const element = container.querySelector(selector) as T | null
-	if (!element) throw new Error(`required element not found: ${selector}`)
-	if (!additionalProperty) return element
-	const elFromProperty = element[additionalProperty] as U | null
-	if (!elFromProperty) throw new Error(`required element not found: ${selector}`)
-	return elFromProperty
-}
 
-export const qsRequiredFromDocument = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	parsedDocument: Document
-) => {
-	const element = parsedDocument.querySelector(selector) as T | null
-	if (!element) throw `required element not found: ${selector}`
-	return element
-}
 
-// required querySelectorAll
-export const qsaRequired = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const elements = container.querySelectorAll(selector) as NodeListOf<T>
-	if (!elements.length) throw new Error(`required element group not found: ${selector}`)
-	return elements
-}
-
-// return undefined if the HTML element isn't found
-export const qsOptional = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const element = container.querySelector(selector) as T | null
-	return element ?? undefined
-}
-
-// optional querySelectorAll typecast
-export const qsaOptional = <T extends HTMLElement = HTMLElement>(
-	selector: string,
-	component?: HTMLElement | Document
-) => {
-	const container = component ?? document
-	const elements = container.querySelectorAll(selector) as NodeListOf<T>
-	if (!elements.length) return undefined
-	return elements
-}
-
-// required event targets
-export const currentTargetRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	const element = event.currentTarget as (EventTarget & T) | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-export const relatedTargetRequired = <
-	E extends EventWithRelatedTarget = EventWithRelatedTarget,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	const element = event.relatedTarget as (EventTarget & T) | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-export const relatedTargetOptional = <
-	E extends EventWithRelatedTarget = EventWithRelatedTarget,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.relatedTarget as EventTarget & T) ?? undefined
-}
-
-export const targetRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement | Document = HTMLElement
->(
-	event: E
-) => {
-	const element = event.target as T | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	return element
-}
-
-// optional event targets. this is sort of not important but will probably make type casting easier
-export const currentTargetOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.currentTarget as EventTarget & T) ?? undefined
-}
-
-export const targetOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E
-) => {
-	return (event.target as EventTarget & T) ?? undefined
-}
-
-export const targetClosestRequired = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E,
-	selector: string
-) => {
-	const element = event.target as T | null
-	if (!element) throw new Error(`required element not found: event.currentTarget`)
-	const closest = element.closest(selector) as T
-	if (!closest)
-		throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
-	return closest
-}
-
-export const targetClosestOptional = <
-	E extends Event = CommonEventType,
-	T extends HTMLElement = HTMLElement
->(
-	event: E,
-	selector: string
-) => {
-	const element = event.target as T | null
-	if (!element) return undefined
-	const closest = element.closest(selector) as T
-	if (!closest) return undefined
-	return closest
-}
-
-// properties and methods of HTML elements that return an HTMLElement
-export const closestRequired = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	selector: string
-) => {
-	const closest = element.closest(selector) as T
-	if (!closest)
-		throw new Error(`required element not found: ${element.nodeName}.closest(${selector})`)
-	return closest
-}
-
-export const closestOptional = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	selector: string
-) => {
-	return (element.closest(selector) as T) ?? undefined
-}
-
-export const elementPropertyRequired = <T extends HTMLElement = HTMLElement>(
-	element: HTMLElement,
-	property: HTMLElementProperty
-) => {
-	const parent = element[property] as T | null
-	if (!parent) throw new Error(`required element not found: ${element.nodeName}.parentNode`)
-	return parent
-}
 
 // this function is use to safely define a new custom element
 // it allows callbacks to be run before and after the element is defined -
@@ -333,94 +160,17 @@ interface CustomElementConstructorWithStaticTagName extends CustomElementConstru
 	htmlSelector: string
 }
 
-// throw error if something goes wrong with a constructor
-export const safeDefineElement = (
-	elementClass: CustomElementConstructorWithStaticTagName,
-	callbackBefore?: Function,
-	callbackAfter?: Function
-): void => {
-	try {
-		if (customElements.get(elementClass.htmlSelector)) return
-		if (callbackBefore instanceof Function) {
-			const elsInDocument = qsaOptional(elementClass.htmlSelector)
-			if (elsInDocument) {
-				callbackBefore()
-			}
-		}
-		customElements.define(elementClass.htmlSelector, elementClass)
-		if (callbackAfter instanceof Function) {
-			const elsInDocument = qsaOptional(elementClass.htmlSelector)
-			if (elsInDocument) {
-				callbackAfter()
-			}
-		}
-	} catch (error) {
-		console.error(
-			`Failed to define custom element '${elementClass.htmlSelector}': ${error.message}`
-		)
-	}
-}
 
-// formData helpers
-export const getOrThrow = <T extends FormData | Map<any, any> = FormData>(data: T, key: string) => {
-	const value = data.get(key)
-	if (!value) throw new Error(`Value ${key} not found in ${data}`)
-	return value
-}
-export const getOrUndefined = <T extends FormData | Map<any, any> = FormData>(
-	data: T,
-	key: string
-) => {
-	const value = data.get(key)
-	if (!value) return undefined
-	return value
-}
 
-// get attribute from element or throw error
-export const getAttributeOrThrow = (attribute: string, el: HTMLElement) => {
-	const data = el.getAttribute(attribute)
-	if (!data) throw new Error(`Attribute ${attribute} no found on element ${{el}}`)
-	return data
-}
-export const getAttributeOrUndefined = (attribute: string, el: HTMLElement) => {
-	const data = el.getAttribute(attribute)
-	if (!data) return undefined
-	return data
-}
 // browser safe replace all
 export const replaceAll = (str: string, find: string, replace: string) => {
 	return str.split(find).join(replace)
 }
 
-// toggle attributes specific to ucoast builds, not used in default dawn repack
-export const toggleActive = (el: HTMLElement, active: boolean) => {
-	if (active) {
-		el.setAttribute('data-uc-active', '')
-	} else {
-		el.removeAttribute('data-uc-active')
-	}
-}
-
-export const toggleIsEmpty = (el: HTMLElement, isEmpty: boolean) => {
-	if (isEmpty) {
-		el.setAttribute('data-uc-cart-empty', '')
-	} else {
-		el.removeAttribute('data-uc-cart-empty')
-	}
-}
-
-export const toggleLoading = (el: HTMLElement, loading: boolean) => {
-	if (loading) {
-		el.setAttribute(ATTRIBUTES.loading, '')
-	} else {
-		el.removeAttribute(ATTRIBUTES.loading)
-	}
-}
-
 // scroll to anchor link with some ucoast-specific features, not used in default dawn repack
 export const scrollToAnchor = (selector: string) => {
-	const header = qsRequired('[data-uc-header-wrapper]')
-	const anchor = qsRequired(selector)
+	const header = q.rs('[data-uc-header-wrapper]')
+	const anchor = q.rs(selector)
 	const headerHeight = header.offsetHeight
 	const collectionTop = anchor.getBoundingClientRect().top
 	const scrollToPosition =
@@ -438,7 +188,7 @@ export const getBackendRoute = () => {
 
 export const getCurrentHeaderHeight = () => {
 	let height = 0
-	const headerSections = qsaRequired('.shopify-section-group-header-group')
+	const headerSections = q.rl('.shopify-section-group-header-group')
 	headerSections.forEach((section) => {
 		const sectionHeight = section.getBoundingClientRect().height
 		height += sectionHeight
@@ -447,7 +197,7 @@ export const getCurrentHeaderHeight = () => {
 }
 
 /*export const closeAllModals = () => {
-	const modals = qsaOptional<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
+	const modals = q.ol<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
 		'modal-dialog, klaviyo-popup, notify-me, quick-add-modal'
 	)
 	if (!modals) return
@@ -568,12 +318,12 @@ export function initializeSummaryA11y() {
 				: undefined
 
 		if (nextElementSibling && nextElementSibling.hasAttribute('id')) {
-			summary.setAttribute('aria-controls', getAttributeOrThrow('id', nextElementSibling))
+			summary.setAttribute('aria-controls', q.ra(nextElementSibling, 'id'))
 		}
 		summary.addEventListener('click', (event) => {
 			//event.preventDefault()
-			const currentTarget = currentTargetRequired(event)
-			const closestTarget = targetClosestRequired(event, 'details')
+			const currentTarget = q.rct(event)
+			const closestTarget = q.rClosestTarget(event, 'details')
 			const shouldOpen = !closestTarget.hasAttribute('open')
 			currentTarget.setAttribute('aria-expanded', `${shouldOpen}`)
 		})
@@ -582,7 +332,7 @@ export function initializeSummaryA11y() {
 		const parentElement =
 			summary.parentElement instanceof HTMLElement ? summary.parentElement : undefined
 		if (!parentElement) return
-		parentElement.addEventListener('keyup', onKeyUpEscape)
+		parentElement.addEventListener('keyup', q.onKeyUpEscape)
 	})
 
 	document.querySelectorAll('[data-summary-hover="off"]').forEach((el) => {
@@ -591,7 +341,7 @@ export function initializeSummaryA11y() {
 		})
 	})
 
-	const closeOnExitContainers = qsaOptional('[data-close-menus-on-mouse-exit]')
+	const closeOnExitContainers = q.ol('[data-close-menus-on-mouse-exit]')
 	closeOnExitContainers?.forEach(el => {
 		el.addEventListener('mouseleave', (_) => {
 			closeAllHeaderMenus()
@@ -602,18 +352,12 @@ export function initializeSummaryA11y() {
 function closeAllHeaderMenus() {
 	console.log('close all', window.Ucoast.openMenuId)
 	if (!window.Ucoast.openMenuId) return
-	const headerMenus = qsaOptional<HeaderMenu>('header-menu')
+	const headerMenus = q.ol<HeaderMenu>('header-menu')
 	headerMenus?.forEach(el => el.close())
 	window.Ucoast.openMenuId = undefined
 }
 
-export function getFocusableElements(container: HTMLElement): FocusableHTMLElement[] {
-	return Array.from(
-		container.querySelectorAll(
-			"summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
-		)
-	)
-}
+
 
 export function focusVisiblePolyfill() {
 	const navKeys = [
@@ -659,20 +403,8 @@ export function focusVisiblePolyfill() {
 	)
 }
 
-export function onKeyUpEscape(event: KeyboardEvent) {
-	if (event.code?.toUpperCase() !== 'ESCAPE') return
-
-	const openDetailsElement = targetClosestOptional(event, 'details[open]')
-	if (!openDetailsElement) return
-
-	const summaryElement = qsRequired('summary', openDetailsElement)
-	openDetailsElement.removeAttribute('open')
-	summaryElement.setAttribute('aria-expanded', 'false')
-	summaryElement.focus()
-}
-
 export function pauseAllMedia() {
-	const jsYoutubeEls = qsaOptional<HTMLIFrameElement>('.js-youtube')
+	const jsYoutubeEls = q.ol<HTMLIFrameElement>('.js-youtube')
 	if (jsYoutubeEls) {
 		jsYoutubeEls.forEach((video) => {
 			if (!video.contentWindow) return
@@ -683,7 +415,7 @@ export function pauseAllMedia() {
 		})
 	}
 
-	const jsVimeoEls = qsaOptional<HTMLIFrameElement>('.js-vimeo')
+	const jsVimeoEls = q.ol<HTMLIFrameElement>('.js-vimeo')
 	if (jsVimeoEls) {
 		jsVimeoEls.forEach((video) => {
 			if (!video.contentWindow) return
@@ -691,12 +423,12 @@ export function pauseAllMedia() {
 		})
 	}
 
-	const html5Videos = qsaOptional<HTMLVideoElement>('video')
+	const html5Videos = q.ol<HTMLVideoElement>('video')
 	if (html5Videos) {
 		html5Videos.forEach((video) => video.pause())
 	}
 
-	const productModels = qsaOptional<ProductModel>('product-model')
+	const productModels = q.ol<ProductModel>('product-model')
 	if (productModels) {
 		productModels.forEach((model) => {
 			if (model.modelViewerUI) model.modelViewerUI.pause()
@@ -706,27 +438,8 @@ export function pauseAllMedia() {
 
 // event based functions
 
-export function debounce(fn: Function, wait: number): DebounceCallback {
-	let timeoutId: number
-	return (...args) => {
-		clearTimeout(timeoutId)
-		// @ts-ignore
-		// since this is a generic function that can literally be used for anything, I think 'any' is the best type here
-		// 'unknown' would be better but we can't assign a type without moving off of arrow functions
-		timeoutId = setTimeout(() => fn.apply(this, args), wait)
-	}
-}
-export function throttle(fn: Function, delay: number = 0) {
-	let lastCall = 0
-	return function (...args: unknown[]) {
-		const now = new Date().getTime()
-		if (now - lastCall < delay) {
-			return
-		}
-		lastCall = now
-		return fn(...args)
-	}
-}
+
+
 
 // fetch API configs
 
@@ -745,18 +458,18 @@ type AddToCartFormValues = {
 }
 
 export function addToCartConfig(body: FormData) {
-	const definedQuantity = getOrUndefined(body, 'quantity')
-	const quantity = getOrUndefined(body, 'quantity') ? parseInt(getOrThrow(body, 'quantity')) : 1
+	const definedQuantity = q.ofd(body, 'quantity')
+	const quantity = q.ofd(body, 'quantity') ? parseInt(q.rfd(body, 'quantity')) : 1
 	const data: AddToCartFormValues = {
 		items: [
 			{
 				quantity,
-				id: parseInt(getOrThrow(body, 'id')),
+				id: parseInt(q.rfd(body, 'id')),
 			},
 		],
-		form_type: getOrThrow(body, 'form_type'),
-		sections: getOrUndefined(body, 'sections'),
-		sections_url: getOrUndefined(body, 'sections_url'),
+		form_type: q.rfd(body, 'form_type'),
+		sections: q.ofd(body, 'sections'),
+		sections_url: q.ofd(body, 'sections_url'),
 	}
 	return {
 		method: 'POST',
@@ -811,7 +524,7 @@ export function trackRecentlyViewedProducts() {
 
 export function disableDesktopCSS() {
 	if (window.innerWidth >= 990) return
-	const mUp = qsaOptional('link[href*=".m-up"]')
+	const mUp = q.ol('link[href*=".m-up"]')
 	mUp?.forEach((link) => {
 		const href = link.getAttribute('href')
 		if (!href || href.includes('::')) return // vite urls contain ::
@@ -819,7 +532,7 @@ export function disableDesktopCSS() {
 		link.setAttribute('data-href', href)
 	})
 	if (window.innerWidth < 750) {
-		const sUp = qsaOptional('link[href*=".s-up"]')
+		const sUp = q.ol('link[href*=".s-up"]')
 		sUp?.forEach((link) => {
 			const href = link.getAttribute('href')
 			if (!href || href.includes('::')) return
@@ -830,226 +543,9 @@ export function disableDesktopCSS() {
 	}
 }
 
-// startoriginal global
-
-// type checkers - turns out loading these in class files makes the whole file load
-// TODO: migrate other checkers in here
-
-export function isVideoComponent(obj: HTMLElement | Element): obj is UcoastVideo {
-	if (!obj) return false
-	if (obj.localName !== 'ucoast-video') return false
-	return true
-}
-
-// media loader stuff - this was in a separate file but was getting issues w/buildpack
-
-export const mediaLoader = (runOnce = false) => {
-	const images = qsaOptional('img')
-	const videos = qsaOptional<UcoastVideo>('ucoast-video')
-
-	if (images) {
-		images.forEach((image) => {
-			if (!(image instanceof HTMLImageElement)) {
-				return
-			}
-			if (image.getAttribute('loading') === 'eager') {
-				replaceSrcSet(image, {
-					loadImmediately: true
-				})
-				return
-			}
-			/*if (!isAnyPartOfElementInViewport(image)) {
-				return
-			}
-			if (isAnyPartOfElementInViewport(image) && image.hasAttribute('data-uc-mega-image-defer') && !qsOptional('[data-uc-mega-menu-details][open]')) {
-				return
-			}*/
-			replaceSrcSet(image)
-		})
-		if (!runOnce) {
-			const imageObserver = new IntersectionObserver(onImageIntersection, {
-				root: null,
-				rootMargin: '50px 0px 50px 0px',
-				threshold: 0
-			})
-			images.forEach((element) => imageObserver.observe(element))
-		}
-	}
-
-	if (videos && !runOnce) {
-		const videoObserver = new IntersectionObserver(onVideoIntersection, {
-			root: null,
-			rootMargin: '50px 0px 50px 0px',
-			threshold: 0
-		})
-		videos.forEach((element) => videoObserver.observe(element))
-		const videoPreloadObserver = new IntersectionObserver(onVideoPreloadIntersection, {
-			root: null,
-			rootMargin: '50px 0px 50px 0px',
-			threshold: 0
-		})
-		videos.forEach((element) => videoPreloadObserver.observe(element))
-	}
-}
-
-function onImageIntersection(elements: IntersectionObserverEntry[], _: IntersectionObserver) {
-	elements.forEach((element) => {
-		if (element.isIntersecting) {
-			const image = element.target
-			if (!(image instanceof HTMLImageElement)) throw 'element target not found'
-			replaceSrcSet(image, {
-				loadImmediately: true
-			})
-		}
-	})
-}
-
-function onVideoIntersection(elements: IntersectionObserverEntry[], _: IntersectionObserver) {
-	elements.forEach((element) => {
-		const ucoastVideo = element.target
-		if (isVideoComponent(ucoastVideo)) {
-			if (element.isIntersecting) {
-				void ucoastVideo.play()
-			} else if (!isTenPercentInViewport(ucoastVideo)) {
-				void ucoastVideo.pause()
-			} else if (isTenPercentInViewport(ucoastVideo)) {
-				void ucoastVideo.play()
-			}
-		}
-	})
-}
-
-function onVideoPreloadIntersection(
-	elements: IntersectionObserverEntry[],
-	_: IntersectionObserver
-) {
-	elements.forEach((element) => {
-		const video = element.target
-		if (isVideoComponent(video) && element.isIntersecting && video.hasAttribute('data-uc-megamenu-defer-video') && !qsOptional('[data-uc-mega-menu-details][open]')) {
-			return
-		}
-		else if (isVideoComponent(video) && element.isIntersecting) {
-			void video.preload()
-		}
-	})
-}
-
-export const replaceSrcSet = (
-	image: HTMLImageElement,
-	options?: { overrideTargetSize?: Number; loadImmediately?: boolean }
-) => {
-	const srcSet = image.getAttribute('data-srcset')
-	if (!srcSet) return
-	const devicePixelRatio = window.devicePixelRatio ?? 2
-	const targetSize =
-		options?.overrideTargetSize ??
-		(image.getBoundingClientRect().width * devicePixelRatio).toFixed(0)
-	let newSrc = image.getAttribute('src')
-	if (!newSrc || !newSrc.includes('&width=')) return
-	const srcArr = newSrc.split('&width=')
-	newSrc = `${srcArr[0]}&width=${targetSize}`
-
-	const defer = image.hasAttribute('data-uc-defer')
-	if (defer) {
-		image.setAttribute('data-src', newSrc)
-	} else if (options?.loadImmediately) {
-		image.removeAttribute('loading')
-		let preloadedImage = new Image()
-		preloadedImage.src = newSrc
-		image.setAttribute('src', newSrc)
-	} else {
-		image.setAttribute('loading', 'eager')
-		image.setAttribute('src', newSrc)
-	}
-}
-
-// this is a default shopify function that normally runs in global scope
-// I moved it to functions for clarity
-
-// trapFocusHandlers variable and associated functions are part of the global scope
-// this function should always run first
-
-const trapFocusHandlers: {
-	focusin?: (event: Event) => void
-	focusout?: (event: Event) => void
-	keydown?: (event: KeyboardEvent) => void
-} = {}
-
-export function trapFocus(
-	container: HTMLElement,
-	elementToFocus: HTMLElement | undefined = container
-) {
-	const elements = getFocusableElements(container)
-	const first = elements[0]
-	const last = elements[elements.length - 1]
-
-	removeTrapFocus()
-
-	trapFocusHandlers.focusin = (event) => {
-		if (event.target !== container && event.target !== last && event.target !== first) return
-
-		if (!trapFocusHandlers.keydown)
-			throw new Error('trapFocusHandlers.focusin called before .keydown is defined')
-
-		document.addEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	trapFocusHandlers.focusout = function () {
-		if (!trapFocusHandlers.keydown)
-			throw new Error('trapFocusHandlers.focusout called before .keydown is defined')
-		document.removeEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	trapFocusHandlers.keydown = function (event: KeyboardEvent) {
-		if (event.code?.toUpperCase() !== 'TAB') return // If not TAB key
-		// On the last focusable element and tab forward, focus the first element.
-		const target = targetRequired<KeyboardEvent, FocusableHTMLElement>(event)
-		if (target === last && !event.shiftKey) {
-			event.preventDefault()
-			first.focus()
-		}
-
-		//  On the first focusable element and tab backward, focus the last element.
-		if ((event.target === container || event.target === first) && event.shiftKey) {
-			event.preventDefault()
-			last.focus()
-		}
-	}
-
-	document.addEventListener('focusout', trapFocusHandlers.focusout)
-	document.addEventListener('focusin', trapFocusHandlers.focusin)
-
-	elementToFocus.focus()
-
-	if (
-		elementToFocus instanceof HTMLInputElement &&
-		['search', 'text', 'email', 'url'].includes(elementToFocus.type) &&
-		elementToFocus.value
-	) {
-		elementToFocus.setSelectionRange(0, elementToFocus.value.length)
-	}
-}
-
-// don't know why shopify put this function below the above but I'm not about to go debug it
-
-export function removeTrapFocus(elementToFocus: HTMLElement | undefined = undefined) {
-	if (trapFocusHandlers.focusin) {
-		document.removeEventListener('focusin', trapFocusHandlers.focusin)
-	}
-	if (trapFocusHandlers.focusout) {
-		document.removeEventListener('focusout', trapFocusHandlers.focusout)
-	}
-
-	if (trapFocusHandlers.keydown) {
-		document.removeEventListener('keydown', trapFocusHandlers.keydown)
-	}
-
-	if (elementToFocus) elementToFocus.focus()
-}
-
 export function openWaitlistModal(variantId: number, opener: HTMLElement) {
-	const modal = qsRequired<ModalDialog>(`#WaitlistModal`)
-	const waitlistForm = qsRequired<WaitlistForm>('waitlist-form', modal)
+	const modal = q.rs<ModalDialog>(`#WaitlistModal`)
+	const waitlistForm = q.rs<WaitlistForm>('waitlist-form', modal)
 	waitlistForm.variantInput.value = `${variantId}`
 	if (modal) modal.show(opener)
 }
@@ -1073,7 +569,8 @@ export function initializeShopifyConsentAPI() {
 }
 
 function initGlobalUcoast() {
-	safeDefineElement(UcoastVideo)
+	q.safeDefineElement(ArtDirection)
+	q.safeDefineElement(UcoastVideo)
 	const iOS = window.Ucoast?.iOS ?? false
 	const Ucoast: typeof window.Ucoast = {
 		shopifyConsentAPILoaded: false,
@@ -1086,14 +583,16 @@ function initGlobalUcoast() {
 	if (!window.Ucoast.mediaManager) {
 		window.Ucoast.mediaManager = new MediaManager()
 	}
+
 }
 
 
 
 export function globalSetup() {
+	init()
 	initGlobalUcoast()
 	initializeShopifyConsentAPI()
-	safeDefineElement(UcoastVideo)
+	q.safeDefineElement(UcoastVideo)
 	initializeSummaryA11y()
 	try {
 		document.querySelector(':focus-visible')

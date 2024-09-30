@@ -1,0 +1,43 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'banner-content';
+.#{$block} {
+	&__eyebrow {
+		& + * {
+			margin-top: $ax14;
+		}
+	}
+	&__title {
+		& + .#{$block}__button {
+			margin-top: $ax28;
+		}
+		& + .#{$block}__text {
+			margin-top: $ax14;
+		}
+		& + .#{$block}__title {
+			margin-top: $ax4;
+		}
+	}
+	&__text {
+		& + .#{$block}__button {
+			margin-top: $ax30;
+		}
+	}
+	padding: $ax15;
+	@include media-query($m-up) {
+		padding: $ax40;
+		&__title {
+			& + .#{$block}__button {
+				margin-top: $ax38;
+			}
+			& + .#{$block}__text {
+				margin-top: $ax23;
+			}
+		}
+		&__text {
+			& + .#{$block}__button {
+				margin-top: $ax30;
+			}
+		}
+	}
+}

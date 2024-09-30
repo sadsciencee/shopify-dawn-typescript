@@ -1,8 +1,4 @@
-import {
-	qsOptional,
-	qsRequired,
-	qsRequiredFromDocument,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { CartNotification } from '@/scripts/theme/cart-notification'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
@@ -57,8 +53,8 @@ export async function getCart(): Promise<Cart | CartErrorResponse> {
 
 export function getDOMCart() {
 	return (
-		qsOptional<CartNotification>(CartNotification.htmlSelector) ??
-		qsOptional<CartDrawer>(CartDrawer.htmlSelector)
+		q.os<CartNotification>(CartNotification.htmlSelector) ??
+		q.os<CartDrawer>(CartDrawer.htmlSelector)
 	)
 }
 
@@ -76,7 +72,7 @@ const ignoredProperties = ['utf8', 'product-id', 'section-id']
 
 export function updateShippingBar(rawHTML: string) {
 	console.log('dynamic-shipping-bar')
-	const shippingBar = qsOptional<DynamicShippingBar>('dynamic-shipping-bar')
+	const shippingBar = q.os<DynamicShippingBar>('dynamic-shipping-bar')
 	if (!shippingBar) return
 	shippingBar.animateFromRawHTML(rawHTML)
 }
@@ -202,16 +198,16 @@ export function renderRawHTMLToDOM({
 	console.log({sourceSelector, destinationSelector, destinationSelectorContainer})
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
-	const sourceElement = qsRequired(
+	const sourceElement = q.rs(
 		sourceSelectorOrDefault,
 		newDocument.documentElement
 	)
 	if (destinationSelectorContainer) {
-		const container = qsRequired(destinationSelectorContainer)
-		const destinationElement = qsRequired(destinationSelector, container)
+		const container = q.rs(destinationSelectorContainer)
+		const destinationElement = q.rs(destinationSelector, container)
 		destinationElement.outerHTML = sourceElement.outerHTML
 	} else {
-		const destinationElement = qsRequired(destinationSelector)
+		const destinationElement = q.rs(destinationSelector)
 		destinationElement.outerHTML = sourceElement.outerHTML
 	}
 }
@@ -354,7 +350,7 @@ export async function getSectionHTMLForResource(
 				const html = response[sectionId]
 				const parser = new DOMParser()
 				const doc = parser.parseFromString(html, 'text/html')
-				return qsRequiredFromDocument('.shopify-section', doc).innerHTML
+				return q.rs('.shopify-section', doc).innerHTML
 			})
 	} catch (e) {
 		console.error('error in getSectionHTMLForResource')
@@ -367,6 +363,6 @@ export function getActiveOrAccessibilityElement(): HTMLElement {
 	if (activeElement instanceof HTMLElement) {
 		return activeElement
 	} else {
-		return qsRequired('[data-uc-accessibility-focus]')
+		return q.rs('[data-uc-accessibility-focus]')
 	}
 }

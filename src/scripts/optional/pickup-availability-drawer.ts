@@ -1,5 +1,4 @@
-import { qsRequired, targetRequired } from '@/scripts/core/global'
-import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class PickupAvailabilityDrawer extends UcoastEl {
@@ -11,7 +10,7 @@ export class PickupAvailabilityDrawer extends UcoastEl {
 		super()
 
 		this.onBodyClick = this.handleBodyClick.bind(this)
-		this.opener = qsRequired('button', this)
+		this.opener = q.rs('button', this)
 
 		this.opener.addEventListener('click', () => {
 			this.hide()
@@ -23,7 +22,7 @@ export class PickupAvailabilityDrawer extends UcoastEl {
 	}
 
 	handleBodyClick(event: MouseEvent) {
-		const target = targetRequired(event)
+		const target = q.rt(event)
 		if (
 			target != this &&
 			!target.closest('pickup-availability-drawer') &&
@@ -37,7 +36,7 @@ export class PickupAvailabilityDrawer extends UcoastEl {
 		this.removeAttribute('open')
 		document.body.removeEventListener('click', this.onBodyClick)
 		document.body.classList.remove('overflow-hidden')
-		removeTrapFocus(this.focusElement)
+		window.TsDOM.removeTrapFocus(this.focusElement)
 	}
 
 	show(focusElement: HTMLElement) {
@@ -45,6 +44,6 @@ export class PickupAvailabilityDrawer extends UcoastEl {
 		this.setAttribute('open', '')
 		document.body.addEventListener('click', this.onBodyClick)
 		document.body.classList.add('overflow-hidden')
-		trapFocus(this)
+		window.TsDOM.trapFocus(this)
 	}
 }

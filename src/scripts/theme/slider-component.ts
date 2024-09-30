@@ -1,4 +1,4 @@
-import { currentTargetRequired, qsaOptional, qsOptional, qsRequired } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type SlideChangedEvent } from '@/scripts/types/events'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
@@ -26,13 +26,13 @@ export class SliderComponent extends UcoastEl {
 	mediaLoaded = false
 	constructor() {
 		super()
-		this.slider = qsRequired('[id^="Slider-"]', this)
-		this.sliderItems = qsaOptional('[id^="Slide-"]', this)
+		this.slider = q.rs('[id^="Slider-"]', this)
+		this.sliderItems = q.ol('[id^="Slide-"]', this)
 		this.enableSliderLooping = false
-		this.currentPageElement = qsOptional('.slider-counter--current', this)
-		this.pageTotalElement = qsOptional('.slider-counter--total', this)
-		this.prevButton = qsOptional('button[name="previous"]', this)
-		this.nextButton = qsOptional('button[name="next"]', this)
+		this.currentPageElement = q.os('.slider-counter--current', this)
+		this.pageTotalElement = q.os('.slider-counter--total', this)
+		this.prevButton = q.os('button[name="previous"]', this)
+		this.nextButton = q.os('button[name="next"]', this)
 
 		this.initPages()
 		const resizeObserver = new ResizeObserver((_entries: ResizeObserverEntry[]) =>
@@ -143,7 +143,7 @@ export class SliderComponent extends UcoastEl {
 
 	onButtonClick(event: MouseEvent) {
 		event.preventDefault()
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		if (!(currentTarget instanceof HTMLButtonElement)) return
 		if (!this.sliderItemOffset) return
 		const step = currentTarget.dataset.step ? parseInt(currentTarget.dataset.step) : 1
@@ -163,6 +163,6 @@ export class SliderComponent extends UcoastEl {
 	loadMedia() {
 		if (this.mediaLoaded) return
 		this.mediaLoaded = true
-		void window.Ucoast.mediaManager.loadAllInContainer(this)
+		void window.Ucoast.mediaManager.playAllInContainer(this)
 	}
 }

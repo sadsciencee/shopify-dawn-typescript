@@ -1,8 +1,4 @@
-import {
-	currentTargetRequired,
-	getAttributeOrThrow,
-	qsaRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { ProductSlider } from '@/scripts/theme/product-slider'
 
@@ -13,9 +9,9 @@ export class MultiProductSlider extends UcoastEl {
 	sliders: NodeListOf<ProductSlider>
 	constructor() {
 		super()
-		this.navButtons = qsaRequired('button[data-nav]', this)
-		this.sliderWrappers = qsaRequired('[data-slider]', this)
-		this.sliders = qsaRequired(ProductSlider.htmlSelector, this)
+		this.navButtons = q.rl('button[data-nav]', this)
+		this.sliderWrappers = q.rl('[data-slider]', this)
+		this.sliders = q.rl(ProductSlider.htmlSelector, this)
 		this.addListeners()
 	}
 
@@ -26,10 +22,10 @@ export class MultiProductSlider extends UcoastEl {
 	}
 
 	activateSlider(event: Event) {
-		const currentTarget = currentTargetRequired(event)
-		const blockId = getAttributeOrThrow('data-nav', currentTarget)
+		const currentTarget = q.rct(event)
+		const blockId = q.ra(currentTarget, 'data-nav')
 		this.navButtons.forEach((navButton) => {
-			const navBlockId = getAttributeOrThrow('data-nav', navButton)
+			const navBlockId = q.ra(navButton, 'data-nav')
 			if (blockId === navBlockId) {
 				navButton.classList.add('active')
 			} else {
@@ -37,14 +33,17 @@ export class MultiProductSlider extends UcoastEl {
 			}
 		})
 		this.sliderWrappers.forEach((sliderWrapper) => {
-			const sliderBlockId = getAttributeOrThrow(
-				'data-slider',
-				sliderWrapper
-			)
+			const sliderBlockId = q.ra(sliderWrapper, 'data-slider')
 			if (blockId === sliderBlockId) {
 				sliderWrapper.classList.add('active')
+				void window.Ucoast.mediaManager.playAllInContainer(
+					sliderWrapper
+				)
 			} else {
 				sliderWrapper.classList.remove('active')
+				void window.Ucoast.mediaManager.pauseAllInContainer(
+					sliderWrapper
+				)
 			}
 		})
 	}

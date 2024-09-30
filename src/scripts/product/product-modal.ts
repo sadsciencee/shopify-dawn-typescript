@@ -1,5 +1,5 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import { qsOptional, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { DeferredMedia } from '@/scripts/theme/deferred-media'
 
 export class ProductModal extends ModalDialog {
@@ -27,7 +27,7 @@ export class ProductModal extends ModalDialog {
 				element.classList.remove('active')
 			}
 		)
-		const activeMedia = qsOptional<
+		const activeMedia = q.os<
 			HTMLImageElement | HTMLVideoElement | HTMLIFrameElement | DeferredMedia
 		>(`[data-media-id="${openedById}"]`, this)
 		if (!activeMedia) {
@@ -38,9 +38,9 @@ export class ProductModal extends ModalDialog {
 		const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null
 		activeMedia.classList.add('active')
 		activeMedia.scrollIntoView()
-		void window.Ucoast.mediaManager.loadAllInContainer(this)
+		void window.Ucoast.mediaManager.playAllInContainer(this)
 
-		const container = qsRequired(ProductModal.selectors.container, this)
+		const container = q.rs(ProductModal.selectors.container, this)
 		const activeMediaWidth = activeMedia.width
 			? parseInt(`${activeMedia.width}`)
 			: activeMedia.clientWidth

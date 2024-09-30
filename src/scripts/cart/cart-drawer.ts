@@ -1,11 +1,5 @@
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
-import {
-	currentTargetRequired,
-	onKeyUpEscape,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
-import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global'
 import {
@@ -40,11 +34,11 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	getOverlay() {
-		return qsRequired(CartDrawer.selectors.overlay, this)
+		return q.rs(CartDrawer.selectors.overlay, this)
 	}
 
 	setHeaderCartIconAccessibility() {
-		const cartLink = qsRequired(CartDrawer.selectors.cartLink)
+		const cartLink = q.rs(CartDrawer.selectors.cartLink)
 		cartLink.setAttribute('role', 'button')
 		cartLink.setAttribute('aria-haspopup', 'dialog')
 		cartLink.addEventListener('click', (event) => {
@@ -61,7 +55,7 @@ export class CartDrawer extends UcoastEl {
 
 	open(triggeredBy?: HTMLElement) {
 		if (triggeredBy) this.setActiveElement(triggeredBy)
-		const cartDrawerNote = qsOptional(
+		const cartDrawerNote = q.os(
 			CartDrawer.selectors.noteSummary,
 			this
 		)
@@ -78,13 +72,13 @@ export class CartDrawer extends UcoastEl {
 				const containerToTrapFocusOn = this.hasAttribute(
 					ATTRIBUTES.cartEmpty
 				)
-					? qsRequired(CartDrawer.selectors.innerEmpty, this)
-					: qsRequired(CartDrawer.selectors.container)
+					? q.rs(CartDrawer.selectors.innerEmpty, this)
+					: q.rs(CartDrawer.selectors.container)
 				const focusElement =
-					qsOptional(CartDrawer.selectors.inner, this) ||
-					qsRequired(CartDrawer.selectors.closeButton, this)
-				trapFocus(containerToTrapFocusOn, focusElement)
-				void window.Ucoast.mediaManager.loadAllInContainer(this)
+					q.os(CartDrawer.selectors.inner, this) ||
+					q.rs(CartDrawer.selectors.closeButton, this)
+				window.TsDOM.trapFocus(containerToTrapFocusOn, focusElement)
+				void window.Ucoast.mediaManager.playAllInContainer(this)
 			},
 			{ once: true }
 		)
@@ -94,7 +88,7 @@ export class CartDrawer extends UcoastEl {
 
 	close() {
 		this.classList.remove('active')
-		removeTrapFocus(this.activeElement)
+		window.TsDOM.removeTrapFocus(this.activeElement)
 		document.body.classList.remove('overflow-hidden')
 	}
 
@@ -116,15 +110,15 @@ export class CartDrawer extends UcoastEl {
 		}
 
 		cartDrawerNote.addEventListener('click', (event: MouseEvent) => {
-			const currentTarget = currentTargetRequired(event)
-			const isExpanded = qsRequired(
+			const currentTarget = q.rct(event)
+			const isExpanded = q.rs(
 				CartDrawer.selectors.noteDetails,
 				this
 			).hasAttribute('open')
 			currentTarget.setAttribute('aria-expanded', `${isExpanded}`)
 		})
 
-		parentElement.addEventListener('keyup', onKeyUpEscape)
+		parentElement.addEventListener('keyup', q.onKeyUpEscape)
 	}
 
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
@@ -152,7 +146,7 @@ export class CartDrawer extends UcoastEl {
 			} else {
 				this.setAttribute(ATTRIBUTES.cartEmpty, '')
 			}
-			void window.Ucoast.mediaManager.loadAllInContainer(this)
+			void window.Ucoast.mediaManager.playAllInContainer(this)
 		}, 1)
 	}
 

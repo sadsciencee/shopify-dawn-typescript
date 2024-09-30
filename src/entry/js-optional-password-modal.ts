@@ -1,3 +1,3 @@
 import { PasswordModal } from '@/scripts/optional/password-modal'
-import { safeDefineElement } from '@/scripts/core/global'
-safeDefineElement(PasswordModal)
+import { TsDOM as q} from '@/scripts/core/TsDOM'
+q.safeDefineElement(PasswordModal)

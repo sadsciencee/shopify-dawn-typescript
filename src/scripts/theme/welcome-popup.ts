@@ -1,10 +1,6 @@
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
 import { KlaviyoForm } from '@/scripts/theme/klaviyo-form'
-import {
-	getAttributeOrThrow,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { getActiveOrAccessibilityElement } from '@/scripts/core/cart-functions'
 
 export class WelcomePopup extends ModalDialog {
@@ -17,12 +13,12 @@ export class WelcomePopup extends ModalDialog {
 
 	constructor() {
 		super()
-		this.klaviyoForm = qsRequired<KlaviyoForm>('klaviyo-form', this)
+		this.klaviyoForm = q.rs<KlaviyoForm>('klaviyo-form', this)
 		this.openAfter =
-			parseInt(getAttributeOrThrow('data-uc-open-after', this)) * 1000
-		this.cacheKey = getAttributeOrThrow('data-uc-cache-key', this)
+			parseInt(q.ra(this, 'data-uc-open-after')) * 1000
+		this.cacheKey = q.ra(this, 'data-uc-cache-key')
 		this.demoMode =
-			getAttributeOrThrow('data-uc-demo-mode', this) === 'true'
+			q.ra(this, 'data-uc-demo-mode') === 'true'
 
 		this.initializePopup()
 		// note: the code below should be used if the consentmo app is used for customer consent
@@ -39,7 +35,7 @@ export class WelcomePopup extends ModalDialog {
 		window.setTimeout(() => {
 			if (!this.dataPrivacyIsOpen()) {
 				this.show(getActiveOrAccessibilityElement())
-				window.Ucoast.mediaManager.loadAllInContainer(this)
+				void window.Ucoast.mediaManager.playAllInContainer(this)
 			}
 
 		}, this.openAfter)
@@ -47,8 +43,8 @@ export class WelcomePopup extends ModalDialog {
 
 	dataPrivacyIsOpen() {
 		const dataPrivacyModal =
-			qsOptional('.cc-window') ??
-			qsOptional('[aria-describedby="cookieconsent:desc"]')
+			q.os('.cc-window') ??
+			q.os('[aria-describedby="cookieconsent:desc"]')
 		if (!dataPrivacyModal) return false
 		return !dataPrivacyModal.classList.contains('cc-invisible')
 	}

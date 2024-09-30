@@ -1,9 +1,10 @@
-import { qsaOptional, qsOptional, qsRequired, scaleValue } from '@/scripts/core/global';
+import { scaleValue } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type PredictiveSearch } from '@/scripts/optional/predictive-search'
 import { type DetailsModal } from '@/scripts/theme/details-modal'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { SELECTORS } from '@/scripts/core/global';
+import { SELECTORS } from '@/scripts/core/global'
 
 export class StickyHeader extends UcoastEl {
 	static htmlSelector = 'sticky-header'
@@ -21,11 +22,11 @@ export class StickyHeader extends UcoastEl {
 	disclosures?: [] | NodeListOf<HeaderMenu>
 	constructor() {
 		super()
-		this.header = qsRequired(SELECTORS.sectionHeader)
+		this.header = q.rs(SELECTORS.sectionHeader)
 	}
 
 	override connectedCallback() {
-		this.header = qsRequired(SELECTORS.sectionHeader)
+		this.header = q.rs(SELECTORS.sectionHeader)
 		this.headerIsAlwaysSticky =
 			this.getAttribute('data-sticky-type') === 'always' ||
 			this.getAttribute('data-sticky-type') === 'reduce-logo-size'
@@ -43,7 +44,10 @@ export class StickyHeader extends UcoastEl {
 
 		this.currentScrollTop = 0
 		this.preventReveal = false
-		this.predictiveSearch = qsOptional<PredictiveSearch>('predictive-search', this)
+		this.predictiveSearch = q.os<PredictiveSearch>(
+			'predictive-search',
+			this
+		)
 
 		this.onScrollHandler = this.onScroll.bind(this)
 		this.hideHeaderOnScrollUp = () => (this.preventReveal = true)
@@ -64,7 +68,10 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	override disconnectedCallback() {
-		this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp)
+		this.removeEventListener(
+			'preventHeaderReveal',
+			this.hideHeaderOnScrollUp
+		)
 		window.removeEventListener('scroll', this.onScrollHandler)
 	}
 
@@ -78,7 +85,8 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	onScroll() {
-		const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+		const scrollTop =
+			window.pageYOffset || document.documentElement.scrollTop
 
 		if (this.predictiveSearch && this.predictiveSearch.isOpen) return
 
@@ -114,7 +122,9 @@ export class StickyHeader extends UcoastEl {
 			this.header.classList.remove('scrolled-past-header')
 			requestAnimationFrame(this.reset.bind(this))
 		} else if (!(this.headerBounds instanceof DOMRectReadOnly)) {
-			console.warn('onScroll used in sticky-header but headerBounds is not initialized')
+			console.warn(
+				'onScroll used in sticky-header but headerBounds is not initialized'
+			)
 			console.log('headerBounds', this.headerBounds)
 		}
 
@@ -123,7 +133,10 @@ export class StickyHeader extends UcoastEl {
 
 	hide() {
 		if (this.headerIsAlwaysSticky) return
-		this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky')
+		this.header.classList.add(
+			'shopify-section-header-hidden',
+			'shopify-section-header-sticky'
+		)
 		this.closeMenuDisclosure()
 		this.closeSearchModal()
 	}
@@ -144,7 +157,9 @@ export class StickyHeader extends UcoastEl {
 	}
 
 	closeMenuDisclosure() {
-		this.disclosures = this.disclosures || qsaOptional<HeaderMenu>('header-menu', this.header)
+		this.disclosures =
+			this.disclosures ||
+			q.ol<HeaderMenu>('header-menu', this.header)
 		this.disclosures?.forEach((disclosure) => {
 			disclosure.close()
 		})
@@ -152,7 +167,8 @@ export class StickyHeader extends UcoastEl {
 
 	closeSearchModal() {
 		this.searchModal =
-			this.searchModal ?? qsRequired<DetailsModal>('details-modal', this.header)
+			this.searchModal ??
+			q.rs<DetailsModal>('details-modal', this.header)
 		this.searchModal.close(false)
 	}
 }

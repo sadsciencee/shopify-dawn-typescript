@@ -64,8 +64,9 @@
 	%}
 	{% if wrapper_id %}
 		{% style %}
-			[data-wrapper-id="{{ wrapper_id }}"] img {
-			object-position: {{ x_position }}% {{ y_position }}% !important;
+			[data-wrapper-id="{{ wrapper_id }}"] img,
+			[data-wrapper-id="{{ wrapper_id }}"] video{
+				object-position: {{ x_position }}% {{ y_position }}% !important;
 			}
 		{% endstyle %}
 	{% endif %}

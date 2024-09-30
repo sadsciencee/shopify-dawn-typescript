@@ -1,4 +1,4 @@
-import { safeDefineElement } from '@/scripts/core/global';
+import { TsDOM as q} from '@/scripts/core/TsDOM'
 import { CartDrawer } from '@/scripts/cart/cart-drawer'
 import { CartNote } from '@/scripts/cart/cart-note'
 import { CartDrawerItems } from '@/scripts/cart/cart-drawer-items'
@@ -16,19 +16,19 @@ import { ModalDialog } from '@/scripts/theme/modal-dialog';
 import { ModalOpener } from '@/scripts/theme/modal-opener';
 import { DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
 
-safeDefineElement(QuantityInput)
-safeDefineElement(CartNotification)
-safeDefineElement(CartDrawer)
-safeDefineElement(CartNote)
-safeDefineElement(CartItems)
-safeDefineElement(CartDrawerItems)
-safeDefineElement(CartRemoveButton)
-safeDefineElement(SearchForm)
-safeDefineElement(PredictiveSearch)
-safeDefineElement(HeaderMenu)
-safeDefineElement(DetailsModal)
-safeDefineElement(MenuDrawer)
-safeDefineElement(HeaderDrawer)
-safeDefineElement(ModalDialog)
-safeDefineElement(ModalOpener)
-safeDefineElement(DynamicShippingBar)
+q.safeDefineElement(QuantityInput)
+q.safeDefineElement(CartNotification)
+q.safeDefineElement(CartDrawer)
+q.safeDefineElement(CartNote)
+q.safeDefineElement(CartItems)
+q.safeDefineElement(CartDrawerItems)
+q.safeDefineElement(CartRemoveButton)
+q.safeDefineElement(SearchForm)
+q.safeDefineElement(PredictiveSearch)
+q.safeDefineElement(HeaderMenu)
+q.safeDefineElement(DetailsModal)
+q.safeDefineElement(MenuDrawer)
+q.safeDefineElement(HeaderDrawer)
+q.safeDefineElement(ModalDialog)
+q.safeDefineElement(ModalOpener)
+q.safeDefineElement(DynamicShippingBar)

@@ -1,22 +1,9 @@
-import {
-	closestRequired,
-	currentTargetRequired,
-	debounce,
-	getAttributeOrThrow,
-	onKeyUpEscape,
-	qsaOptional,
-	qsaRequired,
-	qsOptional,
-	qsRequired,
-	targetClosestOptional,
-	targetClosestRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { initializeScrollAnimationTrigger } from '@/scripts/theme/animations'
 import { type MenuDrawer } from '@/scripts/theme/menu-drawer'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { ATTRIBUTES } from '@/scripts/core/global'
-import { mediaLoader } from '@/scripts/core/global';
 
 type FilterDataType = { html: string; url: string }
 
@@ -52,7 +39,7 @@ export class FacetFiltersForm extends UcoastEl {
 	static searchPathInitial: string = window.location.pathname
 	static searchPathPrev: string = window.location.pathname
 	static getProductGridContainer: () => HTMLElement = () =>
-		qsRequired(FacetFiltersForm.selectors.productGrid)
+		q.rs(FacetFiltersForm.selectors.productGrid)
 	debouncedOnSubmit: (event: Event) => void
 	facetForm: HTMLFormElement
 
@@ -64,12 +51,12 @@ export class FacetFiltersForm extends UcoastEl {
 			this.onSubmitHandler(event)
 		}, 500)
 
-		this.facetForm = qsRequired(FacetFiltersForm.selectors.form, this)
+		this.facetForm = q.rs(FacetFiltersForm.selectors.form, this)
 		this.facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this))
 
-		qsOptional(FacetFiltersForm.selectors.desktopWrapper, this)?.addEventListener(
+		q.os(FacetFiltersForm.selectors.desktopWrapper, this)?.addEventListener(
 			'keyup',
-			onKeyUpEscape
+			q.onKeyUpEscape
 		)
 	}
 
@@ -94,9 +81,9 @@ export class FacetFiltersForm extends UcoastEl {
 	static renderPage(searchParams: string, event: Event | null = null, updateURLHash = true) {
 		FacetFiltersForm.searchParamsPrev = searchParams
 		const sections = FacetFiltersForm.getSections()
-		const countContainer = qsOptional(FacetFiltersForm.selectors.productCount)
-		const countContainerDesktop = qsOptional(FacetFiltersForm.selectors.productCountDesktop)
-		const collection = qsRequired(
+		const countContainer = q.os(FacetFiltersForm.selectors.productCount)
+		const countContainerDesktop = q.os(FacetFiltersForm.selectors.productCountDesktop)
+		const collection = q.rs(
 			FacetFiltersForm.selectors.productGridCollection,
 			FacetFiltersForm.getProductGridContainer()
 		)
@@ -152,11 +139,10 @@ export class FacetFiltersForm extends UcoastEl {
 			.getElementById('ProductGridContainer')?.innerHTML
 		if (newHTML) {
 			productGridContainer.innerHTML = newHTML
-			mediaLoader()
 		}
 
 		// TODO: would like scroll triggers to be a data attribute
-		const scrollTriggers = qsaOptional('.scroll-trigger', productGridContainer)
+		const scrollTriggers = q.ol('.scroll-trigger', productGridContainer)
 		if (!scrollTriggers) return
 
 		scrollTriggers.forEach((element) => {
@@ -167,14 +153,14 @@ export class FacetFiltersForm extends UcoastEl {
 	static renderProductCount(html: string) {
 		const newDocument = new DOMParser().parseFromString(html, 'text/html')
 		const count =
-			qsOptional(FacetFiltersForm.selectors.productCount, newDocument.documentElement)
+			q.os(FacetFiltersForm.selectors.productCount, newDocument.documentElement)
 				?.innerHTML ?? 'No Results'
-		const container = qsOptional(FacetFiltersForm.selectors.productCount)
+		const container = q.os(FacetFiltersForm.selectors.productCount)
 		if (container) {
 			container.innerHTML = count
 			container.removeAttribute(ATTRIBUTES.loading)
 		}
-		const containerDesktop = qsOptional(FacetFiltersForm.selectors.productCountDesktop)
+		const containerDesktop = q.os(FacetFiltersForm.selectors.productCountDesktop)
 
 		if (containerDesktop) {
 			containerDesktop.innerHTML = count
@@ -185,10 +171,10 @@ export class FacetFiltersForm extends UcoastEl {
 	static renderFilters(html: string, event: Event | null) {
 		const parsedHTML = new DOMParser().parseFromString(html, 'text/html')
 
-		const facetDetailsElements = qsaOptional(FacetFiltersForm.selectors.jsFilter, parsedHTML)
+		const facetDetailsElements = q.ol(FacetFiltersForm.selectors.jsFilter, parsedHTML)
 		const matchesIndex = (element: HTMLElement) => {
 			if (!event) return false
-			const jsFilter = targetClosestOptional(event, FacetFiltersForm.selectors.jsFilter)
+			const jsFilter = q.oClosestTarget(event, FacetFiltersForm.selectors.jsFilter)
 			if (!jsFilter) return false
 			return element.dataset.index === jsFilter.dataset.index
 		}
@@ -200,7 +186,7 @@ export class FacetFiltersForm extends UcoastEl {
 			: undefined
 
 		facetsToRender.forEach((element: HTMLElement) => {
-			const elementToUpdate = qsRequired(
+			const elementToUpdate = q.rs(
 				`${FacetFiltersForm.selectors.jsFilter}[data-index="${element.dataset.index}"]`
 			)
 			elementToUpdate.innerHTML = element.innerHTML
@@ -210,7 +196,7 @@ export class FacetFiltersForm extends UcoastEl {
 		FacetFiltersForm.renderAdditionalElements(parsedHTML)
 
 		if (countsToRender && event) {
-			const target = targetClosestRequired(event, FacetFiltersForm.selectors.jsFilter)
+			const target = q.rClosestTarget(event, FacetFiltersForm.selectors.jsFilter)
 			FacetFiltersForm.renderCounts(countsToRender, target)
 		}
 	}
@@ -224,7 +210,7 @@ export class FacetFiltersForm extends UcoastEl {
 		activeFacetElementSelectors.forEach((selector: string) => {
 			const activeFacetsElement = html.querySelector(selector)
 			if (!activeFacetsElement) return
-			const facetsElementToUpdate = qsRequired(selector)
+			const facetsElementToUpdate = q.rs(selector)
 			facetsElementToUpdate.innerHTML = activeFacetsElement.innerHTML
 		})
 
@@ -233,23 +219,23 @@ export class FacetFiltersForm extends UcoastEl {
 
 	static renderAdditionalElements(html: Document) {
 		FacetFiltersForm.selectors.mobileElements.forEach((selector) => {
-			const newElement = qsOptional(selector, html)
-			const elementToUpdate = qsOptional(selector)
+			const newElement = q.os(selector, html)
+			const elementToUpdate = q.os(selector)
 			if (!newElement || !elementToUpdate) return
 			elementToUpdate.innerHTML = newElement.innerHTML
 		})
 
-		const mobileFacets = qsRequired(FacetFiltersForm.selectors.mobileForm)
-		const menuDrawer = closestRequired<MenuDrawer>(mobileFacets, 'menu-drawer')
+		const mobileFacets = q.rs(FacetFiltersForm.selectors.mobileForm)
+		const menuDrawer = q.rc<MenuDrawer>(mobileFacets, 'menu-drawer')
 		if (!menuDrawer) throw new Error('menu-drawer not found, cant close mobile facets')
 		menuDrawer.onReload()
 	}
 
 	static renderCounts(source: HTMLElement, target: HTMLElement) {
-		const targetElement = qsOptional(FacetFiltersForm.selectors.selected, target)
-		const sourceElement = qsOptional(FacetFiltersForm.selectors.selected, source)
-		const targetElementAccessibility = qsOptional(FacetFiltersForm.selectors.summary, target)
-		const sourceElementAccessibility = qsOptional(FacetFiltersForm.selectors.summary, source)
+		const targetElement = q.os(FacetFiltersForm.selectors.selected, target)
+		const sourceElement = q.os(FacetFiltersForm.selectors.selected, source)
+		const targetElementAccessibility = q.os(FacetFiltersForm.selectors.summary, target)
+		const sourceElementAccessibility = q.os(FacetFiltersForm.selectors.summary, source)
 
 		if (sourceElement && targetElement) {
 			targetElement.outerHTML = sourceElement.outerHTML
@@ -269,10 +255,10 @@ export class FacetFiltersForm extends UcoastEl {
 	}
 
 	static getSections(): ShopifySectionRenderingSchema[] {
-		const productGrid = qsRequired('#product-grid')
+		const productGrid = q.rs('#product-grid')
 		return [
 			{
-				section: getAttributeOrThrow('data-id', productGrid),
+				section: q.ra(productGrid, 'data-id'),
 			},
 		]
 	}
@@ -298,10 +284,10 @@ export class FacetFiltersForm extends UcoastEl {
 
 	onSubmitHandler(event: Event) {
 		event.preventDefault()
-		const sortFilterForms = qsaRequired<HTMLFormElement>(FacetFiltersForm.selectors.form)
+		const sortFilterForms = q.rl<HTMLFormElement>(FacetFiltersForm.selectors.form)
 		const internetExplorerSrc = event.srcElement ? (event.srcElement as HTMLElement) : undefined
 		if (internetExplorerSrc && internetExplorerSrc.className == 'mobile-facets__checkbox') {
-			const form = targetClosestRequired<Event, HTMLFormElement>(
+			const form = q.rClosestTarget<Event, HTMLFormElement>(
 				event,
 				FacetFiltersForm.selectors.form
 			)
@@ -310,13 +296,13 @@ export class FacetFiltersForm extends UcoastEl {
 		} else {
 			const forms: string[] = []
 			const isMobile =
-				targetClosestOptional<Event, HTMLFormElement>(
+				q.oClosestTarget<Event, HTMLFormElement>(
 					event,
 					FacetFiltersForm.selectors.form
 				)?.getAttribute('data-uc-facet-form') === 'mobile'
 
 			sortFilterForms.forEach((form) => {
-				const formType = getAttributeOrThrow('data-uc-facet-form', form)
+				const formType = q.ra(form, 'data-uc-facet-form')
 				if (!isMobile) {
 					if (
 						formType === 'sort' ||
@@ -338,7 +324,7 @@ export class FacetFiltersForm extends UcoastEl {
 	onActiveFilterClick(event: Event) {
 		event.preventDefault()
 		FacetFiltersForm.toggleActiveFacets()
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		if (!(currentTarget instanceof HTMLAnchorElement))
 			throw new Error('currentTarget is not anchor element')
 		const url =

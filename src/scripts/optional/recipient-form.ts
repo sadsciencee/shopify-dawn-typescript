@@ -5,8 +5,8 @@ import {
 	isVariantChangeEvent,
 	subscribe,
 } from '@/scripts/core/global'
-import { getAttributeOrThrow, qsaOptional, qsOptional, qsRequired } from '@/scripts/core/global';
 import { UcoastEl } from '@/scripts/core/UcoastEl';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class RecipientForm extends UcoastEl {
 	static htmlSelector = 'recipient-form'
@@ -33,31 +33,31 @@ export class RecipientForm extends UcoastEl {
 		const sectionId = this.dataset.sectionId
 		if (!sectionId) throw new Error('RecipientForm: missing data-section-id')
 		this.sectionId = sectionId
-		this.recipientFieldsLiveRegion = qsRequired(
+		this.recipientFieldsLiveRegion = q.rs(
 			`#Recipient-fields-live-region-${this.sectionId}`,
 			this
 		)
-		this.checkboxInput = qsRequired(`#Recipient-checkbox-${this.sectionId}`, this)
+		this.checkboxInput = q.rs(`#Recipient-checkbox-${this.sectionId}`, this)
 		this.checkboxInput.disabled = false
-		this.hiddenControlField = qsRequired(`#Recipient-control-${this.sectionId}`, this)
+		this.hiddenControlField = q.rs(`#Recipient-control-${this.sectionId}`, this)
 		this.hiddenControlField.disabled = true
-		this.emailInput = qsRequired(`#Recipient-email-${this.sectionId}`, this)
-		this.nameInput = qsRequired(`#Recipient-name-${this.sectionId}`, this)
-		this.messageInput = qsRequired(`#Recipient-message-${this.sectionId}`, this)
-		this.sendonInput = qsRequired(`#Recipient-send-on-${this.sectionId}`, this)
-		this.offsetProperty = qsOptional(`#Recipient-timezone-offset-${this.sectionId}`, this)
+		this.emailInput = q.rs(`#Recipient-email-${this.sectionId}`, this)
+		this.nameInput = q.rs(`#Recipient-name-${this.sectionId}`, this)
+		this.messageInput = q.rs(`#Recipient-message-${this.sectionId}`, this)
+		this.sendonInput = q.rs(`#Recipient-send-on-${this.sectionId}`, this)
+		this.offsetProperty = q.os(`#Recipient-timezone-offset-${this.sectionId}`, this)
 		if (this.offsetProperty)
 			this.offsetProperty.value = new Date().getTimezoneOffset().toString()
 
-		this.errorMessageWrapper = qsOptional('.product-form__recipient-error-message-wrapper')
+		this.errorMessageWrapper = q.os('.product-form__recipient-error-message-wrapper')
 		if (this.errorMessageWrapper instanceof HTMLElement) {
-			this.errorMessageList = qsRequired('ul', this.errorMessageWrapper)
-			this.errorMessage = qsRequired('.error-message', this.errorMessageWrapper)
+			this.errorMessageList = q.rs('ul', this.errorMessageWrapper)
+			this.errorMessage = q.rs('.error-message', this.errorMessageWrapper)
 			this.defaultErrorHeader = this.errorMessage.innerText
 		} else {
 			console.warn('RecipientForm: missing error message wrapper')
 		}
-		this.currentProductVariantId = getAttributeOrThrow('product-variant-id', this)
+		this.currentProductVariantId = q.ra(this, 'product-variant-id')
 		this.addEventListener('change', this.onChange.bind(this))
 		this.onChange()
 	}
@@ -159,8 +159,8 @@ export class RecipientForm extends UcoastEl {
 				const errorMessageId = `RecipientForm-${key}-error-${this.sectionId}`
 				const fieldSelector = `#Recipient-${key}-${this.sectionId}`
 				const message = `${value.join(', ')}`
-				const errorMessageElement = qsRequired(`#${errorMessageId}`, this)
-				const errorTextElement = qsRequired('.error-message', errorMessageElement)
+				const errorMessageElement = q.rs(`#${errorMessageId}`, this)
+				const errorTextElement = q.rs('.error-message', errorMessageElement)
 
 				if (this.errorMessageList) {
 					this.errorMessageList.appendChild(
@@ -216,11 +216,11 @@ export class RecipientForm extends UcoastEl {
 
 		if (this.errorMessageList) this.errorMessageList.innerHTML = ''
 
-		const errorMessages = qsaOptional('.recipient-fields .form__message', this)
+		const errorMessages = q.ol('.recipient-fields .form__message', this)
 		if (errorMessages) {
 			errorMessages.forEach((field) => {
 				field.classList.add('hidden')
-				const textField = qsOptional('.error-message', field)
+				const textField = q.os('.error-message', field)
 				if (textField) textField.innerText = ''
 			})
 		}

@@ -3226,3 +3226,31 @@ details-disclosure > details {
 	}
 }
 
+
+// moved from critical - just underlines so not relevant for CLS
+
+.header__localization .disclosure .localization-form__select,
+.mega-menu__link,
+quick-add-modal .product__title > a,
+.header__submenu .header__menu-item,
+.underline-on-hover {
+	@include underline-on-hover();
+}
+
+.rte a,
+.rte .link,
+.mega-menu__link--active,
+.shopify-payment-button__more-options,
+.underline-always {
+	@include underline-always();
+}
+
+.underline-links-hover,
+.complementary-products-contains-quick-add .card__heading,
+.underline-on-hover-child {
+	@include underline-on-hover-child();
+}
+
+.underline-always-child {
+	@include underline-always-child();
+}

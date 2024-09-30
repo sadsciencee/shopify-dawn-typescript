@@ -1,10 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import {
-	currentTargetRequired,
-	getAttributeOrThrow,
-	qsaRequired,
-	qsRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class PriceRange extends UcoastEl {
 	static htmlSelector = 'price-range'
@@ -18,9 +13,9 @@ export class PriceRange extends UcoastEl {
 	minInput: HTMLInputElement
 	constructor() {
 		super()
-		this.maxInput = qsRequired(PriceRange.selectors.max, this)
-		this.minInput = qsRequired(PriceRange.selectors.min, this)
-		this.inputs = qsaRequired(PriceRange.selectors.input, this)
+		this.maxInput = q.rs(PriceRange.selectors.max, this)
+		this.minInput = q.rs(PriceRange.selectors.min, this)
+		this.inputs = q.rl(PriceRange.selectors.input, this)
 		this.inputs.forEach((element) =>
 			element.addEventListener('change', this.onRangeChange.bind(this))
 		)
@@ -28,7 +23,7 @@ export class PriceRange extends UcoastEl {
 	}
 
 	onRangeChange(event: Event) {
-		const currentTarget = currentTargetRequired<Event, HTMLInputElement>(event)
+		const currentTarget = q.rct<Event, HTMLInputElement>(event)
 		this.adjustToValidValues(currentTarget)
 		this.setMinAndMaxValues()
 	}
@@ -38,13 +33,13 @@ export class PriceRange extends UcoastEl {
 		if (this.minInput.value) this.maxInput.setAttribute('min', this.minInput.value)
 		if (this.minInput.value === '') this.maxInput.setAttribute('min', '0')
 		if (this.maxInput.value === '')
-			this.minInput.setAttribute('max', getAttributeOrThrow('max', this.maxInput))
+			this.minInput.setAttribute('max', q.ra(this.maxInput, 'max'))
 	}
 
 	adjustToValidValues(input: HTMLInputElement) {
 		const value = Number(input.value)
-		const min = Number(getAttributeOrThrow('min', input))
-		const max = Number(getAttributeOrThrow('max', input))
+		const min = Number(q.ra(input, 'min'))
+		const max = Number(q.ra(input, 'max'))
 
 		if (value < min) input.value = `${min}`
 		if (value > max) input.value = `${max}`

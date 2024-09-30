@@ -1,11 +1,4 @@
-import {
-	closestOptional,
-	qsOptional,
-	qsRequired,
-	targetClosestOptional,
-	targetRequired,
-} from '@/scripts/core/global'
-import { removeTrapFocus, trapFocus } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class DetailsModal extends UcoastEl {
@@ -16,9 +9,9 @@ export class DetailsModal extends UcoastEl {
 	onBodyClickEvent?: (event: MouseEvent) => undefined
 	constructor() {
 		super()
-		this.detailsContainer = qsRequired('details', this)
-		this.summaryToggle = qsRequired('summary', this)
-		this.button = qsRequired('button[type="button"]', this)
+		this.detailsContainer = q.rs('details', this)
+		this.summaryToggle = q.rs('summary', this)
+		this.button = q.rs('button[type="button"]', this)
 
 		this.detailsContainer.addEventListener(
 			'keyup',
@@ -36,23 +29,23 @@ export class DetailsModal extends UcoastEl {
 
 	onSummaryClick(event: MouseEvent) {
 		event.preventDefault()
-		const closestDetails = targetClosestOptional(event, 'details')
+		const closestDetails = q.oClosestTarget(event, 'details')
 		closestDetails?.hasAttribute('open')
 			? this.close()
 			: this.open({
-					target: targetRequired(event),
+					target: q.rt(event),
 			  })
 	}
 
 	onBodyClick(event: MouseEvent) {
-		const target = targetRequired(event)
+		const target = q.rt(event)
 		if (!this.contains(target) || target.classList.contains('modal-overlay')) this.close(false)
 	}
 
 	open(event: { target: HTMLElement }) {
 		this.onBodyClickEvent = this.onBodyClickEvent || this.onBodyClick.bind(this)
 		if (!this.onBodyClickEvent) throw new Error('onBodyClickEvent is undefined')
-		const closestDetails = closestOptional(event.target, 'details')
+		const closestDetails = q.oc(event.target, 'details')
 		if (closestDetails) {
 			closestDetails.setAttribute('open', 'true')
 		}
@@ -60,14 +53,14 @@ export class DetailsModal extends UcoastEl {
 		document.body.addEventListener('click', this.onBodyClickEvent)
 		document.body.classList.add('overflow-hidden')
 
-		trapFocus(
-			qsRequired('[tabindex="-1"]', this.detailsContainer),
-			qsOptional('input:not([type="hidden"])', this.detailsContainer)
+		window.TsDOM.trapFocus(
+			q.rs('[tabindex="-1"]', this.detailsContainer),
+			q.os('input:not([type="hidden"])', this.detailsContainer)
 		)
 	}
 
 	close(focusToggle = true) {
-		removeTrapFocus(focusToggle ? this.summaryToggle : undefined)
+		window.TsDOM.removeTrapFocus(focusToggle ? this.summaryToggle : undefined)
 		this.detailsContainer.removeAttribute('open')
 		if (this.onBodyClickEvent) {
 			document.body.removeEventListener('click', this.onBodyClickEvent)

@@ -19,12 +19,17 @@
 	else
 		assign loading = 'eager'
 	endif
+	if section.settings.columns_mobile == "2"
+		assign mobile_size = 'md'
+	endif
 -%}
 
 <div class="{{ spacing }}">
 	{%- paginate collection.products by section.settings.products_per_page -%}
 		{% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-		{%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+		{%- if section.settings.enable_sorting
+			and section.settings.filter_type == 'vertical'
+		-%}
 			<facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
 				<form class="facets-vertical-form" data-uc-facet-form="sort">
 					<div class="facet-filters sorting caption">
@@ -78,7 +83,8 @@
 											terms: collection.terms,
 											count: collection.results_count
 									}}
-								{%- elsif collection.products_count == collection.all_products_count
+								{%- elsif collection.products_count
+										== collection.all_products_count
 								-%}
 									{{
 										'products.facets.product_count_simple'
@@ -111,7 +117,9 @@
 		{%- endif -%}
 
 		<div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
-			{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+			{%- if section.settings.enable_filtering
+				or section.settings.enable_sorting
+			-%}
 				<aside
 					aria-labelledby="verticalTitle"
 					class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
@@ -149,7 +157,9 @@
 								<br>
 								{{
 									'sections.collection_template.use_fewer_filters_html'
-									| t: link: collection.url, class: 'underlined-link link'
+									| t:
+										link: collection.url,
+										class: 'underlined-link link'
 								}}
 							</h2>
 						</div>
@@ -170,9 +180,8 @@
 							"
 						>
 							{%- for product in collection.products -%}
-								{% assign lazy_load = false %}
-								{%- if forloop.index > 2 -%}
-									{%- assign lazy_load = true -%}
+								{%- if forloop.index > 4 -%}
+									{%- assign loading = 'lazy' -%}
 								{%- endif -%}
 								<li
 									class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %}"
@@ -188,16 +197,20 @@
 										show_secondary_image: section.settings.show_secondary_image,
 										show_vendor: section.settings.show_vendor,
 										show_rating: section.settings.show_rating,
-										lazy_load: lazy_load,
 										show_quick_add: section.settings.enable_quick_add,
-										section_id: section.id
+										section_id: section.id,
+										loading: loading,
+										mobile_size: mobile_size
 									%}
 								</li>
 							{%- endfor -%}
 						</ul>
 
 						{%- if paginate.pages > 1 -%}
-							{% render 'pagination', paginate: paginate, anchor: '' %}
+							{% render 'pagination',
+								paginate: paginate,
+								anchor: ''
+							%}
 						{%- endif -%}
 					</div>
 				{%- endif -%}

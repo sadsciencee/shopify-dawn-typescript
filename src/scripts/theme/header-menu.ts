@@ -1,11 +1,7 @@
 import { DetailsDisclosure } from '@/scripts/theme/details-disclosure';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import {
-  currentTargetRequired,
-  getAttributeOrUndefined,
-  onKeyUpEscape,
-  qsOptional,
-  qsRequired,
-  scaleValue, targetClosestRequired,
+  scaleValue,
 } from '@/scripts/core/global'
 import {type StickyHeader } from '@/scripts/theme/sticky-header';
 import { SELECTORS } from '@/scripts/core/global';
@@ -17,9 +13,9 @@ export class HeaderMenu extends DetailsDisclosure {
   detailsId?: string
   constructor() {
     super()
-    this.header = qsRequired<StickyHeader>(SELECTORS.headerWrapper)
-    this.hoverSummary = qsOptional('summary[data-summary-hover="on"]', this)
-    this.detailsId = getAttributeOrUndefined('id', this.mainDetailsToggle)
+    this.header = q.rs<StickyHeader>(SELECTORS.headerWrapper)
+    this.hoverSummary = q.os('summary[data-summary-hover="on"]', this)
+    this.detailsId = q.oa(this.mainDetailsToggle, 'id')
     this.initHoverSummary()
   }
 
@@ -27,24 +23,24 @@ export class HeaderMenu extends DetailsDisclosure {
     if (!this.hoverSummary || !this.detailsId) return
 
     this.hoverSummary.addEventListener('click', (_) => {
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       window.setTimeout(() => {
-        void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+        void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       }, 3)
     })
 
     this.hoverSummary.addEventListener('mouseenter', (_) => {
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
       const openMenuId = window.Ucoast.openMenuId
       if (openMenuId && openMenuId === this.detailsId) return
       window.Ucoast.openMenuId = this.detailsId
       this.mainDetailsToggle.setAttribute('open', '')
       this.animations?.forEach((animation) => animation.play())
       this.hoverSummary?.setAttribute('aria-expanded', 'true')
-      void window.Ucoast.mediaManager.loadAllInContainer(this.mainDetailsToggle)
+      void window.Ucoast.mediaManager.playAllInContainer(this.mainDetailsToggle)
     })
 
-    this.mainDetailsToggle.addEventListener('keyup', onKeyUpEscape)
+    this.mainDetailsToggle.addEventListener('keyup', q.onKeyUpEscape)
   }
 
   override onToggle() {

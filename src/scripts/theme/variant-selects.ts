@@ -1,12 +1,5 @@
-import { getAttributeOrUndefined, PUB_SUB_EVENTS } from '@/scripts/core/global'
-import { createVariantChangeEvent, publish } from '@/scripts/core/global'
-import {
-	getAttributeOrThrow,
-	qsaOptional,
-	qsaRequired,
-	qsOptional,
-	qsRequired,
-} from '@/scripts/core/global'
+import { createVariantChangeEvent, publish, PUB_SUB_EVENTS } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type ProductForm } from '@/scripts/product/product-form'
 import { type MediaGallery } from '@/scripts/product/media-gallery'
 import { type ShareButton } from '@/scripts/optional/share-button'
@@ -55,7 +48,7 @@ export class VariantSelects extends UcoastEl {
 
 	updateOptions() {
 		this.options = Array.from(
-			qsaRequired<HTMLSelectElement>('select', this),
+			q.rl<HTMLSelectElement>('select', this),
 			(select) => select.value
 		)
 	}
@@ -75,7 +68,7 @@ export class VariantSelects extends UcoastEl {
 		if (!currentVariant) return
 		if (!currentVariant.featured_media) return
 
-		const mediaGalleries = qsaOptional<MediaGallery>(
+		const mediaGalleries = q.ol<MediaGallery>(
 			`[id^="MediaGallery-${this.dataset.section}"]`
 		)
 		mediaGalleries?.forEach((mediaGallery) =>
@@ -85,11 +78,11 @@ export class VariantSelects extends UcoastEl {
 			)
 		)
 
-		const modalContent = qsOptional(
+		const modalContent = q.os(
 			`#ProductModal-${this.dataset.section} .product-media-modal__content`
 		)
 		if (!modalContent) return
-		const newMediaModal = qsRequired(
+		const newMediaModal = q.rs(
 			`[data-media-id="${currentVariant.featured_media.id}"]`,
 			modalContent
 		)
@@ -103,7 +96,7 @@ export class VariantSelects extends UcoastEl {
 
 	updateShareUrl() {
 		if (!this.currentVariant) throw new Error('cannot updateShareUrl without currentVariant')
-		const shareButton = qsOptional<ShareButton>(`#Share-${this.dataset.section}`)
+		const shareButton = q.os<ShareButton>(`#Share-${this.dataset.section}`)
 		if (!shareButton || !shareButton.updateUrl) return
 		shareButton.updateUrl(
 			`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`
@@ -113,11 +106,11 @@ export class VariantSelects extends UcoastEl {
 	updateVariantInput() {
 		const currentVariant = this.currentVariant
 		if (!currentVariant) throw new Error('cannot updateVariantInput without currentVariant')
-		const productForms = qsaOptional(
+		const productForms = q.ol(
 			`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`
 		)
 		productForms?.forEach((productForm) => {
-			const input = qsRequired<HTMLInputElement>('input[name="id"]', productForm)
+			const input = q.rs<HTMLInputElement>('input[name="id"]', productForm)
 			input.value = `${currentVariant.id}`
 			input.dispatchEvent(new Event('change', { bubbles: true }))
 		})
@@ -140,21 +133,21 @@ export class VariantSelects extends UcoastEl {
 		if (!this.variantData) throw new Error('cannot updateVariantStatuses without variantData')
 		const selectedOptionOneVariants = this.variantData.filter(
 			(variant) =>
-				qsRequired<HTMLInputElement | HTMLOptionElement>(':checked', this).value ===
+				q.rs<HTMLInputElement | HTMLOptionElement>(':checked', this).value ===
 				variant.option1
 		)
-		const inputWrapperNodes = qsaOptional('.product-form__input', this)
+		const inputWrapperNodes = q.ol('.product-form__input', this)
 		const inputWrappers = inputWrapperNodes?.length ? Array.from(inputWrapperNodes) : []
 		if (inputWrappers.length) {
 			inputWrappers.forEach((option: HTMLElement, index: number) => {
 				if (index === 0) return
-				const optionInputNodes = qsaOptional<HTMLInputElement | HTMLOptionElement>(
+				const optionInputNodes = q.ol<HTMLInputElement | HTMLOptionElement>(
 					'input[type="radio"], option',
 					option
 				)
 				const optionInputs = optionInputNodes?.length ? Array.from(optionInputNodes) : []
 
-				const previousOptionSelected = qsRequired<HTMLInputElement | HTMLOptionElement>(
+				const previousOptionSelected = q.rs<HTMLInputElement | HTMLOptionElement>(
 					':checked',
 					inputWrappers[index - 1]
 				).value
@@ -178,18 +171,18 @@ export class VariantSelects extends UcoastEl {
 	setInputAvailability(listOfOptions:(HTMLInputElement|HTMLOptionElement)[], listOfAvailableOptions:(string|null)[]) {
 		listOfOptions.forEach((input) => {
 			if (listOfAvailableOptions.includes(input.getAttribute('value'))) {
-				input.innerText = getAttributeOrThrow('value', input)
+				input.innerText = q.ra(input, 'value')
 			} else {
 				input.innerText = window.variantStrings.unavailable_with_option.replace(
 					'[value]',
-          getAttributeOrThrow('value', input)
+          q.ra(input, 'value')
 				)
 			}
 		})
 	}
 
 	updatePickupAvailability() {
-		const pickUpAvailability = qsOptional<PickupAvailability>('pickup-availability')
+		const pickUpAvailability = q.os<PickupAvailability>('pickup-availability')
 		if (!pickUpAvailability) return
 		const currentVariant = this.currentVariant
 
@@ -205,7 +198,7 @@ export class VariantSelects extends UcoastEl {
 		const section = this.closest('section')
 		if (!section) return
 
-		const productForm = qsOptional<ProductForm>('product-form', section)
+		const productForm = q.os<ProductForm>('product-form', section)
 		if (productForm) productForm.handleErrorMessage()
 	}
 
@@ -215,7 +208,7 @@ export class VariantSelects extends UcoastEl {
 		const requestedVariantId = this.currentVariant.id
 		const sectionId = this.dataset.originalSection
 			? this.dataset.originalSection
-			: getAttributeOrThrow('data-section', this)
+			: q.ra(this, 'data-section')
 
 		fetch(
 			`${this.dataset.url}?variant=${requestedVariantId}&section_id=${
@@ -248,7 +241,7 @@ export class VariantSelects extends UcoastEl {
 					}`
 				)
 				const skuDestination = document.getElementById(`Sku-${this.dataset.section}`)
-				const inventorySource = qsOptional(
+				const inventorySource = q.os(
 					`#Inventory-${
 						this.dataset.originalSection
 							? this.dataset.originalSection
@@ -299,7 +292,7 @@ export class VariantSelects extends UcoastEl {
 
 				if (ctaSource && ctaDestination) {
 					ctaDestination.innerHTML = ctaSource.innerHTML
-					const sourceDataOosPopupTrigger = getAttributeOrUndefined('data-oos-popup-trigger', ctaSource)
+					const sourceDataOosPopupTrigger = q.oa(ctaSource, 'data-oos-popup-trigger')
 					if (sourceDataOosPopupTrigger) {
 						ctaDestination.setAttribute('data-oos-popup-trigger', sourceDataOosPopupTrigger)
 					} else {
@@ -323,10 +316,10 @@ export class VariantSelects extends UcoastEl {
 	}
 
 	toggleAddButton(disable = true, text: string, modifyClass = true) {
-		const productForm = qsRequired<HTMLFormElement>(`#product-form-${this.dataset.section}`)
+		const productForm = q.rs<HTMLFormElement>(`#product-form-${this.dataset.section}`)
 		if (!productForm) return
-		const addButton = qsOptional('[name="add"]', productForm)
-		const addButtonText = qsOptional('[name="add"] > span', productForm)
+		const addButton = q.os('[name="add"]', productForm)
+		const addButtonText = q.os('[name="add"] > span', productForm)
 		if (!addButton || !addButtonText) return
 
 		if (disable) {
@@ -341,9 +334,9 @@ export class VariantSelects extends UcoastEl {
 	}
 
 	setUnavailable() {
-		const button = qsRequired(`#product-form-${this.dataset.section}`)
-		const addButton = qsOptional('[name="add"]', button)
-		const addButtonText = qsOptional('[name="add"] > span', button)
+		const button = q.rs(`#product-form-${this.dataset.section}`)
+		const addButton = q.os('[name="add"]', button)
+		const addButtonText = q.os('[name="add"] > span', button)
 		const price = document.getElementById(`price-${this.dataset.section}`)
 		const inventory = document.getElementById(`Inventory-${this.dataset.section}`)
 		const sku = document.getElementById(`Sku-${this.dataset.section}`)
@@ -356,7 +349,7 @@ export class VariantSelects extends UcoastEl {
 	}
 
 	getVariantData(): ProductVariant[] {
-		const textContent = qsRequired<HTMLScriptElement>(
+		const textContent = q.rs<HTMLScriptElement>(
 			'[type="application/json"]',
 			this
 		).textContent

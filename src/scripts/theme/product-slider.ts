@@ -3,7 +3,7 @@ import EmblaCarousel, {
 	EmblaCarouselType,
 	EmblaOptionsType,
 } from 'embla-carousel'
-import { getAttributeOrThrow, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import ClassNames from 'embla-carousel-class-names'
 import AutoHeight from 'embla-carousel-auto-height'
@@ -24,12 +24,12 @@ export class ProductSlider extends UcoastEl {
 		if (this.hasAttribute('data-disable-auto-height')) {
 			this.disableAutoHeight = true
 		}
-		this.dynamicContentContainer = qsRequired(
+		this.dynamicContentContainer = q.rs(
 			'[data-dynamic-content]',
 			this
 		)
-		this.collectionUrl = getAttributeOrThrow('data-collection-url', this)
-		this.uniqueId = getAttributeOrThrow('data-unique-id', this)
+		this.collectionUrl = q.ra(this, 'data-collection-url')
+		this.uniqueId = q.ra(this, 'data-unique-id')
 
 		if (!this.defer) {
 			// if the form is statically loaded, we need to initialize variantData outside the async flow
@@ -55,7 +55,6 @@ export class ProductSlider extends UcoastEl {
 			this.uniqueId
 		)
 		this.dynamicContentContainer.innerHTML = contentWithUniqueId
-		await window.Ucoast.mediaManager.preloadContainer(this.dynamicContentContainer)
 		window.setTimeout(() => {
 			this.classList.add('loaded')
 		}, 5)
@@ -75,7 +74,7 @@ export class ProductSlider extends UcoastEl {
 			dragThreshold: 100,
 		}
 
-		const viewportNode = qsRequired('.embla__viewport', this)
+		const viewportNode = q.rs('.embla__viewport', this)
 		try {
 			if (this?.disableAutoHeight) {
 				this.emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
@@ -93,7 +92,7 @@ export class ProductSlider extends UcoastEl {
 			console.error(e)
 		}
 		if (!this.defer) {
-			await window.Ucoast.mediaManager.preloadContainer(this)
+
 		}
 		this.initialized = true
 	}

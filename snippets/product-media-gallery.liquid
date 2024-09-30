@@ -219,10 +219,12 @@
 							aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 							aria-describedby="{{ thumbnail_id }}"
 						>
-							{% render 'ucoast-media',
-								media: featured_media.preview_image,
+							{% render 'ucoast-art-direction',
+								desktop_media: featured_media.preview_image,
 								id: thumbnail_id,
-								alt: featured_media.alt
+								alt: featured_media.alt,
+								desktop_size: 'sm',
+								mobile_size: 'sm'
 							%}
 						</button>
 					</li>
@@ -277,10 +279,12 @@
 								aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 								aria-describedby="{{ thumbnail_id }}"
 							>
-								{% render 'ucoast-media',
-									media: media.preview_image,
+								{% render 'ucoast-art-direction',
+									desktop_media: media.preview_image,
 									id: thumbnail_id,
-									alt: media.alt
+									alt: media.alt,
+									desktop_size: 'sm',
+									mobile_size: 'sm'
 								%}
 							</button>
 						</li>

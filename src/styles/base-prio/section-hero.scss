@@ -1,0 +1,41 @@
+@import '../global/variables';
+@import '../global/functions';
+
+$block: 'hero';
+.#{$block} {
+	@include media-query($m-down) {
+		&--height-viewport {
+			height: 100svh;
+			min-height: ax(550);
+		}
+		&--height-large {
+			.grid__item {
+				aspect-ratio: 0.83334;
+			}
+		}
+		&--height-medium {
+			.grid__item {
+				height: 100svh;
+				min-height: ax(550);
+			}
+		}
+	}
+	@include media-query($m-up) {
+		&--height-viewport {
+			aspect-ratio: 1.7142857143;
+			max-height: calc(
+				100svh - #{$headerHeight} - #{$announcementHeight}
+			);
+			min-height: ax(550);
+		}
+		&--height-large {
+			aspect-ratio: 1.8;
+		}
+		&--height-medium {
+			aspect-ratio: 2.12;
+			max-height: calc(
+				100svh - (#{$sectionSpacingDesktop} * 2)
+			);
+		}
+	}
+}

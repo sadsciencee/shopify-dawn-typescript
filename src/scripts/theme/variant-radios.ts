@@ -1,5 +1,5 @@
 import { VariantSelects } from '@/scripts/theme/variant-selects';
-import { qsaOptional } from '@/scripts/core/global';
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class VariantRadios extends VariantSelects {
   static override htmlSelector = 'variant-radios';
@@ -25,11 +25,11 @@ export class VariantRadios extends VariantSelects {
   }
 
   override updateOptions() {
-    const fieldsetNodes = qsaOptional<HTMLFieldSetElement>('fieldset', this);
+    const fieldsetNodes = q.ol<HTMLFieldSetElement>('fieldset', this);
     if (!fieldsetNodes) throw new Error('cannot do updateOptions in variant-radios, no fieldset nodes found');
     const fieldsets = Array.from(fieldsetNodes);
     this.options = fieldsets.map((fieldset) => {
-      const inputNodes = qsaOptional<HTMLInputElement>('input', fieldset);
+      const inputNodes = q.ol<HTMLInputElement>('input', fieldset);
       if (!inputNodes) throw new Error('cannot do updateOptions in variant-radios, no input nodes found');
       const inputs = Array.from(inputNodes);
       const checkedInput = inputs.find((radio) => radio.checked)

@@ -1,9 +1,5 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import {
-	getAttributeOrThrow,
-	qsRequired,
-	qsRequiredFromDocument,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class DynamicShippingBar extends UcoastEl {
 	static htmlSelector = 'dynamic-shipping-bar'
@@ -13,19 +9,19 @@ export class DynamicShippingBar extends UcoastEl {
 		this.statusEl = this.getStatusEl(this)
 	}
 	getStatusEl(el: DynamicShippingBar) {
-		return qsRequired('[data-shipping-bar-status]', el)
+		return q.rs('[data-shipping-bar-status]', el)
 	}
 	animateFromRawHTML(rawHTML: string) {
 		const newDocument = new DOMParser().parseFromString(
 			rawHTML,
 			'text/html'
 		)
-		const newShippingBar = qsRequiredFromDocument<DynamicShippingBar>(
+		const newShippingBar = q.rs<DynamicShippingBar>(
 			DynamicShippingBar.htmlSelector,
 			newDocument
 		)
 		const newPercent = parseInt(
-			getAttributeOrThrow('data-percent', newShippingBar)
+			q.ra(newShippingBar, 'data-percent')
 		)
 		const newStatusEl = this.getStatusEl(newShippingBar)
 		this.statusEl.innerHTML = newStatusEl.innerHTML

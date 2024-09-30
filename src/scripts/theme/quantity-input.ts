@@ -1,6 +1,6 @@
 import { PUB_SUB_EVENTS } from '@/scripts/core/global'
 import { subscribe, type SubscriberCallback } from '@/scripts/core/global'
-import { qsRequired, targetRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl';
 
 export class QuantityInput extends UcoastEl {
@@ -10,7 +10,7 @@ export class QuantityInput extends UcoastEl {
 	quantityUpdateUnsubscriber: SubscriberCallback | undefined = undefined
 	constructor() {
 		super()
-		this.input = qsRequired('input', this)
+		this.input = q.rs('input', this)
 		this.changeEvent = new Event('change', { bubbles: true })
 
 		this.input.addEventListener('change', this.onInputChange.bind(this))
@@ -40,7 +40,7 @@ export class QuantityInput extends UcoastEl {
 	onButtonClick(event: Event) {
 		event.preventDefault()
 		const previousValue = this.input.value
-		const target = targetRequired<Event, HTMLButtonElement>(event)
+		const target = q.rt<Event, HTMLButtonElement>(event)
 
 		target.name === 'plus' ? this.input.stepUp() : this.input.stepDown()
 		if (previousValue !== this.input.value) this.input.dispatchEvent(this.changeEvent)
@@ -50,12 +50,12 @@ export class QuantityInput extends UcoastEl {
 		const value = parseInt(this.input.value)
 		if (this.input.min) {
 			const min = parseInt(this.input.min)
-			const buttonMinus = qsRequired(".quantity__button[name='minus']", this)
+			const buttonMinus = q.rs(".quantity__button[name='minus']", this)
 			buttonMinus.classList.toggle('disabled', value <= min)
 		}
 		if (this.input.max) {
 			const max = parseInt(this.input.max)
-			const buttonPlus = qsRequired(".quantity__button[name='plus']", this)
+			const buttonPlus = q.rs(".quantity__button[name='plus']", this)
 			buttonPlus.classList.toggle('disabled', value >= max)
 		}
 	}

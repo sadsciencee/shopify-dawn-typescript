@@ -1,5 +1,5 @@
 import { DetailsModal } from '@/scripts/theme/details-modal'
-import { qsRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class PasswordModal extends DetailsModal {
 	static override htmlSelector = 'password-modal'
@@ -7,6 +7,6 @@ export class PasswordModal extends DetailsModal {
 		super()
 
 		if (this.querySelector('input[aria-invalid="true"]'))
-			this.open({ target: qsRequired('details', this) })
+			this.open({ target: q.rs('details', this) })
 	}
 }

@@ -1,4 +1,4 @@
-import { debounce, qsRequired } from '@/scripts/core/global'
+import { TsDOM as q, debounce } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
 export class SearchForm extends UcoastEl {
@@ -8,11 +8,11 @@ export class SearchForm extends UcoastEl {
 	form: HTMLFormElement
 	constructor() {
 		super()
-		this.input = qsRequired('input[type="search"]', this)
+		this.input = q.rs('input[type="search"]', this)
 		const form = this.input.form
 		if (!form) throw new Error('input is not in a form element')
 		this.form = form
-		this.resetButton = qsRequired('button[type="reset"]', this)
+		this.resetButton = q.rs('button[type="reset"]', this)
 
 		this.form.addEventListener('reset', this.onFormReset.bind(this))
 		this.input.addEventListener(

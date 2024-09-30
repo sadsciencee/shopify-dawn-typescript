@@ -1,4 +1,4 @@
-import { throttle } from '@/scripts/core/global';
+import { throttle } from '@/scripts/core/TsDOM'
 
 const SCROLL_ANIMATION_TRIGGER_CLASSNAME = 'scroll-trigger';
 const SCROLL_ANIMATION_OFFSCREEN_CLASSNAME = 'scroll-trigger--offscreen';
@@ -74,7 +74,7 @@ function initializeScrollZoomAnimationTrigger() {
   });
 }
 
-function percentageSeen(element:HTMLElement) {
+export function percentageSeen(element:HTMLElement) {
   const viewportHeight = window.innerHeight;
   const scrollY = window.scrollY;
   const elementPositionY = element.getBoundingClientRect().top + scrollY;

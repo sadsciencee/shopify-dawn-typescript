@@ -1,4 +1,4 @@
-import { getAttributeOrThrow, qsOptional, qsRequired, targetRequired } from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { type PickupAvailabilityDrawer } from '@/scripts/optional/pickup-availability-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 
@@ -9,7 +9,7 @@ export class PickupAvailability extends UcoastEl {
 		super()
 
 		if (!this.hasAttribute('available')) return
-		const template = qsRequired<HTMLTemplateElement>('template', this)
+		const template = q.rs<HTMLTemplateElement>('template', this)
 		const content = template.content
 		const firstElementChild = content.firstElementChild
 		if (!content || !firstElementChild || firstElementChild === null) {
@@ -18,7 +18,7 @@ export class PickupAvailability extends UcoastEl {
 
 		this.errorHtml = firstElementChild?.cloneNode(true)
 		this.onClickRefreshList = this.onClickRefreshList.bind(this)
-		const variantId = getAttributeOrThrow('data-variant-id', this)
+		const variantId = q.ra(this, 'data-variant-id')
 		this.fetchAvailability(variantId)
 	}
 
@@ -35,20 +35,27 @@ export class PickupAvailability extends UcoastEl {
 		fetch(variantSectionUrl)
 			.then((response) => response.text())
 			.then((text) => {
-				const newDocument = new DOMParser().parseFromString(text, 'text/html')
-				const sectionInnerHTML = qsRequired('.shopify-section', newDocument.documentElement)
+				const newDocument = new DOMParser().parseFromString(
+					text,
+					'text/html'
+				)
+				const sectionInnerHTML = q.rs(
+					'.shopify-section',
+					newDocument.documentElement
+				)
 				this.renderPreview(sectionInnerHTML)
 			})
 			.catch((error) => {
 				console.error(error)
 				const button = this.querySelector('button')
-				if (button) button.removeEventListener('click', this.onClickRefreshList)
+				if (button)
+					button.removeEventListener('click', this.onClickRefreshList)
 				this.renderError()
 			})
 	}
 
 	onClickRefreshList(_event: Event) {
-		const variantId = getAttributeOrThrow('data-variant-id', this)
+		const variantId = q.ra(this, 'data-variant-id')
 		this.fetchAvailability(variantId)
 	}
 
@@ -57,14 +64,16 @@ export class PickupAvailability extends UcoastEl {
 		if (!this.errorHtml) throw new Error('renderError thrown too early')
 		this.appendChild(this.errorHtml)
 
-		const button = qsRequired('button', this)
+		const button = q.rs('button', this)
 		button.addEventListener('click', this.onClickRefreshList)
 	}
 
-	renderPreview(sectionInnerHTML: Document|HTMLElement) {
-		const drawer = qsOptional<PickupAvailabilityDrawer>('pickup-availability-drawer')
+	renderPreview(sectionInnerHTML: Document | HTMLElement) {
+		const drawer = q.os<PickupAvailabilityDrawer>(
+			'pickup-availability-drawer'
+		)
 		if (drawer) drawer.remove()
-		const pickupAvailabilityPreview = qsOptional(
+		const pickupAvailabilityPreview = q.os(
 			'pickup-availability-preview',
 			sectionInnerHTML
 		)
@@ -76,19 +85,25 @@ export class PickupAvailability extends UcoastEl {
 
 		this.innerHTML = pickupAvailabilityPreview.outerHTML
 		this.setAttribute('available', '')
-		const drawerNode = sectionInnerHTML.querySelector('pickup-availability-drawer')
+		const drawerNode = sectionInnerHTML.querySelector(
+			'pickup-availability-drawer'
+		)
 
 		if (drawerNode instanceof Node) {
 			document.body.appendChild(drawerNode)
 		} else {
-			throw new Error('No pickup-availability-drawer found in sectionInnerHTML')
+			throw new Error(
+				'No pickup-availability-drawer found in sectionInnerHTML'
+			)
 		}
 
 		const button = this.querySelector('button')
 		if (button)
 			button.addEventListener('click', (event: MouseEvent) => {
-				const drawer = qsRequired<PickupAvailabilityDrawer>('pickup-availability-drawer')
-				const target = targetRequired(event)
+				const drawer = q.rs<PickupAvailabilityDrawer>(
+					'pickup-availability-drawer'
+				)
+				const target = q.rt(event)
 				drawer.show(target)
 			})
 	}

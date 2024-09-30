@@ -1,12 +1,5 @@
 import { SliderComponent } from '@/scripts/theme/slider-component'
-import {
-	currentTargetOptional,
-	currentTargetRequired,
-	qsaOptional,
-	qsOptional,
-	qsRequired,
-	targetRequired,
-} from '@/scripts/core/global'
+import { TsDOM as q } from '@/scripts/core/TsDOM'
 
 export class SlideshowComponent extends SliderComponent {
 	static override htmlSelector = 'slideshow-component'
@@ -27,15 +20,15 @@ export class SlideshowComponent extends SliderComponent {
 	autoplay?: number
 	constructor() {
 		super()
-		this.sliderFirstItemNode = qsRequired('.slideshow__slide', this.slider)
-		this.sliderControlWrapper = qsRequired('.slider-buttons', this)
+		this.sliderFirstItemNode = q.rs('.slideshow__slide', this.slider)
+		this.sliderControlWrapper = q.rs('.slider-buttons', this)
 		this.enableSliderLooping = true
 
 		if (!this.sliderControlWrapper) return
 
 		if (this.sliderItemsToShow && this.sliderItemsToShow.length > 0) this.currentPage = 1
 
-		this.announcementBarSlider = qsOptional('.announcement-bar-slider', this)
+		this.announcementBarSlider = q.os('.announcement-bar-slider', this)
 		// Value below should match --duration-announcement-bar CSS value
 		this.announcerBarAnimationDelay = this.announcementBarSlider ? 250 : 0
 
@@ -88,7 +81,7 @@ export class SlideshowComponent extends SliderComponent {
 		this.addEventListener('focusout', this.focusOutHandling.bind(this))
 
 		if (this.querySelector('.slideshow__autoplay')) {
-			this.sliderAutoplayButton = qsOptional('.slideshow__autoplay', this)
+			this.sliderAutoplayButton = q.os('.slideshow__autoplay', this)
 			if (!this.sliderAutoplayButton) throw new Error('Autoplay button not found')
 			this.sliderAutoplayButton.addEventListener('click', this.autoPlayToggle.bind(this))
 			this.autoplayButtonIsSetToPlay = true
@@ -112,7 +105,7 @@ export class SlideshowComponent extends SliderComponent {
 
 		const isFirstSlide = this.currentPage === 1
 		const isLastSlide = this.currentPage === this.sliderItemsToShow.length
-		const currentTarget = currentTargetOptional(event)
+		const currentTarget = q.oct(event)
 		if (!(currentTarget instanceof HTMLButtonElement))
 			throw Error('currentTarget is not button element in SlideshowComponent class')
 
@@ -147,7 +140,7 @@ export class SlideshowComponent extends SliderComponent {
 		super.update()
 		if (!this.currentPage)
 			throw Error('this.currentPage is not set in SlideshowComponent class')
-		this.sliderControlButtons = qsaOptional('.slider-counter__link', this)
+		this.sliderControlButtons = q.ol('.slider-counter__link', this)
 		this.prevButton?.removeAttribute('disabled')
 
 		if (!this.sliderControlButtons) return
@@ -171,7 +164,7 @@ export class SlideshowComponent extends SliderComponent {
 
 	focusOutHandling(event: Event) {
 		if (this.sliderAutoplayButton) {
-			const eventTarget = targetRequired(event)
+			const eventTarget = q.rt(event)
 			const focusedOnAutoplayButton =
 				event.target === this.sliderAutoplayButton ||
 				this.sliderAutoplayButton.contains(eventTarget)
@@ -189,7 +182,7 @@ export class SlideshowComponent extends SliderComponent {
 	}
 
 	focusInHandling(event: Event) {
-		const eventTarget = targetRequired(event)
+		const eventTarget = q.rt(event)
 		if (this.sliderAutoplayButton) {
 			const focusedOnAutoplayButton =
 				event.target === this.sliderAutoplayButton ||
@@ -318,7 +311,7 @@ export class SlideshowComponent extends SliderComponent {
 			throw new Error(
 				'linkToSlide called early - no sliderControlLinksArray or currentPage found'
 			)
-		const currentTarget = currentTargetRequired(event)
+		const currentTarget = q.rct(event)
 		const slideScrollPosition =
 			this.slider.scrollLeft +
 			this.sliderFirstItemNode.clientWidth *
