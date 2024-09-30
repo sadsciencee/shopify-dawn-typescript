@@ -6,6 +6,7 @@ import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
 import { TsDOM as q, debounce, throttle, init } from '@/scripts/core/TsDOM'
+import { ArtDirection } from '@/scripts/core/art-direction'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -568,6 +569,7 @@ export function initializeShopifyConsentAPI() {
 }
 
 function initGlobalUcoast() {
+	q.safeDefineElement(ArtDirection)
 	q.safeDefineElement(UcoastVideo)
 	const iOS = window.Ucoast?.iOS ?? false
 	const Ucoast: typeof window.Ucoast = {
@@ -581,6 +583,7 @@ function initGlobalUcoast() {
 	if (!window.Ucoast.mediaManager) {
 		window.Ucoast.mediaManager = new MediaManager()
 	}
+
 }
 
 

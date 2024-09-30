@@ -2,6 +2,7 @@ import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { type Hls } from '@/scripts/global'
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { percentageSeen } from '@/scripts/theme/animations'
+import { type ArtDirection } from '@/scripts/core/art-direction'
 
 function isVideoPlaying(video: HTMLVideoElement): boolean {
 	return !video.paused && !video.ended && video.currentTime > 0
@@ -18,6 +19,7 @@ export class UcoastVideo extends UcoastEl {
 	hlsInstance: Hls
 	eventDriven: boolean
 	eventEnabled: boolean
+	wrapper?: ArtDirection
 
 	constructor() {
 		super()
@@ -29,6 +31,7 @@ export class UcoastVideo extends UcoastEl {
 		this.initialized = true
 		this.eventDriven = this.hasAttribute('data-event-driven')
 		this.eventEnabled = false
+		this.wrapper = q.oc(this, 'art-direction')
 	}
 
 	override async connectedCallback() {
@@ -115,6 +118,9 @@ export class UcoastVideo extends UcoastEl {
 		console.log('playing')
 		await this.videoEl.play()
 		this.setAttribute('data-uc-has-played', 'true')
+		if (this.wrapper) {
+			this.wrapper.onMediaLoad()
+		}
 	}
 	pause() {
 		if (isVideoPlaying(this.videoEl)) {

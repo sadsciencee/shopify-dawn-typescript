@@ -495,16 +495,70 @@ body {
 }
 
 /* component-media */
-.media {
+.art-direction {
+	display: block;
 	overflow: hidden;
 	background-color: transparent;
 	@include media-query($m-down) {
 		aspect-ratio: var(--aspect-ratio-mobile, unset);
-		object-position: var(--object-position-mobile);
+		img,
+		video,
+		picture {
+			object-position: var(--object-position-mobile) !important;
+		}
+		// edge case of desktop image, mobile video.
+		&--image-video {
+			&:after {
+				content: '';
+				display: block;
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				transition: backdrop-filter 0.2s linear;
+				width: 100%;
+				z-index: 4;
+				-webkit-backdrop-filter: blur(25px);
+				backdrop-filter: blur(25px);
+			}
+			&.loaded {
+				&:after {
+					-webkit-backdrop-filter: blur(0);
+					backdrop-filter: blur(0);
+				}
+			}
+		}
 	}
 	@include media-query($m-up) {
 		aspect-ratio: var(--aspect-ratio-desktop, unset);
-		object-position: var(--object-position-desktop);
+		img,
+		video,
+		picture {
+			object-position: var(--object-position-desktop) !important;
+		}
+		&--video-none,
+		&--video-image,
+		&--video-video {
+			&:before {
+				content: '';
+				display: block;
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				transition: backdrop-filter 0.2s linear;
+				width: 100%;
+				z-index: 4;
+				-webkit-backdrop-filter: blur(25px);
+				backdrop-filter: blur(25px);
+			}
+			&.loaded {
+				&:before {
+					-webkit-backdrop-filter: blur(0);
+					backdrop-filter: blur(0);
+				}
+			}
+		}
 	}
 }
 
@@ -519,11 +573,13 @@ body {
 	width: 100%;
 }
 
-.media > img, .media > picture > img {
+.media > img,
+.media > picture > img {
 	transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.media--fill, .fill {
+.media--fill,
+.fill {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -531,7 +587,6 @@ body {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-
 }
 
 .media--square {
@@ -541,8 +596,8 @@ body {
 
 .media--portrait {
 	//aspect-ratio: .8;
-	--aspect-ratio-mobile: .8;
-	--aspect-ratio-desktop: .8;
+	--aspect-ratio-mobile: 0.8;
+	--aspect-ratio-desktop: 0.8;
 }
 
 .media--landscape {
@@ -608,7 +663,9 @@ deferred-media {
 	:root {
 		--announcement-height: calc(var(--ax) * 27);
 		--header-height: calc(var(--ax) * 73);
-		--viewport-minus-header: calc(var(--viewport-height) - var(--header-height));
+		--viewport-minus-header: calc(
+			var(--viewport-height) - var(--header-height)
+		);
 
 		--ax: #{$desktopBaseScale};
 		--x-spacing: #{$xSpacingDesktop};
@@ -645,7 +702,9 @@ deferred-media {
 	}
 	.vp-combined--m-up {
 		@include media-query($m-up) {
-			height: calc(#{$viewport} - #{$headerHeight} - #{$announcementHeight});
+			height: calc(
+				#{$viewport} - #{$headerHeight} - #{$announcementHeight}
+			);
 		}
 	}
 }
@@ -653,14 +712,16 @@ deferred-media {
 ucoast-video[data-uc-has-played='false'] video {
 	opacity: 0;
 	backdrop-filter: blur(15px);
-	transition: opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
+	transition:
+		opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
 		filter 0.3s cubic-bezier(0.32, 0.24, 0.15, 1);
 }
 
 ucoast-video[data-uc-has-played='true'] video {
 	opacity: 1;
 	backdrop-filter: blur(0);
-	transition: opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
+	transition:
+		opacity 0.3s cubic-bezier(0.32, 0.24, 0.15, 1),
 		filter 0.3s cubic-bezier(0.32, 0.24, 0.15, 1);
 }
 
@@ -677,4 +738,14 @@ ucoast-video[data-uc-has-played='true'] video {
 	height: #{$viewportMinusHeader};
 }
 
+.semantic-button {
+	@include semanticButton();
+}
 
+.semantic-link {
+	@include semanticLink();
+}
+
+style[data-shopify] {
+	display: none !important;
+}

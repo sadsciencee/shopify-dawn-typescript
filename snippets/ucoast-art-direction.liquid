@@ -22,7 +22,7 @@
 
 		- settings
 		--play_on_event: boolean. use this for videos. defers loading until the video is explicitly played.
-		--aspect_ratio: 'native, fill, 16-9, circle, cropped, landscape, portrait, square'. optional.
+		--aspect_ratio: 'adapt, fill, 16-9, circle, cropped, landscape, portrait, square'. optional.
 		--desktop_size: 'sm, md, lg'. defaults to lg. for image loading optimization - doesnt affect real size
 		--mobile_size: 'sm, md, lg'. defaults to lg. for image loading optimization - doesnt affect real size
 		--loading: 'lazy, eager'. defaults to lazy. optional.
@@ -120,7 +120,7 @@
 
 	assign overlay_opacity = overlay_opacity | default: 0.0
 
-	if aspect_ratio == 'native'
+	if aspect_ratio == 'adapt'
 		assign desktop_aspect_ratio = desktop_media.preview_image.aspect_ratio | default: desktop_media.aspect_ratio
 		assign mobile_aspect_ratio = mobile_media.preview_image.aspect_ratio | default: mobile_media.aspect_ratio | default: desktop_aspect_ratio
 		assign aspect_ratio_vars = '--aspect-ratio-mobile:' | append: mobile_aspect_ratio | append: '; --aspect-ratio-desktop:' | append: desktop_aspect_ratio | append: ';'
@@ -131,27 +131,39 @@
 	comment
 		use a switch key to improve conditional performance
 	endcomment
-	assign switch_key = desktop_media_type | append: '_' | append: mobile_media_type
+	assign switch_key = desktop_media_type | append: '-' | append: mobile_media_type
 %}
-<span
-	class="{{ wrapper_class }}"
-	style="{{ aspect_ratio_vars }} {% render 'overlay-variables', overlay_opacity: overlay_opacity %}"
-	data-wrapper-id="{{ wrapper_id.id }}"
+<art-direction
+	class="{{ wrapper_class }} art-direction art-direction--{{ switch_key }}"
+	style="{%- render 'overlay-variables', overlay_opacity: overlay_opacity -%}{{- aspect_ratio_vars -}}{{- object_position_vars -}}"
+	data-wrapper-id="{{ wrapper_id }}"
 	data-media-id="{{ desktop_media.id }}"
-	data-all-media-ids='{{ desktop_media.id }},{{ mobile_media.id }}'
+	data-all-media-ids="{{ desktop_media.id }},{{ mobile_media.id }}"
 	{{ custom_data_attributes }}
 >
 	{% if media_child %}
 		{{ media_child }}
 	{% endif %}
 	{% case switch_key %}
-		{% when 'video_none' %}
+		{% when 'video-none' %}
+			{% assign poster = desktop_image | default: desktop_media.preview_image %}
+			{% assign media_class = media_class | append: ' no-picture' %}
+			{{
+				poster
+				| image_url: width: starting_width
+				| image_tag:
+					widths: all_widths,
+					sizes: all_sizes,
+					height: null,
+					class: media_class,
+					loading: loading
+			}}
 			{% render 'ucoast-video',
 				video: desktop_media,
 				video_class: media_class,
 				play_on_event: play_on_event
 			%}
-		{% when 'video_video' %}
+		{% when 'video-video' %}
 			{% render 'ucoast-video',
 				video: desktop_media,
 				video_class: media_class,
@@ -164,7 +176,10 @@
 				viewport_class: 'm-up-hide',
 				play_on_event: play_on_event
 			%}
-		{% when 'video_image' %}
+		{% when 'video-image' %}
+			{% assign poster = desktop_image
+				| default: desktop_media.preview_image
+			%}
 			<picture>
 				<source
 					media="(max-width: 989px)"
@@ -188,10 +203,11 @@
 				viewport_class: 'm-down-hide',
 				play_on_event: play_on_event
 			%}
-			{% assign poster = desktop_image
-				| default: desktop_media.preview_image
+
+		{% when 'image-video' %}
+			{% assign poster = mobile_image
+				| default: mobile_media.preview_image
 			%}
-		{% when 'image_video' %}
 			<picture>
 				<source
 					media="(max-width: 989px)"
@@ -214,12 +230,10 @@
 				viewport_class: 'm-up-hide',
 				play_on_event: play_on_event
 			%}
-			{% assign poster = mobile_image
-				| default: mobile_media.preview_image
-			%}
-		{% when 'none_none' %}
+
+		{% when 'none-none' %}
 			{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-		{% when 'image_none' %}
+		{% when 'image-none' %}
 			{% assign media_class = media_class | append: ' no-picture' %}
 			{{
 				desktop_media
@@ -253,12 +267,4 @@
 				}}
 			</picture>
 	{% endcase %}
-	{% if object_position_vars %}
-		{% style %}
-			[data-media-id="{{ desktop_media.id }}"] img,
-			[data-media-id="{{ desktop_media.id }}"] video {
-				{{ object_position_vars }}
-			}
-		{% endstyle %}
-	{% endif %}
-</span>
+</art-direction>

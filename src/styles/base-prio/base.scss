@@ -3254,11 +3254,3 @@ quick-add-modal .product__title > a,
 .underline-always-child {
 	@include underline-always-child();
 }
-
-.semantic-button {
-	@include semanticButton();
-}
-
-.semantic-link {
-	@include semanticLink();
-}

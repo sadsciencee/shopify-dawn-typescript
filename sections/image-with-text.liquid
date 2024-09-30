@@ -29,6 +29,7 @@
 			-%}
 				{% render 'ucoast-art-direction',
 					desktop_image: section.settings.image,
+					desktop_video: section.settings.video,
 					multiplier: 2,
 					wrapper_class: wrapper_class,
 					aspect_ratio: aspect_ratio,
@@ -37,6 +38,7 @@
 			{% else %}
 				{% render 'ucoast-art-direction',
 					desktop_image: section.settings.image,
+					desktop_video: section.settings.video,
 					wrapper_class: wrapper_class,
 					aspect_ratio: aspect_ratio,
 					media_class: media_class
@@ -104,6 +106,11 @@
 				"type": "image_picker",
 				"id": "image",
 				"label": "t:sections.image-with-text.settings.image.label"
+			},
+			{
+				"type": "video",
+				"id": "video",
+				"label": "Video"
 			},
 			{
 				"type": "select",

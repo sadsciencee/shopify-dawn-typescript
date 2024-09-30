@@ -11,6 +11,18 @@
 		{% if test_mode %}
 			data-test-mode
 		{% endif %}
+			data-sources='[{% liquid
+				for source in video.sources
+					echo '{'
+					echo '"format": "' | append: source.mime_type | append: '",'
+					echo '"url": "' | append: source.url | append: '"'
+					echo '"height": "' | append: source.height | append: '",'
+					echo '"mime_type": "' | append: source.mime_type | append: '",'
+					echo '"width": "' | append: source.width | append: '"'
+					echo '}'
+					echo ','
+				endfor
+			%}]'
 	>
 		{% liquid
 			for source in video.sources
