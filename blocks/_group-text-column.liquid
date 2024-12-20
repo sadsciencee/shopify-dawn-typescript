@@ -1,0 +1,43 @@
+<div
+	class="gb gb--text color-{{ block.settings.color_scheme }}"
+>
+	{% content_for 'blocks' %}
+</div>
+
+{% schema %}
+	{
+		"name": "Text Group",
+		"blocks": [{ "type": "_text-rich" }, { "type": "_text-heading" }, { "type": "@app" }],
+		"settings": [
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "scheme-1"
+			}
+		],
+		"presets": [
+			{
+				"name": "Text Group",
+				"blocks": [
+					{
+						"type": "_text-heading",
+						"settings": {
+							"text": "Hello, world!"
+						}
+					},
+					{
+						"type": "_text-rich",
+						"settings": {
+							"text": "<p>How's it going?<\/p>"
+						}
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

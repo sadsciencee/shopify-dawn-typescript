@@ -9,6 +9,15 @@
 	font-weight: #{$fontBodyWeight};
 }
 
+.text-large {
+	@include clampSize(18, 21);
+	letter-spacing: 0.04em;
+	line-height: calc(1 + 0.8 / #{$fontBodyScale});
+	font-family: #{$fontBodyFamily};
+	font-style: #{$fontBodyStyle};
+	font-weight: #{$fontBodyWeight};
+}
+
 h1,
 h2,
 h3,
