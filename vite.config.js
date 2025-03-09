@@ -41,7 +41,7 @@ export default {
 			sourceCodeDir: 'src',
 			entrypointsDir: 'src/entry',
 			additionalEntrypoints: [],
-			snippetFile: 'ucoast.liquid',
+			snippetFile: 'vite.liquid',
 			versionNumbers: true
 		}),
 	],

@@ -8,9 +8,9 @@
 	assign base_file = file | append: '.scss'
 	capture stylesheet
 		if preload_stylesheet
-			render 'ucoast' with base_file, preload_stylesheet: true
+			render 'vite' with base_file, preload_stylesheet: true
 		else
-			render 'ucoast' with base_file
+			render 'vite' with base_file
 		endif
 	endcapture
 	if stylesheet contains '@vite/client'

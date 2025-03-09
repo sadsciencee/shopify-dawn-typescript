@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "push": "shopify theme push -x templates/*.json -x sections/*.json -x config/settings_data.json",
     "pull-json": "shopify theme pull -o templates/*.json -o sections/*.json -o config/settings_data.json",
-    "push-assets": "shopify theme push -o assets/* -o snippets/ucoast.liquid"
+    "push-assets": "shopify theme push -o assets/* -o snippets/vite.liquid"
   },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.5.0",

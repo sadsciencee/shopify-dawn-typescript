@@ -1,0 +1,27 @@
+<div class="custom-section color-{{ section.settings.color_scheme }}">
+	{% content_for 'blocks' %}
+</div>
+
+{% schema %}
+	{
+		"name": "Custom section",
+		"blocks": [{ "type": "_group-text-column" }, { "type": "@app" }],
+		"settings": [
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "scheme-1"
+			}
+		],
+		"presets": [
+			{
+				"name": "Custom section"
+			}
+		]
+	}
+{% endschema %}

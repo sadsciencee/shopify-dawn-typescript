@@ -219,7 +219,7 @@
 							aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 							aria-describedby="{{ thumbnail_id }}"
 						>
-							{% render 'ucoast-art-direction',
+							{% render 'art-direction',
 								desktop_media: featured_media.preview_image,
 								id: thumbnail_id,
 								alt: featured_media.alt,
@@ -279,7 +279,7 @@
 								aria-controls="GalleryViewer-{{ section.id }}{{ id_append }}"
 								aria-describedby="{{ thumbnail_id }}"
 							>
-								{% render 'ucoast-art-direction',
+								{% render 'art-direction',
 									desktop_media: media.preview_image,
 									id: thumbnail_id,
 									alt: media.alt,

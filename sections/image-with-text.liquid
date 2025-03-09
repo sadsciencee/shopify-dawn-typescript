@@ -27,7 +27,7 @@
 			{%- if section.settings.image_behavior == 'ambient'
 				or section.settings.image_behavior == 'zoom-in'
 			-%}
-				{% render 'ucoast-art-direction',
+				{% render 'art-direction',
 					desktop_image: section.settings.image,
 					desktop_video: section.settings.video,
 					multiplier: 2,
@@ -36,7 +36,7 @@
 					media_class: media_class
 				%}
 			{% else %}
-				{% render 'ucoast-art-direction',
+				{% render 'art-direction',
 					desktop_image: section.settings.image,
 					desktop_video: section.settings.video,
 					wrapper_class: wrapper_class,

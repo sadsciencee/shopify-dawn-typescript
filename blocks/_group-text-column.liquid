@@ -1,0 +1,53 @@
+{% liquid
+	for inside_block in block.blocks
+        echo inside_block.id
+		echo inside_block.settings.title
+	endfor
+%}
+<div
+	class="gb gb--text color-{{ block.settings.color_scheme }} count--{{ count }}"
+>
+	{% content_for 'blocks' %}
+</div>
+
+{% schema %}
+	{
+		"name": "Text Group",
+		"blocks": [
+			{ "type": "_text-rich" },
+			{ "type": "_text-heading" },
+			{ "type": "@app" }
+		],
+		"settings": [
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "scheme-1"
+			}
+		],
+		"presets": [
+			{
+				"name": "Text Group",
+				"blocks": [
+					{
+						"type": "_text-heading",
+						"settings": {
+							"title": "Hello, world!"
+						}
+					},
+					{
+						"type": "_text-rich",
+						"settings": {
+							"title": "<p>How's it going?<\/p>"
+						}
+					}
+				]
+			}
+		]
+	}
+{% endschema %}
