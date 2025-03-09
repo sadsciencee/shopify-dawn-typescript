@@ -53,7 +53,7 @@
 			>
 				{%- if card_product.featured_media -%}
 					<div class="card__media relative global-media-settings overflow-hidden {% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-						{% render 'ucoast-art-direction',
+						{% render 'art-direction',
 							desktop_media: card_product.featured_media,
 							media_class: 'motion-reduce block w-100 h-auto',
 							wrapper_class: 'media--transparent media--hover-effect block',
@@ -68,7 +68,7 @@
 						{%- if card_product.media[1] != null
 							and show_secondary_image
 						-%}
-							{% render 'ucoast-art-direction',
+							{% render 'art-direction',
 								desktop_media: card_product.media[1],
 								media_class: 'motion-reduce block w-100 h-auto',
 								wrapper_class: 'media--transparent media--hover-effect reveal-on-hover top-0 left-0 w-100 h-100 z-2 block absolute',

@@ -17,14 +17,14 @@
 	data-section="{{ section.id }}"
 >
 	{% render 'ucoast-style-tag', file: 'css-dir-product-prio', preload_stylesheet: true %}
-	{% render 'ucoast', ucoast: 'js-dir-product.ts' %}
+	{% render 'vite', vite: 'js-dir-product.ts' %}
 	{% if section.settings.image_zoom == 'hover' %}
 		<div id="EnableZoomOnHover-main">
-			{% render 'ucoast', ucoast: 'js-optional-magnify.ts' %}
+			{% render 'vite', vite: 'js-optional-magnify.ts' %}
 		</div>
 	{% endif %}
 	{%- if request.design_mode -%}
-		{% render 'ucoast', ucoast: 'js-optional-theme-editor.ts' %}
+		{% render 'vite', vite: 'js-optional-theme-editor.ts' %}
 	{%- endif -%}
 
 	{%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
@@ -209,7 +209,7 @@
 		<script type="application/json" id="ProductJSON-{{ product.id }}">
 			{{ product.media | where: 'media_type', 'model' | json }}
 		</script>
-		{% render 'ucoast', ucoast: 'js-optional-product-model.ts' %}
+		{% render 'vite', vite: 'js-optional-product-model.ts' %}
 	{%- endif -%}
 
 	<script>

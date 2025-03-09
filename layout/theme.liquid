@@ -39,7 +39,7 @@
 		{% style %}
 			{% render 'critical-css' %}
 		{% endstyle %}
-		{% render 'ucoast', ucoast: '_critical.ts' %}
+		{% render 'vite', vite: '_critical.ts' %}
 
 		{% case request.page_type %}
 			{% when 'page' %}
@@ -130,9 +130,9 @@
 
 		{% sections 'footer-group' %}
 
-		{% render 'ucoast', ucoast: 'js-dir-theme.ts' %}
+		{% render 'vite', vite: 'js-dir-theme.ts' %}
 		{%- if settings.animations_reveal_on_scroll -%}
-			{% render 'ucoast', ucoast: 'js-optional-animations.ts' %}
+			{% render 'vite', vite: 'js-optional-animations.ts' %}
 		{%- endif -%}
 
 		{% case request.page_type %}
@@ -155,14 +155,14 @@
 		{% endcase %}
 
 		{%- if settings.cart_type == 'drawer' -%}
-			{% render 'ucoast', ucoast: 'js-dir-cart-drawer.ts' %}
+			{% render 'vite', vite: 'js-dir-cart-drawer.ts' %}
 		{%- endif -%}
 		{% comment %}
-			{% render 'ucoast', ucoast: 'js-optional-localization-form.ts' %}
+			{% render 'vite', vite: 'js-optional-localization-form.ts' %}
 		{% endcomment %}
 
 		{% render 'ucoast-style-tag', file: 'css-optional-quick-add' %}
-		{% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
+		{% render 'vite', vite: 'js-optional-quick-add.ts' %}
 
 		<ul hidden>
 			<li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

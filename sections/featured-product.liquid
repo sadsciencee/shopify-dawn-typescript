@@ -13,7 +13,7 @@
 	endcapture
 -%}
 
-{% render 'ucoast', ucoast: 'js-dir-product.ts' %}
+{% render 'vite', vite: 'js-dir-product.ts' %}
 
 {%- liquid
 	assign product = section.settings.product
@@ -385,18 +385,18 @@
 
 {%- if section.settings.image_zoom == 'hover' -%}
 	<div id="EnableZoomOnHover-featured">
-		{% render 'ucoast', ucoast: 'js-optional-magnify.ts' %}
+		{% render 'vite', vite: 'js-optional-magnify.ts' %}
 	</div>
 {%- endif %}
 {%- if request.design_mode -%}
-	{% render 'ucoast', ucoast: 'js-optional-theme-editor.ts' %}
+	{% render 'vite', vite: 'js-optional-theme-editor.ts' %}
 {%- endif -%}
 
 {%- if first_3d_model -%}
 	<script type="application/json" id="ProductJSON-{{ product.id }}">
 		{{ product.media | where: 'media_type', 'model' | json }}
 	</script>
-	{% render 'ucoast', ucoast: 'js-optional-product-model.ts' %}
+	{% render 'vite', vite: 'js-optional-product-model.ts' %}
 {%- endif -%}
 
 {%- liquid

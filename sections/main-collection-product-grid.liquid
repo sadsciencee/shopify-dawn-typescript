@@ -1,11 +1,11 @@
-{% render 'ucoast', ucoast: 'js-dir-catalog.ts' %}
+{% render 'vite', vite: 'js-dir-catalog.ts' %}
 {% if section.settings.image_shape == 'blob' %}
 	{% render 'ucoast-style-tag', file: 'css-optional-mask-blobs' %}
 {%- endif -%}
 
 {%- if section.settings.enable_quick_add -%}
 	{% render 'ucoast-style-tag', file: 'css-optional-quick-add' %}
-	{% render 'ucoast', ucoast: 'js-optional-quick-add.ts' %}
+	{% render 'vite', vite: 'js-optional-quick-add.ts' %}
 {%- endif -%}
 {%- liquid
 	capture spacing

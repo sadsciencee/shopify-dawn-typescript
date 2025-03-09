@@ -28,7 +28,7 @@
 				endcapture
 			%}
 			{% capture block_markup %}
-				{% render 'ucoast-art-direction',
+				{% render 'art-direction',
 						desktop_image: block.settings.image,
 						desktop_video: block.settings.video,
 						mobile_image: block.settings.mobile_image,
@@ -63,7 +63,7 @@
 </div>
 
 {%- if request.design_mode -%}
-	{% render 'ucoast', ucoast: 'js-optional-theme-editor.ts' %}
+	{% render 'vite', vite: 'js-optional-theme-editor.ts' %}
 {%- endif -%}
 
 {% schema %}
