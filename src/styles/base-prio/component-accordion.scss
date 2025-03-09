@@ -1,0 +1,60 @@
+@import "../global/variables";
+@import "../global/functions";
+.accordion summary {
+  display: flex;
+  position: relative;
+  line-height: 1;
+  padding: #{$ax15} 0;
+}
+
+.accordion .summary__title {
+  display: flex;
+  flex: 1;
+}
+
+.accordion .summary__title + .icon-caret {
+  height: calc(#{$fontHeadingScale} * #{$ax6});
+}
+
+.accordion + .accordion {
+  margin-top: 0;
+  border-top: none;
+}
+
+.accordion {
+  margin-top: #{$ax25};
+  margin-bottom: 0;
+  border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
+  border-bottom: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.08);
+}
+
+.accordion__title {
+  display: inline-block;
+  max-width: calc(100% - #{ax(60)});
+  min-height: #{$ax16};
+  margin: 0;
+  word-break: break-word;
+}
+
+.accordion .icon-accordion {
+  align-self: center;
+  fill: rgb(#{$schemaColorForeground});
+  height: calc(#{$fontHeadingScale} * #{$ax20});
+  margin-right: calc(#{$fontHeadingScale} * #{$ax10});
+  width: calc(#{$fontHeadingScale} * #{$ax20});
+}
+
+.accordion details[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.accordion__content {
+  margin-bottom: #{$ax15};
+  word-break: break-word;
+  overflow-x: auto;
+  padding: 0 #{$ax6};
+}
+
+.accordion__content img {
+  max-width: 100%;
+}

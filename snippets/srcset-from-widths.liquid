@@ -1,0 +1,16 @@
+{% liquid
+	comment
+		input: image, widths
+	endcomment
+	assign arr = widths | split: ','
+	for width in arr
+        assign width_as_int = width | strip | plus: 0
+		echo image | image_url: width: width_as_int
+		echo ' '
+		echo width
+		echo 'w'
+		unless forloop.last
+			echo ', '
+		endunless
+	endfor
+%}

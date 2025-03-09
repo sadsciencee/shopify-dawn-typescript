@@ -1,0 +1,58 @@
+{% comment %}
+  Renders a product media modal. Also see 'product-media-gallery'
+
+  Accepts:
+  - product: {Object} Product liquid object
+  - variant_images: {Array} Product images associated with a variant
+
+  Usage:
+  {% render 'product-media-modal' %}
+{% endcomment %}
+
+<product-modal id="ProductModal-{{ section.id }}" class="product-media-modal h-100 fixed top-0 left-0 w-100 media-modal">
+  <div
+    class="product-media-modal__dialog flex align-center"
+    role="dialog"
+    aria-label="{{ 'products.modal.label' | t }}"
+    aria-modal="true"
+    tabindex="-1"
+  >
+    <button
+      id="ModalClose-{{ section.id }}"
+      type="button"
+      class="product-media-modal__toggle flex align-center justify-center fixed z-2"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      {% render 'icon-default', icon: 'close' %}
+    </button>
+
+    <div
+      class="product-media-modal__content w-100 color-{{ settings.color_schemes | first }} gradient"
+      role="document"
+      data-uc-product-modal-container
+      aria-label="{{ 'products.modal.label' | t }}"
+      tabindex="0"
+    >
+      {%- liquid
+        if product.selected_or_first_available_variant.featured_media != null
+          assign media = product.selected_or_first_available_variant.featured_media
+          render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
+        endif
+      -%}
+
+      {%- for media in product.media -%}
+        {%- liquid
+          if section.settings.hide_variants and variant_images contains media.src or variant_images contains media.id
+            assign variant_image = true
+          else
+            assign variant_image = false
+          endif
+
+          unless media.id == product.selected_or_first_available_variant.featured_media.id
+            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+          endunless
+        -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</product-modal>

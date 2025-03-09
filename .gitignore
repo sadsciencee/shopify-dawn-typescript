@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+
+# production
+build
+
+# misc
+.DS_Store
+
+npm-debug.log
+yarn-error.log
+yarn.lock
+.yarnclean
+.vscode
+.idea
+.idea/
+.idea/*
+node_modules/
+node_modules/*
+/assets/
+/snippets/vite.liquid

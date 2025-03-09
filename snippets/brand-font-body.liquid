@@ -1,0 +1,37 @@
+{% if preload %}
+    {{ 'BODY_FONT_FILE_NAME.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2' }}
+{% else %}
+        @font-face {
+            font-display: block;
+            font-family: brandbody;
+            src: url("{{ 'BODY_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
+            font-style: normal;
+            font-weight: 400;
+        }
+        @font-face {
+            font-display: block;
+            font-family: brandbody;
+            src: url("{{ 'BODY_ITALIC_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
+            font-style: italic;
+            font-weight: 400;
+        }
+        @font-face {
+            font-display: block;
+            font-family: brandbody;
+            src: url("{{ 'BODY_BOLD_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
+            font-style: italic;
+            font-weight: 700;
+        }
+        {% comment %}
+            template is based on a font with an extra-bold weight, but this isn't necessary or used in any default styles
+            if you don't need this, remove the below and make sure to remove from css-variables.liquid
+            and variables.scss
+        {% endcomment %}
+        @font-face {
+            font-display: block;
+            font-family: body;
+            src: url("{{ 'BODY_EXTRA_BOLD_FONT_FILE_NAME.woff2' | asset_url }}") format("woff2");
+            font-style: italic;
+            font-weight: 800;
+        }
+{% endif %}

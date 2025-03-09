@@ -1,0 +1,114 @@
+{% comment %}
+	Renders cart drawer
+
+	Usage:
+	{% render 'cart-drawer' %}
+{% endcomment %}
+
+<style>
+	.drawer {
+		visibility: hidden;
+	}
+</style>
+
+<cart-drawer
+	class="drawer fixed left-0 top-0 h-100 flex justify-end"
+	{% if cart == empty %}
+		data-uc-cart-empty
+	{% endif %}
+>
+	<div id="CartDrawer" class="cart-drawer">
+		<div
+			data-uc-cart-drawer-overlay
+			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"
+		></div>
+		<div
+			data-uc-cart-drawer-inner
+			class="drawer__inner h-100 flex flex-column overflow-hidden"
+			role="dialog"
+			aria-modal="true"
+			aria-label="{{ 'sections.cart.title' | t }}"
+			tabindex="-1"
+		>
+			{%- if cart == empty -%}
+				<div
+					data-uc-cart-drawer-inner-empty
+					class="flex flex-column overflow-hidden h-100"
+				>
+					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
+						<div class="cart-drawer__empty-content">
+							<h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+							<button
+								class="drawer__close inline-block p-0 absolute bg-transparent b-0"
+								type="button"
+								onclick="this.closest('cart-drawer').close()"
+								aria-label="{{ 'accessibility.close' | t }}"
+								data-uc-cart-drawer-close-button
+							>
+								{% render 'icon-default', icon: 'close' %}
+							</button>
+							<a href="{{ routes.all_products_collection_url }}" class="button">
+								{{ 'general.continue_shopping' | t }}
+							</a>
+
+							{%- if shop.customer_accounts_enabled and customer == null -%}
+								<p class="cart__login-title h3">
+									{{ 'sections.cart.login.title' | t }}
+								</p>
+								<p class="cart__login-paragraph">
+									{{
+										'sections.cart.login.paragraph_html'
+										| t: link: routes.account_login_url
+									}}
+								</p>
+							{%- endif -%}
+						</div>
+					</div>
+					{%- if settings.cart_drawer_collection != blank -%}
+						<div class="cart-drawer__collection">
+							{% render 'card-collection',
+								card_collection: settings.cart_drawer_collection,
+								columns: 1
+							%}
+						</div>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+			<div class="drawer__header relative flex justify-between align-center">
+				<h2 class="drawer__heading mb-0">{{ 'sections.cart.title' | t }}</h2>
+				<button
+					class="drawer__close inline-block p-0 absolute bg-transparent b-0"
+					type="button"
+					onclick="this.closest('cart-drawer').close()"
+					aria-label="{{ 'accessibility.close' | t }}"
+				>
+					{% render 'icon-default', icon: 'close' %}
+				</button>
+			</div>
+			{% render 'dynamic-shipping-bar', cart: cart %}
+			{% render 'cart-drawer-items', cart: cart %}
+			{% render 'dynamic-cart-footer', cart: cart %}
+		</div>
+	</div>
+</cart-drawer>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		function isIE() {
+			const ua = window.navigator.userAgent
+			const msie = ua.indexOf('MSIE ')
+			const trident = ua.indexOf('Trident/')
+
+			return msie > 0 || trident > 0
+		}
+
+		if (!isIE()) return
+		const cartSubmitInput = document.createElement('input')
+		cartSubmitInput.setAttribute('name', 'checkout')
+		cartSubmitInput.setAttribute('type', 'hidden')
+		document.querySelector('#cart').appendChild(cartSubmitInput)
+		document.querySelector('#checkout').addEventListener('click', function (event) {
+			document.querySelector('#cart').submit()
+		})
+	})
+</script>

@@ -1,0 +1,54 @@
+{% comment %}
+	this should only be called from ucoast-media
+{% endcomment %}
+{% if video %}
+	<ucoast-video
+		class="{{ video_class | default: 'fill' }} {{ viewport_class }}"
+		data-uc-has-played="false"
+		{% if play_on_event %}
+			data-event-driven
+		{% endif %}
+		{% if test_mode %}
+			data-test-mode
+		{% endif %}
+			data-sources='[{% liquid
+				for source in video.sources
+					echo '{'
+					echo '"format": "' | append: source.mime_type | append: '",'
+					echo '"url": "' | append: source.url | append: '"'
+					echo '"height": "' | append: source.height | append: '",'
+					echo '"mime_type": "' | append: source.mime_type | append: '",'
+					echo '"width": "' | append: source.width | append: '"'
+					echo '}'
+					echo ','
+				endfor
+			%}]'
+	>
+		{% liquid
+			for source in video.sources
+				if source.mime_type == 'video/mp4'
+					assign mp4_source = 'data-mp4-src="' | append: source.url | append: '" '
+					assign mp4_source_obj = source
+				elsif source.mime_type == 'application/x-mpegURL'
+					assign hls_source = 'data-hls-src="' | append: source.url | append: '" '
+					assign hls_source_obj = source
+				endif
+			endfor
+		%}
+		<video
+			class="fill"
+			playsinline="playsinline"
+			preload="metadata"
+			muted="muted"
+			poster="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+			loop="true"
+			{{ mp4_source }}
+			{{ hls_source }}
+		>
+			<source
+				src="{{ hls_source_obj.url }}"
+				type="{{ hls_source_obj.mime_type }}"
+			>
+		</video>
+	</ucoast-video>
+{% endif %}

@@ -1,0 +1,3 @@
+[environments.dev]
+store = "david-hollenbeck-case-study"
+live-reload = 'off'

@@ -1,0 +1,19 @@
+{%- liquid
+    # check for up to 3 types from a block id, and echo the type if found
+    # for use with theme blocks since the type is always @theme...
+    if id == '' or id == blank or id == empty
+        if default_type
+            echo default_type
+        endif
+    else
+        if id contains type_1
+            echo type_1
+        elsif type_2 and id contains type_2
+            echo type_2
+        elsif type_3 and id contains type_3
+            echo type_3
+        elsif default_type
+            echo default_type
+        endif
+    endif
+-%}

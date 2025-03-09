@@ -1,0 +1,44 @@
+<script type='text/javascript'>
+  {
+    function inlineRemoveDesktopCss() {
+      if (window.innerWidth >= 990) {
+        return
+      }
+      const mUp = document.querySelectorAll('link[href*=".m-up"]')
+      mUp?.forEach((link) => {
+        const href = link.getAttribute('href')
+        if (!href || href.includes('::')) return
+        console.log('removin')
+        link.removeAttribute('href')
+        link.setAttribute('data-href', href)
+      })
+      if (window.innerWidth >= 750) {
+        return;
+      }
+
+      const sUp = document.querySelectorAll('link[href*=".s-up"]');
+      sUp?.forEach((link) => {
+        const href = link.getAttribute('href')
+        if (!href || href.includes('::')) return
+        link.removeAttribute('href')
+        link.setAttribute('data-href', href)
+      })
+    }
+    try {
+      inlineRemoveDesktopCss()
+    } catch(e) {
+      console.log(e)
+    }
+    if (document.readyState === 'loading') {
+      try {
+        inlineRemoveDesktopCss()
+      } catch(e) {
+        console.log(e)
+      }
+      document.addEventListener('DOMContentLoaded', inlineRemoveDesktopCss)
+    } else {
+      inlineRemoveDesktopCss()
+    }
+
+  }
+</script>

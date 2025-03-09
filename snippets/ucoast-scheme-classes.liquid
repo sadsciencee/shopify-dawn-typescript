@@ -1,0 +1,21 @@
+{% liquid
+	assign scheme1 = settings.color_schemes | first
+	if mobile_color_scheme and desktop_color_scheme
+		assign mobile_color_scheme = mobile_color_scheme | lstrip | rstrip
+		assign desktop_color_scheme = desktop_color_scheme | lstrip | rstrip
+		unless mobile_color_scheme == 'background-1' or disable_padding == true
+			echo ' p-section-background--s-down '
+		endunless
+		echo 'color-' | append: mobile_color_scheme | append: '--s-down '
+		unless desktop_color_scheme == 'background-1' or disable_padding == true
+			echo ' p-section-background--s-up '
+		endunless
+		echo 'color-' | append: desktop_color_scheme | append: '--s-up '
+	else
+		assign color_scheme = color_scheme | lstrip | rstrip
+		unless color_scheme == 'background-1' or disable_padding == true
+			echo ' p-section-background '
+		endunless
+		echo 'color-' | append: color_scheme | append: ' '
+	endif
+%}

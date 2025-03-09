@@ -1,0 +1,399 @@
+@import '../global/variables';
+@import '../global/functions';
+slider-component {
+	--desktop-margin-left-first-item: max(
+		#{$ax50},
+		calc((100vw - #{$pageWidth} + #{ax(100)} - #{$xSpacingDesktop}) / 2)
+	);
+	position: relative;
+	display: block;
+}
+
+slider-component.slider-component-full-width {
+	--desktop-margin-left-first-item: #{$ax15};
+}
+
+@include media-query($s-down) {
+	slider-component.page-width {
+		padding: 0 #{$ax15};
+	}
+}
+
+@include media-query($m-only) {
+	slider-component.page-width {
+		padding: 0 #{$ax50};
+	}
+}
+
+@include media-query($m-down) {
+	.no-js slider-component .slider {
+		padding-bottom: #{$ax30};
+	}
+}
+
+.slider__slide {
+	--focus-outline-padding: #{$ax5};
+	--shadow-padding-top: calc(
+		(var(--shadow-vertical-offset) * -1 + var(--shadow-blur-radius)) * var(--shadow-visible)
+	);
+	--shadow-padding-bottom: calc(
+		(var(--shadow-vertical-offset) + var(--shadow-blur-radius)) * var(--shadow-visible)
+	);
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	padding-bottom: 0;
+}
+
+@include media-query($s-down) {
+	.slider.slider--mobile {
+		position: relative;
+		flex-wrap: inherit;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scroll-padding-left: #{$ax15};
+		-webkit-overflow-scrolling: touch;
+		margin-bottom: #{$ax10};
+	}
+
+	/* Fix to show some space at the end of our sliders in all browsers */
+	.slider--mobile:after {
+		content: '';
+		width: 0;
+		padding-left: #{$ax15};
+	}
+
+	.slider.slider--mobile .slider__slide {
+		margin-bottom: 0;
+		padding-top: max(var(--focus-outline-padding), var(--shadow-padding-top));
+		padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
+	}
+
+	.slider.slider--mobile.contains-card--standard
+		.slider__slide:not(.collection-list__item--no-media) {
+		padding-bottom: var(--focus-outline-padding);
+	}
+
+	.slider.slider--mobile.contains-content-container .slider__slide {
+		--focus-outline-padding: 0rem;
+	}
+}
+
+@include media-query($m-down) {
+	.slider.slider--tablet {
+		position: relative;
+		flex-wrap: inherit;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scroll-padding-left: #{$ax15};
+		-webkit-overflow-scrolling: touch;
+		margin-bottom: #{$ax10};
+	}
+
+	/* Fix to show some space at the end of our sliders in all browsers */
+	.slider--tablet:after {
+		content: '';
+		width: 0;
+		padding-left: #{$ax15};
+		margin-left: calc(-1 * #{$xSpacingDesktop});
+	}
+
+	.slider.slider--tablet .slider__slide {
+		margin-bottom: 0;
+		padding-top: max(var(--focus-outline-padding), var(--shadow-padding-top));
+		padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
+	}
+
+	.slider.slider--tablet.contains-card--standard
+		.slider__slide:not(.collection-list__item--no-media) {
+		padding-bottom: var(--focus-outline-padding);
+	}
+
+	.slider.slider--tablet.contains-content-container .slider__slide {
+		--focus-outline-padding: 0rem;
+	}
+}
+
+.slider--everywhere {
+	position: relative;
+	flex-wrap: inherit;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+	margin-bottom: #{$ax10};
+}
+
+.slider.slider--everywhere .slider__slide {
+	margin-bottom: 0;
+	scroll-snap-align: center;
+}
+
+@media (prefers-reduced-motion) {
+	.slider {
+		scroll-behavior: auto;
+	}
+}
+
+/* Scrollbar */
+
+.slider {
+	scrollbar-color: rgb(#{$schemaColorForeground}) rgba(#{$schemaColorForeground}, 0.04);
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+	height: #{$ax4};
+	width: #{$ax4};
+	display: none;
+}
+
+.no-js .slider {
+	-ms-overflow-style: auto;
+	scrollbar-width: auto;
+}
+
+.no-js .slider::-webkit-scrollbar {
+	display: initial;
+}
+
+.slider::-webkit-scrollbar-thumb {
+	background-color: rgb(#{$schemaColorForeground});
+	border-radius: #{$ax4};
+	border: 0;
+}
+
+.slider::-webkit-scrollbar-track {
+	background: rgba(#{$schemaColorForeground}, 0.04);
+	border-radius: #{$ax4};
+}
+
+.slider-counter {
+	display: flex;
+	justify-content: center;
+	min-width: #{$ax44};
+}
+
+.slider-counter__link {
+	padding: #{$ax10};
+}
+
+@include media-query($s-down) {
+	.slider-counter__link {
+		padding: #{$ax7};
+	}
+}
+
+.slider-counter__link--dots .dot {
+	width: #{$ax10};
+	height: #{$ax10};
+	border-radius: 50%;
+	border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.5);
+	padding: 0;
+	display: block;
+}
+
+.slider-counter__link--active.slider-counter__link--dots .dot {
+	background-color: rgb(#{$schemaColorForeground});
+}
+
+@media screen and (forced-colors: active) {
+	.slider-counter__link--active.slider-counter__link--dots .dot {
+		background-color: CanvasText;
+	}
+}
+
+.slider-counter__link--dots:not(.slider-counter__link--active):hover .dot {
+	border-color: rgb(#{$schemaColorForeground});
+}
+
+.slider-counter__link--dots .dot,
+.slider-counter__link--numbers {
+	transition: transform 0.2s ease-in-out;
+}
+
+.slider-counter__link--active.slider-counter__link--numbers,
+.slider-counter__link--dots:not(.slider-counter__link--active):hover .dot,
+.slider-counter__link--numbers:hover {
+	transform: scale(1.1);
+}
+
+.slider-counter__link--numbers {
+	color: rgba(#{$schemaColorForeground}, 0.5);
+	text-decoration: none;
+}
+
+.slider-counter__link--numbers:hover {
+	color: rgb(#{$schemaColorForeground});
+}
+
+.slider-counter__link--active.slider-counter__link--numbers {
+	@include underline-always;
+	color: rgb(#{$schemaColorForeground});
+}
+
+.slider-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@include media-query($m-down) {
+	.slider--desktop:not(.slider--tablet) + .slider-buttons {
+		display: none;
+	}
+}
+
+.slider-button {
+	color: rgba(#{$schemaColorForeground}, 0.75);
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	width: #{$ax44};
+	height: #{$ax44};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.slider-button:not([disabled]):hover {
+	color: rgb(#{$schemaColorForeground});
+}
+
+.slider-button .icon {
+	height: #{$ax6};
+}
+
+.slider-button[disabled] .icon {
+	color: rgba(#{$schemaColorForeground}, 0.3);
+	cursor: not-allowed;
+}
+
+.slider-button--next .icon {
+	transform: rotate(-90deg);
+}
+
+.slider-button--prev .icon {
+	transform: rotate(90deg);
+}
+
+.slider-button--next:not([disabled]):hover .icon {
+	transform: rotate(-90deg) scale(1.1);
+}
+
+.slider-button--prev:not([disabled]):hover .icon {
+	transform: rotate(90deg) scale(1.1);
+}
+
+@include media-query($s-up) {
+	.slider.slider--tablet-up {
+		position: relative;
+		flex-wrap: inherit;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scroll-padding-left: #{$ax10};
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.slider.slider--tablet-up .slider__slide {
+		margin-bottom: 0;
+	}
+
+	.slider-counter--dots {
+		margin: 0 #{$ax12};
+	}
+
+	.slider--mobile + .slider-buttons {
+		display: none;
+	}
+}
+@include media-query($m-up) {
+	.slider-component-desktop.page-width {
+		max-width: none;
+	}
+
+	.slider--desktop {
+		position: relative;
+		flex-wrap: inherit;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		margin-bottom: #{$ax10};
+		scroll-padding-left: var(--desktop-margin-left-first-item);
+	}
+
+	/* Fix to show some space at the end of our sliders in all browsers */
+	.slider--desktop:after {
+		content: '';
+		width: 0;
+		padding-left: #{$ax50};
+		margin-left: calc(-1 * #{$xSpacingDesktop});
+	}
+
+	.slider.slider--desktop .slider__slide {
+		margin-bottom: 0;
+		padding-top: max(var(--focus-outline-padding), var(--shadow-padding-top));
+		padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
+	}
+
+	.slider--desktop .slider__slide:first-child {
+		margin-left: var(--desktop-margin-left-first-item);
+		scroll-margin-left: var(--desktop-margin-left-first-item);
+	}
+
+	.slider-component-full-width .slider--desktop {
+		scroll-padding-left: #{$ax15};
+	}
+
+	.slider-component-full-width .slider--desktop .slider__slide:first-child {
+		margin-left: #{$ax15};
+		scroll-margin-left: #{$ax15};
+	}
+
+	/* Fix to show some space at the end of our sliders in all browsers */
+	.slider-component-full-width .slider--desktop:after {
+		padding-left: #{$ax15};
+	}
+
+	.slider--desktop.grid--5-col-desktop .grid__item {
+		width: calc((100% - var(--desktop-margin-left-first-item)) / 5 - #{$xSpacingDesktop} * 2);
+	}
+
+	.slider--desktop.grid--4-col-desktop .grid__item {
+		width: calc((100% - var(--desktop-margin-left-first-item)) / 4 - #{$xSpacingDesktop} * 3);
+	}
+
+	.slider--desktop.grid--3-col-desktop .grid__item {
+		width: calc((100% - var(--desktop-margin-left-first-item)) / 3 - #{$xSpacingDesktop} * 4);
+	}
+
+	.slider--desktop.grid--2-col-desktop .grid__item {
+		width: calc((100% - var(--desktop-margin-left-first-item)) / 2 - #{$xSpacingDesktop} * 5);
+	}
+
+	.slider--desktop.grid--1-col-desktop .grid__item {
+		width: calc((100% - var(--desktop-margin-left-first-item)) - #{$xSpacingDesktop} * 9);
+	}
+
+	.slider.slider--desktop.contains-card--standard .slider__slide:not(.collection-list__item--no-media) {
+		padding-bottom: var(--focus-outline-padding);
+	}
+
+	.slider.slider--desktop.contains-content-container .slider__slide {
+		--focus-outline-padding: 0rem;
+	}
+}
+@media (prefers-reduced-motion) {
+	.slider {
+		scroll-behavior: auto;
+	}
+}
+@include media-query($m-up) {
+	.slider:not(.slider--everywhere):not(.slider--desktop) + .slider-buttons {
+		display: none;
+	}
+}

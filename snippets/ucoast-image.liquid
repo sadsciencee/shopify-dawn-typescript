@@ -1,0 +1,73 @@
+{% comment %}
+	this should only be called from ucoast-media
+{% endcomment %}
+{% liquid
+	unless image
+		assign image = settings.placeholder_image
+	endunless
+	unless id
+		assign id = image.id
+	endunless
+	if x_position and y_position
+		assign wrapper_id = 'image-wrapper-' | append: id | append: x_position | append: y_position
+	endif
+%}
+<span
+		class="{% if wrapper_class %}{{ wrapper_class }} {% else %} media media--transparent {% endif %}"
+
+	{% if aspect_ratio == 'adapt' and image != blank %}
+		style="--media-ratio: {{ image.aspect_ratio | divided_by: 1 }};"
+	{% elsif aspect_ratio == 'adapt' %}
+		style="--media-ratio: 1;"
+	{% endif %}
+		{% if wrapper_id %}
+			data-wrapper-id='{{ wrapper_id }}'
+		{% endif %}
+		data-media-id='{{ id }}'
+>
+	{% liquid
+		unless image
+			assign image = settings.placeholder_image
+		endunless
+		unless starting_width
+			assign starting_width = 1
+		endunless
+		unless alt
+			assign alt = image.alt
+		endunless
+		unless alt
+			assign alt = ''
+		endunless
+
+		if media_child
+			echo media_child
+		endif
+		capture input
+			echo image | image_url: width: starting_width | image_tag: loading: loading, class: image_class, id: id, style: style, preload: preload, alt: alt
+		endcapture
+		assign starting_src = image | image_url: width: starting_width
+		assign replace_src = ' src="' | append: starting_src | append: '" data-src='
+		if defer
+			assign replace_src = ' data-uc-defer ' | append: replace_src
+		endif
+		if load_on_event
+			assign replace_src = ' data-uc-load-on-event ' | append: replace_src
+		endif
+		if multiplier != 1
+			assign replace_src = ' data-uc-multiplier="' | append: multiplier | append: '"' | append: replace_src
+		endif
+		if custom_attributes
+			assign replace_src = ' ' | append: custom_attributes | append: ' ' | append: replace_src
+		endif
+		assign output = input | replace: 'srcset="', 'data-srcset="' | replace: ' src=', replace_src
+		echo output
+	%}
+	{% if wrapper_id %}
+		{% style %}
+			[data-wrapper-id="{{ wrapper_id }}"] img,
+			[data-wrapper-id="{{ wrapper_id }}"] video{
+				object-position: {{ x_position }}% {{ y_position }}% !important;
+			}
+		{% endstyle %}
+	{% endif %}
+</span>

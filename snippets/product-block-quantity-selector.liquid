@@ -1,0 +1,96 @@
+<div
+	id="Quantity-Form-{{ section.id }}"
+	class="product-form__input"
+	{% if settings.inputs_shadow_vertical_offset != 0
+		and settings.inputs_shadow_vertical_offset < 0
+	%}
+		data-uc-product-form-quantity="top"
+	{% else %}
+		data-uc-product-form-quantity
+	{% endif %}
+	{{ block.shopify_attributes }}
+>
+	{%- assign cart_qty = cart | item_count_for_variant: current_variant.id -%}
+	<label class="form__label" for="Quantity-{{ section.id }}" data-uc-quantity-label>
+		{{ 'products.product.quantity.label' | t }}
+		<span
+			class="no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}"
+			data-uc-quantity-rules-cart
+		>
+			<span class="hidden" data-uc-loading-overlay>
+				<span data-uc-loading-overlay-spinner>
+					<svg
+						aria-hidden="true"
+						focusable="false"
+						class="spinner"
+						viewBox="0 0 66 66"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+					</svg>
+				</span>
+			</span>
+			<span
+				>(
+				{{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
+				)</span
+			>
+		</span>
+	</label>
+	<quantity-input class="quantity">
+		<button class="quantity__button no-js-hidden" name="minus" type="button">
+			<span class="visually-hidden">
+				{{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+			</span>
+			{% render 'icon-default', icon: 'minus' %}
+		</button>
+		<input
+			data-uc-quantity-input
+			type="number"
+			name="quantity"
+			id="Quantity-{{ section.id }}"
+			data-cart-quantity="{{ cart_qty }}"
+			data-min="{{ current_varia2nt.quantity_rule.min }}"
+			min="{{ current_variant.quantity_rule.min }}"
+			{% if current_variant.quantity_rule.max != null %}
+				data-max="{{ current_variant.quantity_rule.max }}"
+				max="{{ current_variant.quantity_rule.max }}"
+			{% endif %}
+			step="{{ current_variant.quantity_rule.increment }}"
+			value="{{ current_variant.quantity_rule.min }}"
+			form="{{ product_form_id }}"
+		>
+		<button class="quantity__button no-js-hidden" name="plus" type="button">
+			<span class="visually-hidden">
+				{{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+			</span>
+			{% render 'icon-default', icon: 'plus' %}
+		</button>
+	</quantity-input>
+	<div class="caption no-js-hidden" data-uc-quantity-rules>
+		{%- if current_variant.quantity_rule.increment > 1 -%}
+			<span class="divider">
+				{{-
+					'products.product.quantity.multiples_of'
+					| t: quantity: current_variant.quantity_rule.increment
+				-}}
+			</span>
+		{%- endif -%}
+		{%- if current_variant.quantity_rule.min > 1 -%}
+			<span class="divider">
+				{{-
+					'products.product.quantity.minimum_of'
+					| t: quantity: current_variant.quantity_rule.min
+				-}}
+			</span>
+		{%- endif -%}
+		{%- if current_variant.quantity_rule.max != null -%}
+			<span class="divider">
+				{{-
+					'products.product.quantity.maximum_of'
+					| t: quantity: current_variant.quantity_rule.max
+				-}}
+			</span>
+		{%- endif -%}
+	</div>
+</div>

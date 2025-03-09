@@ -1,0 +1,34 @@
+{% liquid
+	unless section_id
+		assign section_id = section.id
+	endunless
+	if search_products
+		assign product_list = search_products
+	else
+		assign product_list = collection.products
+	endif
+%}
+{%- for product in product_list -%}
+	{%- if forloop.index == 4 -%}
+		{% assign loading = 'lazy' %}
+	{%- endif -%}
+	<li
+		class="grid__item{% render 'ucoast-animate', animation: 'slide-in' %} {% if slider %} embla__slide{% endif %}"
+		data-cascade
+		style="--animation-order: {{ forloop.index }};"
+	>
+		{% render 'card-product',
+			card_product: product,
+			section_id: section_id,
+			allow_upsell: true,
+			show_secondary_image: true,
+			loading: loading,
+			play_on_event: play_on_event
+		%}
+	</li>
+	{% if forloop.index0 == insert_after %}
+		<li class="grid__item grid__item--insert {% if slider %} embla__slide{% endif %}">
+			{{ insert_markup }}
+		</li>
+	{% endif %}
+{%- endfor -%}

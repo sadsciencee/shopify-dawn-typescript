@@ -1,0 +1,14 @@
+{% liquid
+	unless defer
+		assign defer = false
+	endunless
+	unless load_on_event
+		assign load_on_event = false
+	endunless
+
+	if media.duration > 0
+		render 'ucoast-video', wrapper_class: wrapper_class, video_class: media_class, video: media, defer: defer, load_on_event: load_on_event, aspect_ratio: aspect_ratio, starting_width: starting_width, id: media.id, y_position: y_position, x_position: x_position
+	else
+		render 'ucoast-image', wrapper_class: wrapper_class, image_class: media_class, image: media, defer: defer, load_on_event: load_on_event, aspect_ratio: aspect_ratio, starting_width: starting_width, id: media.id, y_position: y_position, x_position: x_position
+	endif
+%}

@@ -1,0 +1,270 @@
+{% liquid
+	comment
+		required inputs:
+
+		- desktop_media: video or image. use this on product media arrays or metafield file inputs
+
+		optional inputs:
+
+		- media
+		-- desktop_video: video specific input. use this with theme settings that allow image or video, or to allow image override of poster
+		-- desktop_image: image specific input. use this with theme settings that allow image or video, or to allow image override of poster
+		-- mobile_media: video or image. use this on product media arrays or metafield file inputs. overrides desktop for mobile devices.
+		-- mobile_video: overrides desktop for mobile devices.
+		-- mobile_image: overrides desktop for mobile devices.
+		-- media_child: optional. pass in a child html element to be rendered inside the media wrapper.
+
+		- selectors
+		-- unique_id. it's recommended to pass block or section id here to prevent conflicts with other instances of this snippet that use the same media.
+		-- media_class: optional. defaults to 'absolute top-0 left-0 w-100 h-100 object-cover'
+		-- wrapper_class: optional. adds another class to 'media media--aspect_ratio'
+		-- custom_data_attributes: optional. pass in any data attributes you need.
+
+		- settings
+		--play_on_event: boolean. use this for videos. defers loading until the video is explicitly played.
+		--aspect_ratio: 'adapt, fill, 16-9, circle, cropped, landscape, portrait, square'. optional.
+		--desktop_size: 'sm, md, lg'. defaults to lg. for image loading optimization - doesnt affect real size
+		--mobile_size: 'sm, md, lg'. defaults to lg. for image loading optimization - doesnt affect real size
+		--loading: 'lazy, eager'. defaults to lazy. optional.
+		--priority: 'high'. defaults to high. optional.	only use this if you're really sure - heros, PDP gallery featured image, etc.
+
+		- css vars
+		--aspect_ratio_vars: pass in css variables directly for complex use cases. optional.
+		--object_position_vars: use media-position.liquid to calculate object-position. optional.
+	endcomment
+	comment
+		1. determine media types for desktop/mobile
+		when possible, just pass media directly. however if you need to pass in media options, for example from the theme editor, use desktop_video, desktop_image, mobile_video, mobile_image
+	endcomment
+
+	assign desktop_media_type = 'none'
+	assign mobile_media_type = 'none'
+	assign media_class = media_class | default: 'absolute top-0 left-0 w-100 h-100 object-cover'
+	assign wrapper_class = wrapper_class | append: ' settings-overlay media media--' | append: aspect_ratio
+
+	if desktop_media
+		if desktop_media.duration > 0
+			assign desktop_media_type = 'video'
+		else
+			assign desktop_media_type = 'image'
+		endif
+	elsif desktop_video
+		assign desktop_media = desktop_video
+		assign desktop_media_type = 'video'
+	elsif desktop_image
+		assign desktop_media = desktop_image
+		assign desktop_media_type = 'image'
+	endif
+	if mobile_media
+		if mobile_media.duration > 0
+			assign mobile_media_type = 'video'
+		else
+			assign mobile_media_type = 'image'
+		endif
+	elsif mobile_video
+		assign mobile_media = mobile_video
+		assign mobile_media_type = 'video'
+	elsif mobile_image
+		assign mobile_media = mobile_image
+		assign mobile_media_type = 'image'
+	endif
+	if mobile_media_type != 'none' and desktop_media_type == 'none'
+		assign desktop_media = mobile_media
+		assign desktop_media_type = mobile_media_type
+	endif
+
+	comment
+		calculate widths and sizes for image tag
+		always choose two widths for mobile and 3 for desktop
+		the media queries will be 495, 989, 1200, 1800, none
+
+		on mobile_size:
+		use 'sm' for anything definitely less than half the viewport
+		use 'md' for anything roughly half the viewport
+		leave blank aka 'lg' for anything else
+
+		on desktop_size:
+		use 'sm' for anything close to or less than 1/3 the viewport
+		use 'md' for anything between 1/3 and 2/3 of the viewport
+	endcomment
+
+	case mobile_size
+		when 'sm'
+			assign mobile_widths = '300, 600'
+			assign mobile_sizes = '(max-width: 495px) 30vw, (max-width: 989px) 30vw'
+		when 'md'
+			assign mobile_widths = '450, 900'
+			assign mobile_sizes = '(max-width: 495px) 45vw, (max-width: 989px) 45vw'
+		else
+			assign mobile_widths = '900, 1800'
+			assign mobile_sizes = '(max-width: 495px) 100vw, (max-width: 989px) 100vw'
+	endcase
+
+	case desktop_size
+		when 'sm'
+			assign desktop_widths = '600, 900, 1200'
+			assign desktop_sizes = '(max-width: 1200px) 25vw, (max-width: 1800px) 25vw, 25vw'
+			assign starting_width = 600
+		when 'md'
+			assign desktop_widths = '1200, 1800, 2400'
+			assign desktop_sizes = '(max-wid    th: 1200px) 50vw, (max-width: 1800px) 50vw, 50vw'
+			assign starting_width = 1200
+		else
+			assign desktop_widths = '2400, 3600, 4800'
+			assign desktop_sizes = '(max-width: 1200px) 100vw, (max-width: 1800px) 100vw, 100vw'
+			assign starting_width = 2400
+	endcase
+
+	assign all_widths = mobile_widths | append: ', ' | append: desktop_widths
+	assign all_sizes = mobile_sizes | append: ', ' | append: desktop_sizes
+
+	assign overlay_opacity = overlay_opacity | default: 0.0
+
+	if aspect_ratio == 'adapt'
+		assign desktop_aspect_ratio = desktop_media.preview_image.aspect_ratio | default: desktop_media.aspect_ratio
+		assign mobile_aspect_ratio = mobile_media.preview_image.aspect_ratio | default: mobile_media.aspect_ratio | default: desktop_aspect_ratio
+		assign aspect_ratio_vars = '--aspect-ratio-mobile:' | append: mobile_aspect_ratio | append: '; --aspect-ratio-desktop:' | append: desktop_aspect_ratio | append: ';'
+	endif
+
+	assign wrapper_id = 'ucoast-media-' | append: desktop_media.id | append: desktop_media_type | append: mobile_media.id | append: mobile_media_type | append: unique_id
+
+	comment
+		use a switch key to improve conditional performance
+	endcomment
+	assign switch_key = desktop_media_type | append: '-' | append: mobile_media_type
+%}
+<art-direction
+	class="{{ wrapper_class }} art-direction art-direction--{{ switch_key }}"
+	style="{%- render 'overlay-variables', overlay_opacity: overlay_opacity -%}{{- aspect_ratio_vars -}}{{- object_position_vars -}}"
+	data-wrapper-id="{{ wrapper_id }}"
+	data-media-id="{{ desktop_media.id }}"
+	data-all-media-ids="{{ desktop_media.id }},{{ mobile_media.id }}"
+	{{ custom_data_attributes }}
+>
+	{% if media_child %}
+		{{ media_child }}
+	{% endif %}
+	{% case switch_key %}
+		{% when 'video-none' %}
+			{% assign poster = desktop_image | default: desktop_media.preview_image %}
+			{% assign media_class = media_class | append: ' no-picture' %}
+			{{
+				poster
+				| image_url: width: starting_width
+				| image_tag:
+					widths: all_widths,
+					sizes: all_sizes,
+					height: null,
+					class: media_class,
+					loading: loading
+			}}
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class,
+				play_on_event: play_on_event
+			%}
+		{% when 'video-video' %}
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class,
+				viewport_class: 'm-down-hide',
+				play_on_event: play_on_event
+			%}
+			{% render 'ucoast-video',
+				video: mobile_media,
+				video_class: media_class,
+				viewport_class: 'm-up-hide',
+				play_on_event: play_on_event
+			%}
+		{% when 'video-image' %}
+			{% assign poster = desktop_image
+				| default: desktop_media.preview_image
+			%}
+			<picture>
+				<source
+					media="(max-width: 989px)"
+					srcset="{% render 'srcset-from-widths', image: mobile_media, widths: mobile_widths %}"
+				>
+				<source
+					media="(min-width: 990px)"
+					srcset="{% render 'srcset-from-widths', image: poster, widths: desktop_widths %}"
+				>
+
+				<img
+					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+					alt="{{ mobile_media.alt }}"
+					sizes="{{- all_sizes -}}"
+					class="{{ media_class }}"
+				>
+			</picture>
+			{% render 'ucoast-video',
+				video: desktop_media,
+				video_class: media_class,
+				viewport_class: 'm-down-hide',
+				play_on_event: play_on_event
+			%}
+
+		{% when 'image-video' %}
+			{% assign poster = mobile_image
+				| default: mobile_media.preview_image
+			%}
+			<picture>
+				<source
+					media="(max-width: 989px)"
+					srcset="{% render 'srcset-from-widths', image: poster, widths: mobile_widths %}"
+				>
+				<source
+					media="(min-width: 990px)"
+					srcset="{% render 'srcset-from-widths', image: desktop_media, widths: desktop_widths %}"
+				>
+				<img
+					src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+					alt="{{ desktop_media.alt }}"
+					class="{{ media_class }}"
+					sizes="{{- all_sizes -}}"
+				>
+			</picture>
+			{% render 'ucoast-video',
+				video: mobile_media,
+				video_class: media_class,
+				viewport_class: 'm-up-hide',
+				play_on_event: play_on_event
+			%}
+
+		{% when 'none-none' %}
+			{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+		{% when 'image-none' %}
+			{% assign media_class = media_class | append: ' no-picture' %}
+			{{
+				desktop_media
+				| image_url: width: starting_width
+				| image_tag:
+					widths: all_widths,
+					sizes: all_sizes,
+					height: null,
+					class: media_class,
+					loading: loading
+			}}
+		{% else %}
+			<picture>
+				<source
+					media="(max-width: 989px)"
+					srcset="{% render 'srcset-from-widths', image: mobile_media, widths: mobile_widths %}"
+				>
+				<source
+					media="(min-width: 990px)"
+					srcset="{% render 'srcset-from-widths', image: desktop_media, widths: desktop_widths %}"
+				>
+				{{
+					desktop_media
+					| image_url: width: starting_width
+					| image_tag:
+						widths: all_widths,
+						sizes: all_sizes,
+						height: null,
+						class: media_class,
+						loading: loading
+				}}
+			</picture>
+	{% endcase %}
+</art-direction>

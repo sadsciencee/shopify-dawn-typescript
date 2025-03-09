@@ -1,0 +1,8 @@
+{% comment %}
+    required vars (passed in settings obj)
+
+    position: 'start' | 'center'
+    wrap_width: int 220-720
+    mobile_wrap_percent: int 51-150
+{% endcomment %}
+--component-text-align: {{- position -}};--component-wrap-width: {%- render 'ucoast-ax', value: wrap_width -%};--component-mobile-wrap-percent: {{- mobile_wrap_percent -}};--component-flex-position:{%- if position == 'start' -%}flex-start{%- else -%}center{%- endif -%};

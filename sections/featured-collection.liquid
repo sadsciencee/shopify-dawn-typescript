@@ -1,0 +1,153 @@
+{%- liquid
+	capture spacing
+		render 'ucoast-spacing', settings: section.settings
+	endcapture
+	if section.index > 2
+		assign loading = 'lazy'
+	else
+		assign loading = 'eager'
+	endif
+	capture color_scheme
+		render 'ucoast-scheme-classes', color_scheme: section.settings.color_scheme
+	endcapture
+-%}
+
+{%- liquid
+	assign products_to_display = section.settings.collection.all_products_count
+
+	if section.settings.collection.all_products_count > section.settings.products_to_show
+		assign products_to_display = section.settings.products_to_show
+		assign more_in_collection = true
+	endif
+
+	assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+	assign show_mobile_slider = false
+	if section.settings.swipe_on_mobile and products_to_display > columns_mobile_int
+		assign show_mobile_slider = true
+	endif
+
+	assign show_desktop_slider = false
+	if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
+		assign show_desktop_slider = true
+	endif
+-%}
+
+<div
+	class="{{ color_scheme }} isolate gradient {{ spacing }}"
+	style="padding-left: 0; padding-right: 0;"
+>
+	{% if section.blocks.size == 1 %}
+		{% render 'dynamic-product-slider',
+			collection: section.blocks[0].settings.collection,
+			show_quick_add: section.settings.show_quick_add
+		%}
+	{% else %}
+		<multi-product-slider class="multi-product-slider">
+			<div class="multi-product-slider__nav-wrapper">
+				<nav class="multi-product-slider__nav flex align-start justify-start">
+					{% for block in section.blocks %}
+						<button
+							class="h3 semantic-button multi-product-slider__button tt-uppercase underline-on-hover {% if forloop.first %} active {% endif %}"
+							data-nav="{{ block.id }}"
+							type="button"
+						>
+							{% if block.settings.title != blank %}
+								{{ block.settings.title }}
+							{% else %}
+								{{ block.settings.collection.title }}
+							{% endif %}
+						</button>
+					{% endfor %}
+				</nav>
+			</div>
+			<div
+				class="multi-product-slider__container relative w-100 list-unstyled"
+			>
+				{% assign defer = false %}
+				{% for block in section.blocks %}
+					<div
+						class="multi-product-slider__slider-wrapper absolute left-0 h-100 w-100 {% if forloop.first %} active {% endif %}"
+						data-slider="{{ block.id }}"
+					>
+						{% render 'dynamic-product-slider',
+							collection: block.settings.collection,
+							defer: defer
+						%}
+						{% if forloop.first %}
+							{% assign defer = true %}
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		</multi-product-slider>
+	{% endif %}
+</div>
+
+{% schema %}
+	{
+		"name": "t:sections.featured-collection.name",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"info": "t:sections.all.colors.has_cards_info",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.spacing"
+			},
+			{
+				"type": "range",
+				"id": "space_above",
+				"label": "Space Above",
+				"info": "Set to -1 to disable space above",
+				"min": 0,
+				"max": 10,
+				"default": 4,
+				"unit": "spc",
+				"step": 1
+			},
+			{
+				"type": "range",
+				"id": "mobile_space_above",
+				"label": "Mobile Space Above",
+				"min": -1,
+				"max": 10,
+				"step": 1,
+				"default": -1,
+				"info": "Leave as '-1' to use the same value as the desktop setting."
+			}
+		],
+		"blocks": [
+			{
+				"type": "collection",
+				"name": "t:sections.featured-collection.settings.collection.label",
+				"settings": [
+					{
+						"type": "inline_richtext",
+						"id": "title",
+						"default": "Featured collection",
+						"label": "t:sections.featured-collection.settings.title.label"
+					},
+					{
+						"type": "collection",
+						"id": "collection",
+						"label": "t:sections.featured-collection.settings.collection.label"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "t:sections.featured-collection.presets.name"
+			}
+		]
+	}
+{% endschema %}

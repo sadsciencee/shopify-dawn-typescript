@@ -1,0 +1,33 @@
+@import '../global/variables';
+@import '../global/functions';
+$block: 'dynamic-shipping-bar';
+.#{$block} {
+	height: $ax20;
+	&__indicator {
+		background-color: rgba(#{$schemaColorShadow}, 1);
+		border-radius: $ax10;
+		overflow: hidden;
+		width: var(--progress-percent);
+		transition: width 0.3s $bezier;
+	}
+	&__background {
+		background-color: rgb(#{$schemaColorBackground});
+		border: $ax1 solid rgb(#{$schemaColorForeground});
+		border-radius: $ax10;
+		left: $ax1;
+		right: $ax1;
+		width: calc(100% - #{$ax2});
+	}
+	&__status {
+		&__text {
+			margin: 0;
+			font-size: $ax10;
+			padding: $ax2 $ax10;
+		}
+		&__container {
+			border-radius: $ax10;
+			background-color: rgb(#{$schemaColorBackground});
+			overflow: hidden;
+		}
+	}
+}

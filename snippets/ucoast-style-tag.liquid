@@ -1,0 +1,24 @@
+{% comment %}
+	file: feeds into 'ucoast' param in the vite plugin
+	settings [bool]:
+	  preload_stylesheet: if true, will preload the stylesheet
+{% endcomment %}
+
+{% liquid
+	assign base_file = file | append: '.scss'
+	capture stylesheet
+		if preload_stylesheet
+			render 'vite' with base_file, preload_stylesheet: true
+		else
+			render 'vite' with base_file
+		endif
+	endcapture
+	if stylesheet contains '@vite/client'
+		echo stylesheet
+	elsif file contains 'defer'
+		assign stylesheet = stylesheet | replace: 'type="text/css"', 'type="text/css" defer="defer"'
+		echo stylesheet
+	else
+		echo stylesheet
+	endif
+%}

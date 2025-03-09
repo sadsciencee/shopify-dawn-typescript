@@ -1,0 +1,5 @@
+{% comment %} string replace "src" with "data-src" to prevent google from yelling at me{% endcomment %}
+{% liquid
+	assign output = input | replace: 'src=', 'data-src='
+	echo output
+%}
