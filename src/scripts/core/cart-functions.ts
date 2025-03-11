@@ -65,7 +65,7 @@ export function hasDomCart() {
 export function getDOMCartSectionApiIds() {
 	const cartEl = getDOMCart()
 	if (!cartEl) return undefined
-	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-shipping-bar']
+	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-shipping-bar', 'dynamic-cart-footer']
 }
 
 const ignoredProperties = ['utf8', 'product-id', 'section-id']

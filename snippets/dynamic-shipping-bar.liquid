@@ -1,9 +1,12 @@
 {% liquid
+	capture gwp_offer
+		render 'return-gwp-offer-next', partial_cart_threshold: true
+	endcapture
 	assign success = "you're getting free shipping!"
-	assign meter_suffix = "away from free shipping"
+	assign meter_suffix = 'until free shipping' | append: gwp_offer
 
 	assign display = true
-	assign threshold = localization.market.metafields.custom.free_shipping_threshold.value
+	assign threshold = 20000
 	unless threshold
 		assign display = false
 	endunless
@@ -26,7 +29,7 @@
 		style="--progress-percent: {{ percent }}%"
 	>
 		<span
-			class="absolute left-0 top-0 h-100 w-100 dynamic-shipping-bar__status__container empty flex align-center justify-start"
+			class="absolute top-0 h-100 dynamic-shipping-bar__status__container empty flex align-center justify-start"
 			role="status"
 		>
 			<span
@@ -44,7 +47,7 @@
 			class="dynamic-shipping-bar__indicator absolute left-0 top-0 h-100 z-2 empty"
 		></span>
 		<span
-			class="dynamic-shipping-bar__background w-100 absolute left-0 top-0 h-100 z-1 empty"
+			class="dynamic-shipping-bar__background w-100 absolute top-0 h-100 z-1 empty"
 		></span>
 	</dynamic-shipping-bar>
 {% endif %}

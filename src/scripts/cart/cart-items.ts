@@ -239,13 +239,16 @@ export class CartItems extends UcoastEl {
 							)
 						: q.rs(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
-					window.TsDOM.trapFocus(
-						q.rs(
-							this.instanceSelectors.cartDrawerInnerEmpty,
-							cartDrawerWrapper
-						),
-						q.rs('a', cartDrawerWrapper)
+					const cartEmptyEl = q.os(
+						this.instanceSelectors.cartDrawerInnerEmpty,
+						cartDrawerWrapper
 					)
+					if (cartEmptyEl) {
+						window.TsDOM.trapFocus(
+							cartEmptyEl,
+							q.rs('a', cartDrawerWrapper)
+						)
+					}
 				} else if (
 					document.querySelector(this.instanceSelectors.item) &&
 					cartDrawerWrapper

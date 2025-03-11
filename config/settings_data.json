@@ -10,15 +10,15 @@
 {
   "current": {
     "gwp_offers": [
-      "gwp-tier-2-vip-customer-75-00",
-      "gwp-tier-2-generic-customer-150-00",
+      "75-149-99-all-customers",
       "gwp-tier-1-vip-customer-0-00-75-00",
-      "75-149-99-all-customers"
+      "gwp-tier-2-vip-customer-75-00",
+      "gwp-tier-2-generic-customer-150-00"
     ],
     "placeholder_image": "shopify://shop_images/98_41495123-7124-45aa-9e7a-21d3e4c0e5d6.jpg",
     "logo": "shopify://shop_images/scratch_1950.svg",
     "logo_width": 90,
-    "favicon": "{{ shop.brand.square_logo }}",
+    "favicon": "shopify://shop_images/favicon.png",
     "type_header_font": "josefin_sans_n3",
     "heading_scale": 100,
     "type_body_font": "basic_commercial_soft_rounded_n4",
@@ -31,10 +31,10 @@
     "spacing_grid_horizontal": 16,
     "spacing_grid_vertical": 40,
     "animations_reveal_on_scroll": true,
-    "animations_hover_elements": "vertical-lift",
+    "animations_hover_elements": "default",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
-    "buttons_radius": 4,
+    "buttons_radius": 0,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
@@ -93,9 +93,10 @@
     "text_boxes_shadow_horizontal_offset": 0,
     "text_boxes_shadow_vertical_offset": 4,
     "text_boxes_shadow_blur": 5,
+    "pdp_aspect_ratio": 75,
     "media_border_thickness": 1,
     "media_border_opacity": 5,
-    "media_radius": 8,
+    "media_radius": 0,
     "media_shadow_opacity": 0,
     "media_shadow_horizontal_offset": 0,
     "media_shadow_vertical_offset": 4,
@@ -132,7 +133,7 @@
     "currency_code_enabled": true,
     "cart_type": "drawer",
     "show_vendor": false,
-    "show_cart_note": true,
+    "show_cart_note": false,
     "cart_drawer_collection": "",
     "sections": {
       "main-password-header": {
@@ -156,10 +157,10 @@
           "card_background": "",
           "background_gradient": "",
           "text": "#000000",
-          "button": "#133a48",
+          "button": "#000000",
           "button_label": "#ffffff",
-          "secondary_button": "#322f69",
-          "secondary_button_label": "#133a48",
+          "secondary_button": "#000000",
+          "secondary_button_label": "#000000",
           "outline_button_label": "#000000",
           "shadow": "#d9d9d9"
         }
@@ -170,11 +171,11 @@
           "card_background": "",
           "background_gradient": "",
           "text": "#000000",
-          "button": "#133a48",
+          "button": "#000000",
           "button_label": "#ffffff",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#000000",
-          "outline_button_label": "#133a48",
+          "outline_button_label": "#000000",
           "shadow": "#d9d9d9"
         }
       },
@@ -199,10 +200,10 @@
           "background_gradient": "",
           "text": "#000000",
           "button": "#ffffff",
-          "button_label": "#270731",
+          "button_label": "#000000",
           "secondary_button": "#ffffff",
           "secondary_button_label": "#ffffff",
-          "outline_button_label": "#322f69",
+          "outline_button_label": "#000000",
           "shadow": "#d9d9d9"
         }
       },
@@ -212,25 +213,11 @@
           "card_background": "",
           "background_gradient": "",
           "text": "#000000",
-          "button": "#133a48",
+          "button": "#000000",
           "button_label": "#ffffff",
           "secondary_button": "#f7f0fa",
           "secondary_button_label": "#ffffff",
-          "outline_button_label": "#133a48",
-          "shadow": "#d9d9d9"
-        }
-      },
-      "scheme-2557bd81-e4bb-4cd9-801c-7cfbd40c972c": {
-        "settings": {
-          "background": "rgba(0,0,0,0)",
-          "card_background": "",
-          "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#270731",
-          "secondary_button": "#322f69",
-          "secondary_button_label": "#133a48",
-          "outline_button_label": "#ffffff",
+          "outline_button_label": "#000000",
           "shadow": "#d9d9d9"
         }
       }
@@ -403,7 +390,7 @@
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
       "currency_code_enabled": true,
-      "cart_type": "notification",
+      "cart_type": "drawer",
       "show_vendor": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",

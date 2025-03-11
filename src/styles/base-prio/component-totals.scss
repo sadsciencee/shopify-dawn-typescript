@@ -4,28 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  padding: 0 $ax15 $ax15;
+
+  h2, p {
+    margin: 0;
+  }
 }
 
-.totals > * {
-  font-size: #{$ax16};
-  margin: 0;
-}
-
-.totals > h2 {
-  font-size: calc(#{$fontHeadingScale} * #{$ax16});
-}
 
 .totals * {
   line-height: 1;
 }
 
-.totals > * + * {
-  margin-left: #{$ax20};
-}
 
-.totals__subtotal-value {
-  font-size: #{$ax18};
-}
 
 .cart__ctas + .totals {
   margin-top: #{$ax20};

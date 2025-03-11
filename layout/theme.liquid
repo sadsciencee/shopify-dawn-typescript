@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}">
+<html class="no-js no-scrollbar" lang="{{ request.locale.iso_code }}">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -105,7 +105,7 @@
 		</script>
 	</head>
 
-	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+	<body class="gradient{% if settings.animations_hover_elements != 'none' %} no-scrollbar animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
 		<a
 			class="skip-to-content-link button visually-hidden"
 			href="#MainContent"

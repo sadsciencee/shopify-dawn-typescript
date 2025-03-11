@@ -20,7 +20,7 @@
 	<div id="CartDrawer" class="cart-drawer">
 		<div
 			data-uc-cart-drawer-overlay
-			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"
+			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0 empty"
 		></div>
 		<div
 			data-uc-cart-drawer-inner
@@ -30,20 +30,30 @@
 			aria-label="{{ 'sections.cart.title' | t }}"
 			tabindex="-1"
 		>
+			<button
+					class="drawer__header relative flex justify-start align-center semantic-button"
+					type="button"
+					onclick="this.closest('cart-drawer').close()"
+					aria-label="{{ 'accessibility.close' | t }}"
+			>
+				{% render 'icon-default', icon: 'arrow-left' %}
+				{{ 'general.continue_shopping' | t }}
+			</button>
+			{% render 'dynamic-shipping-bar', cart: cart %}
 			{%- if cart == empty -%}
 				<div
-					data-uc-cart-drawer-inner-empty
-					class="flex flex-column overflow-hidden h-100"
+						data-uc-cart-drawer-inner-empty
+						class="flex flex-column overflow-hidden h-100"
 				>
 					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
 						<div class="cart-drawer__empty-content">
 							<h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
 							<button
-								class="drawer__close inline-block p-0 absolute bg-transparent b-0"
-								type="button"
-								onclick="this.closest('cart-drawer').close()"
-								aria-label="{{ 'accessibility.close' | t }}"
-								data-uc-cart-drawer-close-button
+									class="drawer__close inline-block p-0 absolute bg-transparent b-0"
+									type="button"
+									onclick="this.closest('cart-drawer').close()"
+									aria-label="{{ 'accessibility.close' | t }}"
+									data-uc-cart-drawer-close-button
 							>
 								{% render 'icon-default', icon: 'close' %}
 							</button>
@@ -57,8 +67,8 @@
 								</p>
 								<p class="cart__login-paragraph">
 									{{
-										'sections.cart.login.paragraph_html'
-										| t: link: routes.account_login_url
+									'sections.cart.login.paragraph_html'
+									| t: link: routes.account_login_url
 									}}
 								</p>
 							{%- endif -%}
@@ -67,25 +77,13 @@
 					{%- if settings.cart_drawer_collection != blank -%}
 						<div class="cart-drawer__collection">
 							{% render 'card-collection',
-								card_collection: settings.cart_drawer_collection,
-								columns: 1
+									card_collection: settings.cart_drawer_collection,
+									columns: 1
 							%}
 						</div>
 					{%- endif -%}
 				</div>
 			{%- endif -%}
-			<div class="drawer__header relative flex justify-between align-center">
-				<h2 class="drawer__heading mb-0">{{ 'sections.cart.title' | t }}</h2>
-				<button
-					class="drawer__close inline-block p-0 absolute bg-transparent b-0"
-					type="button"
-					onclick="this.closest('cart-drawer').close()"
-					aria-label="{{ 'accessibility.close' | t }}"
-				>
-					{% render 'icon-default', icon: 'close' %}
-				</button>
-			</div>
-			{% render 'dynamic-shipping-bar', cart: cart %}
 			{% render 'cart-drawer-items', cart: cart %}
 			{% render 'dynamic-cart-footer', cart: cart %}
 		</div>

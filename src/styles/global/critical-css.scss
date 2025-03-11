@@ -83,7 +83,7 @@ body {
 	min-height: 100%;
 	margin: 0;
 	font-size: #{$ax15};
-	letter-spacing: 0.04em;
+	letter-spacing: 0.01em;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
 	font-style: #{$fontBodyStyle};
@@ -748,4 +748,15 @@ ucoast-video[data-uc-has-played='true'] video {
 
 style[data-shopify] {
 	display: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.no-underline {
+	text-decoration: none;
 }

@@ -16,7 +16,7 @@
 			{%- if cart != empty -%}
 				<div class="drawer__cart-items-wrapper">
 					<table class="cart-items" role="table">
-						<thead role="rowgroup">
+						<thead role="rowgroup" class="visually-hidden">
 							<tr role="row">
 								<th
 									id="CartDrawer-ColumnProductImage"
@@ -100,7 +100,7 @@
 
 										<a
 											href="{{ item.url }}"
-											class="h4 break"
+											class="link break no-underline"
 											data-uc-cart-item-name
 										>
 											{{- item.product.title | escape -}}
@@ -400,7 +400,7 @@
 													aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
 												>
 													{% render 'icon-default',
-														icon: 'remove'
+														icon: 'close-small'
 													%}
 												</button>
 											</cart-remove-button>

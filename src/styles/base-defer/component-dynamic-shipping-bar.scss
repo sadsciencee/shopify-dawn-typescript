@@ -2,21 +2,25 @@
 @import '../global/functions';
 $block: 'dynamic-shipping-bar';
 .#{$block} {
+	padding: 0 $ax15;
 	height: $ax20;
 	&__indicator {
-		background-color: rgba(#{$schemaColorShadow}, 1);
+		background-color: #90D3EE;
 		border-radius: $ax10;
 		overflow: hidden;
-		width: var(--progress-percent);
+		width: calc(var(--progress-percent) - #{$ax30});
 		transition: width 0.3s $bezier;
+		left: $ax15;
+		right: $ax15;
+		max-width: calc(100% - #{$ax30});
 	}
 	&__background {
 		background-color: rgb(#{$schemaColorBackground});
 		border: $ax1 solid rgb(#{$schemaColorForeground});
 		border-radius: $ax10;
-		left: $ax1;
-		right: $ax1;
-		width: calc(100% - #{$ax2});
+		left: $ax16;
+		right: $ax16;
+		width: calc(100% - #{$ax32});
 	}
 	&__status {
 		&__text {
@@ -28,6 +32,8 @@ $block: 'dynamic-shipping-bar';
 			border-radius: $ax10;
 			background-color: rgb(#{$schemaColorBackground});
 			overflow: hidden;
+			width: calc(100% - #{$ax30});
+			left: $ax15;
 		}
 	}
 }

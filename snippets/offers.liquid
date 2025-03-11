@@ -3,7 +3,7 @@
     assign collect_logs = collect_logs | default: false
 
     capture gwp_offer_handle
-        render 'return-active-gwp-offer', collect_logs: collect_logs
+        render 'return-gwp-offer-next', collect_logs: collect_logs, partial_cart_threshold: true
     endcapture
     echo gwp_offer_handle
 -%}

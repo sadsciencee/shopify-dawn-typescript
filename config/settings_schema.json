@@ -1164,7 +1164,7 @@
         "min": 51,
         "max": 225,
         "step": 3,
-        "default": 66,
+        "default": 75,
         "unit": "%"
       },
       {
@@ -1174,7 +1174,7 @@
         "min": 51,
         "max": 225,
         "step": 3,
-        "default": 66,
+        "default": 75,
         "unit": "%"
       },
       {

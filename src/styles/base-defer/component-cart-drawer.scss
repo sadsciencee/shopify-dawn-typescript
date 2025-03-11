@@ -18,16 +18,15 @@
 .drawer__inner {
   width: ax(400);
   max-width: calc(100vw - #{$ax30});
-  padding: 0 $ax15;
-  border: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
-  border-right: 0;
+  padding: 0;
+  border: 0;
   background-color: rgb(#{$schemaColorBackground});
   transform: translateX(100%);
   transition: transform var(--duration-default) ease;
 }
 
 [data-uc-cart-drawer-inner-empty] {
-  padding: 0 $ax15;
+  padding: 0;
   background-color: rgb(#{$schemaColorBackground});
 }
 
@@ -37,7 +36,7 @@
 
 cart-drawer[data-uc-cart-empty] .drawer__inner {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto 1fr;
   align-items: center;
   padding: 0;
 }
@@ -61,7 +60,15 @@ cart-drawer:not([data-uc-cart-empty]) .cart-drawer__collection {
 
 .drawer__header {
   background-color: rgb(#{$schemaColorBackground});
-  padding: $ax15 0;
+  padding: $ax15;
+  gap: $ax10;
+  line-height: 1;
+  .icon-arrow-left {
+    width: $ax12;
+    height: auto;
+    display: block;
+    transform: translateY(#{$ax1});
+  }
 }
 
 .drawer__heading {
@@ -94,7 +101,7 @@ cart-drawer:not([data-uc-cart-empty]) .cart-drawer__collection {
 .drawer__footer {
   background-color: rgb(#{$schemaColorBackground});
   border-top: #{$ax1} solid rgba(#{$schemaColorForeground}, 0.2);
-  padding: $ax15 0;
+  padding: $ax15 0 0;
 }
 
 cart-drawer-items[data-uc-cart-empty] + .drawer__footer {
@@ -157,6 +164,8 @@ cart-drawer-items {
   overflow: auto;
   flex: 1;
   margin-top: $ax15;
+  padding: 0 $ax15;
+  width: 100%;
 }
 
 @media screen and (max-height: 650px) {
@@ -182,6 +191,7 @@ cart-drawer-items {
 
 .cart-drawer .cart-item__media {
   grid-row: 1 / 3;
+  aspect-ratio: $pdpAspectRatio;
 }
 
 .cart-drawer .cart-item__image {
@@ -222,11 +232,13 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items td {
-  padding-top: #{$ax20};
+  padding-top: 0;
+  //padding-top: #{$ax20};
 }
 
 .cart-drawer [data-uc-cart-item] > td + td {
-  padding-left: #{$ax10};
+  padding-left: 0;
+  // padding-left: #{$ax10};
 }
 
 .cart-drawer .cart-item__details {

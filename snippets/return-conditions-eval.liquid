@@ -1,11 +1,19 @@
 {%- liquid
-    # params: conditions ((offer_condition_cart_threshold | offer_condition_customer)[]), operator ("AND" | "OR"), collect_logs (boolean, optional), list_delimiter (string, default ':::')
+    # params:
+    #   conditions ((offer_condition_cart_threshold | offer_condition_customer)[])
+    #   operator ("AND" | "OR")
+    #   collect_logs (boolean, optional)
+    #   list_delimiter (string, default ':::')
+    #   partial_cart_threshold (boolean, default false)
+
+
+    # default params and variables
     assign evals = ''
     assign list_delimiter = list_delimiter | default: ':::'
     assign log_lines = ''
     assign collect_logs = collect_logs | default: false
     assign result = 'false'
-
+    assign partial_cart_threshold = partial_cart_threshold | default: false
 
     # loop conditions and use the appropriate condition eval snippet based on the condition type
     for condition in conditions
@@ -13,7 +21,11 @@
         case condition.system.type
             when 'offer_condition_cart_threshold'
                 capture eval
-                    render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs
+                    if partial_cart_threshold
+                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs, partial: partial_cart_threshold
+                    else
+                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs
+                    endif
                 endcapture
             when 'offer_condition_customer'
                 capture eval

@@ -2,7 +2,7 @@
 @import './functions.scss';
 .text-body {
 	font-size: #{$ax15};
-	letter-spacing: 0.04em;
+	letter-spacing: 0.01em;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
 	font-style: #{$fontBodyStyle};
@@ -11,7 +11,7 @@
 
 .text-large {
 	@include clampSize(18, 21);
-	letter-spacing: 0.04em;
+	letter-spacing: 0.01em;
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
 	font-family: #{$fontBodyFamily};
 	font-style: #{$fontBodyStyle};
@@ -32,7 +32,7 @@ h5,
 	font-family: #{$fontHeadingFamily};
 	font-style: #{$fontHeadingStyle};
 	font-weight: #{$fontHeadingWeight};
-	letter-spacing: calc(#{$fontHeadingScale} * #{ax(.6)});
+	letter-spacing: 0.01em;
 	color: rgb(#{$schemaColorForeground});
 	line-height: calc(1 + 0.3 / max(1, #{$fontHeadingScale}));
 	word-break: break-word;
@@ -135,7 +135,7 @@ blockquote {
 
 .caption {
 	font-size: #{$ax10};
-	letter-spacing: 0.07em;
+	letter-spacing: 0.01em;
 	line-height: calc(1 + 0.7 / #{$fontBodyScale});
 }
 
@@ -147,19 +147,19 @@ blockquote {
 
 .caption-with-letter-spacing {
 	font-size: #{$ax10};
-	letter-spacing: 0.13em;
+	letter-spacing: 0.03em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 	text-transform: uppercase;
 }
 
 .caption-with-letter-spacing--medium {
 	font-size: #{$ax12};
-	letter-spacing: 0.1334em;
+	letter-spacing: 0.03em;
 }
 
 .caption-with-letter-spacing--large {
 	font-size: #{$ax14};
-	letter-spacing: 0.01286em;
+	letter-spacing: 0.01em;
 }
 
 .caption-large,
@@ -170,7 +170,7 @@ blockquote {
 .select__select {
 	font-size: #{$ax13};
 	line-height: calc(1 + 0.5 / #{$fontBodyScale});
-	letter-spacing: 0.0308em;
+	letter-spacing: 0.01em;
 }
 
 .color-foreground {
@@ -231,7 +231,7 @@ h6:empty:not(.empty) {
 	display: inline-flex;
 	font-size: #{$ax14};
 	font-weight: 600;
-	letter-spacing: 0.00714em;
+	letter-spacing: 0.01em;
 	text-decoration: none;
 	margin-bottom: #{$ax45};
 	white-space: nowrap;

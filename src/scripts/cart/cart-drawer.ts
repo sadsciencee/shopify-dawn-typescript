@@ -55,10 +55,7 @@ export class CartDrawer extends UcoastEl {
 
 	open(triggeredBy?: HTMLElement) {
 		if (triggeredBy) this.setActiveElement(triggeredBy)
-		const cartDrawerNote = q.os(
-			CartDrawer.selectors.noteSummary,
-			this
-		)
+		const cartDrawerNote = q.os(CartDrawer.selectors.noteSummary, this)
 		if (cartDrawerNote && !cartDrawerNote.hasAttribute('role'))
 			this.setSummaryAccessibility(cartDrawerNote)
 		// here the animation doesn't seem to always get triggered. A timeout seem to help
@@ -111,10 +108,9 @@ export class CartDrawer extends UcoastEl {
 
 		cartDrawerNote.addEventListener('click', (event: MouseEvent) => {
 			const currentTarget = q.rct(event)
-			const isExpanded = q.rs(
-				CartDrawer.selectors.noteDetails,
-				this
-			).hasAttribute('open')
+			const isExpanded = q
+				.rs(CartDrawer.selectors.noteDetails, this)
+				.hasAttribute('open')
 			currentTarget.setAttribute('aria-expanded', `${isExpanded}`)
 		})
 
@@ -130,6 +126,12 @@ export class CartDrawer extends UcoastEl {
 			}
 			const sectionHandle = section.section
 			if (!sectionHandle) throw new Error('Section id is required')
+			console.log('rendering section', {
+				sectionHandle,
+				selector: section.selector,
+				id: section.id,
+			})
+			console.log('sections', cart.sections)
 			renderRawHTMLToDOM({
 				sourceHTML: cart.sections[sectionHandle],
 				sourceSelector: section.selector,

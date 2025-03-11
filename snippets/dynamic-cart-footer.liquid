@@ -26,8 +26,8 @@
 
     <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
         <div class="totals" role="status">
-            <h2 class="totals__subtotal">{{ 'sections.cart.headings.total' | t }}</h2>
-            <p class="totals__subtotal-value">
+            <h2 class="text-body">{{ 'sections.cart.headings.total' | t }}</h2>
+            <p class="text-body">
                 {{ cart.total_price | money_with_currency }}
             </p>
         </div>
@@ -49,24 +49,6 @@
                 </ul>
             {%- endif -%}
         </div>
-
-        <small class="tax-note caption-large rte">
-            {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
-                {{
-                'sections.cart.taxes_included_and_shipping_policy_html'
-                | t: link: shop.shipping_policy.url
-                }}
-            {%- elsif cart.taxes_included -%}
-                {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
-            {%- elsif shop.shipping_policy.body != blank -%}
-                {{
-                'sections.cart.taxes_and_shipping_policy_at_checkout_html'
-                | t: link: shop.shipping_policy.url
-                }}
-            {%- else -%}
-                {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
-            {%- endif -%}
-        </small>
     </div>
 
     <!-- CTAs -->

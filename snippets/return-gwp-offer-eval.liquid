@@ -1,0 +1,74 @@
+{%- liquid
+    # params:
+    #   collect_logs (boolean, optional)
+    #   offer (gwp_offer)
+    #   partial_cart_threshold (boolean, default false)
+
+    # check the active offers in the store, sort by priority and return the handle and type of the first active offer
+    # returns as array of type:handle:log_lines strings, delimited by ':::'. if type/handle are not found, each will be _not_found_, but logs will still be included
+    # cart threshold requirements are checked with a partial evaluation, this allows us to present a "spend x to get y" message for the next valid offer
+    # refer to 'display-log-lines' snippet for log line formatting instructions
+
+    # setup default params and vars
+    assign result_delimiter = '::'
+    assign list_delimiter = ':::'
+    assign log_delimiter = '___LOG___'
+    assign result = '_not_found_' | append: result_delimiter | append: '_not_found_'
+    assign log_lines = ''
+    assign collect_logs = collect_logs | default: false
+    assign offers = offers | default: settings.gwp_offers
+    assign partial_cart_threshold = partial_cart_threshold | default: false
+
+
+    if collect_logs
+        capture log_title
+            echo '_title_Checking offer ' | append: offer.label.value | append: ' at index ' | append: index | append: log_delimiter
+        endcapture
+    endif
+
+    # get instructions from the offer metaobject
+    assign enable_condition_operator = offer.enable_condition_operator.value | default: 'OR'
+    assign disable_condition_operator = offer.disable_condition_operator.value | default: 'OR'
+
+    # run evals against conditions
+    capture enable_evals_result
+        # at least for now only apply partial threshold to 'enable' conditions
+        render 'return-conditions-eval', conditions: offer.enable_conditions.value, operator: enable_condition_operator, collect_logs: collect_logs, list_delimiter: list_delimiter, partial_cart_threshold: partial_cart_threshold
+    endcapture
+    capture disable_evals_result
+        render 'return-conditions-eval', conditions: offer.disable_conditions.value, operator: disable_condition_operator, collect_logs: collect_logs, list_delimiter: list_delimiter
+    endcapture
+
+    # if we're collecting logs, loop the evals results and append to log_lines
+    if collect_logs
+        # pull individual log lines from results
+        assign enable_lines_split = enable_evals_result | split: result_delimiter
+        assign disable_lines_split = disable_evals_result | split: result_delimiter
+        capture item_log_lines
+            echo log_title
+            render 'return-log-line', source: enable_evals_result, log_delimiter: log_delimiter
+            render 'return-log-line', source: disable_evals_result, log_delimiter: log_delimiter
+        endcapture
+        assign log_lines = log_lines | append: item_log_lines
+
+        ## clean up the results for the final output
+        assign enable_evals_result = enable_lines_split[0]
+        assign disable_evals_result = disable_lines_split[0]
+
+        assign log_lines = log_lines | append: '___LOG___' | append: 'enable_evals_result=' | append: enable_evals_result | append: ',disable_evals_result=' | append: disable_evals_result | append: '___LOG___'
+    endif
+
+    # if the offer is valid, set the result and exit the loop. otherwise continue to the next offer
+    # use 'contains' since the results will contain log lines after a '::' separator
+    if enable_evals_result == 'true' and disable_evals_result == 'false'
+        assign result = offer.system.type | append: result_delimiter | append: offer.system.handle
+        assign log_lines = log_lines | append: '_title_Selected Offer' | append: log_delimiter | append: 'Type=' | append: offer.system.type | append: ',Handle=' | append: offer.system.handle
+    endif
+
+    # return out result to calling snippet
+    if collect_logs
+        echo result | append: result_delimiter | append: log_lines
+    else
+        echo result
+    endif
+-%}
