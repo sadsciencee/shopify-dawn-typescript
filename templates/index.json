@@ -1,14 +1,20 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
 	"sections": {
+		"test_iNtqMa": {
+			"type": "test",
+			"settings": {
+				"collect_logs": true
+			}
+		},
 		"featured_collection_L3RcEq": {
 			"type": "featured-collection",
 			"blocks": {
@@ -54,12 +60,10 @@
 						"button_label": "Button label",
 						"button_link": "",
 						"full_block_clickable": false,
-						"image": "shopify://shop_images/IMG_9944_2.jpg",
 						"x_position_desktop": 50,
 						"y_position_desktop": 50,
 						"override_shopify_position_desktop": true,
 						"image_overlay_opacity": 10,
-						"mobile_image": "shopify://shop_images/Screen_Shot_2023-03-28_at_2.09_2.jpg",
 						"x_position_mobile": 50,
 						"y_position_mobile": 50,
 						"override_shopify_position_mobile": true
@@ -79,12 +83,10 @@
 						"button_label": "Button label",
 						"button_link": "",
 						"full_block_clickable": false,
-						"image": "shopify://shop_images/IMG_9944.jpg",
 						"x_position_desktop": 50,
 						"y_position_desktop": 50,
 						"override_shopify_position_desktop": true,
 						"image_overlay_opacity": 10,
-						"mobile_image": "shopify://shop_images/IMG_9945.jpg",
 						"x_position_mobile": 50,
 						"y_position_mobile": 50,
 						"override_shopify_position_mobile": true
@@ -220,21 +222,15 @@
 			"blocks": {
 				"template--21632493683004__0026a19f-baba-419e-b405-504c014c4a12-image-1": {
 					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/Screen_Shot_2023-03-28_at_2.09_2.jpg"
-					}
+					"settings": {}
 				},
 				"image_wEYkDw": {
 					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/Screen_Shot_2023-03-28_at_2.09_1.jpg"
-					}
+					"settings": {}
 				},
 				"image_MYdLGc": {
 					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/IMG_9944_2.jpg"
-					}
+					"settings": {}
 				}
 			},
 			"block_order": [
@@ -270,12 +266,10 @@
 						"button_label": "Button label",
 						"button_link": "",
 						"full_block_clickable": false,
-						"image": "shopify://shop_images/IMG_9944_2.jpg",
 						"x_position_desktop": 50,
 						"y_position_desktop": 50,
 						"override_shopify_position_desktop": true,
 						"image_overlay_opacity": 10,
-						"mobile_image": "shopify://shop_images/Screen_Shot_2023-03-28_at_2.09_2.jpg",
 						"x_position_mobile": 50,
 						"y_position_mobile": 50,
 						"override_shopify_position_mobile": true
@@ -295,12 +289,10 @@
 						"button_label": "Button label",
 						"button_link": "",
 						"full_block_clickable": false,
-						"image": "shopify://shop_images/IMG_9944.jpg",
 						"x_position_desktop": 50,
 						"y_position_desktop": 50,
 						"override_shopify_position_desktop": true,
 						"image_overlay_opacity": 10,
-						"mobile_image": "shopify://shop_images/IMG_9945.jpg",
 						"x_position_mobile": 50,
 						"y_position_mobile": 50,
 						"override_shopify_position_mobile": true
@@ -319,6 +311,7 @@
 		}
 	},
 	"order": [
+		"test_iNtqMa",
 		"featured_collection_L3RcEq",
 		"hero_MK4cWi",
 		"rich_text",

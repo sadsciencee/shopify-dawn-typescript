@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
@@ -8,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "We're making room for Spring! Shop 250 styles at up to 70% off today*",
             "link": ""
           }
         }
@@ -17,7 +26,7 @@
         "announcement-bar-0"
       ],
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "inverse",
         "show_line_separator": true,
         "show_social": false,
         "auto_rotate": false,
@@ -30,6 +39,7 @@
         "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "mega",
+        "open_menu_on_hover": true,
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "background-1",

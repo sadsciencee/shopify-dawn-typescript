@@ -1,0 +1,38 @@
+{%- liquid
+    # params: condition (offer_condition_cart_threshold), collect_logs (boolean, optional)
+    # returns 'true' if the current cart state meets the required condition, 'false' if not
+    # optionally, returns log line after '::' delimiter
+    assign collect_logs = collect_logs | default: false
+
+    # convert strings to numbers
+    assign minimum_cart_value = condition.minimum_cart_value.value | plus: 0
+    assign maximum_cart_value = condition.maximum_cart_value.value | plus: 0
+
+    assign cart_value = cart.total_price
+    assign log_line = 'condition.minimum_cart_value=' | append: minimum_cart_value | append: ',cart_value= ' | append: cart_value | append: ',condition.maximum_cart_value=' | append: maximum_cart_value
+    assign result = 'false'
+    if cart_value < minimum_cart_value
+        # we always need to check minimum value
+        assign log_line = log_line | append: ',cart_value < minimum_cart_value'
+        assign result = 'false'
+    elsif maximum_cart_value == 0
+        # if maximum value is empty, we don't need to check it, evaluate to true
+        assign log_line = log_line | append: ',minimum_cart_value < cart_value=true,maximum_cart_value=empty'
+        assign result = 'true'
+    elsif maximum_cart_value >= cart_value
+        # cart value is within min/max range
+        assign log_line = log_line | append: ',minimum_cart_value < cart_value=true,maximum_cart_value GTE cart_value=true'
+        assign result = 'true'
+    else
+        # cart value exceeds maximum value
+        assign log_line = log_line | append: ',minimum_cart_value < cart_value=true,maximum_cart_value GTE cart_value=false'
+        assign result = 'false'
+    endif
+
+    if collect_logs
+        assign log_line = '::Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: '___LOG___' | append: log_line
+        echo result | append: log_line
+    else
+        echo result
+    endif
+-%}

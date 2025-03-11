@@ -1863,7 +1863,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 		top: 50%;
 		left: 50%;
 		right: 0;
-		width: calc(100% * var(--logo-scale));
+		width: calc(100% * 1);
 		height: auto;
 		max-width: unset;
 		transform: translate(-50%, -50%);
@@ -3253,4 +3253,8 @@ quick-add-modal .product__title > a,
 
 .underline-always-child {
 	@include underline-always-child();
+}
+
+.header__heading, .header__heading .header__heading-link {
+	width: ax(120);
 }

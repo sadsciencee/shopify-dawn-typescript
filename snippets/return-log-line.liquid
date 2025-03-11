@@ -1,0 +1,11 @@
+{%- liquid
+    # params: source (string), index (number: default 1), line_delimiter (string: default '::'), log_delimiter (string: default '___LOG___')
+    # extract a log line from a response. specify an index to specify what index the log line will appear at, when delimited by '::'
+    # example: render 'return-log-line', source: 'true:log message here', index: 1
+
+    assign line_delimiter = line_delimiter | default: '::'
+    assign log_delimiter = log_delimiter | default: '___LOG___'
+    assign index = index | default: 1
+    assign split_source = source | split: line_delimiter
+    echo split_source[index] | append: '___LOG___'
+ -%}

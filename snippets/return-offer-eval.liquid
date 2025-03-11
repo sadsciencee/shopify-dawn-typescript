@@ -1,0 +1,79 @@
+{%- liquid
+    # params: conditions ((offer_condition_cart_threshold | offer_condition_customer)[]), operator ("AND" | "OR"), collect_logs (boolean, optional), list_delimiter (string, default ':::')
+    assign evals = ''
+    assign list_delimiter = list_delimiter | default: ':::'
+    assign log_lines = ''
+    assign collect_logs = collect_logs | default: false
+    assign result = 'false'
+
+
+    # loop conditions and use the appropriate condition eval snippet based on the condition type
+    for condition in conditions
+        assign eval = 'error'
+        case condition.system.type
+            when 'offer_condition_cart_threshold'
+                capture eval
+                    render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs
+                endcapture
+            when 'offer_condition_customer'
+                capture eval
+                    render 'return-condition-eval-customer', condition: condition, collect_logs: collect_logs
+                endcapture
+            else
+                if collect_logs
+                    assign eval = 'error::error=unknown condition type,' | append: 'condition_type=' | append: condition.system.type
+                else
+                    assign eval = 'error'
+                endif
+        endcase
+        assign evals = evals | append: eval | append: list_delimiter
+    endfor
+
+
+
+    if collect_logs
+        # get log lines and parse out the evals list *without* logs for the final result
+        assign eval_lines = evals | split: list_delimiter
+        capture log_lines
+            for eval in eval_lines
+                capture log_line
+                    render 'return-log-line', source: eval
+                endcapture
+                echo log_line
+            endfor
+        endcapture
+        # get clean array w/o logs for final eval logic
+        capture clean_evals
+            render 'return-without-logs', source: evals, list_delimiter: list_delimiter
+        endcapture
+        assign evals = clean_evals
+    endif
+
+    # make evals into an array
+    assign evals = evals | split: list_delimiter
+
+    # once all evals are complete, check the evals array against the operator and return the final result
+    if evals contains 'error'
+        assign result = 'error'
+    elsif operator == 'OR'
+        if evals contains 'true'
+            assign result = 'true'
+        else
+            assign result = 'false'
+        endif
+    elsif operator == 'AND'
+        if evals contains 'false'
+            assign result = 'false'
+        else
+            assign result = 'true'
+        endif
+    else
+        assign result = 'error'
+    endif
+
+    if collect_logs
+        echo result | append: '::' | append: log_lines
+    else
+        echo result
+    endif
+-%}

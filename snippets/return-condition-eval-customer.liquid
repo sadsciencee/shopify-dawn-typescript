@@ -1,0 +1,113 @@
+{%- liquid
+    # params: condition (offer_condition_customer), collect_logs (boolean, optional)
+    # returns 'true' if the current cart state meets the required conditions, 'false' if not
+    # optionally, returns log line after '::' delimiter
+    assign collect_logs = collect_logs | default: false
+    assign result = 'false'
+
+    # setup default evals
+    assign tags_include_eval = false
+    assign tags_exclude_eval = false
+    assign metafields_include_eval = false
+    assign metafields_exclude_eval = false
+
+    # string list requirements have different null values depending on if they were never set, set to blank, etc...
+    assign tags_include_empty = false
+    if condition.tags_include.value == empty or condition.tags_include.value.size == 0 or condition.tags_include.value == blank
+        assign tags_include_eval = true
+        assign tags_include_empty = true
+    endif
+    if condition.tags_exclude.value == empty or condition.tags_exclude.value.size == 0 or condition.tags_exclude.value == blank
+        assign tags_exclude_eval = true
+    endif
+    assign metafields_include_empty = false
+    if condition.metafields_include.value == empty or condition.metafields_include.value.size == 0 or condition.metafields_include.value == blank
+        assign metafields_include_eval = true
+        assign metafields_include_empty = true
+    endif
+    if condition.metafields_exclude.value == empty or condition.metafields_exclude.value.size == 0 or condition.metafields_exclude.value == blank
+        assign metafields_exclude_eval = true
+    endif
+
+    if customer
+        # check all condition requirements against the current customer
+        if tags_include_eval == false
+            for tag in condition.tags_include.value
+                if customer.tags contains tag
+                    assign tags_include_eval = true
+                    break
+                endif
+            endfor
+        endif
+        if tags_exclude_eval == false
+            for tag in condition.tags_exclude.value
+                if customer.tags contains tag
+                    break
+                endif
+                if forloop.last
+                    assign tags_exclude_eval = true
+                endif
+            endfor
+        endif
+
+        # metafield requirements are stored as namespace:key:value strings
+        if metafields_include_eval == false
+            for metafield in condition.metafields_include
+                assign split = metafield | split: ':' | compact
+                assign namespace = split[0]
+                assign key = split[1]
+                assign value = split[2]
+                if customer.metafields[namespace][key] == value
+                    assign metafields_include_eval = true
+                    break
+                endif
+            endfor
+        endif
+        if metafields_exclude_eval == false
+            for metafield in condition.metafields_exclude
+                assign split = metafield | split: ':' | compact
+                assign namespace = split[0]
+                assign key = split[1]
+                assign value = split[2]
+                if customer.metafields[namespace][key] == value
+                    break
+                endif
+                if forloop.last
+                    assign metafields_exclude_eval = true
+                endif
+            endfor
+        endif
+    else
+        # exclusions are always true for guest customers, even if requirements are not empty
+        assign tags_exclude_eval = true
+        assign metafields_exclude_eval = true
+    endif
+
+
+
+    assign log_line = log_line | append: 'condition.tags_include.value=' | append: condition.tags_include.value | append: ',condition.metafields_include.value=' | append: condition.metafields_include.value | append: ',condition.tags_exclude.value=' | append: condition.tags_exclude.value | append: ',condition.metafields_exclude.value=' | append: condition.metafields_exclude.value  | append: '___LOG___'
+    assign log_line = log_line | append: 'tags_include_eval=' | append: tags_include_eval | append: ',tags_exclude_eval=' | append: tags_exclude_eval | append: ',metafields_include_eval=' | append: metafields_include_eval | append: ',metafields_exclude_eval=' | append: metafields_exclude_eval
+
+
+    # tags_exclude_eval and metafields_exclude_eval must both evaluate to true no matter what
+    if tags_exclude_eval == true and metafields_exclude_eval == true
+        # if both include conditions are true, obviously return true
+        # since empty evals are true, this includes the case where both fields are empty
+        if tags_include_eval == true and metafields_include_eval == true
+            assign result = 'true'
+            # if tags_include is not empty, and evaluates to true, the whole condition evaluates to true
+        elsif tags_include_empty == false and tags_include_eval == true
+            assign result = 'true'
+        elsif metafields_include_empty == false and metafields_include_eval == true
+            # if metafields_include is not empty, and evaluates to true, the whole condition evaluates to true
+            assign result = 'true'
+        endif
+    endif
+
+    if collect_logs
+        assign log_line = '::Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: '___LOG___' | append: log_line
+        echo result | append: log_line
+    else
+        echo result
+    endif
+-%}

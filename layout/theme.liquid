@@ -16,15 +16,27 @@
 		{%- endif -%}
 		{% render 'remove-unused-css' %}
 
-		{%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-			<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+		{%- unless settings.type_header_font.system?
+			and settings.type_body_font.system?
+		-%}
+			<link
+				rel="preconnect"
+				href="https://fonts.shopifycdn.com"
+				crossorigin
+			>
 		{%- endunless -%}
 
 		<title>
 			{{ page_title }}
-			{%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-			{%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-			{%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+			{%- if current_tags %}
+				&ndash; tagged "{{ current_tags | join: ', ' }}"
+			{%- endif -%}
+			{%- if current_page != 1 %}
+				&ndash; Page {{ current_page -}}
+			{%- endif -%}
+			{%- unless page_title contains shop.name %}
+				&ndash; {{ shop.name -}}
+			{%- endunless -%}
 		</title>
 
 		{% if page_description %}
@@ -35,6 +47,7 @@
 
 		{{ content_for_header }}
 
+		{% render 'fonts-preload' %}
 		{% render 'css-variables' %}
 		{% style %}
 			{% render 'critical-css' %}
@@ -43,7 +56,10 @@
 
 		{% case request.page_type %}
 			{% when 'page' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-page-prio', preload_stylesheet: true %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-page-prio',
+					preload_stylesheet: true
+				%}
 			{% when 'collection' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-collection-prio',
@@ -55,7 +71,10 @@
 					preload_stylesheet: true
 				%}
 			{% when 'blog' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-blog-prio', preload_stylesheet: true %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-blog-prio',
+					preload_stylesheet: true
+				%}
 			{% when 'article' %}
 				{% render 'ucoast-style-tag',
 					file: 'css-dir-article-prio',
@@ -75,38 +94,11 @@
 				{% endif %}
 		{% endcase %}
 
-		{%- unless settings.type_body_font.system? -%}
-			{% if settings.body_font_custom %}
-				{% render 'brand-font-body', preload: true %}
-			{% else %}
-				<link
-					rel="preload"
-					as="font"
-					href="{{ settings.type_body_font | font_url }}"
-					type="font/woff2"
-					crossorigin
-				>
-			{% endif %}
-		{%- endunless -%}
-		{%- unless settings.type_header_font.system? -%}
-			{% if settings.header_font_custom %}
-				{% render 'brand-font-header', preload: true %}
-			{% else %}
-				<link
-					rel="preload"
-					as="font"
-					href="{{ settings.type_header_font | font_url }}"
-					type="font/woff2"
-					crossorigin
-				>
-			{% endif %}
-		{%- endunless -%}
+		{% render 'fonts' %}
 
 		<script>
-			document.documentElement.className = document.documentElement.className.replace(
-				'no-js',
-				'js'
-			)
+			document.documentElement.className =
+				document.documentElement.className.replace('no-js', 'js')
 			if (Shopify.designMode) {
 				document.documentElement.classList.add('shopify-design-mode')
 			}
@@ -114,7 +106,10 @@
 	</head>
 
 	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-		<a class="skip-to-content-link button visually-hidden" href="#MainContent">
+		<a
+			class="skip-to-content-link button visually-hidden"
+			href="#MainContent"
+		>
 			{{ 'accessibility.skip_to_text' | t }}
 		</a>
 
@@ -124,7 +119,12 @@
 
 		{% sections 'header-group' %}
 
-		<main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+		<main
+			id="MainContent"
+			class="content-for-layout focus-none"
+			role="main"
+			tabindex="-1"
+		>
 			{{ content_for_layout }}
 		</main>
 
@@ -139,16 +139,22 @@
 			{% when 'page' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-page-defer' %}
 			{% when 'collection' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-collection-defer' %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-collection-defer'
+				%}
 			{% when 'search' %}
-				{% render 'ucoast-style-tag', file: 'css-dir-collection-defer' %}
+				{% render 'ucoast-style-tag',
+					file: 'css-dir-collection-defer'
+				%}
 			{% when 'blog' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-blog-defer' %}
 			{% when 'article' %}
 				{% render 'ucoast-style-tag', file: 'css-dir-article-defer' %}
 			{% else %}
 				{% if request.page_type contains 'customers' %}
-					{% render 'ucoast-style-tag', file: 'css-dir-customer-defer' %}
+					{% render 'ucoast-style-tag',
+						file: 'css-dir-customer-defer'
+					%}
 				{% else %}
 					{% render 'ucoast-style-tag', file: 'css-dir-base-defer' %}
 				{% endif %}
@@ -165,24 +171,28 @@
 		{% render 'vite', vite: 'js-optional-quick-add.ts' %}
 
 		<ul hidden>
-			<li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
-			<li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+			<li id="a11y-refresh-page-message">
+				{{ 'accessibility.refresh_page' | t }}
+			</li>
+			<li id="a11y-new-window-message">
+				{{ 'accessibility.link_messages.new_window' | t }}
+			</li>
 		</ul>
 
 		<script>
-			window.shopUrl = '{{ request.origin }}';
+			window.shopUrl = '{{ request.origin }}'
 			window.routes = {
 				cart_add_url: '{{ routes.cart_add_url }}',
 				cart_change_url: '{{ routes.cart_change_url }}',
 				cart_update_url: '{{ routes.cart_update_url }}',
 				cart_url: '{{ routes.cart_url }}',
 				predictive_search_url: '{{ routes.predictive_search_url }}',
-			};
+			}
 
 			window.cartStrings = {
 				error: `{{ 'sections.cart.cart_error' | t }}`,
 				quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
-			};
+			}
 
 			window.variantStrings = {
 				addToCart: `{{ 'products.product.add_to_cart' | t }}`,
@@ -191,7 +201,7 @@
 				soldOut: `{{ 'products.product.sold_out' | t }}`,
 				unavailable: `{{ 'products.product.unavailable' | t }}`,
 				unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
-			};
+			}
 
 			window.quickOrderListStrings = {
 				itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
@@ -203,7 +213,7 @@
 				min_error: `{{- 'sections.quick_order_list.min_error' | t: min: '[min]' }}`,
 				max_error: `{{- 'sections.quick_order_list.max_error' | t: max: '[max]' }}`,
 				step_error: `{{- 'sections.quick_order_list.step_error' | t: step: '[step]' }}`,
-			};
+			}
 
 			window.accessibilityStrings = {
 				imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
@@ -213,7 +223,7 @@
 				recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
 				recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
 				countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
-			};
+			}
 		</script>
 
 		{% render 'welcome-popup' %}

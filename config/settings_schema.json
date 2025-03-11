@@ -8,6 +8,18 @@
     "theme_support_url": "https://ucoastweb.com/"
   },
   {
+    "name": "Offers",
+    "settings": [
+      {
+        "type": "metaobject_list",
+        "id": "gwp_offers",
+        "label": "Gift With Purchase Offers",
+        "metaobject_type": "gwp_offer",
+        "limit": 12
+      }
+    ]
+  },
+  {
     "name": "Placeholders",
     "settings": [
       {
@@ -25,17 +37,6 @@
         "type": "image_picker",
         "id": "logo",
         "label": "t:settings_schema.logo.settings.logo_image.label"
-      },
-      {
-        "id": "logo_scale",
-        "label": "t:settings_schema.logo.settings.logo_scale.label",
-        "type": "range",
-        "min": 50,
-        "max": 150,
-        "step": 1,
-        "default": 100,
-        "unit": "%",
-        "info": "t:settings_schema.logo.settings.logo_scale.info"
       },
       {
         "type": "range",

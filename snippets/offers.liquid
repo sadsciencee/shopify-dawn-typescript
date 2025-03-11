@@ -1,0 +1,9 @@
+{%- liquid
+    # params: collect_logs (boolean, optional)
+    assign collect_logs = collect_logs | default: false
+
+    capture gwp_offer_handle
+        render 'return-active-gwp-offer', collect_logs: collect_logs
+    endcapture
+    echo gwp_offer_handle
+-%}

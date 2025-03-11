@@ -51,14 +51,18 @@
     .list-menu__item {
         display: flex;
         align-items: center;
-        line-height: calc(1 + 0.3 / var(--f-body-scale));
+        font-family: 'CircularStd', sans-serif;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        font-size: var(--ax16);
     }
 
     .list-menu__item--link {
         text-decoration: none;
         padding-bottom: {% render 'ucoast-ax', value: 10 %};
         padding-top: {% render 'ucoast-ax', value: 10 %};
-        line-height: calc(1 + 0.8 / var(--f-body-scale));
+        line-height: 1.2;
     }
 
     @media screen and (min-width: 750px) {
@@ -141,7 +145,7 @@
             assign localization_forms = true
         endif
     -%}
-    <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+    <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} {% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
         {%- liquid
             if section.settings.menu != blank
                 render 'header-drawer'
@@ -159,12 +163,7 @@
                         <div class="header__heading-logo-wrapper">
                             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                             {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                            {% render 'ucoast-image',
-                                    image: settings.logo,
-                                    image_class: 'header__heading-logo motion-reduce',
-                                    alt: logo_alt,
-                                    loading: loading
-                            %}
+                            {{ settings.logo | img_tag }}
                         </div>
                     {%- else -%}
                         <span class="h2">{{ shop.name }}</span>
