@@ -1,18 +1,22 @@
 {%- liquid
-    # check claimed offers and determine if any claimed offers are invalid
+    # find all gwp offers that have been claimed in the current cart state
 
     # params: collect_logs (boolean, optional)
-    # returns an array in string form. 'handle::claimed_ids(string[])::log_lines' separated by '::'
+    # returns an array in string form. 'handle::claimed_ids(string[])::log_lines' separated by ':::'
 
     # note: the claimed_ids string[] is comma separated with a trailing comma
 
-    # params and defaults
+    # consts
     assign result_delimiter = '::'
     assign list_delimiter = ':::'
     assign log_delimiter = '___LOG___'
     assign not_found_result = '_not_found_'
-    assign results = ''
+
+    # set params
     assign collect_logs = collect_logs | default: false
+
+    # set output vars
+    assign results = ''
 
     # loop offer metaobjects in order specified by theme settings
     for offer in settings.gwp_offers

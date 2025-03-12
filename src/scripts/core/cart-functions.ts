@@ -8,7 +8,7 @@ import type {
 	CartErrorResponse,
 	ProductVariant,
 } from '@/scripts/shopify'
-import { type DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
+import { type DynamicProgressBar } from '@/scripts/cart/dynamic-progress-bar'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -65,14 +65,14 @@ export function hasDomCart() {
 export function getDOMCartSectionApiIds() {
 	const cartEl = getDOMCart()
 	if (!cartEl) return undefined
-	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-shipping-bar', 'dynamic-cart-footer']
+	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-progress-bar', 'dynamic-cart-footer']
 }
 
 const ignoredProperties = ['utf8', 'product-id', 'section-id']
 
-export function updateShippingBar(rawHTML: string) {
-	console.log('dynamic-shipping-bar')
-	const shippingBar = q.os<DynamicShippingBar>('dynamic-shipping-bar')
+export function updateProgressBar(rawHTML: string) {
+	console.log('dynamic-progress-bar')
+	const shippingBar = q.os<DynamicProgressBar>('dynamic-progress-bar')
 	if (!shippingBar) return
 	shippingBar.animateFromRawHTML(rawHTML)
 }

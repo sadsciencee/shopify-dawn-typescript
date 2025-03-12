@@ -4,50 +4,78 @@
     # params:
     #   collect_logs (boolean, optional)
     #   soft_cart_threshold: (boolean, default false)
-    # returns as type:handle:log_lines string. if type/handle are not found, each will be _not_found_, but logs will still be included
+    #   include_claimed_offers: (boolean, default false)
 
+    # returns string (type:handle:log_lines)
 
+    # note: type and handle will be '_not_found_' if no valid offer is available
+    # note: soft_cart_threshold causes offers to evaluate as valid even if the minimum cart value is not met
+    # note: include_claimed_offers causes offers that have already been claimed to evaluate as valid
 
-    # always use double colons to avoid conflicts
+    # consts
     assign result_delimiter = '::'
     assign list_delimiter = ':::'
     assign log_delimiter = '___LOG___'
     assign not_found_result = '_not_found_'
-    # set 'soft_cart_threshold' to true if you want to retrieve the first *possible* offer - this can be used to present a "spend x to get y" message for the next valid offer
+
+    # set params
     assign soft_cart_threshold = soft_cart_threshold | default: false
     assign include_claimed_offers = include_claimed_offers | default: false
-
-    # default result
-    assign result = not_found_result | append: result_delimiter | append: not_found_result
-    # default log lines
-    assign log_lines = ''
-    # default collect_logs
     assign collect_logs = collect_logs | default: false
 
+    # set output vars
+    assign result = not_found_result | append: result_delimiter | append: not_found_result
+    assign log_lines = ''
+
+    # log section label
     if collect_logs
         assign log_lines = '_title_Config Details' | append: log_delimiter | append: 'Offers Count=' | append: settings.gwp_offers.count | append: log_delimiter
     endif
 
-    # loop offer metaobjects in order specified by theme settings
+    # loop gwp_offer metaobjects from theme settings
     for offer in settings.gwp_offers
-        capture offer_result
+        # call eval function
+        capture eval_result
             render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, include_claimed_offers: include_claimed_offers
         endcapture
-        assign result_split = offer_result | split: result_delimiter
+
+        # parse eval result and check if the offer is valid
+        assign result_split = eval_result | split: result_delimiter
         assign offer_type = result_split[0]
         assign offer_handle = result_split[1]
+        if collect_logs
+            assign offer_logs = result_split[2]
+            assign log_lines = log_lines | append: offer_logs
+        endif
         if offer_type == not_found_result or offer_handle == not_found_result
-            if collect_logs
-                assign offer_logs = result_split[2]
-                assign log_lines = log_lines | append: offer_logs
-            endif
             continue
         endif
-        # accept the first fully eval'd result
-        assign result = offer_result
+
+
+        unless include_claimed_offers == true
+            # dont return an offer if it's already claimed
+            capture offer_result
+                render 'return-gwp-offer-claimed', offer: offer, collect_logs: collect_logs
+            endcapture
+            assign result_split = offer_result | split: result_delimiter
+            assign claimed = result_split[1]
+            if collect_logs
+                assign log_lines = log_lines | append: result_split[3]
+            endif
+            if claimed == 'true'
+                continue
+            endif
+        endunless
+
+        # create clean result string without logs
+        assign result = offer_type | append: result_delimiter | append: offer_handle
         break
     endfor
 
     # return result to caller
-    echo result
+    if collect_logs
+        echo result | append: result_delimiter | append: log_lines
+    else
+        echo result
+    endif
 -%}

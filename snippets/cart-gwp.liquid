@@ -1,0 +1,38 @@
+{% liquid
+    # renders a gwp selection UI if an active offer is found
+    # params:
+    #   gwp_offer_type (string, 'none' | 'active' | 'partial')
+    #	gwp_offer (gwp_offer)
+
+    # constants/params setup
+    assign gwp_offer_type = gwp_offer_type | default: 'none'
+
+    if gwp_offer_type == 'active'
+        assign product_list = gwp_offer.product_offer.value.products.value
+    endif
+%}
+
+{% if gwp_offer_type == 'active' %}
+    <cart-gwp class="cart-gwp">
+        <div class="cart-gwp__track no-scrollbar">
+            <ul class="cart-gwp__products list-unstyled" style="--desktop-grid: {{- desktop_grid -}}">
+                {% for card_product in product_list %}
+                    <li class="list-unstyled block cart-gwp__item">
+                        {% render 'card-product',
+                                card_product: card_product,
+                                media_aspect_ratio: "portrait",
+                                image_shape: "default",
+                                show_secondary_image: true,
+                                show_vendor: false,
+                                show_rating: false,
+                                show_quick_add: true,
+                                section_id: section.id,
+                                loading: 'eager',
+                                mobile_size: 'sm'
+                        %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </cart-gwp>
+{% endif %}

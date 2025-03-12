@@ -1,0 +1,25 @@
+@import '../global/variables';
+@import '../global/functions';
+
+$block: 'cart-gwp';
+$desktopGrid: var(--desktop-grid);
+
+.#{$block} {
+  &__track {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  &__products {
+    width: max-content;
+    display: flex;
+    gap: $ax15;
+  }
+
+  &__item {
+    width: 100%;
+    max-width: ax(180);
+  }
+}

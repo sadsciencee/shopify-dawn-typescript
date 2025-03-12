@@ -3,18 +3,24 @@
     #   conditions ((offer_condition_cart_threshold | offer_condition_customer)[])
     #   operator ("AND" | "OR")
     #   collect_logs (boolean, optional)
-    #   list_delimiter (string, default ':::')
     #   soft_cart_threshold (boolean, default false)
 
+    # consts
+    assign result_delimiter = '::'
+    assign list_delimiter = ':::'
+    assign log_delimiter = '___LOG___'
+    assign not_found_result = '_not_found_'
 
-    # default params and variables
-    assign evals = ''
-    assign list_delimiter = list_delimiter | default: ':::'
-    assign log_lines = ''
+    # set params
     assign collect_logs = collect_logs | default: false
-    assign result = 'false'
     assign soft_cart_threshold = soft_cart_threshold | default: false
-    assign include_claimed_offers = include_claimed_offers | default: false
+    assign operator = operator | default: 'OR'
+
+    # set output vars
+    assign evals = ''
+    assign log_lines = ''
+    assign result = 'false'
+
 
     # loop conditions and use the appropriate condition eval snippet based on the condition type
     for condition in conditions
@@ -23,7 +29,7 @@
             when 'offer_condition_cart_threshold'
                 capture eval
                     if soft_cart_threshold
-                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, include_claimed_offers: include_claimed_offers
+                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold
                     else
                         render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs
                     endif
@@ -84,6 +90,7 @@
         assign result = 'error'
     endif
 
+    # return result to caller
     if collect_logs
         echo result | append: '::' | append: log_lines
     else

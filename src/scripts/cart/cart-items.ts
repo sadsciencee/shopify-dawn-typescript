@@ -10,7 +10,7 @@ import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { updateShippingBar } from '@/scripts/core/cart-functions'
+import { updateProgressBar } from '@/scripts/core/cart-functions'
 
 export class CartItems extends UcoastEl {
 	// static
@@ -190,8 +190,8 @@ export class CartItems extends UcoastEl {
 
 				this.getSectionsToRender().forEach(
 					(section: ShopifySectionRenderingSchema) => {
-						if (section.section === 'dynamic-shipping-bar') {
-							updateShippingBar(
+						if (section.section === 'dynamic-progress-bar') {
+							updateProgressBar(
 								parsedState.sections[section.section]
 							)
 							return

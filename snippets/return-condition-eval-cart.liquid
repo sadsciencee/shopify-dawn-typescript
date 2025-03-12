@@ -1,33 +1,37 @@
 {%- liquid
+    # evaluate a cart threshold condition
+
     # params:
     #   condition (offer_condition_cart_threshold)
-    #   partial (boolean, default false)
+    #   soft_cart_threshold (boolean, default false)
     #   collect_logs (boolean, optional)
 
-    # returns 'true' if the current cart state meets the required condition, 'false' if not
-    # optionally, returns log line after '::' delimiter
+    # returns string (boolean::log_lines)
 
+    # consts
+    assign result_delimiter = '::'
+    assign log_delimiter = '___LOG___'
 
-    # default params and variables
+    # set params
     assign collect_logs = collect_logs | default: false
     assign soft_cart_threshold = soft_cart_threshold | default: false
 
-    # convert strings to numbers
+    # convert condition money values to integers
     assign minimum_cart_value = condition.minimum_cart_value.value | plus: 0
     assign maximum_cart_value = condition.maximum_cart_value.value | plus: 0
 
     assign cart_value = cart.total_price
-    assign log_line = 'condition.minimum_cart_value=' | append: minimum_cart_value | append: ',cart_value= ' | append: cart_value | append: ',condition.maximum_cart_value=' | append: maximum_cart_value
+    assign log_line = 'condition.minimum_cart_value=' | append: minimum_cart_value | append: ',cart_value=' | append: cart_value | append: ',condition.maximum_cart_value=' | append: maximum_cart_value
     assign result = 'false'
     if cart_value < minimum_cart_value
         # we always need to check minimum value
         assign log_line = log_line | append: ',cart_value < minimum_cart_value'
         if soft_cart_threshold
-            # partial evals determine if the offer could be displayed to the customr
+            # soft_cart_threshold evals determine if the offer could be displayed to the customr
             # for example "spend $60 to get this offer"
             assign result = 'true'
         else
-            # if partial isn't specified, act normally and evaluate to false
+            # if soft_cart_threshold isn't specified, act normally and evaluate to false
             assign result = 'false'
         endif
     elsif maximum_cart_value == 0
@@ -44,9 +48,10 @@
         assign result = 'false'
     endif
 
+    # return result to caller
     if collect_logs
-        assign log_line = '::Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: '___LOG___' | append: log_line
-        echo result | append: log_line
+        assign log_line = 'Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: log_delimiter | append: log_line
+        echo result | append: result_delimiter | append: log_line
     else
         echo result
     endif

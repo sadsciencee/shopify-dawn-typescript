@@ -6,7 +6,7 @@ import {
 	CartAddWithSections,
 	CartUpdateWithSections,
 	renderRawHTMLToDOM,
-	updateShippingBar,
+	updateProgressBar,
 } from '@/scripts/core/cart-functions'
 
 export class CartDrawer extends UcoastEl {
@@ -120,8 +120,8 @@ export class CartDrawer extends UcoastEl {
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
 		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
-			if (section.section === 'dynamic-shipping-bar') {
-				updateShippingBar(cart.sections[section.section])
+			if (section.section === 'dynamic-progress-bar') {
+				updateProgressBar(cart.sections[section.section])
 				return
 			}
 			const sectionHandle = section.section
@@ -166,8 +166,8 @@ export class CartDrawer extends UcoastEl {
 			},
 			{
 				id: 'CartDrawer',
-				section: 'dynamic-shipping-bar',
-				selector: 'dynamic-shipping-bar',
+				section: 'dynamic-progress-bar',
+				selector: 'dynamic-progress-bar',
 			},
 			{
 				id: 'CartDrawer',

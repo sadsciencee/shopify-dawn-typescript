@@ -1,7 +1,13 @@
 {%- liquid
-    # params: source (string), index (number: default 1), line_delimiter (string: default '::'), log_delimiter (string: default '___LOG___')
-    # extract a log line from a response. specify an index to specify what index the log line will appear at, when delimited by '::'
-    # example: render 'return-log-line', source: 'true:log message here', index: 1
+    # extract a log line from a response.
+
+    # params:
+    #   source (string)
+    #   index (number: default 1)
+    #   line_delimiter (string: default '::')
+    #   log_delimiter (string: default '___LOG___')
+
+    # note: specify an index to identify which index the log line can be found at when delimited by 'line_delimiter'
 
     assign line_delimiter = line_delimiter | default: '::'
     assign log_delimiter = log_delimiter | default: '___LOG___'

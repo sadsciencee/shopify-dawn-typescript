@@ -1,8 +1,20 @@
 {%- liquid
-    # params: condition (offer_condition_customer), collect_logs (boolean, optional)
-    # returns 'true' if the current cart state meets the required conditions, 'false' if not
-    # optionally, returns log line after '::' delimiter
+    # evaluate a customer condition
+
+    # params:
+    #   condition (offer_condition_customer)
+    #   collect_logs (boolean, optional)
+
+    # returns string (boolean::log_lines)
+
+    # consts
+    assign result_delimiter = '::'
+    assign log_delimiter = '___LOG___'
+
+    # set params
     assign collect_logs = collect_logs | default: false
+
+    # set output vars
     assign result = 'false'
 
     # setup default evals
@@ -85,7 +97,7 @@
 
 
 
-    assign log_line = log_line | append: 'condition.tags_include.value=' | append: condition.tags_include.value | append: ',condition.metafields_include.value=' | append: condition.metafields_include.value | append: ',condition.tags_exclude.value=' | append: condition.tags_exclude.value | append: ',condition.metafields_exclude.value=' | append: condition.metafields_exclude.value  | append: '___LOG___'
+    assign log_line = log_line | append: 'condition.tags_include.value=' | append: condition.tags_include.value | append: ',condition.metafields_include.value=' | append: condition.metafields_include.value | append: ',condition.tags_exclude.value=' | append: condition.tags_exclude.value | append: ',condition.metafields_exclude.value=' | append: condition.metafields_exclude.value  | append: log_delimiter
     assign log_line = log_line | append: 'tags_include_eval=' | append: tags_include_eval | append: ',tags_exclude_eval=' | append: tags_exclude_eval | append: ',metafields_include_eval=' | append: metafields_include_eval | append: ',metafields_exclude_eval=' | append: metafields_exclude_eval
 
 
@@ -104,9 +116,10 @@
         endif
     endif
 
+    # return result to caller
     if collect_logs
-        assign log_line = '::Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: '___LOG___' | append: log_line
-        echo result | append: log_line
+        assign log_line = 'Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: log_delimiter | append: log_line
+        echo result | append: result_delimiter | append: log_line
     else
         echo result
     endif
