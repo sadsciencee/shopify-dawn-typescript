@@ -1,9 +1,43 @@
 {% liquid
-	capture gwp_offer
-		render 'return-gwp-offer-next', partial_cart_threshold: true
+	# constants setup
+	assign result_delimiter = '::'
+	assign not_found_result = '_not_found_'
+
+	# will be set to 'none' | 'active' | 'partial'
+	# an 'active offer' is a ready-to-claim offer, while a partial offer just means that it's something the customer can work towards
+	assign offer_type = 'none'
+
+	# start by checking for an active offer
+	capture active_offer_result
+		render 'return-gwp-offer-next'
 	endcapture
-	assign success = "you're getting free shipping!"
-	assign meter_suffix = 'until free shipping' | append: gwp_offer
+
+	# use a function to get the handle of the active offer or 'false' string
+	capture maybe_active_offer_handle
+		render 'return-gwp-offer-found', result: active_offer_result
+	endcapture
+
+	# if there's no active offer, check for a partial offer
+	if maybe_active_offer_handle == 'false'
+		capture partial_offer_result
+			render 'return-gwp-offer-next', soft_cart_threshold: true
+		endcapture
+		# use the same function to get the handle of the potential partial offer
+		capture maybe_partial_offer_handle
+			render 'return-gwp-offer-found', result: partial_offer_result
+		endcapture
+		if maybe_partial_offer_handle != 'false'
+			assign offer = metaobjects.gwp_offer[maybe_partial_offer_handle]
+			assign offer_type = 'partial'
+		endif
+	else
+		assign offer = metaobjects.gwp_offer[maybe_active_offer_handle]
+		assign offer_type = 'active'
+	endif
+
+	assign success = 'Gift unlocked!'
+	assign meter_prefix = 'Spend another '
+	assign meter_suffix = ' to unlock a gift!'
 
 	assign display = true
 	assign threshold = 20000
@@ -21,9 +55,9 @@
 	endif
 %}
 
-{% if threshold %}
+{% if offer_type != 'none' %}
 	<dynamic-shipping-bar
-		data-percent='{{ percent }}'
+		data-percent="{{ percent }}"
 		data-success="{{ success }}"
 		class="w-100 block relative dynamic-shipping-bar"
 		style="--progress-percent: {{ percent }}%"
@@ -39,7 +73,9 @@
 				{% if difference <= 0 %}
 					{{ success }}
 				{% else %}
-					{{ difference | money_without_trailing_zeros }} {{ meter_suffix }}
+					{{- meter_prefix -}}
+					{{- difference | money_without_trailing_zeros -}}
+					{{- meter_suffix -}}
 				{% endif %}
 			</span>
 		</span>

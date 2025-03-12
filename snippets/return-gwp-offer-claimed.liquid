@@ -1,0 +1,49 @@
+{% liquid
+	# determine if a GWP offer has been claimed, and the ids of the claimed products
+
+	# params: offer (gwp_offer), collect_logs (boolean, optional)
+	# returns 'offer_handle::claimed(boolean)::claimed_ids(string[])::log_lines' - string[] is a comma separated string with a trailing comma
+
+	# setup defaults
+	assign result_delimiter = '::'
+	assign log_delimiter = '___LOG___'
+	assign log_lines = '_'
+	assign collect_logs = collect_logs | default: false
+
+	# partial result string
+	assign result = offer.system.handle | append: result_delimiter
+
+	# make id arrays from our input + current cart
+	assign offer_product_ids = offer.product_offer.value.products.value | map: 'id'
+	assign cart_product_ids = cart.items | map: 'product_id'
+
+	if collect_logs
+		assign json_offer_ids = offer_product_ids | json
+		assign log_lines = '_title_Offer Product IDs' | append: log_delimiter | append: json_offer_ids | append: log_delimiter
+	endif
+
+	# for now we will only support one product per offer but it's fairly common for merchants to allow 2-3 (esp for sample products)
+	assign claim_count = 0
+	assign claimed_ids = ''
+
+	for offer_product_id in offer_product_ids
+		if cart_product_ids contains offer_product_id
+			assign claim_count = claim_count | plus: 1
+			assign claimed_ids = claimed_ids | append: offer_product_id | append: ','
+			continue
+		endif
+	endfor
+
+	if claim_count > 0
+		assign result = result | append: 'true' | append: result_delimiter | append: claimed_ids
+	else
+		assign result = result | append: 'false' | append: result_delimiter | append: ' ,'
+	endif
+
+    if collect_logs
+        assign result = result | append: result_delimiter | append: log_lines
+    endif
+
+    # echo to output
+    echo result
+%}

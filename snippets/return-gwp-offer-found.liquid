@@ -1,0 +1,18 @@
+{% liquid
+    # params
+    # result (string type::handle::log_lines)
+    # returns the gwp offer handle if a valid offer was found, 'false' otherwise
+
+    assign result_delimiter = '::'
+    assign not_found_result = '_not_found_'
+
+    assign result_split = result | split: result_delimiter
+    assign result_type = result_split[0]
+    assign result_handle = result_split[1]
+
+    if result_type != 'gwp_offer' or result_handle == not_found_result or result_handle == empty or result_handle == blank
+        echo 'false'
+    else
+        echo result_handle
+    endif
+%}

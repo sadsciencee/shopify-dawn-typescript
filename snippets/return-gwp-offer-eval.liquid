@@ -1,23 +1,26 @@
 {%- liquid
+    # check the active offers in the store, sort by priority and return the handle and type of the first active offer
+
     # params:
     #   collect_logs (boolean, optional)
     #   offer (gwp_offer)
-    #   partial_cart_threshold (boolean, default false)
+    #   soft_cart_threshold (boolean, default false)
 
-    # check the active offers in the store, sort by priority and return the handle and type of the first active offer
-    # returns as array of type:handle:log_lines strings, delimited by ':::'. if type/handle are not found, each will be _not_found_, but logs will still be included
-    # cart threshold requirements are checked with a partial evaluation, this allows us to present a "spend x to get y" message for the next valid offer
-    # refer to 'display-log-lines' snippet for log line formatting instructions
+    # returns an array of type:handle:log_lines strings, delimited by ':::'. if type/handle are not found, each will be _not_found_, but logs will still be included
 
     # setup default params and vars
     assign result_delimiter = '::'
     assign list_delimiter = ':::'
     assign log_delimiter = '___LOG___'
-    assign result = '_not_found_' | append: result_delimiter | append: '_not_found_'
+    assign not_found_result = '_not_found_'
+    assign result = not_found_result | append: result_delimiter | append: not_found_result
     assign log_lines = ''
     assign collect_logs = collect_logs | default: false
     assign offers = offers | default: settings.gwp_offers
-    assign partial_cart_threshold = partial_cart_threshold | default: false
+
+    # cart threshold requirements are checked with a partial evaluation, this allows us to present a "spend x to get y" message for the next valid offer
+    assign soft_cart_threshold = soft_cart_threshold | default: false
+    assign include_claimed_offers = include_claimed_offers | default: false
 
 
     if collect_logs
@@ -33,7 +36,7 @@
     # run evals against conditions
     capture enable_evals_result
         # at least for now only apply partial threshold to 'enable' conditions
-        render 'return-conditions-eval', conditions: offer.enable_conditions.value, operator: enable_condition_operator, collect_logs: collect_logs, list_delimiter: list_delimiter, partial_cart_threshold: partial_cart_threshold
+        render 'return-conditions-eval', conditions: offer.enable_conditions.value, operator: enable_condition_operator, collect_logs: collect_logs, list_delimiter: list_delimiter, soft_cart_threshold: soft_cart_threshold
     endcapture
     capture disable_evals_result
         render 'return-conditions-eval', conditions: offer.disable_conditions.value, operator: disable_condition_operator, collect_logs: collect_logs, list_delimiter: list_delimiter

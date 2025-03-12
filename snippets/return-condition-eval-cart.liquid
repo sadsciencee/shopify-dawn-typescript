@@ -10,7 +10,7 @@
 
     # default params and variables
     assign collect_logs = collect_logs | default: false
-    assign partial = partial | default: false
+    assign soft_cart_threshold = soft_cart_threshold | default: false
 
     # convert strings to numbers
     assign minimum_cart_value = condition.minimum_cart_value.value | plus: 0
@@ -22,7 +22,7 @@
     if cart_value < minimum_cart_value
         # we always need to check minimum value
         assign log_line = log_line | append: ',cart_value < minimum_cart_value'
-        if partial
+        if soft_cart_threshold
             # partial evals determine if the offer could be displayed to the customr
             # for example "spend $60 to get this offer"
             assign result = 'true'
@@ -35,7 +35,7 @@
         assign log_line = log_line | append: ',minimum_cart_value < cart_value=true,maximum_cart_value=empty'
         assign result = 'true'
     elsif maximum_cart_value >= cart_value
-        # cart value is within min/max range. we still want to follow this rule if it's a partial eval since we won't show offers for lower cart values
+        # cart value is within min/max range. we still want to follow this rule if it's a soft_cart_threshold eval since we won't show offers for lower cart values
         assign log_line = log_line | append: ',minimum_cart_value < cart_value=true,maximum_cart_value GTE cart_value=true'
         assign result = 'true'
     else

@@ -1,0 +1,67 @@
+{% liquid
+    # get list of line items to set to 0 quantity
+
+    # params
+    #   line_id_type: 'variant_id' | 'key'
+    #   returns string as line_id(string)::quantity(number) separated by ':::' - line_id will be line_item.key unless 'variant_id' is specified in the 'line_id_type' param
+
+    # note: this should only be called in the section api on cart response
+
+    # params and defaults
+    assign result_delimiter = '::'
+    assign list_delimiter = ':::'
+    assign not_found_result = '_not_found_'
+    assign log_delimiter = '___LOG___'
+    assign results = ''
+    assign collect_logs = collect_logs | default: false
+    assign line_id_type = line_id_type | default: 'key'
+
+    # call function to retrieve list of claimed offers
+    capture claimed_offers_result
+        render 'return-gwp-claimed-offers', collect_logs: collect_logs
+    endcapture
+    assign claimed_offers = claimed_offers_result | split: list_delimiter
+
+
+    assign ids_to_remove = ''
+
+    # iterate and build list of cart keys to remove
+    for offer in claimed_offers
+        assign offer_split = offer | split: result_delimiter
+        assign handle = offer_split[0]
+        assign claimed_ids = offer_split[1]
+        assign offer = metaobjects.gwp_offers[handle]
+        if offer == blank or offer == empty
+            continue
+        endif
+        capture offer_eval
+            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, include_claimed_offers: include_claimed_offers
+        endcapture
+        capture maybe_active_offer_handle
+            render 'return-gwp-offer-found', result: offer_eval
+        endcapture
+        if maybe_active_offer_handle == not_found_result
+            continue
+        endif
+        # no need to append ',' since 'return-gwp-claimed-offers' returns a trailing commma
+        assign ids_to_remove = ids_to_remove | append: claimed_ids
+    endfor
+
+    # convert string to array and remove duplicates / nulls
+    assign ids_to_remove = ids_to_remove | split: ',' | compact | uniq
+
+    # we have to loop one at a time since we have to convert string ids to numbers before using 'where' filter
+    for id in ids_to_remove
+        assign id = id | plus: 0
+        assign cart_line_items = cart.line_items | where: 'product_id', id
+        for item in cart_line_items
+            # line_id_type can be variant_id or key, variant_id should only be used if you need to add items at the same time
+            assign item_result = item[line_id_type] | append: result_delimiter | append: 0 | append: list_delimiter
+            assign results = results | append: item_result
+        endfor
+    endfor
+
+    # clean up array and return as string
+    assign results = results | split: list_delimiter | compact | uniq | join: list_delimiter
+    echo results
+%}

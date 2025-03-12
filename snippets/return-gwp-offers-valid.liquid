@@ -1,12 +1,12 @@
 {%- liquid
-    # check the active offers in the store, sort by priority and return the handle and type of the next valid offer
+    # not 100% sure but i think this was a copy paste taht should get deleted
 
     # params:
     #   collect_logs (boolean, optional)
     #   soft_cart_threshold: (boolean, default false)
+    # check the active offers in the store, sort by priority and return the handle and type of the first active offer
     # returns as type:handle:log_lines string. if type/handle are not found, each will be _not_found_, but logs will still be included
-
-
+    # refer to 'display-log-lines' snippet for log line formatting instructions
 
     # always use double colons to avoid conflicts
     assign result_delimiter = '::'
@@ -18,7 +18,7 @@
     assign include_claimed_offers = include_claimed_offers | default: false
 
     # default result
-    assign result = not_found_result | append: result_delimiter | append: not_found_result
+    assign results = ''
     # default log lines
     assign log_lines = ''
     # default collect_logs
@@ -31,7 +31,7 @@
     # loop offer metaobjects in order specified by theme settings
     for offer in settings.gwp_offers
         capture offer_result
-            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, include_claimed_offers: include_claimed_offers
+            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, index: forloop.index0
         endcapture
         assign result_split = offer_result | split: result_delimiter
         assign offer_type = result_split[0]
@@ -43,11 +43,13 @@
             endif
             continue
         endif
-        # accept the first fully eval'd result
-        assign result = offer_result
-        break
+        # add the result to the list if valid
+        assign results = results | append: offer_result | append: list_delimiter
     endfor
 
+    # clean up null results
+    assign results = results | split: list_delimiter | compact | uniq | join: list_delimiter
+
     # return result to caller
-    echo result
+    echo results
 -%}

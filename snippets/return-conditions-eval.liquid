@@ -4,7 +4,7 @@
     #   operator ("AND" | "OR")
     #   collect_logs (boolean, optional)
     #   list_delimiter (string, default ':::')
-    #   partial_cart_threshold (boolean, default false)
+    #   soft_cart_threshold (boolean, default false)
 
 
     # default params and variables
@@ -13,7 +13,8 @@
     assign log_lines = ''
     assign collect_logs = collect_logs | default: false
     assign result = 'false'
-    assign partial_cart_threshold = partial_cart_threshold | default: false
+    assign soft_cart_threshold = soft_cart_threshold | default: false
+    assign include_claimed_offers = include_claimed_offers | default: false
 
     # loop conditions and use the appropriate condition eval snippet based on the condition type
     for condition in conditions
@@ -21,8 +22,8 @@
         case condition.system.type
             when 'offer_condition_cart_threshold'
                 capture eval
-                    if partial_cart_threshold
-                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs, partial: partial_cart_threshold
+                    if soft_cart_threshold
+                        render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, include_claimed_offers: include_claimed_offers
                     else
                         render 'return-condition-eval-cart', condition: condition, collect_logs: collect_logs
                     endif
