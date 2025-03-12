@@ -1,10 +1,18 @@
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global'
+import {
+	ATTRIBUTES,
+	fetchConfig,
+	PUB_SUB_EVENTS,
+	publish,
+	SELECTORS,
+} from '@/scripts/core/global'
 import {
 	CartAddWithSections,
+	CartUpdateInstructions,
 	CartUpdateWithSections,
+	getUpdateInstructions,
 	renderRawHTMLToDOM,
 	updateProgressBar,
 } from '@/scripts/core/cart-functions'
@@ -31,10 +39,19 @@ export class CartDrawer extends UcoastEl {
 		)
 		this.getOverlay().addEventListener('click', this.close.bind(this))
 		this.setHeaderCartIconAccessibility()
+		this.maybeAutoOpen()
 	}
 
 	getOverlay() {
 		return q.rs(CartDrawer.selectors.overlay, this)
+	}
+
+	maybeAutoOpen() {
+		const url = new URL(window.location.href)
+		const urlParams = url.searchParams
+		if (urlParams.get('open') === 'cart') {
+			this.open()
+		}
 	}
 
 	setHeaderCartIconAccessibility() {
@@ -118,8 +135,16 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
+		// check for cart update instructions in case we need to remove a gwp or bundle item
+		const cartUpdateInstructions = getUpdateInstructions(cart)
+		if (cartUpdateInstructions.update_required) {
+			void this.runUpdateInstructions(cartUpdateInstructions)
+			// skip the re-render since we're about to rerender anyway
+			return
+		}
 		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
+			if (section.section === 'cart-update-instructions') return
 			if (section.section === 'dynamic-progress-bar') {
 				updateProgressBar(cart.sections[section.section])
 				return
@@ -152,6 +177,31 @@ export class CartDrawer extends UcoastEl {
 		}, 1)
 	}
 
+	async runUpdateInstructions(instructions: CartUpdateInstructions) {
+		const body = JSON.stringify({
+			updates: instructions.updates,
+			sections: this.getSectionsToRender().map(
+				(section) => section.section
+			),
+			sections_url: window.location.pathname,
+		})
+		fetch(`${window.routes.cart_update_url}`, {
+			...fetchConfig(),
+			...{ body },
+		})
+			.then((response) => {
+				return response.text()
+			})
+			.then((state) => {
+				const parsedState = JSON.parse(state)
+				// same as cart add, check for update instructions in case we need to remove gwp
+				this.renderContents(parsedState)
+			})
+			.catch((error) => {
+				console.error('Error running update instructions', error)
+			})
+	}
+
 	getSectionsToRender(): ShopifySectionRenderingSchema[] {
 		return [
 			{
@@ -173,6 +223,11 @@ export class CartDrawer extends UcoastEl {
 				id: 'CartDrawer',
 				section: 'dynamic-cart-footer',
 				selector: '.drawer__footer',
+			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
 			},
 		]
 	}

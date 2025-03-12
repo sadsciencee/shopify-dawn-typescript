@@ -28,7 +28,7 @@
         assign claimed = result_split[1]
         assign claimed_product_ids = result_split[2]
         if collect_logs
-            assign offer_logs = result_split[3]
+            assign offer_logs = result_split[3] | default: 'log'
         endif
         if claimed == 'false'
             if collect_logs
@@ -38,11 +38,11 @@
         else
             if collect_logs
                 assign offer_logs = offer_logs | append: 'Offer ' | append: handle | append: ' is claimed' | append: log_delimiter
-                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids | append: result_delimiter | append: offer_logs | append: list_delimiter
+                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids | append: result_delimiter | append: offer_logs
             else
-                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids | append: result_delimiter | append: list_delimiter
+                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids
             endif
-            assign results = results | append: success_result
+            assign results = results | append: success_result | append: list_delimiter
         endif
         # add the result to the list if valid
     endfor

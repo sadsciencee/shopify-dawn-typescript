@@ -41,10 +41,12 @@
 .card--card {
 	height: 100%;
 }
-
+.card--card {
+	position: relative;
+}
 .card--card,
 .card--standard .card__inner {
-	position: relative;
+
 	box-sizing: border-box;
 	border-radius: var(--border-radius);
 	border: var(--border-width) solid rgba(#{$schemaColorForeground}, var(--border-opacity));
@@ -94,11 +96,31 @@
 }
 
 .card--standard .card__media {
-	margin: var(--image-padding);
+	margin: 0;
+	border: 0;
 }
 
 .card__inner {
 	width: 100%;
+
+
+}
+
+.card--standard {
+	// overrides
+	.quick-add {
+		margin-bottom: 0;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 3;
+
+		.button {
+			padding: $ax10;
+			min-height: unset;
+		}
+	}
 }
 
 .card--media .card__inner .card__content {

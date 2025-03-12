@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -6,35 +15,34 @@
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "{{ product.vendor }}",
+            "text": "",
             "text_style": "uppercase"
           }
         },
         "title": {
           "type": "title",
-          "settings": {
-          }
-        },
-        "caption": {
-          "type": "text",
-          "settings": {
-            "text_style": "subtitle"
-          }
+          "settings": {}
         },
         "price": {
           "type": "price",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "disabled": true,
           "settings": {
+            "text": "Text block",
+            "text_style": "body"
           }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "dropdown"
-          }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {
+            "picker_type": "button"
           }
         },
         "buy_buttons": {
@@ -44,13 +52,13 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {
-          }
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
         },
         "collapsible-row-0": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Materials",
             "icon": "leather",
@@ -60,14 +68,17 @@
         },
         "collapsible-row-1": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Shipping & Returns",
             "icon": "truck",
+            "content": "",
             "page": ""
           }
         },
         "collapsible-row-2": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Dimensions",
             "icon": "ruler",
@@ -77,6 +88,7 @@
         },
         "collapsible-row-3": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Care Instructions",
             "icon": "heart",
@@ -86,6 +98,7 @@
         },
         "share": {
           "type": "share",
+          "disabled": true,
           "settings": {
             "share_label": "Share"
           }
@@ -94,12 +107,12 @@
       "block_order": [
         "vendor",
         "title",
-        "caption",
         "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
         "description",
+        "caption",
+        "variant_picker",
+        "buy_buttons",
+        "quantity_selector",
         "collapsible-row-0",
         "collapsible-row-1",
         "collapsible-row-2",
@@ -107,17 +120,19 @@
         "share"
       ],
       "settings": {
+        "color_scheme": "",
         "enable_sticky_info": true,
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "media_fit": "cover",
+        "gallery_layout": "columns",
         "media_position": "left",
         "image_zoom": "lightbox",
-        "mobile_thumbnails": "hide",
-        "hide_variants": true,
+        "mobile_thumbnails": "show",
+        "hide_variants": false,
         "enable_video_looping": false,
-        "space_above": 2
+        "space_above": 2,
+        "mobile_space_above": -1
       }
     },
     "image-with-text": {
@@ -133,7 +148,7 @@
         "image-with-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "text_style": "body"
           }
         }
@@ -151,7 +166,9 @@
         "content_layout": "no-overlap",
         "color_scheme": "background-2",
         "image_behavior": "none",
-        "mobile_content_alignment": "left"
+        "mobile_content_alignment": "left",
+        "space_above": 4,
+        "mobile_space_above": -1
       }
     },
     "multicolumn": {
@@ -161,7 +178,7 @@
           "type": "column",
           "settings": {
             "title": "Free Shipping",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -170,7 +187,7 @@
           "type": "column",
           "settings": {
             "title": "Hassle-Free Exchanges",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -192,7 +209,9 @@
         "button_label": "",
         "button_link": "",
         "columns_mobile": "1",
-        "swipe_on_mobile": false
+        "swipe_on_mobile": false,
+        "space_above": 4,
+        "mobile_space_above": -1
       }
     },
     "related-products": {
@@ -208,7 +227,9 @@
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "columns_mobile": "2"
+        "columns_mobile": "2",
+        "space_above": 4,
+        "mobile_space_above": -1
       }
     }
   },

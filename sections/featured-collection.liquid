@@ -47,7 +47,7 @@
 				<nav class="multi-product-slider__nav flex align-start justify-start">
 					{% for block in section.blocks %}
 						<button
-							class="h3 semantic-button multi-product-slider__button tt-uppercase underline-on-hover {% if forloop.first %} active {% endif %}"
+							class="h4 semantic-button multi-product-slider__button tt-uppercase underline-on-hover {% if forloop.first %} active underline-always {% else %} underline-on-hover {% endif %}"
 							data-nav="{{ block.id }}"
 							type="button"
 						>

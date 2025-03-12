@@ -10,7 +10,7 @@ import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { updateProgressBar } from '@/scripts/core/cart-functions'
+import { getUpdateInstructions, updateProgressBar } from '@/scripts/core/cart-functions'
 
 export class CartItems extends UcoastEl {
 	// static
@@ -135,6 +135,11 @@ export class CartItems extends UcoastEl {
 				section: q.ra(q.rs(this.instanceSelectors.footer), 'data-id'),
 				selector: '.js-contents',
 			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
+			},
 		]
 	}
 
@@ -159,6 +164,16 @@ export class CartItems extends UcoastEl {
 			})
 			.then((state) => {
 				const parsedState = JSON.parse(state)
+				// same as cart add, check for update instructions in case we need to remove gwp
+				console.log('parsedState', parsedState)
+				const cartUpdateInstructions = getUpdateInstructions(parsedState)
+				if (cartUpdateInstructions.update_required) {
+					const cartDrawer = q.rs<CartDrawer>('cart-drawer')
+					void cartDrawer.runUpdateInstructions(cartUpdateInstructions)
+					// skip the re-render since we're about to rerender anyway
+					return
+				}
+				// continue with normal cart update
 				const quantityElement = q.rs<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)
@@ -190,6 +205,8 @@ export class CartItems extends UcoastEl {
 
 				this.getSectionsToRender().forEach(
 					(section: ShopifySectionRenderingSchema) => {
+						if (section.section === 'cart-update-instructions')
+							return
 						if (section.section === 'dynamic-progress-bar') {
 							updateProgressBar(
 								parsedState.sections[section.section]

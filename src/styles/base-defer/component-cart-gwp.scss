@@ -5,8 +5,13 @@ $block: 'cart-gwp';
 $desktopGrid: var(--desktop-grid);
 
 .#{$block} {
+  display: block;
+  width: 100%;
+  margin-bottom: $ax15;
+  padding-bottom: $ax15;
+  border-bottom: var(--ax1) solid rgba(var(--c-foreground),.2);
+
   &__track {
-    width: 100%;
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
@@ -16,10 +21,16 @@ $desktopGrid: var(--desktop-grid);
     width: max-content;
     display: flex;
     gap: $ax15;
+    margin-left: $ax15;
+    margin-right: $ax15;
   }
 
   &__item {
-    width: 100%;
-    max-width: ax(180);
+    width: ax(120);
+    max-width: 33vw;
+  }
+
+  .card__information {
+    display: none;
   }
 }

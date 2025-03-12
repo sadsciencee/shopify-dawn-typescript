@@ -1,9 +1,4 @@
 {%- liquid
     # params: collect_logs (boolean, optional)
-    assign collect_logs = collect_logs | default: false
 
-    capture gwp_offer_handle
-        render 'return-gwp-offer-next', collect_logs: collect_logs, soft_cart_threshold: true
-    endcapture
-    echo gwp_offer_handle
 -%}

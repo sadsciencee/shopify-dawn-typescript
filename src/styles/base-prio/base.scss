@@ -724,11 +724,12 @@ button.shopify-payment-button__button--unbranded {
 	font-size: #{$ax15};
 	text-decoration: none;
 	color: rgb(#{$schemaColorButtonText});
-	transition: box-shadow var(--duration-short) ease;
+	transition: box-shadow var(--duration-short) ease, background var(--duration-short) ease, color var(--duration-short) ease, border-color var(--duration-short) ease;
 	-webkit-appearance: none;
 	appearance: none;
 	background-color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
+
 
 .button:before,
 .shopify-challenge__button:before,
@@ -746,6 +747,18 @@ button.shopify-payment-button__button--unbranded {
 	border-radius: #{$buttonsRadiusOutset};
 	box-shadow: $comboBoxShadow1;
 }
+
+.button:hover {
+	color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	background-color: rgb(#{$schemaColorButtonText});
+	border-color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	&:after {
+		box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
+		rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+		0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButtonText}, var(--alpha-button-background));
+	}
+}
+
 
 .button:after,
 .shopify-challenge__button:after,
@@ -3120,4 +3133,7 @@ quick-add-modal .product__title > a,
 // in critical, remove on next compile
 .no-underline {
 	text-decoration: none;
+}
+body {
+	-webkit-font-smoothing: antialiased;
 }

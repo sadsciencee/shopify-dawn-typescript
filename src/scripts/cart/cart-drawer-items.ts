@@ -44,6 +44,11 @@ export class CartDrawerItems extends CartItems {
 				section: 'dynamic-cart-footer',
 				selector: '.drawer__footer',
 			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
+			},
 		]
 	}
 }

@@ -6,7 +6,7 @@ $block: 'dynamic-progress-bar';
 	height: $ax20;
 	&__indicator {
 		background-color: #90D3EE;
-		border-radius: $ax10;
+		// border-radius: $ax10;
 		overflow: hidden;
 		width: calc(var(--progress-percent) - #{$ax30});
 		transition: width 0.3s $bezier;
@@ -17,7 +17,7 @@ $block: 'dynamic-progress-bar';
 	&__background {
 		background-color: rgb(#{$schemaColorBackground});
 		border: $ax1 solid rgb(#{$schemaColorForeground});
-		border-radius: $ax10;
+		// border-radius: $ax10;
 		left: $ax16;
 		right: $ax16;
 		width: calc(100% - #{$ax32});

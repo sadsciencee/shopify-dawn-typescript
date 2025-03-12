@@ -1,42 +1,41 @@
 {%- liquid
-    assign collect_logs = section.settings.collect_logs
-    capture offers
-        render 'offers', collect_logs: collect_logs
-    endcapture
+	assign collect_logs = section.settings.collect_logs
+	capture offers
+		render 'return-gwp-offer-next', collect_logs: collect_logs
+	endcapture
 -%}
 
 <div class="page-width">
-  {% if collect_logs %}
-    {% render 'display-log-lines', source: offers, index: 2 %}
-    {% assign split = offers | split: '::' %}
-    {% assign offers = split[0] | append: '::' | append: split[1] %}
-  {% endif %}
-  {{ offers }}
+	{% if collect_logs %}
+		{% render 'display-log-lines', source: offers, index: 2 %}
+		{% assign split = offers | split: '::' %}
+		{% assign offers = split[0] | append: '::' | append: split[1] %}
+	{% endif %}
+	{{ offers }}
+	<h2>cart update instructions in json</h2>
+	{% render 'cart-update-instructions', cart: cart %}
 </div>
 
 {% schema %}
-{
-  "name": "Test Section",
-  "tag": "section",
-  "class": "section",
-  "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
-  },
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "collect_logs",
-      "label": "Enable Log Collection",
-      "default": true
-    }
-  ],
-  "presets": [
-    {
-      "name": "Test Section"
-    }
-  ]
-}
+	{
+		"name": "Test Section",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "collect_logs",
+				"label": "Enable Log Collection",
+				"default": true
+			}
+		],
+		"presets": [
+			{
+				"name": "Test Section"
+			}
+		]
+	}
 {% endschema %}

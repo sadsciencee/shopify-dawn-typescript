@@ -1,68 +1,76 @@
 {%- liquid
-	capture inventory_schema
-		assign check_against_inventory = true
-		if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
-			assign check_against_inventory = false
-		endif
-		if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
-			assign quantity_rule_soldout = true
-		endif
-		if variant.metafields.custom.inventory_status.value and variant.metafields.custom.inventory_status.value != 'Default' and variant.metafields.custom.inventory_status.value != empty
-			assign status_metafield = variant.metafields.custom.inventory_status.value
-			if status_metafield == 'Preorder'
-				if variant.available or variant.inventory_policy == 'continue'
-					echo 'PreOrder'
-				else
-					echo 'ComingSoon'
-				endif
-			elsif status_metafield == 'Coming Soon'
-				echo 'ComingSoon'
-			elsif status_metafield == 'Out of Stock'
-				echo 'OutOfStock'
-			else
-				echo 'InStock'
-			endif
-		elsif quantity_rule_soldout
-			echo 'ComingSoon'
-		elsif variant.inventory_quantity < 1 and variant.inventory_policy == 'continue'
-			echo 'PreOrder'
-		elsif variant.available
-			echo 'InStock'
-		else
-			echo 'OutOfStock'
-		endif
-	endcapture
+    capture inventory_schema
+        assign check_against_inventory = true
+        if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+            assign check_against_inventory = false
+        endif
+        if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+            assign quantity_rule_soldout = true
+        endif
+        if variant.metafields.custom.inventory_status.value and variant.metafields.custom.inventory_status.value != 'Default' and variant.metafields.custom.inventory_status.value != empty
+            assign status_metafield = variant.metafields.custom.inventory_status.value
+            if status_metafield == 'Preorder'
+                if variant.available or variant.inventory_policy == 'continue'
+                    echo 'PreOrder'
+                else
+                    echo 'ComingSoon'
+                endif
+            elsif status_metafield == 'Coming Soon'
+                echo 'ComingSoon'
+            elsif status_metafield == 'Out of Stock'
+                echo 'OutOfStock'
+            else
+                echo 'InStock'
+            endif
+        elsif quantity_rule_soldout
+            echo 'ComingSoon'
+        elsif variant.inventory_quantity < 1 and variant.inventory_policy == 'continue'
+            echo 'PreOrder'
+        elsif variant.available
+            echo 'InStock'
+        else
+            echo 'OutOfStock'
+        endif
+    endcapture
 
-	if output_translation
-		case inventory_schema
-			when 'InStock'
-				if quick_add
-					echo 'products.product.quick_add' | t
-				else
-					echo 'products.product.add_to_cart' | t
-				endif
-			when 'PreOrder'
-				if variant.metafields.custom.preorder_ship_date.value
-					assign today_date = 'today' | date: '%s' | times: 1
-					assign pre_date = variant.metafields.custom.preorder_ship_date.value | date: '%s' | times: 1
-					if today_date < pre_date
-						echo 'products.product.preorder' | t
-						echo ' - ships '
-						echo variant.metafields.custom.preorder_ship_date.value | date: '%m/%d/%Y'
+    if output_translation
+        case inventory_schema
+            when 'InStock'
+                if is_free_gift
+                    echo free_gift_text
+                elsif quick_add
+                    echo 'products.product.quick_add' | t
+                else
+                    echo 'products.product.add_to_cart' | t
+                endif
+            when 'PreOrder'
+                if is_free_gift
+                    echo free_gift_text
+                elsif variant.metafields.custom.preorder_ship_date.value
+                    assign today_date = 'today' | date: '%s' | times: 1
+                    assign pre_date = variant.metafields.custom.preorder_ship_date.value | date: '%s' | times: 1
+                    if today_date < pre_date
+                        echo 'products.product.preorder' | t
+                        echo ' - ships '
+                        echo variant.metafields.custom.preorder_ship_date.value | date: '%m/%d/%Y'
                     else
                         echo 'products.product.add_to_cart' | t
-					endif
-				else
-					echo 'products.product.preorder' | t
-				endif
-			when 'ComingSoon'
-				echo 'products.product.coming_soon' | t
-			when 'OutOfStock'
-				echo 'products.product.sold_out' | t
-			else
-				echo 'products.product.add_to_cart' | t
-		endcase
-	else
-		echo inventory_schema
-	endif
+                    endif
+                else
+                    echo 'products.product.preorder' | t
+                endif
+            when 'ComingSoon'
+                echo 'products.product.coming_soon' | t
+            when 'OutOfStock'
+                echo 'products.product.sold_out' | t
+            else
+                if is_free_gift
+                    echo free_gift_text
+                else
+                    echo 'products.product.add_to_cart' | t
+                endif
+        endcase
+    else
+        echo inventory_schema
+    endif
 -%}

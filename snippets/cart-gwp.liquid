@@ -1,14 +1,16 @@
 {% liquid
     # renders a gwp selection UI if an active offer is found
+
     # params:
     #   gwp_offer_type (string, 'none' | 'active' | 'partial')
     #	gwp_offer (gwp_offer)
 
-    # constants/params setup
+    # set params
     assign gwp_offer_type = gwp_offer_type | default: 'none'
 
     if gwp_offer_type == 'active'
         assign product_list = gwp_offer.product_offer.value.products.value
+        assign free_gift_text = gwp_offer.display_cta.value
     endif
 %}
 
@@ -28,7 +30,9 @@
                                 show_quick_add: true,
                                 section_id: section.id,
                                 loading: 'eager',
-                                mobile_size: 'sm'
+                                mobile_size: 'sm',
+                                is_free_gift: true,
+                                free_gift_text: free_gift_text
                         %}
                     </li>
                 {% endfor %}

@@ -6,7 +6,7 @@
     #   soft_cart_threshold: (boolean, default false)
     #   include_claimed_offers: (boolean, default false)
 
-    # returns string (type:handle:log_lines)
+    # returns string (type::handle::log_lines)
 
     # note: type and handle will be '_not_found_' if no valid offer is available
     # note: soft_cart_threshold causes offers to evaluate as valid even if the minimum cart value is not met
@@ -50,22 +50,6 @@
         if offer_type == not_found_result or offer_handle == not_found_result
             continue
         endif
-
-
-        unless include_claimed_offers == true
-            # dont return an offer if it's already claimed
-            capture offer_result
-                render 'return-gwp-offer-claimed', offer: offer, collect_logs: collect_logs
-            endcapture
-            assign result_split = offer_result | split: result_delimiter
-            assign claimed = result_split[1]
-            if collect_logs
-                assign log_lines = log_lines | append: result_split[3]
-            endif
-            if claimed == 'true'
-                continue
-            endif
-        endunless
 
         # create clean result string without logs
         assign result = offer_type | append: result_delimiter | append: offer_handle

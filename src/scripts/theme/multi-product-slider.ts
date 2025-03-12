@@ -28,8 +28,12 @@ export class MultiProductSlider extends UcoastEl {
 			const navBlockId = q.ra(navButton, 'data-nav')
 			if (blockId === navBlockId) {
 				navButton.classList.add('active')
+				navButton.classList.remove('underline-on-hover')
+				navButton.classList.add('underline-always')
 			} else {
 				navButton.classList.remove('active')
+				navButton.classList.add('underline-on-hover')
+				navButton.classList.remove('underline-always')
 			}
 		})
 		this.sliderWrappers.forEach((sliderWrapper) => {

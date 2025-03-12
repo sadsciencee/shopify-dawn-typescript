@@ -1,6 +1,8 @@
 {%- liquid
     # top-level gwp logic
 
+    # params: collect_logs (boolean, optional)
+
     # returns string (offer_handle(string)::offer_type('none' | 'active' | 'partial'))
 
     # note: an 'active offer' is a ready-to-claim offer, while a partial offer just means that it's something the customer can work towards
@@ -9,20 +11,22 @@
     # consts
     assign result_delimiter = '::'
 
+    # set params
+    assign collect_logs = collect_logs | default: false
+
     # set output vars
     assign offer_type = 'none'
     assign offer_handle = 'false'
 
     # start by checking for an active offer
     capture active_offer_result
-        render 'return-gwp-offer-next'
+        render 'return-gwp-offer-next', collect_logs: collect_logs
     endcapture
 
     # call function to get the handle of the active offer or 'false' string
     capture maybe_active_offer_handle
-        render 'return-gwp-offer-found', result: active_offer_result
+        render 'return-gwp-offer-found', result: active_offer_result, collect_logs: collect_logs
     endcapture
-    assign maybe_active_offer_handle = maybe_active_offer_handle
 
     if maybe_active_offer_handle != 'false'
         assign offer_handle = maybe_active_offer_handle
@@ -30,12 +34,12 @@
     else
         # if there's no active offer, check for a partial offer
         capture partial_offer_result
-            render 'return-gwp-offer-next', soft_cart_threshold: true
+            render 'return-gwp-offer-next', soft_cart_threshold: true, collect_logs: collect_logs
         endcapture
 
         # call the same function to get the handle of the potential partial offer
         capture maybe_partial_offer_handle
-            render 'return-gwp-offer-found', result: partial_offer_result
+            render 'return-gwp-offer-found', result: partial_offer_result, collect_logs: collect_logs
         endcapture
 
         # if a partial offer is found it should have a 'offer_condition_cart_threshold' metaobject in the the 'enable_conditions' list

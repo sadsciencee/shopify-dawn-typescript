@@ -5,11 +5,13 @@
     #   collect_logs (boolean, optional)
     #   offer (gwp_offer)
     #   soft_cart_threshold (boolean, default false)
+    #   include_claimed_offers: (boolean, default false)
 
     # returns string (type:handle:log_lines)
 
     # note: type and handle will be '_not_found_' if no valid offer is available
     # note: soft_cart_threshold causes offers to evaluate as valid even if the minimum cart value is not met
+    # note: include_claimed_offers causes offers that have already been claimed to evaluate as valid
 
     # consts
     assign result_delimiter = '::'
@@ -20,6 +22,7 @@
     # set params
     assign collect_logs = collect_logs | default: false
     assign soft_cart_threshold = soft_cart_threshold | default: false
+    assign include_claimed_offers = include_claimed_offers | default: false
 
     # set output vars
     assign result = not_found_result | append: result_delimiter | append: not_found_result
@@ -61,14 +64,31 @@
         assign enable_evals_result = enable_lines_split[0]
         assign disable_evals_result = disable_lines_split[0]
 
-        assign log_lines = log_lines | append: '___LOG___' | append: 'enable_evals_result=' | append: enable_evals_result | append: ',disable_evals_result=' | append: disable_evals_result | append: '___LOG___'
+        assign log_lines = log_lines | append: log_delimiter | append: 'enable_evals_result=' | append: enable_evals_result | append: ',disable_evals_result=' | append: disable_evals_result | append: log_delimiter
     endif
 
     # if the offer is valid, set the result and exit the loop. otherwise continue to the next offer
     # use 'contains' since the results will contain log lines after a '::' separator
     if enable_evals_result == 'true' and disable_evals_result == 'false'
-        assign result = offer.system.type | append: result_delimiter | append: offer.system.handle
         assign log_lines = log_lines | append: '_title_Valid Offer' | append: log_delimiter | append: 'Type=' | append: offer.system.type | append: ',Handle=' | append: offer.system.handle | append: log_delimiter
+
+        # check if offer is already claimed
+        if include_claimed_offers == true
+            assign result = offer.system.type | append: result_delimiter | append: offer.system.handle
+        else
+            # dont return an offer if it's already claimed
+            capture claimed_result
+                render 'return-gwp-offer-claimed', offer: offer, collect_logs: collect_logs
+            endcapture
+            assign result_split = claimed_result | split: result_delimiter
+            assign claimed = result_split[1]
+            if collect_logs
+                assign log_lines = log_lines | append: result_split[3] | append: log_delimiter
+            endif
+            if claimed == 'false'
+                assign result = offer.system.type | append: result_delimiter | append: offer.system.handle
+            endif
+        endif
     endif
 
     # return result to caller

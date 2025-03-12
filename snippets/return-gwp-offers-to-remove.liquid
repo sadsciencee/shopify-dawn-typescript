@@ -28,8 +28,9 @@
 
     # iterate and build list of cart keys to remove
     assign ids_to_remove = ''
-    for offer in claimed_offers
-        assign offer_split = offer | split: result_delimiter
+    assign safe_ids = ''
+    for offer_result in claimed_offers
+        assign offer_split = offer_result | split: result_delimiter
         assign handle = offer_split[0]
         assign claimed_ids = offer_split[1]
         assign offer = metaobjects.gwp_offer[handle]
@@ -37,25 +38,38 @@
             continue
         endif
         capture offer_eval
-            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, include_claimed_offers: include_claimed_offers
+            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, include_claimed_offers: true
         endcapture
         capture maybe_active_offer_handle
             render 'return-gwp-offer-found', result: offer_eval
         endcapture
-        if maybe_active_offer_handle == not_found_result
+        if maybe_active_offer_handle == not_found_result or maybe_active_offer_handle == 'false'
+            assign ids_to_remove = ids_to_remove | append: claimed_ids
+            # no need to append ',' since 'return-gwp-claimed-offers' returns a trailing commma
             continue
         endif
-        # no need to append ',' since 'return-gwp-claimed-offers' returns a trailing commma
-        assign ids_to_remove = ids_to_remove | append: claimed_ids
+
+        # mark as safe - even if one offer condition is invalid, we have at least one valid offer for the item
+        assign offer_product_ids = offer.product_offer.value.products.value | map: 'id' | join: ","
+        assign safe_ids = safe_ids | append: offer_product_ids | append: ','
     endfor
 
     # convert string to array and remove duplicates / nulls
+    assign safe_ids = safe_ids | split: ',' | compact | uniq
     assign ids_to_remove = ids_to_remove | split: ',' | compact | uniq
+    assign filtered_ids_to_remove = ''
+    for id in ids_to_remove
+        if safe_ids contains id
+            continue
+        endif
+        assign filtered_ids_to_remove = filtered_ids_to_remove | append: id | append: ','
+    endfor
+    assign ids_to_remove = filtered_ids_to_remove
 
     # we have to loop one at a time since we have to convert string ids to numbers before using 'where' filter
     for id in ids_to_remove
-        assign id = id | plus: 0
-        assign cart_line_items = cart.line_items | where: 'product_id', id
+        assign id_int = id | plus: 0
+        assign cart_line_items = cart.items | where: 'product_id', id_int
         for item in cart_line_items
             # line_id_type can be variant_id or key, variant_id should only be used if you need to add items at the same time
             assign item_result = item[line_id_type] | append: result_delimiter | append: 0 | append: list_delimiter

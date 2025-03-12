@@ -28,6 +28,11 @@ export type CartUpdateWithSections = Cart & {
 	sections: SectionsResponse
 }
 
+export type CartUpdateInstructions = {
+	updates: Record<number, number> | Record<string, number>
+	update_required: boolean
+}
+
 export async function getCart(): Promise<Cart | CartErrorResponse> {
 	try {
 		const cart = await fetch('/cart.js', {
@@ -65,7 +70,13 @@ export function hasDomCart() {
 export function getDOMCartSectionApiIds() {
 	const cartEl = getDOMCart()
 	if (!cartEl) return undefined
-	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-progress-bar', 'dynamic-cart-footer']
+	return [
+		'cart-drawer-items',
+		'cart-icon-bubble',
+		'dynamic-progress-bar',
+		'dynamic-cart-footer',
+		'cart-update-instructions',
+	]
 }
 
 const ignoredProperties = ['utf8', 'product-id', 'section-id']
@@ -194,8 +205,6 @@ export function renderRawHTMLToDOM({
 	destinationSelector,
 	destinationSelectorContainer,
 }: RenderRawHTMLToDOMInput) {
-	console.log({sourceHTML})
-	console.log({sourceSelector, destinationSelector, destinationSelectorContainer})
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
 	const sourceElement = q.rs(
@@ -238,7 +247,7 @@ export async function addItemsToCart(
 						sections: sections,
 					}
 				: { items: input }
-	console.log({data})
+	console.log({ data })
 	try {
 		const response = await fetch(
 			`${window.routes.cart_add_url}`,
@@ -364,5 +373,48 @@ export function getActiveOrAccessibilityElement(): HTMLElement {
 		return activeElement
 	} else {
 		return q.rs('[data-uc-accessibility-focus]')
+	}
+}
+
+export function getUpdateInstructions(
+	cart: CartAddWithSections | CartUpdateWithSections
+): CartUpdateInstructions {
+	try {
+		const responseHTML = cart.sections['cart-update-instructions']
+		const newDocument = new DOMParser().parseFromString(
+			responseHTML,
+			'text/html'
+		)
+		const json = q.rs<HTMLScriptElement>(
+			'[data-cart-update-instructions]',
+			newDocument.documentElement
+		).textContent
+		console.log('cart instructions', json)
+		if (json === null) {
+			throw new Error(
+				'Cart instruction script element found, but json content is null'
+			)
+		}
+		const body = JSON.parse(json)
+		if (
+			'update_required' in body &&
+			typeof body.update_required === 'boolean' &&
+			'updates' in body &&
+			typeof body.updates === 'object'
+		) {
+			return body
+		}
+		throw new Error(
+			`Cart instruction script element found, but json content is not as expected. Expected {update_required: boolean, updates: object}, got ${json}`
+		)
+	} catch (e) {
+		console.log(
+			'error retrieving cart update instructions, returning default'
+		)
+		console.error(e)
+		return {
+			update_required: false,
+			updates: {},
+		}
 	}
 }

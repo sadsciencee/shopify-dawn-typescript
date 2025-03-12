@@ -6,8 +6,9 @@
 	#   gwp_offer_type (string, 'none' | 'active' | 'partial')
 	#	gwp_offer (gwp_offer)
 
-	# constants/params setup
+	# set params
 	assign threshold = -1.0
+	assign percent = 0
 	assign gwp_offer_type = gwp_offer_type | default: 'none'
 
 	if gwp_offer_type == 'active'
@@ -38,24 +39,25 @@
 	assign success = 'Gift unlocked!'
 	assign meter_prefix = 'Spend another '
 	assign meter_suffix = ' to unlock a gift!'
+
+	# note: I'm using display: none to hide progress bar when not needed. not ideal but my framework has things set up so the dynamic-progress-bar always renders
 %}
 
-{% if gwp_offer_type != 'none' %}
-	<dynamic-progress-bar
+<dynamic-progress-bar
 		data-percent="{{- percent -}}"
 		data-success="{{- success -}}"
 		class="w-100 block relative dynamic-progress-bar"
-		style="--progress-percent: {{ percent }}%"
+		style="--progress-percent: {{ percent }}%; {% if gwp_offer_type == 'none' %} display: none; {% endif %}"
 		data-threshold="{{- threshold -}}"
 		data-offer="{{- maybe_partial_offer_handle -}}"
-	>
+>
 		<span
-			class="absolute top-0 h-100 dynamic-progress-bar__status__container empty flex align-center justify-start"
-			role="status"
+				class="absolute top-0 h-100 dynamic-progress-bar__status__container empty flex align-center justify-start"
+				role="status"
 		>
 			<span
-				class="dynamic-progress-bar__status__text relative z-3 h5 tt-uppercase lh-1 m-0"
-				data-shipping-bar-status
+					class="dynamic-progress-bar__status__text relative z-3 h5 tt-uppercase lh-1 m-0"
+					data-shipping-bar-status
 			>
 				{% if gwp_offer_type == 'active' %}
 					{{ success }}
@@ -66,11 +68,10 @@
 				{% endif %}
 			</span>
 		</span>
-		<span
+	<span
 			class="dynamic-progress-bar__indicator absolute left-0 top-0 h-100 z-2 empty"
-		></span>
-		<span
+	></span>
+	<span
 			class="dynamic-progress-bar__background w-100 absolute top-0 h-100 z-1 empty"
-		></span>
-	</dynamic-progress-bar>
-{% endif %}
+	></span>
+</dynamic-progress-bar>

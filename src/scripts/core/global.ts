@@ -5,8 +5,9 @@ import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import { TsDOM as q, debounce, throttle, init } from '@/scripts/core/TsDOM'
+import { TsDOM as q, init } from '@/scripts/core/TsDOM'
 import { ArtDirection } from '@/scripts/core/art-direction'
+import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
 
@@ -602,4 +603,3 @@ export function globalSetup() {
 	// mediaLoader
 	void window.Ucoast.mediaManager.initialLoad()
 }
-
