@@ -162,6 +162,9 @@
                                             == false
                                             -%}
                                                 {%- for option in item.options_with_values -%}
+                                                    {% if option.value == 'Default Title' %}
+                                                        {% continue %}
+                                                    {% endif %}
                                                     <div class="product-option">
                                                         <dt>
                                                             {{ option.name -}}
@@ -176,49 +179,6 @@
                                                     </div>
                                                 {%- endfor -%}
                                             {%- endif -%}
-
-
-
-                                            {% comment %}
-                                            <!-- cant think of a single time i wanted these to be user facing where i didnt manually grab the key -->
-                                            {%- for property in item.properties -%}
-                                                {%- assign property_first_char = property.first
-                                                    | slice: 0
-                                                -%}
-                                                {%- if property.last
-                                                        != blank
-                                                    and property_first_char
-                                                        != '_'
-                                                -%}
-                                                    <div class="product-option">
-                                                        <dt>
-                                                            {{ property.first -}}
-                                                            :
-                                                        </dt>
-                                                        <dd>
-                                                            {%- if property.last
-                                                                    contains '/uploads/'
-                                                            -%}
-                                                                <a
-                                                                    href="{{ property.last }}"
-                                                                    class="link"
-                                                                    target="_blank"
-                                                                    aria-describedby="a11y-new-window-message"
-                                                                >
-                                                                    {{
-                                                                        property.last
-                                                                        | split: '/'
-                                                                        | last
-                                                                    }}
-                                                                </a>
-                                                            {%- else -%}
-                                                                {{ property.last }}
-                                                            {%- endif -%}
-                                                        </dd>
-                                                    </div>
-                                                {%- endif -%}
-                                            {%- endfor -%}
-                                            {% endcomment %}
                                         </dl>
 
                                         <p class="product-option">
