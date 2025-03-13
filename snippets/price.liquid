@@ -37,7 +37,7 @@
     {%- if available == false %} price--sold-out {% endif -%}
     {%- if compare_at_price > price %} price--on-sale {% endif -%}
     {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
-    {%- if show_badges %} price--show-badge{% endif -%}
+    {%- if show_badges %} price--show-badge flex align-center{% endif -%}
   "
 >
   <div class="price__container">

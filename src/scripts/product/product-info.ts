@@ -16,7 +16,7 @@ export class ProductInfo extends UcoastEl {
 		variantSelects: 'variant-radios, variant-selects',
 		submitButton: '[type="submit"]',
 	}
-	input: HTMLInputElement
+	input?: HTMLInputElement
 	currentVariant: HTMLInputElement
 	variantSelects?: VariantRadios
 	submitButton: HTMLButtonElement
@@ -26,7 +26,7 @@ export class ProductInfo extends UcoastEl {
 
 	constructor() {
 		super()
-		this.input = q.rs(ProductInfo.selectors.quantityInput, this)
+		this.input = q.os(ProductInfo.selectors.quantityInput, this)
 		this.currentVariant = q.rs(ProductInfo.selectors.currentVariant, this)
 		this.variantSelects = q.os(ProductInfo.selectors.variantSelects, this)
 		this.submitButton = q.rs(ProductInfo.selectors.submitButton, this)
@@ -64,6 +64,10 @@ export class ProductInfo extends UcoastEl {
 	}
 
 	setQuantityBoundries() {
+		if (!this.input) {
+			console.error('cannot call setQuantityBoundries, Quantity input not found')
+			return
+		}
 		const data = {
 			cartQuantity: this.input.dataset.cartQuantity
 				? parseInt(this.input.dataset.cartQuantity)

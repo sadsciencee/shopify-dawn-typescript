@@ -45,8 +45,7 @@
 	assign meter_prefix = 'Spend another '
 	assign meter_suffix = ' to unlock a gift!'
 
-	# note: in order to do the cute progress animation we don't directly overwrite this html from sections api
-	# so display:none is used instead - this element should always be rendered even if not visible
+	# note: this element should always be rendered even if not visible to avoid bugs with section rendering api
 %}
 
 <dynamic-progress-bar
@@ -70,7 +69,7 @@
 					{{ success }}
 				{% else %}
 					{{- meter_prefix -}}
-					{{- difference | money_without_trailing_zeros -}}
+					{{- difference | money_with_currency -}}
 					{{- meter_suffix -}}
 				{% endif %}
 			</span>

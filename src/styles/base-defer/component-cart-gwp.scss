@@ -54,19 +54,13 @@ $desktopGrid: var(--desktop-grid);
     .quick-add {
 
       margin-bottom: 0;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
       z-index: 3;
 
 
       .button {
         padding: $ax10;
         min-height: unset;
-        @include media-query($m-up) {
-          opacity: 1 !important;
-        }
+     
 
       }
     }
