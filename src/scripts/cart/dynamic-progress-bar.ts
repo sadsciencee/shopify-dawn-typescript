@@ -20,6 +20,10 @@ export class DynamicProgressBar extends UcoastEl {
 			DynamicProgressBar.htmlSelector,
 			newDocument
 		)
+		Array.from(newShippingBar.attributes).forEach(attr => {
+			if (attr.name === 'class' || attr.name === 'style') return
+			this.setAttribute(attr.name, attr.value);
+		});
 		const newPercent = parseInt(
 			q.ra(newShippingBar, 'data-percent')
 		)

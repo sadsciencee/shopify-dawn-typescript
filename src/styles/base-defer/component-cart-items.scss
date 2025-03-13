@@ -12,13 +12,15 @@
   opacity: 0.85;
   font-weight: normal;
 }
-
+.cart-item__quantity {
+  position: relative;
+}
 .cart-item__quantity-wrapper {
   display: flex;
 }
 
 .cart-item__totals {
-  position: relative;
+  position: static;
 }
 
 .cart-items *.right {
@@ -66,6 +68,7 @@
 
 .cart-item__media {
   position: relative;
+  background: #efeceb;
 }
 
 .cart-item__link {
@@ -81,6 +84,9 @@
 
 [data-uc-cart-item-name] {
   display: block;
+  @include clampSize(11, 14);
+  font-weight: 400;
+  letter-spacing: -0.03em;
 }
 
 .cart-item__price-wrapper > * {
@@ -91,10 +97,6 @@
 
 .cart-item__discounted-prices dd {
   margin: 0;
-}
-
-.cart-item__discounted-prices .cart-item__old-price {
-  font-size: #{$ax14};
 }
 
 .cart-item__old-price {
@@ -113,14 +115,39 @@
 
 [data-uc-cart-item] cart-remove-button {
   display: flex;
-  margin-left: #{$ax10};
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  align-items: flex-start;
+
+  .button {
+    display: flex !important; //sorry
+    align-items: flex-start;
+    justify-content: flex-end;
+    svg {
+      display: block;
+      width: $ax17;
+      height: auto;
+      transform: scale(1);
+      transition: transform 0.3s $bezier;
+    }
+  }
+
+  .button:hover {
+    background: transparent;
+    color: rgb(#{$schemaColorForeground});
+    svg {
+      transform: scale(1.15);
+      transition: transform 0.3s $bezier;
+    }
+  }
 }
 
 cart-remove-button .button {
   min-width: calc(#{$ax45} / #{$fontBodyScale});
   min-height: #{$ax45};
   padding: 0;
-  margin: 0 #{$ax1} #{$ax1} 0;
 }
 
 cart-remove-button .button:before,
@@ -235,12 +262,7 @@ cart-remove-button .icon-remove {
 [data-uc-cart-item-error-text] + svg {
   margin-top: #{$ax4};
 }
-@include media-query($m-only) {
-  [data-uc-cart-item] cart-remove-button {
-    width: #{$ax45};
-    height: #{$ax45};
-  }
-}
+
 @include media-query($s-up) {
   cart-remove-button .button {
     min-width: #{$ax35};
@@ -292,9 +314,7 @@ cart-remove-button .icon-remove {
     width: #{ax(100)};
   }
 
-  [data-uc-cart-item] cart-remove-button {
-    margin: #{$ax5} 0 0 #{$ax15};
-  }
+
 
   .cart-item__price-wrapper > *:only-child:not(.cart-item__discounted-prices) {
     margin-top: #{$ax10};
@@ -313,4 +333,8 @@ cart-remove-button .icon-remove {
   .cart-items thead th:first-child {
     width: 60%;
   }
+}
+
+.cart-item {
+  position: relative;
 }

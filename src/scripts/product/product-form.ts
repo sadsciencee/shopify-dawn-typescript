@@ -73,6 +73,11 @@ export class ProductForm extends UcoastEl {
 		let formVariantId = formData.get('id')
 		if (!formVariantId) throw Error('No variant id found')
 		const addedVariantId = parseInt(formVariantId.toString())
+		// clean up extra stuff from klaviyo waitlist and other hidden inputs
+		formData.delete('Size')
+		formData.delete('size')
+		formData.delete('Color')
+		formData.delete('color')
 
 		addItemsToCart(formData, getDOMCartSectionApiIds())
 			.then((cart) => {

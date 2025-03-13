@@ -86,7 +86,7 @@ export class CartDrawer extends UcoastEl {
 				const containerToTrapFocusOn = this.hasAttribute(
 					ATTRIBUTES.cartEmpty
 				)
-					? q.rs(CartDrawer.selectors.innerEmpty, this)
+					? q.os(CartDrawer.selectors.innerEmpty, this)
 					: q.rs(CartDrawer.selectors.container)
 				const focusElement =
 					q.os(CartDrawer.selectors.inner, this) ||

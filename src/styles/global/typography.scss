@@ -1,5 +1,13 @@
 @import './variables.scss';
 @import './functions.scss';
+.mini {
+	@include clampSize(11, 14);
+	letter-spacing: -.03em;
+	line-height: 1.15;
+	font-family: #{$fontBodyFamily};
+	font-style: #{$fontBodyStyle};
+	font-weight: #{$fontBodyWeight};
+}
 .text-body {
 	font-size: #{$ax15};
 	letter-spacing: 0.01em;

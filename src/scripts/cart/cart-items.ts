@@ -277,6 +277,7 @@ export class CartItems extends UcoastEl {
 				}
 				void window.Ucoast.mediaManager.playAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
+				this.disableLoading(line)
 			})
 			.catch((error) => {
 				console.error(error)
@@ -285,8 +286,6 @@ export class CartItems extends UcoastEl {
 				).forEach((overlay) => overlay.classList.add('hidden'))
 				const errors = q.rs(this.instanceSelectors.errors)
 				errors.textContent = window.cartStrings.error
-			})
-			.finally(() => {
 				this.disableLoading(line)
 			})
 	}

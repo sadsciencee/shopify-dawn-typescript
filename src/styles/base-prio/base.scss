@@ -534,18 +534,18 @@ summary::-webkit-details-marker {
 .subtitle {
 	font-size: #{$ax18};
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .subtitle--small {
 	font-size: #{$ax14};
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 }
 
 .subtitle--medium {
 	font-size: #{$ax16};
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 }
 
 /* component-grid */
@@ -823,7 +823,7 @@ button.shopify-payment-button__button--unbranded {
 .shopify-challenge__button,
 .customer button {
 	font-size: #{$ax15};
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
@@ -1233,7 +1233,7 @@ details[open] > .share-button__fallback {
 	position: absolute;
 	transition: top var(--duration-short) ease, font-size var(--duration-short) ease;
 	color: rgba(#{$schemaColorForeground}, 0.75);
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 	line-height: 1.5;
 }
 
@@ -1246,7 +1246,7 @@ details[open] > .share-button__fallback {
 	font-size: #{$ax10};
 	top: calc(#{$inputsBorderWidth} + #{$ax5});
 	left: calc(#{$inputsBorderWidth} + #{$ax20});
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 }
 
 .field__input:focus,
@@ -1567,7 +1567,7 @@ input[type='checkbox'] {
 	text-align: center;
 	padding: #{$ax10} 0;
 	margin: 0;
-	letter-spacing: 0.01em;
+	letter-spacing: -.03em;
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,
@@ -2084,6 +2084,12 @@ details-disclosure > details {
 	border-color: rgba(#{$schemaColorBadgeBorder}, var(--alpha-badge-border));
 	color: rgb(#{$schemaColorBadgeForeground});
 	word-break: break-word;
+
+	&--reverse {
+		background-color: rgb(#{$schemaColorBadgeForeground});
+		border-color: rgb(#{$schemaColorBadgeBackground});
+		color: rgb(#{$schemaColorBadgeBackground});
+	}
 }
 
 .gradient {

@@ -22,13 +22,18 @@
 			endif
 		endfor
 
-		# note: everything have to get converted to floats in order to calculate a percentage bc of how liquid handles floats vs ints
+		# note: everything has to get converted to floats in order to calculate a percentage bc of how liquid handles floats vs ints
 		# the currency values are still 'int style' though. in otherwords $10.00 is represented as 1000.0 here
 		assign current_cart_amount = cart.items | map: 'final_line_price' | sum
 		assign difference = threshold | minus: current_cart_amount
 		assign current_cart_amount = current_cart_amount | plus: 0.0
 		assign threshold = threshold | plus: 0.0
 		assign percent = current_cart_amount | divided_by: threshold | times: 100 | round
+
+		# avoid confusing ui when offer is almost unlocked
+		if percent > 97.0
+			assign percent = 97.0
+		endif
 
 		# just a safety check to make sure everything is working as expected before displaying
 		if threshold <= 0.0
@@ -40,23 +45,25 @@
 	assign meter_prefix = 'Spend another '
 	assign meter_suffix = ' to unlock a gift!'
 
-	# note: I'm using display: none to hide progress bar when not needed. not ideal but my framework has things set up so the dynamic-progress-bar always renders
+	# note: in order to do the cute progress animation we don't directly overwrite this html from sections api
+	# so display:none is used instead - this element should always be rendered even if not visible
 %}
 
 <dynamic-progress-bar
 		data-percent="{{- percent -}}"
 		data-success="{{- success -}}"
 		class="w-100 block relative dynamic-progress-bar"
-		style="--progress-percent: {{ percent }}%; {% if gwp_offer_type == 'none' %} display: none; {% endif %}"
+		style="--progress-percent: {{ percent }}%;"
 		data-threshold="{{- threshold -}}"
-		data-offer="{{- maybe_partial_offer_handle -}}"
+		data-offer="{{- gwp_offer.system.handle -}}"
+		data-gwp-offer-type="{{- gwp_offer_type -}}"
 >
 		<span
 				class="absolute top-0 h-100 dynamic-progress-bar__status__container empty flex align-center justify-start"
 				role="status"
 		>
 			<span
-					class="dynamic-progress-bar__status__text relative z-3 h5 tt-uppercase lh-1 m-0"
+					class="dynamic-progress-bar__status__text relative z-3 lh-1 m-0"
 					data-shipping-bar-status
 			>
 				{% if gwp_offer_type == 'active' %}

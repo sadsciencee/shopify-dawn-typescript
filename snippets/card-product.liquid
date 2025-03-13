@@ -52,7 +52,7 @@
 			"
 		>
 			<div
-				class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}"
+				class="card__inner relative {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}"
 			>
 				{%- if card_product.featured_media -%}
 					<div class="card__media relative global-media-settings overflow-hidden {% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
@@ -246,8 +246,16 @@
 						{%- endif -%}
 					</div>
 				{%- endif -%}
+				<a
+						href="{{ card_product.url }}"
+						id="CardLink-{{ section_id }}-{{ card_product.id }}-media"
+						class="full-unstyled-link absolute top-0 left-0 w-100 h-100 z-2"
+						aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
+				>
+					<span class="visually-hidden">{{ card_product.title | escape }}</span>
+				</a>
 			</div>
-			<div class="card__content">
+			<div class="card__content relative">
 				<div class="card__information">
 					<h3
 						class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
@@ -263,7 +271,7 @@
 							class="full-unstyled-link"
 							aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
 						>
-							{{ card_product.title | escape }}
+							<span class="visually-hidden">{{ card_product.title | escape }}</span>
 						</a>
 					</h3>
 					<div class="card-information">

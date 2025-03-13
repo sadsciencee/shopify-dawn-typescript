@@ -30,7 +30,7 @@
                         class="announcement-bar__link underline-on-hover link link--text focus-inset animate-arrow"
                         >
                     {%- endif -%}
-                    <p class="announcement-bar__message h5">
+                    <p class="announcement-bar__message mini">
                         <span>{{ section.blocks.first.settings.text | escape }}</span>
                         {%- if section.blocks.first.settings.link != blank -%}
                             {% render 'icon-default', icon: 'arrow' %}
@@ -89,7 +89,7 @@
                                             class="announcement-bar__link underline-on-hover link link--text focus-inset animate-arrow"
                                             >
                                         {%- endif -%}
-                                        <p class="announcement-bar__message h5">
+                                        <p class="announcement-bar__message mini">
                                             <span>{{ block.settings.text | escape }}</span>
                                             {%- if block.settings.link != blank -%}
                                                 {% render 'icon-default', icon: 'arrow' %}
