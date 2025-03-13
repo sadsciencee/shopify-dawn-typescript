@@ -111,14 +111,25 @@
 	.quick-add {
 		margin-bottom: 0;
 		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
+		left: $ax5;
+		bottom: $ax5;
+		width: calc(100% - #{$ax10});
 		z-index: 3;
 
 		.button {
 			padding: $ax10;
 			min-height: unset;
+
+			@include media-query($m-up) {
+				opacity: 0;
+				transition: .3s opacity $bezier;
+			}
+		}
+	}
+	&:hover .quick-add .button {
+		@include media-query($m-up) {
+			opacity: 1;
+			transition: .3s opacity $bezier;
 		}
 	}
 }

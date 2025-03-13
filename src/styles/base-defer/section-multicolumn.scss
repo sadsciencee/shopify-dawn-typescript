@@ -3,6 +3,12 @@
 .multicolumn .title {
 	margin: 0;
 }
+.multicolumn__title {
+	@include clampSize(22, 32);
+	font-weight: 400;
+	line-height: 1;
+	font-family: 'CircularStd';
+}
 
 .multicolumn.no-heading .title {
 	display: none;

@@ -24,13 +24,13 @@ $block: 'product-slider';
 	.embla__slide,
 	.grid__item {
 		flex-grow: 1;
-		width: ax(270);
-		max-width: ax(270);
+		width: calc((100vw - #{ax(120)}) / 4);
+		max-width: ax(400);
 		min-width: 0;
-		padding-left: var(--slide-spacing);
+		padding-left: $ax15;
 		position: relative;
 		&:first-of-type {
-			margin-left: var(--slide-spacing);
+			margin-left: $ax40;
 		}
 		@include media-query($s-down) {
 			&:first-of-type {

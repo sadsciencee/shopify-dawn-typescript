@@ -13,7 +13,7 @@
 -%}
 <section
 	id="MainProduct-{{ section.id }}"
-	class="page-width {{ spacing }}"
+	class="page-width page-width--full {{ spacing }}"
 	data-section="{{ section.id }}"
 >
 	{% render 'ucoast-style-tag', file: 'css-dir-product-prio', preload_stylesheet: true %}
@@ -1749,7 +1749,7 @@
 				"info": "Set to -1 to disable space above",
 				"min": 0,
 				"max": 10,
-				"default": 4,
+				"default": 0,
 				"unit": "spc",
 				"step": 1
 			},

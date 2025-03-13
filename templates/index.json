@@ -33,6 +33,7 @@
 						"y_position_desktop": 50,
 						"override_shopify_position_desktop": true,
 						"image_overlay_opacity": 0,
+						"mobile_image": "shopify://shop_images/hero_mobile.jpg",
 						"x_position_mobile": 50,
 						"y_position_mobile": 50,
 						"override_shopify_position_mobile": true
@@ -45,6 +46,53 @@
 			"settings": {
 				"height": "medium",
 				"space_above": 0,
+				"mobile_space_above": -1
+			}
+		},
+		"collection_list_YBgbn3": {
+			"type": "collection-list",
+			"blocks": {
+				"featured_collection_3TthK6": {
+					"type": "featured_collection",
+					"settings": {
+						"collection": "women-clothing-sweaters"
+					}
+				},
+				"featured_collection_CnaKCm": {
+					"type": "featured_collection",
+					"settings": {
+						"collection": "men-clothing-sweaters"
+					}
+				},
+				"featured_collection_nrCQ93": {
+					"type": "featured_collection",
+					"settings": {
+						"collection": "women-featured-new-in-3c3669"
+					}
+				},
+				"featured_collection_y9DDeC": {
+					"type": "featured_collection",
+					"settings": {
+						"collection": "men-featured-new-in"
+					}
+				}
+			},
+			"block_order": [
+				"featured_collection_3TthK6",
+				"featured_collection_CnaKCm",
+				"featured_collection_nrCQ93",
+				"featured_collection_y9DDeC"
+			],
+			"settings": {
+				"title": "Featured Categories",
+				"heading_size": "h2-alt",
+				"image_ratio": "portrait",
+				"columns_desktop": 4,
+				"color_scheme": "",
+				"show_view_all": false,
+				"columns_mobile": "1",
+				"swipe_on_mobile": false,
+				"space_above": 4,
 				"mobile_space_above": -1
 			}
 		},
@@ -79,6 +127,7 @@
 	},
 	"order": [
 		"hero_MK4cWi",
+		"collection_list_YBgbn3",
 		"featured_collection_L3RcEq"
 	]
 }

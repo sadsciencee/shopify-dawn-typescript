@@ -41,7 +41,7 @@
 		endif
 	endif
 
-	assign success = 'Gift unlocked!'
+	assign success = gwp_offer.display_title.value | default: 'Gift unlocked!'
 	assign meter_prefix = 'Spend another '
 	assign meter_suffix = ' to unlock a gift!'
 

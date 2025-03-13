@@ -16,6 +16,11 @@
 
 {% if gwp_offer_type == 'active' %}
     <cart-gwp class="cart-gwp">
+        <div class="cart-gwp__title flex align-center justify-center center">
+            <div class="page-width">
+                <h3 class="badge badge--reverse m-0 lh-1">Choose Your Gift</h3>
+            </div>
+        </div>
         <div class="cart-gwp__track no-scrollbar">
             <ul class="cart-gwp__products list-unstyled" style="--desktop-grid: {{- desktop_grid -}}">
                 {% for card_product in product_list %}

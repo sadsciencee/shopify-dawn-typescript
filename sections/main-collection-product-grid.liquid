@@ -30,7 +30,7 @@
 		{%- if section.settings.enable_sorting
 			and section.settings.filter_type == 'vertical'
 		-%}
-			<facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
+			<facet-filters-form class="facets facets-vertical-sort page-width page-width--full small-hide no-js-hidden">
 				<form class="facets-vertical-form" data-uc-facet-form="sort">
 					<div class="facet-filters sorting caption">
 						<div class="facet-filters__field">
@@ -116,13 +116,13 @@
 			</facet-filters-form>
 		{%- endif -%}
 
-		<div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
+		<div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width page-width--full{% endif %}">
 			{%- if section.settings.enable_filtering
 				or section.settings.enable_sorting
 			-%}
 				<aside
 					aria-labelledby="verticalTitle"
-					class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+					class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width page-width--full {% endif %}"
 					id="main-collection-filters"
 					data-id="{{ section.id }}"
 				>

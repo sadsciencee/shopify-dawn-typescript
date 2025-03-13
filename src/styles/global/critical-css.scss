@@ -726,8 +726,8 @@ ucoast-video[data-uc-has-played='true'] video {
 }
 
 .p-section-background {
-	padding-top: calc(#{$sectionSpacing} * 2.2);
-	padding-bottom: calc(#{$sectionSpacing} * 2.2);
+	padding-top: calc(#{$sectionSpacing} * 1);
+	padding-bottom: calc(#{$sectionSpacing} * 1);
 }
 
 .viewport-minus-combined {
@@ -762,4 +762,14 @@ style[data-shopify] {
 }
 body {
 	-webkit-font-smoothing: antialiased;
+}
+.page-width--full {
+	max-width: 100%;
+	width: 100%;
+}
+
+@include media-query($s-up) {
+	.page-width {
+		padding: 0 #{$ax30};
+	}
 }

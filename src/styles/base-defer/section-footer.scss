@@ -62,7 +62,9 @@
 .footer-block__heading {
 	margin-bottom: #{$ax20};
 	margin-top: 0;
-	font-size: calc(#{$fontHeadingScale} * #{$ax16});
+	font-family: CircularStd;
+	font-weight: 400;
+	@include clampSize(16, 20);
 }
 
 .footer__list-social:empty,
@@ -447,10 +449,5 @@
 		.footer__content-top .grid__item {
 			padding-left: #{$ax30};
 		}
-	}
-}
-@include media-query($m-up) {
-	.footer-block__heading {
-		font-size: calc(#{$fontHeadingScale} * #{$ax18});
 	}
 }

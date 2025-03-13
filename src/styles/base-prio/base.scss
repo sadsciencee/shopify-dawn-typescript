@@ -493,7 +493,7 @@ summary::-webkit-details-marker {
 	justify-content: space-between;
 	align-items: flex-end;
 	gap: #{$ax10};
-	margin-bottom: #{$ax30};
+	margin-bottom: 0;
 	flex-wrap: wrap;
 }
 
@@ -2745,7 +2745,7 @@ details-disclosure > details {
 }
 @include media-query($s-up) {
 	.page-width {
-		padding: 0 #{$ax50};
+		padding: 0 #{$ax30};
 	}
 
 	.header.page-width {
@@ -2755,6 +2755,11 @@ details-disclosure > details {
 
 	.page-width--narrow {
 		padding: 0 #{ax(90)};
+	}
+
+	.page-width--full {
+		max-width: 100%;
+		width: 100%;
 	}
 
 	.page-width-desktop {
@@ -2901,7 +2906,7 @@ details-disclosure > details {
 
 	.title,
 	.title-wrapper-with-link {
-		margin: #{$ax50} 0 #{$ax30};
+		margin: #{$ax40} 0 0;
 	}
 
 	.title--primary {
@@ -3135,6 +3140,12 @@ quick-add-modal .product__title > a,
 	width: ax(120);
 }
 
+// just dropping in quick styles
+
+.multi-product-slider {
+
+}
+
 
 // in critical, remove on next compile
 .no-underline {
@@ -3142,4 +3153,8 @@ quick-add-modal .product__title > a,
 }
 body {
 	-webkit-font-smoothing: antialiased;
+}
+.page-width--full {
+	max-width: 100%;
+	width: 100%;
 }

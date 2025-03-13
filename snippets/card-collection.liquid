@@ -49,10 +49,16 @@
 		>
 			{%- if card_collection.featured_image -%}
 				<div class="card__media">
-					{% render 'ucoast-media',
-						media: card_collection.featured_image,
-						media_class: 'motion-reduce',
-						wrapper_class: 'media--transparent media--hover-effect'
+					{% render 'art-direction',
+							desktop_media: card_collection.featured_image,
+							media_class: 'motion-reduce block w-100 h-auto',
+							wrapper_class: 'media--transparent media--hover-effect block',
+							loading: loading,
+							aspect_ratio: 'fill',
+							disable_media_settings: true,
+							mobile_size: mobile_size,
+							desktop_size: desktop_size,
+							play_on_event: play_on_event
 					%}
 				</div>
 			{%- endif -%}
@@ -63,7 +69,7 @@
 			{%- else -%}
 				<div class="card__content">
 					<div class="card__information">
-						<h3 class="card__heading">
+						<h3 class="card__heading collection-list__item__title">
 							<a
 								{% if card_collection == blank %}
 									role="link" aria-disabled="true"
@@ -102,7 +108,7 @@
 		-%}
 			<div class="card__content">
 				<div class="card__information">
-					<h3 class="card__heading">
+					<h3 class="card__heading collection-list__item__title">
 						<a
 							{% if card_collection == blank %}
 								role="link" aria-disabled="true"
@@ -116,13 +122,6 @@
 							{%- else -%}
 								{{ 'onboarding.collection_title' | t }}
 							{%- endif -%}
-							{%- if card_collection.featured_image
-								or card_collection.description == blank
-							-%}
-								<span class="icon-wrap">
-									{%- render 'icon-default', icon: 'arrow' -%}
-								</span>
-							{%- endif %}
 						</a>
 					</h3>
 					{%- if card_collection.featured_image == null
