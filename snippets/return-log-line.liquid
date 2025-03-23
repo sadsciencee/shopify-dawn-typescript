@@ -1,0 +1,17 @@
+{%- liquid
+    # extract a log line from a response.
+
+    # params:
+    #   source (string)
+    #   index (number: default 1)
+    #   line_delimiter (string: default '::')
+    #   log_delimiter (string: default '___LOG___')
+
+    # note: specify an index to identify which index the log line can be found at when delimited by 'line_delimiter'
+
+    assign line_delimiter = line_delimiter | default: '::'
+    assign log_delimiter = log_delimiter | default: '___LOG___'
+    assign index = index | default: 1
+    assign split_source = source | split: line_delimiter
+    echo split_source[index] | append: '___LOG___'
+ -%}

@@ -2,10 +2,22 @@
   {
     "name": "theme_info",
     "theme_name": "uCoast",
-    "theme_version": "11.0.2",
+    "theme_version": "12.0.0",
     "theme_author": "uCoast Web",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://ucoastweb.com/"
+  },
+  {
+    "name": "Offers",
+    "settings": [
+      {
+        "type": "metaobject_list",
+        "id": "gwp_offers",
+        "label": "Gift With Purchase Offers",
+        "metaobject_type": "gwp_offer",
+        "limit": 12
+      }
+    ]
   },
   {
     "name": "Placeholders",
@@ -25,17 +37,6 @@
         "type": "image_picker",
         "id": "logo",
         "label": "t:settings_schema.logo.settings.logo_image.label"
-      },
-      {
-        "id": "logo_scale",
-        "label": "t:settings_schema.logo.settings.logo_scale.label",
-        "type": "range",
-        "min": 50,
-        "max": 150,
-        "step": 1,
-        "default": 100,
-        "unit": "%",
-        "info": "t:settings_schema.logo.settings.logo_scale.info"
       },
       {
         "type": "range",
@@ -1163,7 +1164,7 @@
         "min": 51,
         "max": 225,
         "step": 3,
-        "default": 66,
+        "default": 75,
         "unit": "%"
       },
       {
@@ -1173,7 +1174,7 @@
         "min": 51,
         "max": 225,
         "step": 3,
-        "default": 66,
+        "default": 75,
         "unit": "%"
       },
       {

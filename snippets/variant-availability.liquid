@@ -36,21 +36,25 @@
 	if output_translation
 		case inventory_schema
 			when 'InStock'
-				if quick_add
+				if is_free_gift
+					echo free_gift_text
+				elsif quick_add
 					echo 'products.product.quick_add' | t
 				else
 					echo 'products.product.add_to_cart' | t
 				endif
 			when 'PreOrder'
-				if variant.metafields.custom.preorder_ship_date.value
+				if is_free_gift
+					echo free_gift_text
+				elsif variant.metafields.custom.preorder_ship_date.value
 					assign today_date = 'today' | date: '%s' | times: 1
 					assign pre_date = variant.metafields.custom.preorder_ship_date.value | date: '%s' | times: 1
 					if today_date < pre_date
 						echo 'products.product.preorder' | t
 						echo ' - ships '
 						echo variant.metafields.custom.preorder_ship_date.value | date: '%m/%d/%Y'
-                    else
-                        echo 'products.product.add_to_cart' | t
+					else
+						echo 'products.product.add_to_cart' | t
 					endif
 				else
 					echo 'products.product.preorder' | t
@@ -60,7 +64,11 @@
 			when 'OutOfStock'
 				echo 'products.product.sold_out' | t
 			else
-				echo 'products.product.add_to_cart' | t
+				if is_free_gift
+					echo free_gift_text
+				else
+					echo 'products.product.add_to_cart' | t
+				endif
 		endcase
 	else
 		echo inventory_schema

@@ -1,12 +1,20 @@
 import { ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { ATTRIBUTES, SELECTORS } from '@/scripts/core/global'
+import {
+	ATTRIBUTES,
+	fetchConfig,
+	PUB_SUB_EVENTS,
+	publish,
+	SELECTORS,
+} from '@/scripts/core/global'
 import {
 	CartAddWithSections,
+	CartUpdateInstructions,
 	CartUpdateWithSections,
+	getUpdateInstructions,
 	renderRawHTMLToDOM,
-	updateShippingBar,
+	updateProgressBar,
 } from '@/scripts/core/cart-functions'
 
 export class CartDrawer extends UcoastEl {
@@ -31,10 +39,19 @@ export class CartDrawer extends UcoastEl {
 		)
 		this.getOverlay().addEventListener('click', this.close.bind(this))
 		this.setHeaderCartIconAccessibility()
+		this.maybeAutoOpen()
 	}
 
 	getOverlay() {
 		return q.rs(CartDrawer.selectors.overlay, this)
+	}
+
+	maybeAutoOpen() {
+		const url = new URL(window.location.href)
+		const urlParams = url.searchParams
+		if (urlParams.get('open') === 'cart') {
+			this.open()
+		}
 	}
 
 	setHeaderCartIconAccessibility() {
@@ -55,10 +72,7 @@ export class CartDrawer extends UcoastEl {
 
 	open(triggeredBy?: HTMLElement) {
 		if (triggeredBy) this.setActiveElement(triggeredBy)
-		const cartDrawerNote = q.os(
-			CartDrawer.selectors.noteSummary,
-			this
-		)
+		const cartDrawerNote = q.os(CartDrawer.selectors.noteSummary, this)
 		if (cartDrawerNote && !cartDrawerNote.hasAttribute('role'))
 			this.setSummaryAccessibility(cartDrawerNote)
 		// here the animation doesn't seem to always get triggered. A timeout seem to help
@@ -72,7 +86,7 @@ export class CartDrawer extends UcoastEl {
 				const containerToTrapFocusOn = this.hasAttribute(
 					ATTRIBUTES.cartEmpty
 				)
-					? q.rs(CartDrawer.selectors.innerEmpty, this)
+					? q.os(CartDrawer.selectors.innerEmpty, this)
 					: q.rs(CartDrawer.selectors.container)
 				const focusElement =
 					q.os(CartDrawer.selectors.inner, this) ||
@@ -111,10 +125,9 @@ export class CartDrawer extends UcoastEl {
 
 		cartDrawerNote.addEventListener('click', (event: MouseEvent) => {
 			const currentTarget = q.rct(event)
-			const isExpanded = q.rs(
-				CartDrawer.selectors.noteDetails,
-				this
-			).hasAttribute('open')
+			const isExpanded = q
+				.rs(CartDrawer.selectors.noteDetails, this)
+				.hasAttribute('open')
 			currentTarget.setAttribute('aria-expanded', `${isExpanded}`)
 		})
 
@@ -122,14 +135,28 @@ export class CartDrawer extends UcoastEl {
 	}
 
 	renderContents(cart: CartAddWithSections | CartUpdateWithSections) {
+		// check for cart update instructions in case we need to remove a gwp or bundle item
+		const cartUpdateInstructions = getUpdateInstructions(cart)
+		if (cartUpdateInstructions.update_required) {
+			void this.runUpdateInstructions(cartUpdateInstructions)
+			// skip the re-render since we're about to rerender anyway
+			return
+		}
 		this.setActiveElement(document.activeElement)
 		this.getSectionsToRender().forEach((section) => {
-			if (section.section === 'dynamic-shipping-bar') {
-				updateShippingBar(cart.sections[section.section])
+			if (section.section === 'cart-update-instructions') return
+			if (section.section === 'dynamic-progress-bar') {
+				updateProgressBar(cart.sections[section.section])
 				return
 			}
 			const sectionHandle = section.section
 			if (!sectionHandle) throw new Error('Section id is required')
+			console.log('rendering section', {
+				sectionHandle,
+				selector: section.selector,
+				id: section.id,
+			})
+			console.log('sections', cart.sections)
 			renderRawHTMLToDOM({
 				sourceHTML: cart.sections[sectionHandle],
 				sourceSelector: section.selector,
@@ -150,6 +177,31 @@ export class CartDrawer extends UcoastEl {
 		}, 1)
 	}
 
+	async runUpdateInstructions(instructions: CartUpdateInstructions) {
+		const body = JSON.stringify({
+			updates: instructions.updates,
+			sections: this.getSectionsToRender().map(
+				(section) => section.section
+			),
+			sections_url: window.location.pathname,
+		})
+		fetch(`${window.routes.cart_update_url}`, {
+			...fetchConfig(),
+			...{ body },
+		})
+			.then((response) => {
+				return response.text()
+			})
+			.then((state) => {
+				const parsedState = JSON.parse(state)
+				// same as cart add, check for update instructions in case we need to remove gwp
+				this.renderContents(parsedState)
+			})
+			.catch((error) => {
+				console.error('Error running update instructions', error)
+			})
+	}
+
 	getSectionsToRender(): ShopifySectionRenderingSchema[] {
 		return [
 			{
@@ -164,13 +216,18 @@ export class CartDrawer extends UcoastEl {
 			},
 			{
 				id: 'CartDrawer',
-				section: 'dynamic-shipping-bar',
-				selector: 'dynamic-shipping-bar',
+				section: 'dynamic-progress-bar',
+				selector: 'dynamic-progress-bar',
 			},
 			{
 				id: 'CartDrawer',
 				section: 'dynamic-cart-footer',
 				selector: '.drawer__footer',
+			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
 			},
 		]
 	}

@@ -1,0 +1,68 @@
+@import '../global/variables';
+@import '../global/functions';
+
+$block: 'cart-gwp';
+$desktopGrid: var(--desktop-grid);
+
+.#{$block} {
+  display: block;
+  width: 100%;
+  margin-bottom: $ax15;
+  padding-bottom: $ax15;
+  border-bottom: var(--ax1) solid rgba(var(--c-foreground),.2);
+
+  &__title {
+    padding: $ax8;
+    margin-bottom: $ax7;
+  }
+
+  &__track {
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  &__products {
+    width: max-content;
+    display: flex;
+    gap: $ax15;
+    margin-left: $ax15;
+    margin-right: $ax15;
+    min-width: 100%;
+  }
+
+  &__item {
+    width: ax(120);
+    max-width: 33vw;
+
+    @include media-query($m-up) {
+      width: calc(33.33% - #{$ax20});
+    }
+  }
+
+  .card__information {
+    display: none;
+  }
+
+  // overrides
+
+  .card--standard .card__media {
+    background: #efeceb;
+  }
+
+  .card--standard {
+    .quick-add {
+
+      margin-bottom: 0;
+      z-index: 3;
+
+
+      .button {
+        padding: $ax10;
+        min-height: unset;
+     
+
+      }
+    }
+  }
+}

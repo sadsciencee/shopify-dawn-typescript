@@ -454,7 +454,7 @@ summary::-webkit-details-marker {
 	outline: $comboOutline1;
 	outline-offset: #{$ax10};
 	box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
+	0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .focus-offset.focused,
@@ -462,7 +462,7 @@ summary::-webkit-details-marker {
 	outline: $comboOutline1;
 	outline-offset: #{$ax10};
 	box-shadow: 0 0 0 #{$ax10} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
+	0 0 #{$ax2} #{$ax12} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .no-js .focus-offset:focus:not(:focus-visible) {
@@ -493,7 +493,7 @@ summary::-webkit-details-marker {
 	justify-content: space-between;
 	align-items: flex-end;
 	gap: #{$ax10};
-	margin-bottom: #{$ax30};
+	margin-bottom: 0;
 	flex-wrap: wrap;
 }
 
@@ -534,18 +534,18 @@ summary::-webkit-details-marker {
 .subtitle {
 	font-size: #{$ax18};
 	line-height: calc(1 + 0.8 / #{$fontBodyScale});
-	letter-spacing: 0.0334em;
+	letter-spacing: -.03em;
 	color: rgba(#{$schemaColorForeground}, 0.7);
 }
 
 .subtitle--small {
 	font-size: #{$ax14};
-	letter-spacing: 0.007em;
+	letter-spacing: -.03em;
 }
 
 .subtitle--medium {
 	font-size: #{$ax16};
-	letter-spacing: 0.05em;
+	letter-spacing: -.03em;
 }
 
 /* component-grid */
@@ -724,11 +724,12 @@ button.shopify-payment-button__button--unbranded {
 	font-size: #{$ax15};
 	text-decoration: none;
 	color: rgb(#{$schemaColorButtonText});
-	transition: box-shadow var(--duration-short) ease;
+	transition: box-shadow var(--duration-short) ease, background var(--duration-short) ease, color var(--duration-short) ease, border-color var(--duration-short) ease;
 	-webkit-appearance: none;
 	appearance: none;
 	background-color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
+
 
 .button:before,
 .shopify-challenge__button:before,
@@ -747,6 +748,18 @@ button.shopify-payment-button__button--unbranded {
 	box-shadow: $comboBoxShadow1;
 }
 
+.button:hover {
+	color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	background-color: rgb(#{$schemaColorButtonText});
+	border-color: rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	&:after {
+		box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
+		rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+		0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButtonText}, var(--alpha-button-background));
+	}
+}
+
+
 .button:after,
 .shopify-challenge__button:after,
 .customer button:after,
@@ -760,8 +773,8 @@ button.shopify-payment-button__button--unbranded {
 	z-index: 1;
 	border-radius: #{$buttonsRadius};
 	box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
-			rgba(#{$schemaColorButtonText}, var(--border-opacity)),
-		0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+	0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
 	transition: box-shadow var(--duration-short) ease;
 }
 
@@ -771,9 +784,9 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button__button--unbranded:hover::after {
 	--border-offset: ax(1.3);
 	box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
-			rgba(#{$schemaColorButtonText}, var(--border-opacity)),
-		0 0 0 calc(#{$buttonsBorderWidth} + #{$ax1})
-			rgba(#{$schemaColorButton}, var(--alpha-button-background));
+	rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+	0 0 0 calc(#{$buttonsBorderWidth} + #{$ax1})
+	rgba(#{$schemaColorButton}, var(--alpha-button-background));
 }
 
 .button--outline:after {
@@ -789,8 +802,8 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button [role='button']:focus {
 	outline: 0;
 	box-shadow: 0 0 0 #{$ax3} rgb(#{$schemaColorBackground}),
-		0 0 0 #{$ax5} rgba(#{$schemaColorForeground}, 0.5),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	0 0 0 #{$ax5} rgba(#{$schemaColorForeground}, 0.5),
+	0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .button:focus:not(:focus-visible):not(.focused),
@@ -810,7 +823,7 @@ button.shopify-payment-button__button--unbranded {
 .shopify-challenge__button,
 .customer button {
 	font-size: #{$ax15};
-	letter-spacing: 0.0667em;
+	letter-spacing: -.03em;
 	line-height: calc(1 + 0.2 / #{$fontBodyScale});
 }
 
@@ -832,8 +845,7 @@ button.shopify-payment-button__button--unbranded {
 .button.disabled,
 .customer button:disabled,
 .customer button[aria-disabled='true'],
-.customer button.disabled,
-.quantity__button.disabled {
+.customer button.disabled {
 	cursor: not-allowed;
 	opacity: 0.5;
 }
@@ -949,7 +961,7 @@ details[open] > .share-button__fallback {
 	left: 0;
 	border-radius: #{$inputsRadiusOutset};
 	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset} #{$inputsShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
 	z-index: -1;
 }
 
@@ -996,9 +1008,9 @@ details[open] > .share-button__fallback {
 }
 
 .field:not(:focus-visible):not(.focused)
-	+ [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
++ [data-uc-share-button-copy]:not(:focus-visible):not(.focused),
 .field:not(:focus-visible):not(.focused)
-	+ [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
++ [data-uc-share-button-close]:not(:focus-visible):not(.focused) {
 	background-color: inherit;
 }
 
@@ -1019,7 +1031,7 @@ details[open] > .share-button__fallback {
 	outline: $comboOutline1;
 	outline-offset: #{$ax1};
 	box-shadow: 0 0 0 #{$ax1} rgb(#{$schemaColorBackground}),
-		0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
+	0 0 #{$ax5} #{$ax4} rgba(#{$schemaColorForeground}, 0.3);
 }
 
 .share-button__fallback .field__input {
@@ -1090,7 +1102,7 @@ details[open] > .share-button__fallback {
 	left: 0;
 	border-radius: #{$inputsRadiusOutset};
 	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset} #{$inputsShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
 	z-index: -1;
 }
 
@@ -1128,7 +1140,7 @@ details[open] > .share-button__fallback {
 .customer select:hover.select:after,
 .localization-form__select:hover.localization-form__select:after {
 	box-shadow: 0 0 0 calc(#{$ax1} + #{$inputsBorderWidth})
-		rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
+	rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
 	outline: 0;
 	border-radius: #{$inputsRadius};
 }
@@ -1221,7 +1233,7 @@ details[open] > .share-button__fallback {
 	position: absolute;
 	transition: top var(--duration-short) ease, font-size var(--duration-short) ease;
 	color: rgba(#{$schemaColorForeground}, 0.75);
-	letter-spacing: 0.0625em;
+	letter-spacing: -.03em;
 	line-height: 1.5;
 }
 
@@ -1234,7 +1246,7 @@ details[open] > .share-button__fallback {
 	font-size: #{$ax10};
 	top: calc(#{$inputsBorderWidth} + #{$ax5});
 	left: calc(#{$inputsBorderWidth} + #{$ax20});
-	letter-spacing: 0.04em;
+	letter-spacing: -.03em;
 }
 
 .field__input:focus,
@@ -1362,148 +1374,6 @@ input[type='checkbox'] {
 	text-transform: capitalize;
 }
 
-/* component-quantity */
-.quantity {
-	color: rgba(#{$schemaColorForeground});
-	position: relative;
-	width: calc(#{ax(140)} / #{$fontBodyScale} + #{$inputsBorderWidth} * 2);
-	display: flex;
-	border-radius: #{$inputsRadius};
-	min-height: calc((#{$inputsBorderWidth} * 2) + #{$ax45});
-}
-
-.quantity:after {
-	pointer-events: none;
-	content: '';
-	position: absolute;
-	top: #{$inputsBorderWidth};
-	right: #{$inputsBorderWidth};
-	bottom: #{$inputsBorderWidth};
-	left: #{$inputsBorderWidth};
-	border: #{$ax1} solid transparent;
-	border-radius: #{$inputsRadius};
-	box-shadow: 0 0 0 #{$inputsBorderWidth} rgba(#{$schemaColorForeground}, #{$inputsBorderOpacity});
-	transition: box-shadow var(--duration-short) ease;
-	z-index: 1;
-}
-
-.quantity:before {
-	background: rgb(#{$schemaColorBackground});
-	pointer-events: none;
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	border-radius: #{$inputsRadiusOutset};
-	box-shadow: #{$inputsShadowHorizontalOffset} #{$inputsShadowVerticalOffset} #{$inputsShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$inputsShadowOpacity});
-	z-index: -1;
-}
-
-[data-uc-quantity-input] {
-	color: currentColor;
-	font-size: #{$ax14};
-	font-weight: 500;
-	opacity: 0.85;
-	text-align: center;
-	background-color: transparent;
-	border: 0;
-	padding: 0 #{$ax5};
-	width: 100%;
-	flex-grow: 1;
-	-webkit-appearance: none;
-	appearance: none;
-}
-
-.quantity__button {
-	width: calc(#{$ax45} / #{$fontBodyScale});
-	flex-shrink: 0;
-	font-size: #{$ax18};
-	border: 0;
-	background-color: transparent;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: rgb(#{$schemaColorForeground});
-	padding: 0;
-}
-
-.quantity__button:first-child {
-	margin-left: calc(#{$inputsBorderWidth});
-}
-
-.quantity__button:last-child {
-	margin-right: calc(#{$inputsBorderWidth});
-}
-
-.quantity__button svg {
-	width: #{$ax10};
-	pointer-events: none;
-}
-
-.quantity__button:focus-visible,
-[data-uc-quantity-input]:focus-visible {
-	background-color: rgb(#{$schemaColorBackground});
-	z-index: 2;
-}
-
-.quantity__button:focus,
-[data-uc-quantity-input]:focus {
-	background-color: rgb(#{$schemaColorBackground});
-	z-index: 2;
-}
-
-.quantity__button:not(:focus-visible):not(.focused),
-[data-uc-quantity-input]:not(:focus-visible):not(.focused) {
-	box-shadow: inherit;
-	background-color: inherit;
-}
-
-[data-uc-quantity-input]:-webkit-autofill,
-[data-uc-quantity-input]:-webkit-autofill:hover,
-[data-uc-quantity-input]:-webkit-autofill:active {
-	box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
-	-webkit-box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
-}
-
-[data-uc-quantity-input]::-webkit-outer-spin-button,
-[data-uc-quantity-input]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-[data-uc-quantity-input][type='number'] {
-	-moz-appearance: textfield;
-}
-
-[data-uc-quantity-rules] {
-	margin-top: #{$ax12};
-	position: relative;
-	font-size: #{$ax12};
-}
-
-[data-uc-quantity-rules] .caption {
-	display: inline-block;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-[data-uc-quantity-rules] .divider + .divider::before {
-	content: '\2022';
-	margin: 0 #{$ax5};
-}
-
-[data-uc-quantity-rules-cart] {
-	position: relative;
-}
-
-product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
-[data-uc-quantity-rules-cart] [data-uc-loading-overlay]:not(.hidden) ~ * {
-	visibility: hidden;
-}
 
 /* component-modal */
 .modal__toggle {
@@ -1697,7 +1567,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 	text-align: center;
 	padding: #{$ax10} 0;
 	margin: 0;
-	letter-spacing: #{$ax1};
+	letter-spacing: -.03em;
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,
@@ -1863,7 +1733,7 @@ product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
 		top: 50%;
 		left: 50%;
 		right: 0;
-		width: calc(100% * var(--logo-scale));
+		width: calc(100% * 1);
 		height: auto;
 		max-width: unset;
 		transform: translate(-50%, -50%);
@@ -2145,7 +2015,7 @@ details[open] > .header__menu-item .icon-caret {
 	border-style: solid;
 	border-width: #{$popupBorderWidth};
 	box-shadow: #{$popupShadowHorizontalOffset} #{$popupShadowVerticalOffset} #{$popupShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$popupShadowOpacity});
 	z-index: -1;
 }
 
@@ -2206,7 +2076,7 @@ details-disclosure > details {
 	border-radius: #{$badgeCornerRadius};
 	display: inline-block;
 	font-size: #{$ax12};
-	letter-spacing: #{$ax1};
+	letter-spacing: 0.01em;
 	line-height: 1;
 	padding: #{$ax5} #{$ax13} #{$ax6} #{$ax13};
 	text-align: center;
@@ -2214,6 +2084,12 @@ details-disclosure > details {
 	border-color: rgba(#{$schemaColorBadgeBorder}, var(--alpha-badge-border));
 	color: rgb(#{$schemaColorBadgeForeground});
 	word-break: break-word;
+
+	&--reverse {
+		background-color: rgb(#{$schemaColorBadgeForeground});
+		border-color: rgb(#{$schemaColorBadgeBackground});
+		color: rgb(#{$schemaColorBadgeBackground});
+	}
 }
 
 .gradient {
@@ -2261,7 +2137,7 @@ details-disclosure > details {
 	left: calc(#{$textBoxesBorderWidth} * -1);
 	border-radius: #{$textBoxesRadius};
 	box-shadow: #{$textBoxesShadowHorizontalOffset} #{$textBoxesShadowVerticalOffset} #{$textBoxesShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$textBoxesShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$textBoxesShadowOpacity});
 	z-index: -1;
 }
 
@@ -2317,7 +2193,7 @@ details-disclosure > details {
 	left: calc(#{$mediaBorderWidth} * -1);
 	border-radius: #{$mediaRadius};
 	box-shadow: #{$mediaShadowHorizontalOffset} #{$mediaShadowVerticalOffset} #{$mediaShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
 	z-index: -1;
 	pointer-events: none;
 }
@@ -2436,7 +2312,7 @@ details-disclosure > details {
 	border: #{$mediaBorderWidth} solid rgba(#{$schemaColorForeground}, #{$mediaBorderOpacity});
 	border-radius: #{$mediaRadius};
 	box-shadow: #{$mediaShadowHorizontalOffset} #{$mediaShadowVerticalOffset} #{$mediaShadowBlurRadius}
-		rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
+	rgba(#{$schemaColorShadow}, #{$mediaShadowOpacity});
 	margin-bottom: #{$mediaShadowVerticalOffset};
 }
 
@@ -2626,8 +2502,8 @@ details-disclosure > details {
 		transition: transform var(--duration-extended) ease, box-shadow var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
 		transform: rotate(1deg);
 		box-shadow: ax(-10) ax(-10) #{$ax10} ax(-10) rgba(0, 0, 0, 0.05),
-			#{$ax10} #{$ax10} #{$ax10} ax(-10) rgba(0, 0, 0, 0.05),
-			0 0 #{$ax5} 0 rgba(255, 255, 255, 0), 0 #{$ax20} #{$ax35} ax(-20) rgba(0, 0, 0, 0.5);
+		#{$ax10} #{$ax10} #{$ax10} ax(-10) rgba(0, 0, 0, 0.05),
+		0 0 #{$ax5} 0 rgba(255, 255, 255, 0), 0 #{$ax20} #{$ax35} ax(-20) rgba(0, 0, 0, 0.5);
 	}
 
 	.animate--hover-3d-lift .deferred-media:hover .deferred-media__poster-button {
@@ -2652,30 +2528,30 @@ details-disclosure > details {
 	}
 
 	.animate--hover-3d-lift
-		.card-wrapper
-		.card--shape.card--standard:not(.card--text)
-		.card__inner {
+	.card-wrapper
+	.card--shape.card--standard:not(.card--text)
+	.card__inner {
 		box-shadow: none;
 		transition: transform var(--duration-long) ease, filter var(--duration-long) ease;
 	}
 
 	.animate--hover-3d-lift
-		.card-wrapper:hover
-		.card--shape.card--standard:not(.card--text)
-		.card__inner {
+	.card-wrapper:hover
+	.card--shape.card--standard:not(.card--text)
+	.card__inner {
 		transition: transform calc(2 * var(--duration-extended)) ease,
-			filter var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
+		filter var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
 		filter: drop-shadow(0 #{$ax20} #{$ax20} rgba(0, 0, 0, 0.15))
-			drop-shadow(0 #{$ax10} #{$ax10} rgba(0, 0, 0, 0.15));
+		drop-shadow(0 #{$ax10} #{$ax10} rgba(0, 0, 0, 0.15));
 	}
 
 	.animate--hover-3d-lift .card-wrapper:hover .card--card:after,
 	.animate--hover-3d-lift .card-wrapper:hover .card--standard .card__inner:after,
 	.animate--hover-3d-lift
-		.card-wrapper:hover
-		.card--shape.card--standard:not(.card--text)
-		.card__inner
-		.card__media:before {
+	.card-wrapper:hover
+	.card--shape.card--standard:not(.card--text)
+	.card__inner
+	.card__media:before {
 		background-image: var(--easter-egg);
 		background-size: 250px 250px;
 		mix-blend-mode: color-dodge;
@@ -2684,10 +2560,10 @@ details-disclosure > details {
 	}
 
 	.animate--hover-3d-lift
-		.card-wrapper:hover
-		.card--shape.card--standard:not(.card--text)
-		.card__inner
-		.card__media:before {
+	.card-wrapper:hover
+	.card--shape.card--standard:not(.card--text)
+	.card__inner
+	.card__media:before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -2707,16 +2583,16 @@ details-disclosure > details {
 		opacity: 0;
 		pointer-events: none;
 		transition: background-position calc(2 * var(--duration-extended)) ease,
-			opacity var(--duration-default) ease;
+		opacity var(--duration-default) ease;
 		mix-blend-mode: overlay;
 		background-size: 400% 100%;
 		background-position: 90% 0;
 		background-repeat: no-repeat;
 		background-image: linear-gradient(
-			135deg,
-			rgba(255, 255, 255, 0) 45%,
-			rgba(255, 255, 255, 1) 50%,
-			rgba(255, 255, 255, 0) 55%
+										135deg,
+										rgba(255, 255, 255, 0) 45%,
+										rgba(255, 255, 255, 1) 50%,
+										rgba(255, 255, 255, 0) 55%
 		);
 	}
 
@@ -2772,11 +2648,11 @@ details-disclosure > details {
 	.animate--hover-vertical-lift .customer button:not([disabled]):hover:after,
 	.animate--hover-vertical-lift .shopify-payment-button__button:not([disabled]):hover:after {
 		--border-offset: ax(
-			0.3
+										0.3
 		); /* Default is 1.3px as defined above in this file. This removes 1px to prevent the border from growing on buttons when this effect is on.  */
 		box-shadow: 0 0 0 calc(#{$buttonsBorderWidth} + var(--border-offset))
-				rgba(#{$schemaColorButtonText}, var(--border-opacity)),
-			0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
+		rgba(#{$schemaColorButtonText}, var(--border-opacity)),
+		0 0 0 #{$buttonsBorderWidth} rgba(#{$schemaColorButton}, var(--alpha-button-background));
 	}
 
 	.animate--hover-vertical-lift .button:not([disabled]).button--outline:hover:after {
@@ -2869,7 +2745,7 @@ details-disclosure > details {
 }
 @include media-query($s-up) {
 	.page-width {
-		padding: 0 #{$ax50};
+		padding: 0 #{$ax30};
 	}
 
 	.header.page-width {
@@ -2879,6 +2755,11 @@ details-disclosure > details {
 
 	.page-width--narrow {
 		padding: 0 #{ax(90)};
+	}
+
+	.page-width--full {
+		max-width: 100%;
+		width: 100%;
 	}
 
 	.page-width-desktop {
@@ -3025,7 +2906,7 @@ details-disclosure > details {
 
 	.title,
 	.title-wrapper-with-link {
-		margin: #{$ax50} 0 #{$ax30};
+		margin: #{$ax40} 0 0;
 	}
 
 	.title--primary {
@@ -3253,4 +3134,31 @@ quick-add-modal .product__title > a,
 
 .underline-always-child {
 	@include underline-always-child();
+}
+
+.header__heading, .header__heading .header__heading-link {
+	width: ax(120);
+}
+
+// just dropping in quick styles
+
+.multi-product-slider {
+
+}
+
+
+// in critical, remove on next compile
+.no-underline {
+	text-decoration: none;
+}
+body {
+	-webkit-font-smoothing: antialiased;
+}
+.page-width--full {
+	max-width: 100%;
+	width: 100%;
+}
+
+#preview-bar-iframe {
+	display: none !important;
 }

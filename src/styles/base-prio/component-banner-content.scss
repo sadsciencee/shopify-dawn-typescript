@@ -7,8 +7,17 @@ $block: 'banner-content';
 			margin-top: $ax14;
 		}
 	}
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $ax15;
+		@include media-query($m-up) {
+			gap: $ax30;
+		}
+	}
 	&__title {
-		& + .#{$block}__button {
+		& + .#{$block}__button,
+		& + .#{$block}__buttons {
 			margin-top: $ax28;
 		}
 		& + .#{$block}__text {
@@ -19,7 +28,8 @@ $block: 'banner-content';
 		}
 	}
 	&__text {
-		& + .#{$block}__button {
+		& + .#{$block}__button,
+		& + .#{$block}__buttons {
 			margin-top: $ax30;
 		}
 	}
@@ -27,7 +37,8 @@ $block: 'banner-content';
 	@include media-query($m-up) {
 		padding: $ax40;
 		&__title {
-			& + .#{$block}__button {
+			& + .#{$block}__button,
+			& + .#{$block}__buttons {
 				margin-top: $ax38;
 			}
 			& + .#{$block}__text {
@@ -35,9 +46,14 @@ $block: 'banner-content';
 			}
 		}
 		&__text {
-			& + .#{$block}__button {
+			& + .#{$block}__button,
+			& + .#{$block}__buttons {
 				margin-top: $ax30;
 			}
+		}
+		&__button {
+			min-width: ax(150);
+			max-width: 100%;
 		}
 	}
 }

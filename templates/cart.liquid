@@ -1,0 +1,18 @@
+{% layout 'none' %}
+{% comment %}
+    No one really uses the cart page. This auto redirects the cart page to the home page
+    and opens the cart drawer. If you need the cart page for some reason, you can remove this file
+    and replace it with cart.json from the default dawn template
+{% endcomment %}
+
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta name='robots' content='noindex'>
+</head>
+<body class='{{ template.suffix }} {{template.name}}'>
+<script type='text/javascript'>
+	window.location.href = '/?open=cart';
+</script>
+</body>
+</html>

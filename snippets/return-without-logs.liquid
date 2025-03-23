@@ -1,0 +1,42 @@
+{%- liquid
+    # take a string array and strip logs, returning the same string array without logs
+
+    # params:
+    #   source (string[])
+    #   index (number: default 1)
+    #   line_delimiter (string: default '::')
+    #   list_delimiter (string: default ':::')
+
+    # note: for string 'result::log message here', index 1 would return 'log message here'
+
+    # set params
+    assign list_delimiter = list_delimiter | default: ':::'
+    assign line_delimiter = line_delimiter | default: '::'
+    assign index = index | default: 1
+    assign last_item_index = index | minus: 1
+
+    # set output vars
+    assign final_result = ''
+
+    # loop through source array
+    assign result_list = source | split: list_delimiter
+    for list_item in result_list
+        assign stripped_item = ''
+        assign split_source = list_item | split: line_delimiter
+        for inner_item in split_source
+            if forloop.index0 >= index
+                break
+            endif
+            assign stripped_item = stripped_item | append: inner_item
+            if forloop.index0 != last_item_index
+                assign stripped_item = stripped_item | append: line_delimiter
+            endif
+        endfor
+        if stripped_item != ''
+            assign final_result = final_result | append: stripped_item | append: list_delimiter
+        endif
+    endfor
+
+    # return result to caller
+    echo final_result
+-%}

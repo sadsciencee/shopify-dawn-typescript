@@ -5,7 +5,7 @@ import { type ProductVariant } from '@/scripts/shopify'
 import { type HeaderMenu } from '@/scripts/theme/header-menu'
 import { WaitlistForm } from '@/scripts/theme/waitlist-form'
 import { ModalDialog } from '@/scripts/theme/modal-dialog'
-import { TsDOM as q, debounce, throttle, init } from '@/scripts/core/TsDOM'
+import { TsDOM as q, init } from '@/scripts/core/TsDOM'
 import { ArtDirection } from '@/scripts/core/art-direction'
 // CONSTANTS
 export const ON_CHANGE_DEBOUNCE_TIMER = 300
@@ -33,6 +33,11 @@ export const SELECTORS = {
 	sectionHeader: '.section-header',
 	headerWrapper: '[data-uc-header-wrapper]',
 }
+
+// change these if the designer uses the wrong viewport size
+// you will also need to modify the functions css accordingly
+export const MOBILE_VIEWPORT_ANCHOR = 375
+export const DESKTOP_VIEWPORT_ANCHOR = 1440
 
 // PUB SUB
 // todo: add additional data types as needed
@@ -120,48 +125,6 @@ export function publish(eventName: string, pubSubEvent: PubSubEvent = undefined)
 	}
 }
 
-// FUNCTIONS.ts
-
-// in general, these functions are for enforcing types when access HTML dom elements so I don't have to think about it so much
-// right now I've avoided any other helper functions but if we get another sub category of functions we should change this to a folder 'functions'
-
-// TODO: add KlaviyoPopup back in
-//import { type KlaviyoPopup, type Modal, type NotifyMe } from '@/scripts/content/modal'
-//import { type QuickAddModal } from '@/scripts/optional/quick-add'
-
-// local types
-
-type HTMLElementProperty =
-	| 'parentNode'
-	| 'firstChild'
-	| 'lastChild'
-	| 'previousSibling'
-	| 'nextSibling'
-	| 'firstElementChild'
-	| 'lastElementChild'
-	| 'previousElementSibling'
-	| 'nextElementSibling'
-	| 'parentElement'
-
-type CommonEventType = MouseEvent | KeyboardEvent | TouchEvent
-
-// begin typescript DOM functions
-// this is a set of functions I wrote while refactoring Dawn 9.0 to typescript
-// ended up being very flexible and useful for enforcing types when accessing dom elements so we are reusing for Dawn 10.0
-
-
-
-
-// this function is use to safely define a new custom element
-// it allows callbacks to be run before and after the element is defined -
-// callback functionality is mainly for shop filters but can apply to any class with heavy usage of static methods
-
-interface CustomElementConstructorWithStaticTagName extends CustomElementConstructor {
-	htmlSelector: string
-}
-
-
-
 // browser safe replace all
 export const replaceAll = (str: string, find: string, replace: string) => {
 	return str.split(find).join(replace)
@@ -181,7 +144,8 @@ export const scrollToAnchor = (selector: string) => {
 	window.scrollBy({ top: scrollToPosition, behavior: 'smooth' })
 }
 
-// TODO: refactor to use app proxy for security
+// if you are using a custom app and need to change the backend route, you can do it here
+// note that if using klaviyo, you can use the client api which is auth'd by shopify and doesnt require a separate backend to secure
 export const getBackendRoute = () => {
 	return 'http://localhost:5000'
 }
@@ -196,74 +160,12 @@ export const getCurrentHeaderHeight = () => {
 	return height
 }
 
-/*export const closeAllModals = () => {
-	const modals = q.ol<Modal | KlaviyoPopup | NotifyMe | QuickAddModal>(
-		'modal-dialog, klaviyo-popup, notify-me, quick-add-modal'
-	)
-	if (!modals) return
-	modals.forEach((modal) => {
-		if (typeof modal.hide === 'function' && modal.hasAttribute('open')) {
-			modal.hide()
-		}
-	})
-}*/
-
-// these three functions are somewhat similar - should be refactored for clarity
-export const isElementInViewport = (el: HTMLElement) => {
-	const rect = el.getBoundingClientRect()
-	const result =
-		rect.top >= 0 &&
-		rect.left >= 0 &&
-		rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-	return result
-}
-
-export const isAnyPartOfElementInViewport = (el: HTMLElement) => {
-	const rect = el.getBoundingClientRect();
-
-	return (
-		rect.top < window.innerHeight &&
-		rect.left < window.innerWidth &&
-		rect.bottom > 0 &&
-		rect.right > 0
-	);
-}
-
-
-export const isInViewport = (element: HTMLElement) => {
-	const rect = element.getBoundingClientRect()
-	return (
-		rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-		rect.left < (window.innerWidth || document.documentElement.clientWidth) &&
-		rect.bottom > 0 &&
-		rect.right > 0
-	)
-}
-
-export const isTenPercentInViewport = (element: HTMLElement) => {
-	const rect = element.getBoundingClientRect()
-	const viewportHeight = window.innerHeight || document.documentElement.clientHeight
-	const viewportWidth = window.innerWidth || document.documentElement.clientWidth
-
-	const elementHeight = rect.height
-	const elementWidth = rect.width
-
-	const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)
-	const visibleWidth = Math.min(rect.right, viewportWidth) - Math.max(rect.left, 0)
-
-	const visibleArea = Math.max(0, visibleHeight) * Math.max(0, visibleWidth)
-	const elementArea = elementHeight * elementWidth
-
-	return visibleArea >= 0.1 * elementArea
-}
-
 // this function applies the scaling from the --ax variables. it is project-dependent
 // 1440 and 375 are specific to the size I request from designers, however should be refactored as Constants
 // TODO: add const defs for hard coded scaling values
 
 export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
-	let ratio = viewport === 'desktop' ? 1440 / window.innerWidth : 375 / window.innerWidth
+	let ratio = viewport === 'desktop' ? DESKTOP_VIEWPORT_ANCHOR / window.innerWidth : MOBILE_VIEWPORT_ANCHOR / window.innerWidth
 	if (viewport === 'desktop' && ratio > 1.25) ratio = 1.25 // this is a reverse of the 1:.8 ratio from desktop min in css
 	if (viewport === 'desktop' && ratio < 1) ratio = 1 // this is a verse of the 1:1.15 ratio from desktop max in css
 	if (viewport === 'mobile' && ratio > 1.1111111111) ratio = 1.1111111111
@@ -271,9 +173,10 @@ export const scaleValue = (val: number, viewport: 'mobile' | 'desktop') => {
 	return (val * ratio).toFixed(1)
 }
 
-// TODO: refactor for default dawn repack
-// this sets all relevant height variables for the app
-
+// this sets all relevant height variables
+// i dont really love doing this because it causes cls...
+// normally i will measure the header at 1440px and 375px and then set the vars manually in the css variables liquid file
+// if the client insists on having two lines in the announcement bar (which they should not be doing) then you might need to use this
 export const setHeightVars = (header: HTMLElement, announcement: HTMLElement | undefined) => {
 	const viewport = window.innerWidth >= 750 ? 'desktop' : 'mobile'
 	const viewportHeight =
@@ -301,7 +204,6 @@ export const setDrawerHeight = () => {
 }
 
 // accessibility functions
-
 export function initializeSummaryA11y() {
 	// this is from shopify
 	// it adds some accessibility features to summary elements
@@ -436,49 +338,12 @@ export function pauseAllMedia() {
 	}
 }
 
-// event based functions
-
-
-
-
 // fetch API configs
 
 export function fetchConfig(type = 'json') {
 	return {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', Accept: `application/${type}` },
-	}
-}
-
-type AddToCartFormValues = {
-	items: { quantity: number; id: number }[]
-	form_type: string
-	sections?: string
-	sections_url?: string
-}
-
-export function addToCartConfig(body: FormData) {
-	const definedQuantity = q.ofd(body, 'quantity')
-	const quantity = q.ofd(body, 'quantity') ? parseInt(q.rfd(body, 'quantity')) : 1
-	const data: AddToCartFormValues = {
-		items: [
-			{
-				quantity,
-				id: parseInt(q.rfd(body, 'id')),
-			},
-		],
-		form_type: q.rfd(body, 'form_type'),
-		sections: q.ofd(body, 'sections'),
-		sections_url: q.ofd(body, 'sections_url'),
-	}
-	return {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Accept: `application/json`,
-			'X-Requested-With': 'XMLHttpRequest',
-		},
-		body: JSON.stringify(data),
 	}
 }
 
@@ -496,8 +361,7 @@ export function formatPhoneNumber(unchecked_number: string) {
 	return phone_number
 }
 
-// recentlyViewedProducts isn't part of dawn, but it's in my 9.0 build pack so leaving here for now
-
+// this isnt enabled by default but it comes up. uses browser cookies to track recently viewed products
 export function getRecentlyViewedProducts(): string[] {
 	const pageList = localStorage.getItem('pageList')
 	if (!pageList) return []
@@ -521,7 +385,6 @@ export function trackRecentlyViewedProducts() {
 }
 
 // used in critical.js
-
 export function disableDesktopCSS() {
 	if (window.innerWidth >= 990) return
 	const mUp = q.ol('link[href*=".m-up"]')
@@ -568,6 +431,7 @@ export function initializeShopifyConsentAPI() {
 	)
 }
 
+
 function initGlobalUcoast() {
 	q.safeDefineElement(ArtDirection)
 	q.safeDefineElement(UcoastVideo)
@@ -587,7 +451,7 @@ function initGlobalUcoast() {
 }
 
 
-
+// this is critical js, it runs at the top level of the app. none critical code should generally be in a web component and loaded in a deferred module
 export function globalSetup() {
 	init()
 	initGlobalUcoast()
@@ -602,4 +466,3 @@ export function globalSetup() {
 	// mediaLoader
 	void window.Ucoast.mediaManager.initialLoad()
 }
-

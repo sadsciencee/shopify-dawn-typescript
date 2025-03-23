@@ -1,0 +1,61 @@
+{%- liquid
+	# get the claimed status and claimed products for a gwp_offer
+
+	# params: offer (gwp_offer), collect_logs (boolean, optional)
+	# returns offer_handle::claimed(boolean)::claimed_ids(string[])::log_lines
+
+	# note: claimed_ids string[] in result is separated by ',' instead of the standard ':::'
+
+	# consts
+	assign result_delimiter = '::'
+	assign list_delimiter = ','
+	assign log_delimiter = '___LOG___'
+	assign log_list_delimiter = '___'
+	assign not_found_result = '_not_found_'
+
+	# set params
+	assign collect_logs = collect_logs | default: false
+
+	# set output vars
+	assign result = offer.system.handle | append: result_delimiter
+	assign log_lines = ''
+
+	# make id arrays from our input + current cart
+	assign offer_product_ids = offer.product_offer.value.products.value | map: 'id'
+	assign cart_product_ids = cart.items | map: 'product_id'
+
+	# log section label
+	if collect_logs
+		assign json_offer_ids = offer_product_ids | join: log_list_delimiter
+		assign log_lines = '_title_Checking Claim for "' | append: offer.label.value | append: '": ' | append: log_delimiter
+		assign log_lines = log_lines | append: 'Offer Product IDs: ' | append: json_offer_ids | append: log_delimiter
+	endif
+
+	# for now we will only support one product per offer but it's fairly common for merchants to allow 2-3 (esp for sample products)
+	assign claim_count = 0
+	assign claimed_ids = ''
+
+	# loop and check if cart contains any of the offer products
+	for offer_product_id in offer_product_ids
+		if cart_product_ids contains offer_product_id
+			assign claim_count = claim_count | plus: 1
+			assign claimed_ids = claimed_ids | append: offer_product_id | append: list_delimiter
+			continue
+		endif
+	endfor
+
+	# create result string
+	if claim_count > 0
+		assign result = offer.system.handle | append: result_delimiter | append: 'true' | append: result_delimiter | append: claimed_ids
+	else
+		assign result = offer.system.handle | append: result_delimiter | append: 'false' | append: result_delimiter | append: ' '
+	endif
+
+    if collect_logs
+		assign log_lines = log_lines | append: 'Claimed: ' | append: claim_count | append: log_delimiter
+        assign result = result | append: result_delimiter | append: log_lines
+    endif
+
+    # return result to caller
+    echo result
+-%}

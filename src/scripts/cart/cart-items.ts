@@ -10,7 +10,7 @@ import { publish, PubSubEvent, subscribe } from '@/scripts/core/global'
 import { type ShopifySectionRenderingSchema } from '@/scripts/types/theme'
 import { type CartDrawer } from '@/scripts/cart/cart-drawer'
 import { UcoastEl } from '@/scripts/core/UcoastEl'
-import { updateShippingBar } from '@/scripts/core/cart-functions'
+import { getUpdateInstructions, updateProgressBar } from '@/scripts/core/cart-functions'
 
 export class CartItems extends UcoastEl {
 	// static
@@ -135,6 +135,11 @@ export class CartItems extends UcoastEl {
 				section: q.ra(q.rs(this.instanceSelectors.footer), 'data-id'),
 				selector: '.js-contents',
 			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
+			},
 		]
 	}
 
@@ -159,6 +164,16 @@ export class CartItems extends UcoastEl {
 			})
 			.then((state) => {
 				const parsedState = JSON.parse(state)
+				// same as cart add, check for update instructions in case we need to remove gwp
+				console.log('parsedState', parsedState)
+				const cartUpdateInstructions = getUpdateInstructions(parsedState)
+				if (cartUpdateInstructions.update_required) {
+					const cartDrawer = q.rs<CartDrawer>('cart-drawer')
+					void cartDrawer.runUpdateInstructions(cartUpdateInstructions)
+					// skip the re-render since we're about to rerender anyway
+					return
+				}
+				// continue with normal cart update
 				const quantityElement = q.rs<HTMLInputElement>(
 					`${this.instanceSelectors.lineQuantity}-${line}`
 				)
@@ -177,21 +192,23 @@ export class CartItems extends UcoastEl {
 				if (parsedState.item_count === 0) {
 					this.setAttribute(ATTRIBUTES.cartEmpty, '')
 					cartFooter &&
-						cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartFooter.setAttribute(ATTRIBUTES.cartEmpty, '')
 					cartDrawerWrapper &&
-						cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
+					cartDrawerWrapper.setAttribute(ATTRIBUTES.cartEmpty, '')
 				} else {
 					this.removeAttribute(ATTRIBUTES.cartEmpty)
 					cartFooter &&
-						cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartFooter.removeAttribute(ATTRIBUTES.cartEmpty)
 					cartDrawerWrapper &&
-						cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
+					cartDrawerWrapper.removeAttribute(ATTRIBUTES.cartEmpty)
 				}
 
 				this.getSectionsToRender().forEach(
 					(section: ShopifySectionRenderingSchema) => {
-						if (section.section === 'dynamic-shipping-bar') {
-							updateShippingBar(
+						if (section.section === 'cart-update-instructions')
+							return
+						if (section.section === 'dynamic-progress-bar') {
+							updateProgressBar(
 								parsedState.sections[section.section]
 							)
 							return
@@ -234,18 +251,21 @@ export class CartItems extends UcoastEl {
 				if (lineItem?.querySelector(`[name="${name}"]`)) {
 					cartDrawerWrapper
 						? window.TsDOM.trapFocus(
-								cartDrawerWrapper,
-								q.rs(`[name="${name}"]`, lineItem)
-							)
+							cartDrawerWrapper,
+							q.rs(`[name="${name}"]`, lineItem)
+						)
 						: q.rs(`[name="${name}"]`, lineItem).focus()
 				} else if (parsedState.item_count === 0 && cartDrawerWrapper) {
-					window.TsDOM.trapFocus(
-						q.rs(
-							this.instanceSelectors.cartDrawerInnerEmpty,
-							cartDrawerWrapper
-						),
-						q.rs('a', cartDrawerWrapper)
+					const cartEmptyEl = q.os(
+						this.instanceSelectors.cartDrawerInnerEmpty,
+						cartDrawerWrapper
 					)
+					if (cartEmptyEl) {
+						window.TsDOM.trapFocus(
+							cartEmptyEl,
+							q.rs('a', cartDrawerWrapper)
+						)
+					}
 				} else if (
 					document.querySelector(this.instanceSelectors.item) &&
 					cartDrawerWrapper
@@ -257,6 +277,7 @@ export class CartItems extends UcoastEl {
 				}
 				void window.Ucoast.mediaManager.playAllInContainer(this)
 				publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items' })
+				this.disableLoading(line)
 			})
 			.catch((error) => {
 				console.error(error)
@@ -265,8 +286,6 @@ export class CartItems extends UcoastEl {
 				).forEach((overlay) => overlay.classList.add('hidden'))
 				const errors = q.rs(this.instanceSelectors.errors)
 				errors.textContent = window.cartStrings.error
-			})
-			.finally(() => {
 				this.disableLoading(line)
 			})
 	}

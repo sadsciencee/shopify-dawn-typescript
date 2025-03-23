@@ -1,0 +1,65 @@
+{%- liquid
+    # check the active offers in the store, sort by priority and return the handle and type of the next valid offer
+
+    # params:
+    #   collect_logs (boolean, optional)
+    #   soft_cart_threshold: (boolean, default false)
+    #   include_claimed_offers: (boolean, default false)
+
+    # returns string (type::handle::log_lines)
+
+    # note: type and handle will be '_not_found_' if no valid offer is available
+    # note: soft_cart_threshold causes offers to evaluate as valid even if the minimum cart value is not met
+    # note: include_claimed_offers causes offers that have already been claimed to evaluate as valid
+
+    # consts
+    assign result_delimiter = '::'
+    assign list_delimiter = ':::'
+    assign log_delimiter = '___LOG___'
+    assign not_found_result = '_not_found_'
+
+    # set params
+    assign soft_cart_threshold = soft_cart_threshold | default: false
+    assign include_claimed_offers = include_claimed_offers | default: false
+    assign collect_logs = collect_logs | default: false
+
+    # set output vars
+    assign result = not_found_result | append: result_delimiter | append: not_found_result
+    assign log_lines = ''
+
+    # log section label
+    if collect_logs
+        assign log_lines = '_title_Config Details' | append: log_delimiter | append: 'Offers Count=' | append: settings.gwp_offers.count | append: log_delimiter
+    endif
+
+    # loop gwp_offer metaobjects from theme settings
+    for offer in settings.gwp_offers
+        # call eval function
+        capture eval_result
+            render 'return-gwp-offer-eval', offer: offer, collect_logs: collect_logs, soft_cart_threshold: soft_cart_threshold, include_claimed_offers: include_claimed_offers
+        endcapture
+
+        # parse eval result and check if the offer is valid
+        assign result_split = eval_result | split: result_delimiter
+        assign offer_type = result_split[0]
+        assign offer_handle = result_split[1]
+        if collect_logs
+            assign offer_logs = result_split[2]
+            assign log_lines = log_lines | append: offer_logs
+        endif
+        if offer_type == not_found_result or offer_handle == not_found_result
+            continue
+        endif
+
+        # create clean result string without logs
+        assign result = offer_type | append: result_delimiter | append: offer_handle
+        break
+    endfor
+
+    # return result to caller
+    if collect_logs
+        echo result | append: result_delimiter | append: log_lines
+    else
+        echo result
+    endif
+-%}

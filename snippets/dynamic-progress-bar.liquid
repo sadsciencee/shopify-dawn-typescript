@@ -1,0 +1,83 @@
+{% liquid
+	# renders a dynamic progress bar if an offer is available
+
+	# params:
+	#   cart (cart)
+	#   gwp_offer_type (string, 'none' | 'active' | 'partial')
+	#	gwp_offer (gwp_offer)
+
+	# set params
+	assign threshold = -1.0
+	assign percent = 0
+	assign gwp_offer_type = gwp_offer_type | default: 'none'
+
+	if gwp_offer_type == 'active'
+		# todo grab success message from offer metaobject
+		assign percent = 100
+	elsif gwp_offer_type == 'partial'
+		# partial offers should have a 'offer_condition_cart_threshold' metaobject in the the 'enable_conditions' list
+		for condition in gwp_offer.enable_conditions.value
+			if condition.system.type == 'offer_condition_cart_threshold'
+				assign threshold = condition.minimum_cart_value.value | plus: 0.0
+			endif
+		endfor
+
+		# note: everything has to get converted to floats in order to calculate a percentage bc of how liquid handles floats vs ints
+		# the currency values are still 'int style' though. in otherwords $10.00 is represented as 1000.0 here
+		assign current_cart_amount = cart.items | map: 'final_line_price' | sum
+		assign difference = threshold | minus: current_cart_amount
+		assign current_cart_amount = current_cart_amount | plus: 0.0
+		assign threshold = threshold | plus: 0.0
+		assign percent = current_cart_amount | divided_by: threshold | times: 100 | round
+
+		# avoid confusing ui when offer is almost unlocked
+		if percent > 97.0
+			assign percent = 97.0
+		endif
+
+		# just a safety check to make sure everything is working as expected before displaying
+		if threshold <= 0.0
+			assign gwp_offer_type = 'none'
+		endif
+	endif
+
+	assign success = gwp_offer.display_title.value | default: 'Gift unlocked!'
+	assign meter_prefix = 'Spend another '
+	assign meter_suffix = ' to unlock a gift!'
+
+	# note: this element should always be rendered even if not visible to avoid bugs with section rendering api
+%}
+
+<dynamic-progress-bar
+		data-percent="{{- percent -}}"
+		data-success="{{- success -}}"
+		class="w-100 block relative dynamic-progress-bar"
+		style="--progress-percent: {{ percent }}%;"
+		data-threshold="{{- threshold -}}"
+		data-offer="{{- gwp_offer.system.handle -}}"
+		data-gwp-offer-type="{{- gwp_offer_type -}}"
+>
+		<span
+				class="absolute top-0 h-100 dynamic-progress-bar__status__container empty flex align-center justify-start"
+				role="status"
+		>
+			<span
+					class="dynamic-progress-bar__status__text relative z-3 lh-1 m-0"
+					data-shipping-bar-status
+			>
+				{% if gwp_offer_type == 'active' %}
+					{{ success }}
+				{% else %}
+					{{- meter_prefix -}}
+					{{- difference | money_with_currency -}}
+					{{- meter_suffix -}}
+				{% endif %}
+			</span>
+		</span>
+	<span
+			class="dynamic-progress-bar__indicator absolute left-0 top-0 h-100 z-2 empty"
+	></span>
+	<span
+			class="dynamic-progress-bar__background w-100 absolute top-0 h-100 z-1 empty"
+	></span>
+</dynamic-progress-bar>
