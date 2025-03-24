@@ -3,152 +3,27 @@
   Do not attempt to modify this file directly, as any changes will be overwritten by the next build.
 {% endcomment %}
 {% assign path = vite | replace: '@js/', '../scripts/' | replace: '@scss/', '../styles/' | replace: '~/', '../' | replace: '@/', '../' %}
-{% if path == "/src/entry/_critical-css.scss" or path == "_critical-css.scss" %}
-  {{ '_critical-css-CNebplpM.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/_critical.ts" or path == "_critical.ts" %}
-  <script src="{{ '_critical-TINnYjTq.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/css-dir-article-defer.scss" or path == "css-dir-article-defer.scss" %}
-  {{ 'css-dir-article-defer-CIlAxCc-.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-article-prio.scss" or path == "css-dir-article-prio.scss" %}
-  {{ 'css-dir-article-prio-BgJdz_9T.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-base-defer.scss" or path == "css-dir-base-defer.scss" %}
-  {{ 'css-dir-article-defer-CIlAxCc-.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-base-prio.scss" or path == "css-dir-base-prio.scss" %}
-  {{ 'css-dir-base-prio-BgrRjRyH.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-blog-defer.scss" or path == "css-dir-blog-defer.scss" %}
-  {{ 'css-dir-article-defer-CIlAxCc-.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-blog-prio.scss" or path == "css-dir-blog-prio.scss" %}
-  {{ 'css-dir-blog-prio-CPX8H2xW.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-collection-defer.scss" or path == "css-dir-collection-defer.scss" %}
-  {{ 'css-dir-collection-defer-B2kIqnob.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-collection-prio.scss" or path == "css-dir-collection-prio.scss" %}
-  {{ 'css-dir-collection-prio-DqGxNInF.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-customer-defer.scss" or path == "css-dir-customer-defer.scss" %}
-  {{ 'css-dir-article-defer-CIlAxCc-.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-customer-prio.scss" or path == "css-dir-customer-prio.scss" %}
-  {{ 'css-dir-customer-prio-WOdhFc6b.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-page-defer.scss" or path == "css-dir-page-defer.scss" %}
-  {{ 'css-dir-article-defer-CIlAxCc-.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-page-prio.scss" or path == "css-dir-page-prio.scss" %}
-  {{ 'css-dir-page-prio-FOqrZ0Ir.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-product-defer.scss" or path == "css-dir-product-defer.scss" %}
-  {{ 'css-dir-product-defer-D-vBlLRo.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-dir-product-prio.scss" or path == "css-dir-product-prio.scss" %}
-  {{ 'css-dir-product-prio-DB2JliLN.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-localization-form.scss" or path == "css-optional-component-localization-form.scss" %}
-  {{ 'css-optional-component-localization-form-CtLCyfYl.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-mega-menu.scss" or path == "css-optional-component-mega-menu.scss" %}
-  {{ 'css-optional-component-mega-menu-BlWdCDHp.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-model-viewer-ui.scss" or path == "css-optional-component-model-viewer-ui.scss" %}
-  {{ 'css-optional-component-model-viewer-ui-CCzGQC4s.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-pagination.scss" or path == "css-optional-component-pagination.scss" %}
-  {{ 'css-optional-component-pagination-C_8G0Umg.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-pickup-availability.scss" or path == "css-optional-component-pickup-availability.scss" %}
-  {{ 'css-optional-component-pickup-availability-DlQWgm1h.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-product-model.scss" or path == "css-optional-component-product-model.scss" %}
-  {{ 'css-optional-component-product-model-DPUCMwxD.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-component-recipient-form.scss" or path == "css-optional-component-recipient-form.scss" %}
-  {{ 'css-optional-component-recipient-form-BLpkzOin.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-mask-blobs.scss" or path == "css-optional-mask-blobs.scss" %}
-  {{ 'css-optional-mask-blobs-DU6QEz_2.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-quick-add.scss" or path == "css-optional-quick-add.scss" %}
-  {{ 'css-optional-quick-add-C9O_c9b1.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-section-contact-form.scss" or path == "css-optional-section-contact-form.scss" %}
-  {{ 'css-optional-section-contact-form-I0wQcCVp.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-section-password.scss" or path == "css-optional-section-password.scss" %}
-  {{ 'css-optional-section-password-C5lY-Yto.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/css-optional-template-giftcard.scss" or path == "css-optional-template-giftcard.scss" %}
-  {{ 'css-optional-template-giftcard-u3nEWLLl.css' | asset_url | stylesheet_tag: preload: preload_stylesheet }}
-{% elsif path == "/src/entry/js-dir-cart-drawer.ts" or path == "js-dir-cart-drawer.ts" %}
-  <script src="{{ 'js-dir-cart-drawer-C0BP-LPa.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-BYEriNJF.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-C23ird7S.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-BvSBS3Qp.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-modal-B2Vw5OTp.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-catalog.ts" or path == "js-dir-catalog.ts" %}
-  <script src="{{ 'js-dir-catalog-CvaKd6-H.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'search-form-C23ird7S.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-customer.ts" or path == "js-dir-customer.ts" %}
-  <script src="{{ 'js-dir-customer-Bxd90Xzf.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-product.ts" or path == "js-dir-product.ts" %}
-  <script src="{{ 'js-dir-product-D9onEu7n.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-BrKucH9E.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-BYEriNJF.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-C-kGojk7.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-DJk1wzMZ.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-dir-theme.ts" or path == "js-dir-theme.ts" %}
-  <script src="{{ 'js-dir-theme-BU6hJ18j.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'deferred-media-C-kGojk7.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-BvSBS3Qp.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'slider-component-DJk1wzMZ.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'modal-dialog-BYEriNJF.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-animations.ts" or path == "js-optional-animations.ts" %}
-  <script src="{{ 'js-optional-animations-trzs5npS.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-localization-form.ts" or path == "js-optional-localization-form.ts" %}
-  <script src="{{ 'js-optional-localization-form-BAWxM0iG.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-magnify.ts" or path == "js-optional-magnify.ts" %}
-  <script src="{{ 'js-optional-magnify-Bt4jHmWt.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-{% elsif path == "/src/entry/js-optional-password-modal.ts" or path == "js-optional-password-modal.ts" %}
-  <script src="{{ 'js-optional-password-modal-fP1T_Bgl.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'details-modal-B2Vw5OTp.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-pickup-availability.ts" or path == "js-optional-pickup-availability.ts" %}
-  <script src="{{ 'js-optional-pickup-availability-vczE5gmD.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-product-model.ts" or path == "js-optional-product-model.ts" %}
-  <script src="{{ 'js-optional-product-model-DHFoXvKs.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'deferred-media-C-kGojk7.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-quick-add.ts" or path == "js-optional-quick-add.ts" %}
-  <script src="{{ 'js-optional-quick-add-zbhRwBxt.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'modal-dialog-BYEriNJF.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'product-form-BrKucH9E.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-recipient-form.ts" or path == "js-optional-recipient-form.ts" %}
-  <script src="{{ 'js-optional-recipient-form-rDSd8tWp.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'global-BXvKo19t.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'animations-th2wlu6c.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-share-button.ts" or path == "js-optional-share-button.ts" %}
-  <script src="{{ 'js-optional-share-button-MeFkWMzY.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'details-disclosure-BvSBS3Qp.js' | asset_url }}" crossorigin="anonymous">
-  <link rel="modulepreload" href="{{ 'UcoastEl-BmITKVCN.js' | asset_url }}" crossorigin="anonymous">
-{% elsif path == "/src/entry/js-optional-theme-editor.ts" or path == "js-optional-theme-editor.ts" %}
-  <script src="{{ 'js-optional-theme-editor-Biq_-xZg.js' | asset_url }}" type="module" crossorigin="anonymous"></script>
-  <link rel="modulepreload" href="{{ 'TsDOM-Dn0vhv15.js' | asset_url }}" crossorigin="anonymous">
+{% liquid
+  assign path_prefix = path | slice: 0
+  if path_prefix == '/'
+    assign file_url_prefix = 'https://localhost:3000'
+  else
+    assign file_url_prefix = 'https://localhost:3000/src/entry/'
+  endif
+  assign file_url = path | prepend: file_url_prefix
+  assign file_name = path | split: '/' | last
+  if file_name contains '.'
+    assign file_extension = file_name | split: '.' | last
+  endif
+  assign css_extensions = 'css|less|sass|scss|styl|stylus|pcss|postcss' | split: '|'
+  assign is_css = false
+  if css_extensions contains file_extension
+    assign is_css = true
+  endif
+%}
+<script src="https://localhost:3000/@vite/client" type="module"></script>
+{% if is_css == true %}
+  {{ file_url | stylesheet_tag }}
+{% else %}
+  <script src="{{ file_url }}" type="module"></script>
 {% endif %}

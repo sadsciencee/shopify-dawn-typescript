@@ -9,34 +9,6 @@
 */
 {
 	"sections": {
-		"featured_collection_L3RcEq": {
-			"type": "featured-collection",
-			"blocks": {
-				"collection_JTg4gN": {
-					"type": "collection",
-					"settings": {
-						"title": "Featured collection",
-						"collection": "premium-collection"
-					}
-				},
-				"collection_4Bcbrx": {
-					"type": "collection",
-					"settings": {
-						"title": "Featured collection",
-						"collection": "automated-collection"
-					}
-				}
-			},
-			"block_order": [
-				"collection_JTg4gN",
-				"collection_4Bcbrx"
-			],
-			"settings": {
-				"color_scheme": "",
-				"space_above": 4,
-				"mobile_space_above": -1
-			}
-		},
 		"hero_MK4cWi": {
 			"type": "hero",
 			"blocks": {
@@ -98,6 +70,34 @@
 			"settings": {
 				"height": "large",
 				"space_above": 0,
+				"mobile_space_above": -1
+			}
+		},
+		"featured_collection_L3RcEq": {
+			"type": "featured-collection",
+			"blocks": {
+				"collection_JTg4gN": {
+					"type": "collection",
+					"settings": {
+						"title": "Featured collection",
+						"collection": "premium-collection"
+					}
+				},
+				"collection_4Bcbrx": {
+					"type": "collection",
+					"settings": {
+						"title": "Featured collection",
+						"collection": "automated-collection"
+					}
+				}
+			},
+			"block_order": [
+				"collection_JTg4gN",
+				"collection_4Bcbrx"
+			],
+			"settings": {
+				"color_scheme": "",
+				"space_above": 4,
 				"mobile_space_above": -1
 			}
 		},
@@ -319,8 +319,8 @@
 		}
 	},
 	"order": [
-		"featured_collection_L3RcEq",
 		"hero_MK4cWi",
+		"featured_collection_L3RcEq",
 		"rich_text",
 		"rich_text_RhK3RR",
 		"rich_text_ztxYpi",
