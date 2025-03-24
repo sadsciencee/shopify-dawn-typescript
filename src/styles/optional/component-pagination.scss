@@ -6,8 +6,8 @@
 
 
 .pagination__list > li {
-	flex: 1 0 #{$ax44};
-	max-width: #{$ax44};
+	width: $ax24;
+	height: $ax24;
 }
 
 .pagination__list > li:not(:last-child) {
@@ -16,52 +16,22 @@
 
 .pagination__item {
 	color: rgb(#{$schemaColorForeground});
-	height: #{$ax44};
 	text-decoration: none;
 }
 
-a.pagination__item:hover::after {
-	height: #{$ax1};
-}
-
 .pagination__item .icon-caret {
-	height: #{$ax6};
+	height: #{$ax7};
+	transform: translateY(-10%);
 }
 
-.pagination__item--current::after {
-	height: #{$ax1};
-}
 
-.pagination__item--current::after,
-.pagination__item:hover::after {
-	content: '';
-	display: block;
-	width: #{$ax20};
-	position: absolute;
-	bottom: #{$ax8};
-	left: 0;
-	transform: translateX(calc(-50% + #{$ax10}));
-	background-color: currentColor;
-}
 
 .pagination__item--next .icon {
 	margin-left: #{ax(-2)};
 	transform: rotate(90deg);
 }
 
-.pagination__item--next:hover .icon {
-	transform: rotate(90deg) scale(1.07);
-}
-
 .pagination__item--prev .icon {
 	margin-right: #{ax(-2)};
 	transform: rotate(-90deg);
-}
-
-.pagination__item--prev:hover .icon {
-	transform: rotate(-90deg) scale(1.07);
-}
-
-.pagination__item-arrow:hover::after {
-	display: none;
 }

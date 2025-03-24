@@ -1,0 +1,24 @@
+{%- liquid
+	# helper to parse a gwp_offer result string and return the offer handle if valid
+
+	# params
+	#   result (string type::handle::log_lines)
+
+	# returns string (gwp_handle | 'false')
+
+	# consts
+	assign result_delimiter = '::'
+	assign not_found_result = '_not_found_'
+
+	# parse result input
+	assign result_split = result | split: result_delimiter
+	assign result_type = result_split[0]
+	assign result_handle = result_split[1]
+
+	# return result to caller
+	if result_type != 'gwp_offer' or result_handle == not_found_result or result_handle == empty or result_handle == blank
+		echo 'false'
+	else
+		echo result_handle
+	endif
+-%}

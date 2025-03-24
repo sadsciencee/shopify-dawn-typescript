@@ -14,7 +14,7 @@ import { MenuDrawer } from '@/scripts/theme/menu-drawer';
 import { HeaderDrawer } from '@/scripts/theme/header-drawer';
 import { ModalDialog } from '@/scripts/theme/modal-dialog';
 import { ModalOpener } from '@/scripts/theme/modal-opener';
-import { DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
+import { DynamicProgressBar } from '@/scripts/cart/dynamic-progress-bar'
 
 q.safeDefineElement(QuantityInput)
 q.safeDefineElement(CartNotification)
@@ -31,4 +31,4 @@ q.safeDefineElement(MenuDrawer)
 q.safeDefineElement(HeaderDrawer)
 q.safeDefineElement(ModalDialog)
 q.safeDefineElement(ModalOpener)
-q.safeDefineElement(DynamicShippingBar)
+q.safeDefineElement(DynamicProgressBar)

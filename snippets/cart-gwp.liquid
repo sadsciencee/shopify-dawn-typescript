@@ -1,0 +1,47 @@
+{% liquid
+    # renders a gwp selection UI if an active offer is found
+
+    # params:
+    #   gwp_offer_type (string, 'none' | 'active' | 'partial')
+    #	gwp_offer (gwp_offer)
+
+    # set params
+    assign gwp_offer_type = gwp_offer_type | default: 'none'
+
+    if gwp_offer_type == 'active'
+        assign product_list = gwp_offer.product_offer.value.products.value
+        assign free_gift_text = gwp_offer.display_cta.value
+    endif
+%}
+
+{% if gwp_offer_type == 'active' %}
+    <cart-gwp class="cart-gwp">
+        <div class="cart-gwp__title flex align-center justify-center center">
+            <div class="page-width">
+                <h3 class="badge badge--reverse m-0 lh-1">Choose Your Gift</h3>
+            </div>
+        </div>
+        <div class="cart-gwp__track no-scrollbar">
+            <ul class="cart-gwp__products list-unstyled" style="--desktop-grid: {{- desktop_grid -}}">
+                {% for card_product in product_list %}
+                    <li class="list-unstyled block cart-gwp__item">
+                        {% render 'card-product',
+                                card_product: card_product,
+                                media_aspect_ratio: "portrait",
+                                image_shape: "default",
+                                show_secondary_image: true,
+                                show_vendor: false,
+                                show_rating: false,
+                                show_quick_add: true,
+                                section_id: section.id,
+                                loading: 'eager',
+                                mobile_size: 'sm',
+                                is_free_gift: true,
+                                free_gift_text: free_gift_text
+                        %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </cart-gwp>
+{% endif %}

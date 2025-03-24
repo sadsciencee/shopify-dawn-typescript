@@ -1,9 +1,18 @@
-{% comment %}
-	Renders cart drawer
-
-	Usage:
-	{% render 'cart-drawer' %}
-{% endcomment %}
+{% liquid
+	# constants setup
+	assign result_delimiter = '::'
+	# call main gwp logic function. necessary copy paste, used in cart-drawer.liquid snippet and dynamic cart sections
+	capture gwp_result
+		render 'return-gwp-main'
+	endcapture
+	assign gwp_result = gwp_result | split: result_delimiter
+	assign gwp_offer_handle = gwp_result[0]
+	assign gwp_offer_type = gwp_result[1]
+	assign gwp_offer = metaobjects.gwp_offer[gwp_offer_handle]
+	if gwp_offer == empty or gwp_offer == blank
+		assign gwp_offer_type = 'none'
+	endif
+%}
 
 <style>
 	.drawer {
@@ -12,82 +21,41 @@
 </style>
 
 <cart-drawer
-	class="drawer fixed left-0 top-0 h-100 flex justify-end"
-	{% if cart == empty %}
-		data-uc-cart-empty
-	{% endif %}
+		class="drawer fixed left-0 top-0 h-100 flex justify-end"
 >
 	<div id="CartDrawer" class="cart-drawer">
 		<div
-			data-uc-cart-drawer-overlay
-			class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0"
+				data-uc-cart-drawer-overlay
+				class="cart-drawer__overlay fixed top-0 right-0 bottom-0 left-0 empty"
 		></div>
 		<div
-			data-uc-cart-drawer-inner
-			class="drawer__inner h-100 flex flex-column overflow-hidden"
-			role="dialog"
-			aria-modal="true"
-			aria-label="{{ 'sections.cart.title' | t }}"
-			tabindex="-1"
+				data-uc-cart-drawer-inner
+				class="drawer__inner h-100 flex flex-column overflow-hidden"
+				role="dialog"
+				aria-modal="true"
+				aria-label="{{ 'sections.cart.title' | t }}"
+				tabindex="-1"
 		>
-			{%- if cart == empty -%}
-				<div
-					data-uc-cart-drawer-inner-empty
-					class="flex flex-column overflow-hidden h-100"
-				>
-					<div class="cart-drawer__warnings flex flex-column justify-center center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
-						<div class="cart-drawer__empty-content">
-							<h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
-							<button
-								class="drawer__close inline-block p-0 absolute bg-transparent b-0"
-								type="button"
-								onclick="this.closest('cart-drawer').close()"
-								aria-label="{{ 'accessibility.close' | t }}"
-								data-uc-cart-drawer-close-button
-							>
-								{% render 'icon-default', icon: 'close' %}
-							</button>
-							<a href="{{ routes.all_products_collection_url }}" class="button">
-								{{ 'general.continue_shopping' | t }}
-							</a>
-
-							{%- if shop.customer_accounts_enabled and customer == null -%}
-								<p class="cart__login-title h3">
-									{{ 'sections.cart.login.title' | t }}
-								</p>
-								<p class="cart__login-paragraph">
-									{{
-										'sections.cart.login.paragraph_html'
-										| t: link: routes.account_login_url
-									}}
-								</p>
-							{%- endif -%}
-						</div>
-					</div>
-					{%- if settings.cart_drawer_collection != blank -%}
-						<div class="cart-drawer__collection">
-							{% render 'card-collection',
-								card_collection: settings.cart_drawer_collection,
-								columns: 1
-							%}
-						</div>
-					{%- endif -%}
-				</div>
-			{%- endif -%}
-			<div class="drawer__header relative flex justify-between align-center">
-				<h2 class="drawer__heading mb-0">{{ 'sections.cart.title' | t }}</h2>
-				<button
-					class="drawer__close inline-block p-0 absolute bg-transparent b-0"
+			<button
+					class="drawer__header relative flex justify-start align-center semantic-button"
 					type="button"
 					onclick="this.closest('cart-drawer').close()"
 					aria-label="{{ 'accessibility.close' | t }}"
-				>
-					{% render 'icon-default', icon: 'close' %}
-				</button>
-			</div>
-			{% render 'dynamic-shipping-bar', cart: cart %}
+			>
+				{% render 'icon-default', icon: 'arrow-left' %}
+				{{ 'general.continue_shopping' | t }}
+			</button>
+			{% render 'dynamic-progress-bar',
+					cart: cart,
+					gwp_offer: gwp_offer,
+					gwp_offer_type: gwp_offer_type
+			%}
 			{% render 'cart-drawer-items', cart: cart %}
-			{% render 'dynamic-cart-footer', cart: cart %}
+			{% render 'dynamic-cart-footer',
+					cart: cart,
+					gwp_offer: gwp_offer,
+					gwp_offer_type: gwp_offer_type
+			%}
 		</div>
 	</div>
 </cart-drawer>
@@ -107,8 +75,10 @@
 		cartSubmitInput.setAttribute('name', 'checkout')
 		cartSubmitInput.setAttribute('type', 'hidden')
 		document.querySelector('#cart').appendChild(cartSubmitInput)
-		document.querySelector('#checkout').addEventListener('click', function (event) {
-			document.querySelector('#cart').submit()
-		})
+		document
+				.querySelector('#checkout')
+				.addEventListener('click', function (event) {
+					document.querySelector('#cart').submit()
+				})
 	})
 </script>

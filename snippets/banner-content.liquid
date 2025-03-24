@@ -30,7 +30,7 @@
     {% if settings.title != blank or title != blank %}
         {% unless use_h1 %}
             <h2 class="{{ settings.heading_size }} banner-content__title m-0">
-				{{ title |default: settings.title }}
+				{{ title | default: settings.title }}
 			</h2>
         {% else %}
             <h1 class="{{ settings.heading_size }} banner-content__title m-0">
@@ -39,25 +39,37 @@
         {% endunless %}
     {% endif %}
     {% if settings.text != blank %}
-        <p class="banner-content__text text-body m-0">
+        <p class="banner-content__text h2 m-0">
 			{{ settings.text }}
 		</p>
     {% endif %}
     {% if settings.button_label != blank %}
-        {% unless settings.full_block_clickable %}
-            <a
-                    href="{{ settings.button_link }}"
-                    class="button banner-content__button"
-            >
-				<span>{{ settings.button_label }}</span>
-			</a>
-        {% else %}
-            <span
-                    href="{{ settings.button_link }}"
-                    class="button banner-content__button"
-            >
-				<span>{{ settings.button_label }}</span>
-			</span>
-        {% endunless %}
+        <div class="banner-content__buttons">
+			{% unless settings.full_block_clickable %}
+                <a
+                        href="{{ settings.button_link }}"
+                        class="button banner-content__button"
+                >
+					<span>{{ settings.button_label }}</span>
+				</a>
+            {% else %}
+                <span
+                        href="{{ settings.button_link }}"
+                        class="button banner-content__button"
+                >
+					<span>{{ settings.button_label }}</span>
+				</span>
+            {% endunless %}
+            {% if settings.button_label_2 != blank
+            and settings.full_block_clickable == false
+            %}
+                <a
+                        href="{{ settings.button_link_2 }}"
+                        class="button banner-content__button"
+                >
+					<span>{{ settings.button_label_2 }}</span>
+				</a>
+            {% endif %}
+		</div>
     {% endif %}
 </span>

@@ -1,0 +1,124 @@
+@import '../global/variables';
+@import '../global/functions';
+.quantity {
+  color: rgba(#{$schemaColorForeground});
+  position: relative;
+  width: calc(#{ax(84)} / #{$fontBodyScale} + #{$inputsBorderWidth} * 2);
+  display: flex;
+  border-radius: #{$inputsRadius};
+  height: $ax28;
+  border: $ax1 solid #d7d7d7;
+  overflow: hidden;
+}
+
+
+[data-uc-quantity-input] {
+  color: currentColor;
+  font-size: #{$ax14};
+  font-weight: 400;
+  opacity: 1;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  padding: 0 #{$ax5};
+  width: $ax28;
+  flex-grow: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: $ax28;
+}
+
+.quantity__button {
+  width: $ax28;
+  height: $ax28;
+  flex-shrink: 0;
+  font-size: #{$ax14};
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(#{$schemaColorForeground});
+  padding: 0;
+}
+
+.quantity__button:first-child {
+  margin-left: calc(#{$inputsBorderWidth});
+  border-right: $ax1 solid #d7d7d7;
+}
+
+.quantity__button:last-child {
+  margin-right: calc(#{$inputsBorderWidth});
+  border-left: $ax1 solid #d7d7d7;
+}
+
+.quantity__button svg {
+  width: #{$ax10};
+  pointer-events: none;
+}
+
+.quantity__button:focus-visible,
+[data-uc-quantity-input]:focus-visible {
+  background-color: rgb(#{$schemaColorBackground});
+  z-index: 2;
+}
+
+.quantity__button:focus,
+[data-uc-quantity-input]:focus {
+  background-color: rgb(#{$schemaColorBackground});
+  z-index: 2;
+}
+
+.quantity__button:not(:focus-visible):not(.focused),
+[data-uc-quantity-input]:not(:focus-visible):not(.focused) {
+  box-shadow: inherit;
+  background-color: inherit;
+}
+
+[data-uc-quantity-input]:-webkit-autofill,
+[data-uc-quantity-input]:-webkit-autofill:hover,
+[data-uc-quantity-input]:-webkit-autofill:active {
+  box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
+  -webkit-box-shadow: 0 0 0 #{ax(100)} rgb(#{$schemaColorBackground}) inset !important;
+}
+
+[data-uc-quantity-input]::-webkit-outer-spin-button,
+[data-uc-quantity-input]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+[data-uc-quantity-input][type='number'] {
+  -moz-appearance: textfield;
+}
+
+[data-uc-quantity-rules] {
+  margin-top: #{$ax12};
+  position: relative;
+  font-size: #{$ax12};
+}
+
+[data-uc-quantity-rules] .caption {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+[data-uc-quantity-rules] .divider + .divider::before {
+  content: '\2022';
+  margin: 0 #{$ax5};
+}
+
+[data-uc-quantity-rules-cart] {
+  position: relative;
+}
+
+product-info [data-uc-loading-overlay]:not(.hidden) ~ *,
+[data-uc-quantity-rules-cart] [data-uc-loading-overlay]:not(.hidden) ~ * {
+  visibility: hidden;
+}
+
+.quantity__button.disabled {
+  cursor: not-allowed;
+}

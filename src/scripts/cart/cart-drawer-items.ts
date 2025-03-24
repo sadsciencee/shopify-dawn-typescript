@@ -36,13 +36,18 @@ export class CartDrawerItems extends CartItems {
 			},
 			{
 				id: 'CartDrawer',
-				section: 'dynamic-shipping-bar',
-				selector: 'dynamic-shipping-bar',
+				section: 'dynamic-progress-bar',
+				selector: 'dynamic-progress-bar',
 			},
 			{
 				id: 'CartDrawer',
 				section: 'dynamic-cart-footer',
 				selector: '.drawer__footer',
+			},
+			{
+				id: 'CartDrawer',
+				section: 'cart-update-instructions',
+				selector: '[data-cart-update-instructions]',
 			},
 		]
 	}

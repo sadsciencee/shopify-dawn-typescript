@@ -1,0 +1,70 @@
+{%- liquid
+    # evaluate a customer condition
+
+    # params:
+    #   condition (offer_condition_customer)
+    #   collect_logs (boolean, optional)
+
+    # returns string (boolean::log_lines)
+
+    # consts
+    assign result_delimiter = '::'
+    assign log_delimiter = '___LOG___'
+
+    # set params
+    assign collect_logs = collect_logs | default: false
+
+    # set output vars
+    assign result = 'false'
+
+    # setup default evals. note, 'metafields_exclude_eval' will evaluate 'false' if the customer is NOT excluded from the discount
+    assign metafields_include_eval = false
+    assign metafields_exclude_eval = false
+
+    # get customer group and metafield values
+    assign customer_group = customer.metafields.custom.group.value | default: 'guest'
+    assign metafields_include = condition.metafields_include.value
+    assign metafields_exclude = condition.metafields_exclude.value
+
+    # string list requirements have different null values depending on if they were never set, set to blank, etc...
+    assign metafields_include_empty = false
+    if metafields_include == empty or metafields_include.size == 0 or metafields_include == blank or metafields_include.count == 0
+        assign metafields_include_eval = true
+        assign metafields_include_empty = true
+    endif
+
+    assign metafields_exclude_empty = false
+    if metafields_exclude == empty or metafields_exclude.size == 0 or metafields_exclude == blank or metafields_exclude.count == 0
+        assign metafields_exclude_empty = true
+    endif
+
+    if customer_group != 'guest'
+        # check all condition requirements against the current customer
+        if metafields_include_empty == false and metafields_include contains customer_group
+            assign metafields_include_eval = true
+        endif
+        if metafields_exclude_empty == false and metafields_exclude contains customer_group
+            assign metafields_exclude_eval = true
+        endif
+    else
+        # exclusions are always false for guest customers, even if requirements are not empty
+        assign metafields_exclude_eval = false
+    endif
+
+
+    assign log_line = log_line | append: 'metafields_include=' | append: metafields_include | append: ',metafields_exclude=' | append: metafields_exclude | append: log_delimiter
+    assign log_line = log_line | append: 'metafields_include_eval=' | append: metafields_include_eval | append: ',metafields_exclude_eval=' | append: metafields_exclude_eval
+
+
+    if metafields_exclude_eval == false and metafields_include_eval == true
+        assign result = 'true'
+    endif
+
+    # return result to caller
+    if collect_logs
+        assign log_line = 'Condition "' | append: condition.label.value | append: '" evaluated to "' | append: result | append: '" ' | append: log_delimiter | append: log_line
+        echo result | append: result_delimiter | append: log_line
+    else
+        echo result
+    endif
+-%}

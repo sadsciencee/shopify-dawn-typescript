@@ -1,14 +1,14 @@
 import { UcoastEl } from '@/scripts/core/UcoastEl'
 import { TsDOM as q } from '@/scripts/core/TsDOM'
 
-export class DynamicShippingBar extends UcoastEl {
-	static htmlSelector = 'dynamic-shipping-bar'
+export class DynamicProgressBar extends UcoastEl {
+	static htmlSelector = 'dynamic-progress-bar'
 	statusEl: HTMLElement
 	constructor() {
 		super()
 		this.statusEl = this.getStatusEl(this)
 	}
-	getStatusEl(el: DynamicShippingBar) {
+	getStatusEl(el: DynamicProgressBar) {
 		return q.rs('[data-shipping-bar-status]', el)
 	}
 	animateFromRawHTML(rawHTML: string) {
@@ -16,10 +16,14 @@ export class DynamicShippingBar extends UcoastEl {
 			rawHTML,
 			'text/html'
 		)
-		const newShippingBar = q.rs<DynamicShippingBar>(
-			DynamicShippingBar.htmlSelector,
+		const newShippingBar = q.rs<DynamicProgressBar>(
+			DynamicProgressBar.htmlSelector,
 			newDocument
 		)
+		Array.from(newShippingBar.attributes).forEach(attr => {
+			if (attr.name === 'class' || attr.name === 'style') return
+			this.setAttribute(attr.name, attr.value);
+		});
 		const newPercent = parseInt(
 			q.ra(newShippingBar, 'data-percent')
 		)

@@ -1,0 +1,55 @@
+{%- liquid
+    # find all gwp offers that have been claimed in the current cart state
+
+    # params: collect_logs (boolean, optional)
+    # returns an array in string form. 'handle::claimed_ids(string[])::log_lines' separated by ':::'
+
+    # note: the claimed_ids string[] is comma separated with a trailing comma
+
+    # consts
+    assign result_delimiter = '::'
+    assign list_delimiter = ':::'
+    assign log_delimiter = '___LOG___'
+    assign not_found_result = '_not_found_'
+
+    # set params
+    assign collect_logs = collect_logs | default: false
+
+    # set output vars
+    assign results = ''
+
+    # loop offer metaobjects in order specified by theme settings
+    for offer in settings.gwp_offers
+        # capture result in form of 'offer_handle::claimed(boolean)::claimed_ids(string[])::log_lines'
+        capture offer_result
+            render 'return-gwp-offer-claimed', offer: offer, collect_logs: collect_logs
+        endcapture
+        assign result_split = offer_result | split: result_delimiter
+        assign claimed = result_split[1]
+        assign claimed_product_ids = result_split[2]
+        if collect_logs
+            assign offer_logs = result_split[3] | default: 'log'
+        endif
+        if claimed == 'false'
+            if collect_logs
+                assign offer_logs = offer_logs | append: 'Offer ' | append: handle | append: ' is not claimed' | append: log_delimiter
+            endif
+            continue
+        else
+            if collect_logs
+                assign offer_logs = offer_logs | append: 'Offer ' | append: handle | append: ' is claimed' | append: log_delimiter
+                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids | append: result_delimiter | append: offer_logs
+            else
+                assign success_result = offer.system.handle | append: result_delimiter | append: claimed_product_ids
+            endif
+            assign results = results | append: success_result | append: list_delimiter
+        endif
+        # add the result to the list if valid
+    endfor
+
+    # clean up null results
+    assign results = results | split: list_delimiter | compact | uniq | join: list_delimiter
+
+    # return result to caller
+    echo results
+-%}

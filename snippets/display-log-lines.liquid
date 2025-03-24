@@ -1,0 +1,41 @@
+{%- liquid
+    # params: source (string), line_delimiter (string, default '::'), index (number, default 1)
+    # log_lines should be a string array delimited by '___LOG___'
+    # individual log lines can be delimited by the ',' character to display logs in a list form
+    # if an '=' is found in a log line list item, the log line will be split into a key-value pair
+    # if '_title_' is found in a log line, it will be converted to an <h4> element with _title_ removed
+    assign line_delimiter = line_delimiter | default: '::'
+    assign log_delimiter = log_delimiter | default: '___LOG___'
+    assign split_source = source | split: line_delimiter
+    assign log_lines = split_source[index]
+    assign log_lines = log_lines | split: log_delimiter | compact
+
+-%}
+{% if log_lines.size > 0 %}
+    <div class="logs">
+        <h3>Logs:</h3>
+        {% for log_line in log_lines %}
+            {% if log_line contains '_title_' %}
+                <h4>{{ log_line | replace: '_title_', '' }}</h4>
+                {% continue %}
+            {% endif %}
+            {% unless log_line contains ',' %}
+                <p>{{ log_line }}</p>
+                {% continue %}
+            {% endunless %}
+            {% assign log_list = log_line | split: ',' %}
+            <ul>
+                {% for list_item in log_list %}
+                    {% unless list_item contains '=' %}
+                        <li>{{ list_item }}</li>
+                        {% continue %}
+                    {% endunless %}
+                    {% assign kv_pair = list_item | split: '=' %}
+                    <li>
+                        <strong>{{ kv_pair[0] }}:</strong> {{ kv_pair[1] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -8,7 +8,7 @@ import type {
 	CartErrorResponse,
 	ProductVariant,
 } from '@/scripts/shopify'
-import { type DynamicShippingBar } from '@/scripts/cart/dynamic-shipping-bar'
+import { type DynamicProgressBar } from '@/scripts/cart/dynamic-progress-bar'
 
 // TODO: next steps on refactor
 // - finish up debugging current changes in cart notification and cart page
@@ -26,6 +26,11 @@ export type CartAddWithSections = CartAdd & {
 
 export type CartUpdateWithSections = Cart & {
 	sections: SectionsResponse
+}
+
+export type CartUpdateInstructions = {
+	updates: Record<number, number> | Record<string, number>
+	update_required: boolean
 }
 
 export async function getCart(): Promise<Cart | CartErrorResponse> {
@@ -65,14 +70,20 @@ export function hasDomCart() {
 export function getDOMCartSectionApiIds() {
 	const cartEl = getDOMCart()
 	if (!cartEl) return undefined
-	return ['cart-drawer-items', 'cart-icon-bubble', 'dynamic-shipping-bar']
+	return [
+		'cart-drawer-items',
+		'cart-icon-bubble',
+		'dynamic-progress-bar',
+		'dynamic-cart-footer',
+		'cart-update-instructions',
+	]
 }
 
 const ignoredProperties = ['utf8', 'product-id', 'section-id']
 
-export function updateShippingBar(rawHTML: string) {
-	console.log('dynamic-shipping-bar')
-	const shippingBar = q.os<DynamicShippingBar>('dynamic-shipping-bar')
+export function updateProgressBar(rawHTML: string) {
+	console.log('dynamic-progress-bar')
+	const shippingBar = q.os<DynamicProgressBar>('dynamic-progress-bar')
 	if (!shippingBar) return
 	shippingBar.animateFromRawHTML(rawHTML)
 }
@@ -189,13 +200,11 @@ type RenderRawHTMLToDOMInput = {
 }
 
 export function renderRawHTMLToDOM({
-	sourceHTML,
-	sourceSelector,
-	destinationSelector,
-	destinationSelectorContainer,
-}: RenderRawHTMLToDOMInput) {
-	console.log({sourceHTML})
-	console.log({sourceSelector, destinationSelector, destinationSelectorContainer})
+									   sourceHTML,
+									   sourceSelector,
+									   destinationSelector,
+									   destinationSelectorContainer,
+								   }: RenderRawHTMLToDOMInput) {
 	const sourceSelectorOrDefault = sourceSelector ?? '.shopify-section'
 	const newDocument = new DOMParser().parseFromString(sourceHTML, 'text/html')
 	const sourceElement = q.rs(
@@ -234,11 +243,11 @@ export async function addItemsToCart(
 			? createAddToCartInputFromFormData(input, sections)
 			: sections && sections.length
 				? {
-						items: input,
-						sections: sections,
-					}
+					items: input,
+					sections: sections,
+				}
 				: { items: input }
-	console.log({data})
+	console.log({ data })
 	try {
 		const response = await fetch(
 			`${window.routes.cart_add_url}`,
@@ -289,12 +298,12 @@ export async function updateCartRequest(
 	const data =
 		sections && sections.length
 			? {
-					updates,
-					sections,
-				}
+				updates,
+				sections,
+			}
 			: {
-					updates,
-				}
+				updates,
+			}
 
 	try {
 		const response = await fetch(
@@ -364,5 +373,48 @@ export function getActiveOrAccessibilityElement(): HTMLElement {
 		return activeElement
 	} else {
 		return q.rs('[data-uc-accessibility-focus]')
+	}
+}
+
+export function getUpdateInstructions(
+	cart: CartAddWithSections | CartUpdateWithSections
+): CartUpdateInstructions {
+	try {
+		const responseHTML = cart.sections['cart-update-instructions']
+		const newDocument = new DOMParser().parseFromString(
+			responseHTML,
+			'text/html'
+		)
+		const json = q.rs<HTMLScriptElement>(
+			'[data-cart-update-instructions]',
+			newDocument.documentElement
+		).textContent
+		console.log('cart instructions', json)
+		if (json === null) {
+			throw new Error(
+				'Cart instruction script element found, but json content is null'
+			)
+		}
+		const body = JSON.parse(json)
+		if (
+			'update_required' in body &&
+			typeof body.update_required === 'boolean' &&
+			'updates' in body &&
+			typeof body.updates === 'object'
+		) {
+			return body
+		}
+		throw new Error(
+			`Cart instruction script element found, but json content is not as expected. Expected {update_required: boolean, updates: object}, got ${json}`
+		)
+	} catch (e) {
+		console.log(
+			'error retrieving cart update instructions, returning default'
+		)
+		console.error(e)
+		return {
+			update_required: false,
+			updates: {},
+		}
 	}
 }
