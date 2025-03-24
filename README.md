@@ -1,4 +1,4 @@
-# Evil Dawn
+# Evil Dawn :smiling_imp:
 dark side rework of [Dawn](https://github.com/Shopify/dawn), Shopify's reference liquid theme
 
 ## features
