@@ -9,7 +9,7 @@ dark side rework of [Dawn][(#getting-started](https://github.com/Shopify/dawn)),
 - special DOM selector to make your web component usage type safe and chillaxed
 - liquid functions for GWP offers
 - art-direction.liquid is like if the `image_tag` filter just worked regardless of if the media is video/image and gave you control over desktop + mobile as well as hls support for bg video on chrome desktop
-- i rewrote facets.liquid so it's like comprehensible
+- i rewrote facets.liquid so it's like comprehensible (coming soon, need to merge changes from another project)
 - this diverged from dawn around version 12 so it's missing some of the b2b stuff
 
 ## why
