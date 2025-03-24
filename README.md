@@ -1,5 +1,5 @@
 # Evil Dawn
-dark side rework of [Dawn][(#getting-started](https://github.com/Shopify/dawn)), Shopify's reference liquid theme
+dark side rework of [Dawn](https://github.com/Shopify/dawn), Shopify's reference liquid theme
 
 ## features
 - typescript
