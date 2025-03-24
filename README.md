@@ -29,6 +29,23 @@ dark side rework of [Dawn](https://github.com/Shopify/dawn), Shopify's reference
 - `pnpm build`
 - `shopify theme push`
 
+### viewport scaling
+the whole theme is setup to automatically scale your ui based on the horizontal viewport width
+
+this code assumes
+- your desktop design is at 1440px
+- your mobile design is at 375px
+
+you can adjust those params but I'm not going to get into that rn. check functions.scss and variables.scss
+
+so if you punch in `$ax24` for something that is 24px in the 1440px figma, that value will maintain its size relevant to the screen. this avoids the post-build "it doesnt look like the figma" conversation
+
+there are built in css variables for 1-50 px. so you can use `$ax1`, `$ax2` etc up to 50. at that point you can use the `ax()` function - i.e. width: `ax(360)`
+
+these are not just sass variables, they're css variables, so `var(--ax1)` is valid. can be useful if you're setting values in liquid. 
+
+same goes for the `ax()` function. so instead of `ax(5)` you would just do `calc(var(--ax) * 5)`
+
 ## notes
 - critical css/js files are not part of the build. when you run `pnpm build` you will get a critical.css file in the `/assets` folder. you can uhh copy this into the `critical-css.liquid` file. "why dont you just use the `inline_asset_content` filter?" right. thanks for reminding me. :)
 - refer to [volt](https://shopify-vite.barrelny.com/guide/) docs for vite specifics. tldr: put fonts and static assets in /public because they will get deleted by `pnpm build` if you just put them in assets
