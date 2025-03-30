@@ -2,3 +2,4 @@ eslintrc.json
 package.json
 tsconfig.json
 assets/.vite/manifest.json
+app/*
