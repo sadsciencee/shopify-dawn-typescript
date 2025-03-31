@@ -46,11 +46,13 @@ $breakpoints: (
   @if $mobile {
     $mobileMax: ($value * 0.1 * 1rem);
     $mobileMin: ($value * 0.09 * 1rem);
-    $mobileVw: ($value * 0.2667 * 1vw);
+    // assumes mobile design is 375px. 1/375 * 100 = 0.266666667
+    $mobileVw: ($mobile * 0.2778 * 1vw);
     @return clamp(#{$mobileMin}, #{$mobileVw}, #{$mobileMax});
   } @else {
     $desktopMax: ($value * 0.1 * 1rem);
     $desktopMin: ($value * 0.08 * 1rem);
+    // assumes desktop design is 1440px. 1/1440 * 100 = 0.069444444
     $desktopVw: ($value * 0.06944 * 1vw);
     @return clamp(#{$desktopMin}, #{$desktopVw}, #{$desktopMax});
   }
@@ -84,9 +86,9 @@ $desktopBaseScale: calc(#{scaleValue(100, false)} * 0.01);
 
 // clampSize mixin
 // takes px input for mobile & desktop & converts to clamp size for mobile & desktop
-// based on design breakpoints of 390px and 1512px
-// scaleValues desktop between 1200px and 1800px with a swivel point of 1512px
-// scaleValues mobile between 320px and 450px with a swivel point of 390px
+// based on design breakpoints of 375px and 1440px
+// scaleValues desktop between 1200px and 1800px with a swivel point of 1440px
+// scaleValues mobile between 320px and 450px with a swivel point of 375px
 // 451-989px uses mobileMax, 990-1200px uses desktopMin
 // hardcoded to prevent scaling below 10px for accessibility.
 // using sass vars to reduce rendered calculations
@@ -96,9 +98,11 @@ $desktopBaseScale: calc(#{scaleValue(100, false)} * 0.01);
   $mobileFallback: ($mobile * 0.1 * 1rem);
   $mobileMaxVal: ($mobile * 0.1);
   $mobileMax: ($mobileMaxVal * 1rem);
-  $mobileVw: ($mobile * 0.2667 * 1vw);
+  // assumes mobile design is 375px. 1/375 * 100 = 0.266666667
+  $mobileVw: ($mobile * 0.2778 * 1vw);
   $desktopFallback: ($desktop * 0.1 * 1rem);
   $desktopMax: ($desktop * 0.1 * 1rem);
+  // assumes desktop design is 1440px. 1/1440 * 100 = 0.069444444
   $desktopVw: ($desktop * 0.06944 * 1vw);
 
   // prevent min values from falling below 10px
