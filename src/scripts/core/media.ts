@@ -1,5 +1,6 @@
 import { UcoastVideo } from '@/scripts/core/ucoast-video'
 import { throttle, TsDOM as q } from '@/scripts/core/TsDOM'
+import { type Hls } from '@/scripts/global'
 interface FadeOptions {
 	duration?: number
 	initialOpacity?: number
